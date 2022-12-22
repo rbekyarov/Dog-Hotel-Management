@@ -1,0 +1,35 @@
+
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <div class="table-center">
+        <div class="page-header">
+            <h1>Breeds</h1>
+        </div>
+        <a class="nav-link h5" th:href="@{/view/add/breedAdd}">
+            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                    class="glyphicon glyphicon-ok"></span>Add
+            </button>
+        </a>
+        <table class = table>
+            <tr >
+                <th>Id</th>
+                <th>Breed</th>
+            </tr>
+            <tr th:each="b : ${breeds}">
+                <td th:text="${b.id}"></td>
+                <td th:text="${b.breedName}"></td>
+                <td> <a class="nav-link h5" th:href="@{breed/edit/{id}(id=*{b.id})}">
+                    <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                            class="glyphicon glyphicon-ok"></span>Edit
+                    </button>
+                </a></td>
+
+                <td> <a class="nav-link h5" th:href="@{breed/remove/{id}(id=*{b.id})}">
+                    <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                            class="glyphicon glyphicon-ok"></span>Remove
+                    </button>
+                </a></td>
+            </tr>
+        </table>
+    </div>
+</th:block>

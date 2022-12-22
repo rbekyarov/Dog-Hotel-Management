@@ -1,0 +1,105 @@
+
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="button_back">
+        <a class="nav-link h5" th:href="@{/view/table/reservationTable}">
+            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                    class="glyphicon glyphicon-ok"></span>Back
+            </button>
+        </a>
+    </div>
+    <div class="container">
+        <h2 class="page_title">Add Reservation</h2>
+        <form class="form_add" th:action="@{/view/add/reservationAdd}"
+              th:method="post"
+              th:object="${reservationDTO}"
+
+        >
+            <div class="form-group">
+                <label class="text-white font-weight-bold" ></label>
+                <p>Client:</p>
+                <select th:field="*{client.id}">
+                    <option value="">Please select</option>
+                    <option
+                            th:each="b : ${allClients}"
+                            th:value="${b.id}"
+                            th:text="${b.email}">
+
+                        <div th:if="{b.dogs}"> <select th:field="*{dogs}" >
+                    <option value="">Please select</option>
+                    <option
+                            th:each="dg : ${b.dogs}"
+                            th:value="${dg.id}"
+                            th:text="${dg.name}"></option>
+
+                </select></div>
+            <div th:unless="${dogs}">Before Select Client</div>
+                    </option>
+                </select>
+
+
+
+
+
+
+                <p><label for="birthdate">Start Date</label></p>
+
+                <div class="input-group date">
+                    <input type="text" class="form-control" id="birthdate" autocomplete="off" th:field="*{startDate}"/>
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                </div>
+                <p><label for="birthdate">End Date</label></p>
+
+                <div class="input-group date">
+                    <input type="text" class="form-control" id="enddate" autocomplete="off" th:field="*{endDate}"/>
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                </div>
+                <p>Cells:</p>
+                <select th:field="*{cells}" >
+                    <option value="">Please select</option>
+                    <option
+                            th:each="c : ${allEmptyCells}"
+                            th:value="${c.id}"
+                            th:text="${c.code}"></option>
+
+                </select>
+
+            </div>
+
+            <div class="button_calculate">
+                <div >
+                    <div>
+                        <input type="submit" class="btn btn-danger btn-lg btn3d" value="Calculate"/>
+                    </div>
+                </div>
+            </div>
+            <div class="button_submit">
+                <div >
+                    <div>
+                        <input type="submit" class="btn btn-danger btn-lg btn3d" value="Submit Reservation"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script th:src="@{webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+    <script>
+        $('.input-group.date').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+    <script>
+        function getDogs(id)
+        {
+            return id;
+        }
+    </script>
+</th:block>

@@ -1,0 +1,44 @@
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="button_back">
+    <a class="nav-link h5" th:href="@{/view/table/cellTable}">
+        <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                class="glyphicon glyphicon-ok"></span>Back
+        </button>
+    </a>
+    </div>
+    <div class="container">
+        <h2 class="page_title">Edit Cell</h2>
+
+        <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
+              th:method="post">
+            <div class="form-group">
+                <textarea
+                        id="description"
+                        th:field="${cellDto.code}"
+                        type="textarea"
+                        placeholder="Please enter behavior">
+            </textarea>
+                <p></p>
+                <select th:field="${cellDto.status}" >
+                    <option value="">Select status</option>
+                    <option value="empty">empty</option>
+                    <option value="busy">busy</option>
+                </select>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Behavior is required.
+                </p>
+            </div>
+            <div class="button_submit">
+                <div >
+                    <div>
+                        <input  type="submit" class="btn btn-danger btn-lg btn3d" value="Edit Cell"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</th:block>
+
+<!--<a class="btn btn-danger btn-lg btn3d" th:href="@{/behavior/{id}/edit(id=*{id})}">
+    Submit Behavior
+</a>-->

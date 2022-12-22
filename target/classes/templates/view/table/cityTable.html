@@ -1,0 +1,37 @@
+
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <div class="table-center">
+        <div class="page-header">
+            <h1>Cities</h1>
+        </div>
+        <a class="nav-link h5" th:href="@{/view/add/cityAdd}">
+            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                    class="glyphicon glyphicon-ok"></span>Add
+            </button>
+        </a>
+        <table class = table>
+            <tr >
+                <th>Id</th>
+                <th>Code</th>
+                <th>Name</th>
+            </tr>
+            <tr th:each="c : ${cities}">
+                <td th:text="${c.id}"></td>
+                <td th:text="${c.code}"></td>
+                <td th:text="${c.name}"></td>
+                <td> <a class="nav-link h5" th:href="@{city/edit/{id}(id=*{c.id})}">
+                    <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                            class="glyphicon glyphicon-ok"></span>Edit
+                    </button>
+                </a></td>
+
+                <td> <a class="nav-link h5" th:href="@{city/remove/{id}(id=*{c.id})}">
+                    <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                            class="glyphicon glyphicon-ok"></span>Remove
+                    </button>
+                </a></td>
+            </tr>
+        </table>
+    </div>
+</th:block>

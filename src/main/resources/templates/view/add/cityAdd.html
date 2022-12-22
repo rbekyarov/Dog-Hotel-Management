@@ -1,0 +1,47 @@
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="button_back">
+        <a class="nav-link h5" th:href="@{/view/table/cityTable}">
+            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                    class="glyphicon glyphicon-ok"></span>Back
+            </button>
+        </a>
+    </div>
+    <div class="container">
+        <h2 class="page_title">Add City</h2>
+        <form class="form_add" th:action="@{/view/add/cityAdd}"
+              th:method="post"
+              th:object="${addCity}"
+        >
+            <div class="form-group">
+                <label class="text-white font-weight-bold" for="description"></label>
+                <textarea
+                        id="description"
+                        th:field="${cityDTO.code}"
+                        type="textarea"
+                        placeholder="Please enter code"
+                >
+            </textarea>
+                <p></p>
+                <textarea
+                        id="description2"
+                        th:field="${cityDTO.name}"
+                        type="textarea"
+                        placeholder="Please enter name"
+                >
+            </textarea>
+                <p class="invalid-feedback errors alert alert-danger">
+                    City is required.
+                </p>
+            </div>
+
+
+            <div class="button_submit">
+                <div >
+                    <div>
+                        <input type="submit" class="btn btn-danger btn-lg btn3d" value="Submit City"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</th:block>

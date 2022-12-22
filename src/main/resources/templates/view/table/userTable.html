@@ -1,0 +1,37 @@
+
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <div class="table-center">
+        <div class="page-header">
+            <h1>Users</h1>
+        </div>
+        <a class="nav-link h5" th:href="@{/view/add/userAdd}">
+            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                    class="glyphicon glyphicon-ok"></span>New User
+            </button>
+        </a>
+        <table class = table>
+            <tr >
+                <th>Id</th>
+                <th>UserName</th>
+                <th>Roles</th>
+            </tr>
+            <tr th:each="u : ${users}">
+                <td th:text="${u.id}"></td>
+                <td th:text="${u.username}"></td>
+                <td th:text="${u.role}"></td>
+                <td> <a class="nav-link h5" th:href="@{user/edit/{id}(id=*{u.id})}">
+                    <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                            class="glyphicon glyphicon-ok"></span>Edit
+                    </button>
+                </a></td>
+
+                <td> <a class="nav-link h5" th:href="@{user/remove/{id}(id=*{u.id})}">
+                    <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                            class="glyphicon glyphicon-ok"></span>Remove
+                    </button>
+                </a></td>
+            </tr>
+        </table>
+    </div>
+</th:block>

@@ -1,0 +1,89 @@
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="button_back">
+        <a class="nav-link h5" th:href="@{/view/table/clientTable}">
+            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                    class="glyphicon glyphicon-ok"></span>Back
+            </button>
+        </a>
+    </div>
+    <div class="container">
+        <h2 class="page_title">Add Client</h2>
+        <form class="form_add" th:action="@{/view/add/clientAdd}"
+              th:method="post"
+              th:object="${clientDTO}"
+
+        >
+            <div class="form-group">
+                <label class="text-white font-weight-bold" ></label>
+                <p>First Name:</p>
+                <textarea
+                        th:field="*{firstName}"
+                        type="textarea"
+                        placeholder="Please enter Name"
+                >
+            </textarea>
+
+                <p>Last Name:</p>
+                <textarea
+                        th:field="*{lastName}"
+                        type="textarea"
+                        placeholder="Please enter Name"
+                >
+            </textarea>
+
+                <p>Email:</p>
+                <textarea
+                        th:field="*{email}"
+                        type="textarea"
+                        placeholder="Please enter Email"
+                >
+            </textarea>
+                <p>Phone:</p>
+                <textarea
+                        th:field="*{phone}"
+                        type="textarea"
+                        placeholder="Please enter Phone"
+                >
+            </textarea>
+                <p>Address:</p>
+                <textarea
+                        th:field="*{address}"
+                        type="textarea"
+                        placeholder="Please enter Address"
+                >
+            </textarea>
+                <p>City:</p>
+                <select th:field="*{city.id}" >
+                    <option value="">Please select</option>
+                    <option
+                            th:each="b : ${allCity}"
+                            th:value="${b.id}"
+                            th:text="${b.name}"></option>
+
+                </select>
+                <p></p>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Price is required.
+                </p>
+            </div>
+            <div class="button_submit">
+                <div >
+                    <div>
+                        <input type="submit" class="btn btn-danger btn-lg btn3d" value="Submit Dog"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script th:src="@{webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+    <script>
+        $('.input-group.date').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+</th:block>

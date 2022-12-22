@@ -1,0 +1,118 @@
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="button_back">
+        <a class="nav-link h5" th:href="@{/view/table/dogTable}">
+            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                    class="glyphicon glyphicon-ok"></span>Back
+            </button>
+        </a>
+    </div>
+    <div class="container">
+        <h2 class="page_title">Add Dog</h2>
+        <form class="form_add" th:action="@{/view/add/dogAdd}"
+              th:method="post"
+              th:object="${dogDTO}"
+
+        >
+            <div class="form-group">
+                <label class="text-white font-weight-bold" ></label>
+                <p>Name:</p>
+                <textarea
+                        th:field="*{name}"
+                        type="textarea"
+                        placeholder="Please enter Name"
+                >
+            </textarea>
+
+                <p><label for="birthdate">BirthDate</label></p>
+
+                <div class="input-group date">
+                    <input type="text" class="form-control" id="birthdate" autocomplete="off" th:field="*{birthDate}"/>
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                </div>
+                <p>Weight:</p>
+                <textarea
+                        th:field="*{weight}"
+                        type="textarea"
+                        placeholder="Please enter Weight"
+                >
+            </textarea>
+                <p>Breed:</p>
+                <select th:field="*{breed.id}" >
+                    <option value="">Please select</option>
+                    <option
+                            th:each="b : ${allBreeds}"
+                            th:value="${b.id}"
+                            th:text="${b.breedName}"></option>
+
+                </select>
+
+                <p>Sex:</p>
+                <select th:field="*{sex}" >
+                    <option value="">Please select</option>
+                    <option value="M">M</option>
+                    <option value="F">F</option>
+                </select>
+                <p>Passport:</p>
+                <select th:field="*{passport}" >
+                    <option value="">Please select</option>
+                    <option value="NO">NO</option>
+                    <option value="YES">YES</option>
+                </select>
+
+                <p>Microchip:</p>
+                <select th:field="*{microchip}" >
+                    <option value="">Please select</option>
+                    <option value="NO">NO</option>
+                    <option value="YES">YES</option>
+                </select>
+
+                <p>Client:</p>
+                <select th:field="*{client.id}" >
+                    <option value="">Please select</option>
+                    <option
+                            th:each="c : ${allClients}"
+                            th:value="${c.id}"
+                            th:text="${c.email}"></option>
+
+                </select>
+
+                <p>Behavior:</p>
+                <select th:field="*{behavior.id}" >
+                    <option value="">Please select</option>
+                    <option
+                            th:each="b : ${allBehaviors}"
+                            th:value="${b.id}"
+                            th:text="${b.name}"></option>
+
+                </select>
+
+                <p></p>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Price is required.
+                </p>
+            </div>
+
+
+            <div class="button_submit">
+                <div >
+                    <div>
+                        <input type="submit" class="btn btn-danger btn-lg btn3d" value="Submit Dog"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script th:src="@{webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+    <script>
+        $('.input-group.date').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+</th:block>

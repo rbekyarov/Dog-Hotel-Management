@@ -1,0 +1,37 @@
+</body>
+</html>
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="container justify-content-center mt-3">
+        <div class="jumbotron index-jumbo d-flex justify-content-center bg-blur">
+            <div class="container">
+                <div class="col-md-12 d-flex border-left border-bottom w-50 ">
+                    <h1 class="myBackgroundColor "><div>
+                        <a  href="/view/login">
+                            <span >LOGIN</span></a>
+                        <p></p>
+                    </div>
+                        <div>
+                            <a  href="/view/register">
+                                <span >REGISTER</span></a>
+                        </div></h1>
+
+
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <th:block th:if="${isInit == true}">
+                        <p><a class="btn btn-warning export-button text-white" th:href="@{/export/coupe-tasks}">Get
+                            all coupe cars with most expensive repair costs</a></p>
+                    </th:block>
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <th:block th:if="${isInit == false}">
+                            <p class="myBackgroundColor rounded p-2">Тo see the next task, first import all JSON and XML
+                                files.</p>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</th:block>
