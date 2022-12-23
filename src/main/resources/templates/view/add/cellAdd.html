@@ -8,7 +8,7 @@
         </a>
     </div>
     <div class="container">
-        <h2 class="page_title">Add Cell</h2>
+        <h2 class="page_title">Add Dog House</h2>
         <form class="form_add" th:action="@{/view/add/cellAdd}"
               th:method="post"
               th:object="${cellDto}"
@@ -24,7 +24,6 @@
             </textarea>
                 <p></p>
                 <select th:field="${cellDTO.status}" >
-                    <option value="">Select status</option>
                     <option value="empty">empty</option>
                     <option value="busy">busy</option>
                 </select>
@@ -38,7 +37,7 @@
             <div class="button_submit">
                 <div >
                     <div>
-                        <input type="submit" class="btn btn-danger btn-lg btn3d" value="Submit Cell"/>
+                        <input type="submit" class="btn btn-danger btn-lg btn3d" value="Submit Dog House"/>
                     </div>
                 </div>
             </div>

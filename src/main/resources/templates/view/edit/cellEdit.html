@@ -8,7 +8,7 @@
     </a>
     </div>
     <div class="container">
-        <h2 class="page_title">Edit Cell</h2>
+        <h2 class="page_title">Edit Dog House</h2>
 
         <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
               th:method="post">
@@ -21,7 +21,6 @@
             </textarea>
                 <p></p>
                 <select th:field="${cellDto.status}" >
-                    <option value="">Select status</option>
                     <option value="empty">empty</option>
                     <option value="busy">busy</option>
                 </select>
@@ -32,7 +31,7 @@
             <div class="button_submit">
                 <div >
                     <div>
-                        <input  type="submit" class="btn btn-danger btn-lg btn3d" value="Edit Cell"/>
+                        <input  type="submit" class="btn btn-danger btn-lg btn3d" value="Edit Dog House"/>
                     </div>
                 </div>
             </div>

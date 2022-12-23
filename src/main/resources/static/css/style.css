@@ -78,7 +78,7 @@ body {
 }
 
 .myBackgroundColor {
-    background-color: #000000;
+    background-color: #3f51b5de;
 }
 
 .jumbotron-background {
@@ -159,7 +159,7 @@ body > header > nav > a > img{
 
 .bg-blur {
     /*background-color: rgba(0, 0, 0, 0.8); !* Black w/opacity/see-through *!*/
-    background-color: rgb(29 29 29 / 76%); /* Black w/opacity/see-through */
+    background-color: rgba(248, 241, 241, 0.76); /* Black w/opacity/see-through */
     color: white;
     font-weight: bold;
     border: 3px solid #f1f1f1;
