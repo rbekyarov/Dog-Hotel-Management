@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <div class="table-center" th:object="${user}">
+        <p th:text="Welcome ${user.username}">  </p>
+
+    </div>
+</th:block>

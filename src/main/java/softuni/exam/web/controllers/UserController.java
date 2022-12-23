@@ -80,7 +80,7 @@ public class UserController extends BaseController {
     public ModelAndView login(ModelAndView modelAndView, HttpSession session){
         Object user = session.getAttribute("username");
         if (user != null){
-            modelAndView.setViewName("redirect:/");
+            modelAndView.setViewName("/view/home");
         }else {
             user = new User();
             modelAndView.setViewName("/view/login");
@@ -88,24 +88,33 @@ public class UserController extends BaseController {
 
         return super.view(modelAndView.getViewName(), "user",user);
     }
-
     @PostMapping("/view/login")
-    public ModelAndView loginConfirm( @ModelAttribute UserLoginDTO userLoginDTO,
-                                     ModelAndView modelAndView, HttpSession session){
+    public ModelAndView loginConfirm( @ModelAttribute UserLoginDTO userLoginDTO,ModelAndView modelAndView,
+                                HttpSession session){
         UserDTO user = this.modelMapper.map(userLoginDTO, UserDTO.class);
         UserDTO userLogin = this.userService.loginUser(user);
 
         if (userLogin == null){
-            throw new IllegalArgumentException("User login failed!");
+            modelAndView.setViewName("/view/login");
+
+        }else {
+            modelAndView.setViewName("/view/home");
         }
         session.setAttribute("userId", user.getId());
         session.setAttribute("username", user.getUsername());
 
-        modelAndView.setViewName("redirect:/");
-
-        return super.view(modelAndView.getViewName(), "user", user);
+        return super.view(modelAndView.getViewName(), "user",user);
 
     }
+    @GetMapping("/view/home")
+    public ModelAndView  home(ModelAndView modelAndView, HttpSession session){
+        Object user = session.getAttribute("username");
+            modelAndView.setViewName("/view/home");
+
+        return super.view(modelAndView.getViewName(), "user",user);
+    }
+
+
 
     @GetMapping("/logout")
     public ModelAndView logout(ModelAndView modelAndView, HttpSession session){

@@ -14,6 +14,7 @@
         >
             <div class="form-group">
                 <label class="text-white font-weight-bold" for="description"></label>
+                <p>Username</p>
                 <textarea
                         id="description"
                         th:field="${user.username}"
@@ -21,11 +22,12 @@
                         placeholder="Please enter Username"
                 >
             </textarea>
+                <p>Password</p>
                 <textarea
                         id="description1"
                         th:field="${user.password}"
                         type="textarea"
-                        placeholder="Please enter Username"
+                        placeholder="Please enter Password"
                 >
             </textarea>
 
@@ -35,7 +37,7 @@
             <div class="button_submit">
                 <div >
                     <div>
-                        <input type="submit" class="btn btn-danger btn-lg btn3d" value="Submit Behavior"/>
+                        <input type="submit" class="btn btn-danger btn-lg btn3d" value="Login"/>
                     </div>
                 </div>
             </div>

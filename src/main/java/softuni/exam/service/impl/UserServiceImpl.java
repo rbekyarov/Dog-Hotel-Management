@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO loginUser(UserDTO userDTO) {
         return this.userRepository.findByUsername(userDTO.getUsername())
-                .filter(u -> u.getPassword().equals(DigestUtils.sha256Hex(userDTO.getPassword())))
+                .filter(u -> u.getPassword().equals(userDTO.getPassword()))
                 .map(u -> this.modelMapper.map(u, UserDTO.class))
                 .orElse(null);
     }
