@@ -1,3 +1,4 @@
+<th:block th:if="${session.admin}">
 <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="button_back">
         <a class="nav-link h5" th:href="@{/view/table/userTable}">
@@ -58,4 +59,5 @@
             </div>
         </form>
     </div>
+</th:block>
 </th:block>

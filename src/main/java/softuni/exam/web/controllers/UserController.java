@@ -112,7 +112,13 @@ public class UserController extends BaseController {
             modelAndView.setViewName("/view/home");
             session.setAttribute("userId", user.getId());
             session.setAttribute("username", user.getUsername());
-            session.setAttribute("role", user.getRole());
+            if(user.getRole().name().equals("ADMIN")){
+                session.setAttribute("admin", user.getRole());
+            }else if (user.getRole().name().equals("USER")){
+                session.setAttribute("user", user.getRole());
+            }else
+                session.setAttribute("guest", "guest");
+
 
         }
 
