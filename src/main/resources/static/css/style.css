@@ -1,3 +1,8 @@
+.welcome{
+    text-align: -webkit-center;
+    font-size: 20px;
+    color: #353838;
+}
 .input-group{
     width: 20%;
 }

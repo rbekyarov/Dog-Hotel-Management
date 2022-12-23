@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import softuni.exam.models.dto.*;
 import softuni.exam.models.entity.Behavior;
 import softuni.exam.models.entity.User;
+import softuni.exam.models.entity.enums.Role;
 import softuni.exam.service.UserService;
 
 import javax.servlet.http.HttpSession;
@@ -50,14 +51,17 @@ public class UserController extends BaseController {
 
     @GetMapping("/view/register")
     public ModelAndView register(ModelAndView modelAndView, HttpSession session){
+        UserDTO userDTO = new UserDTO();
+
+        modelAndView.addObject("userDTO", userDTO);
         Object user = session.getAttribute("username");
         if ( user != null){
-            modelAndView.setViewName("redirect:/");
+            modelAndView.setViewName("/view/home");
         }else {
-            modelAndView.setViewName("register");
+            modelAndView.setViewName("/view/register");
         }
 
-        return super.view(modelAndView.getViewName(), "user",user);
+        return super.view(modelAndView.getViewName(), "userDTO",userDTO);
     }
 
     @PostMapping("/view/register")
@@ -91,25 +95,41 @@ public class UserController extends BaseController {
     @PostMapping("/view/login")
     public ModelAndView loginConfirm( @ModelAttribute UserLoginDTO userLoginDTO,ModelAndView modelAndView,
                                 HttpSession session){
-        UserDTO user = this.modelMapper.map(userLoginDTO, UserDTO.class);
-        UserDTO userLogin = this.userService.loginUser(user);
+        UserDTO userDTO = this.modelMapper.map(userLoginDTO, UserDTO.class);
+        UserDTO userLogin = this.userService.loginUser(userDTO);
 
         if (userLogin == null){
             modelAndView.setViewName("/view/login");
 
         }else {
+            User user = new User();
+            Long id = userLogin.getId();
+            String username = userLogin.getUsername();
+            Role role = userLogin.getRole();
+            user.setId(id);
+            user.setUsername(username);
+            user.setRole(role);
             modelAndView.setViewName("/view/home");
-        }
-        session.setAttribute("userId", user.getId());
-        session.setAttribute("username", user.getUsername());
+            session.setAttribute("userId", user.getId());
+            session.setAttribute("username", user.getUsername());
+            session.setAttribute("role", user.getRole());
 
-        return super.view(modelAndView.getViewName(), "user",user);
+        }
+
+
+        return super.view(modelAndView.getViewName(), "session",session);
 
     }
     @GetMapping("/view/home")
     public ModelAndView  home(ModelAndView modelAndView, HttpSession session){
         Object user = session.getAttribute("username");
+
+        if (user !=null){
             modelAndView.setViewName("/view/home");
+        }else {
+            modelAndView.setViewName("/view/login");
+        }
+
 
         return super.view(modelAndView.getViewName(), "user",user);
     }
@@ -122,7 +142,7 @@ public class UserController extends BaseController {
             session.invalidate();
             modelAndView.setViewName("redirect:/");
         }else {
-            modelAndView.setViewName("redirect:/login");
+            modelAndView.setViewName("redirect:/view/login");
         }
 
         return modelAndView;
