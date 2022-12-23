@@ -3,10 +3,7 @@ package softuni.exam.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import softuni.exam.models.dto.DogDTO;
-import softuni.exam.models.entity.Behavior;
-import softuni.exam.models.entity.Breed;
-import softuni.exam.models.entity.Client;
-import softuni.exam.models.entity.Dog;
+import softuni.exam.models.entity.*;
 import softuni.exam.models.entity.enums.Microchip;
 import softuni.exam.models.entity.enums.Passport;
 import softuni.exam.models.entity.enums.Sex;
@@ -61,7 +58,7 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void editDog(String name, LocalDate birthDate, String image, Integer weight, Long breedId, Sex sex,Passport passport, Microchip microchip, Long clientId, Long behaviorId, Long id) {
+    public void editDog(String name, LocalDate birthDate, ImageData image, Integer weight, Long breedId, Sex sex, Passport passport, Microchip microchip, Long clientId, Long behaviorId, Long id) {
         dogRepository.editDog(name,
                 birthDate,
                 image,

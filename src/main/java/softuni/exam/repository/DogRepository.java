@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import softuni.exam.models.entity.Breed;
 import softuni.exam.models.entity.Dog;
+import softuni.exam.models.entity.ImageData;
 import softuni.exam.models.entity.enums.Microchip;
 import softuni.exam.models.entity.enums.Passport;
 import softuni.exam.models.entity.enums.Sex;
@@ -27,10 +28,10 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Dog as d SET d.name = :name, d.birthDate=:birthDate,d.image=:image, d.weight =:weight, d.breed.id = :breedId,d.sex=:sex,d.passport=:passport,d.microchip=:microchip,d.client.id = :clientId, d.behavior.id=:behaviorId where d.id=:id ")
+    @Query("update Dog as d SET d.name = :name, d.birthDate=:birthDate,d.imageData=:image, d.weight =:weight, d.breed.id = :breedId,d.sex=:sex,d.passport=:passport,d.microchip=:microchip,d.client.id = :clientId, d.behavior.id=:behaviorId where d.id=:id ")
     void editDog(@Param("name") String name ,
                  @Param("birthDate") LocalDate birthDate ,
-                 @Param("image") String image,
+                 @Param("image") ImageData image,
                  @Param("weight") Integer weight,
                  @Param("breedId") Long breedId,
                  @Param("sex") Sex sex,

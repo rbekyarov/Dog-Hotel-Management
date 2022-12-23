@@ -101,7 +101,7 @@ public class DogController extends BaseController{
 
 
 
-        return super.view("/view/add/dogAdd",
+        return super.view("/view/edit/dogEdit",
                 "dogDTO",dogDTO,
                 "allBehaviors",
                 allBehaviors,

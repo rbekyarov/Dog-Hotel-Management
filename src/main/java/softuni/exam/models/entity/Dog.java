@@ -13,7 +13,8 @@ import java.time.LocalDate;
 public class Dog extends BaseEntity {
     private String name;
     private LocalDate birthDate;
-    private String image;
+
+    private ImageData imageData;
     private Integer weight;
     private Breed breed;
     private Sex sex;
@@ -21,6 +22,14 @@ public class Dog extends BaseEntity {
     private Microchip microchip;
     private Client client;
     private Behavior behavior;
+    @ManyToOne
+    public ImageData getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(ImageData imageData) {
+        this.imageData = imageData;
+    }
 
     public Dog() {
     }
@@ -45,14 +54,7 @@ public class Dog extends BaseEntity {
         this.birthDate = birthDate;
     }
 
-    @Column(columnDefinition = "TEXT")
-    public String getImage() {
-        return image;
-    }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     @Column
     public Integer getWeight() {

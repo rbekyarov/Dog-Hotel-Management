@@ -2,10 +2,7 @@ package softuni.exam.service;
 
 import softuni.exam.models.dto.BreedDTO;
 import softuni.exam.models.dto.DogDTO;
-import softuni.exam.models.entity.Behavior;
-import softuni.exam.models.entity.Breed;
-import softuni.exam.models.entity.Client;
-import softuni.exam.models.entity.Dog;
+import softuni.exam.models.entity.*;
 import softuni.exam.models.entity.enums.Microchip;
 import softuni.exam.models.entity.enums.Passport;
 import softuni.exam.models.entity.enums.Sex;
@@ -28,7 +25,7 @@ public interface DogService {
 
     void editDog(String name,
                  LocalDate birthDate,
-                 String image,
+                 ImageData image,
                  Integer weight,
                  Long breedId,
                  Sex sex,

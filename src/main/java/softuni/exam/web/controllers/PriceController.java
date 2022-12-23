@@ -77,7 +77,15 @@ public class PriceController extends BaseController{
         var priceDTO =
                 priceService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
-        priceService.editPrice(priceEditDTO.getPriceOvernightStay(),priceEditDTO.getPriceFood(),priceEditDTO.getPriceTraining(), priceEditDTO.getPriceBathing(), priceEditDTO.getPriceCombing(), priceEditDTO.getPricePaws(), priceEditDTO.getPriceEars(), priceEditDTO.getPriceNails(), id);
+        priceService.editPrice(priceEditDTO.getPriceOvernightStay(),
+                priceEditDTO.getPriceFood(),
+                priceEditDTO.getPriceTraining(),
+                priceEditDTO.getPriceBathing(),
+                priceEditDTO.getPriceCombing(),
+                priceEditDTO.getPricePaws(),
+                priceEditDTO.getPriceEars(),
+                priceEditDTO.getPriceNails(),
+                id);
 
         return "redirect:/view/table/priceTable";
     }
