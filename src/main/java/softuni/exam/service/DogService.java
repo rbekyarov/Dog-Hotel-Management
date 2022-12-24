@@ -25,7 +25,6 @@ public interface DogService {
 
     void editDog(String name,
                  LocalDate birthDate,
-                 ImageData image,
                  Integer weight,
                  Long breedId,
                  Sex sex,

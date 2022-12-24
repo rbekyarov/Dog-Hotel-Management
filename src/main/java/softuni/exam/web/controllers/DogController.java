@@ -120,7 +120,6 @@ public class DogController extends BaseController{
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
         dogService.editDog(dogEditDTO.getName(),
                 dogEditDTO.getBirthDate(),
-                dogEditDTO.getImage(),
                 dogEditDTO.getWeight(),
                 dogEditDTO.getBreed().getId(),
                 dogEditDTO.getSex(),

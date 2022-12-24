@@ -14,7 +14,6 @@ public class Dog extends BaseEntity {
     private String name;
     private LocalDate birthDate;
 
-    private ImageData imageData;
     private Integer weight;
     private Breed breed;
     private Sex sex;
@@ -22,14 +21,6 @@ public class Dog extends BaseEntity {
     private Microchip microchip;
     private Client client;
     private Behavior behavior;
-    @ManyToOne
-    public ImageData getImageData() {
-        return imageData;
-    }
-
-    public void setImageData(ImageData imageData) {
-        this.imageData = imageData;
-    }
 
     public Dog() {
     }
@@ -44,7 +35,7 @@ public class Dog extends BaseEntity {
     }
 
     @Column
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public LocalDate getBirthDate() {
         return birthDate;
     }

@@ -1,22 +1,18 @@
 package softuni.exam.models.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import softuni.exam.models.entity.Behavior;
 import softuni.exam.models.entity.Breed;
 import softuni.exam.models.entity.Client;
-import softuni.exam.models.entity.ImageData;
 import softuni.exam.models.entity.enums.Microchip;
 import softuni.exam.models.entity.enums.Passport;
 import softuni.exam.models.entity.enums.Sex;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 public class DogDTO {
 
     private String name;
-    private LocalDate birthDate;
-    private ImageData image;
+    private String birthDate;
     private Integer weight;
     private Breed breed;
     private Sex sex;
@@ -37,21 +33,14 @@ public class DogDTO {
         this.name = name;
     }
 
-    public LocalDate getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    public void setBirthDate(LocalDate birthDate) {
+
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
-    public ImageData getImage() {
-        return image;
-    }
-
-    public void setImage(ImageData image) {
-        this.image = image;
-    }
 
     public Integer getWeight() {
         return weight;
