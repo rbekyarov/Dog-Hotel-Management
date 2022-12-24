@@ -29,6 +29,7 @@ public class ReservationDTO {
 
     public ReservationDTO() {
     }
+
     @NotNull
     public Client getClient() {
         return client;
@@ -37,6 +38,7 @@ public class ReservationDTO {
     public void setClient(Client client) {
         this.client = client;
     }
+
     @NotNull
     public Set<Dog> getDogs() {
         return dogs;
@@ -45,6 +47,7 @@ public class ReservationDTO {
     public void setDogs(Set<Dog> dogs) {
         this.dogs = dogs;
     }
+
     @NotNull
     public LocalDate getStartDate() {
         return startDate;
@@ -53,6 +56,7 @@ public class ReservationDTO {
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
+
     @NotNull
     public LocalDate getEndDate() {
         return endDate;
@@ -61,6 +65,7 @@ public class ReservationDTO {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
     @NotNull
     public Set<Cell> getCells() {
         return cells;
@@ -69,7 +74,7 @@ public class ReservationDTO {
     public void setCells(Set<Cell> cells) {
         this.cells = cells;
     }
-    
+
     public Food getFood() {
         return food;
     }

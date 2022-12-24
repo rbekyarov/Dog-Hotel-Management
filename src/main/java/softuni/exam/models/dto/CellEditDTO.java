@@ -11,6 +11,7 @@ public class CellEditDTO {
 
     public CellEditDTO() {
     }
+
     @NotNull(message = "Field cannot be empty")
     public String getCode() {
         return code;
@@ -19,6 +20,7 @@ public class CellEditDTO {
     public void setCode(String code) {
         this.code = code;
     }
+
     @NotNull(message = "Field cannot be empty")
 
     public Status getStatus() {

@@ -17,5 +17,13 @@ public interface PriceService {
 
     Optional<Price> findById(Long id);
 
-    void editPrice(BigDecimal priceOvernightStay,BigDecimal priceFood,BigDecimal priceTraining,BigDecimal priceBathing,BigDecimal priceCombing,BigDecimal pricePaws,BigDecimal priceEars,BigDecimal priceNails, Long id);
+    void editPrice(BigDecimal priceOvernightStay,
+                   BigDecimal priceFood,
+                   BigDecimal priceTraining,
+                   BigDecimal priceBathing,
+                   BigDecimal priceCombing,
+                   BigDecimal pricePaws,
+                   BigDecimal priceEars,
+                   BigDecimal priceNails,
+                   Long id);
 }

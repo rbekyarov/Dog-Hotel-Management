@@ -13,9 +13,10 @@ import softuni.exam.service.BehaviorService;
 
 import javax.validation.Valid;
 import java.util.List;
+
 @Controller
-public class BehaviorController extends BaseController{
-   private final BehaviorService behaviorService;
+public class BehaviorController extends BaseController {
+    private final BehaviorService behaviorService;
 
     public BehaviorController(BehaviorService behaviorService) {
         this.behaviorService = behaviorService;
@@ -37,7 +38,7 @@ public class BehaviorController extends BaseController{
         modelAndView.addObject("behaviorDTO", behaviorDTO);
 
 
-        return super.view("/view/add/behaviorAdd", "behaviorDTO",behaviorDTO);
+        return super.view("/view/add/behaviorAdd", "behaviorDTO", behaviorDTO);
 
     }
 
@@ -50,7 +51,7 @@ public class BehaviorController extends BaseController{
     }
 
     @GetMapping("view/table/behavior/remove/{id}")
-    public String removeBehavior( @PathVariable Long id) {
+    public String removeBehavior(@PathVariable Long id) {
         behaviorService.removeBehaviorById(id);
 
         return "redirect:/view/table/behaviorTable";
@@ -59,7 +60,7 @@ public class BehaviorController extends BaseController{
 
     @GetMapping("view/table/behavior/edit/{id}")
     public ModelAndView getBehaviorDetail(@PathVariable("id") Long id,
-                                 ModelAndView modelAndView) throws ObjectNotFoundException {
+                                          ModelAndView modelAndView) throws ObjectNotFoundException {
 
         var behaviorDto =
                 behaviorService.findById(id).
@@ -67,12 +68,12 @@ public class BehaviorController extends BaseController{
 
         modelAndView.addObject("behaviorDTO", behaviorDto);
 
-        return super.view("/view/edit/behaviorEdit", "behaviorDTO",behaviorDto);
+        return super.view("/view/edit/behaviorEdit", "behaviorDTO", behaviorDto);
 
     }
 
     @PostMapping("view/table/behavior/edit/{id}/edit")
-    public String editBehavior( @PathVariable("id") Long id , BehaviorEditDTO behaviorEditDTO) throws ObjectNotFoundException {
+    public String editBehavior(@PathVariable("id") Long id, BehaviorEditDTO behaviorEditDTO) throws ObjectNotFoundException {
         var behaviorDto =
                 behaviorService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));

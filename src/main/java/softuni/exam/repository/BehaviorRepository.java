@@ -18,7 +18,7 @@ public interface BehaviorRepository extends JpaRepository<Behavior, Long> {
     @Query("select b from Behavior as b order by b.id asc ")
     List<Behavior> findAllOrderById();
 
-    Optional<Behavior>findById(Long id);
+    Optional<Behavior> findById(Long id);
 
     @Transactional
     @Modifying

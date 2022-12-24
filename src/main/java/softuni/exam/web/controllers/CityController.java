@@ -15,13 +15,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class CityController extends BaseController{
-   private final CityService cityService;
+public class CityController extends BaseController {
+    private final CityService cityService;
 
     public CityController(CityService cityService) {
         this.cityService = cityService;
     }
-
 
     @GetMapping("/view/table/cityTable")
     public ModelAndView cityTable(ModelAndView modelAndView) {
@@ -38,7 +37,7 @@ public class CityController extends BaseController{
         modelAndView.addObject("cityDTO", cityDTO);
 
 
-        return super.view("/view/add/cityAdd", "cityDTO",cityDTO);
+        return super.view("/view/add/cityAdd", "cityDTO", cityDTO);
 
     }
 
@@ -51,7 +50,7 @@ public class CityController extends BaseController{
     }
 
     @GetMapping("view/table/city/remove/{id}")
-    public String removeCity( @PathVariable Long id) {
+    public String removeCity(@PathVariable Long id) {
         cityService.removeCityById(id);
 
         return "redirect:/view/table/cityTable";
@@ -60,7 +59,7 @@ public class CityController extends BaseController{
 
     @GetMapping("view/table/city/edit/{id}")
     public ModelAndView getCityDetail(@PathVariable("id") Long id,
-                                 ModelAndView modelAndView) throws ObjectNotFoundException {
+                                      ModelAndView modelAndView) throws ObjectNotFoundException {
 
         var cityDTO =
                 cityService.findById(id).
@@ -68,16 +67,16 @@ public class CityController extends BaseController{
 
         modelAndView.addObject("cityDTO", cityDTO);
 
-        return super.view("/view/edit/cityEdit", "cityDTO",cityDTO);
+        return super.view("/view/edit/cityEdit", "cityDTO", cityDTO);
 
     }
 
     @PostMapping("view/table/city/edit/{id}/edit")
-    public String editCity(@PathVariable("id") Long id , CityEditDTO cityEditDTO) throws ObjectNotFoundException {
+    public String editCity(@PathVariable("id") Long id, CityEditDTO cityEditDTO) throws ObjectNotFoundException {
         var cityDto =
                 cityService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
-        cityService.editCity(cityEditDTO.getCode(), id,cityEditDTO.getName());
+        cityService.editCity(cityEditDTO.getCode(), id, cityEditDTO.getName());
 
         return "redirect:/view/table/cityTable";
     }

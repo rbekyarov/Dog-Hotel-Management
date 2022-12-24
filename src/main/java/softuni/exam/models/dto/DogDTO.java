@@ -49,6 +49,7 @@ public class DogDTO {
     public void setWeight(Integer weight) {
         this.weight = weight;
     }
+
     @NotNull(message = "Breed cannot be empty")
     public Breed getBreed() {
         return breed;
@@ -57,6 +58,7 @@ public class DogDTO {
     public void setBreed(Breed breed) {
         this.breed = breed;
     }
+
     @NotNull(message = "Sex cannot be empty")
     public Sex getSex() {
         return sex;
@@ -65,6 +67,7 @@ public class DogDTO {
     public void setSex(Sex sex) {
         this.sex = sex;
     }
+
     @NotNull(message = "Passport cannot be empty")
     public Passport getPassport() {
         return passport;
@@ -73,6 +76,7 @@ public class DogDTO {
     public void setPassport(Passport passport) {
         this.passport = passport;
     }
+
     @NotNull(message = "Microchip cannot be empty")
     public Microchip getMicrochip() {
         return microchip;
@@ -81,6 +85,7 @@ public class DogDTO {
     public void setMicrochip(Microchip microchip) {
         this.microchip = microchip;
     }
+
     @NotNull(message = "Client cannot be empty")
     public Client getClient() {
         return client;

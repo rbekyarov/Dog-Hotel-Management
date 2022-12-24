@@ -21,6 +21,7 @@ public class ClientDTO {
 
     public ClientDTO() {
     }
+
     @NotNull(message = "Name cannot be empty")
     public String getFirstName() {
         return firstName;
@@ -29,6 +30,7 @@ public class ClientDTO {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     @NotNull(message = "LastName cannot be empty")
     public String getLastName() {
         return lastName;
@@ -63,6 +65,7 @@ public class ClientDTO {
     public void setAddress(String address) {
         this.address = address;
     }
+
     @NotNull(message = "City cannot be empty")
     public City getCity() {
         return city;

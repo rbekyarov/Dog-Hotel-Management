@@ -17,6 +17,7 @@ public class PriceEditDTO {
 
     public PriceEditDTO() {
     }
+
     @NotNull(message = "Field cannot be empty")
     @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceOvernightStay() {
@@ -26,6 +27,7 @@ public class PriceEditDTO {
     public void setPriceOvernightStay(BigDecimal priceOvernightStay) {
         this.priceOvernightStay = priceOvernightStay;
     }
+
     @NotNull(message = "Field cannot be empty")
     @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceFood() {
@@ -35,6 +37,7 @@ public class PriceEditDTO {
     public void setPriceFood(BigDecimal priceFood) {
         this.priceFood = priceFood;
     }
+
     @NotNull(message = "Field cannot be empty")
     @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceTraining() {
@@ -44,6 +47,7 @@ public class PriceEditDTO {
     public void setPriceTraining(BigDecimal priceTraining) {
         this.priceTraining = priceTraining;
     }
+
     @NotNull(message = "Field cannot be empty")
     @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceBathing() {
@@ -53,6 +57,7 @@ public class PriceEditDTO {
     public void setPriceBathing(BigDecimal priceBathing) {
         this.priceBathing = priceBathing;
     }
+
     @NotNull(message = "Field cannot be empty")
     @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceCombing() {
@@ -62,6 +67,7 @@ public class PriceEditDTO {
     public void setPriceCombing(BigDecimal priceCombing) {
         this.priceCombing = priceCombing;
     }
+
     @NotNull(message = "Field cannot be empty")
     @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPricePaws() {
@@ -71,6 +77,7 @@ public class PriceEditDTO {
     public void setPricePaws(BigDecimal pricePaws) {
         this.pricePaws = pricePaws;
     }
+
     @NotNull(message = "Field cannot be empty")
     @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceEars() {
@@ -80,6 +87,7 @@ public class PriceEditDTO {
     public void setPriceEars(BigDecimal priceEars) {
         this.priceEars = priceEars;
     }
+
     @NotNull(message = "Field cannot be empty")
     @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceNails() {

@@ -17,10 +17,10 @@ import javax.validation.Valid;
 import java.util.*;
 
 @Controller
-public class ClientController extends BaseController{
-   private final ClientService clientService;
-   private final DogService dogService;
-   private final CityService cityService;
+public class ClientController extends BaseController {
+    private final ClientService clientService;
+    private final DogService dogService;
+    private final CityService cityService;
 
     public ClientController(ClientService clientService, DogService dogService, CityService cityService) {
         this.clientService = clientService;
@@ -49,11 +49,10 @@ public class ClientController extends BaseController{
         modelAndView.addObject("clientDTO", clientDTO);
 
         return super.view("/view/add/clientAdd",
-                "clientDTO",clientDTO,
+                "clientDTO", clientDTO,
                 "allCity", allCity);
 
     }
-
 
     @PostMapping("/view/add/clientAdd")
     public String addClient(@Valid ClientDTO clientDTO) {
@@ -64,21 +63,19 @@ public class ClientController extends BaseController{
     }
 
     @GetMapping("view/table/client/remove/{id}")
-    public String removeClient( @PathVariable Long id) {
+    public String removeClient(@PathVariable Long id) {
         clientService.removeClientById(id);
 
         return "redirect:/view/table/clientTable";
     }
 
-
     @GetMapping("view/table/client/edit/{id}")
     public ModelAndView getClientDetail(@PathVariable("id") Long id,
-                                 ModelAndView modelAndView) throws ObjectNotFoundException {
+                                        ModelAndView modelAndView) throws ObjectNotFoundException {
 
         var clientDTO =
                 clientService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
-
 
         modelAndView.addObject("clientDTO", clientDTO);
         List<City> allCity = cityService.findAllCityById();
@@ -87,14 +84,14 @@ public class ClientController extends BaseController{
 
 
         return super.view("/view/edit/clientEdit",
-                "clientDTO",clientDTO,
+                "clientDTO", clientDTO,
                 "allCity", allCity);
 
     }
 
     @PostMapping("view/table/client/edit/{id}/edit")
-    public String clientEdit(@PathVariable("id") Long id , ClientEditDTO clientEditDTO) throws ObjectNotFoundException {
-       //Set<Dog> dogs = dogService.findAllDogByClient(id);
+    public String clientEdit(@PathVariable("id") Long id, ClientEditDTO clientEditDTO) throws ObjectNotFoundException {
+        //Set<Dog> dogs = dogService.findAllDogByClient(id);
         clientService.editClient(clientEditDTO.getFirstName(),
                 clientEditDTO.getLastName(),
                 clientEditDTO.getEmail(),

@@ -16,7 +16,6 @@ public class BehaviorServiceImpl implements BehaviorService {
     private final BehaviorRepository behaviorRepository;
     private final ModelMapper modelMapper;
 
-
     public BehaviorServiceImpl(BehaviorRepository behaviorRepository, ModelMapper modelMapper) {
         this.behaviorRepository = behaviorRepository;
         this.modelMapper = modelMapper;

@@ -16,11 +16,12 @@ public class ClientEditDTO {
     private String phone;
     private String address;
     private City city;
-    private Set<Dog>dogs;
+    private Set<Dog> dogs;
 
 
     public ClientEditDTO() {
     }
+
     @NotNull(message = "Name cannot be empty")
     public String getFirstName() {
         return firstName;
@@ -29,6 +30,7 @@ public class ClientEditDTO {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     @NotNull(message = "LastName cannot be empty")
     public String getLastName() {
         return lastName;
@@ -63,6 +65,7 @@ public class ClientEditDTO {
     public void setAddress(String address) {
         this.address = address;
     }
+
     @NotNull(message = "City cannot be empty")
     public City getCity() {
         return city;

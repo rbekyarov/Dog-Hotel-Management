@@ -15,8 +15,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class BreedController extends BaseController{
-   private final BreedService breedService;
+public class BreedController extends BaseController {
+    private final BreedService breedService;
 
     public BreedController(BreedService breedService) {
         this.breedService = breedService;
@@ -38,7 +38,7 @@ public class BreedController extends BaseController{
         modelAndView.addObject("breedDTO", breedDTO);
 
 
-        return super.view("/view/add/breedAdd", "breedDTO",breedDTO);
+        return super.view("/view/add/breedAdd", "breedDTO", breedDTO);
 
     }
 
@@ -51,7 +51,7 @@ public class BreedController extends BaseController{
     }
 
     @GetMapping("view/table/breed/remove/{id}")
-    public String removeBreed( @PathVariable Long id) {
+    public String removeBreed(@PathVariable Long id) {
         breedService.removeBreedById(id);
 
         return "redirect:/view/table/breedTable";
@@ -60,7 +60,7 @@ public class BreedController extends BaseController{
 
     @GetMapping("view/table/breed/edit/{id}")
     public ModelAndView getBreedDetail(@PathVariable("id") Long id,
-                                 ModelAndView modelAndView) throws ObjectNotFoundException {
+                                       ModelAndView modelAndView) throws ObjectNotFoundException {
 
         var breedDto =
                 breedService.findById(id).
@@ -68,12 +68,12 @@ public class BreedController extends BaseController{
 
         modelAndView.addObject("breedDTO", breedDto);
 
-        return super.view("/view/edit/breedEdit", "breedDTO",breedDto);
+        return super.view("/view/edit/breedEdit", "breedDTO", breedDto);
 
     }
 
     @PostMapping("view/table/breed/edit/{id}/edit")
-    public String editBreed(@PathVariable("id") Long id , BreedEditDTO breedEditDTO) throws ObjectNotFoundException {
+    public String editBreed(@PathVariable("id") Long id, BreedEditDTO breedEditDTO) throws ObjectNotFoundException {
         var breedDto =
                 breedService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));

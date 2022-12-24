@@ -15,13 +15,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class PriceController extends BaseController{
-   private final PriceService priceService;
+public class PriceController extends BaseController {
+    private final PriceService priceService;
 
     public PriceController(PriceService priceService) {
         this.priceService = priceService;
     }
-
 
     @GetMapping("/view/table/priceTable")
     public ModelAndView priceTable(ModelAndView modelAndView) {
@@ -38,7 +37,7 @@ public class PriceController extends BaseController{
         modelAndView.addObject("priceDTO", priceDTO);
 
 
-        return super.view("/view/add/priceAdd", "priceDTO",priceDTO);
+        return super.view("/view/add/priceAdd", "priceDTO", priceDTO);
 
     }
 
@@ -51,7 +50,7 @@ public class PriceController extends BaseController{
     }
 
     @GetMapping("view/table/price/remove/{id}")
-    public String removePrice( @PathVariable Long id) {
+    public String removePrice(@PathVariable Long id) {
         priceService.removePriceById(id);
 
         return "redirect:/view/table/priceTable";
@@ -60,7 +59,7 @@ public class PriceController extends BaseController{
 
     @GetMapping("view/table/price/edit/{id}")
     public ModelAndView getPriceDetail(@PathVariable("id") Long id,
-                                 ModelAndView modelAndView) throws ObjectNotFoundException {
+                                       ModelAndView modelAndView) throws ObjectNotFoundException {
 
         var priceDTO =
                 priceService.findById(id).
@@ -68,12 +67,12 @@ public class PriceController extends BaseController{
 
         modelAndView.addObject("priceDTO", priceDTO);
 
-        return super.view("/view/edit/priceEdit", "priceDTO",priceDTO);
+        return super.view("/view/edit/priceEdit", "priceDTO", priceDTO);
 
     }
 
     @PostMapping("view/table/price/edit/{id}/edit")
-    public String editPrice(@PathVariable("id") Long id , PriceEditDTO priceEditDTO) throws ObjectNotFoundException {
+    public String editPrice(@PathVariable("id") Long id, PriceEditDTO priceEditDTO) throws ObjectNotFoundException {
         var priceDTO =
                 priceService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));

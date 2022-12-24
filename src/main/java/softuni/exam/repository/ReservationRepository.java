@@ -29,17 +29,17 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Modifying
     @Query("update Reservation as r SET r.client.id =:clientId ,r.dogs =:dogs,r.startDate=:startDate,r.endDate=:endDate,r.cells=:cells,r.food=:food,r.training=:training,r.bathing=:bathing, r.combing=:combing,r.ears=:ears,r.paws=:paws,r.nails=:nails,r.discount=:discount  where r.id=:id ")
     void editReservation(@Param("clientId") Long clientId
-            ,@Param("dogs") Set<Dog> dogs
-            ,@Param("startDate") LocalDate startDate
-            ,@Param("endDate") LocalDate endDate
-            ,@Param("cells") Set<Cell> cells
-            ,@Param("food") Food food
-            ,@Param("training") Training training
-            ,@Param("bathing") Bathing bathing
-            ,@Param("combing") Combing combing
-            ,@Param("ears") Ears ears
-            ,@Param("paws") Paws paws
-            ,@Param("nails") Nails nails
-            ,@Param("discount") Double discount
-            ,@Param("id") Long id);
+            , @Param("dogs") Set<Dog> dogs
+            , @Param("startDate") LocalDate startDate
+            , @Param("endDate") LocalDate endDate
+            , @Param("cells") Set<Cell> cells
+            , @Param("food") Food food
+            , @Param("training") Training training
+            , @Param("bathing") Bathing bathing
+            , @Param("combing") Combing combing
+            , @Param("ears") Ears ears
+            , @Param("paws") Paws paws
+            , @Param("nails") Nails nails
+            , @Param("discount") Double discount
+            , @Param("id") Long id);
 }

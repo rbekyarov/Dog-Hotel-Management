@@ -1,60 +1,60 @@
 <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
-  <div class="button_back">
-    <a class="nav-link h5" th:href="@{/}">
-      <button type="button" class="btn btn-danger btn-lg btn3d"><span
-              class="glyphicon glyphicon-ok"></span>Back
-      </button>
-    </a>
-  </div>
-  <div class="container">
-    <h2 class="page_title">Register User</h2>
-    <form class="form_add" th:action="@{/view/register}"
-          th:method="post"
-          th:object="${userDTO}"
-    >
-      <div class="form-group">
-        <label class="text-white font-weight-bold" for="description"></label>
-        <p>UserName</p>
-        <textarea
-                id="description"
-                th:field="${userDTO.username}"
-                type="textarea"
-                placeholder="Please enter Username"
+    <div class="button_back">
+        <a class="nav-link h5" th:href="@{/}">
+            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                    class="glyphicon glyphicon-ok"></span>Back
+            </button>
+        </a>
+    </div>
+    <div class="container">
+        <h2 class="page_title">Register User</h2>
+        <form class="form_add" th:action="@{/view/register}"
+              th:method="post"
+              th:object="${userDTO}"
         >
+            <div class="form-group">
+                <label class="text-white font-weight-bold" for="description"></label>
+                <p>UserName</p>
+                <textarea
+                        id="description"
+                        th:field="${userDTO.username}"
+                        type="textarea"
+                        placeholder="Please enter Username"
+                >
             </textarea>
-        <p>Password</p>
-        <textarea
-                id="description1"
-                th:field="${userDTO.password}"
-                type="textarea"
-                placeholder="Please enter Password"
-        >
+                <p>Password</p>
+                <textarea
+                        id="description1"
+                        th:field="${userDTO.password}"
+                        type="textarea"
+                        placeholder="Please enter Password"
+                >
             </textarea>
-        <p>Confirm Password</p>
-        <textarea
-                id="description2"
-                th:field="${userDTO.confirmPassword}"
-                type="textarea"
-                placeholder="Confirm Password"
-        >
+                <p>Confirm Password</p>
+                <textarea
+                        id="description2"
+                        th:field="${userDTO.confirmPassword}"
+                        type="textarea"
+                        placeholder="Confirm Password"
+                >
             </textarea>
-        <p>Default Role</p>
-        <div class="form-group">
-          <select th:field="${userDTO.role}">
-            <option value="USER">USER</option>
-          </select>
-        </div>
+                <p>Default Role</p>
+                <div class="form-group">
+                    <select th:field="${userDTO.role}">
+                        <option value="USER">USER</option>
+                    </select>
+                </div>
 
-      </div>
+            </div>
 
 
-      <div class="button_submit">
-        <div >
-          <div>
-            <input type="submit" class="btn btn-danger btn-lg btn3d" value="Register"/>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
+            <div class="button_submit">
+                <div>
+                    <div>
+                        <input type="submit" class="btn btn-danger btn-lg btn3d" value="Register"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </th:block>

@@ -9,6 +9,7 @@ public class CityDTO {
 
     public CityDTO() {
     }
+
     @NotNull(message = "Field cannot be empty")
     public String getCode() {
         return code;
@@ -17,6 +18,7 @@ public class CityDTO {
     public void setCode(String code) {
         this.code = code;
     }
+
     @NotNull(message = "Field cannot be empty")
     public String getName() {
         return name;

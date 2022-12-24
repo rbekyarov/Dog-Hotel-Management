@@ -49,8 +49,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void editUser(Role role ,Long id) {
-         userRepository.editUser(role ,id);
+    public void editUser(Role role, Long id) {
+        userRepository.editUser(role, id);
     }
 
 
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findByUsername(String username) {
-       return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
 

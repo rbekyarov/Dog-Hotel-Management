@@ -28,6 +28,7 @@ public class UserLoginDTO {
     public void setUsername(String username) {
         this.username = username;
     }
+
     @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters!")
     @NotNull
     public String getPassword() {

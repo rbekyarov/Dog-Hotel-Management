@@ -33,6 +33,7 @@ public class UserRegisterDTO {
     public void setUsername(String username) {
         this.username = username;
     }
+
     @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters!")
     @NotNull
     public String getPassword() {
@@ -42,6 +43,7 @@ public class UserRegisterDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
     @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters!")
     @NotNull
     public String getConfirmPassword() {

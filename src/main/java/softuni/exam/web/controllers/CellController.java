@@ -15,13 +15,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class CellController extends BaseController{
-   private final CellService cellService;
+public class CellController extends BaseController {
+    private final CellService cellService;
 
     public CellController(CellService cellService) {
         this.cellService = cellService;
     }
-
 
     @GetMapping("/view/table/cellTable")
     public ModelAndView cellTable(ModelAndView modelAndView) {
@@ -38,7 +37,7 @@ public class CellController extends BaseController{
         modelAndView.addObject("cellDTO", cellDTO);
 
 
-        return super.view("/view/add/cellAdd", "cellDTO",cellDTO);
+        return super.view("/view/add/cellAdd", "cellDTO", cellDTO);
 
     }
 
@@ -51,7 +50,7 @@ public class CellController extends BaseController{
     }
 
     @GetMapping("view/table/cell/remove/{id}")
-    public String removeCell( @PathVariable Long id) {
+    public String removeCell(@PathVariable Long id) {
         cellService.removeCellById(id);
 
         return "redirect:/view/table/cellTable";
@@ -60,7 +59,7 @@ public class CellController extends BaseController{
 
     @GetMapping("view/table/cell/edit/{id}")
     public ModelAndView getCellDetail(@PathVariable("id") Long id,
-                                 ModelAndView modelAndView) throws ObjectNotFoundException {
+                                      ModelAndView modelAndView) throws ObjectNotFoundException {
 
         var cellDto =
                 cellService.findById(id).
@@ -68,12 +67,12 @@ public class CellController extends BaseController{
 
         modelAndView.addObject("cellDto", cellDto);
 
-        return super.view("/view/edit/cellEdit", "cellDto",cellDto);
+        return super.view("/view/edit/cellEdit", "cellDto", cellDto);
 
     }
 
     @PostMapping("view/table/cell/edit/{id}/edit")
-    public String editCell(@PathVariable("id") Long id , CellEditDTO cellEditDTO) throws ObjectNotFoundException {
+    public String editCell(@PathVariable("id") Long id, CellEditDTO cellEditDTO) throws ObjectNotFoundException {
         var cellDto =
                 cellService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));

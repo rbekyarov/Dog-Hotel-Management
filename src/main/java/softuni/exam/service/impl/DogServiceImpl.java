@@ -29,7 +29,7 @@ public class DogServiceImpl implements DogService {
     private final ModelMapper modelMapper;
 
     public DogServiceImpl(DogRepository dogRepository, BehaviorService behaviorService, ClientService clientService, BreedService breedService, ModelMapper modelMapper
-                          ) {
+    ) {
         this.dogRepository = dogRepository;
         this.behaviorService = behaviorService;
         this.clientService = clientService;
@@ -46,7 +46,7 @@ public class DogServiceImpl implements DogService {
     public void addDog(DogDTO dogDTO) {
         Dog dog = modelMapper.map(dogDTO, Dog.class);
 
-        String date = dogDTO.getBirthDate() ;
+        String date = dogDTO.getBirthDate();
 
         dog.setBirthDate(formatterLocal(date));
 
@@ -78,8 +78,9 @@ public class DogServiceImpl implements DogService {
                 behaviorId,
                 id);
     }
+
     @Override
-    public List<Behavior> getAllBehaviors(){
+    public List<Behavior> getAllBehaviors() {
         return behaviorService.findAllBehaviorById();
     }
 
@@ -109,10 +110,8 @@ public class DogServiceImpl implements DogService {
     }
 
     //convert String to LocalDate
-    LocalDate formatterLocal(String date){
+    LocalDate formatterLocal(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-
-
         LocalDate localDate = LocalDate.parse(date, formatter);
 
         return localDate;

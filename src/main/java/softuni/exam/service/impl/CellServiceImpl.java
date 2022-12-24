@@ -21,7 +21,6 @@ public class CellServiceImpl implements CellService {
         this.modelMapper = modelMapper;
     }
 
-
     @Override
     public List<Cell> findAllCellById() {
         return cellRepository.findAllCellById();

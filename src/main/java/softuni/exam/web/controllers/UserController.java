@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.exam.models.dto.*;
-import softuni.exam.models.entity.Behavior;
 import softuni.exam.models.entity.User;
 import softuni.exam.models.entity.enums.Role;
 import softuni.exam.service.UserService;
@@ -36,13 +35,13 @@ public class UserController extends BaseController {
         modelAndView.addObject("userDTO", userDTO);
 
 
-        return super.view("/view/add/userAdd", "userDTO",userDTO);
+        return super.view("/view/add/userAdd", "userDTO", userDTO);
 
     }
 
     @PostMapping("/view/add/userAdd")
     public String addUser(@Valid UserDTO userDTO) {
-        if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
+        if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
             throw new IllegalArgumentException("Passwords don't match!");
         }
         userService.addUser(userDTO);
@@ -51,32 +50,32 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/view/register")
-    public ModelAndView register(ModelAndView modelAndView, HttpSession session){
+    public ModelAndView register(ModelAndView modelAndView, HttpSession session) {
         UserDTO userDTO = new UserDTO();
 
         modelAndView.addObject("userDTO", userDTO);
         Object user = session.getAttribute("username");
-        if ( user != null){
+        if (user != null) {
             modelAndView.setViewName("/view/home");
-        }else {
+        } else {
             modelAndView.setViewName("/view/register");
         }
 
-        return super.view(modelAndView.getViewName(), "userDTO",userDTO);
+        return super.view(modelAndView.getViewName(), "userDTO", userDTO);
     }
 
     @PostMapping("/view/register")
     public ModelAndView registerConfirm(@ModelAttribute UserRegisterDTO userRegisterDTO,
-                                        ModelAndView modelAndView){
-        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())){
+                                        ModelAndView modelAndView) {
+        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
             throw new IllegalArgumentException("Passwords don't match!");
         }
         String username = userRegisterDTO.getUsername();
-        Optional<User> byUsername =  userService.findByUsername(username);
-        if(byUsername.isEmpty()){
+        Optional<User> byUsername = userService.findByUsername(username);
+        if (byUsername.isEmpty()) {
             userService.registerUser(userRegisterDTO);
             modelAndView.setViewName("redirect:/view/login");
-        }else {
+        } else {
             modelAndView.setViewName("redirect:/view/register");
         }
 
@@ -85,27 +84,28 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/view/login")
-    public ModelAndView login(ModelAndView modelAndView, HttpSession session){
+    public ModelAndView login(ModelAndView modelAndView, HttpSession session) {
         Object user = session.getAttribute("username");
-        if (user != null){
+        if (user != null) {
             modelAndView.setViewName("/view/home");
-        }else {
+        } else {
             user = new User();
             modelAndView.setViewName("/view/login");
         }
 
-        return super.view(modelAndView.getViewName(), "user",user);
+        return super.view(modelAndView.getViewName(), "user", user);
     }
+
     @PostMapping("/view/login")
-    public ModelAndView loginConfirm( @ModelAttribute UserLoginDTO userLoginDTO,ModelAndView modelAndView,
-                                HttpSession session){
+    public ModelAndView loginConfirm(@ModelAttribute UserLoginDTO userLoginDTO, ModelAndView modelAndView,
+                                     HttpSession session) {
         UserDTO userDTO = this.modelMapper.map(userLoginDTO, UserDTO.class);
         UserDTO userLogin = this.userService.loginUser(userDTO);
 
-        if (userLogin == null){
+        if (userLogin == null) {
             modelAndView.setViewName("/index");
 
-        }else {
+        } else {
             User user = new User();
             Long id = userLogin.getId();
             String username = userLogin.getUsername();
@@ -116,45 +116,43 @@ public class UserController extends BaseController {
 
             session.setAttribute("userId", user.getId());
             session.setAttribute("username", user.getUsername());
-            if(user.getRole().name().equals("ADMIN")){
+            if (user.getRole().name().equals("ADMIN")) {
                 session.setAttribute("admin", user.getRole());
                 modelAndView.setViewName("/view/home");
 
-            }else {
+            } else {
                 session.setAttribute("user", user.getRole());
                 modelAndView.setViewName("/view/home");
             }
 
-
-
         }
 
 
-        return super.view(modelAndView.getViewName(), "session",session);
+        return super.view(modelAndView.getViewName(), "session", session);
 
     }
+
     @GetMapping("/view/home")
-    public ModelAndView  home(ModelAndView modelAndView, HttpSession session){
+    public ModelAndView home(ModelAndView modelAndView, HttpSession session) {
         Object user = session.getAttribute("username");
 
-        if (user !=null){
+        if (user != null) {
             modelAndView.setViewName("/view/home");
-        }else {
+        } else {
             modelAndView.setViewName("/view/login");
         }
 
 
-        return super.view(modelAndView.getViewName(), "user",user);
+        return super.view(modelAndView.getViewName(), "user", user);
     }
 
 
-
     @GetMapping("/logout")
-    public ModelAndView logout(ModelAndView modelAndView, HttpSession session){
-        if (session.getAttribute("username") != null){
+    public ModelAndView logout(ModelAndView modelAndView, HttpSession session) {
+        if (session.getAttribute("username") != null) {
             session.invalidate();
             modelAndView.setViewName("redirect:/");
-        }else {
+        } else {
             modelAndView.setViewName("redirect:/view/login");
         }
 
@@ -171,7 +169,7 @@ public class UserController extends BaseController {
 
     @GetMapping("view/table/user/edit/{id}")
     public ModelAndView getUserDetail(@PathVariable("id") Long id,
-                                          ModelAndView modelAndView) throws ObjectNotFoundException {
+                                      ModelAndView modelAndView) throws ObjectNotFoundException {
 
         var userDto =
                 userService.findById(id).
@@ -179,21 +177,22 @@ public class UserController extends BaseController {
 
         modelAndView.addObject("userDto", userDto);
 
-        return super.view("/view/edit/userEdit", "userDto",userDto);
+        return super.view("/view/edit/userEdit", "userDto", userDto);
 
     }
+
     @PostMapping("view/table/user/edit/{id}/edit")
-    public String editBehavior( @PathVariable("id") Long id , UserEditDTO userEditDTO) throws ObjectNotFoundException {
+    public String editBehavior(@PathVariable("id") Long id, UserEditDTO userEditDTO) throws ObjectNotFoundException {
         var userDto =
                 userService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
-        userService.editUser(userEditDTO.getRole(),id);
+        userService.editUser(userEditDTO.getRole(), id);
 
         return "redirect:/view/table/userTable";
     }
 
     @GetMapping("view/table/user/remove/{id}")
-    public String removeUser( @PathVariable Long id) {
+    public String removeUser(@PathVariable Long id) {
         userService.removeUserById(id);
 
         return "redirect:/view/table/userTable";

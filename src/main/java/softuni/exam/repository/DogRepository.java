@@ -27,8 +27,8 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
     @Transactional
     @Modifying
     @Query("update Dog as d SET d.name = :name, d.birthDate=:birthDate, d.weight =:weight, d.breed.id = :breedId,d.sex=:sex,d.passport=:passport,d.microchip=:microchip,d.client.id = :clientId, d.behavior.id=:behaviorId where d.id=:id ")
-    void editDog(@Param("name") String name ,
-                 @Param("birthDate") LocalDate birthDate ,
+    void editDog(@Param("name") String name,
+                 @Param("birthDate") LocalDate birthDate,
                  @Param("weight") Integer weight,
                  @Param("breedId") Long breedId,
                  @Param("sex") Sex sex,
@@ -39,9 +39,11 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
                  @Param("id") Long id);
 
     @Query("select d.id from Dog as d where d.client.email=:clientEmail")
-    Set<Long> listDogIds( @Param("clientEmail") String clientEmail);
+    Set<Long> listDogIds(@Param("clientEmail") String clientEmail);
+
     @Query("select d from Dog as d where d.client.email=:clientEmail")
     List<Dog> listDogByEmail(@Param("clientEmail") String email);
+
     @Query("select d from Dog as d where d.client.id=:id ")
     List<Dog> findAllDogByClient(@Param("id") Long id);
 }

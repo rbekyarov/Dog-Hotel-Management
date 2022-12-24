@@ -28,7 +28,6 @@ public class ReservationController extends BaseController {
 
     public ReservationController(ReservationService reservationService, ClientService clientService, CellService cellService, DogService dogService) {
 
-
         this.reservationService = reservationService;
         this.clientService = clientService;
         this.cellService = cellService;
@@ -45,7 +44,7 @@ public class ReservationController extends BaseController {
     }
 
     @GetMapping("/view/add/reservationAdd")
-    public ModelAndView reservationAdd(ModelAndView modelAndView , @RequestParam(value = "id", required = false) String clientId) {
+    public ModelAndView reservationAdd(ModelAndView modelAndView, @RequestParam(value = "id", required = false) String clientId) {
         ReservationDTO reservationDTO = new ReservationDTO();
 
         List<Client> allClients = clientService.findAllClientById();
@@ -66,7 +65,6 @@ public class ReservationController extends BaseController {
         );
 
     }
-
 
     @PostMapping("/view/add/reservationAdd")
     public String addReservation(@Valid ReservationDTO reservationDTO) {
@@ -128,4 +126,4 @@ public class ReservationController extends BaseController {
 //
 //        return "redirect:/view/table/reservationTable";
 //    }
-    }
+}

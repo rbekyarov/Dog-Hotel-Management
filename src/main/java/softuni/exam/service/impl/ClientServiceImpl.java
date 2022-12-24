@@ -46,14 +46,13 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void editClient(String firstName, String lastName, String email, String phone, String address, Long cityId, Long id) {
-       clientRepository.editClient(firstName,
-               lastName,
-               email,
-               phone,
-               address,
-               cityId,
-               id);
+        clientRepository.editClient(firstName,
+                lastName,
+                email,
+                phone,
+                address,
+                cityId,
+                id);
     }
-
 
 }

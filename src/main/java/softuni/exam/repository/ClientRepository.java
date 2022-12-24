@@ -23,16 +23,17 @@ import java.util.Set;
 public interface ClientRepository extends JpaRepository<Client, Long> {
     @Query("select c from Client as c order by c.id asc ")
     List<Client> findAllClientById();
+
     Optional<Client> findById(Long id);
 
     @Transactional
     @Modifying
     @Query("update Client as c SET c.firstName = :firstName, c.lastName=:lastName,c.email=:email, c.phone =:phone, c.address = :address,c.city.id=:cityId where c.id=:id ")
-    void editClient(@Param("firstName") String firstName ,
-                 @Param("lastName") String lastName ,
-                 @Param("email") String email,
-                 @Param("phone") String phone,
-                 @Param("address") String address,
-                 @Param("cityId") Long cityId,
-                 @Param("id") Long id);
+    void editClient(@Param("firstName") String firstName,
+                    @Param("lastName") String lastName,
+                    @Param("email") String email,
+                    @Param("phone") String phone,
+                    @Param("address") String address,
+                    @Param("cityId") Long cityId,
+                    @Param("id") Long id);
 }

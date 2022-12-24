@@ -16,6 +16,7 @@ public abstract class BaseController {
 
         return modelAndView;
     }
+
     //BehaviorController, BreedController,CellController,CityController,priceService
     public ModelAndView view(String view, String objectName, Object object) {
         ModelAndView modelAndView = new ModelAndView();
@@ -27,7 +28,7 @@ public abstract class BaseController {
     }
 
     //reservationAdd
-    public ModelAndView view(String view, String objectName, Object object, String clients , List<Client> clientsList, String allEmptyCells, List<Cell> allEmptyCellsList) {
+    public ModelAndView view(String view, String objectName, Object object, String clients, List<Client> clientsList, String allEmptyCells, List<Cell> allEmptyCellsList) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fragments/base-layout");
         modelAndView.addObject("view", view);
@@ -40,7 +41,7 @@ public abstract class BaseController {
     }
 
     //dogAdd
-    public ModelAndView view(String view, String objectName, Object object, String allBehaviors , List<Behavior> allBehaviorsList, String allBreeds, List<Breed> allBreedsList, String allClients, List<Client> allClientsList) {
+    public ModelAndView view(String view, String objectName, Object object, String allBehaviors, List<Behavior> allBehaviorsList, String allBreeds, List<Breed> allBreedsList, String allClients, List<Client> allClientsList) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fragments/base-layout");
         modelAndView.addObject("view", view);
@@ -51,8 +52,9 @@ public abstract class BaseController {
 
         return modelAndView;
     }
+
     //clientAdd
-    public ModelAndView view(String view, String objectName, Object object, String allCity , List<City> allCityList) {
+    public ModelAndView view(String view, String objectName, Object object, String allCity, List<City> allCityList) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fragments/base-layout");
         modelAndView.addObject("view", view);
@@ -62,8 +64,6 @@ public abstract class BaseController {
 
         return modelAndView;
     }
-
-
 
 
     public ModelAndView redirect(String url) {

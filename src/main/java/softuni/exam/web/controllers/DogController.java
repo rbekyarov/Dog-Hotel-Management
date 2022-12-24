@@ -21,14 +21,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class DogController extends BaseController{
-   private final DogService dogService;
+public class DogController extends BaseController {
+    private final DogService dogService;
 
     public DogController(DogService dogService) {
 
         this.dogService = dogService;
     }
-
 
     @GetMapping("/view/table/dogTable")
     public ModelAndView dogTable(ModelAndView modelAndView) {
@@ -52,21 +51,15 @@ public class DogController extends BaseController{
         modelAndView.addObject("allBreeds", allBreeds);
         modelAndView.addObject("allClients", allClients);
 
-
-
-
         return super.view("/view/add/dogAdd",
-                "dogDTO",dogDTO,
+                "dogDTO", dogDTO,
                 "allBehaviors",
                 allBehaviors,
                 "allBreeds",
                 allBreeds,
                 "allClients",
-                allClients
-                );
-
+                allClients);
     }
-
 
     @PostMapping("/view/add/dogAdd")
     public String addDog(@Valid DogDTO dogDTO) {
@@ -77,16 +70,15 @@ public class DogController extends BaseController{
     }
 
     @GetMapping("view/table/dog/remove/{id}")
-    public String removeDog( @PathVariable Long id) {
+    public String removeDog(@PathVariable Long id) {
         dogService.removeDogById(id);
 
         return "redirect:/view/table/dogTable";
     }
 
-
     @GetMapping("view/table/dog/edit/{id}")
     public ModelAndView getDogDetail(@PathVariable("id") Long id,
-                                 ModelAndView modelAndView) throws ObjectNotFoundException {
+                                     ModelAndView modelAndView) throws ObjectNotFoundException {
 
         var dogDTO =
                 dogService.findById(id).
@@ -100,9 +92,8 @@ public class DogController extends BaseController{
         modelAndView.addObject("dogDTO", dogDTO);
 
 
-
         return super.view("/view/edit/dogEdit",
-                "dogDTO",dogDTO,
+                "dogDTO", dogDTO,
                 "allBehaviors",
                 allBehaviors,
                 "allBreeds",
@@ -114,7 +105,7 @@ public class DogController extends BaseController{
     }
 
     @PostMapping("view/table/dog/edit/{id}/edit")
-    public String editDog(@PathVariable("id") Long id , DogEditDTO dogEditDTO) throws ObjectNotFoundException {
+    public String editDog(@PathVariable("id") Long id, DogEditDTO dogEditDTO) throws ObjectNotFoundException {
         var dogDTO =
                 dogService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
