@@ -24,18 +24,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean registerUser(UserDTO userDTO) {
-        User user = this.modelMapper.map(userDTO, User.class);
-        user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
+    public void registerUser(UserRegisterDTO userRegisterDTO) {
+        User user = this.modelMapper.map(userRegisterDTO, User.class);
+        userRepository.saveAndFlush(user);
 
-        try {
-            this.userRepository.saveAndFlush(user);
-
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
     }
 
     @Override
@@ -74,6 +66,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void removeUserById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+       return userRepository.findByUsername(username);
     }
 
 

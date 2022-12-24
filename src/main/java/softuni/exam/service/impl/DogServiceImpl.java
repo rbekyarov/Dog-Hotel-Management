@@ -13,10 +13,7 @@ import softuni.exam.service.BreedService;
 import softuni.exam.service.ClientService;
 import softuni.exam.service.DogService;
 
-import javax.transaction.Transactional;
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -51,11 +48,7 @@ public class DogServiceImpl implements DogService {
 
         String date = dogDTO.getBirthDate() ;
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-
-        //convert String to LocalDate
-        LocalDate localDate = LocalDate.parse(date, formatter);
-        dog.setBirthDate(localDate);
+        dog.setBirthDate(formatterLocal(date));
 
 
         dogRepository.saveAndFlush(dog);
@@ -72,9 +65,10 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void editDog(String name, LocalDate birthDate, Integer weight, Long breedId, Sex sex, Passport passport, Microchip microchip, Long clientId, Long behaviorId, Long id) {
+    public void editDog(String name, String birthDate, Integer weight, Long breedId, Sex sex, Passport passport, Microchip microchip, Long clientId, Long behaviorId, Long id) {
+
         dogRepository.editDog(name,
-                birthDate,
+                formatterLocal(birthDate),
                 weight,
                 breedId,
                 sex,
@@ -114,4 +108,13 @@ public class DogServiceImpl implements DogService {
         return Set.copyOf(dogRepository.findAllDogByClient(id));
     }
 
+    //convert String to LocalDate
+    LocalDate formatterLocal(String date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+
+        LocalDate localDate = LocalDate.parse(date, formatter);
+
+        return localDate;
+    }
 }

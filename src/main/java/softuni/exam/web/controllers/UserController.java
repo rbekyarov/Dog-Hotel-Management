@@ -17,6 +17,7 @@ import softuni.exam.service.UserService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController extends BaseController {
@@ -65,18 +66,21 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/view/register")
-    public ModelAndView registerConfirm(@ModelAttribute UserRegisterDTO model,
+    public ModelAndView registerConfirm(@ModelAttribute UserRegisterDTO userRegisterDTO,
                                         ModelAndView modelAndView){
-        if (!model.getPassword().equals(model.getConfirmPassword())){
+        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())){
             throw new IllegalArgumentException("Passwords don't match!");
         }
-
-        UserDTO serviceModel = this.modelMapper.map(model, UserDTO.class);
-        if (!this.userService.registerUser(serviceModel)){
-            throw new IllegalArgumentException("UserRegistration failed!");
+        String username = userRegisterDTO.getUsername();
+        Optional<User> byUsername =  userService.findByUsername(username);
+        if(byUsername.isEmpty()){
+            userService.registerUser(userRegisterDTO);
+            modelAndView.setViewName("redirect:/view/login");
+        }else {
+            modelAndView.setViewName("redirect:/view/register");
         }
 
-        modelAndView.setViewName("redirect:/view/login");
+
         return modelAndView;
     }
 
@@ -99,7 +103,7 @@ public class UserController extends BaseController {
         UserDTO userLogin = this.userService.loginUser(userDTO);
 
         if (userLogin == null){
-            modelAndView.setViewName("/view/login");
+            modelAndView.setViewName("/index");
 
         }else {
             User user = new User();
@@ -109,15 +113,18 @@ public class UserController extends BaseController {
             user.setId(id);
             user.setUsername(username);
             user.setRole(role);
-            modelAndView.setViewName("/view/home");
+
             session.setAttribute("userId", user.getId());
             session.setAttribute("username", user.getUsername());
             if(user.getRole().name().equals("ADMIN")){
                 session.setAttribute("admin", user.getRole());
-            }else if (user.getRole().name().equals("USER")){
+                modelAndView.setViewName("/view/home");
+
+            }else {
                 session.setAttribute("user", user.getRole());
-            }else
-                session.setAttribute("guest", "guest");
+                modelAndView.setViewName("/view/home");
+            }
+
 
 
         }

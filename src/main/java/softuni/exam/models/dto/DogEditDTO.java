@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class DogEditDTO {
 
     private String name;
-    private LocalDate birthDate;
+    private String birthDate;
     private Integer weight;
     private Breed breed;
     private Sex sex;
@@ -34,14 +34,13 @@ public class DogEditDTO {
         this.name = name;
     }
 
-    public LocalDate getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
-
 
     public Integer getWeight() {
         return weight;

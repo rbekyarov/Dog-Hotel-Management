@@ -1,5 +1,7 @@
 package softuni.exam.models.dto;
 
+import softuni.exam.models.entity.enums.Role;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -8,6 +10,8 @@ public class UserRegisterDTO {
     private String username;
     private String password;
     private String confirmPassword;
+
+    private Role role;
 
     public UserRegisterDTO() {
     }
@@ -46,5 +50,13 @@ public class UserRegisterDTO {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

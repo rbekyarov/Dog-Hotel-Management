@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    boolean registerUser(UserDTO userDTO);
+    void registerUser(UserRegisterDTO userRegisterDTO);
 
     UserDTO loginUser(UserDTO userDTO);
 
@@ -25,4 +25,5 @@ public interface UserService {
 
     void removeUserById(Long id);
 
+    Optional<User> findByUsername(String username);
 }

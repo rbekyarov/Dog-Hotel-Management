@@ -24,7 +24,7 @@ public interface DogService {
     Optional<Dog> findById(Long id);
 
     void editDog(String name,
-                 LocalDate birthDate,
+                 String birthDate,
                  Integer weight,
                  Long breedId,
                  Sex sex,
