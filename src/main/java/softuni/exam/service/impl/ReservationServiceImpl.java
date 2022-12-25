@@ -75,9 +75,13 @@ public class ReservationServiceImpl implements ReservationService {
             price += priceService.getNailsCurrentPrice();
         }
         Reservation reservation = modelMapper.map(reservationDTO, Reservation.class);
+        double totalPrice = 0.0;
+        totalPrice = price -(price*reservationDTO.getDiscount());
 
-        reservationDTO.getBathing().name().
-                reservation.setPrice();
+        reservation.setCountOvernightStay((int)countOvernightStay);
+        reservation.setTotalPrice(new BigDecimal(totalPrice));
+        reservation.setPrice(new BigDecimal(price));
+
         reservationRepository.save(reservation);
     }
 
@@ -91,13 +95,16 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.findById(id);
     }
 
+
+
     @Override
-    public void editReservation(Long clientId, Set<Dog> dogs, LocalDate startDate, LocalDate endDate, Set<Cell> cells, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, Double discount, Long id) {
+    public void editReservation(Long clientId, Long dogId, LocalDate startDate, LocalDate endDate,Integer countOvernightStay, Long cellId, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails,BigDecimal price, Double discount,BigDecimal totalPrice, Long id) {
         reservationRepository.editReservation(clientId,
-                dogs,
+                dogId,
                 startDate,
                 endDate,
-                cells,
+                countOvernightStay,
+                cellId,
                 food,
                 training,
                 bathing,
@@ -105,7 +112,9 @@ public class ReservationServiceImpl implements ReservationService {
                 ears,
                 paws,
                 nails,
+                price,
                 discount,
+                totalPrice,
                 id);
     }
 }

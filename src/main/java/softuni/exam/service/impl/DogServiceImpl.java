@@ -105,8 +105,8 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public Set<Dog> findAllDogByClient(Long id) {
-        return Set.copyOf(dogRepository.findAllDogByClient(id));
+    public List<Dog> findAllDogByClient(Long id) {
+        return dogRepository.findAllDogByClient(id);
     }
 
     //convert String to LocalDate

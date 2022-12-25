@@ -12,10 +12,12 @@ import java.util.Set;
 @Table(name = "reservations")
 public class Reservation extends BaseEntity{
     private Client client;
-    private Set<Dog> dogs;
+    private Dog dog;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Set<Cell> cells;
+
+    private Integer countOvernightStay;
+    private Cell cell;
     private Food food;
     private Training training;
     private Bathing bathing;
@@ -38,14 +40,7 @@ public class Reservation extends BaseEntity{
         this.client = client;
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
-    public Set<Dog> getDogs() {
-        return dogs;
-    }
 
-    public void setDogs(Set<Dog> dogs) {
-        this.dogs = dogs;
-    }
     @Column(name = "start_date", nullable = false)
     public LocalDate getStartDate() {
         return startDate;
@@ -59,17 +54,18 @@ public class Reservation extends BaseEntity{
         return endDate;
     }
 
+    public Integer getCountOvernightStay() {
+        return countOvernightStay;
+    }
+
+    public void setCountOvernightStay(Integer countOvernightStay) {
+        this.countOvernightStay = countOvernightStay;
+    }
+
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-    @OneToMany(fetch = FetchType.EAGER)
-    public Set<Cell> getCells() {
-        return cells;
-    }
 
-    public void setCells(Set<Cell> cells) {
-        this.cells = cells;
-    }
     @Enumerated(EnumType.STRING)
     public Food getFood() {
         return food;
@@ -145,6 +141,24 @@ public class Reservation extends BaseEntity{
     @Column
     public BigDecimal getTotalPrice() {
         return totalPrice;
+    }
+    @ManyToOne
+    @JoinColumn(name = "dog_id", referencedColumnName = "id")
+    public Dog getDog() {
+        return dog;
+    }
+
+    public void setDog(Dog dog) {
+        this.dog = dog;
+    }
+    @ManyToOne
+    @JoinColumn(name = "cell_id", referencedColumnName = "id")
+    public Cell getCell() {
+        return cell;
+    }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
     }
 
     public void setTotalPrice(BigDecimal totalPrice) {

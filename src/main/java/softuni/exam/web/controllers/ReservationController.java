@@ -41,24 +41,27 @@ public class ReservationController extends BaseController {
     }
 
     @GetMapping("/view/add/reservationAdd")
-    public ModelAndView reservationAdd(ModelAndView modelAndView, @RequestParam(value = "id", required = false) String clientId) {
+    public ModelAndView reservationAdd(ModelAndView modelAndView, @RequestParam(value = "id", required = false) Long clientId) {
         ReservationDTO reservationDTO = new ReservationDTO();
 
         List<Client> allClients = clientService.findAllClientById();
-
+        List<Dog> allDogsOnClient = dogService.findAllDogByClient(clientId);
         List<Cell> allEmptyCells = cellService.findAllEmptyCells();
+        List<Price> allPrices = priceService.findAllPriceById();
 
-        modelAndView.addObject("allClients", allClients);
-        modelAndView.addObject("allEmptyCells", allEmptyCells);
         modelAndView.addObject("reservationDTO", reservationDTO);
-
+        modelAndView.addObject("allClients", allClients);
+        modelAndView.addObject("allDogsOnClient", allDogsOnClient);
+        modelAndView.addObject("allEmptyCells", allEmptyCells);
+        modelAndView.addObject("allPrices", allPrices);
 
         return super.view("/view/add/reservationAdd",
                 "reservationDTO", reservationDTO,
-                "allClients",
-                allClients,
-                "allEmptyCells",
-                allEmptyCells
+                "allClients",allClients,
+                "allEmptyCells",allEmptyCells,
+                "allPrices",allPrices,
+                "allDogsOnClient", allDogsOnClient
+
         );
 
     }
@@ -86,20 +89,25 @@ public class ReservationController extends BaseController {
         var reservationDTO =
                 dogService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
+
         List<Client> allClients = clientService.findAllClientById();
+        List<Dog> allDogsOnClient = dogService.findAllDogByClient(id);
         List<Cell> allEmptyCells = cellService.findAllEmptyCells();
+        List<Price> allPrices = priceService.findAllPriceById();
 
-        modelAndView.addObject("allClients", allClients);
-        modelAndView.addObject("allEmptyCells", allEmptyCells);
         modelAndView.addObject("reservationDTO", reservationDTO);
-
+        modelAndView.addObject("allClients", allClients);
+        modelAndView.addObject("allDogsOnClient", allDogsOnClient);
+        modelAndView.addObject("allEmptyCells", allEmptyCells);
+        modelAndView.addObject("allPrices", allPrices);
 
         return super.view("/view/add/reservationAdd",
                 "reservationDTO", reservationDTO,
-                "allClients",
-                allClients,
-                "allEmptyCells",
-                allEmptyCells
+                "allClients",allClients,
+                "allEmptyCells",allEmptyCells,
+                "allPrices",allPrices,
+                "allDogsOnClient", allDogsOnClient
+
         );
 
     }

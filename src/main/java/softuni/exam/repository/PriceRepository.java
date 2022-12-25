@@ -34,20 +34,28 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
             , @Param("priceEars") BigDecimal priceEars
             , @Param("priceNails") BigDecimal priceNails
             , @Param("id") Long id);
+
     @Query("select p.priceFood from Price as p where p.id= :id")
-    BigDecimal getFoodCurrentPrice(@Param("id")int id);
+    BigDecimal getFoodCurrentPrice(@Param("id") int id);
+
     @Query("select p.priceTraining from Price as p where p.id= :id")
-    BigDecimal getTrainingCurrentPrice(@Param("id")int id);
+    BigDecimal getTrainingCurrentPrice(@Param("id") int id);
+
     @Query("select p.priceBathing from Price as p where p.id= :id")
-    BigDecimal getBathingCurrentPrice(@Param("id")int id);
+    BigDecimal getBathingCurrentPrice(@Param("id") int id);
+
     @Query("select p.priceCombing from Price as p where p.id= :id")
-    BigDecimal getCombingCurrentPrice(@Param("id")int id);
+    BigDecimal getCombingCurrentPrice(@Param("id") int id);
+
     @Query("select p.priceEars from Price as p where p.id= :id")
-    BigDecimal getEarsCurrentPrice(@Param("id")int id);
+    BigDecimal getEarsCurrentPrice(@Param("id") int id);
+
     @Query("select p.pricePaws from Price as p where p.id= :id")
-    BigDecimal getPawsCurrentPrice(@Param("id")int id);
+    BigDecimal getPawsCurrentPrice(@Param("id") int id);
+
     @Query("select p.priceNails from Price as p where p.id= :id")
-    BigDecimal getNailsCurrentPrice(@Param("id")int id);
+    BigDecimal getNailsCurrentPrice(@Param("id") int id);
+
     @Query("select p.priceOvernightStay from Price as p where p.id= :id")
-    BigDecimal getOvernightStayCurrentPrice(int lastPricesId);
+    BigDecimal getOvernightStayCurrentPrice(@Param("id") int id);
 }

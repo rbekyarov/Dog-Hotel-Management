@@ -42,5 +42,5 @@ public interface DogService {
     public Set<Long> listDogIds(String email);
 
     List<Dog> listDogByEmail(String email);
-    Set<Dog> findAllDogByClient(Long id);
+    List<Dog> findAllDogByClient(Long id);
 }

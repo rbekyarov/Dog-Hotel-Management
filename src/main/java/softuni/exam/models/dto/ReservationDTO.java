@@ -13,10 +13,10 @@ import java.util.Set;
 
 public class ReservationDTO {
     private Client client;
-    private Set<Dog> dogs;
+    private Dog dog;
     private String startDate;
     private String endDate;
-    private Set<Cell> cells;
+    private Cell cell;
     private Food food;
     private Training training;
     private Bathing bathing;
@@ -39,13 +39,20 @@ public class ReservationDTO {
         this.client = client;
     }
 
-    @NotNull
-    public Set<Dog> getDogs() {
-        return dogs;
+    public Dog getDog() {
+        return dog;
     }
 
-    public void setDogs(Set<Dog> dogs) {
-        this.dogs = dogs;
+    public void setDog(Dog dog) {
+        this.dog = dog;
+    }
+
+    public Cell getCell() {
+        return cell;
+    }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
     }
 
     public String getStartDate() {
@@ -64,14 +71,7 @@ public class ReservationDTO {
         this.endDate = endDate;
     }
 
-    @NotNull
-    public Set<Cell> getCells() {
-        return cells;
-    }
 
-    public void setCells(Set<Cell> cells) {
-        this.cells = cells;
-    }
 
     public Food getFood() {
         return food;

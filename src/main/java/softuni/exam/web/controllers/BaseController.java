@@ -28,13 +28,15 @@ public abstract class BaseController {
     }
 
     //reservationAdd
-    public ModelAndView view(String view, String objectName, Object object, String clients, List<Client> clientsList, String allEmptyCells, List<Cell> allEmptyCellsList) {
+    public ModelAndView view(String view, String objectName, Object object, String clients, List<Client> clientsList, String allEmptyCells, List<Cell> allEmptyCellsList,String allPrices, List<Price> allPricesList ,String allDogsOnClient, List<Dog>allDogsOnClientList) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fragments/base-layout");
         modelAndView.addObject("view", view);
         modelAndView.addObject(objectName, object);
         modelAndView.addObject(clients, clientsList);
         modelAndView.addObject(allEmptyCells, allEmptyCellsList);
+        modelAndView.addObject(allDogsOnClient, allDogsOnClient);
+        modelAndView.addObject(allPrices, allPrices);
 
 
         return modelAndView;

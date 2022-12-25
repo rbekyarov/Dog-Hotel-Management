@@ -3,6 +3,8 @@ package softuni.exam.service;
 import softuni.exam.models.dto.ReservationDTO;
 import softuni.exam.models.entity.*;
 import softuni.exam.models.entity.enums.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -21,10 +23,11 @@ public interface ReservationService {
     Optional<Reservation> findById(Long id);
 
     void editReservation(Long clientId,
-                         Set<Dog> dogs,
+                         Long dogId,
                          LocalDate startDate,
                          LocalDate endDate,
-                         Set<Cell> cells,
+                         Integer countOvernightStay,
+                         Long cellId,
                          Food food,
                          Training training,
                          Bathing bathing,
@@ -32,7 +35,9 @@ public interface ReservationService {
                          Ears ears,
                          Paws paws,
                          Nails nails,
+                         BigDecimal price,
                          Double discount,
+                         BigDecimal totalPrice,
                  Long id);
 
 }

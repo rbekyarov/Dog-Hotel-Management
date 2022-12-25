@@ -12,10 +12,10 @@ import java.util.Set;
 
 public class ReservationEditDTO {
     private Client client;
-    private Set<Dog> dogs;
+    private Dog dog;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Set<Cell> cells;
+    private Cell cell;
     private Food food;
     private Training training;
     private Bathing bathing;
@@ -38,13 +38,20 @@ public class ReservationEditDTO {
         this.client = client;
     }
 
-    @NotNull
-    public Set<Dog> getDogs() {
-        return dogs;
+    public Dog getDog() {
+        return dog;
     }
 
-    public void setDogs(Set<Dog> dogs) {
-        this.dogs = dogs;
+    public void setDog(Dog dog) {
+        this.dog = dog;
+    }
+
+    public Cell getCell() {
+        return cell;
+    }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
     }
 
     @NotNull
@@ -65,14 +72,7 @@ public class ReservationEditDTO {
         this.endDate = endDate;
     }
 
-    @NotNull
-    public Set<Cell> getCells() {
-        return cells;
-    }
 
-    public void setCells(Set<Cell> cells) {
-        this.cells = cells;
-    }
 
     public Food getFood() {
         return food;
