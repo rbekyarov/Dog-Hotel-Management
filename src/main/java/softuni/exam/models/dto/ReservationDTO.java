@@ -14,8 +14,8 @@ import java.util.Set;
 public class ReservationDTO {
     private Client client;
     private Set<Dog> dogs;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String startDate;
+    private String endDate;
     private Set<Cell> cells;
     private Food food;
     private Training training;
@@ -48,21 +48,19 @@ public class ReservationDTO {
         this.dogs = dogs;
     }
 
-    @NotNull
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    @NotNull
-    public LocalDate getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

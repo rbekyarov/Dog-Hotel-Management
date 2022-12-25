@@ -56,4 +56,57 @@ public class PriceServiceImpl implements PriceService {
                 priceNails,
                 id);
     }
+
+    @Override
+    public Double getFoodCurrentPrice() {
+        BigDecimal foodCurrentPrice = priceRepository.getFoodCurrentPrice(getLastPricesId());
+        return foodCurrentPrice.doubleValue();
+    }
+
+    @Override
+    public Double getBathingCurrentPrice() {
+        BigDecimal foodCurrentPrice = priceRepository.getBathingCurrentPrice(getLastPricesId());
+        return foodCurrentPrice.doubleValue();
+    }
+
+    @Override
+    public Double getTrainingCurrentPrice() {
+        BigDecimal trainingCurrentPrice = priceRepository.getTrainingCurrentPrice(getLastPricesId());
+        return trainingCurrentPrice.doubleValue();
+    }
+
+    @Override
+    public Double getCombingCurrentPrice() {
+        BigDecimal combingCurrentPrice = priceRepository.getCombingCurrentPrice(getLastPricesId());
+        return combingCurrentPrice.doubleValue();
+    }
+
+    @Override
+    public Double getEarsCurrentPrice() {
+        BigDecimal earsCurrentPrice = priceRepository.getEarsCurrentPrice(getLastPricesId());
+        return earsCurrentPrice.doubleValue();
+    }
+
+    @Override
+    public Double getPawsCurrentPrice() {
+        BigDecimal pawsCurrentPrice = priceRepository.getPawsCurrentPrice(getLastPricesId());
+        return pawsCurrentPrice.doubleValue();
+    }
+
+    @Override
+    public Double getNailsCurrentPrice() {
+        BigDecimal nailsCurrentPrice = priceRepository.getNailsCurrentPrice(getLastPricesId());
+        return nailsCurrentPrice.doubleValue();
+    }
+
+    @Override
+    public Double getOvernightStayCurrentPrice() {
+        BigDecimal overnightStayCurrentPrice = priceRepository.getOvernightStayCurrentPrice(getLastPricesId());
+        return overnightStayCurrentPrice.doubleValue();
+    }
+
+    public int getLastPricesId(){
+        List<Price> allPrices = priceRepository.findAllPricesById();
+        return allPrices.size();
+    }
 }

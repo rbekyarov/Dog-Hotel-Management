@@ -7,14 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import softuni.exam.models.dto.DogEditDTO;
 import softuni.exam.models.dto.ReservationDTO;
-import softuni.exam.models.dto.ReservationEditDTO;
 import softuni.exam.models.entity.*;
-import softuni.exam.service.CellService;
-import softuni.exam.service.ClientService;
-import softuni.exam.service.DogService;
-import softuni.exam.service.ReservationService;
+import softuni.exam.service.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -25,13 +20,15 @@ public class ReservationController extends BaseController {
     private final ClientService clientService;
     private final CellService cellService;
     private final DogService dogService;
+    private final PriceService priceService;
 
-    public ReservationController(ReservationService reservationService, ClientService clientService, CellService cellService, DogService dogService) {
+    public ReservationController(ReservationService reservationService, ClientService clientService, CellService cellService, DogService dogService, PriceService priceService) {
 
         this.reservationService = reservationService;
         this.clientService = clientService;
         this.cellService = cellService;
         this.dogService = dogService;
+        this.priceService = priceService;
     }
 
 

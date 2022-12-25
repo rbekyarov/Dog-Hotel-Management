@@ -27,7 +27,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Transactional
     @Modifying
-    @Query("update Reservation as r SET r.client.id =:clientId ,r.dogs =:dogs,r.startDate=:startDate,r.endDate=:endDate,r.cells=:cells,r.food=:food,r.training=:training,r.bathing=:bathing, r.combing=:combing,r.ears=:ears,r.paws=:paws,r.nails=:nails,r.discount=:discount  where r.id=:id ")
+    @Query("update Reservation as r SET r.client.id =:clientId ,r.dogs =:dogs,r.startDate=:startDate,r.endDate=:endDate,r.cells=:cells,r.food=:food,r.training=:training,r.bathing=:bathing, r.combing=:combing,r.ears=:ears,r.paws=:paws,r.nails=:nails,r.price=:price,r.discount=:discount,r.totalPrice =:totalPrice  where r.id=:id ")
     void editReservation(@Param("clientId") Long clientId
             , @Param("dogs") Set<Dog> dogs
             , @Param("startDate") LocalDate startDate
@@ -40,6 +40,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             , @Param("ears") Ears ears
             , @Param("paws") Paws paws
             , @Param("nails") Nails nails
+            , @Param("nails") BigDecimal price
             , @Param("discount") Double discount
+            , @Param("discount") BigDecimal totalPrice
             , @Param("id") Long id);
 }
