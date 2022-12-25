@@ -1,115 +1,130 @@
 <th:block th:unless="${session.isEmpty()}">
-<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
-    <div class="button_back">
-    <a class="nav-link h5" th:href="@{/view/table/dogTable}">
-        <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                class="glyphicon glyphicon-ok"></span>Back
-        </button>
-    </a>
-    </div>
-    <div class="container">
-        <h2 class="page_title">Edit Dog</h2>
+    <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+        <div class="button_back">
+            <a class="nav-link h5" th:href="@{/view/table/dogTable}">
+                <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                        class="glyphicon glyphicon-ok"></span>Back
+                </button>
+            </a>
+        </div>
+        <div class="container">
+            <h2 class="page_title">Edit Dog</h2>
 
-        <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
-                      th:method="post"
-                      th:object="${dogDTO}"
+            <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
+                  th:method="post"
+                  th:object="${dogDTO}"
 
-                >
-                    <div class="form-group">
-                        <label class="text-white font-weight-bold" ></label>
-                        <p>Name:</p>
-                        <textarea
-                                th:field="*{name}"
-                                type="textarea"
-                                placeholder="Please enter Name"
-                        >
+            >
+                <div class="form-group">
+                    <label class="text-white font-weight-bold"></label>
+                    <p>Name:</p>
+                    <textarea
+                            th:field="*{name}"
+                            type="textarea"
+                            placeholder="Please enter Name"
+                    >
             </textarea>
 
-                        <p><label for="birthdate">BirthDate</label></p>
-
-                        <div class="input-group date">
-                            <input type="text" class="form-control" id="birthdate" autocomplete="off" th:field="*{birthDate}"/>
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    <div class="form-group">
+                        <label for="date">BirthDate:</label>
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                                   th:field="*{birthDate}" id="date" placeholder="Date"/>
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                             </div>
                         </div>
-                        <p>Weight:</p>
-                        <textarea
-                                th:field="*{weight}"
-                                type="textarea"
-                                placeholder="Please enter Weight"
-                        >
+                    </div>
+                    <p>Weight:</p>
+                    <textarea
+                            th:field="*{weight}"
+                            type="textarea"
+                            placeholder="Please enter Weight"
+                    >
             </textarea>
-                        <p>Breed:</p>
-                        <select th:field="*{breed.id}" >
-                            <option value="">Please select</option>
-                            <option
-                                    th:each="b : ${allBreeds}"
-                                    th:value="${b.id}"
-                                    th:text="${b.breedName}"></option>
+                    <p>Breed:</p>
+                    <select th:field="*{breed.id}">
+                        <option value="">Please select</option>
+                        <option
+                                th:each="b : ${allBreeds}"
+                                th:value="${b.id}"
+                                th:text="${b.breedName}"></option>
 
-                        </select>
+                    </select>
 
-                        <p>Sex:</p>
-                        <select th:field="*{sex}" >
-                            <option value="M">M</option>
-                            <option value="F">F</option>
-                        </select>
-                        <p>Passport:</p>
-                        <select th:field="*{passport}" >
-                            <option value="NO">NO</option>
-                            <option value="YES">YES</option>
-                        </select>
+                    <p>Sex:</p>
+                    <select th:field="*{sex}">
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                    </select>
+                    <p>Passport:</p>
+                    <select th:field="*{passport}">
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select>
 
-                        <p>Microchip:</p>
-                        <select th:field="*{microchip}" >
-                            <option value="NO">NO</option>
-                            <option value="YES">YES</option>
-                        </select>
+                    <p>Microchip:</p>
+                    <select th:field="*{microchip}">
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select>
 
-                        <p>Client:</p>
-                        <select th:field="*{client.id}" >
-                            <option value="">Please select</option>
-                            <option
-                                    th:each="c : ${allClients}"
-                                    th:value="${c.id}"
-                                    th:text="${c.email}"></option>
+                    <p>Client:</p>
+                    <select th:field="*{client.id}">
+                        <option value="">Please select</option>
+                        <option
+                                th:each="c : ${allClients}"
+                                th:value="${c.id}"
+                                th:text="${c.email}"></option>
 
-                        </select>
+                    </select>
 
-                        <p>Behavior:</p>
-                        <select th:field="*{behavior.id}" >
-                            <option value="">Please select</option>
-                            <option
-                                    th:each="b : ${allBehaviors}"
-                                    th:value="${b.id}"
-                                    th:text="${b.name}"></option>
+                    <p>Behavior:</p>
+                    <select th:field="*{behavior.id}">
+                        <option value="">Please select</option>
+                        <option
+                                th:each="b : ${allBehaviors}"
+                                th:value="${b.id}"
+                                th:text="${b.name}"></option>
 
-                        </select>
+                    </select>
 
-                        <p></p>
-            </div>
-            <div class="button_submit">
-                <div >
+                    <p></p>
+                </div>
+                <div class="button_submit">
                     <div>
-                        <input  type="submit" class="btn btn-danger btn-lg btn3d" value="Edit Dog"/>
+                        <div>
+                            <input type="submit" class="btn btn-danger btn-lg btn3d" value="Edit Dog"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-            <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-            <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-            <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-            <script th:src="@{/assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+            </form>
+        </div>
 
-            <script>
-                $('.input-group.date').datepicker({
-                    autoclose: true,
-                    todayHighlight: true
-                });
-            </script>
-</th:block>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script th:src="@{/assets/moment/moment.min.js}"></script>
+        <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+        <script>
+            $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+                icons: {
+                    time: 'far fa-clock',
+                    date: 'far fa-calendar',
+                    up: 'fas fa-arrow-up',
+                    down: 'fas fa-arrow-down',
+                    previous: 'fas fa-chevron-left',
+                    next: 'fas fa-chevron-right',
+                    today: 'far fa-calendar-check-o',
+                    clear: 'far fa-trash',
+                    close: 'far fa-times'
+                } });
+
+            $('#datetimepicker1').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+        </script>
+    </th:block>
 </th:block>
 
 <!--<a class="btn btn-danger btn-lg btn3d" th:href="@{/behavior/{id}/edit(id=*{id})}">

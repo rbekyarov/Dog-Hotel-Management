@@ -24,12 +24,14 @@
                 >
             </textarea>
 
-                <p><label for="birthdate">BirthDate</label></p>
-
-                <div class="input-group date">
-                    <input type="text" class="form-control" id="birthdate" autocomplete="off" th:field="*{birthDate}"/>
-                    <div class="input-group-append">
-                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                <div class="form-group">
+                    <label for="date">BirthDate:</label>
+                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                               th:field="*{birthDate}" id="date" placeholder="Date"/>
+                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                        </div>
                     </div>
                 </div>
                 <p>Weight:</p>
@@ -102,15 +104,27 @@
             </div>
         </form>
     </div>
-    <script th:src="@{webjars/jquery/jquery.min.js}"></script>
-    <script th:src="@{webjars/popper.js/umd/popper.min.js}"></script>
-    <script th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{/assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
-
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/moment/moment.min.js}"></script>
+    <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
     <script>
-        $('.input-group.date').datepicker({
-            autoclose: true,
-            todayHighlight: true
+        $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+            icons: {
+                time: 'far fa-clock',
+                date: 'far fa-calendar',
+                up: 'fas fa-arrow-up',
+                down: 'fas fa-arrow-down',
+                previous: 'fas fa-chevron-left',
+                next: 'fas fa-chevron-right',
+                today: 'far fa-calendar-check-o',
+                clear: 'far fa-trash',
+                close: 'far fa-times'
+            } });
+
+        $('#datetimepicker1').datetimepicker({
+            format: 'DD/MM/YYYY'
         });
     </script>
 </th:block>

@@ -1,79 +1,79 @@
 <th:block th:if="${session.admin}">
-<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
-    <div class="button_back">
-    <a class="nav-link h5" th:href="@{/view/table/priceTable}">
-        <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                class="glyphicon glyphicon-ok"></span>Back
-        </button>
-    </a>
-    </div>
-    <div class="container">
-        <h2 class="page_title">Edit Price</h2>
+    <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+        <div class="button_back">
+            <a class="nav-link h5" th:href="@{/view/table/priceTable}">
+                <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                        class="glyphicon glyphicon-ok"></span>Back
+                </button>
+            </a>
+        </div>
+        <div class="container">
+            <h2 class="page_title">Edit Price</h2>
 
-        <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
-              th:method="post">
-            <div class="form-group">
+            <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
+                  th:method="post">
+                <div class="form-group">
                 <textarea
                         th:field="${priceDTO.priceOvernightStay}"
                         type="textarea"
                         placeholder="Please enter price Overnight Stay">
             </textarea>
-                <p></p>
-                <textarea
-                        th:field="${priceDTO.priceFood}"
-                        type="textarea"
-                        placeholder="Please enter price Food">
+                    <p></p>
+                    <textarea
+                            th:field="${priceDTO.priceFood}"
+                            type="textarea"
+                            placeholder="Please enter price Food">
             </textarea>
-                <p></p>
-                <textarea
-                        th:field="${priceDTO.priceTraining}"
-                        type="textarea"
-                        placeholder="Please enter price Training">
+                    <p></p>
+                    <textarea
+                            th:field="${priceDTO.priceTraining}"
+                            type="textarea"
+                            placeholder="Please enter price Training">
             </textarea>
-                <p></p>
-                <textarea
-                        th:field="${priceDTO.priceBathing}"
-                        type="textarea"
-                        placeholder="Please enter price Bathing">
+                    <p></p>
+                    <textarea
+                            th:field="${priceDTO.priceBathing}"
+                            type="textarea"
+                            placeholder="Please enter price Bathing">
             </textarea>
-                <p></p>
-                <textarea
-                        th:field="${priceDTO.priceCombing}"
-                        type="textarea"
-                        placeholder="Please enter price Combing">
+                    <p></p>
+                    <textarea
+                            th:field="${priceDTO.priceCombing}"
+                            type="textarea"
+                            placeholder="Please enter price Combing">
             </textarea>
-                <textarea
-                        th:field="${priceDTO.pricePaws}"
-                        type="textarea"
-                        placeholder="Please enter price Paws">
+                    <textarea
+                            th:field="${priceDTO.pricePaws}"
+                            type="textarea"
+                            placeholder="Please enter price Paws">
             </textarea>
-                <p></p>
-                <textarea
-                        th:field="${priceDTO.priceEars}"
-                        type="textarea"
-                        placeholder="Please enter price Ears">
+                    <p></p>
+                    <textarea
+                            th:field="${priceDTO.priceEars}"
+                            type="textarea"
+                            placeholder="Please enter price Ears">
             </textarea>
-                <p></p>
-                <textarea
-                        th:field="${priceDTO.priceNails}"
-                        type="textarea"
-                        placeholder="Please enter price Nails">
+                    <p></p>
+                    <textarea
+                            th:field="${priceDTO.priceNails}"
+                            type="textarea"
+                            placeholder="Please enter price Nails">
             </textarea>
-                <p></p>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Price is required.
-                </p>
-            </div>
-            <div class="button_submit">
-                <div >
+                    <p></p>
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Price is required.
+                    </p>
+                </div>
+                <div class="button_submit">
                     <div>
-                        <input  type="submit" class="btn btn-danger btn-lg btn3d" value="Edit Price"/>
+                        <div>
+                            <input type="submit" class="btn btn-danger btn-lg btn3d" value="Edit Price"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-</th:block>
+            </form>
+        </div>
+    </th:block>
 </th:block>
 
 <!--<a class="btn btn-danger btn-lg btn3d" th:href="@{/behavior/{id}/edit(id=*{id})}">

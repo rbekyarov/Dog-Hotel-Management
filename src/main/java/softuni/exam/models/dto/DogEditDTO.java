@@ -1,5 +1,6 @@
 package softuni.exam.models.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import softuni.exam.models.entity.Behavior;
 import softuni.exam.models.entity.Breed;
 import softuni.exam.models.entity.Client;
@@ -33,7 +34,7 @@ public class DogEditDTO {
     public void setName(String name) {
         this.name = name;
     }
-
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     public String getBirthDate() {
         return birthDate;
     }

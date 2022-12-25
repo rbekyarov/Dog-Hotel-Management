@@ -1,46 +1,46 @@
 <th:block th:unless="${session.isEmpty()}">
-<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
-    <div class="button_back">
-    <a class="nav-link h5" th:href="@{/view/table/cityTable}">
-        <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                class="glyphicon glyphicon-ok"></span>Back
-        </button>
-    </a>
-    </div>
-    <div class="container">
-        <h2 class="page_title">Edit City</h2>
+    <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+        <div class="button_back">
+            <a class="nav-link h5" th:href="@{/view/table/cityTable}">
+                <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                        class="glyphicon glyphicon-ok"></span>Back
+                </button>
+            </a>
+        </div>
+        <div class="container">
+            <h2 class="page_title">Edit City</h2>
 
-        <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
-              th:method="post">
-            <div class="form-group">
+            <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
+                  th:method="post">
+                <div class="form-group">
                 <textarea
                         id="description"
                         th:field="${cityDTO.code}"
                         type="textarea"
                         placeholder="Please enter code">
             </textarea>
-                <p></p>
-                <textarea
-                        id="description1"
-                        th:field="${cityDTO.name}"
-                        type="textarea"
-                        placeholder="Please enter name">
+                    <p></p>
+                    <textarea
+                            id="description1"
+                            th:field="${cityDTO.name}"
+                            type="textarea"
+                            placeholder="Please enter name">
             </textarea>
-                <p></p>
-                <p class="invalid-feedback errors alert alert-danger">
-                    City is required.
-                </p>
-            </div>
-            <div class="button_submit">
-                <div >
+                    <p></p>
+                    <p class="invalid-feedback errors alert alert-danger">
+                        City is required.
+                    </p>
+                </div>
+                <div class="button_submit">
                     <div>
-                        <input  type="submit" class="btn btn-danger btn-lg btn3d" value="Edit City"/>
+                        <div>
+                            <input type="submit" class="btn btn-danger btn-lg btn3d" value="Edit City"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-</th:block>
+            </form>
+        </div>
+    </th:block>
 </th:block>
 <!--<a class="btn btn-danger btn-lg btn3d" th:href="@{/behavior/{id}/edit(id=*{id})}">
     Submit Behavior

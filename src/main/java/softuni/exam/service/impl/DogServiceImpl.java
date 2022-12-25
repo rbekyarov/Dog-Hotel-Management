@@ -111,7 +111,7 @@ public class DogServiceImpl implements DogService {
 
     //convert String to LocalDate
     LocalDate formatterLocal(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);
 
         return localDate;
