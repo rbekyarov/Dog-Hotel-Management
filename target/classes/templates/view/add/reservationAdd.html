@@ -16,35 +16,30 @@
                 <div class="form-group">
                     <label class="text-white font-weight-bold"></label>
                     <p>Client:</p>
-                    <select th:field="*{client.id}" onchange="getClientId()">
+                    <select th:field="*{client.id}" oninput="window.addEventListener()">
                         <option value="">Please select</option>
                         <option
                                 th:each="b : ${allClients}"
                                 th:value="${b.id}"
-                                th:text="${b.email}"></option>
+                                th:text="${b.email}"
+                                th:with="dogs=${b.dogs}"
+                                ></option>
+
 
                     </select>
-                    <script th:inline="javascript">
-                        /*<![CDATA[*/
-                        function getClientId(){
-                            var client = /*[[${allClients}]]*/ 'default';
-                            console.log(client.id)
-                        }
-
-
-                        /*]]>*/
-                    </script>
-                    <th:block th:if="*{client.id}">
                     <p>Dog:</p>
                     <select th:field="*{dog.id}">
                         <option value="">Please select</option>
                         <option
-                                th:each="d : ${allDogsOnClient}"
+                                th:each="d : ${dogs}"
                                 th:value="${d.id}"
                                 th:text="${d.name}"></option>
 
                     </select>
-                   </th:block>
+
+<!--                    <th:block th:if="*{client.id}">-->
+
+<!--                    </th:block>-->
                     <p>Date Start:</p>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input"
@@ -120,6 +115,12 @@
             $('#datetimepicker1').datetimepicker({
                 format: 'DD/MM/YYYY'
             });
+        </script>
+        <script th:inline="javascript">
+            function getClientId() {
+
+            }
+
         </script>
     </th:block>
 </th:block>
