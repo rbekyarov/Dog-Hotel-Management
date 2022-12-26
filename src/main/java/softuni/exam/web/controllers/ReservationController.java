@@ -12,6 +12,7 @@ import softuni.exam.models.entity.*;
 import softuni.exam.service.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,11 +42,15 @@ public class ReservationController extends BaseController {
     }
 
     @GetMapping("/view/add/reservationAdd")
-    public ModelAndView reservationAdd(ModelAndView modelAndView, @RequestParam(value = "id", required = false) Long clientId) {
+    public ModelAndView reservationAdd(ModelAndView modelAndView, @RequestParam(value = "client.id", required = false) Long clientId) {
         ReservationDTO reservationDTO = new ReservationDTO();
 
         List<Client> allClients = clientService.findAllClientById();
-        List<Dog> allDogsOnClient = dogService.findAllDogByClient(clientId);
+        List<Dog> allDogsOnClient = new ArrayList<>();
+        if(clientId !=null){
+             allDogsOnClient = dogService.findAllDogByClient(clientId);
+        }
+
         List<Cell> allEmptyCells = cellService.findAllEmptyCells();
         List<Price> allPrices = priceService.findAllPriceById();
 
