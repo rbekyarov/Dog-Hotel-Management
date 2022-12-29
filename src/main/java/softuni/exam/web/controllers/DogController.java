@@ -1,37 +1,45 @@
 package softuni.exam.web.controllers;
 
+import io.github.classgraph.Resource;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import softuni.exam.models.dto.BreedDTO;
-import softuni.exam.models.dto.BreedEditDTO;
 import softuni.exam.models.dto.DogDTO;
 import softuni.exam.models.dto.DogEditDTO;
 import softuni.exam.models.entity.Behavior;
 import softuni.exam.models.entity.Breed;
 import softuni.exam.models.entity.Client;
 import softuni.exam.models.entity.Dog;
-import softuni.exam.service.BreedService;
 import softuni.exam.service.DogService;
+import softuni.exam.service.FileStorageService;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
 public class DogController extends BaseController {
+
+    public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/image";
+
     private final DogService dogService;
 
-    public DogController(DogService dogService) {
+
+    public DogController(DogService dogService, FileStorageService fileStorageService) {
 
         this.dogService = dogService;
     }
 
     @GetMapping("/view/table/dogTable")
     public ModelAndView dogTable(ModelAndView modelAndView) {
-
         List<Dog> dogs = dogService.findAllDogById();
         modelAndView.addObject("dogs", dogs);
         return super.view("/view/table/dogTable", "dogs", dogs);
@@ -62,7 +70,19 @@ public class DogController extends BaseController {
     }
 
     @PostMapping("/view/add/dogAdd")
-    public String addDog(@Valid DogDTO dogDTO) {
+    public String addDog(@Valid DogDTO dogDTO,
+                         @RequestParam("fileImage") MultipartFile file,
+                         @RequestParam("imgName")String imgName) throws IOException {
+        String imageUUID;
+        if(!file.isEmpty()) {
+            imageUUID = file.getOriginalFilename();
+            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
+            Files.write(fileNameAndPath, file.getBytes());
+        }else {
+            imageUUID = imgName;
+        }
+        dogDTO.setImageName(imageUUID);
+
 
         dogService.addDog(dogDTO);
 
@@ -105,10 +125,17 @@ public class DogController extends BaseController {
     }
 
     @PostMapping("view/table/dog/edit/{id}/edit")
-    public String editDog(@PathVariable("id") Long id, DogEditDTO dogEditDTO) throws ObjectNotFoundException {
-        var dogDTO =
-                dogService.findById(id).
-                        orElseThrow(() -> new ObjectNotFoundException("not found!"));
+    public String editDog(@PathVariable("id") Long id, DogEditDTO dogEditDTO,@RequestParam("fileImage") MultipartFile file,
+                          @RequestParam("imgName")String imgName) throws ObjectNotFoundException, IOException {
+        String imageUUID;
+        if(!file.isEmpty()) {
+            imageUUID = file.getOriginalFilename();
+            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
+            Files.write(fileNameAndPath, file.getBytes());
+        }else {
+            imageUUID = imgName;
+        }
+        dogEditDTO.setImageName(imageUUID);
         dogService.editDog(dogEditDTO.getName(),
                 dogEditDTO.getBirthDate(),
                 dogEditDTO.getWeight(),
@@ -118,6 +145,7 @@ public class DogController extends BaseController {
                 dogEditDTO.getMicrochip(),
                 dogEditDTO.getClient().getId(),
                 dogEditDTO.getBehavior().getId(),
+                imageUUID,
                 id);
 
         return "redirect:/view/table/dogTable";

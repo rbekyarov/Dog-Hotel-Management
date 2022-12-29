@@ -1,6 +1,8 @@
 package softuni.exam.models.dto;
 
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 import softuni.exam.models.entity.Behavior;
 import softuni.exam.models.entity.Breed;
 import softuni.exam.models.entity.Client;
@@ -9,7 +11,7 @@ import softuni.exam.models.entity.enums.Passport;
 import softuni.exam.models.entity.enums.Sex;
 
 import javax.validation.constraints.NotNull;
-
+@Data
 public class DogDTO {
 
     private String name;
@@ -21,6 +23,8 @@ public class DogDTO {
     private Microchip microchip;
     private Client client;
     private Behavior behavior;
+
+    private String imageName;
 
     public DogDTO() {
     }
@@ -102,5 +106,13 @@ public class DogDTO {
 
     public void setBehavior(Behavior behavior) {
         this.behavior = behavior;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

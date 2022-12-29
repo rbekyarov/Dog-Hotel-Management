@@ -28,14 +28,14 @@ public class DogServiceImpl implements DogService {
     private final BreedService breedService;
     private final ModelMapper modelMapper;
 
-    public DogServiceImpl(DogRepository dogRepository, BehaviorService behaviorService, ClientService clientService, BreedService breedService, ModelMapper modelMapper
-    ) {
+    public DogServiceImpl(DogRepository dogRepository, BehaviorService behaviorService, ClientService clientService, BreedService breedService, ModelMapper modelMapper) {
         this.dogRepository = dogRepository;
         this.behaviorService = behaviorService;
         this.clientService = clientService;
         this.breedService = breedService;
         this.modelMapper = modelMapper;
     }
+
 
     @Override
     public List<Dog> findAllDogById() {
@@ -44,14 +44,15 @@ public class DogServiceImpl implements DogService {
 
     @Override
     public void addDog(DogDTO dogDTO) {
-        Dog dog = modelMapper.map(dogDTO, Dog.class);
+
+        Dog dogNew = modelMapper.map(dogDTO, Dog.class);
 
         String date = dogDTO.getBirthDate();
 
-        dog.setBirthDate(formatterLocal(date));
+        dogNew.setBirthDate(formatterLocal(date));
 
 
-        dogRepository.saveAndFlush(dog);
+        dogRepository.saveAndFlush(dogNew);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void editDog(String name, String birthDate, Integer weight, Long breedId, Sex sex, Passport passport, Microchip microchip, Long clientId, Long behaviorId, Long id) {
+    public void editDog(String name, String birthDate, Integer weight, Long breedId, Sex sex, Passport passport, Microchip microchip, Long clientId, Long behaviorId, String imageName, Long id) {
 
         dogRepository.editDog(name,
                 formatterLocal(birthDate),
@@ -76,6 +77,7 @@ public class DogServiceImpl implements DogService {
                 microchip,
                 clientId,
                 behaviorId,
+                imageName,
                 id);
     }
 

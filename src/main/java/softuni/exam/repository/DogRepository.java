@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 import softuni.exam.models.entity.Dog;
 import softuni.exam.models.entity.enums.Microchip;
 import softuni.exam.models.entity.enums.Passport;
@@ -26,7 +27,7 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Dog as d SET d.name = :name, d.birthDate=:birthDate, d.weight =:weight, d.breed.id = :breedId,d.sex=:sex,d.passport=:passport,d.microchip=:microchip,d.client.id = :clientId, d.behavior.id=:behaviorId where d.id=:id ")
+    @Query("update Dog as d SET d.name = :name, d.birthDate=:birthDate, d.weight =:weight, d.breed.id = :breedId,d.sex=:sex,d.passport=:passport,d.microchip=:microchip,d.client.id = :clientId, d.behavior.id=:behaviorId,d.imageName=:imageName where d.id=:id ")
     void editDog(@Param("name") String name,
                  @Param("birthDate") LocalDate birthDate,
                  @Param("weight") Integer weight,
@@ -36,6 +37,7 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
                  @Param("microchip") Microchip microchip,
                  @Param("clientId") Long clientId,
                  @Param("behaviorId") Long behaviorId,
+                 @Param("imageName")  String imageName,
                  @Param("id") Long id);
 
     @Query("select d.id from Dog as d where d.client.email=:clientEmail")

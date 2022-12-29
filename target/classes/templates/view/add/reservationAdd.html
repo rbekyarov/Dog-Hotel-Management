@@ -22,9 +22,7 @@
                                 th:each="b : ${allClients}"
                                 th:value="${b.id}"
                                 th:text="${b.email}"
-                                th:with="dogs=${b.dogs}"
                                 ></option>
-
 
                     </select>
                     <p>Dog:</p>
@@ -40,7 +38,7 @@
 <!--                    <th:block th:if="*{client.id}">-->
 
 <!--                    </th:block>-->
-                    <p>Date Start:</p>
+                    <p>Date of Arrival:</p>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input"
                                data-target="#datetimepicker1"
@@ -51,19 +49,18 @@
                         </div>
                     </div>
 
-                    <p>Date End:</p>
-                    <div class="input-group date" id="datetimepicker12" data-target-input="nearest">
+                    <p>Date of Departure:</p>
+                    <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input"
-                               data-target="#datetimepicker1"
+                               data-target="#datetimepicker2"
                                th:field="*{endDate}" id="date2" placeholder="Date"/>
-                        <div class="input-group-append" data-target="#datetimepicker1"
+                        <div class="input-group-append" data-target="#datetimepicker2"
                              data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                         </div>
                     </div>
 
-
-                    <p>Cells:</p>
+                    <p>Dog House:</p>
                     <select th:field="*{cell}">
                         <option value="">Please select</option>
                         <option
@@ -74,6 +71,41 @@
                     </select>
 
                 </div>
+                <p>Feeding:</p>
+                <select th:field="*{food}" >
+                    <option value="NO">NO</option>
+                    <option value="YES">YES</option>
+                </select>
+                <p>Training:</p>
+                <select th:field="*{training}" >
+                    <option value="NO">NO</option>
+                    <option value="YES">YES</option>
+                </select>
+                <p>Bathing:</p>
+                <select th:field="*{bathing}" >
+                    <option value="NO">NO</option>
+                    <option value="YES">YES</option>
+                </select>
+                <p>Combing:</p>
+                <select th:field="*{combing}" >
+                    <option value="NO">NO</option>
+                    <option value="YES">YES</option>
+                </select>
+                <p>Еar cleaning:</p>
+                <select th:field="*{ears}" >
+                    <option value="NO">NO</option>
+                    <option value="YES">YES</option>
+                </select>
+                <p>Paws cleaning:</p>
+                <select th:field="*{paws}" >
+                    <option value="NO">NO</option>
+                    <option value="YES">YES</option>
+                </select>
+                <p>Nails trimming:</p>
+                <select th:field="*{nails}" >
+                    <option value="NO">NO</option>
+                    <option value="YES">YES</option>
+                </select>
 
                 <div class="button_calculate">
                     <div>
@@ -113,6 +145,9 @@
             });
 
             $('#datetimepicker1').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+            $('#datetimepicker2').datetimepicker({
                 format: 'DD/MM/YYYY'
             });
         </script>

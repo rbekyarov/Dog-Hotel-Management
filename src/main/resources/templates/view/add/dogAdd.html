@@ -1,5 +1,6 @@
+<!DOCTYPE html>
 <th:block th:unless="${session.isEmpty()}">
-<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+<th:block th:fragment xmlns:th="http://www.thymeleaf.org">
     <div class="button_back">
         <a class="nav-link h5" th:href="@{/view/table/dogTable}">
             <button type="button" class="btn btn-danger btn-lg btn3d"><span
@@ -9,7 +10,7 @@
     </div>
     <div class="container">
         <h2 class="page_title">Add Dog</h2>
-        <form class="form_add" th:action="@{/view/add/dogAdd}"
+        <form class="form_add" enctype="multipart/form-data" th:action="@{/view/add/dogAdd}"
               th:method="post"
               th:object="${dogDTO}"
 
@@ -23,6 +24,18 @@
                         placeholder="Please enter Name"
                 >
             </textarea>
+                <div class="form-group">
+                    <label class="file-label" for="fileImage">Add Image</label>
+                    <div class="mb-4">
+                        <input class="file-input" type="file" id="fileImage" name="fileImage">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <img src="#" id="thumbnail" height="100px" width="100px"
+                         th:src="@{${'/image/' + dogDTO.imageName}}" alt="image" />
+                    <input type="hidden" name="imgName"  th:value="${dogDTO.imageName}">
+
+                </div>
 
                 <div class="form-group">
                     <label for="date">BirthDate:</label>
@@ -126,6 +139,31 @@
         $('#datetimepicker1').datetimepicker({
             format: 'DD/MM/YYYY'
         });
+    </script>
+    <script>
+        /* $(document).ready(function(){
+
+        }); */
+        function showImageThumbnail(fileInput){
+            if(fileInput.files && fileInput.files[0]){
+                var reader = new FileReader();
+
+                reader.onload = function(e){
+                    $('thumbnail').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+        $('#fileImage').change(function(){
+            showImageThumbnail(this);
+        });
+
+        $('.file-input').on("change", function(){
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".file-label").addClass("selected").html(fileName);
+        });
+
+
     </script>
 </th:block>
 </th:block>

@@ -1,5 +1,6 @@
 package softuni.exam.models.entity;
 
+import lombok.Builder;
 import org.springframework.format.annotation.DateTimeFormat;
 import softuni.exam.models.entity.enums.Microchip;
 import softuni.exam.models.entity.enums.Passport;
@@ -8,12 +9,13 @@ import softuni.exam.models.entity.enums.Sex;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+
 @Entity
 @Table(name = "dogs")
 public class Dog extends BaseEntity {
     private String name;
     private LocalDate birthDate;
-
+    private String imageName;
     private Integer weight;
     private Breed breed;
     private Sex sex;
@@ -24,6 +26,8 @@ public class Dog extends BaseEntity {
 
     public Dog() {
     }
+
+
 
     @Column(nullable = false)
     public String getName() {
@@ -44,7 +48,6 @@ public class Dog extends BaseEntity {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
-
 
 
     @Column
@@ -111,5 +114,11 @@ public class Dog extends BaseEntity {
         this.behavior = behavior;
     }
 
+    public String getImageName() {
+        return imageName;
+    }
 
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
 }

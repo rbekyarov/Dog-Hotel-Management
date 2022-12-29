@@ -1,5 +1,6 @@
 package softuni.exam.service;
 
+import org.springframework.web.multipart.MultipartFile;
 import softuni.exam.models.dto.BreedDTO;
 import softuni.exam.models.dto.DogDTO;
 import softuni.exam.models.entity.*;
@@ -32,6 +33,7 @@ public interface DogService {
                  Microchip microchip,
                  Long clientId,
                  Long behaviorId,
+                 String imageName,
                  Long id);
 
     public List<Behavior> getAllBehaviors();
