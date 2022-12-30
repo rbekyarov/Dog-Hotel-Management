@@ -14,14 +14,8 @@
               th:object="${addBehavior}"
               >
             <div class="form-group">
-                <label class="text-white font-weight-bold" for="description"></label>
-                <textarea
-                        id="description"
-                        th:field="${behaviorDTO.name}"
-                        type="textarea"
-                        placeholder="Please enter behavior"
-                >
-            </textarea>
+                <label class="text-white font-weight-bold" for="description">Behavior</label><br>
+                <input type="text" id="description" th:field="${behaviorDTO.name}" placeholder="Please enter behavior"/>
                 <p class="invalid-feedback errors alert alert-danger">
                     Behavior is required.
                 </p>

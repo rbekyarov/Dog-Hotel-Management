@@ -13,12 +13,8 @@
             <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
                   th:method="post">
                 <div class="form-group">
-                <textarea
-                        id="description"
-                        th:field="${breedDTO.breedName}"
-                        type="textarea"
-                        placeholder="Please enter behavior">
-            </textarea>
+                    <label class="text-white font-weight-bold" for="description">Breed</label><br>
+                    <input type="text" id="description" th:field="${breedDTO.breedName}" placeholder="Please enter breed"/>
                     <p class="invalid-feedback errors alert alert-danger">
                         Behavior is required.
                     </p>

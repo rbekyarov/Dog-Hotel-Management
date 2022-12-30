@@ -13,11 +13,9 @@
             <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
                   th:method="post">
                 <div class="form-group">
-                <textarea
-                        id="description"
-                        th:field="${cellDto.code}"
-                        type="textarea"
-                        placeholder="Please enter behavior">
+
+                <textarea rows="1"
+                        th:field="${cellDto.code}">
             </textarea>
                     <p></p>
                     <select th:field="${cellDto.status}">

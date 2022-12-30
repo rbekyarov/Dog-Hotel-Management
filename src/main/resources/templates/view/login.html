@@ -13,23 +13,11 @@
               th:object="${user}"
         >
             <div class="form-group">
+                <label>UserName:</label><br>
+                <input type="text" id="description" th:field="${user.username}" placeholder="Please enter Username"/><br>
+                <label>Password:</label><br>
+                <input type="text" id="description1" th:field="${user.password}" placeholder="Please enter Password"/><br>
                 <label class="text-white font-weight-bold" for="description"></label>
-                <p>Username</p>
-                <textarea
-                        id="description"
-                        th:field="${user.username}"
-                        type="textarea"
-                        placeholder="Please enter Username"
-                >
-            </textarea>
-                <p>Password</p>
-                <textarea
-                        id="description1"
-                        th:field="${user.password}"
-                        type="textarea"
-                        placeholder="Please enter Password"
-                >
-            </textarea>
 
             </div>
 

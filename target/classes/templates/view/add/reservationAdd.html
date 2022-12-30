@@ -16,19 +16,20 @@
                 <div class="form-group">
                     <label class="text-white font-weight-bold"></label>
                     <p>Client:</p>
-                    <select id="text-box" th:field="*{client.id}" >
+                    <select id="text-box" th:field="*{client.id}" oninput="getClientDogs()" >
                         <option value="">Please select</option>
                         <option
                                 th:each="client : ${allClients}"
                                 th:value="${client.id}"
                                 th:text="${client.email}"
+
                                 th:with="clientDogs=${client.dogs}"
 
                         ></option>
-
+               <p th:text="${clientDogs}"></p>
                     </select>
 
-                    <p>Dog:</p>
+                    <p th:value = "${clientDogs}"  >Dog:</p>
                     <select th:field="*{dog.id}" >
                         <option value="">Please select</option>
                         <option
@@ -37,7 +38,16 @@
                                 th:text="${d.name}"></option>
 
                     </select>
+         <script th:inline="javascript">
+             /*<![CDATA[*/
 
+
+                            var param = /*[(${clientDogs})]*/ [];
+                            alert(param.length);
+
+
+             /*]]>*/
+         </script>
                     <p>Date of Arrival:</p>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input"
@@ -147,17 +157,7 @@
                 format: 'DD/MM/YYYY'
             });
         </script>
-        <script>
-            function getClientId() {
-                const client = document.getElementById('text-box');
-                let clientId = client.value
-//console.log(clientId)
 
-                return clientId;
-
-
-            }
-        </script>
 
     </th:block>
 </th:block>
