@@ -42,13 +42,13 @@ public class ReservationController extends BaseController {
     }
 
     @GetMapping("/view/add/reservationAdd")
-    public ModelAndView reservationAdd(ModelAndView modelAndView, @RequestParam(value = "client.id", required = false) Long clientId) {
+    public ModelAndView reservationAdd(ModelAndView modelAndView, @RequestParam(value = "clientId", required = false) String clientId) {
         ReservationDTO reservationDTO = new ReservationDTO();
 
         List<Client> allClients = clientService.findAllClientById();
         List<Dog> allDogsOnClient = new ArrayList<>();
         if(clientId !=null){
-             allDogsOnClient = dogService.findAllDogByClient(clientId);
+            allDogsOnClient = dogService.findAllDogByClient(Long.parseLong(clientId));
         }
 
         List<Cell> allEmptyCells = cellService.findAllEmptyCells();

@@ -16,28 +16,32 @@
                 <div class="form-group">
                     <label class="text-white font-weight-bold"></label>
                     <p>Client:</p>
-                    <select th:field="*{client.id}" oninput="window.addEventListener()">
+                    <select id="text-box" th:field="*{client.id}" >
                         <option value="">Please select</option>
                         <option
-                                th:each="b : ${allClients}"
-                                th:value="${b.id}"
-                                th:text="${b.email}"
-                                ></option>
+                                th:each="client : ${allClients}"
+                                th:value="${client.id}"
+                                th:text="${client.email}"
+                                th:with="clientDogs=${client.dogs}"
+
+                        ></option>
 
                     </select>
+<!--                    <input type="button" onclick="getClientId()" value="Transform">-->
+
                     <p>Dog:</p>
-                    <select th:field="*{dog.id}">
+                    <select th:field="*{dog.id}" >
                         <option value="">Please select</option>
                         <option
-                                th:each="d : ${dogs}"
+                                th:each="d : ${clientDogs}"
                                 th:value="${d.id}"
                                 th:text="${d.name}"></option>
 
                     </select>
 
-<!--                    <th:block th:if="*{client.id}">-->
+                    <!--                    <th:block th:if="*{client.id}">-->
 
-<!--                    </th:block>-->
+                    <!--                    </th:block>-->
                     <p>Date of Arrival:</p>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input"
@@ -72,37 +76,37 @@
 
                 </div>
                 <p>Feeding:</p>
-                <select th:field="*{food}" >
+                <select th:field="*{food}">
                     <option value="NO">NO</option>
                     <option value="YES">YES</option>
                 </select>
                 <p>Training:</p>
-                <select th:field="*{training}" >
+                <select th:field="*{training}">
                     <option value="NO">NO</option>
                     <option value="YES">YES</option>
                 </select>
                 <p>Bathing:</p>
-                <select th:field="*{bathing}" >
+                <select th:field="*{bathing}">
                     <option value="NO">NO</option>
                     <option value="YES">YES</option>
                 </select>
                 <p>Combing:</p>
-                <select th:field="*{combing}" >
+                <select th:field="*{combing}">
                     <option value="NO">NO</option>
                     <option value="YES">YES</option>
                 </select>
                 <p>Еar cleaning:</p>
-                <select th:field="*{ears}" >
+                <select th:field="*{ears}">
                     <option value="NO">NO</option>
                     <option value="YES">YES</option>
                 </select>
                 <p>Paws cleaning:</p>
-                <select th:field="*{paws}" >
+                <select th:field="*{paws}">
                     <option value="NO">NO</option>
                     <option value="YES">YES</option>
                 </select>
                 <p>Nails trimming:</p>
-                <select th:field="*{nails}" >
+                <select th:field="*{nails}">
                     <option value="NO">NO</option>
                     <option value="YES">YES</option>
                 </select>
@@ -124,9 +128,7 @@
             </form>
         </div>
 
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
         <script th:src="@{/assets/moment/moment.min.js}"></script>
         <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
         <script>
@@ -151,11 +153,17 @@
                 format: 'DD/MM/YYYY'
             });
         </script>
-        <script th:inline="javascript">
+        <script>
             function getClientId() {
+                const client = document.getElementById('text-box');
+                let clientId = client.value
+//console.log(clientId)
+
+                return clientId;
+
 
             }
-
         </script>
+
     </th:block>
 </th:block>
