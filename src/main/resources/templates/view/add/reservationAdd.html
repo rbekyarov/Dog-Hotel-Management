@@ -27,7 +27,6 @@
                         ></option>
 
                     </select>
-<!--                    <input type="button" onclick="getClientId()" value="Transform">-->
 
                     <p>Dog:</p>
                     <select th:field="*{dog.id}" >
@@ -38,10 +37,7 @@
                                 th:text="${d.name}"></option>
 
                     </select>
-
-                    <!--                    <th:block th:if="*{client.id}">-->
-
-                    <!--                    </th:block>-->
+                    
                     <p>Date of Arrival:</p>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input"
@@ -129,8 +125,6 @@
         </div>
 
 
-        <script th:src="@{/assets/moment/moment.min.js}"></script>
-        <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
         <script>
             $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
                 icons: {
