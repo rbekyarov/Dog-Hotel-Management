@@ -17,17 +17,22 @@
                     <label class="text-white font-weight-bold"></label>
                     <p>Client:</p>
                     <select id="showClient" name="showClient" th:field="*{client.id}" oninput="getClientDogs()">
+
                         <option value="">Please select</option>
                         <option
                                 th:each="showClient : ${allClients}"
                                 th:value="${showClient.id}"
                                 th:text="${showClient.email}"
+
+
                         ></option>
-
                     </select>
+                    <script th:inline="javascript" >
+                        /*<![CDATA[*/
 
-                    <script th:inline="javascript">
-                        const showClientList = /*[[${allClients}]]*/ [];
+                        var clientList = /*[[${allClients}]]*/ 'test';
+                        alert(clientList)
+                        /*]]>*/
                     </script>
 
 
@@ -35,13 +40,14 @@
                     <select id="dogsBox" th:field="*{dog.id}">
 
                         <script>
-                            function getClientDogs() {
-                                const chosenShowClient = $("showClient").val();
 
-                                for (let i = 0; i < showClientList.length; i++) {
-                                    if (showClientList[i].id === chosenShowClient) {
+                            function getClientDogs() {
+                                const clientId = Number(document.getElementById('showClient').value);
+                                let length = clientList.length
+                                for (let i = 0; i < length; i++) {
+                                    if (clientList[i].id === clientId) {
                                         $('#dogsBox option').remove();
-                                        const dogs = showClientList[i].dogs;
+                                        const dogs = clientList[i].dogs;
                                         for (let n = 0; n < dogs.length; n++) {
                                             $('#dogsBox').append($('<option>', {
                                                 value: dogs[n].id,
