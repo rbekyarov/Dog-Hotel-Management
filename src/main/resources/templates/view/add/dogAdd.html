@@ -55,7 +55,7 @@
                     <option
                             th:each="c : ${allClients}"
                             th:value="${c.id}"
-                            th:text="${c.email}"></option>
+                            th:text="${c.firstName+' '+c.lastName+' '+c.email}"></option>
 
                 </select>
                 <br> <label>Behavior:</label><br>

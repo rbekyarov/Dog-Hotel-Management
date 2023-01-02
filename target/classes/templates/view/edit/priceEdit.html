@@ -13,56 +13,23 @@
             <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
                   th:method="post">
                 <div class="form-group">
-                <textarea
-                        th:field="${priceDTO.priceOvernightStay}"
-                        type="textarea"
-                        placeholder="Please enter price Overnight Stay">
-            </textarea>
-                    <p></p>
-                    <textarea
-                            th:field="${priceDTO.priceFood}"
-                            type="textarea"
-                            placeholder="Please enter price Food">
-            </textarea>
-                    <p></p>
-                    <textarea
-                            th:field="${priceDTO.priceTraining}"
-                            type="textarea"
-                            placeholder="Please enter price Training">
-            </textarea>
-                    <p></p>
-                    <textarea
-                            th:field="${priceDTO.priceBathing}"
-                            type="textarea"
-                            placeholder="Please enter price Bathing">
-            </textarea>
-                    <p></p>
-                    <textarea
-                            th:field="${priceDTO.priceCombing}"
-                            type="textarea"
-                            placeholder="Please enter price Combing">
-            </textarea>
-                    <textarea
-                            th:field="${priceDTO.pricePaws}"
-                            type="textarea"
-                            placeholder="Please enter price Paws">
-            </textarea>
-                    <p></p>
-                    <textarea
-                            th:field="${priceDTO.priceEars}"
-                            type="textarea"
-                            placeholder="Please enter price Ears">
-            </textarea>
-                    <p></p>
-                    <textarea
-                            th:field="${priceDTO.priceNails}"
-                            type="textarea"
-                            placeholder="Please enter price Nails">
-            </textarea>
-                    <p></p>
-                    <p class="invalid-feedback errors alert alert-danger">
-                        Price is required.
-                    </p>
+                    <label>Price Overnight Stay:</label><br>
+                    <input type="text" id="description" th:field="${priceDTO.priceOvernightStay}" placeholder="Please enter price Overnight Stay"/><br>
+                    <label>Price Food:</label><br>
+                    <input type="text" id="description1" th:field="${priceDTO.priceFood}" placeholder="Please enter price Food"/><br>
+                    <label>Price Training:</label><br>
+                    <input type="text" id="description2" th:field="${priceDTO.priceTraining}" placeholder="Please enter price Training"/><br>
+                    <label>Price Bathing:</label><br>
+                    <input type="text" id="description3" th:field="${priceDTO.priceBathing}" placeholder="Please enter price Bathing"/><br>
+                    <label>Price Combing:</label><br>
+                    <input type="text" id="description4" th:field="${priceDTO.priceCombing}" placeholder="Please enter price Combing"/><br>
+                    <label>Price Paws:</label><br>
+                    <input type="text" id="description5" th:field="${priceDTO.pricePaws}" placeholder="Please enter price Paws"/><br>
+                    <label>Price Ears:</label><br>
+                    <input type="text" id="description6" th:field="${priceDTO.priceEars}" placeholder="Please enter price Ears"/><br>
+                    <label>Price Nails:</label><br>
+                    <input type="text" id="description7" th:field="${priceDTO.priceNails}" placeholder="Please enter price Nails"/><br>
+
                 </div>
                 <div class="button_submit">
                     <div>

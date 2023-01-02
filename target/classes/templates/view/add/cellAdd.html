@@ -14,15 +14,14 @@
               th:object="${cellDto}"
         >
             <div class="form-group">
-                <label class="text-white font-weight-bold" for="description"></label>
-                <textarea
-                        id="description"
-                        th:field="${cellDTO.code}"
-                        type="textarea"
-                        placeholder="Please enter cell"
-                >
-            </textarea>
-                <p></p>
+                <label class="text-white font-weight-bold" for="description">Dog House</label><br>
+                <input type="text" id="description" th:field="${cellDTO.code}" placeholder="Please enter Dog House"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Behavior is required.
+                </p><br>
+
+                <label>Status</label><br>
+
                 <select th:field="${cellDTO.status}" >
                     <option value="empty">empty</option>
                     <option value="busy">busy</option>

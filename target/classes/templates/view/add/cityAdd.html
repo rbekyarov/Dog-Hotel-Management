@@ -14,22 +14,13 @@
               th:object="${addCity}"
         >
             <div class="form-group">
-                <label class="text-white font-weight-bold" for="description"></label>
-                <textarea
-                        id="description"
-                        th:field="${cityDTO.code}"
-                        type="textarea"
-                        placeholder="Please enter code"
-                >
-            </textarea>
-                <p></p>
-                <textarea
-                        id="description2"
-                        th:field="${cityDTO.name}"
-                        type="textarea"
-                        placeholder="Please enter name"
-                >
-            </textarea>
+
+                <label >City Code</label><br>
+                <input type="text" id="description" th:field="${cityDTO.code}" placeholder="Please enter code"/><br>
+
+                <label >City Name</label><br>
+                <input type="text" id="description1" th:field="${cityDTO.name}" placeholder="Please enter City Name"/>
+
                 <p class="invalid-feedback errors alert alert-danger">
                     City is required.
                 </p>

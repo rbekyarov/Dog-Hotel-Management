@@ -14,32 +14,13 @@
               th:object="${userDTO}"
         >
             <div class="form-group">
-                <label class="text-white font-weight-bold" for="description"></label>
-                <p>UserName</p>
-                <textarea
-                        id="description"
-                        th:field="${userDTO.username}"
-                        type="textarea"
-                        placeholder="Please enter Username"
-                >
-            </textarea>
-                <p>Password</p>
-                <textarea
-                        id="description1"
-                        th:field="${userDTO.password}"
-                        type="textarea"
-                        placeholder="Please enter Password"
-                >
-            </textarea>
-                <p>Confirm Password</p>
-                <textarea
-                        id="description2"
-                        th:field="${userDTO.confirmPassword}"
-                        type="textarea"
-                        placeholder="Confirm Password"
-                >
-            </textarea>
-                <p>Select Role</p>
+                <label>UserName:</label><br>
+                <input type="text" id="description" th:field="${userDTO.username}" placeholder="Please enter Username"/><br>
+                <label>Password:</label><br>
+                <input type="text" id="description1" th:field="${userDTO.password}" placeholder="Please enter Password"/><br>
+                <label>Confirm Password:</label><br>
+                <input type="text" id="description2" th:field="${userDTO.confirmPassword}" placeholder="Confirm Password"/><br>
+                <label>Select Role:</label><br>
                 <div class="form-group">
                     <select th:field="${userDTO.role}">
                         <option value="USER">USER</option>
@@ -48,7 +29,6 @@
                 </div>
 
             </div>
-
 
             <div class="button_submit">
                 <div >

@@ -16,38 +16,43 @@
                 <div class="form-group">
                     <label class="text-white font-weight-bold"></label>
                     <p>Client:</p>
-                    <select id="text-box" th:field="*{client.id}" oninput="getClientDogs()" >
+                    <select id="showClient" name="showClient" th:field="*{client.id}" oninput="getClientDogs()">
                         <option value="">Please select</option>
                         <option
-                                th:each="client : ${allClients}"
-                                th:value="${client.id}"
-                                th:text="${client.email}"
-
-                                th:with="clientDogs=${client.dogs}"
-
+                                th:each="showClient : ${allClients}"
+                                th:value="${showClient.id}"
+                                th:text="${showClient.email}"
                         ></option>
-               <p th:text="${clientDogs}"></p>
                     </select>
 
-                    <p th:value = "${clientDogs}"  >Dog:</p>
-                    <select th:field="*{dog.id}" >
-                        <option value="">Please select</option>
-                        <option
-                                th:each="d : ${clientDogs}"
-                                th:value="${d.id}"
-                                th:text="${d.name}"></option>
+                    <script th:inline="javascript">
+                        const showClientList = /*[[${allClients}]]*/ [];
+                    </script>
+
+                    <p>Dogs:</p>
+                    <select id="dogsBox" th:field="*{dog.id}">
+
+                        <script>
+                            function getClientDogs() {
+                                const chosenShowClient = $("showClient").val();
+                                for (let i = 0; i < showClientList.length; i++) {
+                                    if (showClientList[i].id === chosenShowClient) {
+                                        $('#dogsBox option').remove();
+                                        const dogs = showClientList[i].dogs;
+                                        for (let n = 0; n < dogs.length; n++) {
+                                            $('#dogsBox').append($('<option>', {
+                                                value: dogs[n].id,
+                                                text: dogs[n].name
+                                            }));
+                                        }
+                                        $("#dogsBox").trigger("chosen:updated");
+                                    }
+                                }
+                            }
+                        </script>
 
                     </select>
-         <script th:inline="javascript">
-             /*<![CDATA[*/
 
-
-                            var param = /*[(${clientDogs})]*/ [];
-                            alert(param.length);
-
-
-             /*]]>*/
-         </script>
                     <p>Date of Arrival:</p>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input"

@@ -16,46 +16,33 @@
 
             >
                 <div class="form-group">
-                    <label class="text-white font-weight-bold"></label>
-                    <p>Name:</p>
-                    <textarea
-                            th:field="*{name}"
-                            type="textarea"
-                            placeholder="Please enter Name"
-                    >
-            </textarea>
-                    <div class="form-group">
-                        <label class="file-label" for="fileImage">Add Image</label>
-                        <div class="mb-4">
-                            <input class="file-input" type="file" id="fileImage" name="fileImage">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <img src="#" id="thumbnail" height="100px" width="100px"
-                             th:src="@{${'/image/' + dogDTO.imageName}}" alt="image" />
-                        <input type="hidden" name="imgName"  th:value="${dogDTO.imageName}">
+                    <label>Dog Name:</label><br>
+                    <input type="text" id="description" th:field="*{name}" placeholder="Please enter Name"/><br>
 
+                    <label class="file-label" for="fileImage">Add Image</label>
+                    <div class="mb-4">
+                        <input class="file-input" type="file" id="fileImage" name="fileImage">
                     </div>
 
-                    <div class="form-group">
-                        <label for="date">BirthDate:</label>
-                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
-                                   th:field="*{birthDate}" id="date" placeholder="Date"/>
-                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                            </div>
+
+                    <img src="#" id="thumbnail" height="100px" width="100px"
+                         th:src="@{${'/image/' + dogDTO.imageName}}" alt="image" />
+                    <input type="hidden" name="imgName"  th:value="${dogDTO.imageName}"><br>
+
+
+                    <label for="date">BirthDate:</label>
+                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                               th:field="*{birthDate}" id="date" placeholder="Date"/>
+                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                         </div>
                     </div>
-                    <p>Weight:</p>
-                    <textarea
-                            th:field="*{weight}"
-                            type="textarea"
-                            placeholder="Please enter Weight"
-                    >
-            </textarea>
-                    <p>Breed:</p>
-                    <select th:field="*{breed.id}">
+                    <label>Weight:</label><br>
+                    <input type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight"/><br>
+
+                    <label>Breed:</label><br>
+                    <select th:field="*{breed.id}" >
                         <option value="">Please select</option>
                         <option
                                 th:each="b : ${allBreeds}"
@@ -63,45 +50,40 @@
                                 th:text="${b.breedName}"></option>
 
                     </select>
-
-                    <p>Sex:</p>
-                    <select th:field="*{sex}">
-                        <option value="M">M</option>
-                        <option value="F">F</option>
-                    </select>
-                    <p>Passport:</p>
-                    <select th:field="*{passport}">
-                        <option value="NO">NO</option>
-                        <option value="YES">YES</option>
-                    </select>
-
-                    <p>Microchip:</p>
-                    <select th:field="*{microchip}">
-                        <option value="NO">NO</option>
-                        <option value="YES">YES</option>
-                    </select>
-
-                    <p>Client:</p>
-                    <select th:field="*{client.id}">
+                    <br><label>Client:</label><br>
+                    <select th:field="*{client.id}" >
                         <option value="">Please select</option>
                         <option
                                 th:each="c : ${allClients}"
                                 th:value="${c.id}"
-                                th:text="${c.email}"></option>
+                                th:text="${c.firstName+' '+c.lastName+' '+c.email}"></option>
 
                     </select>
-
-                    <p>Behavior:</p>
-                    <select th:field="*{behavior.id}">
+                    <br> <label>Behavior:</label><br>
+                    <select th:field="*{behavior.id}" >
                         <option value="">Please select</option>
                         <option
                                 th:each="b : ${allBehaviors}"
                                 th:value="${b.id}"
                                 th:text="${b.name}"></option>
-
+                    </select>
+                    <br> <label>Sex:</label><br>
+                    <select th:field="*{sex}" >
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                    </select>
+                    <br> <label>Passport:</label><br>
+                    <select th:field="*{passport}" >
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select>
+                    <br><label>Microchip:</label><br>
+                    <select th:field="*{microchip}" >
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
                     </select>
 
-                    <p></p>
+
                 </div>
                 <div class="button_submit">
                     <div>
