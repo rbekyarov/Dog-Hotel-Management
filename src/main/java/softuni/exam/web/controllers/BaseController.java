@@ -5,6 +5,7 @@ import softuni.exam.models.entity.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public abstract class BaseController {
 
@@ -28,15 +29,14 @@ public abstract class BaseController {
     }
 
     //reservationAdd
-    public ModelAndView view(String view, String objectName, Object object, String clients, List<Client> clientsList, String allEmptyCells, List<Cell> allEmptyCellsList,String allPrices, List<Price> allPricesList ,String allDogsOnClient, List<Dog>allDogsOnClientList) {
+    public ModelAndView view(String view, String objectName, Object object, String clients, List<Client> clientsList, String allEmptyCells, List<Cell> allEmptyCellsList, String allPrices, Price allPricesList , String allDogsOnClient, List<Dog>allDogsOnClientList) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fragments/base-layout");
         modelAndView.addObject("view", view);
         modelAndView.addObject(objectName, object);
         modelAndView.addObject(clients, clientsList);
         modelAndView.addObject(allEmptyCells, allEmptyCellsList);
-        modelAndView.addObject(allDogsOnClient, allDogsOnClient);
-        modelAndView.addObject(allPrices, allPrices);
+        modelAndView.addObject(allPrices, allPricesList);
 
 
         return modelAndView;

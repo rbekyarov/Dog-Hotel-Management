@@ -15,7 +15,7 @@
 
                 <div class="form-group">
                     <label class="text-white font-weight-bold"></label>
-                    <p>Client:</p>
+                    <label>Client:</label><br>
                     <select id="showClient" name="showClient" th:field="*{client.id}" oninput="getClientDogs()">
 
                         <option value="">Please select</option>
@@ -24,40 +24,12 @@
                                 th:value="${showClient.id}"
                                 th:text="${showClient.email}"
                         ></option>
-                    </select>
-                    <script th:inline="javascript" >
-                        /*<![CDATA[*/
+                    </select><br>
 
-                        var clientList = /*[[${allClients}]]*/ 'test';
-                        /*]]>*/
-                    </script>
-                    <p>Dogs:</p>
+                    <label>Dogs:</label><br>
                     <select id="dogsBox" th:field="*{dog.id}">
-
-                        <script>
-
-                            function getClientDogs() {
-                                const clientId = Number(document.getElementById('showClient').value);
-                                let length = clientList.length
-                                for (let i = 0; i < length; i++) {
-                                    if (clientList[i].id === clientId) {
-                                        $('#dogsBox option').remove();
-                                        const dogs = clientList[i].dogs;
-                                        for (let n = 0; n < dogs.length; n++) {
-                                            $('#dogsBox').append($('<option>', {
-                                                value: dogs[n].id,
-                                                text: dogs[n].name
-                                            }));
-                                        }
-                                        $("#dogsBox").trigger("chosen:updated");
-                                    }
-                                }
-                            }
-                        </script>
-
-                    </select>
-
-                    <p>Date of Arrival:</p>
+                    </select><br>
+                    <label>Date of Arrival:</label><br>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input"
                                data-target="#datetimepicker1"
@@ -67,8 +39,7 @@
                             <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                         </div>
                     </div>
-
-                    <p>Date of Departure:</p>
+                    <label>Date of Departure:</label><br>
                     <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input"
                                data-target="#datetimepicker2"
@@ -78,8 +49,7 @@
                             <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                         </div>
                     </div>
-
-                    <p>Dog House:</p>
+                    <label>Dog House:</label><br>
                     <select th:field="*{cell}">
                         <option value="">Please select</option>
                         <option
@@ -87,45 +57,47 @@
                                 th:value="${c.id}"
                                 th:text="${c.code}"></option>
 
-                    </select>
+                    </select><br><br>
 
+                    <label th:text="${'Feeding: price '+ price.getPriceFood()+'$'}"></label><br>
+                    <select th:field="*{food}">
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select><br>
+                    <label th:text="${'Training: price '+ price.getPriceTraining()+'$'}"></label><br>
+                    <select th:field="*{training}">
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select><br>
+                    <label th:text="${'Bathing: price '+ price.getPriceBathing()+'$'}"></label><br>
+                    <select th:field="*{bathing}">
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select><br>
+                    <label th:text="${'Combing: price '+ price.getPriceCombing()+'$'}"></label><br>
+                    <select th:field="*{combing}">
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select><br>
+                    <label th:text="${'Еar cleaning: price '+ price.getPriceEars()+'$'}"></label><br>
+                    <select th:field="*{ears}">
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select><br>
+                    <label th:text="${'Paws cleaning: price '+ price.getPricePaws()+'$'}"></label><br>
+                    <select th:field="*{paws}">
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select><br>
+                    <label th:text="${'Nails trimming: price '+ price.getPriceNails()+'$'}"></label><br>
+                    <select th:field="*{nails}"><br>
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select><br>
+                    <label>Discount %</label><br>
+                    <input type="text" id="description22" th:field="*{discount}"
+                           placeholder="Please enter Discount percent"/><br>
                 </div>
-                <p>Feeding:</p>
-                <select th:field="*{food}">
-                    <option value="NO">NO</option>
-                    <option value="YES">YES</option>
-                </select>
-                <p>Training:</p>
-                <select th:field="*{training}">
-                    <option value="NO">NO</option>
-                    <option value="YES">YES</option>
-                </select>
-                <p>Bathing:</p>
-                <select th:field="*{bathing}">
-                    <option value="NO">NO</option>
-                    <option value="YES">YES</option>
-                </select>
-                <p>Combing:</p>
-                <select th:field="*{combing}">
-                    <option value="NO">NO</option>
-                    <option value="YES">YES</option>
-                </select>
-                <p>Еar cleaning:</p>
-                <select th:field="*{ears}">
-                    <option value="NO">NO</option>
-                    <option value="YES">YES</option>
-                </select>
-                <p>Paws cleaning:</p>
-                <select th:field="*{paws}">
-                    <option value="NO">NO</option>
-                    <option value="YES">YES</option>
-                </select>
-                <p>Nails trimming:</p>
-                <select th:field="*{nails}">
-                    <option value="NO">NO</option>
-                    <option value="YES">YES</option>
-                </select>
-
                 <div class="button_calculate">
                     <div>
                         <div>
@@ -133,13 +105,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="button_submit">
-                    <div>
-                        <div>
-                            <input type="submit" class="btn btn-danger btn-lg btn3d" value="Submit Reservation"/>
-                        </div>
-                    </div>
-                </div>
+
             </form>
         </div>
 
@@ -166,7 +132,32 @@
                 format: 'DD/MM/YYYY'
             });
         </script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
 
+            var clientList = /*[[${allClients}]]*/ 'test';
+            /*]]>*/
+        </script>
+        <script>
+
+            function getClientDogs() {
+                const clientId = Number(document.getElementById('showClient').value);
+                let length = clientList.length
+                for (let i = 0; i < length; i++) {
+                    if (clientList[i].id === clientId) {
+                        $('#dogsBox option').remove();
+                        const dogs = clientList[i].dogs;
+                        for (let n = 0; n < dogs.length; n++) {
+                            $('#dogsBox').append($('<option>', {
+                                value: dogs[n].id,
+                                text: dogs[n].name
+                            }));
+                        }
+                        $("#dogsBox").trigger("chosen:updated");
+                    }
+                }
+            }
+        </script>
 
     </th:block>
 </th:block>

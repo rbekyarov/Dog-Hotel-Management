@@ -1,7 +1,6 @@
 package softuni.exam.service;
 
-import org.springframework.web.multipart.MultipartFile;
-import softuni.exam.models.dto.BreedDTO;
+
 import softuni.exam.models.dto.DogDTO;
 import softuni.exam.models.entity.*;
 import softuni.exam.models.entity.enums.Microchip;

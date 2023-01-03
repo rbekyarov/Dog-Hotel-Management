@@ -15,6 +15,7 @@ import softuni.exam.service.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ReservationController extends BaseController {
@@ -46,35 +47,27 @@ public class ReservationController extends BaseController {
     }
 
     @GetMapping("/view/add/reservationAdd")
-    public ModelAndView reservationAdd(ModelAndView modelAndView, @RequestParam(value = "clientId", required = false) String clientId) {
+    public ModelAndView reservationAdd(ModelAndView modelAndView) {
         ReservationDTO reservationDTO = new ReservationDTO();
 
         List<Client> allClients = clientService.findAll();
-        List<Client> clients = new ArrayList<>();
-        for (Client client : allClients) {
-            clients.add(client);
-        }
-
 
         List<Dog> allDogsOnClient = new ArrayList<>();
-        if(clientId !=null){
-            allDogsOnClient = dogService.findAllDogByClient(Long.parseLong(clientId));
-        }
+
 
         List<Cell> allEmptyCells = cellService.findAllEmptyCells();
-        List<Price> allPrices = priceService.findAllPriceById();
-
+        Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
+        Price price = allPrices.get();
         modelAndView.addObject("reservationDTO", reservationDTO);
         modelAndView.addObject("allClients", allClients);
-        modelAndView.addObject("allDogsOnClient", allDogsOnClient);
         modelAndView.addObject("allEmptyCells", allEmptyCells);
-        modelAndView.addObject("allPrices", allPrices);
+        modelAndView.addObject("price", price);
 
         return super.view("/view/add/reservationAdd",
                 "reservationDTO", reservationDTO,
                 "allClients",allClients,
                 "allEmptyCells",allEmptyCells,
-                "allPrices",allPrices,
+                "price",price,
                 "allDogsOnClient", allDogsOnClient
 
         );
@@ -108,8 +101,8 @@ public class ReservationController extends BaseController {
         List<Client> allClients = clientService.findAllClientById();
         List<Dog> allDogsOnClient = dogService.findAllDogByClient(id);
         List<Cell> allEmptyCells = cellService.findAllEmptyCells();
-        List<Price> allPrices = priceService.findAllPriceById();
-
+        Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
+        Price price = allPrices.get();
         modelAndView.addObject("reservationDTO", reservationDTO);
         modelAndView.addObject("allClients", allClients);
         modelAndView.addObject("allDogsOnClient", allDogsOnClient);
@@ -120,7 +113,7 @@ public class ReservationController extends BaseController {
                 "reservationDTO", reservationDTO,
                 "allClients",allClients,
                 "allEmptyCells",allEmptyCells,
-                "allPrices",allPrices,
+                "price",price,
                 "allDogsOnClient", allDogsOnClient
 
         );
