@@ -88,28 +88,44 @@ public class ReservationController extends BaseController {
 
         return "redirect:/view/table/reservationTable";
     }
+    @GetMapping("view/table/reservation/view/{id}")
+    public ModelAndView getReservationView(@PathVariable("id") Long id,
+                                             ModelAndView modelAndView) throws ObjectNotFoundException {
 
+        Reservation reservation =
+                reservationService.findById(id).
+                        orElseThrow(() -> new ObjectNotFoundException("not found!"));
+        modelAndView.addObject("reservation", reservation);
+
+
+        return super.view("/view/table/reservationView",
+                "reservation", reservation
+        );
+
+    }
 
     @GetMapping("view/table/reservation/edit/{id}")
     public ModelAndView getReservationDetail(@PathVariable("id") Long id,
                                              ModelAndView modelAndView) throws ObjectNotFoundException {
 
         var reservationDTO =
-                dogService.findById(id).
+                reservationService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
-        List<Client> allClients = clientService.findAllClientById();
-        List<Dog> allDogsOnClient = dogService.findAllDogByClient(id);
+        List<Client> allClients = clientService.findAll();
+
+        List<Dog> allDogsOnClient = new ArrayList<>();
+
+
         List<Cell> allEmptyCells = cellService.findAllEmptyCells();
         Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
         Price price = allPrices.get();
         modelAndView.addObject("reservationDTO", reservationDTO);
         modelAndView.addObject("allClients", allClients);
-        modelAndView.addObject("allDogsOnClient", allDogsOnClient);
         modelAndView.addObject("allEmptyCells", allEmptyCells);
-        modelAndView.addObject("allPrices", allPrices);
+        modelAndView.addObject("price", price);
 
-        return super.view("/view/add/reservationAdd",
+        return super.view("/view/edit/reservationEdit",
                 "reservationDTO", reservationDTO,
                 "allClients",allClients,
                 "allEmptyCells",allEmptyCells,

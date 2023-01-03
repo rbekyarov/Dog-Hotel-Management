@@ -38,7 +38,11 @@
                     <td th:text="${r.totalPrice}"></td>
 
 
-
+                    <td><a class="nav-link h5" th:href="@{reservation/view/{id}(id=*{r.id})}">
+                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                                class="glyphicon glyphicon-ok"></span>View
+                        </button>
+                    </a></td>
                     <td><a class="nav-link h5" th:href="@{reservation/edit/{id}(id=*{r.id})}">
                         <button type="button" class="btn btn-danger btn-lg btn3d"><span
                                 class="glyphicon glyphicon-ok"></span>Edit
