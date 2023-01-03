@@ -19,4 +19,6 @@ public interface CellService {
     void editCells(String name, Long id , Status status);
 
     List<Cell> findAllEmptyCells();
+
+    void setCellBusy(Long id);
 }

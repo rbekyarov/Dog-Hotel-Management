@@ -52,4 +52,9 @@ public class CellServiceImpl implements CellService {
     public List<Cell> findAllEmptyCells() {
         return cellRepository.findAllEmptyCells();
     }
+
+    @Override
+    public void setCellBusy(Long id) {
+        cellRepository.setCellBusy(id);
+    }
 }

@@ -14,19 +14,29 @@
                 <tr>
                     <th>Id</th>
                     <th>Client</th>
-                    <th>Dogs</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Cells</th>
+                    <th>Dog</th>
+                    <th>Stay Day:</th>
+                    <th>Day of coming</th>
+                    <th>Day of departure</th>
+                    <th>Dog House</th>
+                    <th>Price</th>
+                    <th>Discount %</th>
+                    <th>Total Price</th>
+
 
                 </tr>
                 <tr th:each="r : ${reservations}">
                     <td th:text="${r.id}"></td>
                     <td th:text="${r.client.email}"></td>
-                    <td><p th:each="d: ${r.dogs}" th:text="${d.getName()}"></td>
+                    <td th:text="${r.dog.name}"></td>
+                    <td th:text="${r.countOvernightStay}"></td>
                     <td th:text="${r.startDate}"></td>
                     <td th:text="${r.endDate}"></td>
-                    <td><p th:each="c: ${r.cells}" th:text="${c.code}"></td>
+                    <td th:text="${r.cell.code}"></td>
+                    <td th:text="${r.price}"></td>
+                    <td th:text="${r.discount}"></td>
+                    <td th:text="${r.totalPrice}"></td>
+
 
 
                     <td><a class="nav-link h5" th:href="@{reservation/edit/{id}(id=*{r.id})}">
