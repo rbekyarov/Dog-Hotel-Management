@@ -64,4 +64,9 @@ public class ClientServiceImpl implements ClientService {
                 id);
     }
 
+    @Override
+    public List<Client> findAll() {
+        return clientRepository.findAll();
+    }
+
 }

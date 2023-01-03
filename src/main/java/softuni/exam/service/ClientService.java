@@ -32,4 +32,6 @@ public interface ClientService {
                  Long cityId,
                  Long id);
 
+    List<Client> findAll();
+
 }

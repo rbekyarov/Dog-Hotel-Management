@@ -49,7 +49,7 @@ public class ReservationController extends BaseController {
     public ModelAndView reservationAdd(ModelAndView modelAndView, @RequestParam(value = "clientId", required = false) String clientId) {
         ReservationDTO reservationDTO = new ReservationDTO();
 
-        List<Client> allClients = clientService.findAllClientById();
+        List<Client> allClients = clientService.findAll();
         List<Client> clients = new ArrayList<>();
         for (Client client : allClients) {
             clients.add(client);

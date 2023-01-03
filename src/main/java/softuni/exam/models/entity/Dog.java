@@ -1,5 +1,7 @@
 package softuni.exam.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Builder;
 import org.springframework.format.annotation.DateTimeFormat;
 import softuni.exam.models.entity.enums.Microchip;
@@ -9,7 +11,7 @@ import softuni.exam.models.entity.enums.Sex;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
 @Table(name = "dogs")
 public class Dog extends BaseEntity {
