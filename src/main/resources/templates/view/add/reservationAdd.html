@@ -58,45 +58,57 @@
                                 th:text="${c.code}"></option>
 
                     </select><br><br>
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 700px;">
+                        <tbody>
+                        <tr>
+                            <td><label th:text="${'Feeding: price for One Day '+ price.getPriceFood()+'$'}"></label><br>
+                                <select th:field="*{food}">
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select><br></td>
+                            <td><label th:text="${'Training: price '+ price.getPriceTraining()+'$'}"></label><br>
+                                <select th:field="*{training}">
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select><br></td>
+                        </tr>
+                        <tr>
+                            <td><label th:text="${'Bathing: price '+ price.getPriceBathing()+'$'}"></label><br>
+                                <select th:field="*{bathing}">
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select><br></td>
+                            <td><label th:text="${'Combing: price '+ price.getPriceCombing()+'$'}"></label><br>
+                                <select th:field="*{combing}">
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select><br></td>
+                        </tr>
+                        <tr>
+                            <td><label th:text="${'Еar cleaning: price '+ price.getPriceEars()+'$'}"></label><br>
+                                <select th:field="*{ears}">
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select><br></td>
+                            <td><label th:text="${'Paws cleaning: price '+ price.getPricePaws()+'$'}"></label><br>
+                                <select th:field="*{paws}">
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select><br></td>
+                        </tr>
+                        <tr>
+                            <td><label th:text="${'Nails trimming: price '+ price.getPriceNails()+'$'}"></label><br>
+                                <select th:field="*{nails}"><br>
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select><br></td>
+                            <td><label>Discount %</label><br>
+                                <input type="text" id="description22" th:field="*{discount}"
+                                       placeholder="Please enter Discount percent"/><br></td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-                    <label th:text="${'Feeding: price '+ price.getPriceFood()+'$'}"></label><br>
-                    <select th:field="*{food}">
-                        <option value="NO">NO</option>
-                        <option value="YES">YES</option>
-                    </select><br>
-                    <label th:text="${'Training: price '+ price.getPriceTraining()+'$'}"></label><br>
-                    <select th:field="*{training}">
-                        <option value="NO">NO</option>
-                        <option value="YES">YES</option>
-                    </select><br>
-                    <label th:text="${'Bathing: price '+ price.getPriceBathing()+'$'}"></label><br>
-                    <select th:field="*{bathing}">
-                        <option value="NO">NO</option>
-                        <option value="YES">YES</option>
-                    </select><br>
-                    <label th:text="${'Combing: price '+ price.getPriceCombing()+'$'}"></label><br>
-                    <select th:field="*{combing}">
-                        <option value="NO">NO</option>
-                        <option value="YES">YES</option>
-                    </select><br>
-                    <label th:text="${'Еar cleaning: price '+ price.getPriceEars()+'$'}"></label><br>
-                    <select th:field="*{ears}">
-                        <option value="NO">NO</option>
-                        <option value="YES">YES</option>
-                    </select><br>
-                    <label th:text="${'Paws cleaning: price '+ price.getPricePaws()+'$'}"></label><br>
-                    <select th:field="*{paws}">
-                        <option value="NO">NO</option>
-                        <option value="YES">YES</option>
-                    </select><br>
-                    <label th:text="${'Nails trimming: price '+ price.getPriceNails()+'$'}"></label><br>
-                    <select th:field="*{nails}"><br>
-                        <option value="NO">NO</option>
-                        <option value="YES">YES</option>
-                    </select><br>
-                    <label>Discount %</label><br>
-                    <input type="text" id="description22" th:field="*{discount}"
-                           placeholder="Please enter Discount percent"/><br>
                 </div>
                 <div class="button_calculate">
                     <div>
@@ -126,10 +138,10 @@
             });
 
             $('#datetimepicker1').datetimepicker({
-                format: 'DD/MM/YYYY'
+                format: 'YYYY/MM/DD'
             });
             $('#datetimepicker2').datetimepicker({
-                format: 'DD/MM/YYYY'
+                format: 'YYYY/MM/DD'
             });
         </script>
         <script th:inline="javascript">
@@ -158,6 +170,7 @@
                 }
             }
         </script>
-
+        <script th:src="@{/assets/moment/moment.min.js}"></script>
+        <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
     </th:block>
 </th:block>
