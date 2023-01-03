@@ -11,7 +11,12 @@ public class Breed extends BaseEntity{
 
     public Breed() {
     }
-@Column(unique = true, nullable = false)
+
+    public Breed(String breedName) {
+        this.breedName = breedName;
+    }
+
+    @Column(unique = true, nullable = false)
     public String getBreedName() {
         return breedName;
     }

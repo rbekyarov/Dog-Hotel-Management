@@ -21,6 +21,18 @@ public class Price extends BaseEntity{
 
     public Price() {
     }
+
+    public Price(BigDecimal priceOvernightStay, BigDecimal priceFood, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails) {
+        this.priceOvernightStay = priceOvernightStay;
+        this.priceFood = priceFood;
+        this.priceTraining = priceTraining;
+        this.priceBathing = priceBathing;
+        this.priceCombing = priceCombing;
+        this.pricePaws = pricePaws;
+        this.priceEars = priceEars;
+        this.priceNails = priceNails;
+    }
+
     @Column
     public BigDecimal getPriceOvernightStay() {
         return priceOvernightStay;

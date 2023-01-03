@@ -17,7 +17,18 @@ public class Client extends BaseEntity{
 
     public Client() {
     }
-@Column(name = "first_name", nullable = false)
+
+    public Client(String firstName, String lastName, String email, String phone, String address, City city) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.city = city;
+
+    }
+
+    @Column(name = "first_name", nullable = false)
     public String getFirstName() {
         return firstName;
     }

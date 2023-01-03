@@ -10,6 +10,11 @@ public class Cell extends BaseEntity{
     private String code;
     private Status status;
 
+    public Cell(String code, Status status) {
+        this.code = code;
+        this.status = status;
+    }
+
     public Cell() {
     }
     @Column(nullable = false, unique = true)

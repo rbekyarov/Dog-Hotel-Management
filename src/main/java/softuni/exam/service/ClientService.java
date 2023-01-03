@@ -16,6 +16,7 @@ import java.util.Set;
 
 public interface ClientService {
     List<Client> findAllClientById();
+    List<Client> findAllClientForReservation();
 
     void addClient(ClientDTO clientDTO);
 

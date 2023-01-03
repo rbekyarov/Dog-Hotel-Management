@@ -52,7 +52,7 @@ public class DogServiceImpl implements DogService {
         dogNew.setBirthDate(formatterLocal(date));
 
 
-        dogRepository.saveAndFlush(dogNew);
+        dogRepository.save(dogNew);
     }
 
     @Override

@@ -23,8 +23,6 @@
                                 th:each="showClient : ${allClients}"
                                 th:value="${showClient.id}"
                                 th:text="${showClient.email}"
-
-
                         ></option>
                     </select>
                     <script th:inline="javascript" >
@@ -34,8 +32,6 @@
                         alert(clientList)
                         /*]]>*/
                     </script>
-
-
                     <p>Dogs:</p>
                     <select id="dogsBox" th:field="*{dog.id}">
 

@@ -12,6 +12,12 @@ public class City extends BaseEntity {
 
     public City() {
     }
+
+    public City(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
+
     @Column(nullable = false, unique = true)
     public String getCode() {
         return code;

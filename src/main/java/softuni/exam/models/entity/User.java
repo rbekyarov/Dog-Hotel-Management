@@ -14,6 +14,13 @@ public class User extends BaseEntity {
 
     public User() {
     }
+
+    public User(String username, String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     @Column (name = "user_name", nullable = false, unique = true)
     public String getUsername() {
         return username;

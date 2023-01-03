@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.exam.models.dto.ReservationDTO;
 import softuni.exam.models.entity.*;
+import softuni.exam.repository.CellRepository;
 import softuni.exam.service.*;
 
 import javax.validation.Valid;
@@ -22,14 +23,17 @@ public class ReservationController extends BaseController {
     private final CellService cellService;
     private final DogService dogService;
     private final PriceService priceService;
+    private final CellRepository cellRepository;
 
-    public ReservationController(ReservationService reservationService, ClientService clientService, CellService cellService, DogService dogService, PriceService priceService) {
+    public ReservationController(ReservationService reservationService, ClientService clientService, CellService cellService, DogService dogService, PriceService priceService,
+                                 CellRepository cellRepository) {
 
         this.reservationService = reservationService;
         this.clientService = clientService;
         this.cellService = cellService;
         this.dogService = dogService;
         this.priceService = priceService;
+        this.cellRepository = cellRepository;
     }
 
 
@@ -46,6 +50,12 @@ public class ReservationController extends BaseController {
         ReservationDTO reservationDTO = new ReservationDTO();
 
         List<Client> allClients = clientService.findAllClientById();
+        List<Client> clients = new ArrayList<>();
+        for (Client client : allClients) {
+            clients.add(client);
+        }
+
+
         List<Dog> allDogsOnClient = new ArrayList<>();
         if(clientId !=null){
             allDogsOnClient = dogService.findAllDogByClient(Long.parseLong(clientId));

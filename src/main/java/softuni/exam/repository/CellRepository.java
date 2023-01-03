@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import softuni.exam.models.entity.Cell;
+import softuni.exam.models.entity.Client;
 import softuni.exam.models.entity.enums.Status;
 
 
@@ -29,4 +30,5 @@ public interface CellRepository extends JpaRepository<Cell, Long> {
 
     @Query("select c from Cell as c where c.status='empty'")
     List<Cell> findAllEmptyCells();
+
 }

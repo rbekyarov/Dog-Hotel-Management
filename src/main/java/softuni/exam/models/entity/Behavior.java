@@ -12,6 +12,10 @@ public class Behavior extends BaseEntity{
     public Behavior() {
     }
 
+    public Behavior(String name) {
+        this.name = name;
+    }
+
     @Column(nullable = false, unique = true)
     public String getName() {
         return name;

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import softuni.exam.models.dto.ClientDTO;
 import softuni.exam.models.entity.Client;
 import softuni.exam.models.entity.Dog;
+import softuni.exam.repository.CellRepository;
 import softuni.exam.repository.ClientRepository;
 import softuni.exam.service.ClientService;
 
@@ -16,15 +17,23 @@ import java.util.Set;
 public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
     private final ModelMapper modelMapper;
+    private final CellRepository cellRepository;
 
-    public ClientServiceImpl(ClientRepository clientRepository, ModelMapper modelMapper) {
+    public ClientServiceImpl(ClientRepository clientRepository, ModelMapper modelMapper,
+                             CellRepository cellRepository) {
         this.clientRepository = clientRepository;
         this.modelMapper = modelMapper;
+        this.cellRepository = cellRepository;
     }
 
     @Override
     public List<Client> findAllClientById() {
         return clientRepository.findAllClientById();
+    }
+
+    @Override
+    public List<Client> findAllClientForReservation() {
+        return clientRepository.findAllClientForReservation();
     }
 
     @Override
