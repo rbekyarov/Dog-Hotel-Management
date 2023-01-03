@@ -8,7 +8,6 @@ import softuni.exam.repository.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashSet;
 
 @Component
 public class InitData implements CommandLineRunner {
@@ -54,26 +53,32 @@ public class InitData implements CommandLineRunner {
             breedRepository.save(new Breed("German Shepherd"));
             breedRepository.save(new Breed("Rotwailer"));
             breedRepository.save(new Breed("Bulgarian Shepherd - BOK"));
+            breedRepository.save(new Breed("Miniature Schnauzer"));
 
         }
         if (cellRepository.findAll().size() == 0) {
             cellRepository.save(new Cell("A1", Status.empty));
             cellRepository.save(new Cell("A2", Status.busy));
             cellRepository.save(new Cell("A3", Status.empty));
+            cellRepository.save(new Cell("B1", Status.empty));
+            cellRepository.save(new Cell("B2", Status.busy));
+            cellRepository.save(new Cell("B3", Status.empty));
 
         }
         if (cityRepository.findAll().size() == 0) {
             cityRepository.save(new City("1000", "Sofia"));
             cityRepository.save(new City("2000", "Plovdiv"));
             cityRepository.save(new City("6000", "Stara Zagora"));
+            cityRepository.save(new City("9000", "Varna"));
+            cityRepository.save(new City("7008", "Ruse"));
 
         }
         if (priceRepository.findAll().size() == 0) {
             priceRepository.save(new Price(BigDecimal.valueOf(20.00),
                     BigDecimal.valueOf(10.00),
-                    BigDecimal.valueOf(5.00),
-                    BigDecimal.valueOf(5.00),
-                    BigDecimal.valueOf(5.00),
+                    BigDecimal.valueOf(8.00),
+                    BigDecimal.valueOf(7.00),
+                    BigDecimal.valueOf(7.00),
                     BigDecimal.valueOf(5.00),
                     BigDecimal.valueOf(5.00),
                     BigDecimal.valueOf(5.00)));
@@ -144,8 +149,17 @@ public class InitData implements CommandLineRunner {
                     clientRepository.getById(Long.parseLong("2")),
                     behaviorRepository.getById(Long.parseLong("7"))));
 
+            dogRepository.save(new Dog("Benji",
+                    LocalDate.of(2020, 5, 28),
+                    "benji.jpg",
+                    10,
+                    breedRepository.getById(Long.parseLong("5")),
+                    Sex.M,
+                    Passport.YES,
+                    Microchip.YES,
+                    clientRepository.getById(Long.parseLong("2")),
+                    behaviorRepository.getById(Long.parseLong("1"))));
 
         }
-
     }
 }

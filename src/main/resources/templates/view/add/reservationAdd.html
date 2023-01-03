@@ -121,7 +121,8 @@
             </form>
         </div>
 
-
+        <script th:src="@{/assets/moment/moment.min.js}"></script>
+        <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
         <script>
             $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
                 icons: {
@@ -138,10 +139,26 @@
             });
 
             $('#datetimepicker1').datetimepicker({
-                format: 'YYYY/MM/DD'
+                format: 'DD/MM/YYYY'
             });
+
+        </script>
+        <script>
+            $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+                icons: {
+                    time: 'far fa-clock',
+                    date: 'far fa-calendar',
+                    up: 'fas fa-arrow-up',
+                    down: 'fas fa-arrow-down',
+                    previous: 'fas fa-chevron-left',
+                    next: 'fas fa-chevron-right',
+                    today: 'far fa-calendar-check-o',
+                    clear: 'far fa-trash',
+                    close: 'far fa-times'
+                } });
+
             $('#datetimepicker2').datetimepicker({
-                format: 'YYYY/MM/DD'
+                format: 'DD/MM/YYYY'
             });
         </script>
         <script th:inline="javascript">
@@ -170,7 +187,6 @@
                 }
             }
         </script>
-        <script th:src="@{/assets/moment/moment.min.js}"></script>
-        <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+
     </th:block>
 </th:block>
