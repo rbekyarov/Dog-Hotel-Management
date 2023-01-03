@@ -3,11 +3,11 @@ package softuni.exam;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import softuni.exam.models.entity.*;
-import softuni.exam.models.entity.enums.Role;
-import softuni.exam.models.entity.enums.Status;
+import softuni.exam.models.entity.enums.*;
 import softuni.exam.repository.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.HashSet;
 
 @Component
@@ -51,7 +51,9 @@ public class InitData implements CommandLineRunner {
         }
         if (breedRepository.findAll().size() == 0) {
             breedRepository.save(new Breed("Boxer"));
-            breedRepository.save(new Breed("German Shepherd "));
+            breedRepository.save(new Breed("German Shepherd"));
+            breedRepository.save(new Breed("Rotwailer"));
+            breedRepository.save(new Breed("Bulgarian Shepherd - BOK"));
 
         }
         if (cellRepository.findAll().size() == 0) {
@@ -61,28 +63,86 @@ public class InitData implements CommandLineRunner {
 
         }
         if (cityRepository.findAll().size() == 0) {
-            cityRepository.save(new City("1000","Sofia"));
-            cityRepository.save(new City("2000","Plovdiv"));
-            cityRepository.save(new City("6000","Stara Zagora"));
+            cityRepository.save(new City("1000", "Sofia"));
+            cityRepository.save(new City("2000", "Plovdiv"));
+            cityRepository.save(new City("6000", "Stara Zagora"));
 
         }
         if (priceRepository.findAll().size() == 0) {
             priceRepository.save(new Price(BigDecimal.valueOf(20.00),
-                                           BigDecimal.valueOf(10.00),
-                                           BigDecimal.valueOf(5.00),
-                                           BigDecimal.valueOf(5.00),
-                                           BigDecimal.valueOf(5.00),
-                                           BigDecimal.valueOf(5.00),
-                                           BigDecimal.valueOf(5.00),
-                                           BigDecimal.valueOf(5.00)));
+                    BigDecimal.valueOf(10.00),
+                    BigDecimal.valueOf(5.00),
+                    BigDecimal.valueOf(5.00),
+                    BigDecimal.valueOf(5.00),
+                    BigDecimal.valueOf(5.00),
+                    BigDecimal.valueOf(5.00),
+                    BigDecimal.valueOf(5.00)));
 
 
         }
         if (clientRepository.findAll().size() == 0) {
-           clientRepository.save(new Client("Ivan", "Ivanov", "ivanov@gmail.com", "0886335241", "Lulin 15", cityRepository.getById(Long.parseLong("1"))));
-           clientRepository.save(new Client("Stanimir", "Pavlov", "spavlov@abv.bg", "08842276361", "Zdravetz 4", cityRepository.getById(Long.parseLong("2"))));
-           clientRepository.save(new Client("Vladimir", "Georgiev", "vgeorgiev@outlook.com", "0887325579", "Zagorka 16", cityRepository.getById(Long.parseLong("3"))));
+            clientRepository.save(new Client("Ivan", "Ivanov", "ivanov@gmail.com", "0886335241", "Lulin 15", cityRepository.getById(Long.parseLong("1"))));
+            clientRepository.save(new Client("Stanimir", "Pavlov", "spavlov@abv.bg", "08842276361", "Zdravetz 4", cityRepository.getById(Long.parseLong("2"))));
+            clientRepository.save(new Client("Vladimir", "Georgiev", "vgeorgiev@outlook.com", "0887325579", "Zagorka 16", cityRepository.getById(Long.parseLong("3"))));
 
+
+        }
+
+        if (dogRepository.findAll().size() == 0) {
+            dogRepository.save(new Dog("Jerry",
+                    LocalDate.of(2018, 7, 15),
+                    "jerry.jpg",
+                    30,
+                    breedRepository.getById(Long.parseLong("1")),
+                    Sex.M,
+                    Passport.YES,
+                    Microchip.NO,
+                    clientRepository.getById(Long.parseLong("1")),
+                    behaviorRepository.getById(Long.parseLong("1"))));
+
+            dogRepository.save(new Dog("Berta",
+                    LocalDate.of(2019, 3, 26),
+                    "Berta.jpg",
+                    33,
+                    breedRepository.getById(Long.parseLong("3")),
+                    Sex.F,
+                    Passport.YES,
+                    Microchip.YES,
+                    clientRepository.getById(Long.parseLong("1")),
+                    behaviorRepository.getById(Long.parseLong("5"))));
+
+            dogRepository.save(new Dog("Boby",
+                    LocalDate.of(2017, 6, 10),
+                    "bok.jpg",
+                    40,
+                    breedRepository.getById(Long.parseLong("4")),
+                    Sex.M,
+                    Passport.NO,
+                    Microchip.NO,
+                    clientRepository.getById(Long.parseLong("1")),
+                    behaviorRepository.getById(Long.parseLong("2"))));
+
+            dogRepository.save(new Dog("Cezar",
+                    LocalDate.of(2020, 4, 16),
+                    "cezar.jpg",
+                    35,
+                    breedRepository.getById(Long.parseLong("2")),
+                    Sex.M,
+                    Passport.YES,
+                    Microchip.YES,
+                    clientRepository.getById(Long.parseLong("3")),
+                    behaviorRepository.getById(Long.parseLong("4"))));
+
+            dogRepository.save(new Dog("Zara",
+                    LocalDate.of(2020, 4, 16),
+                    "Zara.jpg",
+                    35,
+                    breedRepository.getById(Long.parseLong("1")),
+                    Sex.F,
+                    Passport.YES,
+                    Microchip.NO,
+                    clientRepository.getById(Long.parseLong("2")),
+                    behaviorRepository.getById(Long.parseLong("7"))));
 
 
         }

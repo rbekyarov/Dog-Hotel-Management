@@ -29,7 +29,18 @@ public class Dog extends BaseEntity {
     public Dog() {
     }
 
-
+    public Dog(String name, LocalDate birthDate, String imageName, Integer weight, Breed breed, Sex sex, Passport passport, Microchip microchip, Client client, Behavior behavior) {
+        this.name = name;
+        this.birthDate = birthDate;
+        this.imageName = imageName;
+        this.weight = weight;
+        this.breed = breed;
+        this.sex = sex;
+        this.passport = passport;
+        this.microchip = microchip;
+        this.client = client;
+        this.behavior = behavior;
+    }
 
     @Column(nullable = false)
     public String getName() {
