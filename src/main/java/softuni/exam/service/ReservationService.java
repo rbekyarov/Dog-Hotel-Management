@@ -1,6 +1,7 @@
 package softuni.exam.service;
 
 import softuni.exam.models.dto.ReservationDTO;
+import softuni.exam.models.dto.ReservationEditDTO;
 import softuni.exam.models.entity.*;
 import softuni.exam.models.entity.enums.*;
 
@@ -22,22 +23,6 @@ public interface ReservationService {
 
     Optional<Reservation> findById(Long id);
 
-    void editReservation(Long clientId,
-                         Long dogId,
-                         LocalDate startDate,
-                         LocalDate endDate,
-                         Integer countOvernightStay,
-                         Long cellId,
-                         Food food,
-                         Training training,
-                         Bathing bathing,
-                         Combing combing,
-                         Ears ears,
-                         Paws paws,
-                         Nails nails,
-                         BigDecimal price,
-                         Double discount,
-                         BigDecimal totalPrice,
-                 Long id);
+    void editReservation(Long id , ReservationEditDTO reservationEditDTO);
 
 }

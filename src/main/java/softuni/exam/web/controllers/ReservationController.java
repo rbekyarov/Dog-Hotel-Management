@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.exam.models.dto.ReservationDTO;
+import softuni.exam.models.dto.ReservationEditDTO;
 import softuni.exam.models.entity.*;
 import softuni.exam.repository.CellRepository;
 import softuni.exam.service.*;
@@ -26,8 +27,7 @@ public class ReservationController extends BaseController {
     private final PriceService priceService;
     private final CellRepository cellRepository;
 
-    public ReservationController(ReservationService reservationService, ClientService clientService, CellService cellService, DogService dogService, PriceService priceService,
-                                 CellRepository cellRepository) {
+    public ReservationController(ReservationService reservationService, ClientService clientService, CellService cellService, DogService dogService, PriceService priceService, CellRepository cellRepository) {
 
         this.reservationService = reservationService;
         this.clientService = clientService;
@@ -63,12 +63,7 @@ public class ReservationController extends BaseController {
         modelAndView.addObject("allEmptyCells", allEmptyCells);
         modelAndView.addObject("price", price);
 
-        return super.view("/view/add/reservationAdd",
-                "reservationDTO", reservationDTO,
-                "allClients",allClients,
-                "allEmptyCells",allEmptyCells,
-                "price",price,
-                "allDogsOnClient", allDogsOnClient
+        return super.view("/view/add/reservationAdd", "reservationDTO", reservationDTO, "allClients", allClients, "allEmptyCells", allEmptyCells, "price", price, "allDogsOnClient", allDogsOnClient
 
         );
 
@@ -84,33 +79,38 @@ public class ReservationController extends BaseController {
 
     @GetMapping("view/table/reservation/remove/{id}")
     public String removeReservation(@PathVariable Long id) {
+
+        Optional<Reservation> reservationOptional = reservationService.findById(id);
+        Reservation reservation = reservationOptional.get();
+        Long cellId = reservation.getCell().getId();
+        cellService.setCellEmpty(cellId);
+
         reservationService.removeReservationById(id);
 
         return "redirect:/view/table/reservationTable";
     }
-    @GetMapping("view/table/reservation/view/{id}")
-    public ModelAndView getReservationView(@PathVariable("id") Long id,
-                                             ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        Reservation reservation =
-                reservationService.findById(id).
-                        orElseThrow(() -> new ObjectNotFoundException("not found!"));
+    @GetMapping("view/table/reservation/view/{id}")
+    public ModelAndView getReservationView(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
+
+        Reservation reservation = reservationService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
         modelAndView.addObject("reservation", reservation);
 
 
-        return super.view("/view/table/reservationView",
-                "reservation", reservation
-        );
+        return super.view("/view/table/reservationView", "reservation", reservation);
 
     }
 
     @GetMapping("view/table/reservation/edit/{id}")
-    public ModelAndView getReservationDetail(@PathVariable("id") Long id,
-                                             ModelAndView modelAndView) throws ObjectNotFoundException {
+    public ModelAndView getReservationDetail(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        var reservationDTO =
-                reservationService.findById(id).
-                        orElseThrow(() -> new ObjectNotFoundException("not found!"));
+        //set Cell Empy
+        Optional<Reservation> reservationOptional = reservationService.findById(id);
+        Reservation reservation = reservationOptional.get();
+        Long cellId = reservation.getCell().getId();
+        cellService.setCellEmpty(cellId);
+         //
+        var reservationDTO = reservationService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
         List<Client> allClients = clientService.findAll();
 
@@ -125,34 +125,16 @@ public class ReservationController extends BaseController {
         modelAndView.addObject("allEmptyCells", allEmptyCells);
         modelAndView.addObject("price", price);
 
-        return super.view("/view/edit/reservationEdit",
-                "reservationDTO", reservationDTO,
-                "allClients",allClients,
-                "allEmptyCells",allEmptyCells,
-                "price",price,
-                "allDogsOnClient", allDogsOnClient
-
-        );
-
+        return super.view("/view/edit/reservationEdit", "reservationDTO", reservationDTO, "allClients", allClients, "allEmptyCells", allEmptyCells, "price", price, "allDogsOnClient", allDogsOnClient);
     }
 
-//    @PostMapping("view/table/reservation/edit/{id}/edit")
-//    public String editReservation(@PathVariable("id") Long id , ReservationEditDTO reservationEditDTO) throws ObjectNotFoundException {
-//        reservationService.editReservation(
-//                reservationEditDTO.getClient().getId(),
-//                reservationEditDTO.getDogs(),
-//                reservationEditDTO.getStartDate(),
-//                reservationEditDTO.getCells(),
-//                reservationEditDTO.getFood(),
-//                reservationEditDTO.getTraining(),
-//                reservationEditDTO.getBathing(),
-//                reservationEditDTO.getCombing(),
-//                reservationEditDTO.getEars(),
-//                reservationEditDTO.getPaws(),
-//                reservationEditDTO.getNails(),
-//                reservationEditDTO.getDiscount(),
-//                id);
-//
-//        return "redirect:/view/table/reservationTable";
-//    }
+    @PostMapping("view/table/reservation/edit/{id}/edit")
+    public String editReservation(@PathVariable("id") Long id, ReservationEditDTO reservationEditDTO) throws ObjectNotFoundException {
+
+
+        reservationService.editReservation(id, reservationEditDTO);
+
+
+        return "redirect:/view/table/reservationTable";
+    }
 }

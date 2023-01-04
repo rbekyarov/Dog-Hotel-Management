@@ -57,4 +57,9 @@ public class CellServiceImpl implements CellService {
     public void setCellBusy(Long id) {
         cellRepository.setCellBusy(id);
     }
+
+    @Override
+    public void setCellEmpty(Long id) {
+        cellRepository.setCellEmpty(id);
+    }
 }

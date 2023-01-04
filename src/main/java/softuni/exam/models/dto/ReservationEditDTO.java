@@ -13,8 +13,8 @@ import java.util.Set;
 public class ReservationEditDTO {
     private Client client;
     private Dog dog;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String startDate;
+    private String endDate;
     private Cell cell;
     private Food food;
     private Training training;
@@ -54,25 +54,21 @@ public class ReservationEditDTO {
         this.cell = cell;
     }
 
-    @NotNull
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    @NotNull
-    public LocalDate getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
-
-
 
     public Food getFood() {
         return food;

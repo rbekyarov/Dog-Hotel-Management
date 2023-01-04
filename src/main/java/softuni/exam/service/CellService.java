@@ -21,4 +21,5 @@ public interface CellService {
     List<Cell> findAllEmptyCells();
 
     void setCellBusy(Long id);
+    void setCellEmpty(Long id);
 }

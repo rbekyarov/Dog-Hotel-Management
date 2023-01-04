@@ -3,6 +3,7 @@ package softuni.exam.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import softuni.exam.models.dto.ReservationDTO;
+import softuni.exam.models.dto.ReservationEditDTO;
 import softuni.exam.models.entity.Cell;
 import softuni.exam.models.entity.Dog;
 import softuni.exam.models.entity.Price;
@@ -104,6 +105,7 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setCountOvernightStay((int)countOvernightStay);
         reservation.setTotalPrice(new BigDecimal(totalPrice));
         reservation.setPrice(new BigDecimal(price));
+
         Long id = cellCurrent.getId();
         cellService.setCellBusy(id);
 
@@ -123,12 +125,81 @@ public class ReservationServiceImpl implements ReservationService {
 
 
     @Override
-    public void editReservation(Long clientId, Long dogId, LocalDate startDate, LocalDate endDate,Integer countOvernightStay, Long cellId, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails,BigDecimal price, Double discount,BigDecimal totalPrice, Long id) {
-        reservationRepository.editReservation(clientId,
+    public void editReservation(Long reservationId, ReservationEditDTO reservationEditDTO) {
+
+        //Get new Date
+        String startDate = reservationEditDTO.getStartDate();
+        String endDate = reservationEditDTO.getEndDate();
+        String substring1 = startDate.substring(0, 10);
+        String substring2 = endDate.substring(0, 10);
+        LocalDate date1 = formatterLocal(substring1);
+        LocalDate date2 = formatterLocal(substring2);
+
+        // Calc Days Stay
+        long countOvernightStay = ChronoUnit.DAYS.between(date1, date2);
+       //Get Actual Prices
+        Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
+        Price currentPrice = allPrices.get();
+        Double price = 0.00;
+        priceService.findAllPriceById();
+
+        //Calculate price and totalPrice
+        price += (int) countOvernightStay  * currentPrice.getPriceOvernightStay().doubleValue();
+
+        if (reservationEditDTO.getFood().name().equals("YES")) {
+            price += (int) countOvernightStay * currentPrice.getPriceFood().doubleValue();
+        }
+        if (reservationEditDTO.getTraining().name().equals("YES")) {
+            price += currentPrice.getPriceTraining().doubleValue();
+        }
+        if (reservationEditDTO.getBathing().name().equals("YES")) {
+            price += currentPrice.getPriceBathing().doubleValue();
+        }
+        if (reservationEditDTO.getCombing().name().equals("YES")) {
+            price += currentPrice.getPriceCombing().doubleValue();
+        }
+        if (reservationEditDTO.getEars().name().equals("YES")) {
+            price += currentPrice.getPriceEars().doubleValue();
+        }
+        if (reservationEditDTO.getPaws().name().equals("YES")) {
+            price += currentPrice.getPricePaws().doubleValue();
+        }
+        if (reservationEditDTO.getNails().name().equals("YES")) {
+            price += currentPrice.getPriceNails().doubleValue();
+        }
+        double totalPrice = 0.0;
+
+        //calculate Discount
+        Double discount = reservationEditDTO.getDiscount();
+        if(discount!=null){
+            totalPrice = price -(price*discount/100);
+        }else {
+            totalPrice = price;
+            discount=0.0;
+        }
+
+        //Get field
+        Long dogId = reservationEditDTO.getDog().getId();
+        Long clientId = reservationEditDTO.getClient().getId();
+        Long cellId = reservationEditDTO.getCell().getId();
+        int countOvernightStay1 = (int) countOvernightStay;
+        Food food = reservationEditDTO.getFood();
+        Training training = reservationEditDTO.getTraining();
+        Bathing bathing = reservationEditDTO.getBathing();
+        Combing combing = reservationEditDTO.getCombing();
+        Ears ears = reservationEditDTO.getEars();
+        Paws paws = reservationEditDTO.getPaws();
+        Nails nails = reservationEditDTO.getNails();
+        BigDecimal bigDecimalPrice = BigDecimal.valueOf(price);
+        BigDecimal bigDecimalTotalPrice = BigDecimal.valueOf(totalPrice);
+
+        // edit reservation
+        reservationRepository.editReservation(
+                clientId,
                 dogId,
-                startDate,
-                endDate,
-                countOvernightStay,
+                date1,
+                date2,
+                countOvernightStay1,
                 cellId,
                 food,
                 training,
@@ -137,10 +208,15 @@ public class ReservationServiceImpl implements ReservationService {
                 ears,
                 paws,
                 nails,
-                price,
+                bigDecimalPrice,
                 discount,
-                totalPrice,
-                id);
+                bigDecimalTotalPrice,
+                reservationId);
+
+        //set Cell Busy
+        Cell cellCurrent = reservationEditDTO.getCell();
+        Long id = cellCurrent.getId();
+        cellService.setCellBusy(id);
     }
     LocalDate formatterLocal(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
