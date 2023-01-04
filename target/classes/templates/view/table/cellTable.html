@@ -3,16 +3,16 @@
 
         <div class="table-center">
             <div class="page-header">
-                <h1>Dog House</h1>
+                <h1>Dog Houses List</h1>
             </div>
             <a class="nav-link h5" th:href="@{/view/add/cellAdd}">
-                <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                        class="glyphicon glyphicon-ok"></span>Add
+                <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                        class="glyphicon glyphicon-ok"></span>Add House
                 </button>
             </a>
             <table class=table>
                 <tr>
-                    <th>Id</th>
+                    <th>No</th>
                     <th>Code</th>
                     <th>Status</th>
                 </tr>
@@ -21,13 +21,13 @@
                     <td th:text="${c.code}"></td>
                     <td th:text="${c.status}"></td>
                     <td><a class="nav-link h5" th:href="@{cell/edit/{id}(id=*{c.id})}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Edit
                         </button>
                     </a></td>
 
                     <td><a class="nav-link h5" th:href="@{cell/remove/{id}(id=*{c.id})}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Remove
                         </button>
                     </a></td>

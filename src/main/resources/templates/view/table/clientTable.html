@@ -3,16 +3,16 @@
 
         <div class="table-center">
             <div class="page-header">
-                <h1>Clients</h1>
+                <h1>Client List</h1>
             </div>
             <a class="nav-link h5" th:href="@{/view/add/clientAdd}">
-                <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                        class="glyphicon glyphicon-ok"></span>Add
+                <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                        class="glyphicon glyphicon-ok"></span>Add Client
                 </button>
             </a>
             <table class=table>
                 <tr>
-                    <th>Id</th>
+                    <th>No</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
@@ -34,13 +34,13 @@
 
 
                     <td><a class="nav-link h5" th:href="@{client/edit/{id}(id=*{c.id})}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Edit
                         </button>
                     </a></td>
 
                     <td><a class="nav-link h5" th:href="@{client/remove/{id}(id=*{c.id})}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Remove
                         </button>
                     </a></td>

@@ -3,7 +3,7 @@
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="button_back">
         <a class="nav-link h5" th:href="@{/view/table/dogTable}">
-            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+            <button type="button" class="btn btn-danger btn-lg btnTable"><span
                     class="glyphicon glyphicon-ok"></span>Back
             </button>
         </a>
@@ -17,7 +17,7 @@
         >
             <div class="form-group">
                 <label>Dog Name:</label><br>
-                <input type="text" id="description" th:field="*{name}" placeholder="Please enter Name"/><br>
+                <input type="text" id="description" th:field="*{name}" placeholder="Please enter Name" required/><br>
 
                     <label class="file-label" for="fileImage">Add Image</label>
                     <div class="mb-4">
@@ -89,7 +89,7 @@
             <div class="button_submit">
                 <div >
                     <div>
-                        <input type="submit" class="btn btn-danger btn-lg btn3d" value="Submit Dog"/>
+                        <input type="submit" class="btn btn-danger btn-lg btnTable" value="Submit Dog"/>
                     </div>
                 </div>
             </div>

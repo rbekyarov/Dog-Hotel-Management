@@ -2,21 +2,21 @@
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
         <div class="button_back">
             <a class="nav-link h5" th:href="@{/view/table/reservationTable}">
-                <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                <button type="button" class="btn btn-danger btn-lg btnTable"><span
                         class="glyphicon glyphicon-ok"></span>Back
                 </button>
             </a>
         </div>
         <div class="container">
-            <h2 class="page_title" th:object="${reservation}">Reservation Details</h2>
+            <h1 class="page_title" th:object="${reservation}">Reservation Details</h1>
             <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 150px;">
                 <tbody>
                 <tr>
-                    <td><label th:text="${'Reservation No.'+ reservation.id}"></label><br></td>
+                    <td><h5 th:text="${'No.'+ reservation.id}"></h5><br></td>
                 </tr>
                 </tbody>
             </table>
-            <br>
+
             <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 500px;">
                 <tbody>
                 <tr>
@@ -39,17 +39,18 @@
                 </tr>
                 </tbody>
             </table>
-            <br>
 
-            <br>
-            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 200px;">
+
+
+            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 300px;">
                 <tbody>
                 <tr>
-                    <td><label>Hotel Accommodation:</label><br></td>
+                    <td><h5>Hotel Accommodation:</h5><br></td>
+
                 </tr>
                 </tbody>
             </table>
-            <br>
+
             <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 500px;">
                 <tbody>
                 <tr>
@@ -62,15 +63,15 @@
                 </tr>
                 </tbody>
             </table>
-            <br>
+
             <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 150px;">
                 <tbody>
                 <tr>
-                    <td><label>Services:</label><br></td>
+                    <td><h5>Services:</h5><br></td>
                 </tr>
                 </tbody>
             </table>
-            <br>
+
             <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 500px;">
 
                 <tbody>
@@ -92,16 +93,17 @@
                 </tr>
                 </tbody>
             </table>
-            <br>
+
             <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 150px;">
 
                 <tbody>
                 <tr>
-                    <td><label>Prices:</label><br></td>
+                    <td><h5>Prices:</h5><br></td>
+
                 </tr>
                 </tbody>
             </table>
-            <br>
+
             <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 500px;">
                 <tbody>
                 <tr>
@@ -111,7 +113,7 @@
                 </tr>
                 </tbody>
             </table>
-            <br>
+
 
         </div>
 

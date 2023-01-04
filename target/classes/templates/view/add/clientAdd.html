@@ -2,7 +2,7 @@
 <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="button_back">
         <a class="nav-link h5" th:href="@{/view/table/clientTable}">
-            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+            <button type="button" class="btn btn-danger btn-lg btnTable"><span
                     class="glyphicon glyphicon-ok"></span>Back
             </button>
         </a>
@@ -14,13 +14,13 @@
               th:object="${clientDTO}">
             <div class="form-group">
                 <label>First Name:</label><br>
-                <input type="text" id="description" th:field="*{firstName}" placeholder="Please enter Name"/><br>
+                <input type="text" id="description" th:field="*{firstName}" placeholder="Please enter Name" required/><br>
                 <label>Last Name:</label><br>
-                <input type="text" id="description1" th:field="*{lastName}" placeholder="Please enter Name"/><br>
+                <input type="text" id="description1" th:field="*{lastName}" placeholder="Please enter Name" required/><br>
                 <label>Email:</label><br>
-                <input type="text" id="description2" th:field="*{email}" placeholder="Please enter Email"/><br>
+                <input type="text" id="description2" th:field="*{email}" placeholder="Please enter Email" required/><br>
                 <label>Phone:</label><br>
-                <input type="text" id="description3" th:field="*{phone}" placeholder="Please enter Phone"/><br>
+                <input type="text" id="description3" th:field="*{phone}" placeholder="Please enter Phone" required/><br>
 
                 <label>Address:</label><br>
                 <textarea
@@ -42,7 +42,7 @@
             <div class="button_submit">
                 <div >
                     <div>
-                        <input type="submit" class="btn btn-danger btn-lg btn3d" value="Submit Client"/>
+                        <input type="submit" class="btn btn-danger btn-lg btnTable" value="Submit Client"/>
                     </div>
                 </div>
             </div>
