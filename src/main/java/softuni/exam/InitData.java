@@ -170,7 +170,7 @@ public class InitData implements CommandLineRunner {
                     Microchip.NO,
                     clientRepository.getById(Long.parseLong("2")),
                     behaviorRepository.getById(Long.parseLong("7"))));
-             //New Dog "Benji"
+            //New Dog "Benji"
             dogRepository.save(new Dog("Benji",
                     LocalDate.of(2020, 5, 28),
                     "benji.jpg",
