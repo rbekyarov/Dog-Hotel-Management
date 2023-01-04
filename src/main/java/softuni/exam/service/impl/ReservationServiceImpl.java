@@ -218,6 +218,15 @@ public class ReservationServiceImpl implements ReservationService {
         Long id = cellCurrent.getId();
         cellService.setCellBusy(id);
     }
+
+    @Override
+    public void setCellEmptyByReservationID(Long id) {
+        Optional<Reservation> reservationOptional = reservationRepository.findById(id);
+        Reservation reservation = reservationOptional.get();
+        Long cellId = reservation.getCell().getId();
+        cellService.setCellEmpty(cellId);
+    }
+
     LocalDate formatterLocal(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);

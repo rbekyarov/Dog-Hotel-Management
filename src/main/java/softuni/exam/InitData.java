@@ -54,10 +54,10 @@ public class InitData implements CommandLineRunner {
         if (breedRepository.findAll().size() == 0) {
             breedRepository.save(new Breed("Boxer"));
             breedRepository.save(new Breed("German Shepherd"));
-            breedRepository.save(new Breed("Rotwailer"));
+            breedRepository.save(new Breed("Rottweiler"));
             breedRepository.save(new Breed("Bulgarian Shepherd - BOK"));
             breedRepository.save(new Breed("Miniature Schnauzer"));
-            breedRepository.save(new Breed("Huske"));
+            breedRepository.save(new Breed("Husky"));
 
         }
         //ADD Dog House

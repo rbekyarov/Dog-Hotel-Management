@@ -25,4 +25,6 @@ public interface ReservationService {
 
     void editReservation(Long id , ReservationEditDTO reservationEditDTO);
 
+    void setCellEmptyByReservationID(Long id);
+
 }

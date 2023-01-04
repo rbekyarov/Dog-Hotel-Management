@@ -80,13 +80,10 @@ public class ReservationController extends BaseController {
     @GetMapping("view/table/reservation/remove/{id}")
     public String removeReservation(@PathVariable Long id) {
 
-        Optional<Reservation> reservationOptional = reservationService.findById(id);
-        Reservation reservation = reservationOptional.get();
-        Long cellId = reservation.getCell().getId();
-        cellService.setCellEmpty(cellId);
-
+        //delete reservation
         reservationService.removeReservationById(id);
-
+        //set Cell Empty after delete reservation
+        reservationService.setCellEmptyByReservationID(id);
         return "redirect:/view/table/reservationTable";
     }
 
@@ -104,11 +101,7 @@ public class ReservationController extends BaseController {
     @GetMapping("view/table/reservation/edit/{id}")
     public ModelAndView getReservationDetail(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        //set Cell Empy
-        Optional<Reservation> reservationOptional = reservationService.findById(id);
-        Reservation reservation = reservationOptional.get();
-        Long cellId = reservation.getCell().getId();
-        cellService.setCellEmpty(cellId);
+
          //
         var reservationDTO = reservationService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
@@ -125,6 +118,8 @@ public class ReservationController extends BaseController {
         modelAndView.addObject("allEmptyCells", allEmptyCells);
         modelAndView.addObject("price", price);
 
+        //set Cell Empy
+        reservationService.setCellEmptyByReservationID(id);
         return super.view("/view/edit/reservationEdit", "reservationDTO", reservationDTO, "allClients", allClients, "allEmptyCells", allEmptyCells, "price", price, "allDogsOnClient", allDogsOnClient);
     }
 
