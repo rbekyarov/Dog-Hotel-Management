@@ -19,9 +19,10 @@ public class InitData implements CommandLineRunner {
     private final PriceRepository priceRepository;
     private final ClientRepository clientRepository;
     private final DogRepository dogRepository;
+    private final CompanyRepository companyRepository;
 
     public InitData(UserRepository userRepository, BehaviorRepository behaviorRepository, BreedRepository breedRepository, CellRepository cellRepository, CityRepository cityRepository, PriceRepository priceRepository, ClientRepository clientRepository,
-                    DogRepository dogRepository) {
+                    DogRepository dogRepository, CompanyRepository companyRepository) {
         this.userRepository = userRepository;
         this.behaviorRepository = behaviorRepository;
         this.breedRepository = breedRepository;
@@ -30,10 +31,12 @@ public class InitData implements CommandLineRunner {
         this.priceRepository = priceRepository;
         this.clientRepository = clientRepository;
         this.dogRepository = dogRepository;
+        this.companyRepository = companyRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
+
         //ADD USER
         if (userRepository.findAll().size() == 0) {
             userRepository.save(new User("admin", "admin", Role.ADMIN));
@@ -80,6 +83,10 @@ public class InitData implements CommandLineRunner {
             cityRepository.save(new City("9000", "Varna", userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 1)));
             cityRepository.save(new City("7008", "Ruse", userRepository.getById(Long.parseLong("1")),LocalDate.of(2023, 1, 1)));
 
+        }
+        //ADD Company
+        if (companyRepository.findAll().size() == 0) {
+            companyRepository.save(new Company("DHM Ltd", "Bulgaria", cityRepository.getById(Long.parseLong("2")), "Tzar Simeon Veliki 1","BG030298796","office@dhm.bg", "BG18RZBB91550123456789", "Ivan Petrov" ));
         }
         //ADD PRICES
         if (priceRepository.findAll().size() == 0) {
