@@ -43,6 +43,7 @@ public class ReservationController extends BaseController {
 
         List<Reservation> reservations = reservationService.findAllReservationById();
         modelAndView.addObject("reservations", reservations);
+        reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
         return super.view("/view/table/reservationTable", "reservations", reservations);
     }
 
@@ -79,11 +80,11 @@ public class ReservationController extends BaseController {
 
     @GetMapping("view/table/reservation/remove/{id}")
     public String removeReservation(@PathVariable Long id) {
-
+        //set Cell Empty
+        reservationService.setCellEmptyByReservationID(id);
         //delete reservation
         reservationService.removeReservationById(id);
-        //set Cell Empty after delete reservation
-        reservationService.setCellEmptyByReservationID(id);
+
         return "redirect:/view/table/reservationTable";
     }
 

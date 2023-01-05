@@ -5,11 +5,9 @@ import org.springframework.stereotype.Service;
 import softuni.exam.models.dto.ReservationDTO;
 import softuni.exam.models.dto.ReservationEditDTO;
 import softuni.exam.models.entity.Cell;
-import softuni.exam.models.entity.Dog;
 import softuni.exam.models.entity.Price;
 import softuni.exam.models.entity.Reservation;
 import softuni.exam.models.entity.enums.*;
-import softuni.exam.repository.CellRepository;
 import softuni.exam.repository.ReservationRepository;
 import softuni.exam.service.CellService;
 import softuni.exam.service.PriceService;
@@ -21,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -53,8 +51,23 @@ public class ReservationServiceImpl implements ReservationService {
         LocalDate date1 = formatterLocal(substring1);
         LocalDate date2 = formatterLocal(substring2);
 
+        //set statusReservation
+        StatusReservation statusReservation = StatusReservation.noset;
+
+        LocalDate dateNow = LocalDate.now();
+        if((dateNow.isBefore(date1)) && (dateNow.isBefore(date2))){
+            statusReservation = StatusReservation.upcoming;
+        }else if ((dateNow.isAfter(date1))&&(dateNow.isBefore(date2))){
+            statusReservation = StatusReservation.active;
+
+        }else if((dateNow.isAfter(date1))&&(dateNow.isAfter(date2))){
+            statusReservation = StatusReservation.completed;
+
+        }
+
 
         long countOvernightStay = ChronoUnit.DAYS.between(date1, date2);
+
 
         Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
         Price currentPrice = allPrices.get();
@@ -105,9 +118,13 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setCountOvernightStay((int)countOvernightStay);
         reservation.setTotalPrice(new BigDecimal(totalPrice));
         reservation.setPrice(new BigDecimal(price));
+        reservation.setStatusReservation(statusReservation);
 
         Long id = cellCurrent.getId();
-        cellService.setCellBusy(id);
+        if(statusReservation.name().equals("active")){
+            cellService.setCellBusy(id);
+        }
+
 
         reservationRepository.save(reservation);
     }
@@ -135,6 +152,19 @@ public class ReservationServiceImpl implements ReservationService {
         LocalDate date1 = formatterLocal(substring1);
         LocalDate date2 = formatterLocal(substring2);
 
+        //set statusReservation
+        StatusReservation statusReservation = StatusReservation.noset;
+
+        LocalDate dateNow = LocalDate.now();
+        if((dateNow.isBefore(date1)) && (dateNow.isBefore(date2))){
+            statusReservation = StatusReservation.upcoming;
+        }else if ((dateNow.isAfter(date1))&&(dateNow.isBefore(date2))){
+            statusReservation = StatusReservation.active;
+
+        }else if((dateNow.isAfter(date1))&&(dateNow.isAfter(date2))){
+            statusReservation = StatusReservation.completed;
+
+        }
         // Calc Days Stay
         long countOvernightStay = ChronoUnit.DAYS.between(date1, date2);
        //Get Actual Prices
@@ -211,12 +241,15 @@ public class ReservationServiceImpl implements ReservationService {
                 bigDecimalPrice,
                 discount,
                 bigDecimalTotalPrice,
+                statusReservation,
                 reservationId);
 
         //set Cell Busy
         Cell cellCurrent = reservationEditDTO.getCell();
         Long id = cellCurrent.getId();
-        cellService.setCellBusy(id);
+        if(statusReservation.name().equals("active")){
+            cellService.setCellBusy(id);
+        }
     }
 
     @Override
@@ -225,6 +258,39 @@ public class ReservationServiceImpl implements ReservationService {
         Reservation reservation = reservationOptional.get();
         Long cellId = reservation.getCell().getId();
         cellService.setCellEmpty(cellId);
+    }
+
+    @Override
+    public void statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall() {
+
+        List<Reservation> allReservation = reservationRepository.findAllReservationById();
+        for (Reservation reservation : allReservation) {
+            //change reservation status
+            Long reservationId = reservation.getId();
+            LocalDate startDate = reservation.getStartDate();
+            LocalDate endDate = reservation.getEndDate();
+            LocalDate dateNow = LocalDate.now();
+
+            StatusReservation statusReservation = StatusReservation.noset;
+            if((dateNow.isBefore(startDate)) && (dateNow.isBefore(endDate))){
+                statusReservation = StatusReservation.upcoming;
+            }else if ((dateNow.isAfter(startDate))&&(dateNow.isBefore(endDate))){
+                statusReservation = StatusReservation.active;
+
+            }else if((dateNow.isAfter(startDate))&&(dateNow.isAfter(endDate))){
+                statusReservation = StatusReservation.completed;
+
+            }
+            //change Cell status
+            reservationRepository.updateStatusReservation(reservationId,statusReservation);
+            if(statusReservation.name().equals("active")){
+                Long cellId = reservation.getCell().getId();
+                cellService.setCellEmpty(cellId);
+
+            }
+        }
+
+
     }
 
     LocalDate formatterLocal(String date) {

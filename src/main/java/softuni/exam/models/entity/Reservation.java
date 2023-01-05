@@ -29,6 +29,8 @@ public class Reservation extends BaseEntity{
     private Double discount;
     private BigDecimal totalPrice;
 
+    private StatusReservation statusReservation;
+
     public Reservation() {
     }
     @ManyToOne
@@ -163,5 +165,13 @@ public class Reservation extends BaseEntity{
 
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+    }
+    @Enumerated(EnumType.STRING)
+    public StatusReservation getStatusReservation() {
+        return statusReservation;
+    }
+
+    public void setStatusReservation(StatusReservation statusReservation) {
+        this.statusReservation = statusReservation;
     }
 }

@@ -23,6 +23,10 @@
                     <th>Price </th>
                     <th>Discount %</th>
                     <th>Total Price</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
 
 
                 </tr>
@@ -40,6 +44,7 @@
                     <td th:text="${r.price+'$'}"></td>
                     <td th:text="${r.discount}"></td>
                     <td th:text="${r.totalPrice +'$'}"></td>
+                    <td th:text="${r.statusReservation}"></td>
 
 
                     <td><a class="nav-link h5" th:href="@{reservation/view/{id}(id=*{r.id})}">
