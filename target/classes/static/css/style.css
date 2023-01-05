@@ -1,3 +1,20 @@
+
+.btnAdmin {
+    transition: all .08s linear;
+    position: relative;
+    outline: medium none;
+    -moz-outline-style: none;
+    border: 0px;
+    margin-right: -15px;
+    margin-top: 15px;
+    color: #ffffff;
+    background-color: #c16b29;
+    font-size: 1.25rem;
+}
+.dogsOnClient{
+    color: #2430ca;
+    line-height: 0.5;
+}
 .btnTable {
     transition: all .08s linear;
     position: relative;
@@ -33,6 +50,7 @@
     border: 0px solid #353838;
     padding: 10px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 }
 
 .button_submit{
@@ -43,7 +61,7 @@
     font-size: 20px;
     color: #353838;
 }
-.table{
+.table {
     display: block;
     max-width: 70%;
     background-color: transparent;
@@ -51,6 +69,8 @@
     border-spacing: 0;
     color: #353838;
     text-align: center;
+    padding: 0.5rem;
+
 }
 
 .footerStyle{

@@ -38,15 +38,7 @@
                     </a>
                 </li>
                 </th:block>
-                <div  th:if="${session.admin}">
-                <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                    <a class="nav-link h5" th:href="@{/view/table/priceTable}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                class="glyphicon glyphicon-ok"></span>PRICES
-                        </button>
-                    </a>
-                </li>
-                </div>
+
                 <th:block th:unless="${session.isEmpty()}">
                 <li class="nav-item active col-md-6" style="white-space: nowrap;">
                     <a class="nav-link h5" th:href="@{/view/table/cityTable}">
@@ -83,11 +75,28 @@
                     </a>
                 </li>
                 </th:block>
-
+                <div  th:if="${session.admin}">
+                    <li class="nav-item active col-md-6" style="white-space: nowrap;">
+                        <a class="nav-link h5" th:href="@{/view/table/priceTable}">
+                            <button type="button" class="btn btn-danger btn-lg btnAdmin"><span
+                                    class="glyphicon glyphicon-ok"></span>PRICES
+                            </button>
+                        </a>
+                    </li>
+                </div>
+                <div  th:if="${session.user}">
+                    <li class="nav-item active col-md-6" style="white-space: nowrap;">
+                        <a class="nav-link h5" th:href="@{/view/table/priceTableUser}">
+                            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                                    class="glyphicon glyphicon-ok"></span>PRICES
+                            </button>
+                        </a>
+                    </li>
+                </div>
                 <div  th:if="${session.admin}">
                 <li class="nav-item active col-md-6" style="white-space: nowrap;">
                     <a class="nav-link h5" th:href="@{/view/table/userTable}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                        <button type="button" class="btn btn-danger btn-lg btnAdmin"><span
                                 class="glyphicon glyphicon-ok"></span>USERS
                         </button>
                     </a>

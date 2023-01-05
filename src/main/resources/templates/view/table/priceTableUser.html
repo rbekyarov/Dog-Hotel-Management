@@ -1,0 +1,40 @@
+<th:block th:if="${session.user}">
+    <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+
+        <div class="table-center">
+            <div class="page-header">
+                <h1>Price List</h1>
+            </div>
+
+            <table class=table>
+                <tr>
+                    <th>No</th>
+                    <th>Overnight Stay</th>
+                    <th>Feeding</th>
+                    <th>Training</th>
+                    <th>Bathing</th>
+                    <th>Combing</th>
+                    <th>Paws cleaning</th>
+                    <th>Еar cleaning</th>
+                    <th>Nails trimming</th>
+                    <th>Created</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr th:each="p : ${prices}">
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.priceOvernightStay}"></td>
+                    <td th:text="${p.priceFood}"></td>
+                    <td th:text="${p.priceTraining}"></td>
+                    <td th:text="${p.priceBathing}"></td>
+                    <td th:text="${p.priceCombing}"></td>
+                    <td th:text="${p.pricePaws}"></td>
+                    <td th:text="${p.priceEars}"></td>
+                    <td th:text="${p.priceNails}"></td>
+                    <td th:text="${p.dateCreate}"></td>
+
+                </tr>
+            </table>
+        </div>
+    </th:block>
+</th:block>

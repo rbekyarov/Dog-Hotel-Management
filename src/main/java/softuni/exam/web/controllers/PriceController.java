@@ -29,6 +29,13 @@ public class PriceController extends BaseController {
         modelAndView.addObject("prices", prices);
         return super.view("/view/table/priceTable", "prices", prices);
     }
+    @GetMapping("/view/table/priceTableUser")
+    public ModelAndView priceTableUser(ModelAndView modelAndView) {
+
+        List<Price> prices = priceService.findAllPriceById();
+        modelAndView.addObject("prices", prices);
+        return super.view("/view/table/priceTableUser", "prices", prices);
+    }
 
     @GetMapping("/view/add/priceAdd")
     public ModelAndView priceAdd(ModelAndView modelAndView) {

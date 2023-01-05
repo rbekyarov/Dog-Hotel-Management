@@ -1,3 +1,16 @@
+
+.btnAdmin {
+    transition: all .08s linear;
+    position: relative;
+    outline: medium none;
+    -moz-outline-style: none;
+    border: 0px;
+    margin-right: -15px;
+    margin-top: 15px;
+    color: #ffffff;
+    background-color: #c16b29;
+    font-size: 1.25rem;
+}
 .dogsOnClient{
     color: #2430ca;
     line-height: 0.5;
