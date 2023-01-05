@@ -158,7 +158,7 @@ public class ReservationServiceImpl implements ReservationService {
         LocalDate dateNow = LocalDate.now();
         if((dateNow.isBefore(date1)) && (dateNow.isBefore(date2))){
             statusReservation = StatusReservation.upcoming;
-        }else if ((dateNow.isAfter(date1))&&(dateNow.isBefore(date2))){
+        }else if ((dateNow.isAfter(date1))&&(dateNow.isEqual(date2))){
             statusReservation = StatusReservation.active;
 
         }else if((dateNow.isAfter(date1))&&(dateNow.isAfter(date2))){
@@ -274,19 +274,23 @@ public class ReservationServiceImpl implements ReservationService {
             StatusReservation statusReservation = StatusReservation.noset;
             if((dateNow.isBefore(startDate)) && (dateNow.isBefore(endDate))){
                 statusReservation = StatusReservation.upcoming;
-            }else if ((dateNow.isAfter(startDate))&&(dateNow.isBefore(endDate))){
+            }else if ((dateNow.isAfter(startDate))&&(dateNow.isEqual(endDate))){
                 statusReservation = StatusReservation.active;
 
             }else if((dateNow.isAfter(startDate))&&(dateNow.isAfter(endDate))){
                 statusReservation = StatusReservation.completed;
 
             }
-            //change Cell status
             reservationRepository.updateStatusReservation(reservationId,statusReservation);
-            if(statusReservation.name().equals("active")){
-                Long cellId = reservation.getCell().getId();
+            //change Cell status
+
+            Long cellId = reservation.getCell().getId();
+            if(!statusReservation.name().equals("active")){
+
                 cellService.setCellEmpty(cellId);
 
+            }else {
+                cellService.setCellBusy(cellId);
             }
         }
 
