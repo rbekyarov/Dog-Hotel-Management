@@ -62,9 +62,8 @@ public class ReservationServiceImpl implements ReservationService {
         LocalDate dateNow = LocalDate.now();
         if((dateNow.isBefore(date1)) && (dateNow.isBefore(date2))){
             statusReservation = StatusReservation.upcoming;
-        }else if ((dateNow.isAfter(date1))&&(dateNow.isEqual(date2))){
+        }else if ((dateNow.isAfter(date1)) || (dateNow.isEqual(date1)) &&(dateNow.isBefore(date2))||(dateNow.isEqual(date2))){
             statusReservation = StatusReservation.active;
-
         }else if((dateNow.isAfter(date1))&&(dateNow.isAfter(date2))){
             statusReservation = StatusReservation.completed;
 
@@ -167,9 +166,8 @@ public class ReservationServiceImpl implements ReservationService {
         LocalDate dateNow = LocalDate.now();
         if((dateNow.isBefore(date1)) && (dateNow.isBefore(date2))){
             statusReservation = StatusReservation.upcoming;
-        }else if ((dateNow.isAfter(date1))&&(dateNow.isEqual(date2))){
+        }else if ((dateNow.isAfter(date1)) || (dateNow.isEqual(date1)) &&(dateNow.isBefore(date2))||(dateNow.isEqual(date2))){
             statusReservation = StatusReservation.active;
-
         }else if((dateNow.isAfter(date1))&&(dateNow.isAfter(date2))){
             statusReservation = StatusReservation.completed;
 
@@ -289,7 +287,7 @@ public class ReservationServiceImpl implements ReservationService {
             StatusReservation statusReservation = StatusReservation.noset;
             if((dateNow.isBefore(startDate)) && (dateNow.isBefore(endDate))){
                 statusReservation = StatusReservation.upcoming;
-            }else if ((dateNow.isAfter(startDate))&&(dateNow.isBefore(endDate))||(dateNow.isEqual(endDate))){
+            }else if ((dateNow.isAfter(startDate)) || (dateNow.isEqual(startDate)) &&(dateNow.isBefore(endDate))||(dateNow.isEqual(endDate))){
                 statusReservation = StatusReservation.active;
 
             }else if((dateNow.isAfter(startDate))&&(dateNow.isAfter(endDate))){
