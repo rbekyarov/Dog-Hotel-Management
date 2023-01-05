@@ -35,24 +35,35 @@ public class CompanyController extends BaseController {
         return super.view("view/MyCompany", "myCompany", myCompany);
 
     }
+    @GetMapping("view/MyCompanyUser")
+    public ModelAndView getMyCompanyUser( ModelAndView modelAndView) {
 
-    @GetMapping("view/edit/companyEdit")
+        List<Company> allCompany = companyService.findAllCompany();
+        Company myCompany = allCompany.get(0);
+
+        modelAndView.addObject("myCompany", myCompany);
+
+        return super.view("view/MyCompanyUser", "myCompany", myCompany);
+
+    }
+
+    @GetMapping("/view/edit/companyEdit")
     public ModelAndView getMyCompanyEdit(ModelAndView modelAndView) throws ObjectNotFoundException {
         Long id = 1L;
-        var companyDto =
+        var companyDTO =
                 companyService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
         List<City> allCity = cityService.findAllCityById();
 
         modelAndView.addObject("allCity", allCity);
-        modelAndView.addObject("companyDto", companyDto);
+        modelAndView.addObject("companyDTO", companyDTO);
 
-        return super.view("/view/edit/companyEdit", "companyDto", companyDto,"allCity", allCity);
+        return super.view("/view/edit/companyEdit", "companyDTO", companyDTO,"allCity", allCity);
 
     }
 
-    @PostMapping("view/edit/companyEdit")
-    public String editBreed(CompanyDTO companyDTO) {
+    @PostMapping("/view/edit/companyEdit")
+    public String editCompany(CompanyDTO companyDTO) {
         Long id = 1L;
         companyService.editCompany(companyDTO.getName(),
                 companyDTO.getCountry(),

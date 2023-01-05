@@ -10,8 +10,9 @@
         <div class="container">
             <h2 class="page_title">Edit MyCompany</h2>
 
-            <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
-                  th:method="post">
+            <form class="form_add" th:action="@{/view/edit/companyEdit}"
+                  th:method="post"
+                th:object="${companyDTO}">
                 <div class="form-group">
                     <label>Company Name:</label><br>
                     <input type="text" id="description" th:field="${companyDTO.name}" placeholder="Please enter Company Name"/><br>
@@ -25,7 +26,7 @@
                                 th:value="${b.id}"
                                 th:text="${b.name}"></option>
 
-                    </select>
+                    </select><br>
 
                     <label>Address:</label><br>
                     <input type="text" id="description2" th:field="${companyDTO.address}" placeholder="Please enter Address"/><br>
