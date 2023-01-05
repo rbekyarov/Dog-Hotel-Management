@@ -11,6 +11,7 @@ import softuni.exam.service.ClientService;
 import softuni.exam.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,8 @@ public class ClientServiceImpl implements ClientService {
         Client client = modelMapper.map(clientDTO, Client.class);
         //get and set Author
         client.setAuthor(userService.getAuthorFromSession(session));
+        // set dateCreated
+        client.setDateCreate(LocalDate.now());
         clientRepository.save(client);
     }
 
@@ -61,6 +64,8 @@ public class ClientServiceImpl implements ClientService {
     public void editClient(String firstName, String lastName, String email, String phone, String address, Long cityId, Long id, HttpSession session) {
         User editAuthor = userService.getAuthorFromSession(session);
         Long editAuthorId = editAuthor.getId();
+        //set dateEdit
+        LocalDate dateEdit = LocalDate.now();
         clientRepository.editClient(firstName,
                 lastName,
                 email,
@@ -68,7 +73,8 @@ public class ClientServiceImpl implements ClientService {
                 address,
                 cityId,
                 id,
-                editAuthorId);
+                editAuthorId,
+                dateEdit);
     }
 
     @Override

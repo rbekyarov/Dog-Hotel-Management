@@ -52,6 +52,8 @@ public class DogServiceImpl implements DogService {
         dogNew.setBirthDate(formatterLocal(date));
          //get and set Author
         dogNew.setAuthor(userService.getAuthorFromSession(session));
+        // set dateCreated
+        dogNew.setDateCreate(LocalDate.now());
 
         dogRepository.save(dogNew);
     }
@@ -70,6 +72,9 @@ public class DogServiceImpl implements DogService {
     public void editDog(String name, String birthDate, Integer weight, Long breedId, Sex sex, Passport passport, Microchip microchip, Long clientId, Long behaviorId, String imageName, Long id, HttpSession session) {
         User editAuthor = userService.getAuthorFromSession(session);
         Long editAuthorId = editAuthor.getId();
+        //set dateEdit
+        LocalDate dateEdit = LocalDate.now();
+
         dogRepository.editDog(name,
                 formatterLocal(birthDate),
                 weight,
@@ -81,7 +86,8 @@ public class DogServiceImpl implements DogService {
                 behaviorId,
                 imageName,
                 id,
-                editAuthorId);
+                editAuthorId,
+                dateEdit);
     }
 
     @Override

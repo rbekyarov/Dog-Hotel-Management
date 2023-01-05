@@ -10,6 +10,7 @@ import softuni.exam.models.entity.Price;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Price as p SET p.priceOvernightStay = :priceOvernightStay ,p.priceFood =:priceFood,p.priceTraining=:priceTraining,p.priceBathing=:priceBathing,p.priceCombing=:priceCombing,p.pricePaws=:pricePaws,p.priceEars=:priceEars,p.priceNails=:priceNails  where p.id=:id ")
+    @Query("update Price as p SET p.priceOvernightStay = :priceOvernightStay ,p.priceFood =:priceFood,p.priceTraining=:priceTraining,p.priceBathing=:priceBathing,p.priceCombing=:priceCombing,p.pricePaws=:pricePaws,p.priceEars=:priceEars,p.priceNails=:priceNails ,p.dateCreate=:dateEdit where p.id=:id ")
     void editPrice(@Param("priceOvernightStay") BigDecimal priceOvernightStay
             , @Param("priceFood") BigDecimal priceFood
             , @Param("priceTraining") BigDecimal priceTraining
@@ -33,7 +34,8 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
             , @Param("pricePaws") BigDecimal pricePaws
             , @Param("priceEars") BigDecimal priceEars
             , @Param("priceNails") BigDecimal priceNails
-            , @Param("id") Long id);
+            , @Param("id") Long id
+            , @Param("dateEdit") LocalDate dateEdit);
 
     @Query("select p.priceFood from Price as p where p.id= :id")
     BigDecimal getFoodCurrentPrice(@Param("id") int id);

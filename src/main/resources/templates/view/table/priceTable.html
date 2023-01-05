@@ -21,6 +21,7 @@
                     <th>Paws cleaning</th>
                     <th>Еar cleaning</th>
                     <th>Nails trimming</th>
+                    <th>Created</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -34,6 +35,7 @@
                     <td th:text="${p.pricePaws}"></td>
                     <td th:text="${p.priceEars}"></td>
                     <td th:text="${p.priceNails}"></td>
+                    <td th:text="${p.dateCreate}"></td>
                     <td><a class="nav-link h5" th:href="@{price/edit/{id}(id=*{p.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Edit

@@ -11,6 +11,7 @@ import softuni.exam.service.CellService;
 import softuni.exam.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,8 @@ public class CellServiceImpl implements CellService {
         cell.setStatus(cellDTO.getStatus());
         //get and set Author
         cell.setAuthor(userService.getAuthorFromSession(session));
+        // set dateCreated
+        cell.setDateCreate(LocalDate.now());
 
         cellRepository.save(cell);
     }
@@ -55,7 +58,9 @@ public class CellServiceImpl implements CellService {
     public void editCells(String name, Long id, Status status,HttpSession session) {
         User editAuthor = userService.getAuthorFromSession(session);
         Long editAuthorId = editAuthor.getId();
-        cellRepository.editCell(name, id, status,editAuthorId);
+        //set dateEdit
+        LocalDate dateEdit = LocalDate.now();
+        cellRepository.editCell(name, id, status,editAuthorId,dateEdit);
     }
 
     @Override

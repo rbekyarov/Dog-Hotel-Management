@@ -10,6 +10,7 @@ import softuni.exam.service.CityService;
 import softuni.exam.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,8 @@ public class CityServiceImpl implements CityService {
         City city = modelMapper.map(cityDTO, City.class);
 //get and set Author
         city.setAuthor(userService.getAuthorFromSession(session));
+        // set dateCreated
+        city.setDateCreate(LocalDate.now());
         cityRepository.save(city);
     }
 
@@ -52,6 +55,8 @@ public class CityServiceImpl implements CityService {
     public void editCity(String code, Long id, String name, HttpSession session) {
         User editAuthor = userService.getAuthorFromSession(session);
         Long editAuthorId = editAuthor.getId();
-        cityRepository.editCity(code, id, name,editAuthorId);
+        //set dateEdit
+        LocalDate dateEdit = LocalDate.now();
+        cityRepository.editCity(code, id, name,editAuthorId,dateEdit);
     }
 }

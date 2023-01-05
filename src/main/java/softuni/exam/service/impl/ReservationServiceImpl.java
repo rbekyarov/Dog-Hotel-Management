@@ -113,6 +113,7 @@ public class ReservationServiceImpl implements ReservationService {
             totalPrice = price;
             discount=0.0;
         }
+
         Cell cellCurrent = reservationDTO.getCell();
         reservation.setCell(cellCurrent);
         reservation.setStartDate(date1);
@@ -124,6 +125,8 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setTotalPrice(new BigDecimal(totalPrice));
         reservation.setPrice(new BigDecimal(price));
         reservation.setStatusReservation(statusReservation);
+        // set dateCreated
+        reservation.setDateCreate(LocalDate.now());
 
         Long id = cellCurrent.getId();
         if(statusReservation.name().equals("active")){
@@ -230,6 +233,9 @@ public class ReservationServiceImpl implements ReservationService {
         BigDecimal bigDecimalTotalPrice = BigDecimal.valueOf(totalPrice);
         User editAuthor = userService.getAuthorFromSession(session);
         Long editAuthorId = editAuthor.getId();
+
+        //set dateEdit
+        LocalDate dateEdit = LocalDate.now();
         // edit reservation
         reservationRepository.editReservation(
                 clientId,
@@ -250,7 +256,8 @@ public class ReservationServiceImpl implements ReservationService {
                 bigDecimalTotalPrice,
                 statusReservation,
                 reservationId,
-                editAuthorId);
+                editAuthorId,
+                dateEdit);
 
         //set Cell Busy
         Cell cellCurrent = reservationEditDTO.getCell();

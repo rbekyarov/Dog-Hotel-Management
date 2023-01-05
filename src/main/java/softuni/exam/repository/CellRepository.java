@@ -12,6 +12,7 @@ import softuni.exam.models.entity.enums.Status;
 
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +26,12 @@ public interface CellRepository extends JpaRepository<Cell, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Cell as c SET c.code = :code , c.status=:status, c.author.id=:editAuthorId where c.id=:id ")
-    void editCell(@Param("code") String code, @Param("id") Long id,@Param("status") Status status,@Param("editAuthorId") Long editAuthorId);
+    @Query("update Cell as c SET c.code = :code , c.status=:status, c.author.id=:editAuthorId,c.dateCreate=:dateEdit where c.id=:id ")
+    void editCell(@Param("code") String code,
+                  @Param("id") Long id,
+                  @Param("status") Status status,
+                  @Param("editAuthorId") Long editAuthorId,
+                  @Param("dateEdit") LocalDate dateEdit);
 
     @Query("select c from Cell as c where c.status='empty'")
     List<Cell> findAllEmptyCells();

@@ -26,11 +26,13 @@ public class Dog extends BaseEntity {
     private Client client;
     private Behavior behavior;
     private User author;
+    private LocalDate dateCreate;
 
     public Dog() {
     }
 
-    public Dog(String name, LocalDate birthDate, String imageName, Integer weight, Breed breed, Sex sex, Passport passport, Microchip microchip, Client client, Behavior behavior, User author) {
+
+    public Dog(String name, LocalDate birthDate, String imageName, Integer weight, Breed breed, Sex sex, Passport passport, Microchip microchip, Client client, Behavior behavior, User author, LocalDate dateCreate) {
         this.name = name;
         this.birthDate = birthDate;
         this.imageName = imageName;
@@ -42,6 +44,7 @@ public class Dog extends BaseEntity {
         this.client = client;
         this.behavior = behavior;
         this.author = author;
+        this.dateCreate = dateCreate;
     }
 
     @Column(nullable = false)
@@ -144,5 +147,13 @@ public class Dog extends BaseEntity {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public LocalDate getDateCreate() {
+        return dateCreate;
+    }
+
+    public void setDateCreate(LocalDate dateCreate) {
+        this.dateCreate = dateCreate;
     }
 }

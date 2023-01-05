@@ -8,6 +8,7 @@ import softuni.exam.repository.PriceRepository;
 import softuni.exam.service.PriceService;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,8 @@ public class PriceServiceImpl implements PriceService {
     @Override
     public void addPrice(PriceDTO priceDTO) {
         Price price = modelMapper.map(priceDTO, Price.class);
-
+        // set dateCreated
+        price.setDateCreate(LocalDate.now());
         priceRepository.save(price);
     }
 
@@ -45,6 +47,8 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public void editPrice(BigDecimal priceOvernightStay, BigDecimal priceFood, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, Long id) {
+        //set dateEdit
+        LocalDate dateEdit = LocalDate.now();
         priceRepository.editPrice(
                 priceOvernightStay,
                 priceFood,
@@ -54,7 +58,8 @@ public class PriceServiceImpl implements PriceService {
                 pricePaws,
                 priceEars,
                 priceNails,
-                id);
+                id,
+                dateEdit);
     }
 
     @Override

@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,12 +18,13 @@ public class Price extends BaseEntity{
   private BigDecimal pricePaws;
   private BigDecimal priceEars;
   private BigDecimal priceNails;
+    private LocalDate dateCreate;
 
 
     public Price() {
     }
 
-    public Price(BigDecimal priceOvernightStay, BigDecimal priceFood, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails) {
+    public Price(BigDecimal priceOvernightStay, BigDecimal priceFood, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, LocalDate dateCreate) {
         this.priceOvernightStay = priceOvernightStay;
         this.priceFood = priceFood;
         this.priceTraining = priceTraining;
@@ -31,6 +33,7 @@ public class Price extends BaseEntity{
         this.pricePaws = pricePaws;
         this.priceEars = priceEars;
         this.priceNails = priceNails;
+        this.dateCreate = dateCreate;
     }
 
     @Column
@@ -96,5 +99,13 @@ public class Price extends BaseEntity{
 
     public void setPriceNails(BigDecimal priceNails) {
         this.priceNails = priceNails;
+    }
+
+    public LocalDate getDateCreate() {
+        return dateCreate;
+    }
+
+    public void setDateCreate(LocalDate dateCreate) {
+        this.dateCreate = dateCreate;
     }
 }

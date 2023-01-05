@@ -10,6 +10,7 @@ import softuni.exam.service.BehaviorService;
 import softuni.exam.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,8 @@ public class BehaviorServiceImpl implements BehaviorService {
         //get and set Author
         behavior.setAuthor(userService.getAuthorFromSession(session));
 
+        // set dateCreated
+        behavior.setDateCreate(LocalDate.now());
 
         behaviorRepository.save(behavior);
     }
@@ -57,9 +60,14 @@ public class BehaviorServiceImpl implements BehaviorService {
 
     @Override
     public void editBehaviors(String name, Long id, HttpSession session) {
+        //Edit Author
         User editAuthor = userService.getAuthorFromSession(session);
         Long editAuthorId = editAuthor.getId();
-        behaviorRepository.editBehavior(name, id,editAuthorId);
+
+        //set dateEdit
+        LocalDate dateEdit = LocalDate.now();
+
+        behaviorRepository.editBehavior(name, id,editAuthorId, dateEdit);
 
 
     }

@@ -10,6 +10,7 @@ import softuni.exam.service.BreedService;
 import softuni.exam.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,8 @@ public class BreedServiceImpl implements BreedService {
         breed.setBreedName(breedDTO.getBreedName());
         //get and set Author
         breed.setAuthor(userService.getAuthorFromSession(session));
+        // set dateCreated
+        breed.setDateCreate(LocalDate.now());
         breedRepository.save(breed);
     }
 
@@ -51,8 +54,11 @@ public class BreedServiceImpl implements BreedService {
 
     @Override
     public void editBreeds(String name, Long id, HttpSession session) {
+        //Edit Author
         User editAuthor = userService.getAuthorFromSession(session);
         Long editAuthorId = editAuthor.getId();
-        breedRepository.editBreed(name, id,editAuthorId);
+        //set dateEdit
+        LocalDate dateEdit = LocalDate.now();
+        breedRepository.editBreed(name, id,editAuthorId,dateEdit);
     }
 }

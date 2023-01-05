@@ -31,11 +31,12 @@ public class Reservation extends BaseEntity{
 
     private StatusReservation statusReservation;
     private User author;
+    private LocalDate dateCreate;
 
     public Reservation() {
     }
 
-    public Reservation(Client client, Dog dog, LocalDate startDate, LocalDate endDate, Integer countOvernightStay, Cell cell, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, StatusReservation statusReservation, User author) {
+    public Reservation(Client client, Dog dog, LocalDate startDate, LocalDate endDate, Integer countOvernightStay, Cell cell, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, StatusReservation statusReservation, User author, LocalDate dateCreate) {
         this.client = client;
         this.dog = dog;
         this.startDate = startDate;
@@ -54,6 +55,7 @@ public class Reservation extends BaseEntity{
         this.totalPrice = totalPrice;
         this.statusReservation = statusReservation;
         this.author = author;
+        this.dateCreate = dateCreate;
     }
 
     @ManyToOne
@@ -205,5 +207,13 @@ public class Reservation extends BaseEntity{
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public LocalDate getDateCreate() {
+        return dateCreate;
+    }
+
+    public void setDateCreate(LocalDate dateCreate) {
+        this.dateCreate = dateCreate;
     }
 }

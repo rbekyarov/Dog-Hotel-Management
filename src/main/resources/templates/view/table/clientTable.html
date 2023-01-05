@@ -21,6 +21,7 @@
                     <th>City</th>
                     <th>Dogs</th>
                     <th>Author</th>
+                    <th>Created</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -32,10 +33,9 @@
                     <td th:text="${c.phone}"></td>
                     <td th:text="${c.address}"></td>
                     <td th:text="${c.city.getName()}"></td>
-
                     <td><p th:each="d: ${c.getDogs()}" th:text="${d.getName()}"></td>
                     <td th:text="${c.author.username}"></td>
-
+                    <td th:text="${c.dateCreate}"></td>
 
                     <td><a class="nav-link h5" th:href="@{client/edit/{id}(id=*{c.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span

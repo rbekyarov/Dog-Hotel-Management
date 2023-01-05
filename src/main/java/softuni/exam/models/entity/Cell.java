@@ -3,6 +3,7 @@ package softuni.exam.models.entity;
 import softuni.exam.models.entity.enums.Status;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "cells")
@@ -11,11 +12,13 @@ public class Cell extends BaseEntity{
     private Status status;
 
     private User author;
+    private LocalDate dateCreate;
 
-    public Cell(String code, Status status, User author) {
+    public Cell(String code, Status status, User author, LocalDate dateCreate) {
         this.code = code;
         this.status = status;
         this.author = author;
+        this.dateCreate = dateCreate;
     }
 
     public Cell() {
@@ -44,5 +47,13 @@ public class Cell extends BaseEntity{
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public LocalDate getDateCreate() {
+        return dateCreate;
+    }
+
+    public void setDateCreate(LocalDate dateCreate) {
+        this.dateCreate = dateCreate;
     }
 }

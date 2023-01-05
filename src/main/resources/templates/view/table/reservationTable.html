@@ -25,6 +25,7 @@
                     <th>Total Price</th>
                     <th>Status</th>
                     <th>Author</th>
+                    <th>Created</th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -47,6 +48,7 @@
                     <td th:text="${r.totalPrice +'$'}"></td>
                     <td th:text="${r.statusReservation}"></td>
                     <td th:text="${r.author.username}"></td>
+                    <td th:text="${r.dateCreate}"></td>
 
 
                     <td><a class="nav-link h5" th:href="@{reservation/view/{id}(id=*{r.id})}">

@@ -15,6 +15,7 @@
                     <th>No</th>
                     <th>Breed</th>
                     <th>Author</th>
+                    <th>Created</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -22,6 +23,7 @@
                     <td th:text="${b.id}"></td>
                     <td th:text="${b.breedName}"></td>
                     <td th:text="${b.author.username}"></td>
+                    <td th:text="${b.dateCreate}"></td>
                     <td><a class="nav-link h5" th:href="@{breed/edit/{id}(id=*{b.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Edit

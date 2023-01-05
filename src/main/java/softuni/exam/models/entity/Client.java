@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
@@ -19,11 +20,12 @@ public class Client extends BaseEntity{
     private City city;
     private Set<Dog> dogs;
     private User author;
+    private LocalDate dateCreate;
 
     public Client() {
     }
 
-    public Client(String firstName, String lastName, String email, String phone, String address, City city, User author) {
+    public Client(String firstName, String lastName, String email, String phone, String address, City city, User author, LocalDate dateCreate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -31,6 +33,7 @@ public class Client extends BaseEntity{
         this.address = address;
         this.city = city;
         this.author = author;
+        this.dateCreate = dateCreate;
     }
 
     @Column(name = "first_name", nullable = false)
@@ -99,5 +102,13 @@ public class Client extends BaseEntity{
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public LocalDate getDateCreate() {
+        return dateCreate;
+    }
+
+    public void setDateCreate(LocalDate dateCreate) {
+        this.dateCreate = dateCreate;
     }
 }

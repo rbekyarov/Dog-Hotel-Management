@@ -9,6 +9,7 @@ import softuni.exam.models.entity.Behavior;
 import softuni.exam.models.entity.Breed;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,9 @@ public interface BreedRepository extends JpaRepository<Breed, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Breed as b SET b.breedName = :name, b.author.id=:editAuthorId where b.id=:id ")
-    void editBreed(@Param("name") String name, @Param("id") Long id,@Param("editAuthorId") Long editAuthorId);
+    @Query("update Breed as b SET b.breedName = :name, b.author.id=:editAuthorId,b.dateCreate=:dateEdit where b.id=:id ")
+    void editBreed(@Param("name") String name,
+                   @Param("id") Long id,
+                   @Param("editAuthorId") Long editAuthorId,
+                   @Param("dateEdit") LocalDate dateEdit);
 }
