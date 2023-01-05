@@ -10,6 +10,7 @@ import softuni.exam.models.entity.enums.Role;
 import softuni.exam.repository.UserRepository;
 import softuni.exam.service.UserService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,6 +72,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public User getAuthorFromSession(HttpSession session) {
+        Object userName = session.getAttribute("username");
+        Optional<User> userOptional = userRepository.findByUsername(userName.toString());
+        User user = userOptional.get();
+        return user;
     }
 
 

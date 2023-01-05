@@ -25,11 +25,12 @@ public class Dog extends BaseEntity {
     private Microchip microchip;
     private Client client;
     private Behavior behavior;
+    private User author;
 
     public Dog() {
     }
 
-    public Dog(String name, LocalDate birthDate, String imageName, Integer weight, Breed breed, Sex sex, Passport passport, Microchip microchip, Client client, Behavior behavior) {
+    public Dog(String name, LocalDate birthDate, String imageName, Integer weight, Breed breed, Sex sex, Passport passport, Microchip microchip, Client client, Behavior behavior, User author) {
         this.name = name;
         this.birthDate = birthDate;
         this.imageName = imageName;
@@ -40,6 +41,7 @@ public class Dog extends BaseEntity {
         this.microchip = microchip;
         this.client = client;
         this.behavior = behavior;
+        this.author = author;
     }
 
     @Column(nullable = false)
@@ -133,5 +135,14 @@ public class Dog extends BaseEntity {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
+    }
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

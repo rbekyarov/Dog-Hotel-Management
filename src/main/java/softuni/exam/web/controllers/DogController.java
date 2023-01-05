@@ -18,6 +18,7 @@ import softuni.exam.models.entity.Dog;
 import softuni.exam.service.DogService;
 import softuni.exam.service.FileStorageService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -72,7 +73,7 @@ public class DogController extends BaseController {
     @PostMapping("/view/add/dogAdd")
     public String addDog(@Valid DogDTO dogDTO,
                          @RequestParam("fileImage") MultipartFile file,
-                         @RequestParam("imgName")String imgName) throws IOException {
+                         @RequestParam("imgName")String imgName, HttpSession session) throws IOException {
         String imageUUID;
         if(!file.isEmpty()) {
             imageUUID = file.getOriginalFilename();
@@ -84,7 +85,7 @@ public class DogController extends BaseController {
         dogDTO.setImageName(imageUUID);
 
 
-        dogService.addDog(dogDTO);
+        dogService.addDog(dogDTO,session);
 
         return "redirect:/view/table/dogTable";
     }
@@ -125,8 +126,8 @@ public class DogController extends BaseController {
     }
 
     @PostMapping("view/table/dog/edit/{id}/edit")
-    public String editDog(@PathVariable("id") Long id, DogEditDTO dogEditDTO,@RequestParam("fileImage") MultipartFile file,
-                          @RequestParam("imgName")String imgName) throws ObjectNotFoundException, IOException {
+    public String editDog(@PathVariable("id") Long id, DogEditDTO dogEditDTO, @RequestParam("fileImage") MultipartFile file,
+                          @RequestParam("imgName")String imgName, HttpSession session) throws ObjectNotFoundException, IOException {
         String imageUUID;
         if(!file.isEmpty()) {
             imageUUID = file.getOriginalFilename();
@@ -146,7 +147,8 @@ public class DogController extends BaseController {
                 dogEditDTO.getClient().getId(),
                 dogEditDTO.getBehavior().getId(),
                 imageUUID,
-                id);
+                id,
+                session);
 
         return "redirect:/view/table/dogTable";
     }

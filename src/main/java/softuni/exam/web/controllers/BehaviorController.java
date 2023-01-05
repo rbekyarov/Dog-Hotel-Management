@@ -11,6 +11,7 @@ import softuni.exam.models.dto.BehaviorEditDTO;
 import softuni.exam.models.entity.Behavior;
 import softuni.exam.service.BehaviorService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -43,9 +44,9 @@ public class BehaviorController extends BaseController {
     }
 
     @PostMapping("/view/add/behaviorAdd")
-    public String addBehavior(@Valid BehaviorDTO behaviorDTO) {
+    public String addBehavior(@Valid BehaviorDTO behaviorDTO , HttpSession session) {
 
-        behaviorService.addBehaviors(behaviorDTO);
+        behaviorService.addBehaviors(behaviorDTO,session);
 
         return "redirect:/view/table/behaviorTable";
     }
@@ -73,11 +74,11 @@ public class BehaviorController extends BaseController {
     }
 
     @PostMapping("view/table/behavior/edit/{id}/edit")
-    public String editBehavior(@PathVariable("id") Long id, BehaviorEditDTO behaviorEditDTO) throws ObjectNotFoundException {
+    public String editBehavior(@PathVariable("id") Long id, BehaviorEditDTO behaviorEditDTO,HttpSession session) throws ObjectNotFoundException {
         var behaviorDto =
                 behaviorService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
-        behaviorService.editBehaviors(behaviorEditDTO.getName(), id);
+        behaviorService.editBehaviors(behaviorEditDTO.getName(), id, session);
 
         return "redirect:/view/table/behaviorTable";
     }

@@ -9,6 +9,7 @@ import softuni.exam.models.entity.enums.Microchip;
 import softuni.exam.models.entity.enums.Passport;
 import softuni.exam.models.entity.enums.Sex;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +19,7 @@ public interface ClientService {
     List<Client> findAllClientById();
     List<Client> findAllClientForReservation();
 
-    void addClient(ClientDTO clientDTO);
+    void addClient(ClientDTO clientDTO, HttpSession session);
 
     void removeClientById(Long id);
 
@@ -30,7 +31,8 @@ public interface ClientService {
                  String phone,
                  String address,
                  Long cityId,
-                 Long id);
+                 Long id,
+             HttpSession session);
 
     List<Client> findAll();
 

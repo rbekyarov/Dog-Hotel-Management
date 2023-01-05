@@ -13,6 +13,7 @@ import softuni.exam.service.CityService;
 import softuni.exam.service.ClientService;
 import softuni.exam.service.DogService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -55,9 +56,9 @@ public class ClientController extends BaseController {
     }
 
     @PostMapping("/view/add/clientAdd")
-    public String addClient(@Valid ClientDTO clientDTO) {
+    public String addClient(@Valid ClientDTO clientDTO, HttpSession session) {
 
-        clientService.addClient(clientDTO);
+        clientService.addClient(clientDTO,session);
 
         return "redirect:/view/table/clientTable";
     }
@@ -90,7 +91,7 @@ public class ClientController extends BaseController {
     }
 
     @PostMapping("view/table/client/edit/{id}/edit")
-    public String clientEdit(@PathVariable("id") Long id, ClientEditDTO clientEditDTO) throws ObjectNotFoundException {
+    public String clientEdit(@PathVariable("id") Long id, ClientEditDTO clientEditDTO,HttpSession session) throws ObjectNotFoundException {
         //Set<Dog> dogs = dogService.findAllDogByClient(id);
         clientService.editClient(clientEditDTO.getFirstName(),
                 clientEditDTO.getLastName(),
@@ -98,7 +99,8 @@ public class ClientController extends BaseController {
                 clientEditDTO.getPhone(),
                 clientEditDTO.getAddress(),
                 clientEditDTO.getCity().getId(),
-                id);
+                id,
+                session);
 
         return "redirect:/view/table/clientTable";
     }

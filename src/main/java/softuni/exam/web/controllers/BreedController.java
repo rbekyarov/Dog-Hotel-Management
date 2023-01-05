@@ -11,6 +11,7 @@ import softuni.exam.models.dto.BreedEditDTO;
 import softuni.exam.models.entity.Breed;
 import softuni.exam.service.BreedService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -43,9 +44,9 @@ public class BreedController extends BaseController {
     }
 
     @PostMapping("/view/add/breedAdd")
-    public String addBreed(@Valid BreedDTO breedDTO) {
+    public String addBreed(@Valid BreedDTO breedDTO, HttpSession session) {
 
-        breedService.addBreeds(breedDTO);
+        breedService.addBreeds(breedDTO,session);
 
         return "redirect:/view/table/breedTable";
     }
@@ -73,11 +74,11 @@ public class BreedController extends BaseController {
     }
 
     @PostMapping("view/table/breed/edit/{id}/edit")
-    public String editBreed(@PathVariable("id") Long id, BreedEditDTO breedEditDTO) throws ObjectNotFoundException {
+    public String editBreed(@PathVariable("id") Long id, BreedEditDTO breedEditDTO,HttpSession session) throws ObjectNotFoundException {
         var breedDto =
                 breedService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
-        breedService.editBreeds(breedEditDTO.getBreedName(), id);
+        breedService.editBreeds(breedEditDTO.getBreedName(), id,session);
 
         return "redirect:/view/table/breedTable";
     }

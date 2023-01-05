@@ -14,12 +14,14 @@
                 <tr>
                     <th>No</th>
                     <th>Behavior</th>
+                    <th>Author</th>
                     <th></th>
                     <th></th>
                 </tr>
                 <tr th:each="b : ${behaviors}">
                     <td th:text="${b.id}"></td>
                     <td th:text="${b.name}"></td>
+                    <td th:text="${b.author.username}"></td>
                     <td><a class="nav-link h5" th:href="@{behavior/edit/{id}(id=*{b.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Edit

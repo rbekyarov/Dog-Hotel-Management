@@ -4,26 +4,29 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import softuni.exam.models.dto.ClientDTO;
 import softuni.exam.models.entity.Client;
-import softuni.exam.models.entity.Dog;
+import softuni.exam.models.entity.User;
 import softuni.exam.repository.CellRepository;
 import softuni.exam.repository.ClientRepository;
 import softuni.exam.service.ClientService;
+import softuni.exam.service.UserService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
     private final ModelMapper modelMapper;
     private final CellRepository cellRepository;
+    private final UserService userService;
 
     public ClientServiceImpl(ClientRepository clientRepository, ModelMapper modelMapper,
-                             CellRepository cellRepository) {
+                             CellRepository cellRepository, UserService userService) {
         this.clientRepository = clientRepository;
         this.modelMapper = modelMapper;
         this.cellRepository = cellRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -37,9 +40,10 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void addClient(ClientDTO clientDTO) {
+    public void addClient(ClientDTO clientDTO, HttpSession session) {
         Client client = modelMapper.map(clientDTO, Client.class);
-
+        //get and set Author
+        client.setAuthor(userService.getAuthorFromSession(session));
         clientRepository.save(client);
     }
 
@@ -54,14 +58,17 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void editClient(String firstName, String lastName, String email, String phone, String address, Long cityId, Long id) {
+    public void editClient(String firstName, String lastName, String email, String phone, String address, Long cityId, Long id, HttpSession session) {
+        User editAuthor = userService.getAuthorFromSession(session);
+        Long editAuthorId = editAuthor.getId();
         clientRepository.editClient(firstName,
                 lastName,
                 email,
                 phone,
                 address,
                 cityId,
-                id);
+                id,
+                editAuthorId);
     }
 
     @Override

@@ -27,7 +27,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Transactional
     @Modifying
-    @Query("update Reservation as r SET r.client.id =:clientId ,r.dog.id =:dogId,r.startDate=:startDate,r.endDate=:endDate,r.countOvernightStay=:countOvernightStay,r.cell.id=:cellId,r.food=:food,r.training=:training,r.bathing=:bathing, r.combing=:combing,r.ears=:ears,r.paws=:paws,r.nails=:nails,r.price=:price,r.discount=:discount,r.totalPrice =:totalPrice,r.statusReservation=:statusReservation  where r.id=:id ")
+    @Query("update Reservation as r SET r.client.id =:clientId ,r.dog.id =:dogId,r.startDate=:startDate,r.endDate=:endDate,r.countOvernightStay=:countOvernightStay,r.cell.id=:cellId,r.food=:food,r.training=:training,r.bathing=:bathing, r.combing=:combing,r.ears=:ears,r.paws=:paws,r.nails=:nails,r.price=:price,r.discount=:discount,r.totalPrice =:totalPrice,r.statusReservation=:statusReservation, r.author.id=:editAuthorId  where r.id=:id ")
     void editReservation(
               @Param("clientId") Long clientId
             , @Param("dogId") Long dogId
@@ -46,7 +46,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             , @Param("discount") Double discount
             , @Param("totalPrice") BigDecimal totalPrice
             , @Param("statusReservation") StatusReservation statusReservation
-            , @Param("id") Long id);
+            , @Param("id") Long id
+            , @Param("editAuthorId") Long editAuthorId);
     @Transactional
     @Modifying
     @Query("update Reservation as r SET r.statusReservation =:statusReservation   where r.id=:reservationId ")

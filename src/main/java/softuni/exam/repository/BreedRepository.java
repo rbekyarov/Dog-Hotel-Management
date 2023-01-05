@@ -21,6 +21,6 @@ public interface BreedRepository extends JpaRepository<Breed, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Breed as b SET b.breedName = :name where b.id=:id ")
-    void editBreed(@Param("name") String name, @Param("id") Long id);
+    @Query("update Breed as b SET b.breedName = :name, b.author.id=:editAuthorId where b.id=:id ")
+    void editBreed(@Param("name") String name, @Param("id") Long id,@Param("editAuthorId") Long editAuthorId);
 }

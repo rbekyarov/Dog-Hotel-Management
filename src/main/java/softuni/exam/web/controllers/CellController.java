@@ -11,6 +11,7 @@ import softuni.exam.models.dto.CellEditDTO;
 import softuni.exam.models.entity.Cell;
 import softuni.exam.service.CellService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -42,9 +43,9 @@ public class CellController extends BaseController {
     }
 
     @PostMapping("/view/add/cellAdd")
-    public String addCell(@Valid CellDTO cellDTO) {
+    public String addCell(@Valid CellDTO cellDTO,HttpSession session) {
 
-        cellService.addCells(cellDTO);
+        cellService.addCells(cellDTO,session);
 
         return "redirect:/view/table/cellTable";
     }
@@ -72,11 +73,11 @@ public class CellController extends BaseController {
     }
 
     @PostMapping("view/table/cell/edit/{id}/edit")
-    public String editCell(@PathVariable("id") Long id, CellEditDTO cellEditDTO) throws ObjectNotFoundException {
+    public String editCell(@PathVariable("id") Long id, CellEditDTO cellEditDTO, HttpSession session) throws ObjectNotFoundException {
         var cellDto =
                 cellService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
-        cellService.editCells(cellEditDTO.getCode(), id, cellEditDTO.getStatus());
+        cellService.editCells(cellEditDTO.getCode(), id, cellEditDTO.getStatus(),session);
 
         return "redirect:/view/table/cellTable";
     }

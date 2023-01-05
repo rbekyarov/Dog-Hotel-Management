@@ -5,6 +5,7 @@ import softuni.exam.models.dto.ReservationEditDTO;
 import softuni.exam.models.entity.*;
 import softuni.exam.models.entity.enums.*;
 
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -17,13 +18,13 @@ public interface ReservationService {
 
 
 
-    void addReservation(ReservationDTO reservationDTO);
+    void addReservation(ReservationDTO reservationDTO, HttpSession session);
 
     void removeReservationById(Long id);
 
     Optional<Reservation> findById(Long id);
 
-    void editReservation(Long id , ReservationEditDTO reservationEditDTO);
+    void editReservation(Long id , ReservationEditDTO reservationEditDTO, HttpSession session);
 
     void setCellEmptyByReservationID(Long id);
 

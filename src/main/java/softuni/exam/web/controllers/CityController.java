@@ -11,6 +11,7 @@ import softuni.exam.models.dto.CityEditDTO;
 import softuni.exam.models.entity.City;
 import softuni.exam.service.CityService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -42,9 +43,9 @@ public class CityController extends BaseController {
     }
 
     @PostMapping("/view/add/cityAdd")
-    public String addCity(@Valid CityDTO cityDTO) {
+    public String addCity(@Valid CityDTO cityDTO, HttpSession session) {
 
-        cityService.addCity(cityDTO);
+        cityService.addCity(cityDTO,session);
 
         return "redirect:/view/table/cityTable";
     }
@@ -72,11 +73,11 @@ public class CityController extends BaseController {
     }
 
     @PostMapping("view/table/city/edit/{id}/edit")
-    public String editCity(@PathVariable("id") Long id, CityEditDTO cityEditDTO) throws ObjectNotFoundException {
+    public String editCity(@PathVariable("id") Long id, CityEditDTO cityEditDTO, HttpSession session) throws ObjectNotFoundException {
         var cityDto =
                 cityService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
-        cityService.editCity(cityEditDTO.getCode(), id, cityEditDTO.getName());
+        cityService.editCity(cityEditDTO.getCode(), id, cityEditDTO.getName(),session);
 
         return "redirect:/view/table/cityTable";
     }

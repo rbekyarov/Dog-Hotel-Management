@@ -10,9 +10,12 @@ public class Cell extends BaseEntity{
     private String code;
     private Status status;
 
-    public Cell(String code, Status status) {
+    private User author;
+
+    public Cell(String code, Status status, User author) {
         this.code = code;
         this.status = status;
+        this.author = author;
     }
 
     public Cell() {
@@ -32,5 +35,14 @@ public class Cell extends BaseEntity{
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

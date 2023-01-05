@@ -41,44 +41,44 @@ public class InitData implements CommandLineRunner {
         }
         //ADD Dog Behavior
         if (behaviorRepository.findAll().size() == 0) {
-            behaviorRepository.save(new Behavior("Good with dogs"));
-            behaviorRepository.save(new Behavior("Good with dogs and humans"));
-            behaviorRepository.save(new Behavior("Good with humans"));
-            behaviorRepository.save(new Behavior("Bad with dogs"));
-            behaviorRepository.save(new Behavior("Bad with dogs and humans"));
-            behaviorRepository.save(new Behavior("Bad with humans"));
-            behaviorRepository.save(new Behavior("Cowardly dog"));
+            behaviorRepository.save(new Behavior("Good with dogs", userRepository.getById(Long.parseLong("1"))));
+            behaviorRepository.save(new Behavior("Good with dogs and humans", userRepository.getById(Long.parseLong("2"))));
+            behaviorRepository.save(new Behavior("Good with humans", userRepository.getById(Long.parseLong("2"))));
+            behaviorRepository.save(new Behavior("Bad with dogs", userRepository.getById(Long.parseLong("1"))));
+            behaviorRepository.save(new Behavior("Bad with dogs and humans", userRepository.getById(Long.parseLong("1"))));
+            behaviorRepository.save(new Behavior("Bad with humans", userRepository.getById(Long.parseLong("2"))));
+            behaviorRepository.save(new Behavior("Cowardly dog", userRepository.getById(Long.parseLong("2"))));
 
         }
         //ADD Dog Breed
         if (breedRepository.findAll().size() == 0) {
-            breedRepository.save(new Breed("Boxer"));
-            breedRepository.save(new Breed("German Shepherd"));
-            breedRepository.save(new Breed("Rottweiler"));
-            breedRepository.save(new Breed("Bulgarian Shepherd - BOK"));
-            breedRepository.save(new Breed("Miniature Schnauzer"));
-            breedRepository.save(new Breed("Husky"));
+            breedRepository.save(new Breed("Boxer", userRepository.getById(Long.parseLong("1"))));
+            breedRepository.save(new Breed("German Shepherd", userRepository.getById(Long.parseLong("1"))));
+            breedRepository.save(new Breed("Rottweiler", userRepository.getById(Long.parseLong("2"))));
+            breedRepository.save(new Breed("Bulgarian Shepherd - BOK", userRepository.getById(Long.parseLong("1"))));
+            breedRepository.save(new Breed("Miniature Schnauzer", userRepository.getById(Long.parseLong("2"))));
+            breedRepository.save(new Breed("Husky", userRepository.getById(Long.parseLong("1"))));
 
         }
         //ADD Dog House
         if (cellRepository.findAll().size() == 0) {
-            cellRepository.save(new Cell("A1", Status.empty));
-            cellRepository.save(new Cell("A2", Status.busy));
-            cellRepository.save(new Cell("A3", Status.empty));
-            cellRepository.save(new Cell("B1", Status.empty));
-            cellRepository.save(new Cell("B2", Status.busy));
-            cellRepository.save(new Cell("B3", Status.empty));
-            cellRepository.save(new Cell("C1", Status.empty));
-            cellRepository.save(new Cell("C2", Status.empty));
+            cellRepository.save(new Cell("A1", Status.empty, userRepository.getById(Long.parseLong("1"))));
+            cellRepository.save(new Cell("A2", Status.busy, userRepository.getById(Long.parseLong("2"))));
+            cellRepository.save(new Cell("A3", Status.empty, userRepository.getById(Long.parseLong("1"))));
+            cellRepository.save(new Cell("B1", Status.empty, userRepository.getById(Long.parseLong("2"))));
+            cellRepository.save(new Cell("B2", Status.busy, userRepository.getById(Long.parseLong("2"))));
+            cellRepository.save(new Cell("B3", Status.empty, userRepository.getById(Long.parseLong("1"))));
+            cellRepository.save(new Cell("C1", Status.empty, userRepository.getById(Long.parseLong("1"))));
+            cellRepository.save(new Cell("C2", Status.empty, userRepository.getById(Long.parseLong("2"))));
 
         }
         //ADD Cities
         if (cityRepository.findAll().size() == 0) {
-            cityRepository.save(new City("1000", "Sofia"));
-            cityRepository.save(new City("2000", "Plovdiv"));
-            cityRepository.save(new City("6000", "Stara Zagora"));
-            cityRepository.save(new City("9000", "Varna"));
-            cityRepository.save(new City("7008", "Ruse"));
+            cityRepository.save(new City("1000", "Sofia", userRepository.getById(Long.parseLong("2"))));
+            cityRepository.save(new City("2000", "Plovdiv", userRepository.getById(Long.parseLong("1"))));
+            cityRepository.save(new City("6000", "Stara Zagora", userRepository.getById(Long.parseLong("1"))));
+            cityRepository.save(new City("9000", "Varna", userRepository.getById(Long.parseLong("2"))));
+            cityRepository.save(new City("7008", "Ruse", userRepository.getById(Long.parseLong("1"))));
 
         }
         //ADD PRICES
@@ -106,10 +106,10 @@ public class InitData implements CommandLineRunner {
         }
         //ADD CLIENT
         if (clientRepository.findAll().size() == 0) {
-            clientRepository.save(new Client("Ivan", "Ivanov", "ivanov@gmail.com", "0886335241", "Lulin 15", cityRepository.getById(Long.parseLong("1"))));
-            clientRepository.save(new Client("Stanimir", "Pavlov", "spavlov@abv.bg", "08842276361", "Zdravetzh 4", cityRepository.getById(Long.parseLong("2"))));
-            clientRepository.save(new Client("Vladimir", "Georgiev", "vgeorgiev@outlook.com", "0887325579", "Zagorka 16", cityRepository.getById(Long.parseLong("3"))));
-            clientRepository.save(new Client("Boyan", "Dimitrov", "bdimitrov@hotmail.com", "0881256377", "Ludogorska 12B", cityRepository.getById(Long.parseLong("4"))));
+            clientRepository.save(new Client("Ivan", "Ivanov", "ivanov@gmail.com", "0886335241", "Lulin 15", cityRepository.getById(Long.parseLong("1")), userRepository.getById(Long.parseLong("1"))));
+            clientRepository.save(new Client("Stanimir", "Pavlov", "spavlov@abv.bg", "08842276361", "Zdravetzh 4", cityRepository.getById(Long.parseLong("2")), userRepository.getById(Long.parseLong("2"))));
+            clientRepository.save(new Client("Vladimir", "Georgiev", "vgeorgiev@outlook.com", "0887325579", "Zagorka 16", cityRepository.getById(Long.parseLong("3")), userRepository.getById(Long.parseLong("1"))));
+            clientRepository.save(new Client("Boyan", "Dimitrov", "bdimitrov@hotmail.com", "0881256377", "Ludogorska 12B", cityRepository.getById(Long.parseLong("4")), userRepository.getById(Long.parseLong("2"))));
 
 
         }
@@ -125,7 +125,8 @@ public class InitData implements CommandLineRunner {
                     Passport.YES,
                     Microchip.NO,
                     clientRepository.getById(Long.parseLong("1")),
-                    behaviorRepository.getById(Long.parseLong("1"))));
+                    behaviorRepository.getById(Long.parseLong("1")),
+                    userRepository.getById(Long.parseLong("1"))));
             //New Dog "Berta"
             dogRepository.save(new Dog("Berta",
                     LocalDate.of(2019, 3, 26),
@@ -136,7 +137,8 @@ public class InitData implements CommandLineRunner {
                     Passport.YES,
                     Microchip.YES,
                     clientRepository.getById(Long.parseLong("1")),
-                    behaviorRepository.getById(Long.parseLong("5"))));
+                    behaviorRepository.getById(Long.parseLong("5")),
+                    userRepository.getById(Long.parseLong("1"))));
             //New Dog "Boby"
             dogRepository.save(new Dog("Boby",
                     LocalDate.of(2017, 6, 10),
@@ -147,7 +149,8 @@ public class InitData implements CommandLineRunner {
                     Passport.NO,
                     Microchip.NO,
                     clientRepository.getById(Long.parseLong("1")),
-                    behaviorRepository.getById(Long.parseLong("2"))));
+                    behaviorRepository.getById(Long.parseLong("2")),
+                    userRepository.getById(Long.parseLong("2"))));
             //New Dog Cezar"
             dogRepository.save(new Dog("Cezar",
                     LocalDate.of(2020, 4, 16),
@@ -158,7 +161,8 @@ public class InitData implements CommandLineRunner {
                     Passport.YES,
                     Microchip.YES,
                     clientRepository.getById(Long.parseLong("3")),
-                    behaviorRepository.getById(Long.parseLong("4"))));
+                    behaviorRepository.getById(Long.parseLong("4")),
+                    userRepository.getById(Long.parseLong("2"))));
             //New Dog "Zara"
             dogRepository.save(new Dog("Zara",
                     LocalDate.of(2020, 4, 16),
@@ -169,7 +173,8 @@ public class InitData implements CommandLineRunner {
                     Passport.YES,
                     Microchip.NO,
                     clientRepository.getById(Long.parseLong("2")),
-                    behaviorRepository.getById(Long.parseLong("7"))));
+                    behaviorRepository.getById(Long.parseLong("7")),
+                    userRepository.getById(Long.parseLong("2"))));
             //New Dog "Benji"
             dogRepository.save(new Dog("Benji",
                     LocalDate.of(2020, 5, 28),
@@ -180,7 +185,8 @@ public class InitData implements CommandLineRunner {
                     Passport.YES,
                     Microchip.YES,
                     clientRepository.getById(Long.parseLong("2")),
-                    behaviorRepository.getById(Long.parseLong("1"))));
+                    behaviorRepository.getById(Long.parseLong("1")),
+                    userRepository.getById(Long.parseLong("2"))));
             //New Dog "Lora"
             dogRepository.save(new Dog("Lora",
                     LocalDate.of(2016, 2, 7),
@@ -191,7 +197,8 @@ public class InitData implements CommandLineRunner {
                     Passport.YES,
                     Microchip.NO,
                     clientRepository.getById(Long.parseLong("4")),
-                    behaviorRepository.getById(Long.parseLong("5"))));
+                    behaviorRepository.getById(Long.parseLong("5")),
+                    userRepository.getById(Long.parseLong("1"))));
 
         }
     }

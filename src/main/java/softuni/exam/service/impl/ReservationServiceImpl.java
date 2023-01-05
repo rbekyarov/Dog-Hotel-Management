@@ -7,12 +7,15 @@ import softuni.exam.models.dto.ReservationEditDTO;
 import softuni.exam.models.entity.Cell;
 import softuni.exam.models.entity.Price;
 import softuni.exam.models.entity.Reservation;
+import softuni.exam.models.entity.User;
 import softuni.exam.models.entity.enums.*;
 import softuni.exam.repository.ReservationRepository;
 import softuni.exam.service.CellService;
 import softuni.exam.service.PriceService;
 import softuni.exam.service.ReservationService;
+import softuni.exam.service.UserService;
 
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,12 +30,14 @@ public class ReservationServiceImpl implements ReservationService {
     private final PriceService priceService;
     private final ModelMapper modelMapper;
     private final CellService cellService;
+    private final UserService userService;
 
-    public ReservationServiceImpl(ReservationRepository reservationRepository, PriceService priceService, ModelMapper modelMapper, CellService cellService) {
+    public ReservationServiceImpl(ReservationRepository reservationRepository, PriceService priceService, ModelMapper modelMapper, CellService cellService, UserService userService) {
         this.reservationRepository = reservationRepository;
         this.priceService = priceService;
         this.modelMapper = modelMapper;
         this.cellService = cellService;
+        this.userService = userService;
     }
 
     @Override
@@ -41,7 +46,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public void addReservation(ReservationDTO reservationDTO) {
+    public void addReservation(ReservationDTO reservationDTO, HttpSession session) {
         // count date calculate
 
         String startDate = reservationDTO.getStartDate();
@@ -57,7 +62,7 @@ public class ReservationServiceImpl implements ReservationService {
         LocalDate dateNow = LocalDate.now();
         if((dateNow.isBefore(date1)) && (dateNow.isBefore(date2))){
             statusReservation = StatusReservation.upcoming;
-        }else if ((dateNow.isAfter(date1))&&(dateNow.isBefore(date2))){
+        }else if ((dateNow.isAfter(date1))&&(dateNow.isEqual(date2))){
             statusReservation = StatusReservation.active;
 
         }else if((dateNow.isAfter(date1))&&(dateNow.isAfter(date2))){
@@ -124,7 +129,8 @@ public class ReservationServiceImpl implements ReservationService {
         if(statusReservation.name().equals("active")){
             cellService.setCellBusy(id);
         }
-
+        //get and set Author
+        reservation.setAuthor(userService.getAuthorFromSession(session));
 
         reservationRepository.save(reservation);
     }
@@ -142,7 +148,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 
     @Override
-    public void editReservation(Long reservationId, ReservationEditDTO reservationEditDTO) {
+    public void editReservation(Long reservationId, ReservationEditDTO reservationEditDTO, HttpSession session) {
 
         //Get new Date
         String startDate = reservationEditDTO.getStartDate();
@@ -222,7 +228,8 @@ public class ReservationServiceImpl implements ReservationService {
         Nails nails = reservationEditDTO.getNails();
         BigDecimal bigDecimalPrice = BigDecimal.valueOf(price);
         BigDecimal bigDecimalTotalPrice = BigDecimal.valueOf(totalPrice);
-
+        User editAuthor = userService.getAuthorFromSession(session);
+        Long editAuthorId = editAuthor.getId();
         // edit reservation
         reservationRepository.editReservation(
                 clientId,
@@ -242,7 +249,8 @@ public class ReservationServiceImpl implements ReservationService {
                 discount,
                 bigDecimalTotalPrice,
                 statusReservation,
-                reservationId);
+                reservationId,
+                editAuthorId);
 
         //set Cell Busy
         Cell cellCurrent = reservationEditDTO.getCell();
@@ -274,7 +282,7 @@ public class ReservationServiceImpl implements ReservationService {
             StatusReservation statusReservation = StatusReservation.noset;
             if((dateNow.isBefore(startDate)) && (dateNow.isBefore(endDate))){
                 statusReservation = StatusReservation.upcoming;
-            }else if ((dateNow.isAfter(startDate))&&(dateNow.isEqual(endDate))){
+            }else if ((dateNow.isAfter(startDate))&&(dateNow.isBefore(endDate))||(dateNow.isEqual(endDate))){
                 statusReservation = StatusReservation.active;
 
             }else if((dateNow.isAfter(startDate))&&(dateNow.isAfter(endDate))){

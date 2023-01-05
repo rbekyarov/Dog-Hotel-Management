@@ -13,6 +13,7 @@ import softuni.exam.models.entity.*;
 import softuni.exam.repository.CellRepository;
 import softuni.exam.service.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,9 +72,9 @@ public class ReservationController extends BaseController {
     }
 
     @PostMapping("/view/add/reservationAdd")
-    public String addReservation(@Valid ReservationDTO reservationDTO) {
+    public String addReservation(@Valid ReservationDTO reservationDTO, HttpSession session) {
 
-        reservationService.addReservation(reservationDTO);
+        reservationService.addReservation(reservationDTO,session);
 
         return "redirect:/view/table/reservationTable";
     }
@@ -125,10 +126,10 @@ public class ReservationController extends BaseController {
     }
 
     @PostMapping("view/table/reservation/edit/{id}/edit")
-    public String editReservation(@PathVariable("id") Long id, ReservationEditDTO reservationEditDTO) throws ObjectNotFoundException {
+    public String editReservation(@PathVariable("id") Long id, ReservationEditDTO reservationEditDTO, HttpSession session) throws ObjectNotFoundException {
 
 
-        reservationService.editReservation(id, reservationEditDTO);
+        reservationService.editReservation(id, reservationEditDTO,session);
 
 
         return "redirect:/view/table/reservationTable";

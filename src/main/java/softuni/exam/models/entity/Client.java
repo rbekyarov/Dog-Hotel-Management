@@ -18,18 +18,19 @@ public class Client extends BaseEntity{
     private String address;
     private City city;
     private Set<Dog> dogs;
+    private User author;
 
     public Client() {
     }
 
-    public Client(String firstName, String lastName, String email, String phone, String address, City city) {
+    public Client(String firstName, String lastName, String email, String phone, String address, City city, User author) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.city = city;
-
+        this.author = author;
     }
 
     @Column(name = "first_name", nullable = false)
@@ -89,5 +90,14 @@ public class Client extends BaseEntity{
 
     public void setDogs(Set<Dog> dogs) {
         this.dogs = dogs;
+    }
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

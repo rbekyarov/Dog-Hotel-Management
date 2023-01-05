@@ -1,19 +1,20 @@
 package softuni.exam.models.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "behaviors")
 public class Behavior extends BaseEntity{
 
     private String name;
+
+    private User author;
     public Behavior() {
     }
 
-    public Behavior(String name) {
+    public Behavior(String name, User author) {
         this.name = name;
+        this.author = author;
     }
 
     @Column(nullable = false, unique = true)
@@ -23,5 +24,14 @@ public class Behavior extends BaseEntity{
 
     public void setName(String name) {
         this.name = name;
+    }
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

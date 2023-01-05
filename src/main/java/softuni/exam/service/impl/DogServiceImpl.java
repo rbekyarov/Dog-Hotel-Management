@@ -8,11 +8,9 @@ import softuni.exam.models.entity.enums.Microchip;
 import softuni.exam.models.entity.enums.Passport;
 import softuni.exam.models.entity.enums.Sex;
 import softuni.exam.repository.DogRepository;
-import softuni.exam.service.BehaviorService;
-import softuni.exam.service.BreedService;
-import softuni.exam.service.ClientService;
-import softuni.exam.service.DogService;
+import softuni.exam.service.*;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -24,14 +22,16 @@ public class DogServiceImpl implements DogService {
     private final DogRepository dogRepository;
     private final BehaviorService behaviorService;
     private final ClientService clientService;
+    private final UserService userService;
 
     private final BreedService breedService;
     private final ModelMapper modelMapper;
 
-    public DogServiceImpl(DogRepository dogRepository, BehaviorService behaviorService, ClientService clientService, BreedService breedService, ModelMapper modelMapper) {
+    public DogServiceImpl(DogRepository dogRepository, BehaviorService behaviorService, ClientService clientService, UserService userService, BreedService breedService, ModelMapper modelMapper) {
         this.dogRepository = dogRepository;
         this.behaviorService = behaviorService;
         this.clientService = clientService;
+        this.userService = userService;
         this.breedService = breedService;
         this.modelMapper = modelMapper;
     }
@@ -43,14 +43,15 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void addDog(DogDTO dogDTO) {
+    public void addDog(DogDTO dogDTO, HttpSession session) {
 
         Dog dogNew = modelMapper.map(dogDTO, Dog.class);
 
         String date = dogDTO.getBirthDate();
 
         dogNew.setBirthDate(formatterLocal(date));
-
+         //get and set Author
+        dogNew.setAuthor(userService.getAuthorFromSession(session));
 
         dogRepository.save(dogNew);
     }
@@ -66,8 +67,9 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void editDog(String name, String birthDate, Integer weight, Long breedId, Sex sex, Passport passport, Microchip microchip, Long clientId, Long behaviorId, String imageName, Long id) {
-
+    public void editDog(String name, String birthDate, Integer weight, Long breedId, Sex sex, Passport passport, Microchip microchip, Long clientId, Long behaviorId, String imageName, Long id, HttpSession session) {
+        User editAuthor = userService.getAuthorFromSession(session);
+        Long editAuthorId = editAuthor.getId();
         dogRepository.editDog(name,
                 formatterLocal(birthDate),
                 weight,
@@ -78,7 +80,8 @@ public class DogServiceImpl implements DogService {
                 clientId,
                 behaviorId,
                 imageName,
-                id);
+                id,
+                editAuthorId);
     }
 
     @Override

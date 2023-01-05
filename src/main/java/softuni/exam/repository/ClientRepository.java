@@ -28,14 +28,15 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Client as c SET c.firstName = :firstName, c.lastName=:lastName,c.email=:email, c.phone =:phone, c.address = :address,c.city.id=:cityId where c.id=:id ")
+    @Query("update Client as c SET c.firstName = :firstName, c.lastName=:lastName,c.email=:email, c.phone =:phone, c.address = :address,c.city.id=:cityId,c.author.id=:editAuthorId where c.id=:id ")
     void editClient(@Param("firstName") String firstName,
                     @Param("lastName") String lastName,
                     @Param("email") String email,
                     @Param("phone") String phone,
                     @Param("address") String address,
                     @Param("cityId") Long cityId,
-                    @Param("id") Long id);
+                    @Param("id") Long id,
+                    @Param("editAuthorId") Long editAuthorId);
 //    @Query("select c.id,c.firstName,c.lastName,c.email,d.id,d.name from Client as c  join Dog as d on c.id = d.client.id  ")
     List<Client> findAllByDogsIsNotNull();
 @Query(value ="select c.id,c.first_name,  c.last_name, d.id,d.name  from clients as c join dogs as d on c.id=d.client_id", nativeQuery = true)

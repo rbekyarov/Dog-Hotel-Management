@@ -25,8 +25,8 @@ public interface CellRepository extends JpaRepository<Cell, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Cell as c SET c.code = :code , c.status=:status where c.id=:id ")
-    void editCell(@Param("code") String code, @Param("id") Long id,@Param("status") Status status);
+    @Query("update Cell as c SET c.code = :code , c.status=:status, c.author.id=:editAuthorId where c.id=:id ")
+    void editCell(@Param("code") String code, @Param("id") Long id,@Param("status") Status status,@Param("editAuthorId") Long editAuthorId);
 
     @Query("select c from Cell as c where c.status='empty'")
     List<Cell> findAllEmptyCells();

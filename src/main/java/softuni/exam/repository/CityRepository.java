@@ -24,6 +24,6 @@ public interface CityRepository extends JpaRepository<City, Long> {
 
     @Transactional
     @Modifying
-    @Query("update City as c SET c.code = :code , c.name=:name where c.id=:id ")
-    void editCity(@Param("code") String code, @Param("id") Long id, @Param("name") String name);
+    @Query("update City as c SET c.code = :code , c.name=:name,c.author.id=:editAuthorId where c.id=:id ")
+    void editCity(@Param("code") String code, @Param("id") Long id, @Param("name") String name,@Param("editAuthorId") Long editAuthorId);
 }

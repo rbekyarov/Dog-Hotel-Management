@@ -20,6 +20,7 @@
                     <th>Address</th>
                     <th>City</th>
                     <th>Dogs</th>
+                    <th>Author</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -33,6 +34,7 @@
                     <td th:text="${c.city.getName()}"></td>
 
                     <td><p th:each="d: ${c.getDogs()}" th:text="${d.getName()}"></td>
+                    <td th:text="${c.author.username}"></td>
 
 
                     <td><a class="nav-link h5" th:href="@{client/edit/{id}(id=*{c.id})}">

@@ -22,7 +22,7 @@ public interface BehaviorRepository extends JpaRepository<Behavior, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Behavior as b SET b.name = :name where b.id=:id ")
-    void editBehavior(@Param("name") String name, @Param("id") Long id);
+    @Query("update Behavior as b SET b.name = :name, b.author.id=:editAuthorId where b.id=:id ")
+    void editBehavior(@Param("name") String name, @Param("id") Long id ,@Param("editAuthorId") Long editAuthorId);
 
 }

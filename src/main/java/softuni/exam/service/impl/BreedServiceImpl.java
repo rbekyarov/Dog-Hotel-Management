@@ -3,11 +3,13 @@ package softuni.exam.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import softuni.exam.models.dto.BreedDTO;
-import softuni.exam.models.entity.Behavior;
 import softuni.exam.models.entity.Breed;
+import softuni.exam.models.entity.User;
 import softuni.exam.repository.BreedRepository;
 import softuni.exam.service.BreedService;
+import softuni.exam.service.UserService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,10 +17,12 @@ import java.util.Optional;
 public class BreedServiceImpl implements BreedService {
     private final BreedRepository breedRepository;
     private final ModelMapper modelMapper;
+    private final UserService userService;
 
-    public BreedServiceImpl(BreedRepository breedRepository, ModelMapper modelMapper) {
+    public BreedServiceImpl(BreedRepository breedRepository, ModelMapper modelMapper, UserService userService) {
         this.breedRepository = breedRepository;
         this.modelMapper = modelMapper;
+        this.userService = userService;
     }
 
     @Override
@@ -27,9 +31,11 @@ public class BreedServiceImpl implements BreedService {
     }
 
     @Override
-    public void addBreeds(BreedDTO breedDTO) {
+    public void addBreeds(BreedDTO breedDTO, HttpSession session) {
         Breed breed = modelMapper.map(breedDTO, Breed.class);
         breed.setBreedName(breedDTO.getBreedName());
+        //get and set Author
+        breed.setAuthor(userService.getAuthorFromSession(session));
         breedRepository.save(breed);
     }
 
@@ -44,7 +50,9 @@ public class BreedServiceImpl implements BreedService {
     }
 
     @Override
-    public void editBreeds(String name, Long id) {
-        breedRepository.editBreed(name, id);
+    public void editBreeds(String name, Long id, HttpSession session) {
+        User editAuthor = userService.getAuthorFromSession(session);
+        Long editAuthorId = editAuthor.getId();
+        breedRepository.editBreed(name, id,editAuthorId);
     }
 }

@@ -7,6 +7,7 @@ import softuni.exam.models.entity.enums.Microchip;
 import softuni.exam.models.entity.enums.Passport;
 import softuni.exam.models.entity.enums.Sex;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +18,7 @@ public interface DogService {
 
 
 
-    void addDog(DogDTO dogDTO);
+    void addDog(DogDTO dogDTO, HttpSession session);
 
     void removeDogById(Long id);
 
@@ -33,7 +34,8 @@ public interface DogService {
                  Long clientId,
                  Long behaviorId,
                  String imageName,
-                 Long id);
+                 Long id
+            , HttpSession session);
 
     public List<Behavior> getAllBehaviors();
 

@@ -30,9 +30,32 @@ public class Reservation extends BaseEntity{
     private BigDecimal totalPrice;
 
     private StatusReservation statusReservation;
+    private User author;
 
     public Reservation() {
     }
+
+    public Reservation(Client client, Dog dog, LocalDate startDate, LocalDate endDate, Integer countOvernightStay, Cell cell, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, StatusReservation statusReservation, User author) {
+        this.client = client;
+        this.dog = dog;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.countOvernightStay = countOvernightStay;
+        this.cell = cell;
+        this.food = food;
+        this.training = training;
+        this.bathing = bathing;
+        this.combing = combing;
+        this.ears = ears;
+        this.paws = paws;
+        this.nails = nails;
+        this.price = price;
+        this.discount = discount;
+        this.totalPrice = totalPrice;
+        this.statusReservation = statusReservation;
+        this.author = author;
+    }
+
     @ManyToOne
     public Client getClient() {
         return client;
@@ -173,5 +196,14 @@ public class Reservation extends BaseEntity{
 
     public void setStatusReservation(StatusReservation statusReservation) {
         this.statusReservation = statusReservation;
+    }
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

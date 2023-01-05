@@ -4,10 +4,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import softuni.exam.models.dto.CellDTO;
 import softuni.exam.models.entity.Cell;
+import softuni.exam.models.entity.User;
 import softuni.exam.models.entity.enums.Status;
 import softuni.exam.repository.CellRepository;
 import softuni.exam.service.CellService;
+import softuni.exam.service.UserService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,10 +18,12 @@ import java.util.Optional;
 public class CellServiceImpl implements CellService {
     private final CellRepository cellRepository;
     private final ModelMapper modelMapper;
+    private final UserService userService;
 
-    public CellServiceImpl(CellRepository cellRepository, ModelMapper modelMapper) {
+    public CellServiceImpl(CellRepository cellRepository, ModelMapper modelMapper, UserService userService) {
         this.cellRepository = cellRepository;
         this.modelMapper = modelMapper;
+        this.userService = userService;
     }
 
     @Override
@@ -27,9 +32,12 @@ public class CellServiceImpl implements CellService {
     }
 
     @Override
-    public void addCells(CellDTO cellDTO) {
+    public void addCells(CellDTO cellDTO, HttpSession session) {
         Cell cell = modelMapper.map(cellDTO, Cell.class);
         cell.setStatus(cellDTO.getStatus());
+        //get and set Author
+        cell.setAuthor(userService.getAuthorFromSession(session));
+
         cellRepository.save(cell);
     }
 
@@ -44,8 +52,10 @@ public class CellServiceImpl implements CellService {
     }
 
     @Override
-    public void editCells(String name, Long id, Status status) {
-        cellRepository.editCell(name, id, status);
+    public void editCells(String name, Long id, Status status,HttpSession session) {
+        User editAuthor = userService.getAuthorFromSession(session);
+        Long editAuthorId = editAuthor.getId();
+        cellRepository.editCell(name, id, status,editAuthorId);
     }
 
     @Override
