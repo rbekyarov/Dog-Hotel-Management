@@ -33,7 +33,7 @@
                     <td th:text="${c.phone}"></td>
                     <td th:text="${c.address}"></td>
                     <td th:text="${c.city.getName()}"></td>
-                    <td><p th:each="d: ${c.getDogs()}" th:text="${d.getName()}"></td>
+                    <td><p class="dogsOnClient" th:each="d: ${c.getDogs()}" th:text="${d.getName()}"></td>
                     <td th:text="${c.author.username}"></td>
                     <td th:text="${c.dateCreate}"></td>
 

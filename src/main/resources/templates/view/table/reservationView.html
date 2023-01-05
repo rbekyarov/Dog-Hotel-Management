@@ -9,10 +9,10 @@
         </div>
         <div class="container">
             <h1 class="page_title" th:object="${reservation}">Reservation Details</h1>
-            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 150px;">
+            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 500px;">
                 <tbody>
 
-                    <td><h5 th:text="${'No.'+ reservation.id + '-'+ reservation.statusReservation+'Date Create: '+r.dateCreate}"></h5><br></td>
+                    <td><h5 th:text="${'No.'+ reservation.id + '  Status: ' + reservation.statusReservation + '  Date Create: '+ reservation.dateCreate}"></h5><br></td>
                 </tr>
                 </tbody>
             </table>
