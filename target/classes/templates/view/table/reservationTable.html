@@ -26,6 +26,7 @@
                     <th>Status</th>
                     <th>Author</th>
                     <th>Created</th>
+                    <th>Invoiced</th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -49,6 +50,7 @@
                     <td th:text="${r.statusReservation}"></td>
                     <td th:text="${r.author.username}"></td>
                     <td th:text="${r.dateCreate}"></td>
+                    <td th:text="${r.invoiced}"></td>
 
 
                     <td><a class="nav-link h5" th:href="@{reservation/view/{id}(id=*{r.id})}">
@@ -56,22 +58,27 @@
                                 class="glyphicon glyphicon-ok"></span>View
                         </button>
                     </a></td>
+                    <th:block th:if="${r.invoiced.name()=='NO'}">
                     <td><a class="nav-link h5" th:href="@{reservation/edit/{id}(id=*{r.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Edit
                         </button>
                     </a></td>
+                    </th:block>
+                    <th:block th:if="${r.invoiced.name()=='NO'}">
                     <td><a class="nav-link h5" th:href="@{invoice/add/{id}(id=*{r.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Invoice
                         </button>
                     </a></td>
-
+                    </th:block>
+                    <th:block th:if="${r.invoiced.name()=='NO'}">
                     <td><a class="nav-link h5" th:href="@{reservation/remove/{id}(id=*{r.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Remove
                         </button>
                     </a></td>
+                    </th:block>
                 </tr>
             </table>
         </div>

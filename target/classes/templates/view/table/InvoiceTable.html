@@ -6,6 +6,12 @@
                 <h1>Invoices List</h1>
             </div>
 
+            <a class="nav-link h5" th:href="@{/view/table/reservationTable}">
+                <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                        class="glyphicon glyphicon-ok"></span>Back
+                </button>
+            </a>
+
             <table class=table>
                 <tr>
                     <th>No</th>
@@ -17,6 +23,7 @@
                     <th>Total Price:</th>
                     <th>Author:</th>
                     <th>Created:</th>
+                    <th></th>
                     <th></th>
 
 
@@ -32,10 +39,14 @@
                     <td th:text="${i.author.username}"></td>
                     <td th:text="${i.dateCreate}"></td>
 
-
+                    <td><a class="nav-link h5" th:href="@{invoice/view/{id}(id=*{i.id})}">
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                class="glyphicon glyphicon-ok"></span>View
+                        </button>
+                    </a></td>
                     <td><a class="nav-link h5" th:href="@{invoice/remove/{id}(id=*{i.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                                class="glyphicon glyphicon-ok"></span>Remove
+                                class="glyphicon glyphicon-ok"></span>Cancellation
                         </button>
                     </a></td>
                 </tr>
