@@ -26,18 +26,18 @@ public class ReservationController extends BaseController {
     private final CellService cellService;
     private final DogService dogService;
     private final PriceService priceService;
+    private final InvoiceService invoiceService;
     private final CellRepository cellRepository;
 
-    public ReservationController(ReservationService reservationService, ClientService clientService, CellService cellService, DogService dogService, PriceService priceService, CellRepository cellRepository) {
-
+    public ReservationController(ReservationService reservationService, ClientService clientService, CellService cellService, DogService dogService, PriceService priceService, InvoiceService invoiceService, CellRepository cellRepository) {
         this.reservationService = reservationService;
         this.clientService = clientService;
         this.cellService = cellService;
         this.dogService = dogService;
         this.priceService = priceService;
+        this.invoiceService = invoiceService;
         this.cellRepository = cellRepository;
     }
-
 
     @GetMapping("/view/table/reservationTable")
     public ModelAndView reservationTable(ModelAndView modelAndView) {
@@ -87,6 +87,16 @@ public class ReservationController extends BaseController {
         reservationService.removeReservationById(id);
 
         return "redirect:/view/table/reservationTable";
+    }
+
+    //Create Invoice
+    @GetMapping("view/table/invoice/add/{id}")
+    public String createInvoice(@PathVariable Long id, HttpSession session) {
+        Optional<Reservation> optionalReservation = reservationService.findById(id);
+        Reservation reservation = optionalReservation.get();
+        invoiceService.addInvoice(reservation, session);
+
+        return "redirect:/view/table/invoiceTable";
     }
 
     @GetMapping("view/table/reservation/view/{id}")

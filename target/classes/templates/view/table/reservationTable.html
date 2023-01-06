@@ -61,6 +61,11 @@
                                 class="glyphicon glyphicon-ok"></span>Edit
                         </button>
                     </a></td>
+                    <td><a class="nav-link h5" th:href="@{invoice/add/{id}(id=*{r.id})}">
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                class="glyphicon glyphicon-ok"></span>Invoice
+                        </button>
+                    </a></td>
 
                     <td><a class="nav-link h5" th:href="@{reservation/remove/{id}(id=*{r.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
