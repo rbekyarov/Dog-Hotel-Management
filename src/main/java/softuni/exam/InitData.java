@@ -66,10 +66,10 @@ public class InitData implements CommandLineRunner {
         //ADD Dog House
         if (cellRepository.findAll().size() == 0) {
             cellRepository.save(new Cell("A1", Status.empty, userRepository.getById(Long.parseLong("1")),LocalDate.of(2023, 1, 1)));
-            cellRepository.save(new Cell("A2", Status.busy, userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 1)));
+            cellRepository.save(new Cell("A2", Status.empty, userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 1)));
             cellRepository.save(new Cell("A3", Status.empty, userRepository.getById(Long.parseLong("1")),LocalDate.of(2023, 1, 1)));
             cellRepository.save(new Cell("B1", Status.empty, userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 1)));
-            cellRepository.save(new Cell("B2", Status.busy, userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 1)));
+            cellRepository.save(new Cell("B2", Status.empty, userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 1)));
             cellRepository.save(new Cell("B3", Status.empty, userRepository.getById(Long.parseLong("1")),LocalDate.of(2023, 1, 1)));
             cellRepository.save(new Cell("C1", Status.empty, userRepository.getById(Long.parseLong("1")),LocalDate.of(2023, 1, 1)));
             cellRepository.save(new Cell("C2", Status.empty, userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 1)));
