@@ -7,4 +7,5 @@ DEMO VIDEO - https://youtu.be/LHvikpcx3-U
 
 ENTITIES:
 
-![2023-01-05 (1)](https://user-images.githubusercontent.com/29566751/210778126-c9d82041-0170-401e-9b9e-b07d36c01734.png)
+
+![2023-01-06 (2)](https://user-images.githubusercontent.com/29566751/210956253-f9b1f943-746d-4f7e-a612-fddb489e40e4.png)
