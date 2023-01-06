@@ -28,14 +28,21 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     void editCompany(@Param("name") String name,
                      @Param("logoName") String logoName,
                      @Param("country") String country,
-                      @Param("cityId") Long cityId ,
-                      @Param("address") String address,
-                      @Param("vatNumber") String vatNumber,
+                     @Param("cityId") Long cityId,
+                     @Param("address") String address,
+                     @Param("vatNumber") String vatNumber,
                      @Param("email") String email,
                      @Param("bankName") String bankName,
                      @Param("bankAccount") String bankAccount,
                      @Param("balance") BigDecimal balance,
                      @Param("managerName") String managerName,
-                     @Param("id")Long id);
+                     @Param("id") Long id);
 
+    @Transactional
+    @Modifying
+    @Query("update Company as c SET c.balance=:newBalance where c.id=1 ")
+    void editBalance(@Param("newBalance") BigDecimal newBalance);
+
+    @Query("select c.balance from Company as c where c.id=1 ")
+    public BigDecimal getCurrentBalance();
 }

@@ -4,10 +4,12 @@ import org.springframework.stereotype.Service;
 import softuni.exam.models.entity.Invoice;
 import softuni.exam.models.entity.Reservation;
 import softuni.exam.repository.InvoiceRepository;
+import softuni.exam.service.CompanyService;
 import softuni.exam.service.InvoiceService;
 import softuni.exam.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -17,12 +19,14 @@ import java.util.Optional;
 public class InvoicesServiceImpl implements InvoiceService {
     private final InvoiceRepository invoiceRepository;
     private final UserService userService;
+    private final CompanyService companyService;
 
 
-    public InvoicesServiceImpl(InvoiceRepository invoiceRepository, UserService userService) {
+    public InvoicesServiceImpl(InvoiceRepository invoiceRepository, UserService userService, CompanyService companyService) {
         this.invoiceRepository = invoiceRepository;
 
         this.userService = userService;
+        this.companyService = companyService;
     }
 
     @Override
@@ -61,13 +65,24 @@ public class InvoicesServiceImpl implements InvoiceService {
 
         //get and set Author
         invoice.setAuthor(userService.getAuthorFromSession(session));
-
-
+        //create invoice
         invoiceRepository.save(invoice);
+        //change Company Balance
+        BigDecimal currentBalance = companyService.getCurrentBalance();
+        BigDecimal totalPrice = invoice.getTotalPrice();
+        companyService.editBalance(currentBalance.add(totalPrice));
     }
 
     @Override
     public void removeInvoiceById(Long id) {
+
+        //change Company Balance
+        Optional<Invoice> invoiceById = invoiceRepository.findById(id);
+        Invoice invoice = invoiceById.get();
+        BigDecimal currentBalance = companyService.getCurrentBalance();
+        BigDecimal totalPrice = invoice.getTotalPrice();
+        companyService.editBalance(currentBalance.subtract(totalPrice));
+
         invoiceRepository.deleteById(id);
     }
 

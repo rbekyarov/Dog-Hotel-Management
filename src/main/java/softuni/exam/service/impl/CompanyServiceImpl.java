@@ -53,6 +53,16 @@ public class CompanyServiceImpl implements CompanyService {
                 id);
     }
 
+    @Override
+    public void editBalance(BigDecimal newBalance) {
+        companyRepository.editBalance(newBalance);
+    }
+
+    @Override
+    public BigDecimal getCurrentBalance() {
+        return companyRepository.getCurrentBalance();
+    }
+
 
 }
 

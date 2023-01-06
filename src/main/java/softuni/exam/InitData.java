@@ -86,7 +86,7 @@ public class InitData implements CommandLineRunner {
         }
         //ADD Company
         if (companyRepository.findAll().size() == 0) {
-            companyRepository.save(new Company("DHM Ltd","logo.jpg", "Bulgaria", cityRepository.getById(Long.parseLong("2")), "Tzar Simeon Veliki 1","BG030298796","office@dhm.bg","Bulgaria Bank", "BG18RZBB91550123456789",BigDecimal.valueOf(1000.00), "Ivan Petrov" ));
+            companyRepository.save(new Company("DHM Ltd","logo.png", "Bulgaria", cityRepository.getById(Long.parseLong("2")), "Tzar Simeon Veliki 1","BG030298796","office@dhm.bg","Bulgaria Bank", "BG18RZBB91550123456789",BigDecimal.valueOf(1000.00), "Ivan Petrov" ));
         }
         //ADD PRICES
         if (priceRepository.findAll().size() == 0) {

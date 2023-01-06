@@ -16,5 +16,6 @@ public interface CompanyService {
 
     void editCompany(String name, String logoName, String country, Long citId, String address, String vatNumber, String email, String bankName, String bankAccount, BigDecimal balance, String managerName, Long id);
 
-
+    void editBalance(BigDecimal newBalance);
+    public BigDecimal getCurrentBalance();
 }
