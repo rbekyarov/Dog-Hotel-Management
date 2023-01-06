@@ -3,9 +3,11 @@ package softuni.exam.service.impl;
 import org.springframework.stereotype.Service;
 import softuni.exam.models.entity.Invoice;
 import softuni.exam.models.entity.Reservation;
+import softuni.exam.models.entity.enums.Invoiced;
 import softuni.exam.repository.InvoiceRepository;
 import softuni.exam.service.CompanyService;
 import softuni.exam.service.InvoiceService;
+import softuni.exam.service.ReservationService;
 import softuni.exam.service.UserService;
 
 import javax.servlet.http.HttpSession;
@@ -20,13 +22,15 @@ public class InvoicesServiceImpl implements InvoiceService {
     private final InvoiceRepository invoiceRepository;
     private final UserService userService;
     private final CompanyService companyService;
+    private final ReservationService reservationService;
 
 
-    public InvoicesServiceImpl(InvoiceRepository invoiceRepository, UserService userService, CompanyService companyService) {
+    public InvoicesServiceImpl(InvoiceRepository invoiceRepository, UserService userService, CompanyService companyService, ReservationService reservationService) {
         this.invoiceRepository = invoiceRepository;
 
         this.userService = userService;
         this.companyService = companyService;
+        this.reservationService = reservationService;
     }
 
     @Override
@@ -71,6 +75,9 @@ public class InvoicesServiceImpl implements InvoiceService {
         BigDecimal currentBalance = companyService.getCurrentBalance();
         BigDecimal totalPrice = invoice.getTotalPrice();
         companyService.editBalance(currentBalance.add(totalPrice));
+        //change Reservation Invoiced Status on "YES"
+        reservationService.changeInvoicedStatus(reservation.getId(), Invoiced.YES);
+
     }
 
     @Override
@@ -82,7 +89,9 @@ public class InvoicesServiceImpl implements InvoiceService {
         BigDecimal currentBalance = companyService.getCurrentBalance();
         BigDecimal totalPrice = invoice.getTotalPrice();
         companyService.editBalance(currentBalance.subtract(totalPrice));
-
+        //change Reservation Invoiced Status on "NO"
+        reservationService.changeInvoicedStatus(invoice.getReservationId(), Invoiced.NO);
+        //delete Invoice
         invoiceRepository.deleteById(id);
     }
 

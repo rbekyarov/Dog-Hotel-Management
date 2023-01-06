@@ -33,6 +33,7 @@ public class Reservation extends BaseEntity{
     private User author;
     private LocalDate dateCreate;
     private Company company;
+    private Invoiced invoiced;
 
     public Reservation() {
     }
@@ -225,5 +226,13 @@ public class Reservation extends BaseEntity{
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+    @Enumerated(EnumType.STRING)
+    public Invoiced getInvoiced() {
+        return invoiced;
+    }
+
+    public void setInvoiced(Invoiced invoiced) {
+        this.invoiced = invoiced;
     }
 }

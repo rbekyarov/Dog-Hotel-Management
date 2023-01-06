@@ -124,6 +124,8 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setPrice(new BigDecimal(price));
         reservation.setStatusReservation(statusReservation);
         reservation.setCompany(companyService.findById(1l).get());
+        //set Default InvoicedStatus
+        reservation.setInvoiced(Invoiced.NO);
         // set dateCreated
         reservation.setDateCreate(LocalDate.now());
 
@@ -308,6 +310,11 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
 
+    }
+
+    @Override
+    public void changeInvoicedStatus(Long id, Invoiced invoiced) {
+        reservationRepository.changeInvoiced(id, invoiced);
     }
 
     LocalDate formatterLocal(String date) {

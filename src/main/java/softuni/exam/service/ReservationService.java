@@ -29,4 +29,5 @@ public interface ReservationService {
     void setCellEmptyByReservationID(Long id);
 
     void statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
+    void changeInvoicedStatus(Long id, Invoiced invoiced);
 }
