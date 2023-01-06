@@ -38,6 +38,24 @@
                     </a>
                 </li>
                 </th:block>
+                <th:block th:unless="${session.isEmpty()}">
+                    <li class="nav-item active col-md-6" style="white-space: nowrap;">
+                        <a class="nav-link h5" th:href="@{/view/table/vendorTable}">
+                            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                                    class="glyphicon glyphicon-ok"></span>VENDORS
+                            </button>
+                        </a>
+                    </li>
+                </th:block>
+                <th:block th:unless="${session.isEmpty()}">
+                    <li class="nav-item active col-md-6" style="white-space: nowrap;">
+                        <a class="nav-link h5" th:href="@{/view/table/costTable}">
+                            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                                    class="glyphicon glyphicon-ok"></span>COSTS
+                            </button>
+                        </a>
+                    </li>
+                </th:block>
 
                 <th:block th:unless="${session.isEmpty()}">
                 <li class="nav-item active col-md-6" style="white-space: nowrap;">

@@ -7,10 +7,10 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "costs")
 public class Cost extends BaseEntity {
-    private String partnerName;
+    private Vendor vendor;
     private String description;
     private BigDecimal amount;
-
+    private LocalDate dateCost;
     private User author;
 
     private LocalDate dateCreate;
@@ -18,13 +18,22 @@ public class Cost extends BaseEntity {
     public Cost() {
     }
 
-    @Column
-    public String getPartnerName() {
-        return partnerName;
+    public Cost(Vendor vendor, String description, BigDecimal amount, LocalDate dateCost, User author, LocalDate dateCreate) {
+        this.vendor = vendor;
+        this.description = description;
+        this.amount = amount;
+        this.dateCost = dateCost;
+        this.author = author;
+        this.dateCreate = dateCreate;
     }
 
-    public void setPartnerName(String partnerName) {
-        this.partnerName = partnerName;
+    @ManyToOne
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 
     @Column
@@ -63,4 +72,14 @@ public class Cost extends BaseEntity {
     public void setDateCreate(LocalDate dateCreate) {
         this.dateCreate = dateCreate;
     }
+
+    @Column
+    public LocalDate getDateCost() {
+        return dateCost;
+    }
+
+    public void setDateCost(LocalDate dateCost) {
+        this.dateCost = dateCost;
+    }
+
 }

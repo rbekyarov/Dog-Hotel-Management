@@ -20,9 +20,11 @@ public class InitData implements CommandLineRunner {
     private final ClientRepository clientRepository;
     private final DogRepository dogRepository;
     private final CompanyRepository companyRepository;
+    private final VendorRepository vendorRepository;
+    private final CostRepository costRepository;
 
     public InitData(UserRepository userRepository, BehaviorRepository behaviorRepository, BreedRepository breedRepository, CellRepository cellRepository, CityRepository cityRepository, PriceRepository priceRepository, ClientRepository clientRepository,
-                    DogRepository dogRepository, CompanyRepository companyRepository) {
+                    DogRepository dogRepository, CompanyRepository companyRepository, VendorRepository vendorRepository, CostRepository costRepository) {
         this.userRepository = userRepository;
         this.behaviorRepository = behaviorRepository;
         this.breedRepository = breedRepository;
@@ -32,6 +34,8 @@ public class InitData implements CommandLineRunner {
         this.clientRepository = clientRepository;
         this.dogRepository = dogRepository;
         this.companyRepository = companyRepository;
+        this.vendorRepository = vendorRepository;
+        this.costRepository = costRepository;
     }
 
     @Override
@@ -215,6 +219,26 @@ public class InitData implements CommandLineRunner {
                     behaviorRepository.getById(Long.parseLong("5")),
                     userRepository.getById(Long.parseLong("1")),
                     LocalDate.of(2023, 1, 1)));
+
+        }
+        //ADD VENDORS
+        if (vendorRepository.findAll().size() == 0) {
+            vendorRepository.save(new Vendor("BTK Ltd", "Bulgaria", cityRepository.getById(Long.parseLong("1")), "Blv Ivan Shishman 3", "BGUNCR49739749397","btk@btk.com",  userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 1)));
+            vendorRepository.save(new Vendor("VIK Ltd", "Bulgaria", cityRepository.getById(Long.parseLong("3")), "Ivan Vazov 8", "BGUNC5356569397","vik-stz@vik.com",  userRepository.getById(Long.parseLong("1")),LocalDate.of(2023, 1, 1)));
+            vendorRepository.save(new Vendor("Kaufland", "Bulgaria", cityRepository.getById(Long.parseLong("3")), "Hristo Botev 1", "BGUNCR4922229397","kaufland-bg@kaufland.com",  userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 1)));
+            vendorRepository.save(new Vendor("Bagira OOD", "Bulgaria", cityRepository.getById(Long.parseLong("3")), "Stoletov 31", "BGUNCR9536356397","bagira@bagira.bg",  userRepository.getById(Long.parseLong("1")),LocalDate.of(2023, 1, 1)));
+            vendorRepository.save(new Vendor("METRO", "Bulgaria", cityRepository.getById(Long.parseLong("3")), "General Gurko 9", "BGUNCR64574549397","metro-stz@metro.com",  userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 1)));
+
+        }
+        //ADD COSTS
+        if (costRepository.findAll().size() == 0) {
+            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("4")), "lumber 5 pies", BigDecimal.valueOf(44.26), LocalDate.of(2023, 1, 1),  userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 6)));
+            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("2")), "Water fee", BigDecimal.valueOf(55.50), LocalDate.of(2023, 1, 2),  userRepository.getById(Long.parseLong("1")),LocalDate.of(2023, 1, 6)));
+            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("1")), "Gsm fee", BigDecimal.valueOf(21.00), LocalDate.of(2023, 1, 2),  userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 6)));
+            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("3")), "Dog food", BigDecimal.valueOf(191.99), LocalDate.of(2023, 1, 3),  userRepository.getById(Long.parseLong("1")),LocalDate.of(2023, 1, 6)));
+            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("5")), "Cosmetics for dogs", BigDecimal.valueOf(94.60), LocalDate.of(2023, 1, 4),  userRepository.getById(Long.parseLong("1")),LocalDate.of(2023, 1, 6)));
+            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("4")), "Construction materials", BigDecimal.valueOf(200.01), LocalDate.of(2023, 1, 6),  userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 6)));
+
 
         }
     }

@@ -56,7 +56,7 @@ public abstract class BaseController {
     }
 
     //clientAdd
-    public ModelAndView view(String view, String objectName, Object object, String allCity, List<City> allCityList) {
+    public ModelAndView view(String view, String objectName, Object object, String allCity, List allCityList) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fragments/base-layout");
         modelAndView.addObject("view", view);
