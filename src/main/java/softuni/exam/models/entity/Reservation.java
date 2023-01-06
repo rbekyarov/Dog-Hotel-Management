@@ -32,6 +32,7 @@ public class Reservation extends BaseEntity{
     private StatusReservation statusReservation;
     private User author;
     private LocalDate dateCreate;
+    private Company company;
 
     public Reservation() {
     }
@@ -215,5 +216,14 @@ public class Reservation extends BaseEntity{
 
     public void setDateCreate(LocalDate dateCreate) {
         this.dateCreate = dateCreate;
+    }
+    @ManyToOne
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

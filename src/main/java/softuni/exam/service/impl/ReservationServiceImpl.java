@@ -10,10 +10,7 @@ import softuni.exam.models.entity.Reservation;
 import softuni.exam.models.entity.User;
 import softuni.exam.models.entity.enums.*;
 import softuni.exam.repository.ReservationRepository;
-import softuni.exam.service.CellService;
-import softuni.exam.service.PriceService;
-import softuni.exam.service.ReservationService;
-import softuni.exam.service.UserService;
+import softuni.exam.service.*;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
@@ -31,13 +28,15 @@ public class ReservationServiceImpl implements ReservationService {
     private final ModelMapper modelMapper;
     private final CellService cellService;
     private final UserService userService;
+    private final CompanyService companyService;
 
-    public ReservationServiceImpl(ReservationRepository reservationRepository, PriceService priceService, ModelMapper modelMapper, CellService cellService, UserService userService) {
+    public ReservationServiceImpl(ReservationRepository reservationRepository, PriceService priceService, ModelMapper modelMapper, CellService cellService, UserService userService, CompanyService companyService) {
         this.reservationRepository = reservationRepository;
         this.priceService = priceService;
         this.modelMapper = modelMapper;
         this.cellService = cellService;
         this.userService = userService;
+        this.companyService = companyService;
     }
 
     @Override
@@ -57,7 +56,7 @@ public class ReservationServiceImpl implements ReservationService {
         LocalDate date2 = formatterLocal(substring2);
 
         //set statusReservation
-        StatusReservation statusReservation = StatusReservation.noset;
+        StatusReservation statusReservation = StatusReservation.unknown;
 
         LocalDate dateNow = LocalDate.now();
         if((dateNow.isBefore(date1)) && (dateNow.isBefore(date2))){
@@ -124,6 +123,7 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setTotalPrice(new BigDecimal(totalPrice));
         reservation.setPrice(new BigDecimal(price));
         reservation.setStatusReservation(statusReservation);
+        reservation.setCompany(companyService.findById(1l).get());
         // set dateCreated
         reservation.setDateCreate(LocalDate.now());
 
@@ -161,7 +161,7 @@ public class ReservationServiceImpl implements ReservationService {
         LocalDate date2 = formatterLocal(substring2);
 
         //set statusReservation
-        StatusReservation statusReservation = StatusReservation.noset;
+        StatusReservation statusReservation = StatusReservation.unknown;
 
         LocalDate dateNow = LocalDate.now();
         if((dateNow.isBefore(date1)) && (dateNow.isBefore(date2))){
@@ -284,7 +284,7 @@ public class ReservationServiceImpl implements ReservationService {
             LocalDate endDate = reservation.getEndDate();
             LocalDate dateNow = LocalDate.now();
 
-            StatusReservation statusReservation = StatusReservation.noset;
+            StatusReservation statusReservation = StatusReservation.unknown;
             if((dateNow.isBefore(startDate)) && (dateNow.isBefore(endDate))){
                 statusReservation = StatusReservation.upcoming;
             }else if ((dateNow.isAfter(startDate)) || (dateNow.isEqual(startDate)) &&(dateNow.isBefore(endDate))||(dateNow.isEqual(endDate))){
