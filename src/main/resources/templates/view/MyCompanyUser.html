@@ -12,6 +12,11 @@
             <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
                 <tbody>
                 <tr>
+                    <td>Company logo:</td>
+                    <td> <img src="#" height="120px" width="120px"
+                              th:src="@{${'/image/' + myCompany.logoName}}" ></td>
+                </tr>
+                <tr>
                     <td>Company name:</td>
                     <td><label th:text="${myCompany.name}"></label></td>
                 </tr>
@@ -36,8 +41,16 @@
                     <td><label th:text="${myCompany.email}"></label></td>
                 </tr>
                 <tr>
+                    <td>Bank Name:</td>
+                    <td><label th:text="${myCompany.bankName}"></label></td>
+                </tr>
+                <tr>
                     <td>Bank Account:</td>
                     <td><label th:text="${myCompany.bankAccount}"></label></td>
+                </tr>
+                <tr>
+                    <td>Bank Balance:</td>
+                    <td><label th:text="${myCompany.balance}"></label></td>
                 </tr>
                 <tr>
                     <td>Manager Name:</td>
@@ -50,6 +63,9 @@
 
 
         </div>
-
+        <script th:src="@{/libs/tailwindcss.js}"></script>
+        <!--  Flowbite -->
+        <link th:href="@{/libs/flowbite.min.css}" rel="stylesheet" />
+        <script th:src="@{/libs/flowbite.js}"></script>
     </th:block>
 </th:block>

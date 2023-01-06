@@ -11,6 +11,7 @@ import softuni.exam.service.CompanyService;
 import softuni.exam.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -36,15 +37,18 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public void editCompany(String name, String country, Long citId, String address, String vatNumber, String email, String bankAccount, String managerName, Long id) {
+    public void editCompany(String name, String logoName, String country, Long citId, String address, String vatNumber, String email, String bankName, String bankAccount, BigDecimal balance, String managerName, Long id) {
         companyRepository.editCompany(
                 name,
+                logoName,
                 country,
                 citId,
                 address,
                 vatNumber,
                 email,
+                bankName,
                 bankAccount,
+                balance,
                 managerName,
                 id);
     }

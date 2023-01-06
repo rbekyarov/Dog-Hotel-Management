@@ -4,32 +4,50 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "companies")
 public class Company extends BaseEntity{
     private String name;
+
+    private String logoName;
     private String country;
     private City city;
     private String address;
     private String vatNumber;
     private String email;
+    private String bankName;
     private String bankAccount;
+
+    private BigDecimal balance;
     private String managerName;
 
     public Company() {
     }
 
-    public Company(String name, String country, City city, String address, String vatNumber, String email, String bankAccount, String managerName) {
+    public Company(String name, String logoName, String country, City city, String address, String vatNumber, String email, String bankName, String bankAccount, BigDecimal balance, String managerName) {
         this.name = name;
+        this.logoName = logoName;
         this.country = country;
         this.city = city;
         this.address = address;
         this.vatNumber = vatNumber;
         this.email = email;
+        this.bankName = bankName;
         this.bankAccount = bankAccount;
+        this.balance = balance;
         this.managerName = managerName;
     }
+
+    public String getLogoName() {
+        return logoName;
+    }
+
+    public void setLogoName(String logoName) {
+        this.logoName = logoName;
+    }
+
     @Column()
     public String getName() {
         return name;
@@ -93,5 +111,21 @@ public class Company extends BaseEntity{
 
     public void setManagerName(String managerName) {
         this.managerName = managerName;
+    }
+    @Column()
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+    @Column()
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 }
