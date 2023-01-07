@@ -1,7 +1,7 @@
 # Dog-Hotel-Management
 My project  -  this app manages a hotel for dogs.
 
-Using SpringBoot,Spring MVC, JPA, Thymeleaf, MySql, Spring Security, JavaScript
+Using Java, SpringBoot, Spring MVC, JPA, Thymeleaf, MySql, Spring Security, JavaScript
 
 DEMO VIDEO - https://youtu.be/wDdqS93h2EI
 
