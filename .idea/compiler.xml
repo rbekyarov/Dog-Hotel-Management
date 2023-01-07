@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="CarRepairService" />
+        <module name="dogHotelManagement" />
         <module name="DogHotelManagement" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="CarRepairService" options="-parameters" />
       <module name="DogHotelManagement" options="-parameters" />
+      <module name="dogHotelManagement" options="-parameters" />
     </option>
   </component>
 </project>
