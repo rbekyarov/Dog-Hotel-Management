@@ -1,7 +1,11 @@
 # Dog-Hotel-Management
 My project  -  this app manages a hotel for dogs.
 
-Using Java, SpringBoot, Spring MVC, JPA, Thymeleaf, MySql, Spring Security, JavaScript
+Using software technology: Java, SpringBoot, Spring MVC, JPA, Thymeleaf, MySql, Spring Security, JavaScript
+Run:
+You need Mysql server and IntelliJ app.
+For start application only need you change with your 
+mysql user name and password on application.properties file. And start application with Intelij
 
 DEMO VIDEO - https://youtu.be/wDdqS93h2EI
 
