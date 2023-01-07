@@ -3,11 +3,10 @@ package softuni.exam.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import softuni.exam.models.dto.CostDTO;
-import softuni.exam.models.dto.VendorDTO;
 import softuni.exam.models.entity.Cost;
 import softuni.exam.models.entity.User;
-import softuni.exam.models.entity.Vendor;
 import softuni.exam.repository.CostRepository;
+import softuni.exam.service.CompanyService;
 import softuni.exam.service.CostService;
 import softuni.exam.service.UserService;
 
@@ -23,11 +22,13 @@ public class CostServiceImpl implements CostService {
     private final CostRepository costRepository;
     private final ModelMapper modelMapper;
     private final UserService userService;
+    private final CompanyService companyService;
 
-    public CostServiceImpl(CostRepository costRepository, ModelMapper modelMapper, UserService userService) {
+    public CostServiceImpl(CostRepository costRepository, ModelMapper modelMapper, UserService userService, CompanyService companyService) {
         this.costRepository = costRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.companyService = companyService;
     }
 
     @Override
@@ -46,10 +47,21 @@ public class CostServiceImpl implements CostService {
         // set dateCreated
         cost.setDateCreate(LocalDate.now());
         costRepository.save(cost);
+        //change Company Balance
+        BigDecimal currentBalance = companyService.getCurrentBalance();
+        BigDecimal amountCost = costDTO.getAmount();
+        companyService.editBalance(currentBalance.subtract(amountCost));
     }
 
     @Override
     public void removeCostById(Long id) {
+        //change Company Balance
+        Optional<Cost> costOptional = costRepository.findById(id);
+        Cost cost = costOptional.get();
+        BigDecimal amount = cost.getAmount();
+        BigDecimal currentBalance = companyService.getCurrentBalance();
+        companyService.editBalance(currentBalance.add(amount));
+
         costRepository.deleteById(id);
     }
 
@@ -65,6 +77,18 @@ public class CostServiceImpl implements CostService {
         //set dateEdit
         LocalDate dateEdit = LocalDate.now();
 
+        //Company Balance
+        //change Company Balance - return amount, old value
+        Optional<Cost> costOptional = costRepository.findById(id);
+        Cost cost = costOptional.get();
+        BigDecimal oldAmount = cost.getAmount();
+        BigDecimal currentBalance = companyService.getCurrentBalance();
+        companyService.editBalance(currentBalance.add(oldAmount));
+        //change Company Balance -charge new amount
+        BigDecimal currentNewBalance = companyService.getCurrentBalance();
+
+
+        companyService.editBalance(currentNewBalance.subtract(amount));
         costRepository.editCost(
                 vendorId,
                 description,
@@ -73,6 +97,8 @@ public class CostServiceImpl implements CostService {
                 editAuthorId,
                 dateEdit,
                 id);
+
+
     }
 
     //convert String to LocalDate
