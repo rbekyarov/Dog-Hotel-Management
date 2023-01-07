@@ -48,28 +48,29 @@ public class ReservationServiceImpl implements ReservationService {
     public void addReservation(ReservationDTO reservationDTO, HttpSession session) {
         // count date calculate
 
-        String startDate = reservationDTO.getStartDate();
-        String endDate = reservationDTO.getEndDate();
-        String substring1 = startDate.substring(0, 10);
-        String substring2 = endDate.substring(0, 10);
-        LocalDate date1 = formatterLocal(substring1);
-        LocalDate date2 = formatterLocal(substring2);
+        String startDateDTO = reservationDTO.getStartDate();
+        String endDateDTO = reservationDTO.getEndDate();
+        String substring1 = startDateDTO.substring(0, 10);
+        String substring2 = endDateDTO.substring(0, 10);
+        LocalDate startDate = formatterLocal(substring1);
+        LocalDate endDate = formatterLocal(substring2);
 
         //set statusReservation
         StatusReservation statusReservation = StatusReservation.unknown;
 
         LocalDate dateNow = LocalDate.now();
-        if((dateNow.isBefore(date1)) && (dateNow.isBefore(date2))){
+        if ((dateNow.isBefore(startDate)) && (dateNow.isBefore(endDate))) {
             statusReservation = StatusReservation.upcoming;
-        }else if ((dateNow.isAfter(date1)) || (dateNow.isEqual(date1)) &&(dateNow.isBefore(date2))||(dateNow.isEqual(date2))){
+        } else if ((dateNow.isEqual(startDate) || (dateNow.isAfter(startDate))) && ((dateNow.isBefore(endDate)) || (dateNow.isEqual(endDate)))) {
             statusReservation = StatusReservation.active;
-        }else if((dateNow.isAfter(date1))&&(dateNow.isAfter(date2))){
+
+        } else if ((dateNow.isAfter(startDate)) && (dateNow.isAfter(endDate))) {
             statusReservation = StatusReservation.completed;
 
         }
 
 
-        long countOvernightStay = ChronoUnit.DAYS.between(date1, date2);
+        long countOvernightStay = ChronoUnit.DAYS.between(startDate, endDate);
 
 
         Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
@@ -79,7 +80,7 @@ public class ReservationServiceImpl implements ReservationService {
         priceService.findAllPriceById();
 
 
-        price += (int) countOvernightStay  * currentPrice.getPriceOvernightStay().doubleValue();
+        price += (int) countOvernightStay * currentPrice.getPriceOvernightStay().doubleValue();
 
         if (reservationDTO.getFood().name().equals("YES")) {
             price += (int) countOvernightStay * currentPrice.getPriceFood().doubleValue();
@@ -105,21 +106,21 @@ public class ReservationServiceImpl implements ReservationService {
         Reservation reservation = modelMapper.map(reservationDTO, Reservation.class);
         double totalPrice = 0.0;
         Double discount = reservationDTO.getDiscount();
-        if(discount!=null){
-            totalPrice = price -(price*discount/100);
-        }else {
+        if (discount != null) {
+            totalPrice = price - (price * discount / 100);
+        } else {
             totalPrice = price;
-            discount=0.0;
+            discount = 0.0;
         }
 
         Cell cellCurrent = reservationDTO.getCell();
         reservation.setCell(cellCurrent);
-        reservation.setStartDate(date1);
-        reservation.setEndDate(date2);
+        reservation.setStartDate(startDate);
+        reservation.setEndDate(endDate);
         reservation.setDiscount(discount);
         reservation.setClient(reservationDTO.getClient());
         reservation.setDog(reservationDTO.getDog());
-        reservation.setCountOvernightStay((int)countOvernightStay);
+        reservation.setCountOvernightStay((int) countOvernightStay);
         reservation.setTotalPrice(new BigDecimal(totalPrice));
         reservation.setPrice(new BigDecimal(price));
         reservation.setStatusReservation(statusReservation);
@@ -130,7 +131,7 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setDateCreate(LocalDate.now());
 
         Long id = cellCurrent.getId();
-        if(statusReservation.name().equals("active")){
+        if (statusReservation.name().equals("active")) {
             cellService.setCellBusy(id);
         }
         //get and set Author
@@ -150,40 +151,40 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
 
-
     @Override
     public void editReservation(Long reservationId, ReservationEditDTO reservationEditDTO, HttpSession session) {
 
         //Get new Date
-        String startDate = reservationEditDTO.getStartDate();
-        String endDate = reservationEditDTO.getEndDate();
-        String substring1 = startDate.substring(0, 10);
-        String substring2 = endDate.substring(0, 10);
-        LocalDate date1 = formatterLocal(substring1);
-        LocalDate date2 = formatterLocal(substring2);
+        String startDateDto = reservationEditDTO.getStartDate();
+        String endDateDto = reservationEditDTO.getEndDate();
+        String substring1 = startDateDto.substring(0, 10);
+        String substring2 = endDateDto.substring(0, 10);
+        LocalDate startDate = formatterLocal(substring1);
+        LocalDate endDate = formatterLocal(substring2);
 
         //set statusReservation
         StatusReservation statusReservation = StatusReservation.unknown;
 
         LocalDate dateNow = LocalDate.now();
-        if((dateNow.isBefore(date1)) && (dateNow.isBefore(date2))){
+        if ((dateNow.isBefore(startDate)) && (dateNow.isBefore(endDate))) {
             statusReservation = StatusReservation.upcoming;
-        }else if ((dateNow.isAfter(date1)) || (dateNow.isEqual(date1)) &&(dateNow.isBefore(date2))||(dateNow.isEqual(date2))){
+        } else if ((dateNow.isEqual(startDate) || (dateNow.isAfter(startDate))) && ((dateNow.isBefore(endDate)) || (dateNow.isEqual(endDate)))) {
             statusReservation = StatusReservation.active;
-        }else if((dateNow.isAfter(date1))&&(dateNow.isAfter(date2))){
+
+        } else if ((dateNow.isAfter(startDate)) && (dateNow.isAfter(endDate))) {
             statusReservation = StatusReservation.completed;
 
         }
         // Calc Days Stay
-        long countOvernightStay = ChronoUnit.DAYS.between(date1, date2);
-       //Get Actual Prices
+        long countOvernightStay = ChronoUnit.DAYS.between(startDate, endDate);
+        //Get Actual Prices
         Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
         Price currentPrice = allPrices.get();
         Double price = 0.00;
         priceService.findAllPriceById();
 
         //Calculate price and totalPrice
-        price += (int) countOvernightStay  * currentPrice.getPriceOvernightStay().doubleValue();
+        price += (int) countOvernightStay * currentPrice.getPriceOvernightStay().doubleValue();
 
         if (reservationEditDTO.getFood().name().equals("YES")) {
             price += (int) countOvernightStay * currentPrice.getPriceFood().doubleValue();
@@ -210,11 +211,11 @@ public class ReservationServiceImpl implements ReservationService {
 
         //calculate Discount
         Double discount = reservationEditDTO.getDiscount();
-        if(discount!=null){
-            totalPrice = price -(price*discount/100);
-        }else {
+        if (discount != null) {
+            totalPrice = price - (price * discount / 100);
+        } else {
             totalPrice = price;
-            discount=0.0;
+            discount = 0.0;
         }
 
         //Get field
@@ -240,8 +241,8 @@ public class ReservationServiceImpl implements ReservationService {
         reservationRepository.editReservation(
                 clientId,
                 dogId,
-                date1,
-                date2,
+                startDate,
+                endDate,
                 countOvernightStay1,
                 cellId,
                 food,
@@ -262,7 +263,7 @@ public class ReservationServiceImpl implements ReservationService {
         //set Cell Busy
         Cell cellCurrent = reservationEditDTO.getCell();
         Long id = cellCurrent.getId();
-        if(statusReservation.name().equals("active")){
+        if (statusReservation.name().equals("active")) {
             cellService.setCellBusy(id);
         }
     }
@@ -287,24 +288,24 @@ public class ReservationServiceImpl implements ReservationService {
             LocalDate dateNow = LocalDate.now();
 
             StatusReservation statusReservation = StatusReservation.unknown;
-            if((dateNow.isBefore(startDate)) && (dateNow.isBefore(endDate))){
+            if ((dateNow.isBefore(startDate)) && (dateNow.isBefore(endDate))) {
                 statusReservation = StatusReservation.upcoming;
-            }else if ((dateNow.isAfter(startDate)) || (dateNow.isEqual(startDate)) &&(dateNow.isBefore(endDate))||(dateNow.isEqual(endDate))){
+            } else if ((dateNow.isEqual(startDate) || (dateNow.isAfter(startDate))) && ((dateNow.isBefore(endDate)) || (dateNow.isEqual(endDate)))) {
                 statusReservation = StatusReservation.active;
 
-            }else if((dateNow.isAfter(startDate))&&(dateNow.isAfter(endDate))){
+            } else if ((dateNow.isAfter(startDate)) && (dateNow.isAfter(endDate))) {
                 statusReservation = StatusReservation.completed;
 
             }
-            reservationRepository.updateStatusReservation(reservationId,statusReservation);
+            reservationRepository.updateStatusReservation(reservationId, statusReservation);
             //change Cell status
 
             Long cellId = reservation.getCell().getId();
-            if(!statusReservation.name().equals("active")){
+            if (!statusReservation.name().equals("active")) {
 
                 cellService.setCellEmpty(cellId);
 
-            }else {
+            } else {
                 cellService.setCellBusy(cellId);
             }
         }
