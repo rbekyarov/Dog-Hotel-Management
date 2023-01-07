@@ -66,6 +66,14 @@ PRICE LIST:
 
 ![priceList](https://user-images.githubusercontent.com/29566751/211099446-f6563a87-bbfc-444c-a1c0-b6d091737c4b.png)
 
+COSTS LIST:
+
+![CostsList](https://user-images.githubusercontent.com/29566751/211135167-61d3803a-f74d-43a9-8c76-57bc873dd194.png)
+
+VENDOR LIST:
+
+![VendorList](https://user-images.githubusercontent.com/29566751/211135176-0f28b64c-5ba1-4893-936c-1b2f6180d5f2.png)
+
 
 BREED LIST:
 
