@@ -27,14 +27,14 @@
                 </tr>
                 <tr th:each="p : ${prices}">
                     <td th:text="${p.id}"></td>
-                    <td th:text="${p.priceOvernightStay}"></td>
-                    <td th:text="${p.priceFood}"></td>
-                    <td th:text="${p.priceTraining}"></td>
-                    <td th:text="${p.priceBathing}"></td>
-                    <td th:text="${p.priceCombing}"></td>
-                    <td th:text="${p.pricePaws}"></td>
-                    <td th:text="${p.priceEars}"></td>
-                    <td th:text="${p.priceNails}"></td>
+                    <td th:text="${p.priceOvernightStay+'$'}"></td>
+                    <td th:text="${p.priceFood+'$'}"></td>
+                    <td th:text="${p.priceTraining+'$'}"></td>
+                    <td th:text="${p.priceBathing+'$'}"></td>
+                    <td th:text="${p.priceCombing+'$'}"></td>
+                    <td th:text="${p.pricePaws+'$'}"></td>
+                    <td th:text="${p.priceEars+'$'}"></td>
+                    <td th:text="${p.priceNails+'$'}"></td>
                     <td th:text="${p.dateCreate}"></td>
                     <td><a class="nav-link h5" th:href="@{price/edit/{id}(id=*{p.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
