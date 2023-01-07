@@ -86,8 +86,8 @@ public class CompanyController extends BaseController {
         companyDTO.setLogoName(imageUUID);
 
         companyService.editCompany(companyDTO.getName(),
-                companyDTO.getCountry(),
                 imageUUID,
+                companyDTO.getCountry(),
                 companyDTO.getCity().getId(),
                 companyDTO.getAddress(),
                 companyDTO.getVatNumber(),
