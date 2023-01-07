@@ -22,9 +22,11 @@ public class InitData implements CommandLineRunner {
     private final CompanyRepository companyRepository;
     private final VendorRepository vendorRepository;
     private final CostRepository costRepository;
+    private final ReservationRepository reservationRepository;
+    private final InvoiceRepository invoiceRepository;
 
     public InitData(UserRepository userRepository, BehaviorRepository behaviorRepository, BreedRepository breedRepository, CellRepository cellRepository, CityRepository cityRepository, PriceRepository priceRepository, ClientRepository clientRepository,
-                    DogRepository dogRepository, CompanyRepository companyRepository, VendorRepository vendorRepository, CostRepository costRepository) {
+                    DogRepository dogRepository, CompanyRepository companyRepository, VendorRepository vendorRepository, CostRepository costRepository, ReservationRepository reservationRepository, InvoiceRepository invoiceRepository) {
         this.userRepository = userRepository;
         this.behaviorRepository = behaviorRepository;
         this.breedRepository = breedRepository;
@@ -36,6 +38,8 @@ public class InitData implements CommandLineRunner {
         this.companyRepository = companyRepository;
         this.vendorRepository = vendorRepository;
         this.costRepository = costRepository;
+        this.reservationRepository = reservationRepository;
+        this.invoiceRepository = invoiceRepository;
     }
 
     @Override
@@ -238,6 +242,211 @@ public class InitData implements CommandLineRunner {
             costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("3")), "Dog food", BigDecimal.valueOf(191.99), LocalDate.of(2023, 1, 3),  userRepository.getById(Long.parseLong("1")),LocalDate.of(2023, 1, 6)));
             costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("5")), "Cosmetics for dogs", BigDecimal.valueOf(94.60), LocalDate.of(2023, 1, 4),  userRepository.getById(Long.parseLong("1")),LocalDate.of(2023, 1, 6)));
             costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("4")), "Construction materials", BigDecimal.valueOf(200.01), LocalDate.of(2023, 1, 6),  userRepository.getById(Long.parseLong("2")),LocalDate.of(2023, 1, 6)));
+
+
+        }
+
+        //ADD RESERVATION
+        if (reservationRepository.findAll().size() == 0) {
+
+            reservationRepository.save(new Reservation(
+                    clientRepository.getById(Long.parseLong("1")),
+                    dogRepository.getById(Long.parseLong("3")),
+                    LocalDate.of(2023, 1, 1),
+                    LocalDate.of(2023, 1, 3),
+                    2,
+                    cellRepository.getById(Long.parseLong("1")),
+                    Food.YES,
+                    Training.NO,
+                    Bathing.NO,
+                    Combing.NO,
+                    Ears.NO,
+                    Paws.NO,
+                    Nails.NO,
+                    BigDecimal.valueOf(60.00),
+                    5.00,
+                    BigDecimal.valueOf(57.00),
+                    StatusReservation.completed,
+                    userRepository.getById(Long.parseLong("1")),
+                    LocalDate.of(2023, 1, 6),
+                    companyRepository.getById(Long.parseLong("1")),
+                    Invoiced.YES));
+
+            reservationRepository.save(new Reservation(
+                    clientRepository.getById(Long.parseLong("2")),
+                    dogRepository.getById(Long.parseLong("6")),
+                    LocalDate.of(2023, 1, 15),
+                    LocalDate.of(2023, 1, 21),
+                    6,
+                    cellRepository.getById(Long.parseLong("2")),
+                    Food.YES,
+                    Training.YES,
+                    Bathing.YES,
+                    Combing.YES,
+                    Ears.YES,
+                    Paws.YES,
+                    Nails.YES,
+                    BigDecimal.valueOf(217.00),
+                    10.00,
+                    BigDecimal.valueOf(195.30),
+                    StatusReservation.upcoming,
+                    userRepository.getById(Long.parseLong("2")),
+                    LocalDate.of(2023, 1, 6),
+                    companyRepository.getById(Long.parseLong("1")),
+                    Invoiced.NO));
+
+
+            reservationRepository.save(new Reservation(
+                    clientRepository.getById(Long.parseLong("3")),
+                    dogRepository.getById(Long.parseLong("4")),
+                    LocalDate.of(2023, 1, 17),
+                    LocalDate.of(2023, 1, 21),
+                    6,
+                    cellRepository.getById(Long.parseLong("5")),
+                    Food.NO,
+                    Training.YES,
+                    Bathing.NO,
+                    Combing.NO,
+                    Ears.NO,
+                    Paws.NO,
+                    Nails.NO,
+                    BigDecimal.valueOf(88.00),
+                    00.00,
+                    BigDecimal.valueOf(88.30),
+                    StatusReservation.upcoming,
+                    userRepository.getById(Long.parseLong("2")),
+                    LocalDate.of(2023, 1, 6),
+                    companyRepository.getById(Long.parseLong("1")),
+                    Invoiced.YES));
+
+
+            reservationRepository.save(new Reservation(
+                    clientRepository.getById(Long.parseLong("4")),
+                    dogRepository.getById(Long.parseLong("7")),
+                    LocalDate.of(2023, 1, 6),
+                    LocalDate.of(2023, 1, 7),
+                    1,
+                    cellRepository.getById(Long.parseLong("6")),
+                    Food.YES,
+                    Training.YES,
+                    Bathing.YES,
+                    Combing.YES,
+                    Ears.YES,
+                    Paws.YES,
+                    Nails.YES,
+                    BigDecimal.valueOf(67.00),
+                    8.00,
+                    BigDecimal.valueOf(61.64),
+                    StatusReservation.active,
+                    userRepository.getById(Long.parseLong("1")),
+                    LocalDate.of(2023, 1, 6),
+                    companyRepository.getById(Long.parseLong("1")),
+                    Invoiced.NO));
+
+
+            reservationRepository.save(new Reservation(
+                    clientRepository.getById(Long.parseLong("2")),
+                    dogRepository.getById(Long.parseLong("5")),
+                    LocalDate.of(2023, 1, 6),
+                    LocalDate.of(2023, 2, 11),
+                    13,
+                    cellRepository.getById(Long.parseLong("7")),
+                    Food.YES,
+                    Training.NO,
+                    Bathing.NO,
+                    Combing.NO,
+                    Ears.NO,
+                    Paws.NO,
+                    Nails.NO,
+                    BigDecimal.valueOf(398.00),
+                    20.00,
+                    BigDecimal.valueOf(318.40),
+                    StatusReservation.upcoming,
+                    userRepository.getById(Long.parseLong("2")),
+                    LocalDate.of(2023, 1, 6),
+                    companyRepository.getById(Long.parseLong("1")),
+                    Invoiced.NO));
+
+
+            reservationRepository.save(new Reservation(
+                    clientRepository.getById(Long.parseLong("4")),
+                    dogRepository.getById(Long.parseLong("7")),
+                    LocalDate.of(2023, 1, 6),
+                    LocalDate.of(2023, 1, 7),
+                    1,
+                    cellRepository.getById(Long.parseLong("6")),
+                    Food.YES,
+                    Training.YES,
+                    Bathing.NO,
+                    Combing.NO,
+                    Ears.NO,
+                    Paws.NO,
+                    Nails.NO,
+                    BigDecimal.valueOf(908.00),
+                    20.00,
+                    BigDecimal.valueOf(726.40),
+                    StatusReservation.upcoming,
+                    userRepository.getById(Long.parseLong("1")),
+                    LocalDate.of(2023, 1, 7),
+                    companyRepository.getById(Long.parseLong("1")),
+                    Invoiced.NO));
+
+
+
+        }
+        //ADD INVOICES
+        if (invoiceRepository.findAll().size() == 0) {
+
+            invoiceRepository.save(new Invoice(
+                    clientRepository.getById(Long.parseLong("1")),
+                    dogRepository.getById(Long.parseLong("3")),
+                    LocalDate.of(2023, 1, 1),
+                    LocalDate.of(2023, 1, 3),
+                    2,
+                    cellRepository.getById(Long.parseLong("1")),
+                    Food.YES,
+                    Training.NO,
+                    Bathing.NO,
+                    Combing.NO,
+                    Ears.NO,
+                    Paws.NO,
+                    Nails.NO,
+                    BigDecimal.valueOf(60.00),
+                    5.00,
+                    BigDecimal.valueOf(57.00),
+                    companyRepository.getById(Long.parseLong("1")),
+                    userRepository.getById(Long.parseLong("1")),
+                    LocalDate.of(2023, 1, 6),
+                    Long.parseLong("1")));
+
+
+            invoiceRepository.save(new Invoice(
+                    clientRepository.getById(Long.parseLong("3")),
+                    dogRepository.getById(Long.parseLong("4")),
+                    LocalDate.of(2023, 1, 17),
+                    LocalDate.of(2023, 1, 21),
+                    6,
+                    cellRepository.getById(Long.parseLong("5")),
+                    Food.NO,
+                    Training.YES,
+                    Bathing.NO,
+                    Combing.NO,
+                    Ears.NO,
+                    Paws.NO,
+                    Nails.NO,
+                    BigDecimal.valueOf(88.00),
+                    00.00,
+                    BigDecimal.valueOf(88.30),
+                    companyRepository.getById(Long.parseLong("1")),
+                    userRepository.getById(Long.parseLong("2")),
+                    LocalDate.of(2023, 1, 6),
+                    Long.parseLong("3")));
+
+
+
+
+
+
 
 
         }

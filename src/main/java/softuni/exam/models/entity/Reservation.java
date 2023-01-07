@@ -38,7 +38,7 @@ public class Reservation extends BaseEntity{
     public Reservation() {
     }
 
-    public Reservation(Client client, Dog dog, LocalDate startDate, LocalDate endDate, Integer countOvernightStay, Cell cell, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, StatusReservation statusReservation, User author, LocalDate dateCreate) {
+    public Reservation(Client client, Dog dog, LocalDate startDate, LocalDate endDate, Integer countOvernightStay, Cell cell, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, StatusReservation statusReservation, User author, LocalDate dateCreate, Company company, Invoiced invoiced) {
         this.client = client;
         this.dog = dog;
         this.startDate = startDate;
@@ -58,6 +58,8 @@ public class Reservation extends BaseEntity{
         this.statusReservation = statusReservation;
         this.author = author;
         this.dateCreate = dateCreate;
+        this.company = company;
+        this.invoiced = invoiced;
     }
 
     @ManyToOne

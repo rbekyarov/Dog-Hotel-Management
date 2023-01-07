@@ -36,6 +36,29 @@ public class Invoice extends BaseEntity {
     public Invoice() {
     }
 
+    public Invoice(Client client, Dog dog, LocalDate startDate, LocalDate endDate, Integer countStay, Cell cell, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, Company company, User author, LocalDate dateCreate, Long reservationId) {
+        this.client = client;
+        this.dog = dog;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.countStay = countStay;
+        this.cell = cell;
+        this.food = food;
+        this.training = training;
+        this.bathing = bathing;
+        this.combing = combing;
+        this.ears = ears;
+        this.paws = paws;
+        this.nails = nails;
+        this.price = price;
+        this.discount = discount;
+        this.totalPrice = totalPrice;
+        this.company = company;
+        this.author = author;
+        this.dateCreate = dateCreate;
+        this.reservationId = reservationId;
+    }
+
     @ManyToOne
     public Client getClient() {
         return client;
