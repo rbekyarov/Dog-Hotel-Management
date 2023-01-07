@@ -347,7 +347,7 @@ public class InitData implements CommandLineRunner {
             reservationRepository.save(new Reservation(
                     clientRepository.getById(Long.parseLong("2")),
                     dogRepository.getById(Long.parseLong("5")),
-                    LocalDate.of(2023, 1, 6),
+                    LocalDate.of(2023, 1, 29),
                     LocalDate.of(2023, 2, 11),
                     13,
                     cellRepository.getById(Long.parseLong("7")),
