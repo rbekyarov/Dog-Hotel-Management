@@ -52,6 +52,10 @@ EDIT RESERVATION:
 
 ![editreservation](https://user-images.githubusercontent.com/29566751/211098955-df79883e-040d-4b48-8303-8efa4ba0459c.png)
 
+RESERVATION DETAILS:
+
+![viewReservation](https://user-images.githubusercontent.com/29566751/211162294-63964024-46a7-4d65-a0e2-b060ec7c58cd.png)
+
 
 INVOICE LIST:
 
