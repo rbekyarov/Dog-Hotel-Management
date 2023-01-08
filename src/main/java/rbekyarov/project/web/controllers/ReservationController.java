@@ -115,7 +115,7 @@ public class ReservationController extends BaseController {
         //set Cell Empty
         reservationService.setCellEmptyByReservationID(id);
         //
-        var reservationDTO = reservationService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
+        Reservation reservationDTO = reservationService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
         List<Client> allClients = clientService.findAll();
 

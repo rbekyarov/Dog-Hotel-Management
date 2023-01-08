@@ -92,7 +92,7 @@ public class DogController extends BaseController {
     public ModelAndView getDogDetail(@PathVariable("id") Long id,
                                      ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        var dogDTO =
+        Dog dogDTO =
                 dogService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
         List<Behavior> allBehaviors = dogService.getAllBehaviors();

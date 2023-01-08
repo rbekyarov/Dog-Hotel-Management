@@ -12,14 +12,22 @@
 
             <form class="form_add" enctype="multipart/form-data" th:action="@{{id}/edit(id=*{id})}"
                   th:method="post"
-                  th:object="${dogDTO}"
+                  th:object="${dogDTO}">
 
-            >
                 <div class="form-group">
+                    <label class="text-white font-weight-bold"></label>
                     <label>Dog Name:</label><br>
-                    <input type="text" id="description" th:field="*{name}" placeholder="Please enter Name"/><br>
 
-                    <label class="file-label" for="fileImage">Add Image</label>
+                    <input type="text" id="description" th:field="*{name}" placeholder="Please enter Name"/><br>
+                    <label>BirthDate:</label>
+                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                               th:field="*{birthDate}" id="date"/>
+                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                        </div>
+                    </div>
+                    <label class="file-label" for="fileImage">Image</label>
                     <div class="mb-4">
                         <input class="file-input" type="file" id="fileImage" name="fileImage">
                     </div>
@@ -30,14 +38,7 @@
                     <input type="hidden" name="imgName"  th:value="${dogDTO.imageName}"><br>
 
 
-                    <label for="date">BirthDate:</label>
-                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
-                               th:field="*{birthDate}" id="date" placeholder="Date"/>
-                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                        </div>
-                    </div>
+
                     <label>Weight:</label><br>
                     <input type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight"/><br>
 
@@ -95,9 +96,7 @@
             </form>
         </div>
 
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
         <script th:src="@{/assets/moment/moment.min.js}"></script>
         <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
         <script>
@@ -112,11 +111,13 @@
                     today: 'far fa-calendar-check-o',
                     clear: 'far fa-trash',
                     close: 'far fa-times'
-                } });
+                }
+            });
 
             $('#datetimepicker1').datetimepicker({
                 format: 'DD/MM/YYYY'
             });
+
         </script>
         <script>
             /* $(document).ready(function(){
@@ -145,7 +146,3 @@
         </script>
     </th:block>
 </th:block>
-
-<!--<a class="btn btn-danger btn-lg btn3d" th:href="@{/behavior/{id}/edit(id=*{id})}">
-    Submit Behavior
-</a>-->
