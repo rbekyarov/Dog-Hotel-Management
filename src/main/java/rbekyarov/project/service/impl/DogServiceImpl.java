@@ -2,6 +2,8 @@ package rbekyarov.project.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import rbekyarov.project.models.dto.DogEditDTO;
 import rbekyarov.project.models.entity.*;
 import rbekyarov.project.models.entity.enums.Microchip;
 import rbekyarov.project.models.entity.enums.Passport;
@@ -10,11 +12,17 @@ import rbekyarov.project.models.dto.DogDTO;
 import rbekyarov.project.service.*;
 import rbekyarov.project.repository.DogRepository;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
+import static rbekyarov.project.web.controllers.DogController.uploadDir;
 
 @Service
 public class DogServiceImpl implements DogService {
@@ -42,9 +50,21 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void addDog(DogDTO dogDTO, HttpSession session) {
+    public void addDog(DogDTO dogDTO, MultipartFile file,String imgName, HttpSession session) throws IOException {
 
         Dog dogNew = modelMapper.map(dogDTO, Dog.class);
+
+        //
+        String imageUUID;
+        if(!file.isEmpty()) {
+            imageUUID = file.getOriginalFilename();
+            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
+            Files.write(fileNameAndPath, file.getBytes());
+        }else {
+            imageUUID = imgName;
+        }
+        dogDTO.setImageName(imageUUID);
+        //
 
         String date = dogDTO.getBirthDate();
 
@@ -68,22 +88,35 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void editDog(String name, String birthDate, Integer weight, Long breedId, Sex sex, Passport passport, Microchip microchip, Long clientId, Long behaviorId, String imageName, Long id, HttpSession session) {
+    public void editDog(Long id, DogEditDTO dogEditDTO, String imgName, MultipartFile file, HttpSession session) throws IOException {
+
+        //image upload
+        String imageUUID;
+        if(!file.isEmpty()) {
+            imageUUID = file.getOriginalFilename();
+            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
+            Files.write(fileNameAndPath, file.getBytes());
+        }else {
+            imageUUID = imgName;
+        }
+        dogEditDTO.setImageName(imageUUID);
+
+        // set author
         User editAuthor = userService.getAuthorFromSession(session);
         Long editAuthorId = editAuthor.getId();
+
         //set dateEdit
         LocalDate dateEdit = LocalDate.now();
-
-        dogRepository.editDog(name,
-                formatterLocal(birthDate),
-                weight,
-                breedId,
-                sex,
-                passport,
-                microchip,
-                clientId,
-                behaviorId,
-                imageName,
+        dogRepository.editDog(dogEditDTO.getName(),
+                formatterLocal(dogEditDTO.getBirthDate()),
+                dogEditDTO.getWeight(),
+                dogEditDTO.getBreed().getId(),
+                dogEditDTO.getSex(),
+                dogEditDTO.getPassport(),
+                dogEditDTO.getMicrochip(),
+                dogEditDTO.getClient().getId(),
+                dogEditDTO.getBehavior().getId(),
+                dogEditDTO.getImageName(),
                 id,
                 editAuthorId,
                 dateEdit);

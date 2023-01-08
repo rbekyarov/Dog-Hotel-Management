@@ -112,8 +112,9 @@ public class ReservationController extends BaseController {
     public ModelAndView getReservationDetail(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
 
 
-        //set Cell Empy
+        //set Cell Empty
         reservationService.setCellEmptyByReservationID(id);
+        //
         var reservationDTO = reservationService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
         List<Client> allClients = clientService.findAll();

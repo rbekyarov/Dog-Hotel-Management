@@ -73,18 +73,10 @@ public class DogController extends BaseController {
     public String addDog(@Valid DogDTO dogDTO,
                          @RequestParam("fileImage") MultipartFile file,
                          @RequestParam("imgName")String imgName, HttpSession session) throws IOException {
-        String imageUUID;
-        if(!file.isEmpty()) {
-            imageUUID = file.getOriginalFilename();
-            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
-            Files.write(fileNameAndPath, file.getBytes());
-        }else {
-            imageUUID = imgName;
-        }
-        dogDTO.setImageName(imageUUID);
 
 
-        dogService.addDog(dogDTO,session);
+
+        dogService.addDog(dogDTO,file,imgName,session);
 
         return "redirect:/view/table/dogTable";
     }
@@ -127,27 +119,8 @@ public class DogController extends BaseController {
     @PostMapping("view/table/dog/edit/{id}/edit")
     public String editDog(@PathVariable("id") Long id, DogEditDTO dogEditDTO, @RequestParam("fileImage") MultipartFile file,
                           @RequestParam("imgName")String imgName, HttpSession session) throws ObjectNotFoundException, IOException {
-        String imageUUID;
-        if(!file.isEmpty()) {
-            imageUUID = file.getOriginalFilename();
-            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
-            Files.write(fileNameAndPath, file.getBytes());
-        }else {
-            imageUUID = imgName;
-        }
-        dogEditDTO.setImageName(imageUUID);
-        dogService.editDog(dogEditDTO.getName(),
-                dogEditDTO.getBirthDate(),
-                dogEditDTO.getWeight(),
-                dogEditDTO.getBreed().getId(),
-                dogEditDTO.getSex(),
-                dogEditDTO.getPassport(),
-                dogEditDTO.getMicrochip(),
-                dogEditDTO.getClient().getId(),
-                dogEditDTO.getBehavior().getId(),
-                imageUUID,
-                id,
-                session);
+
+        dogService.editDog(id, dogEditDTO,imgName,file, session);
 
         return "redirect:/view/table/dogTable";
     }
