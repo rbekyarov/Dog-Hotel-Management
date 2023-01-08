@@ -27,19 +27,19 @@ public interface PriceService {
                    BigDecimal priceNails,
                    Long id);
 
-    Double getFoodCurrentPrice();
+    BigDecimal getFoodCurrentPrice();
 
-    Double getBathingCurrentPrice();
+    BigDecimal getBathingCurrentPrice();
 
-    Double getTrainingCurrentPrice();
+    BigDecimal getTrainingCurrentPrice();
 
-    Double getCombingCurrentPrice();
+    BigDecimal getCombingCurrentPrice();
 
-    Double getEarsCurrentPrice();
+    BigDecimal getEarsCurrentPrice();
 
-    Double getPawsCurrentPrice();
+    BigDecimal getPawsCurrentPrice();
 
-    Double getNailsCurrentPrice();
+    BigDecimal getNailsCurrentPrice();
 
-    Double getOvernightStayCurrentPrice();
+    BigDecimal getOvernightStayCurrentPrice();
 }

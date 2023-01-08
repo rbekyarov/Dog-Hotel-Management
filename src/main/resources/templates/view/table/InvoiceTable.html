@@ -30,13 +30,13 @@
                 </tr>
                 <tr th:each="i : ${invoices}">
                     <td th:text="${i.id}"></td>
-                    <td th:text="${i.client.firstName +' '+ i.client.lastName +' '+ i.client.email +' '+i.client.phone}"></td>
-                    <td th:text="${i.dog.name + ' Weight:' +i.dog.weight + ' '+i.dog.breed.breedName}"></td>
+                    <td th:text="${i.clientName +' '+ i.clientEmail +' '+i.clientPhone}"></td>
+                    <td th:text="${'Dog '+ i.dogName + ' '+'House:' +i.cellCode + ' '+'Day: '+i.countStay}"></td>
                     <td th:text="${i.reservationId}"></td>
                     <td th:text="${i.price+'$'}"></td>
                     <td th:text="${i.discount}"></td>
                     <td th:text="${i.totalPrice +'$'}"></td>
-                    <td th:text="${i.author.username}"></td>
+                    <td th:text="${i.authorName}"></td>
                     <td th:text="${i.dateCreate}"></td>
 
                     <td><a class="nav-link h5" th:href="@{invoice/view/{id}(id=*{i.id})}">

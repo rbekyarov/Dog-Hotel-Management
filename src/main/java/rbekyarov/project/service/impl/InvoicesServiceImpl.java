@@ -3,12 +3,10 @@ package rbekyarov.project.service.impl;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.models.entity.Reservation;
+import rbekyarov.project.models.entity.User;
 import rbekyarov.project.models.entity.enums.Invoiced;
-import rbekyarov.project.service.CompanyService;
+import rbekyarov.project.service.*;
 import rbekyarov.project.repository.InvoiceRepository;
-import rbekyarov.project.service.InvoiceService;
-import rbekyarov.project.service.ReservationService;
-import rbekyarov.project.service.UserService;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
@@ -23,14 +21,16 @@ public class InvoicesServiceImpl implements InvoiceService {
     private final UserService userService;
     private final CompanyService companyService;
     private final ReservationService reservationService;
+    private final PriceService priceService;
 
 
-    public InvoicesServiceImpl(InvoiceRepository invoiceRepository, UserService userService, CompanyService companyService, ReservationService reservationService) {
+    public InvoicesServiceImpl(InvoiceRepository invoiceRepository, UserService userService, CompanyService companyService, ReservationService reservationService, PriceService priceService) {
         this.invoiceRepository = invoiceRepository;
 
         this.userService = userService;
         this.companyService = companyService;
         this.reservationService = reservationService;
+        this.priceService = priceService;
     }
 
     @Override
@@ -43,14 +43,23 @@ public class InvoicesServiceImpl implements InvoiceService {
 
         Invoice invoice = new Invoice();
         //get Data from Reservation
-        invoice.setClient(reservation.getClient());
-        invoice.setDog(reservation.getDog());
-        invoice.setDog(reservation.getDog());
-        invoice.setStartDate(reservation.getStartDate());
-        invoice.setEndDate(reservation.getEndDate());
+           //Company
+        invoice.setCompanyName(reservation.getCompany().getName());
+        invoice.setCompanyCityName(reservation.getCompany().getCity().getName());
+        invoice.setCompanyAddress(reservation.getCompany().getAddress());
+        invoice.setCompanyVatNumber(reservation.getCompany().getVatNumber());
+        invoice.setCompanyEmail(reservation.getCompany().getEmail());
+        invoice.setCompanyBankName(reservation.getCompany().getBankName());
+        invoice.setCompanyBankAccount(reservation.getCompany().getBankAccount());
+        invoice.setCompanyBankAccount(reservation.getCompany().getBankAccount());
+        invoice.setCompanyManagerName(reservation.getCompany().getManagerName());
+
+        invoice.setDogName(reservation.getDog().getName());
+        invoice.setCellCode(reservation.getCell().getCode());
+        invoice.setReservationId(reservation.getId());
         invoice.setCountStay(reservation.getCountOvernightStay());
-        invoice.setCountStay(reservation.getCountOvernightStay());
-        invoice.setCell(reservation.getCell());
+
+           //Enum
         invoice.setFood(reservation.getFood());
         invoice.setTraining(reservation.getTraining());
         invoice.setBathing(reservation.getBathing());
@@ -58,17 +67,35 @@ public class InvoicesServiceImpl implements InvoiceService {
         invoice.setEars(reservation.getEars());
         invoice.setPaws(reservation.getPaws());
         invoice.setNails(reservation.getNails());
+           // PRICES
         invoice.setPrice(reservation.getPrice());
         invoice.setDiscount(reservation.getDiscount());
         invoice.setTotalPrice(reservation.getTotalPrice());
-        invoice.setCompany(reservation.getCompany());
-        invoice.setReservationId(reservation.getId());
+
+           //CURRENT PRICES
+        invoice.setCountStayPrice(priceService.getOvernightStayCurrentPrice());
+        invoice.setFoodPrice(priceService.getFoodCurrentPrice());
+        invoice.setTrainingPrice(priceService.getTrainingCurrentPrice());
+        invoice.setBathingPrice(priceService.getBathingCurrentPrice());
+        invoice.setCombingPrice(priceService.getCombingCurrentPrice());
+        invoice.setEarsPrice(priceService.getEarsCurrentPrice());
+        invoice.setPawsPrice(priceService.getPawsCurrentPrice());
+        invoice.setNailsPrice(priceService.getNailsCurrentPrice());
+
+        //CLIENT
+        invoice.setClientAddress(reservation.getClient().getAddress());
+        invoice.setClientCityName(reservation.getClient().getCity().getName());
+        invoice.setClientEmail(reservation.getClient().getEmail());
+        invoice.setClientPhone(reservation.getClient().getPhone());
+        invoice.setClientName(reservation.getClient().getFirstName()+" "+reservation.getClient().getLastName());
+
 
         // set dateCreated
         invoice.setDateCreate(LocalDate.now());
 
         //get and set Author
-        invoice.setAuthor(userService.getAuthorFromSession(session));
+        User authorFromSession = userService.getAuthorFromSession(session);
+        invoice.setAuthorName(userService.getAuthorFromSession(session).getUsername());
         //create invoice
         invoiceRepository.save(invoice);
         //change Company Balance

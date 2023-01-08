@@ -24,7 +24,7 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public List<Price> findAllPriceById() {
-        return priceRepository.findAllPricesById();
+        return priceRepository.findAllPrices();
     }
 
     @Override
@@ -63,55 +63,47 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public Double getFoodCurrentPrice() {
-        BigDecimal foodCurrentPrice = priceRepository.getFoodCurrentPrice(getLastPricesId());
-        return foodCurrentPrice.doubleValue();
+    public BigDecimal getFoodCurrentPrice() {
+        return priceRepository.getFoodCurrentPrice(getLastPricesId());
     }
 
     @Override
-    public Double getBathingCurrentPrice() {
-        BigDecimal foodCurrentPrice = priceRepository.getBathingCurrentPrice(getLastPricesId());
-        return foodCurrentPrice.doubleValue();
+    public BigDecimal getBathingCurrentPrice() {
+        return priceRepository.getBathingCurrentPrice(getLastPricesId());
     }
 
     @Override
-    public Double getTrainingCurrentPrice() {
-        BigDecimal trainingCurrentPrice = priceRepository.getTrainingCurrentPrice(getLastPricesId());
-        return trainingCurrentPrice.doubleValue();
+    public BigDecimal getTrainingCurrentPrice() {
+        return priceRepository.getTrainingCurrentPrice(getLastPricesId());
     }
 
     @Override
-    public Double getCombingCurrentPrice() {
-        BigDecimal combingCurrentPrice = priceRepository.getCombingCurrentPrice(getLastPricesId());
-        return combingCurrentPrice.doubleValue();
+    public BigDecimal getCombingCurrentPrice() {
+        return priceRepository.getCombingCurrentPrice(getLastPricesId());
     }
 
     @Override
-    public Double getEarsCurrentPrice() {
-        BigDecimal earsCurrentPrice = priceRepository.getEarsCurrentPrice(getLastPricesId());
-        return earsCurrentPrice.doubleValue();
+    public BigDecimal getEarsCurrentPrice() {
+        return priceRepository.getEarsCurrentPrice(getLastPricesId());
     }
 
     @Override
-    public Double getPawsCurrentPrice() {
-        BigDecimal pawsCurrentPrice = priceRepository.getPawsCurrentPrice(getLastPricesId());
-        return pawsCurrentPrice.doubleValue();
+    public BigDecimal getPawsCurrentPrice() {
+        return priceRepository.getPawsCurrentPrice(getLastPricesId());
     }
 
     @Override
-    public Double getNailsCurrentPrice() {
-        BigDecimal nailsCurrentPrice = priceRepository.getNailsCurrentPrice(getLastPricesId());
-        return nailsCurrentPrice.doubleValue();
+    public BigDecimal getNailsCurrentPrice() {
+        return priceRepository.getNailsCurrentPrice(getLastPricesId());
     }
 
     @Override
-    public Double getOvernightStayCurrentPrice() {
-        BigDecimal overnightStayCurrentPrice = priceRepository.getOvernightStayCurrentPrice(getLastPricesId());
-        return overnightStayCurrentPrice.doubleValue();
+    public BigDecimal getOvernightStayCurrentPrice() {
+        return priceRepository.getOvernightStayCurrentPrice(getLastPricesId());
     }
 
-    public int getLastPricesId(){
-        List<Price> allPrices = priceRepository.findAllPricesById();
-        return allPrices.size();
+    public Long getLastPricesId(){
+        List<Price> allPrices = priceRepository.findAllPrices();
+        return Long.valueOf(allPrices.size());
     }
 }

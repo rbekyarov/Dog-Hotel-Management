@@ -1,5 +1,6 @@
 package rbekyarov.project.web.controllers;
 
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,16 @@ public class InvoiceController extends BaseController {
         modelAndView.addObject("invoices", invoices);
         return super.view("/view/table/invoiceTable", "invoices", invoices);
     }
+    @GetMapping("view/table/invoice/view/{id}")
+    public ModelAndView getInvoiceView(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
 
+        Invoice invoice = invoiceService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
+        modelAndView.addObject("invoice", invoice);
+
+
+        return super.view("/view/table/invoiceView", "invoice", invoice);
+
+    }
 
     @GetMapping("view/table/invoice/remove/{id}")
     public String removeInvoice(@PathVariable Long id) {

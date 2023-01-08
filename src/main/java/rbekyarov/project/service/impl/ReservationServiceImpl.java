@@ -107,6 +107,10 @@ public class ReservationServiceImpl implements ReservationService {
         double totalPrice = 0.0;
         Double discount = reservationDTO.getDiscount();
         if (discount != null) {
+            //discount can not be over 20%
+            if (discount > 20.00) {
+                discount = 20.00;
+            }
             totalPrice = price - (price * discount / 100);
         } else {
             totalPrice = price;
