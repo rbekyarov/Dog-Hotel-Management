@@ -51,11 +51,13 @@ public class Invoice extends BaseEntity {
     private String clientAddress;
     private String clientCityName;
     private String clientPhone;
+    private CancellationInvoice cancellationInvoice;
+    private LocalDate cancelledDateInvoice;
 
     public Invoice() {
     }
 
-    public Invoice(String companyName, String companyCityName, String companyAddress, String companyVatNumber, String companyEmail, String companyBankName, String companyBankAccount, String companyManagerName, String dogName, Integer countStay, String cellCode, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, String authorName, LocalDate dateCreate, Long reservationId, BigDecimal countStayPrice, BigDecimal foodPrice, BigDecimal trainingPrice, BigDecimal bathingPrice, BigDecimal combingPrice, BigDecimal earsPrice, BigDecimal pawsPrice, BigDecimal nailsPrice, String clientName, String clientEmail, String clientAddress, String clientCityName, String clientPhone) {
+    public Invoice(String companyName, String companyCityName, String companyAddress, String companyVatNumber, String companyEmail, String companyBankName, String companyBankAccount, String companyManagerName, String dogName, Integer countStay, String cellCode, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, String authorName, LocalDate dateCreate, Long reservationId, BigDecimal countStayPrice, BigDecimal foodPrice, BigDecimal trainingPrice, BigDecimal bathingPrice, BigDecimal combingPrice, BigDecimal earsPrice, BigDecimal pawsPrice, BigDecimal nailsPrice, String clientName, String clientEmail, String clientAddress, String clientCityName, String clientPhone, CancellationInvoice cancellationInvoice,LocalDate cancelledDateInvoice) {
         this.companyName = companyName;
         this.companyCityName = companyCityName;
         this.companyAddress = companyAddress;
@@ -93,6 +95,8 @@ public class Invoice extends BaseEntity {
         this.clientAddress = clientAddress;
         this.clientCityName = clientCityName;
         this.clientPhone = clientPhone;
+        this.cancellationInvoice = cancellationInvoice;
+        this.cancelledDateInvoice = cancelledDateInvoice;
     }
 
     @Column
@@ -390,5 +394,21 @@ public class Invoice extends BaseEntity {
 
     public void setClientPhone(String clientPhone) {
         this.clientPhone = clientPhone;
+    }
+    @Enumerated(EnumType.STRING)
+    public CancellationInvoice getCancellationInvoice() {
+        return cancellationInvoice;
+    }
+
+    public void setCancellationInvoice(CancellationInvoice cancellationInvoice) {
+        this.cancellationInvoice = cancellationInvoice;
+    }
+
+    public LocalDate getCancelledDateInvoice() {
+        return cancelledDateInvoice;
+    }
+
+    public void setCancelledDateInvoice(LocalDate cancelledDateInvoice) {
+        this.cancelledDateInvoice = cancelledDateInvoice;
     }
 }

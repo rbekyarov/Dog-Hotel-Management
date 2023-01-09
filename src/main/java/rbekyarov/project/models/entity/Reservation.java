@@ -60,6 +60,8 @@ public class Reservation extends BaseEntity{
         this.invoiced = invoiced;
     }
 
+
+
     @ManyToOne
     public Client getClient() {
         return client;

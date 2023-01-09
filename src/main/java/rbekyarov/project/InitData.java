@@ -433,7 +433,9 @@ public class InitData implements CommandLineRunner {
                     "ivanov@gmail.com",
                     "Lulin 15",
                     "Sofia",
-                    "0886335241"));
+                    "0886335241",
+                    CancellationInvoice.NO,
+                    LocalDate.of(2023, 1, 7)));
 
 
             invoiceRepository.save(new Invoice(
@@ -473,7 +475,9 @@ public class InitData implements CommandLineRunner {
                     "vgeorgiev@outlook.com",
                     "Zagorka 16",
                     "Stara Zagora",
-                    "0887325579"));
+                    "0887325579",
+                    CancellationInvoice.NO,
+                    LocalDate.of(2023, 1, 7)));
 
 
         }

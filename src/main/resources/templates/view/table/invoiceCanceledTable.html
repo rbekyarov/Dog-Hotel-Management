@@ -3,17 +3,12 @@
 
         <div class="table-center">
             <div class="page-header">
-                <h1>Invoices List</h1>
+                <h1>Canceled Invoices</h1>
             </div>
 
-            <a class="nav-link h5" th:href="@{/view/table/reservationTable}">
+            <a class="nav-link h5" th:href="@{/view/table/invoiceTable}">
                 <button type="button" class="btn btn-danger btn-lg btnTable"><span
                         class="glyphicon glyphicon-ok"></span>Back
-                </button>
-            </a>
-            <a class="nav-link h5" th:href="@{/view/table/invoiceCanceledTable}">
-                <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                        class="glyphicon glyphicon-ok"></span>Cancelled Invoice
                 </button>
             </a>
 
@@ -26,8 +21,7 @@
                     <th>Price:</th>
                     <th>Discount %</th>
                     <th>Total Price:</th>
-                    <th>Author:</th>
-                    <th>Created:</th>
+                    <th>Data Annulled:</th>
                     <th></th>
                     <th></th>
 
@@ -41,7 +35,6 @@
                     <td th:text="${i.price+'$'}"></td>
                     <td th:text="${i.discount}"></td>
                     <td th:text="${i.totalPrice +'$'}"></td>
-                    <td th:text="${i.authorName}"></td>
                     <td th:text="${i.dateCreate}"></td>
 
                     <td><a class="nav-link h5" th:href="@{invoice/view/{id}(id=*{i.id})}">
@@ -49,11 +42,7 @@
                                 class="glyphicon glyphicon-ok"></span>View
                         </button>
                     </a></td>
-                    <td><a class="nav-link h5" th:href="@{invoice/remove/{id}(id=*{i.id})}">
-                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                                class="glyphicon glyphicon-ok"></span>Cancellation
-                        </button>
-                    </a></td>
+
                 </tr>
             </table>
         </div>

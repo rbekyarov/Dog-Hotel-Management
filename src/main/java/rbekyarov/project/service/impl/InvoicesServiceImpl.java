@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.User;
+import rbekyarov.project.models.entity.enums.CancellationInvoice;
 import rbekyarov.project.models.entity.enums.Invoiced;
 import rbekyarov.project.service.*;
 import rbekyarov.project.repository.InvoiceRepository;
@@ -36,6 +37,16 @@ public class InvoicesServiceImpl implements InvoiceService {
     @Override
     public List<Invoice> findAllInvoice() {
         return invoiceRepository.findAllInvoice();
+    }
+
+    @Override
+    public List<Invoice> findAllRealInvoice() {
+        return invoiceRepository.findAllRealInvoice();
+    }
+
+    @Override
+    public List<Invoice> findAllCancelledInvoice() {
+        return invoiceRepository.findAllCancelledInvoice();
     }
 
     @Override
@@ -88,13 +99,13 @@ public class InvoicesServiceImpl implements InvoiceService {
         invoice.setClientEmail(reservation.getClient().getEmail());
         invoice.setClientPhone(reservation.getClient().getPhone());
         invoice.setClientName(reservation.getClient().getFirstName()+" "+reservation.getClient().getLastName());
-
+        //set default canceledStatus "NO"
+        invoice.setCancellationInvoice(CancellationInvoice.NO);
 
         // set dateCreated
         invoice.setDateCreate(LocalDate.now());
 
         //get and set Author
-        User authorFromSession = userService.getAuthorFromSession(session);
         invoice.setAuthorName(userService.getAuthorFromSession(session).getUsername());
         //create invoice
         invoiceRepository.save(invoice);
@@ -105,10 +116,11 @@ public class InvoicesServiceImpl implements InvoiceService {
         //change Reservation Invoiced Status on "YES"
         reservationService.changeInvoicedStatus(reservation.getId(), Invoiced.YES);
 
+
     }
 
     @Override
-    public void removeInvoiceById(Long id) {
+    public void cancellationInvoiceById(Long id) {
 
         //change Company Balance
         Optional<Invoice> invoiceById = invoiceRepository.findById(id);
@@ -118,8 +130,10 @@ public class InvoicesServiceImpl implements InvoiceService {
         companyService.editBalance(currentBalance.subtract(totalPrice));
         //change Reservation Invoiced Status on "NO"
         reservationService.changeInvoicedStatus(invoice.getReservationId(), Invoiced.NO);
-        //delete Invoice
-        invoiceRepository.deleteById(id);
+        invoice.setCancelledDateInvoice(LocalDate.now());
+        //set Invoice - cancellation
+        invoiceRepository.setCanceledOnInvoiced(invoice.getId());
+
     }
 
     @Override

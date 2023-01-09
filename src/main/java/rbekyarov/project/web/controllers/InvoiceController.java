@@ -21,9 +21,16 @@ public class InvoiceController extends BaseController {
     @GetMapping("/view/table/invoiceTable")
     public ModelAndView invoiceTable(ModelAndView modelAndView) {
 
-        List<Invoice> invoices = invoiceService.findAllInvoice();
+        List<Invoice> invoices = invoiceService.findAllRealInvoice();
         modelAndView.addObject("invoices", invoices);
         return super.view("/view/table/invoiceTable", "invoices", invoices);
+    }
+    @GetMapping("/view/table/invoiceCanceledTable")
+    public ModelAndView invoiceCancelledTable(ModelAndView modelAndView) {
+
+        List<Invoice> invoices = invoiceService.findAllCancelledInvoice();
+        modelAndView.addObject("invoices", invoices);
+        return super.view("/view/table/invoiceCanceledTable", "invoices", invoices);
     }
     @GetMapping("view/table/invoice/view/{id}")
     public ModelAndView getInvoiceView(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
@@ -37,10 +44,10 @@ public class InvoiceController extends BaseController {
     }
 
     @GetMapping("view/table/invoice/remove/{id}")
-    public String removeInvoice(@PathVariable Long id) {
+    public String cancellationInvoice(@PathVariable Long id) {
 
         //delete invoice
-        invoiceService.removeInvoiceById(id);
+        invoiceService.cancellationInvoiceById(id);
 
         return "redirect:/view/table/invoiceTable";
     }

@@ -10,12 +10,14 @@ import java.util.Optional;
 
 public interface InvoiceService {
     List<Invoice> findAllInvoice();
+    List<Invoice> findAllRealInvoice();
+    List<Invoice> findAllCancelledInvoice();
 
 
 
     void addInvoice(Reservation reservation, HttpSession session);
 
-    void removeInvoiceById(Long id);
+    void cancellationInvoiceById(Long id);
 
     Optional<Invoice> findById(Long id);
 
