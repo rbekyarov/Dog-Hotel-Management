@@ -141,6 +141,16 @@ public class InvoicesServiceImpl implements InvoiceService {
         return invoiceRepository.findById(id);
     }
 
+    @Override
+    public List<Invoice> listInvoiceById(Long invoiceNumber) {
+        return invoiceRepository.listInvoiceById(invoiceNumber);
+    }
+
+    @Override
+    public List<Invoice> listInvoiceByEmail(String clientEmail) {
+        return invoiceRepository.listInvoiceByEmail(clientEmail);
+    }
+
 }
 
 

@@ -10,6 +10,22 @@
                         class="glyphicon glyphicon-ok"></span>Add Vendor
                 </button>
             </a>
+            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:600px">
+                <thead>
+                <tr>
+                    <th scope="col"><form th:action="@{/view/table/searchVendorName}" method="get">
+                        <input type="text" name="vendorName" th:value="${vendorName}"  placeholder="Find by Vendor Name" size="20" >
+                        <button type="submit" class="btn btn-info" >Search</button>
+                    </form></th>
+                    <th scope="col"><form th:action="@{/view/table/searchVatNumber}" method="get">
+                        <input type="text" name="vendorVatNumber" th:value="${vendorVatNumber}"  placeholder="Find by Vat Number" size="20" >
+                        <button type="submit" class="btn btn-info" >Search</button>
+                    </form></th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
             <table class=table>
                 <tr>
                     <th>No</th>

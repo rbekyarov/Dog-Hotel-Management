@@ -2,12 +2,11 @@ package rbekyarov.project.web.controllers;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.VendorDTO;
 import rbekyarov.project.models.entity.City;
+import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.Vendor;
 import rbekyarov.project.service.VendorService;
 import rbekyarov.project.models.dto.VendorEditDTO;
@@ -15,6 +14,7 @@ import rbekyarov.project.service.CityService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -82,5 +82,28 @@ public class VendorController extends BaseController {
                 id);
 
         return "redirect:/view/table/vendorTable";
+    }
+
+    @RequestMapping(path = {"/","/view/table/searchVendorName"})
+    public ModelAndView search(ModelAndView modelAndView,@RequestParam("vendorName") String vendorName) {
+        List<Vendor> vendors = new ArrayList<>();
+        if(!vendorName.equals("")) {
+            vendors = vendorService.listVendorByName(vendorName);
+            modelAndView.addObject("vendors", vendors);
+        }else {
+            vendors = vendorService.findAllVendor();
+            modelAndView.addObject("vendors", vendors);}
+        return super.view("/view/table/vendorTable", "vendors", vendors);
+    }
+    @RequestMapping(path = {"/","/view/table/searchVatNumber"})
+    public ModelAndView searchClientEmail(ModelAndView modelAndView,@RequestParam("vendorVatNumber") String vendorVatNumber) {
+        List<Vendor> vendors = new ArrayList<>();
+        if(!vendorVatNumber.equals("")) {
+            vendors = vendorService.listVendorByVatNumber(vendorVatNumber);
+            modelAndView.addObject("vendors", vendors);
+        }else {
+            vendors = vendorService.findAllVendor();
+            modelAndView.addObject("vendors", vendors);}
+        return super.view("/view/table/vendorTable", "vendors", vendors);
     }
 }

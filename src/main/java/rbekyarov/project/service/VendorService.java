@@ -19,4 +19,7 @@ public interface VendorService {
 
     void editVendor(String name, String country, Long cityId, String address, String vatNumber, String email, HttpSession session, Long id);
 
+    List<Vendor> listVendorByVatNumber(String vendorVatNumber);
+
+    List<Vendor> listVendorByName(String vendorName);
 }

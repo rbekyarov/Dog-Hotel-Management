@@ -27,4 +27,8 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     @Modifying
     @Query("update Invoice as i SET i.cancellationInvoice='YES' where i.id=:id ")
     void setCanceledOnInvoiced( @Param("id") Long id);
+    @Query("select i from Invoice as i where i.id=:invoiceNumber")
+    List<Invoice> listInvoiceById(@Param("invoiceNumber") Long invoiceNumber);
+    @Query("select i from Invoice as i where i.clientEmail=:clientEmail")
+    List<Invoice> listInvoiceByEmail(@Param("clientEmail")String clientEmail);
 }

@@ -71,4 +71,14 @@ public class VendorServiceImpl implements VendorService {
                 dateEdit,
                 id);
     }
+
+    @Override
+    public List<Vendor> listVendorByVatNumber(String vendorVatNumber) {
+        return vendorRepository.listVendorByVatNumber(vendorVatNumber);
+    }
+
+    @Override
+    public List<Vendor> listVendorByName(String vendorName) {
+        return vendorRepository.listVendorByName(vendorName);
+    }
 }

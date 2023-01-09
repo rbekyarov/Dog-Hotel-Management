@@ -30,4 +30,8 @@ public interface VendorRepository extends JpaRepository<Vendor, Long> {
                       @Param("editAuthorId") Long editAuthorId,
                       @Param("dateEdit") LocalDate dateEdit,
                       @Param("id") Long id );
+    @Query("select v from Vendor as v where v.vatNumber=:vendorVatNumber order by v.id asc ")
+    List<Vendor> listVendorByVatNumber(@Param("vendorVatNumber")String vendorVatNumber);
+    @Query("select v from Vendor as v where v.name=:vendorName order by v.id asc ")
+    List<Vendor> listVendorByName(@Param("vendorName")String vendorName);
 }

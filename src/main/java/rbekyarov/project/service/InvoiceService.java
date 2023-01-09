@@ -21,4 +21,7 @@ public interface InvoiceService {
 
     Optional<Invoice> findById(Long id);
 
+    List<Invoice> listInvoiceById(Long invoiceNumber);
+
+    List<Invoice> listInvoiceByEmail(String clientEmail);
 }
