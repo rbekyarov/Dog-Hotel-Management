@@ -1,13 +1,14 @@
 package rbekyarov.project.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
-import rbekyarov.project.models.entity.Cell;
-import rbekyarov.project.models.entity.Price;
-import rbekyarov.project.models.entity.Reservation;
-import rbekyarov.project.models.entity.User;
+import rbekyarov.project.models.entity.*;
 import rbekyarov.project.models.entity.enums.*;
 import rbekyarov.project.repository.ReservationRepository;
 import rbekyarov.project.service.*;
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -325,6 +327,25 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Reservation> listReservationByClientEmail(String clientEmail) {
         return reservationRepository.listReservationByClientEmail(clientEmail);
+    }
+
+    @Override
+    public Page<Reservation> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Reservation> list;
+        List<Reservation> reservations = reservationRepository.findAllReservationById();
+        if (reservations.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, reservations.size());
+            list = reservations.subList(startItem, toIndex);
+        }
+
+        Page<Reservation> reservationPage = new PageImpl<Reservation>(list, PageRequest.of(currentPage, pageSize), reservations.size());
+
+        return reservationPage;
     }
 
     LocalDate formatterLocal(String date) {

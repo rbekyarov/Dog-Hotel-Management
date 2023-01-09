@@ -1,7 +1,10 @@
 package rbekyarov.project.service;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.PriceDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Price;
 
 import java.math.BigDecimal;
@@ -42,4 +45,5 @@ public interface PriceService {
     BigDecimal getNailsCurrentPrice();
 
     BigDecimal getOvernightStayCurrentPrice();
+    Page<Price> findPaginated(Pageable pageable);
 }

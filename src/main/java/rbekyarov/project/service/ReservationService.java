@@ -1,7 +1,10 @@
 package rbekyarov.project.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.enums.Invoiced;
 
@@ -29,4 +32,5 @@ public interface ReservationService {
     void changeInvoicedStatus(Long id, Invoiced invoiced);
 
     List<Reservation> listReservationByClientEmail(String clientEmail);
+    Page<Reservation> findPaginated(Pageable pageable);
 }

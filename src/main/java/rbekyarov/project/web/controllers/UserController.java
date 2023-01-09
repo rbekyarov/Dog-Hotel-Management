@@ -2,16 +2,16 @@ package rbekyarov.project.web.controllers;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.UserDTO;
 import rbekyarov.project.models.dto.UserEditDTO;
 import rbekyarov.project.models.dto.UserLoginDTO;
 import rbekyarov.project.models.dto.UserRegisterDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.models.entity.enums.Role;
 import rbekyarov.project.service.UserService;
@@ -20,6 +20,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class UserController extends BaseController {
@@ -163,11 +165,23 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/view/table/userTable")
-    public ModelAndView userTable(ModelAndView modelAndView) {
+    public ModelAndView userTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 
-        List<User> users = userService.findAllUserById();
+        final int currentPage = page.orElse(1);
+        final int pageSize = size.orElse(5);
+
+        Page<User> users = userService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+        int totalPages = users.getTotalPages();
+        List<Integer> pageNumbers = null;
+        if (totalPages > 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
         modelAndView.addObject("users", users);
-        return super.view("/view/table/userTable", "users", users);
+        return super.view("/view/table/userTable", "users", users,"pageNumbers", pageNumbers);
     }
 
     @GetMapping("view/table/user/edit/{id}")

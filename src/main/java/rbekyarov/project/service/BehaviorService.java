@@ -1,5 +1,7 @@
 package rbekyarov.project.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.BehaviorDTO;
 import rbekyarov.project.models.entity.Behavior;
 
@@ -18,5 +20,5 @@ public interface BehaviorService {
 
     void editBehaviors(String name, Long id,HttpSession session);
 
-
+    Page<Behavior> findPaginated(Pageable pageable);
 }

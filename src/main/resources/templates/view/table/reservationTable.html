@@ -85,6 +85,12 @@
                     </th:block>
                 </tr>
             </table>
+            <div th:if="${reservations.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{reservationTable(size=${reservations.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==reservations.number + 1} ? active"></a>
+            </div>
         </div>
     </th:block>
 </th:block>

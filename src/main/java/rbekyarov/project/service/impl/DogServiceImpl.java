@@ -1,6 +1,10 @@
 package rbekyarov.project.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import rbekyarov.project.models.dto.DogEditDTO;
@@ -19,10 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static rbekyarov.project.web.controllers.DogController.uploadDir;
 
@@ -149,6 +150,25 @@ public class DogServiceImpl implements DogService {
     @Override
     public List<Dog> listDogByClientEmail(String clientEmail) {
         return dogRepository.listDogByClientEmail(clientEmail);
+    }
+
+    @Override
+    public Page<Dog> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Dog> list;
+        List<Dog> dogs = dogRepository.findAll();
+        if (dogs.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, dogs.size());
+            list = dogs.subList(startItem, toIndex);
+        }
+
+        Page<Dog> dogsPage = new PageImpl<Dog>(list, PageRequest.of(currentPage, pageSize), dogs.size());
+
+        return dogsPage;
     }
 
     //convert String to LocalDate

@@ -1,6 +1,8 @@
 package rbekyarov.project.web.controllers;
 
 import javassist.tools.rmi.ObjectNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,6 +18,8 @@ import rbekyarov.project.service.DogService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class ClientController extends BaseController {
@@ -31,13 +35,21 @@ public class ClientController extends BaseController {
 
 
     @GetMapping("/view/table/clientTable")
-    public ModelAndView clientTable(ModelAndView modelAndView) {
+    public ModelAndView clientTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+        final int currentPage = page.orElse(1);
+        final int pageSize = size.orElse(5);
+        Page<Client> clients = clientService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
 
-        List<Client> clients = clientService.findAllClientById();
-
-        //dogService.findAllDogByClient(id)
+        int totalPages = clients.getTotalPages();
+        List<Integer> pageNumbers = null;
+        if (totalPages > 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
         modelAndView.addObject("clients", clients);
-        return super.view("/view/table/clientTable", "clients", clients);
+        return super.view("/view/table/clientTable", "clients", clients,"pageNumbers", pageNumbers);
     }
 
     @GetMapping("/view/add/clientAdd")

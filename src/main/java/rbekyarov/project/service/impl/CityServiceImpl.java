@@ -1,8 +1,13 @@
 package rbekyarov.project.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.CityDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.City;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.repository.CityRepository;
@@ -11,6 +16,7 @@ import rbekyarov.project.service.UserService;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,5 +64,24 @@ public class CityServiceImpl implements CityService {
         //set dateEdit
         LocalDate dateEdit = LocalDate.now();
         cityRepository.editCity(code, id, name,editAuthorId,dateEdit);
+    }
+
+    @Override
+    public Page<City> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<City> list;
+        List<City> cities = cityRepository.findAll();
+        if (cities.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, cities.size());
+            list = cities.subList(startItem, toIndex);
+        }
+
+        Page<City> citiesPage = new PageImpl<City>(list, PageRequest.of(currentPage, pageSize), cities.size());
+
+        return citiesPage;
     }
 }

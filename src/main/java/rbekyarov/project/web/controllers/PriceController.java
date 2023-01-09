@@ -1,18 +1,25 @@
 package rbekyarov.project.web.controllers;
 
 import javassist.tools.rmi.ObjectNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.PriceDTO;
 import rbekyarov.project.models.dto.PriceEditDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Price;
 import rbekyarov.project.service.PriceService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class PriceController extends BaseController {
@@ -23,11 +30,23 @@ public class PriceController extends BaseController {
     }
 
     @GetMapping("/view/table/priceTable")
-    public ModelAndView priceTable(ModelAndView modelAndView) {
+    public ModelAndView priceTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 
-        List<Price> prices = priceService.findAllPriceById();
+        final int currentPage = page.orElse(1);
+        final int pageSize = size.orElse(5);
+
+        Page<Price> prices = priceService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+        int totalPages = prices.getTotalPages();
+        List<Integer> pageNumbers = null;
+        if (totalPages > 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
         modelAndView.addObject("prices", prices);
-        return super.view("/view/table/priceTable", "prices", prices);
+        return super.view("/view/table/priceTable", "prices", prices,"pageNumbers", pageNumbers);
     }
     @GetMapping("/view/table/priceTableUser")
     public ModelAndView priceTableUser(ModelAndView modelAndView) {

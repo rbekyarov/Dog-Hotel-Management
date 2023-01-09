@@ -1,7 +1,10 @@
 package rbekyarov.project.service;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.CityDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.City;
 
 import javax.servlet.http.HttpSession;
@@ -18,4 +21,5 @@ public interface CityService {
     Optional<City> findById(Long id);
 
     void editCity(String code, Long id , String name, HttpSession session);
+    Page<City> findPaginated(Pageable pageable);
 }

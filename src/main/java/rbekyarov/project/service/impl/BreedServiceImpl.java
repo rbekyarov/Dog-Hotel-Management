@@ -1,8 +1,13 @@
 package rbekyarov.project.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.BreedDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Breed;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.repository.BreedRepository;
@@ -11,6 +16,7 @@ import rbekyarov.project.service.UserService;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,5 +66,24 @@ public class BreedServiceImpl implements BreedService {
         //set dateEdit
         LocalDate dateEdit = LocalDate.now();
         breedRepository.editBreed(name, id,editAuthorId,dateEdit);
+    }
+
+    @Override
+    public Page<Breed> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Breed> list;
+        List<Breed> breeds = breedRepository.findAll();
+        if (breeds.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, breeds.size());
+            list = breeds.subList(startItem, toIndex);
+        }
+
+        Page<Breed> breedsPage = new PageImpl<Breed>(list, PageRequest.of(currentPage, pageSize), breeds.size());
+
+        return breedsPage;
     }
 }

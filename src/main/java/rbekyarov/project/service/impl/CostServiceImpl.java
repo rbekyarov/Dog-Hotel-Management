@@ -1,7 +1,12 @@
 package rbekyarov.project.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.service.CompanyService;
 import rbekyarov.project.models.dto.CostDTO;
@@ -14,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,6 +105,25 @@ public class CostServiceImpl implements CostService {
                 id);
 
 
+    }
+
+    @Override
+    public Page<Cost> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Cost> list;
+        List<Cost> costs = costRepository.findAll();
+        if (costs.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, costs.size());
+            list = costs.subList(startItem, toIndex);
+        }
+
+        Page<Cost> costsPage = new PageImpl<Cost>(list, PageRequest.of(currentPage, pageSize), costs.size());
+
+        return costsPage;
     }
 
     //convert String to LocalDate

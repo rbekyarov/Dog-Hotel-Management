@@ -1,14 +1,20 @@
 package rbekyarov.project.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.PriceDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Price;
 import rbekyarov.project.repository.PriceRepository;
 import rbekyarov.project.service.PriceService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -100,6 +106,25 @@ public class PriceServiceImpl implements PriceService {
     @Override
     public BigDecimal getOvernightStayCurrentPrice() {
         return priceRepository.getOvernightStayCurrentPrice(getLastPricesId());
+    }
+
+    @Override
+    public Page<Price> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Price> list;
+        List<Price> prices = priceRepository.findAllPrices();
+        if (prices.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, prices.size());
+            list = prices.subList(startItem, toIndex);
+        }
+
+        Page<Price> pricesPage = new PageImpl<Price>(list, PageRequest.of(currentPage, pageSize), prices.size());
+
+        return pricesPage;
     }
 
     public Long getLastPricesId(){

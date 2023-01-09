@@ -1,10 +1,13 @@
 package rbekyarov.project.web.controllers;
 
 import javassist.tools.rmi.ObjectNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.VendorDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.City;
 import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.Vendor;
@@ -16,6 +19,9 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class VendorController extends BaseController {
@@ -28,10 +34,22 @@ public class VendorController extends BaseController {
     }
 
     @GetMapping("/view/table/vendorTable")
-    public ModelAndView vendorTable(ModelAndView modelAndView) {
-        List<Vendor> vendors = vendorService.findAllVendor();
+    public ModelAndView vendorTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+        final int currentPage = page.orElse(1);
+        final int pageSize = size.orElse(5);
+
+        Page<Vendor> vendors = vendorService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+        int totalPages = vendors.getTotalPages();
+        List<Integer> pageNumbers = null;
+        if (totalPages > 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
         modelAndView.addObject("vendors", vendors);
-        return super.view("/view/table/vendorTable", "vendors", vendors);
+        return super.view("/view/table/vendorTable", "vendors", vendors,"pageNumbers", pageNumbers);
     }
 
     @GetMapping("/view/add/vendorAdd")

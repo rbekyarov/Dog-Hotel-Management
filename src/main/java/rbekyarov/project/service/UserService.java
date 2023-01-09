@@ -1,7 +1,10 @@
 package rbekyarov.project.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.UserDTO;
 import rbekyarov.project.models.dto.UserRegisterDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.models.entity.enums.Role;
 
@@ -23,6 +26,7 @@ public interface UserService {
     void editUser(Role role, Long id);
 
     void addUser(UserDTO userDTO);
+    Page<User> findPaginated(Pageable pageable);
 
     void removeUserById(Long id);
 

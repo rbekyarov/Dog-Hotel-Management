@@ -1,6 +1,11 @@
 package rbekyarov.project.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.User;
@@ -12,6 +17,7 @@ import rbekyarov.project.repository.InvoiceRepository;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -149,6 +155,25 @@ public class InvoicesServiceImpl implements InvoiceService {
     @Override
     public List<Invoice> listInvoiceByEmail(String clientEmail) {
         return invoiceRepository.listInvoiceByEmail(clientEmail);
+    }
+
+    @Override
+    public Page<Invoice> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Invoice> list;
+        List<Invoice> invoices = invoiceRepository.findAllRealInvoice();
+        if (invoices.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, invoices.size());
+            list = invoices.subList(startItem, toIndex);
+        }
+
+        Page<Invoice> invoicesPage = new PageImpl<Invoice>(list, PageRequest.of(currentPage, pageSize), invoices.size());
+
+        return invoicesPage;
     }
 
 }

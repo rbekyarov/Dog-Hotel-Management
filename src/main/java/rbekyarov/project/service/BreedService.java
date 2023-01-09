@@ -1,6 +1,9 @@
 package rbekyarov.project.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.BreedDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Breed;
 
 import javax.servlet.http.HttpSession;
@@ -17,5 +20,6 @@ public interface BreedService {
     Optional<Breed> findById(Long id);
 
     void editBreeds(String name, Long id, HttpSession session);
+    Page<Breed> findPaginated(Pageable pageable);
 
 }

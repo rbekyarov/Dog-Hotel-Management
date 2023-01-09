@@ -1,6 +1,8 @@
 package rbekyarov.project.web.controllers;
 
 import javassist.tools.rmi.ObjectNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class DogController extends BaseController {
@@ -38,10 +43,24 @@ public class DogController extends BaseController {
     }
 
     @GetMapping("/view/table/dogTable")
-    public ModelAndView dogTable(ModelAndView modelAndView) {
-        List<Dog> dogs = dogService.findAllDogById();
+    public ModelAndView dogTable(ModelAndView  modelAndView , @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+
+
+        final int currentPage = page.orElse(1);
+        final int pageSize = size.orElse(5);
+
+        Page<Dog> dogs = dogService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+        int totalPages = dogs.getTotalPages();
+        List<Integer> pageNumbers = null;
+        if (totalPages > 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
         modelAndView.addObject("dogs", dogs);
-        return super.view("/view/table/dogTable", "dogs", dogs);
+        return super.view("/view/table/dogTable", "dogs", dogs,"pageNumbers", pageNumbers);
     }
 
     @GetMapping("/view/add/dogAdd")

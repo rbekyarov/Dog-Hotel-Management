@@ -1,8 +1,13 @@
 package rbekyarov.project.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.CellDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Cell;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.models.entity.enums.Status;
@@ -12,6 +17,7 @@ import rbekyarov.project.service.UserService;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,5 +82,24 @@ public class CellServiceImpl implements CellService {
     @Override
     public void setCellEmpty(Long id) {
         cellRepository.setCellEmpty(id);
+    }
+
+    @Override
+    public Page<Cell> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Cell> list;
+        List<Cell> cells = cellRepository.findAll();
+        if (cells.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, cells.size());
+            list = cells.subList(startItem, toIndex);
+        }
+
+        Page<Cell> cellsPage = new PageImpl<Cell>(list, PageRequest.of(currentPage, pageSize), cells.size());
+
+        return cellsPage;
     }
 }

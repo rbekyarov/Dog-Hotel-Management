@@ -1,6 +1,8 @@
 package rbekyarov.project.service;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import rbekyarov.project.models.dto.DogDTO;
@@ -43,4 +45,5 @@ public interface DogService {
     List<Dog> findAllDogByClient(Long id);
 
     List<Dog> listDogByClientEmail(String clientEmail);
+    Page<Dog> findPaginated(Pageable pageable);
 }

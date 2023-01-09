@@ -1,5 +1,8 @@
 package rbekyarov.project.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.models.entity.Reservation;
 
@@ -24,4 +27,5 @@ public interface InvoiceService {
     List<Invoice> listInvoiceById(Long invoiceNumber);
 
     List<Invoice> listInvoiceByEmail(String clientEmail);
+    Page<Invoice> findPaginated(Pageable pageable);
 }

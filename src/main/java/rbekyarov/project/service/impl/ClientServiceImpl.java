@@ -1,8 +1,13 @@
 package rbekyarov.project.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.ClientDTO;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Client;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.repository.CellRepository;
@@ -12,6 +17,7 @@ import rbekyarov.project.service.UserService;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,6 +96,25 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public List<Client> listClientByEmail(String clientEmail) {
         return clientRepository.listClientByEmail(clientEmail);
+    }
+
+    @Override
+    public Page<Client> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Client> list;
+        List<Client> clients = clientRepository.findAll();
+        if (clients.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, clients.size());
+            list = clients.subList(startItem, toIndex);
+        }
+
+        Page<Client> clientsPage = new PageImpl<Client>(list, PageRequest.of(currentPage, pageSize), clients.size());
+
+        return clientsPage;
     }
 
 }

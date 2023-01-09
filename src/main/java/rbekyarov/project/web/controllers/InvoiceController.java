@@ -1,18 +1,24 @@
 package rbekyarov.project.web.controllers;
 
 import javassist.tools.rmi.ObjectNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.service.InvoiceService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 @Controller
@@ -24,11 +30,23 @@ public class InvoiceController extends BaseController {
     }
 
     @GetMapping("/view/table/invoiceTable")
-    public ModelAndView invoiceTable(ModelAndView modelAndView) {
+    public ModelAndView invoiceTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 
-        List<Invoice> invoices = invoiceService.findAllRealInvoice();
+        final int currentPage = page.orElse(1);
+        final int pageSize = size.orElse(5);
+
+        Page<Invoice> invoices = invoiceService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+        int totalPages = invoices.getTotalPages();
+        List<Integer> pageNumbers = null;
+        if (totalPages > 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
         modelAndView.addObject("invoices", invoices);
-        return super.view("/view/table/invoiceTable", "invoices", invoices);
+        return super.view("/view/table/invoiceTable", "invoices", invoices,"pageNumbers", pageNumbers);
     }
     @GetMapping("/view/table/invoiceCanceledTable")
     public ModelAndView invoiceCancelledTable(ModelAndView modelAndView) {
