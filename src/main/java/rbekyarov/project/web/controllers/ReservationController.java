@@ -2,9 +2,7 @@ package rbekyarov.project.web.controllers;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
@@ -142,5 +140,17 @@ public class ReservationController extends BaseController {
 
 
         return "redirect:/view/table/reservationTable";
+    }
+
+    @RequestMapping(path = {"/","/view/table/searchReservationByClientEmail"})
+    public ModelAndView searchClientEmail(ModelAndView modelAndView,@RequestParam("clientEmail") String clientEmail) {
+        List<Reservation> reservations = new ArrayList<>();
+        if(!clientEmail.equals("")) {
+            reservations = reservationService.listReservationByClientEmail(clientEmail);
+            modelAndView.addObject("reservations", reservations);
+        }else {
+            reservations = reservationService.findAllReservationById();
+            modelAndView.addObject("reservations", reservations);}
+        return super.view("/view/table/reservationTable", "reservations", reservations);
     }
 }

@@ -36,4 +36,8 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     List<Client> findAllByDogsIsNotNull();
 @Query(value ="select c.id,c.first_name,  c.last_name, d.id,d.name  from clients as c join dogs as d on c.id=d.client_id", nativeQuery = true)
     List<Client> findAllClientForReservation();
+    @Query("select c from Client as c where c.phone=:clientPhone order by c.id asc ")
+    List<Client> listClientByPhone(@Param("clientPhone") String clientPhone);
+    @Query("select c from Client as c where c.email=:clientEmail order by c.id asc ")
+    List<Client> listClientByEmail(@Param("clientEmail")String clientEmail);
 }

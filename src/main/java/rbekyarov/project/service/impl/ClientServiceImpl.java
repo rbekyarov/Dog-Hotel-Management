@@ -82,4 +82,14 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.findAll();
     }
 
+    @Override
+    public List<Client> listClientByPhone(String clientPhone) {
+        return clientRepository.listClientByPhone(clientPhone);
+    }
+
+    @Override
+    public List<Client> listClientByEmail(String clientEmail) {
+        return clientRepository.listClientByEmail(clientEmail);
+    }
+
 }

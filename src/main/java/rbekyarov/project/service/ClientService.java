@@ -28,4 +28,7 @@ public interface ClientService {
 
     List<Client> findAll();
 
+    List<Client> listClientByPhone(String clientPhone);
+
+    List<Client> listClientByEmail(String clientEmail);
 }

@@ -10,6 +10,10 @@
                         class="glyphicon glyphicon-ok"></span>Add Reservation
                 </button>
             </a>
+            <form th:action="@{/view/table/searchReservationByClientEmail}" method="get">
+                <input type="text" name="clientEmail" th:value="${clientEmail}"  placeholder="Find by Client Mail" size="20" >
+                <button type="submit" class="btn btn-info" >Search</button>
+            </form>
             <table class=table>
                 <tr>
                     <th>No</th>

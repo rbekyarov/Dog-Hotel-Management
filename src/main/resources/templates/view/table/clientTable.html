@@ -10,6 +10,22 @@
                         class="glyphicon glyphicon-ok"></span>Add Client
                 </button>
             </a>
+            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:600px">
+                <thead>
+                <tr>
+                    <th scope="col"><form th:action="@{/view/table/searchClientByPhone}" method="get">
+                        <input type="text" name="clientPhone" th:value="${clientPhone}"  placeholder="Find by Client Phone" size="20" >
+                        <button type="submit" class="btn btn-info" >Search</button>
+                    </form></th>
+                    <th scope="col"><form th:action="@{/view/table/searchClientByEmail}" method="get">
+                        <input type="text" name="clientEmail" th:value="${clientEmail}"  placeholder="Find by Client Email" size="20" >
+                        <button type="submit" class="btn btn-info" >Search</button>
+                    </form></th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
             <table class=table>
                 <tr>
                     <th>No</th>

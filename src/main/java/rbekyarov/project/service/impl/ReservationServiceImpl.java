@@ -322,6 +322,11 @@ public class ReservationServiceImpl implements ReservationService {
         reservationRepository.changeInvoiced(id, invoiced);
     }
 
+    @Override
+    public List<Reservation> listReservationByClientEmail(String clientEmail) {
+        return reservationRepository.listReservationByClientEmail(clientEmail);
+    }
+
     LocalDate formatterLocal(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);

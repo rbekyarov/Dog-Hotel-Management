@@ -133,7 +133,8 @@ public class DogController extends BaseController {
             dogs = dogService.findAllDogById();
             modelAndView.addObject("dogs", dogs);}
         return super.view("/view/table/dogTable", "dogs", dogs);
-    }@RequestMapping(path = {"/","/view/table/searchClientEmail"})
+    }
+    @RequestMapping(path = {"/","/view/table/searchClientEmail"})
     public ModelAndView searchClientEmail(ModelAndView modelAndView,@RequestParam("clientEmail") String clientEmail) {
         List<Dog> dogs = new ArrayList<>();
         if(!clientEmail.equals("")) {

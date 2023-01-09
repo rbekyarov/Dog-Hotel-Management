@@ -27,4 +27,6 @@ public interface ReservationService {
 
     void statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
     void changeInvoicedStatus(Long id, Invoiced invoiced);
+
+    List<Reservation> listReservationByClientEmail(String clientEmail);
 }

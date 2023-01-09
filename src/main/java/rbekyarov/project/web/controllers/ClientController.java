@@ -2,9 +2,7 @@ package rbekyarov.project.web.controllers;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.ClientEditDTO;
 import rbekyarov.project.models.entity.City;
@@ -105,5 +103,27 @@ public class ClientController extends BaseController {
                 session);
 
         return "redirect:/view/table/clientTable";
+    }
+    @RequestMapping(path = {"/","/view/table/searchClientByPhone"})
+    public ModelAndView search(ModelAndView modelAndView,@RequestParam("clientPhone") String clientPhone) {
+        List<Client> clients = new ArrayList<>();
+        if(!clientPhone.equals("")) {
+            clients = clientService.listClientByPhone(clientPhone);
+            modelAndView.addObject("clients", clients);
+        }else {
+            clients = clientService.findAllClientById();
+            modelAndView.addObject("clients", clients);}
+        return super.view("/view/table/clientTable", "clients", clients);
+    }
+    @RequestMapping(path = {"/","/view/table/searchClientByEmail"})
+    public ModelAndView searchClientEmail(ModelAndView modelAndView,@RequestParam("clientEmail") String clientEmail) {
+        List<Client> clients = new ArrayList<>();
+        if(!clientEmail.equals("")) {
+            clients = clientService.listClientByEmail(clientEmail);
+            modelAndView.addObject("clients", clients);
+        }else {
+            clients = clientService.findAllClientById();
+            modelAndView.addObject("clients", clients);}
+        return super.view("/view/table/clientTable", "clients", clients);
     }
 }
