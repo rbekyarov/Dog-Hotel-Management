@@ -29,6 +29,11 @@
 
                     <label>Dogs:</label><br>
                     <select id="dogsBox" th:field="*{dog.id}">
+                        <option
+                                th:each="dog : *{dog}"
+                                th:value="${dog.id}"
+                                th:text="${dog.name}"
+                        ></option>
                     </select><br>
                     <label>Date of Arrival:</label><br>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">

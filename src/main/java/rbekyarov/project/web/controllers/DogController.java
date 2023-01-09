@@ -72,11 +72,10 @@ public class DogController extends BaseController {
     @PostMapping("/view/add/dogAdd")
     public String addDog(@Valid DogDTO dogDTO,
                          @RequestParam("fileImage") MultipartFile file,
-                         @RequestParam("imgName")String imgName, HttpSession session) throws IOException {
+                         @RequestParam("imgName") String imgName, HttpSession session) throws IOException {
 
 
-
-        dogService.addDog(dogDTO,file,imgName,session);
+        dogService.addDog(dogDTO, file, imgName, session);
 
         return "redirect:/view/table/dogTable";
     }
@@ -118,9 +117,9 @@ public class DogController extends BaseController {
 
     @PostMapping("view/table/dog/edit/{id}/edit")
     public String editDog(@PathVariable("id") Long id, DogEditDTO dogEditDTO, @RequestParam("fileImage") MultipartFile file,
-                          @RequestParam("imgName")String imgName, HttpSession session) throws ObjectNotFoundException, IOException {
+                          @RequestParam("imgName") String imgName, HttpSession session) throws ObjectNotFoundException, IOException {
 
-        dogService.editDog(id, dogEditDTO,imgName,file, session);
+        dogService.editDog(id, dogEditDTO, imgName, file, session);
 
         return "redirect:/view/table/dogTable";
     }
