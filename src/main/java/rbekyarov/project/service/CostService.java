@@ -23,4 +23,5 @@ public interface CostService {
 
     void editCost(Long vendorId, String description, BigDecimal amount, String dateCost, HttpSession session, Long id);
     Page<Cost> findPaginated(Pageable pageable);
+    List<Cost> findCostByVendor(String name);
 }

@@ -39,6 +39,12 @@
                     </a></td>
                 </tr>
             </table>
+            <div th:if="${cells.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{cellTable(size=${cells.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==cells.number + 1} ? active"></a>
+            </div>
         </div>
     </th:block>
 </th:block>

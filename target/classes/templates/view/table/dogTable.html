@@ -79,6 +79,12 @@
                     </a></td>
                 </tr>
             </table>
+            <div th:if="${dogs.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{dogTable(size=${dogs.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==dogs.number + 1} ? active"></a>
+            </div>
         </div>
         <script th:src="@{/libs/tailwindcss.js}"></script>
         <!--  Flowbite -->

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.VendorDTO;
 import rbekyarov.project.models.entity.Behavior;
+import rbekyarov.project.models.entity.Cost;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.models.entity.Vendor;
 import rbekyarov.project.repository.VendorRepository;
@@ -106,4 +107,6 @@ public class VendorServiceImpl implements VendorService {
 
         return vendorsPage;
     }
+
+
 }

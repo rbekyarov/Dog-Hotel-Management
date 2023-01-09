@@ -32,4 +32,8 @@ public interface CostRepository extends JpaRepository<Cost, Long> {
                   @Param("editAuthorId") Long editAuthorId,
                   @Param("dateEdit") LocalDate dateEdit,
                   @Param("id") Long id);
+
+
+    @Query("select c from Cost as c where c.vendor.name=:name order by c.id asc ")
+    List<Cost> findCostByVendor(@Param("name")String name);
 }

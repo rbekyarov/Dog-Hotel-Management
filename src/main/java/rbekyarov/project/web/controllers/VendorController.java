@@ -124,4 +124,5 @@ public class VendorController extends BaseController {
             modelAndView.addObject("vendors", vendors);}
         return super.view("/view/table/vendorTable", "vendors", vendors);
     }
+
 }

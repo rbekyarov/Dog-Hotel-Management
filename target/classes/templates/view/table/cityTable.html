@@ -39,6 +39,12 @@
                     </a></td>
                 </tr>
             </table>
+            <div th:if="${cities.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{cityTable(size=${cities.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==cities.number + 1} ? active"></a>
+            </div>
         </div>
     </th:block>
 </th:block>

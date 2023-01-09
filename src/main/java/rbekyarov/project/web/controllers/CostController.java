@@ -4,15 +4,13 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.CostDTO;
 import rbekyarov.project.models.dto.CostEditDTO;
 import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Cost;
+import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.Vendor;
 import rbekyarov.project.service.CostService;
 import rbekyarov.project.service.VendorService;
@@ -20,6 +18,7 @@ import rbekyarov.project.service.VendorService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -102,5 +101,16 @@ public class CostController extends BaseController {
                 id);
 
         return "redirect:/view/table/costTable";
+    }
+    @RequestMapping(path = {"/","/view/table/searchCostByVendorName"})
+    public ModelAndView search(ModelAndView modelAndView,@RequestParam("vendorName") String vendorName) {
+        List<Cost> costs = new ArrayList<>();
+        if(!vendorName.equals("")) {
+            costs = costService.findCostByVendor(vendorName);
+            modelAndView.addObject("costs", costs);
+        }else {
+            costs = costService.findAllCost();
+            modelAndView.addObject("costs", costs);}
+        return super.view("/view/table/costTable", "costs", costs);
     }
 }

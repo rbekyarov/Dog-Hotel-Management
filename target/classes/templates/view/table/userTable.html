@@ -33,6 +33,12 @@
                     </a></td>
                 </tr>
             </table>
+            <div th:if="${users.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{userTable(size=${users.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==users.number + 1} ? active"></a>
+            </div>
         </div>
     </th:block>
 </th:block>

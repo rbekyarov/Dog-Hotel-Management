@@ -37,6 +37,12 @@
                     </a></td>
                 </tr>
             </table>
+            <div th:if="${behaviors.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{behaviorTable(size=${behaviors.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==behaviors.number + 1} ? active"></a>
+            </div>
         </div>
     </th:block>
 </th:block>

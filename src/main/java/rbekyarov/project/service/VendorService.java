@@ -4,6 +4,7 @@ package rbekyarov.project.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.entity.Behavior;
+import rbekyarov.project.models.entity.Cost;
 import rbekyarov.project.models.entity.Vendor;
 import rbekyarov.project.models.dto.VendorDTO;
 
@@ -26,4 +27,6 @@ public interface VendorService {
 
     List<Vendor> listVendorByName(String vendorName);
     Page<Vendor> findPaginated(Pageable pageable);
+
+
 }

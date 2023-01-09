@@ -126,6 +126,11 @@ public class CostServiceImpl implements CostService {
         return costsPage;
     }
 
+    @Override
+    public List<Cost> findCostByVendor(String name) {
+        return costRepository.findCostByVendor(name);
+    }
+
     //convert String to LocalDate
     LocalDate convertStringToLocalDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

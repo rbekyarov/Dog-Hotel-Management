@@ -10,6 +10,10 @@
                         class="glyphicon glyphicon-ok"></span>Add Cost
                 </button>
             </a>
+            <form th:action="@{/view/table/searchCostByVendorName}" method="get">
+                <input type="text" name="vendorName" th:value="${vendorName}"  placeholder="Find by Vendor" size="20" >
+                <button type="submit" class="btn btn-info" >Search</button>
+            </form>
             <table class=table>
                 <tr>
                     <th>No</th>
