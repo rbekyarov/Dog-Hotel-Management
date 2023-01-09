@@ -11,6 +11,7 @@ import rbekyarov.project.models.entity.enums.Sex;
 import rbekyarov.project.models.dto.DogDTO;
 import rbekyarov.project.service.*;
 import rbekyarov.project.repository.DogRepository;
+
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,6 +20,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 
@@ -50,27 +52,22 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void addDog(DogDTO dogDTO, MultipartFile file,String imgName, HttpSession session) throws IOException {
+    public void addDog(DogDTO dogDTO, MultipartFile file, String imgName, HttpSession session) throws IOException {
 
         Dog dogNew = modelMapper.map(dogDTO, Dog.class);
 
-        //
-        String imageUUID;
-        if(!file.isEmpty()) {
-            imageUUID = file.getOriginalFilename();
-            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
-            Files.write(fileNameAndPath, file.getBytes());
-        }else {
-            imageUUID = imgName;
-        }
-        dogDTO.setImageName(imageUUID);
-        //
+        // upload image
+       String imageUUID = imageUpload(file,imgName);
+        dogNew.setImageName(imageUUID);
 
+        //add birthDate
         String date = dogDTO.getBirthDate();
+        LocalDate birthDate = formatterLocalForAdd(date);
+        dogNew.setBirthDate(birthDate);
 
-        dogNew.setBirthDate(formatterLocal(date));
-         //get and set Author
+        //get and set Author
         dogNew.setAuthor(userService.getAuthorFromSession(session));
+
         // set dateCreated
         dogNew.setDateCreate(LocalDate.now());
 
@@ -90,15 +87,12 @@ public class DogServiceImpl implements DogService {
     @Override
     public void editDog(Long id, DogEditDTO dogEditDTO, String imgName, MultipartFile file, HttpSession session) throws IOException {
 
+        //Get new birth Date
+        String birthDateDto = dogEditDTO.getBirthDate();
+        LocalDate birthDate = formatterLocalForEdit(birthDateDto);
+
         //image upload
-        String imageUUID;
-        if(!file.isEmpty()) {
-            imageUUID = file.getOriginalFilename();
-            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
-            Files.write(fileNameAndPath, file.getBytes());
-        }else {
-            imageUUID = imgName;
-        }
+        String imageUUID = imageUpload(file,imgName);
         dogEditDTO.setImageName(imageUUID);
 
         // set author
@@ -108,7 +102,7 @@ public class DogServiceImpl implements DogService {
         //set dateEdit
         LocalDate dateEdit = LocalDate.now();
         dogRepository.editDog(dogEditDTO.getName(),
-                formatterLocal(dogEditDTO.getBirthDate()),
+                birthDate,
                 dogEditDTO.getWeight(),
                 dogEditDTO.getBreed().getId(),
                 dogEditDTO.getSex(),
@@ -153,10 +147,66 @@ public class DogServiceImpl implements DogService {
     }
 
     //convert String to LocalDate
-    LocalDate formatterLocal(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(date, formatter);
+    LocalDate formatterLocalForEdit(String birthDateDto) {
+        LocalDate birthDate = null;
+        if (birthDateDto.contains("/")) {
+            String substring1 = birthDateDto.substring(0, 10);
+            String replace = substring1.replace('/', '-');
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 1; i++) {
+                sb.append(replace.charAt(6));
+                sb.append(replace.charAt(7));
+                sb.append(replace.charAt(8));
+                sb.append(replace.charAt(9));
+                sb.append(replace.charAt(5));
+                sb.append(replace.charAt(0));
+                sb.append(replace.charAt(1));
+                sb.append(replace.charAt(5));
+                sb.append(replace.charAt(3));
+                sb.append(replace.charAt(4));
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate localDate = LocalDate.parse(sb.toString(), formatter);
+            birthDate = localDate;
+        } else {
+            birthDate = LocalDate.parse(birthDateDto);
+        }
 
-        return localDate;
+        return birthDate;
+    }
+
+    LocalDate formatterLocalForAdd(String birthDateDto) {
+        LocalDate birthDate = null;
+            String substring1 = birthDateDto.substring(0, 10);
+            String replace = substring1.replace('/', '-');
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 1; i++) {
+                sb.append(replace.charAt(6));
+                sb.append(replace.charAt(7));
+                sb.append(replace.charAt(8));
+                sb.append(replace.charAt(9));
+                sb.append(replace.charAt(5));
+                sb.append(replace.charAt(3));
+                sb.append(replace.charAt(4));
+                sb.append(replace.charAt(5));
+                sb.append(replace.charAt(0));
+                sb.append(replace.charAt(1));
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate localDate = LocalDate.parse(sb.toString(), formatter);
+            birthDate = localDate;
+
+        return birthDate;
+    }
+    String imageUpload(MultipartFile file, String imgName) throws IOException {
+        String imageUUID;
+        if (!file.isEmpty()) {
+            imageUUID = file.getOriginalFilename();
+            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
+            Files.write(fileNameAndPath, file.getBytes());
+        } else {
+            imageUUID = imgName;
+        }
+        return imageUUID;
     }
 }

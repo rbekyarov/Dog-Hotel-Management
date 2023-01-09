@@ -96,9 +96,9 @@
             </form>
         </div>
 
-
         <script th:src="@{/assets/moment/moment.min.js}"></script>
-        <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+
+
         <script>
             $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
                 icons: {
@@ -111,14 +111,13 @@
                     today: 'far fa-calendar-check-o',
                     clear: 'far fa-trash',
                     close: 'far fa-times'
-                }
-            });
+                } });
 
             $('#datetimepicker1').datetimepicker({
                 format: 'DD/MM/YYYY'
             });
-
         </script>
+
         <script>
             /* $(document).ready(function(){
 
@@ -141,8 +140,7 @@
                 var fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".file-label").addClass("selected").html(fileName);
             });
-
-
         </script>
+        <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
     </th:block>
 </th:block>
