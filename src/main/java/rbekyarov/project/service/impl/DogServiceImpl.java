@@ -137,13 +137,18 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public List<Dog> listDogByEmail(String email) {
-        return dogRepository.listDogByEmail(email);
+    public List<Dog> listDogByName(String name) {
+        return dogRepository.listDogByName(name);
     }
 
     @Override
     public List<Dog> findAllDogByClient(Long id) {
         return dogRepository.findAllDogByClient(id);
+    }
+
+    @Override
+    public List<Dog> listDogByClientEmail(String clientEmail) {
+        return dogRepository.listDogByClientEmail(clientEmail);
     }
 
     //convert String to LocalDate

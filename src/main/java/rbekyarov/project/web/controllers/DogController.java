@@ -2,10 +2,8 @@ package rbekyarov.project.web.controllers;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.DogEditDTO;
@@ -23,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -122,5 +121,27 @@ public class DogController extends BaseController {
         dogService.editDog(id, dogEditDTO, imgName, file, session);
 
         return "redirect:/view/table/dogTable";
+    }
+
+    @RequestMapping(path = {"/","/view/table/searchDogName"})
+    public ModelAndView search(ModelAndView modelAndView,@RequestParam("dogName") String dogName) {
+        List<Dog> dogs = new ArrayList<>();
+        if(!dogName.equals("")) {
+            dogs = dogService.listDogByName(dogName);
+            modelAndView.addObject("dogs", dogs);
+        }else {
+            dogs = dogService.findAllDogById();
+            modelAndView.addObject("dogs", dogs);}
+        return super.view("/view/table/dogTable", "dogs", dogs);
+    }@RequestMapping(path = {"/","/view/table/searchClientEmail"})
+    public ModelAndView searchClientEmail(ModelAndView modelAndView,@RequestParam("clientEmail") String clientEmail) {
+        List<Dog> dogs = new ArrayList<>();
+        if(!clientEmail.equals("")) {
+            dogs = dogService.listDogByClientEmail(clientEmail);
+            modelAndView.addObject("dogs", dogs);
+        }else {
+            dogs = dogService.findAllDogById();
+            modelAndView.addObject("dogs", dogs);}
+        return super.view("/view/table/dogTable", "dogs", dogs);
     }
 }

@@ -178,8 +178,9 @@ body > header > nav > a > img{
 }
 
 .btn-info {
-    box-shadow: 0 0 0 1px #5bc0de inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #46b8da, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
-    background-color: #5bc0de;
+    color: #fff;
+    background-color: #c16b29;
+    border-color: #cbc5c5;
 }
 
 .btn-warning {

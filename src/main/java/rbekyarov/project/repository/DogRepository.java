@@ -44,10 +44,12 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
     @Query("select d.id from Dog as d where d.client.email=:clientEmail")
     Set<Long> listDogIds(@Param("clientEmail") String clientEmail);
 
-    @Query("select d from Dog as d where d.client.email=:clientEmail")
-    List<Dog> listDogByEmail(@Param("clientEmail") String email);
+    @Query("select d from Dog as d where d.name=:name")
+    List<Dog> listDogByName(@Param("name") String name);
 
     @Query("select d from Dog as d where d.client.id=:id ")
     List<Dog> findAllDogByClient(@Param("id") Long id);
+    @Query("select d from Dog as d where d.client.email=:clientEmail")
+    List<Dog> listDogByClientEmail(String clientEmail);
 }
 
