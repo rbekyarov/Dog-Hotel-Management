@@ -18,99 +18,96 @@ ENTITIES:
 
 ![2023-01-06 (8)](https://user-images.githubusercontent.com/29566751/211055182-f208daac-244f-412d-bfb5-64e945d4a66b.png)
 
-LIST DOGS:
+INDEX PAGE:
+
+![1 indexPage](https://user-images.githubusercontent.com/29566751/211553216-4dc70dd0-ada4-4098-a3ea-5e57b705ecbc.png)
 
 
-![dogs](https://user-images.githubusercontent.com/29566751/211098515-2bbe8687-6b40-4f8e-acfd-b51b9b1cbbe1.png)
+LOGIN PAGE:
 
-ADD DOGS:
-
-
-![addDog](https://user-images.githubusercontent.com/29566751/211098667-4566c669-f553-487c-9233-9479a04ebed9.png)
+![2 loginPage](https://user-images.githubusercontent.com/29566751/211553290-e6486964-d822-4ca8-bc7c-2a32373bc57b.png)
 
 
-EDIT DOGS:
+WELCOM PAGE:
+
+![3 WelcomPage](https://user-images.githubusercontent.com/29566751/211553703-49124dd4-7a45-46b2-95a3-982b4d32e7c3.png)
 
 
-![editDog](https://user-images.githubusercontent.com/29566751/211098584-663cd74a-96d7-4e4b-8ad9-1b08fc3e3f72.png)
+RESERVATION PAGE:
 
-
-LIST RESERVATION:
-
-
-![reservation](https://user-images.githubusercontent.com/29566751/211098795-4a30db85-ec5e-4b44-98d0-2354bca1026f.png)
-
+![4 ReservationPage](https://user-images.githubusercontent.com/29566751/211553827-51342fc4-57bc-4f79-a998-2b7b80ec82d0.png)
 
 ADD RESERVATION:
 
-
-![add reservation](https://user-images.githubusercontent.com/29566751/211098872-46406b3c-5369-40f0-975b-395a0f229c3a.png)
-
-
+![5 addReservation](https://user-images.githubusercontent.com/29566751/211553873-f282872f-ecd7-437c-bfeb-71a6f8b504e2.png)
 
 EDIT RESERVATION:
 
-![editreservation](https://user-images.githubusercontent.com/29566751/211098955-df79883e-040d-4b48-8303-8efa4ba0459c.png)
+![6 EditReservation](https://user-images.githubusercontent.com/29566751/211553934-8b39867d-7df3-4d0c-b298-530089bed402.png)
+
 
 RESERVATION DETAILS:
 
-![viewReservation](https://user-images.githubusercontent.com/29566751/211162294-63964024-46a7-4d65-a0e2-b060ec7c58cd.png)
+![5A ReservationDetails](https://user-images.githubusercontent.com/29566751/211554038-4cb3ca31-afcb-4f1c-b138-6f8d2f762777.png)
 
 
 INVOICE LIST:
 
-![invoiceList](https://user-images.githubusercontent.com/29566751/211099382-68d7c066-a3ba-4746-9710-c3943b45ad60.png)
+![7 IvoicesPage](https://user-images.githubusercontent.com/29566751/211554119-a019a784-47b1-452e-879a-ccc74e30d79b.png)
+
+CANCELLED INVOICE LIST:
+
+![8 CanceledInvoicesPage](https://user-images.githubusercontent.com/29566751/211554266-c642524a-d990-41de-b8bb-03cdfb79c843.png)
+
+COST PAGE:
+
+![9 CostPage](https://user-images.githubusercontent.com/29566751/211554332-6367595f-a801-45c1-9b25-d07e1549952b.png)
 
 
+VENDOR PAGE:
+
+
+![10 VendorPage](https://user-images.githubusercontent.com/29566751/211554399-d9ce0f6e-13f0-460f-b62f-3bc3d51ed43d.png)
 
 LIST CLIENT:
 
+![11 ClentPage](https://user-images.githubusercontent.com/29566751/211554430-0151407c-f860-41df-94d5-33316bc8498d.png)
 
-![clientList](https://user-images.githubusercontent.com/29566751/211099112-836308d6-d334-4693-827f-9c33258e9b1b.png)
+
+CITY PAGE:
+
+![12 CityPage](https://user-images.githubusercontent.com/29566751/211554584-33ab2eb2-3392-4305-9dda-02c5304ce8aa.png)
+
+DOG PAGE:
+
+![13 DogPage](https://user-images.githubusercontent.com/29566751/211554793-e9ae4752-c360-4d7d-bfa6-0d06de7f4661.png)
+
+EDIT DOG:
+
+![14 EditDog](https://user-images.githubusercontent.com/29566751/211554972-2d0d18fa-15fb-426f-979c-e2d8ac90eca5.png)
 
 
-EDIT CLIENT:
+DOG HOUSE PAGE:
 
-![editClient](https://user-images.githubusercontent.com/29566751/211099218-27cf02c7-f095-4423-bc80-af5847150459.png)
+![15 DogHous](https://user-images.githubusercontent.com/29566751/211555176-431b5cde-db78-41d8-89ef-03614dd286b0.png)
 
 
 PRICE LIST:
 
-![priceList](https://user-images.githubusercontent.com/29566751/211099446-f6563a87-bbfc-444c-a1c0-b6d091737c4b.png)
-
-COSTS LIST:
-
-![CostsList](https://user-images.githubusercontent.com/29566751/211135167-61d3803a-f74d-43a9-8c76-57bc873dd194.png)
-
-VENDOR LIST:
-
-![VendorList](https://user-images.githubusercontent.com/29566751/211135176-0f28b64c-5ba1-4893-936c-1b2f6180d5f2.png)
-
+![17 BehaviorList](https://user-images.githubusercontent.com/29566751/211555443-bc7bedb3-46c0-4cec-888b-2f8d4d01c109.png)
 
 BREED LIST:
 
-
-![breedList](https://user-images.githubusercontent.com/29566751/211099637-63f24193-ef09-4cf8-bfd1-993a6d79e629.png)
+![16 BreedList](https://user-images.githubusercontent.com/29566751/211555335-c4d9fdf0-e3cd-4c32-b3f1-c3cee6349535.png)
 
 
 BEHAVIOR LIST:
 
-![behaviorList](https://user-images.githubusercontent.com/29566751/211099722-4e8ef7f1-87cb-439c-ba55-551adc188831.png)
-
-
-DOG HOUSE:
-
-
-![DogHous](https://user-images.githubusercontent.com/29566751/211099784-ac8303ae-ad70-46ae-8d15-b844c628908b.png)
+![17 BehaviorList](https://user-images.githubusercontent.com/29566751/211555377-a6829631-6b23-4467-b15f-df7aec50d726.png)
 
 
 MY COMPANY:
 
+![20 MyCompani](https://user-images.githubusercontent.com/29566751/211555608-421d7b8e-c553-4364-8f6d-6c6d95be76f5.png)
 
-![myCompany](https://user-images.githubusercontent.com/29566751/211099871-7f579345-0b11-4353-9d24-08d440056d96.png)
-
-
-FIRST SCREEN:
-
-![firstScreen](https://user-images.githubusercontent.com/29566751/211100021-5573f24b-cd60-48be-b8e5-2651dbea61b3.png)
 
