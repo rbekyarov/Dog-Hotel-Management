@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.PriceDTO;
 import rbekyarov.project.models.dto.PriceEditDTO;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Price;
 import rbekyarov.project.service.PriceService;
 
@@ -102,7 +101,7 @@ public class PriceController extends BaseController {
         var priceDTO =
                 priceService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
-        priceService.editPrice(priceEditDTO.getPriceOvernightStay(),
+        priceService.editPrice(priceEditDTO.getPriceStayS(),
                 priceEditDTO.getPriceFood(),
                 priceEditDTO.getPriceTraining(),
                 priceEditDTO.getPriceBathing(),

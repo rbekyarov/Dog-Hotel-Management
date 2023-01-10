@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "prices")
 public class Price extends BaseEntity{
-  private BigDecimal priceOvernightStay;
+  private BigDecimal priceStayS;
   private BigDecimal priceFood;
   private BigDecimal priceTraining;
   private BigDecimal priceBathing;
@@ -23,8 +23,8 @@ public class Price extends BaseEntity{
     public Price() {
     }
 
-    public Price(BigDecimal priceOvernightStay, BigDecimal priceFood, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, LocalDate dateCreate) {
-        this.priceOvernightStay = priceOvernightStay;
+    public Price(BigDecimal priceStayS, BigDecimal priceFood, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, LocalDate dateCreate) {
+        this.priceStayS = priceStayS;
         this.priceFood = priceFood;
         this.priceTraining = priceTraining;
         this.priceBathing = priceBathing;
@@ -36,12 +36,12 @@ public class Price extends BaseEntity{
     }
 
     @Column
-    public BigDecimal getPriceOvernightStay() {
-        return priceOvernightStay;
+    public BigDecimal getPriceStayS() {
+        return priceStayS;
     }
 
-    public void setPriceOvernightStay(BigDecimal priceOvernightStay) {
-        this.priceOvernightStay = priceOvernightStay;
+    public void setPriceStayS(BigDecimal priceStayS) {
+        this.priceStayS = priceStayS;
     }
     @Column
     public BigDecimal getPriceFood() {

@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class PriceDTO {
 
-    private BigDecimal priceOvernightStay;
+    private BigDecimal priceStayS;
     private BigDecimal priceFood;
     private BigDecimal priceTraining;
     private BigDecimal priceBathing;
@@ -20,12 +20,12 @@ public class PriceDTO {
 
     @NotNull(message = "Field cannot be empty")
     @DecimalMin(value = "0", message = "Accepts only positive numbers")
-    public BigDecimal getPriceOvernightStay() {
-        return priceOvernightStay;
+    public BigDecimal getPriceStayS() {
+        return priceStayS;
     }
 
-    public void setPriceOvernightStay(BigDecimal priceOvernightStay) {
-        this.priceOvernightStay = priceOvernightStay;
+    public void setPriceStayS(BigDecimal priceStayS) {
+        this.priceStayS = priceStayS;
     }
 
     @NotNull(message = "Field cannot be empty")

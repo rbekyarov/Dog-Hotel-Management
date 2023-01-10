@@ -82,7 +82,7 @@ public class ReservationServiceImpl implements ReservationService {
         priceService.findAllPriceById();
 
 
-        price += (int) countOvernightStay * currentPrice.getPriceOvernightStay().doubleValue();
+        price += (int) countOvernightStay * currentPrice.getPriceStayS().doubleValue();
 
         if (reservationDTO.getFood().name().equals("YES")) {
             price += (int) countOvernightStay * currentPrice.getPriceFood().doubleValue();
@@ -190,7 +190,7 @@ public class ReservationServiceImpl implements ReservationService {
         priceService.findAllPriceById();
 
         //Calculate price and totalPrice
-        price += (int) countOvernightStay * currentPrice.getPriceOvernightStay().doubleValue();
+        price += (int) countOvernightStay * currentPrice.getPriceStayS().doubleValue();
 
         if (reservationEditDTO.getFood().name().equals("YES")) {
             price += (int) countOvernightStay * currentPrice.getPriceFood().doubleValue();

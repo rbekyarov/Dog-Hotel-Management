@@ -24,8 +24,8 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Price as p SET p.priceOvernightStay = :priceOvernightStay ,p.priceFood =:priceFood,p.priceTraining=:priceTraining,p.priceBathing=:priceBathing,p.priceCombing=:priceCombing,p.pricePaws=:pricePaws,p.priceEars=:priceEars,p.priceNails=:priceNails ,p.dateCreate=:dateEdit where p.id=:id ")
-    void editPrice(@Param("priceOvernightStay") BigDecimal priceOvernightStay
+    @Query("update Price as p SET p.priceStayS = :priceStayS ,p.priceFood =:priceFood,p.priceTraining=:priceTraining,p.priceBathing=:priceBathing,p.priceCombing=:priceCombing,p.pricePaws=:pricePaws,p.priceEars=:priceEars,p.priceNails=:priceNails ,p.dateCreate=:dateEdit where p.id=:id ")
+    void editPrice(@Param("priceStayS") BigDecimal priceStayS
             , @Param("priceFood") BigDecimal priceFood
             , @Param("priceTraining") BigDecimal priceTraining
             , @Param("priceBathing") BigDecimal priceBathing
@@ -57,6 +57,6 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
     @Query("select p.priceNails from Price as p where p.id= :id")
     BigDecimal getNailsCurrentPrice(@Param("id") Long id);
 
-    @Query("select p.priceOvernightStay from Price as p where p.id= :id")
+    @Query("select p.priceStayS from Price as p where p.id= :id")
     BigDecimal getOvernightStayCurrentPrice(@Param("id") Long id);
 }

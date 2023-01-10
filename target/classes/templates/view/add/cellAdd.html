@@ -19,7 +19,13 @@
                 <p class="invalid-feedback errors alert alert-danger">
                     Behavior is required.
                 </p><br>
+                <label>Size</label><br>
 
+                <select th:field="${cellDTO.cellSize}" >
+                    <option value="SMALL">SMALL</option>
+                    <option value="MEDIUM">MEDIUM</option>
+                    <option value="LARGE">LARGE</option>
+                </select><br>
                 <label>Status</label><br>
 
                 <select th:field="${cellDTO.status}" >
