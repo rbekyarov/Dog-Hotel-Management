@@ -80,7 +80,7 @@ public class VendorController extends BaseController {
     @GetMapping("view/table/vendor/edit/{id}")
     public ModelAndView getVendorDetail(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        var vendorDTO = vendorService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
+        Vendor vendorDTO = vendorService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
         List<City> allCity = cityService.findAllCityById();
         modelAndView.addObject("vendorDTO", vendorDTO);
         modelAndView.addObject("allCity", allCity);

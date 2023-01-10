@@ -188,7 +188,7 @@ public class UserController extends BaseController {
     public ModelAndView getUserDetail(@PathVariable("id") Long id,
                                       ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        var userDto =
+        User userDto =
                 userService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
@@ -200,9 +200,7 @@ public class UserController extends BaseController {
 
     @PostMapping("view/table/user/edit/{id}/edit")
     public String editBehavior(@PathVariable("id") Long id, UserEditDTO userEditDTO) throws ObjectNotFoundException {
-        var userDto =
-                userService.findById(id).
-                        orElseThrow(() -> new ObjectNotFoundException("not found!"));
+
         userService.editUser(userEditDTO.getRole(), id);
 
         return "redirect:/view/table/userTable";

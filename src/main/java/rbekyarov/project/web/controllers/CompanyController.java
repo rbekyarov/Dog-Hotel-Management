@@ -57,7 +57,7 @@ public class CompanyController extends BaseController {
     @GetMapping("/view/edit/companyEdit")
     public ModelAndView getMyCompanyEdit(ModelAndView modelAndView) throws ObjectNotFoundException {
         Long id = 1L;
-        var companyDTO =
+        Company companyDTO =
                 companyService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
         List<City> allCity = cityService.findAllCityById();

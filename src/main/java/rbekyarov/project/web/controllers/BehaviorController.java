@@ -80,7 +80,7 @@ public class BehaviorController extends BaseController {
     public ModelAndView getBehaviorDetail(@PathVariable("id") Long id,
                                           ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        var behaviorDto =
+        Behavior behaviorDto =
                 behaviorService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
@@ -92,9 +92,7 @@ public class BehaviorController extends BaseController {
 
     @PostMapping("view/table/behavior/edit/{id}/edit")
     public String editBehavior(@PathVariable("id") Long id, BehaviorEditDTO behaviorEditDTO, HttpSession session) throws ObjectNotFoundException {
-        var behaviorDto =
-                behaviorService.findById(id).
-                        orElseThrow(() -> new ObjectNotFoundException("not found!"));
+
         behaviorService.editBehaviors(behaviorEditDTO.getName(), id, session);
 
         return "redirect:/view/table/behaviorTable";

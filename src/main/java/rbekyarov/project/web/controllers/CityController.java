@@ -77,7 +77,7 @@ public class CityController extends BaseController {
     public ModelAndView getCityDetail(@PathVariable("id") Long id,
                                       ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        var cityDTO =
+        City cityDTO =
                 cityService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
@@ -89,9 +89,7 @@ public class CityController extends BaseController {
 
     @PostMapping("view/table/city/edit/{id}/edit")
     public String editCity(@PathVariable("id") Long id, CityEditDTO cityEditDTO, HttpSession session) throws ObjectNotFoundException {
-        var cityDto =
-                cityService.findById(id).
-                        orElseThrow(() -> new ObjectNotFoundException("not found!"));
+
         cityService.editCity(cityEditDTO.getCode(), id, cityEditDTO.getName(),session);
 
         return "redirect:/view/table/cityTable";

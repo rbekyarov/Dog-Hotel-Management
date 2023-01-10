@@ -86,7 +86,7 @@ public class PriceController extends BaseController {
     public ModelAndView getPriceDetail(@PathVariable("id") Long id,
                                        ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        var priceDTO =
+        Price priceDTO =
                 priceService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 

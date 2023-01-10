@@ -80,7 +80,7 @@ public class BreedController extends BaseController {
     public ModelAndView getBreedDetail(@PathVariable("id") Long id,
                                        ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        var breedDto =
+        Breed breedDto =
                 breedService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
@@ -92,9 +92,6 @@ public class BreedController extends BaseController {
 
     @PostMapping("view/table/breed/edit/{id}/edit")
     public String editBreed(@PathVariable("id") Long id, BreedEditDTO breedEditDTO, HttpSession session) throws ObjectNotFoundException {
-        var breedDto =
-                breedService.findById(id).
-                        orElseThrow(() -> new ObjectNotFoundException("not found!"));
         breedService.editBreeds(breedEditDTO.getBreedName(), id,session);
 
         return "redirect:/view/table/breedTable";

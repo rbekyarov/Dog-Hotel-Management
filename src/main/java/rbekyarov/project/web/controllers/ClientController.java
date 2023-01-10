@@ -86,7 +86,7 @@ public class ClientController extends BaseController {
     public ModelAndView getClientDetail(@PathVariable("id") Long id,
                                         ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        var clientDTO =
+        Client clientDTO =
                 clientService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 

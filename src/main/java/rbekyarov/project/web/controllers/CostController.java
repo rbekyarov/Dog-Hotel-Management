@@ -82,7 +82,7 @@ public class CostController extends BaseController {
     @GetMapping("view/table/cost/edit/{id}")
     public ModelAndView getCostDetail(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        var costDTO = costService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
+        Cost costDTO = costService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
         List<Vendor> allVendor = vendorService.findAllVendor();
         modelAndView.addObject("costDTO", costDTO);
         modelAndView.addObject("allVendor", allVendor);

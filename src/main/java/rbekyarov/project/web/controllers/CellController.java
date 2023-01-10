@@ -77,7 +77,7 @@ public class CellController extends BaseController {
     public ModelAndView getCellDetail(@PathVariable("id") Long id,
                                       ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        var cellDto =
+        Cell cellDto =
                 cellService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
@@ -89,9 +89,6 @@ public class CellController extends BaseController {
 
     @PostMapping("view/table/cell/edit/{id}/edit")
     public String editCell(@PathVariable("id") Long id, CellEditDTO cellEditDTO, HttpSession session) throws ObjectNotFoundException {
-        var cellDto =
-                cellService.findById(id).
-                        orElseThrow(() -> new ObjectNotFoundException("not found!"));
         cellService.editCells(cellEditDTO.getCode(), id, cellEditDTO.getStatus(),cellEditDTO.getCellSize(),session);
 
         return "redirect:/view/table/cellTable";
