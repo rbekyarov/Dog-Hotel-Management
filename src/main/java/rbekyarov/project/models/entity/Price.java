@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Table(name = "prices")
 public class Price extends BaseEntity{
   private BigDecimal priceStayS;
+  private BigDecimal priceStayM;
+  private BigDecimal priceStayL;
   private BigDecimal priceFood;
   private BigDecimal priceTraining;
   private BigDecimal priceBathing;
@@ -23,8 +25,10 @@ public class Price extends BaseEntity{
     public Price() {
     }
 
-    public Price(BigDecimal priceStayS, BigDecimal priceFood, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, LocalDate dateCreate) {
+    public Price(BigDecimal priceStayS, BigDecimal priceStayM, BigDecimal priceStayL, BigDecimal priceFood, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, LocalDate dateCreate) {
         this.priceStayS = priceStayS;
+        this.priceStayM = priceStayM;
+        this.priceStayL = priceStayL;
         this.priceFood = priceFood;
         this.priceTraining = priceTraining;
         this.priceBathing = priceBathing;
@@ -106,5 +110,21 @@ public class Price extends BaseEntity{
 
     public void setDateCreate(LocalDate dateCreate) {
         this.dateCreate = dateCreate;
+    }
+    @Column
+    public BigDecimal getPriceStayM() {
+        return priceStayM;
+    }
+
+    public void setPriceStayM(BigDecimal priceStayM) {
+        this.priceStayM = priceStayM;
+    }
+    @Column
+    public BigDecimal getPriceStayL() {
+        return priceStayL;
+    }
+
+    public void setPriceStayL(BigDecimal priceStayL) {
+        this.priceStayL = priceStayL;
     }
 }

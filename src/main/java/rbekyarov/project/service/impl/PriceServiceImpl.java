@@ -52,11 +52,13 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public void editPrice(BigDecimal priceOvernightStay, BigDecimal priceFood, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, Long id) {
+    public void editPrice(BigDecimal priceStayS,BigDecimal priceStayM,BigDecimal priceStayL, BigDecimal priceFood, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, Long id) {
         //set dateEdit
         LocalDate dateEdit = LocalDate.now();
         priceRepository.editPrice(
-                priceOvernightStay,
+                priceStayS,
+                priceStayM,
+                priceStayL,
                 priceFood,
                 priceTraining,
                 priceBathing,

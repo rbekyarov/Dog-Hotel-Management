@@ -9,7 +9,9 @@
             <table class=table>
                 <tr>
                     <th>No</th>
-                    <th>Overnight Stay</th>
+                    <th>Stay House S</th>
+                    <th>Stay House M</th>
+                    <th>Stay House L</th>
                     <th>Feeding</th>
                     <th>Training</th>
                     <th>Bathing</th>
@@ -23,7 +25,9 @@
                 </tr>
                 <tr th:each="p : ${prices}">
                     <td th:text="${p.id}"></td>
-                    <td th:text="${p.priceOvernightStay}"></td>
+                    <td th:text="${p.priceStayS+'$'}"></td>
+                    <td th:text="${p.priceStayM+'$'}"></td>
+                    <td th:text="${p.priceStayL+'$'}"></td>
                     <td th:text="${p.priceFood}"></td>
                     <td th:text="${p.priceTraining}"></td>
                     <td th:text="${p.priceBathing}"></td>

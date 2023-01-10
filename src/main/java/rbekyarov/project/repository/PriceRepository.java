@@ -24,8 +24,11 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Price as p SET p.priceStayS = :priceStayS ,p.priceFood =:priceFood,p.priceTraining=:priceTraining,p.priceBathing=:priceBathing,p.priceCombing=:priceCombing,p.pricePaws=:pricePaws,p.priceEars=:priceEars,p.priceNails=:priceNails ,p.dateCreate=:dateEdit where p.id=:id ")
-    void editPrice(@Param("priceStayS") BigDecimal priceStayS
+    @Query("update Price as p SET p.priceStayS = :priceStayS,p.priceStayM = :priceStayM,p.priceStayL = :priceStayL ,p.priceFood =:priceFood,p.priceTraining=:priceTraining,p.priceBathing=:priceBathing,p.priceCombing=:priceCombing,p.pricePaws=:pricePaws,p.priceEars=:priceEars,p.priceNails=:priceNails ,p.dateCreate=:dateEdit where p.id=:id ")
+    void editPrice(
+             @Param("priceStayS") BigDecimal priceStayS
+             ,@Param("priceStayM") BigDecimal priceStayM
+             ,@Param("priceStayL") BigDecimal priceStayL
             , @Param("priceFood") BigDecimal priceFood
             , @Param("priceTraining") BigDecimal priceTraining
             , @Param("priceBathing") BigDecimal priceBathing

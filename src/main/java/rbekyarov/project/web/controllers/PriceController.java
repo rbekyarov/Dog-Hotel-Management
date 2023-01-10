@@ -98,10 +98,13 @@ public class PriceController extends BaseController {
 
     @PostMapping("view/table/price/edit/{id}/edit")
     public String editPrice(@PathVariable("id") Long id, PriceEditDTO priceEditDTO) throws ObjectNotFoundException {
-        var priceDTO =
+        Price priceDTO =
                 priceService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
-        priceService.editPrice(priceEditDTO.getPriceStayS(),
+        priceService.editPrice(
+                priceEditDTO.getPriceStayS(),
+                priceEditDTO.getPriceStayM(),
+                priceEditDTO.getPriceStayL(),
                 priceEditDTO.getPriceFood(),
                 priceEditDTO.getPriceTraining(),
                 priceEditDTO.getPriceBathing(),

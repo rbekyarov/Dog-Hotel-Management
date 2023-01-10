@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 public class PriceDTO {
 
     private BigDecimal priceStayS;
+    private BigDecimal priceStayM;
+    private BigDecimal priceStayL;
     private BigDecimal priceFood;
     private BigDecimal priceTraining;
     private BigDecimal priceBathing;
@@ -96,5 +98,21 @@ public class PriceDTO {
 
     public void setPriceNails(BigDecimal priceNails) {
         this.priceNails = priceNails;
+    }
+
+    public BigDecimal getPriceStayM() {
+        return priceStayM;
+    }
+
+    public void setPriceStayM(BigDecimal priceStayM) {
+        this.priceStayM = priceStayM;
+    }
+
+    public BigDecimal getPriceStayL() {
+        return priceStayL;
+    }
+
+    public void setPriceStayL(BigDecimal priceStayL) {
+        this.priceStayL = priceStayL;
     }
 }
