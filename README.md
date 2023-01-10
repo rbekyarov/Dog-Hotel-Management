@@ -11,6 +11,8 @@ You need Mysql server and IntelliJ app.
 For start application only need you change with your 
 mysql user name and password on application.properties file. And start application with Intelij
 
+http://localhost:8010 
+
 DEMO VIDEO - https://youtu.be/wDdqS93h2EI
 
 ENTITIES:
