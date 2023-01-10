@@ -46,4 +46,6 @@ public interface DogService {
 
     List<Dog> listDogByClientEmail(String clientEmail);
     Page<Dog> findPaginated(Pageable pageable);
+
+    Integer getWeightById(Long id);
 }

@@ -61,5 +61,9 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
     BigDecimal getNailsCurrentPrice(@Param("id") Long id);
 
     @Query("select p.priceStayS from Price as p where p.id= :id")
-    BigDecimal getOvernightStayCurrentPrice(@Param("id") Long id);
+    BigDecimal getCurrentPriceStayForCellS(@Param("id") Long id);
+    @Query("select p.priceStayM from Price as p where p.id= :id")
+    BigDecimal getCurrentPriceStayForCellM(@Param("id") Long id);
+    @Query("select p.priceStayL from Price as p where p.id= :id")
+    BigDecimal getCurrentPriceStayForCellL(@Param("id") Long id);
 }

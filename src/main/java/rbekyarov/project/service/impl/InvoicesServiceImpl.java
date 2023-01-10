@@ -5,10 +5,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.models.entity.Reservation;
-import rbekyarov.project.models.entity.User;
 import rbekyarov.project.models.entity.enums.CancellationInvoice;
 import rbekyarov.project.models.entity.enums.Invoiced;
 import rbekyarov.project.service.*;
@@ -90,7 +88,7 @@ public class InvoicesServiceImpl implements InvoiceService {
         invoice.setTotalPrice(reservation.getTotalPrice());
 
            //CURRENT PRICES
-        invoice.setCountStayPrice(priceService.getOvernightStayCurrentPrice());
+        invoice.setCountStayPrice(priceService.getCurrentPriceStayForCellS());
         invoice.setFoodPrice(priceService.getFoodCurrentPrice());
         invoice.setTrainingPrice(priceService.getTrainingCurrentPrice());
         invoice.setBathingPrice(priceService.getBathingCurrentPrice());

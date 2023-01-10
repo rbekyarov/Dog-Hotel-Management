@@ -154,7 +154,17 @@ public class ReservationController extends BaseController {
 
         return "redirect:/view/table/reservationTable";
     }
-
+    @RequestMapping(path = {"/","/view/table/searchReservationNumber"})
+    public ModelAndView searchReservationNumber(ModelAndView modelAndView,@RequestParam("reservationNumber") String reservationNumber) {
+        List<Reservation> reservations = new ArrayList<>();
+        if(!reservationNumber.equals("")) {
+            reservations = reservationService.listReservationById(Long.parseLong(reservationNumber));
+            modelAndView.addObject("reservations", reservations);
+        }else {
+            reservations = reservationService.findAllReservationById();
+            modelAndView.addObject("reservations", reservations);}
+        return super.view("/view/table/reservationTable", "reservations", reservations);
+    }
     @RequestMapping(path = {"/","/view/table/searchReservationByClientEmail"})
     public ModelAndView searchClientEmail(ModelAndView modelAndView,@RequestParam("clientEmail") String clientEmail) {
         List<Reservation> reservations = new ArrayList<>();

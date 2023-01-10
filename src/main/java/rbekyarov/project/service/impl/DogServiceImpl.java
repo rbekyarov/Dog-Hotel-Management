@@ -171,6 +171,11 @@ public class DogServiceImpl implements DogService {
         return dogsPage;
     }
 
+    @Override
+    public Integer getWeightById(Long id) {
+        return dogRepository.getWeightById(id);
+    }
+
     //convert String to LocalDate
     LocalDate formatterLocalForEdit(String birthDateDto) {
         LocalDate birthDate = null;

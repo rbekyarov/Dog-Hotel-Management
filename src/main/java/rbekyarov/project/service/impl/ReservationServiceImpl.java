@@ -10,6 +10,7 @@ import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
 import rbekyarov.project.models.entity.*;
 import rbekyarov.project.models.entity.enums.*;
+import rbekyarov.project.repository.DogRepository;
 import rbekyarov.project.repository.ReservationRepository;
 import rbekyarov.project.service.*;
 
@@ -31,14 +32,19 @@ public class ReservationServiceImpl implements ReservationService {
     private final CellService cellService;
     private final UserService userService;
     private final CompanyService companyService;
+    private final DogRepository dogRepository;
+    private final DogService dogService;
 
-    public ReservationServiceImpl(ReservationRepository reservationRepository, PriceService priceService, ModelMapper modelMapper, CellService cellService, UserService userService, CompanyService companyService) {
+    public ReservationServiceImpl(ReservationRepository reservationRepository, PriceService priceService, ModelMapper modelMapper, CellService cellService, UserService userService, CompanyService companyService,
+                                  DogRepository dogRepository, DogService dogService) {
         this.reservationRepository = reservationRepository;
         this.priceService = priceService;
         this.modelMapper = modelMapper;
         this.cellService = cellService;
         this.userService = userService;
         this.companyService = companyService;
+        this.dogRepository = dogRepository;
+        this.dogService = dogService;
     }
 
     @Override
@@ -80,9 +86,20 @@ public class ReservationServiceImpl implements ReservationService {
 
         Double price = 0.00;
         priceService.findAllPriceById();
+        //Get dog weight
+        Long dogID = reservationDTO.getDog().getId();
+        Integer weight = dogService.getWeightById(dogID);
+        double currentPriceStay = 0.0;
+        if (weight <= 10) {
+            currentPriceStay = currentPrice.getPriceStayS().doubleValue();
+        } else if (weight <= 20) {
+            currentPriceStay = currentPrice.getPriceStayM().doubleValue();
+        }else {
+            currentPriceStay = currentPrice.getPriceStayL().doubleValue();
+        }
 
 
-        price += (int) countOvernightStay * currentPrice.getPriceStayS().doubleValue();
+        price += (int) countOvernightStay * currentPriceStay;
 
         if (reservationDTO.getFood().name().equals("YES")) {
             price += (int) countOvernightStay * currentPrice.getPriceFood().doubleValue();
@@ -189,8 +206,19 @@ public class ReservationServiceImpl implements ReservationService {
         Double price = 0.00;
         priceService.findAllPriceById();
 
+        //Get dog weight
+        Long dogID = reservationEditDTO.getDog().getId();
+        Integer weight = dogService.getWeightById(dogID);
+        double currentPriceStay = 0.0;
+        if (weight <= 10) {
+            currentPriceStay = currentPrice.getPriceStayS().doubleValue();
+        } else if (weight <= 20) {
+            currentPriceStay = currentPrice.getPriceStayM().doubleValue();
+        }else {
+            currentPriceStay = currentPrice.getPriceStayL().doubleValue();
+        }
         //Calculate price and totalPrice
-        price += (int) countOvernightStay * currentPrice.getPriceStayS().doubleValue();
+        price += (int) countOvernightStay * currentPriceStay;
 
         if (reservationEditDTO.getFood().name().equals("YES")) {
             price += (int) countOvernightStay * currentPrice.getPriceFood().doubleValue();
@@ -346,6 +374,11 @@ public class ReservationServiceImpl implements ReservationService {
         Page<Reservation> reservationPage = new PageImpl<Reservation>(list, PageRequest.of(currentPage, pageSize), reservations.size());
 
         return reservationPage;
+    }
+
+    @Override
+    public List<Reservation> listReservationById(long reservationNumber) {
+        return reservationRepository.listReservationById(reservationNumber);
     }
 
     LocalDate formatterLocal(String date) {

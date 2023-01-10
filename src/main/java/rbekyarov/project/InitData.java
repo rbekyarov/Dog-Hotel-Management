@@ -100,9 +100,9 @@ public class InitData implements CommandLineRunner {
         //ADD PRICES
         if (priceRepository.findAll().size() == 0) {
             priceRepository.save(new Price(
-                    BigDecimal.valueOf(15.00),
-                    BigDecimal.valueOf(13.00),
                     BigDecimal.valueOf(10.00),
+                    BigDecimal.valueOf(13.00),
+                    BigDecimal.valueOf(15.00),
                     BigDecimal.valueOf(9.00),
                     BigDecimal.valueOf(5.00),
                     BigDecimal.valueOf(5.00),
@@ -112,9 +112,9 @@ public class InitData implements CommandLineRunner {
                     BigDecimal.valueOf(5.00),
                     LocalDate.of(2023, 1, 1)));
             priceRepository.save(new Price(
-                    BigDecimal.valueOf(20.00),
-                    BigDecimal.valueOf(15.00),
                     BigDecimal.valueOf(12.00),
+                    BigDecimal.valueOf(15.00),
+                    BigDecimal.valueOf(20.00),
                     BigDecimal.valueOf(10.00),
                     BigDecimal.valueOf(8.00),
                     BigDecimal.valueOf(7.00),
@@ -193,7 +193,7 @@ public class InitData implements CommandLineRunner {
             dogRepository.save(new Dog("Zara",
                     LocalDate.of(2020, 4, 16),
                     "Zara.jpg",
-                    35,
+                    15,
                     breedRepository.getById(Long.parseLong("1")),
                     Sex.F,
                     Passport.YES,
@@ -260,7 +260,7 @@ public class InitData implements CommandLineRunner {
                     LocalDate.of(2023, 1, 1),
                     LocalDate.of(2023, 1, 3),
                     2,
-                    cellRepository.getById(Long.parseLong("1")),
+                    cellRepository.getById(Long.parseLong("7")),
                     Food.YES,
                     Training.NO,
                     Bathing.NO,
@@ -412,7 +412,7 @@ public class InitData implements CommandLineRunner {
                     "Ivan Petrov",
                     "Boby",
                     2,
-                    "A1",
+                    "L1",
                     Food.YES,
                     Training.NO,
                     Bathing.NO,

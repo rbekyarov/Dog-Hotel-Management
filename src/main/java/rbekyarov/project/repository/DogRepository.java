@@ -23,6 +23,9 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
     List<Dog> findAllDogById();
 
     Optional<Dog> findById(Long id);
+    @Query("select d.weight from Dog as d where d.id=:id")
+    Integer getWeightById(Long id);
+
 
     @Transactional
     @Modifying

@@ -33,4 +33,6 @@ public interface ReservationService {
 
     List<Reservation> listReservationByClientEmail(String clientEmail);
     Page<Reservation> findPaginated(Pageable pageable);
+
+    List<Reservation> listReservationById(long parseLong);
 }

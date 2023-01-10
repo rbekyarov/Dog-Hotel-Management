@@ -7,7 +7,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.PriceDTO;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Price;
 import rbekyarov.project.repository.PriceRepository;
 import rbekyarov.project.service.PriceService;
@@ -106,8 +105,18 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public BigDecimal getOvernightStayCurrentPrice() {
-        return priceRepository.getOvernightStayCurrentPrice(getLastPricesId());
+    public BigDecimal getCurrentPriceStayForCellS() {
+        return priceRepository.getCurrentPriceStayForCellS(getLastPricesId());
+    }
+
+    @Override
+    public BigDecimal getCurrentPriceStayForCellM() {
+        return priceRepository.getCurrentPriceStayForCellM(getLastPricesId());
+    }
+
+    @Override
+    public BigDecimal getCurrentPriceStayForCellL() {
+        return priceRepository.getCurrentPriceStayForCellL(getLastPricesId());
     }
 
     @Override
