@@ -73,14 +73,15 @@ public class InitData implements CommandLineRunner {
         }
         //ADD Dog House
         if (cellRepository.findAll().size() == 0) {
-            cellRepository.save(new Cell("A1", Status.empty, userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
-            cellRepository.save(new Cell("A2", Status.empty, userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
-            cellRepository.save(new Cell("A3", Status.empty, userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
-            cellRepository.save(new Cell("B1", Status.empty, userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
-            cellRepository.save(new Cell("B2", Status.empty, userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
-            cellRepository.save(new Cell("B3", Status.empty, userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
-            cellRepository.save(new Cell("C1", Status.empty, userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
-            cellRepository.save(new Cell("C2", Status.empty, userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            cellRepository.save(new Cell("S1",CellSize.SMALL ,Status.empty, userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
+            cellRepository.save(new Cell("S2", CellSize.SMALL,Status.empty, userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            cellRepository.save(new Cell("S3", CellSize.SMALL,Status.empty, userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
+            cellRepository.save(new Cell("M1",CellSize.MEDIUM, Status.empty, userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            cellRepository.save(new Cell("M2", CellSize.MEDIUM,Status.empty, userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            cellRepository.save(new Cell("M3", CellSize.MEDIUM,Status.empty, userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
+            cellRepository.save(new Cell("L1", CellSize.LARGE,Status.empty, userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
+            cellRepository.save(new Cell("L2",CellSize.LARGE, Status.empty, userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            cellRepository.save(new Cell("L3",CellSize.LARGE, Status.empty, userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
 
         }
         //ADD Cities
@@ -477,6 +478,48 @@ public class InitData implements CommandLineRunner {
                     "Stara Zagora",
                     "0887325579",
                     CancellationInvoice.NO,
+                    LocalDate.of(2023, 1, 7)));
+
+
+            invoiceRepository.save(new Invoice(
+                    "DHM Ltd",
+                    "Stara Zagora",
+                    "Tzar Simeon Veliki 1",
+                    "BG030298796",
+                    "office@dhm.bg",
+                    "Bulgaria Bank",
+                    "BG18RZBB91550123456789",
+                    "Ivan Petrov",
+                    "Zara",
+                    13,
+                    "C1",
+                    Food.YES,
+                    Training.NO,
+                    Bathing.NO,
+                    Combing.NO,
+                    Ears.NO,
+                    Paws.NO,
+                    Nails.NO,
+                    BigDecimal.valueOf(398.00),
+                    20.00,
+                    BigDecimal.valueOf(318.40),
+                    "admin",
+                    LocalDate.of(2023, 1, 9),
+                    Long.parseLong("5"),
+                    BigDecimal.valueOf(20.00),
+                    BigDecimal.valueOf(10.00),
+                    BigDecimal.valueOf(8.00),
+                    BigDecimal.valueOf(7.00),
+                    BigDecimal.valueOf(7.00),
+                    BigDecimal.valueOf(5.00),
+                    BigDecimal.valueOf(5.00),
+                    BigDecimal.valueOf(5.00),
+                    "Stanimir Pavlov",
+                    "spavlov@abv.bg",
+                    "Zdravetzh 4",
+                    "Plovdiv",
+                    "08842276361",
+                    CancellationInvoice.YES,
                     LocalDate.of(2023, 1, 7)));
 
 

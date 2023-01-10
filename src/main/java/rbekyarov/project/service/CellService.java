@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.CellDTO;
 import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Cell;
+import rbekyarov.project.models.entity.enums.CellSize;
 import rbekyarov.project.models.entity.enums.Status;
 
 import javax.servlet.http.HttpSession;
@@ -20,7 +21,7 @@ public interface CellService {
 
     Optional<Cell> findById(Long id);
 
-    void editCells(String name, Long id , Status status, HttpSession session);
+    void editCells(String name, Long id, Status status, CellSize cellSize, HttpSession session);
 
     List<Cell> findAllEmptyCells();
 

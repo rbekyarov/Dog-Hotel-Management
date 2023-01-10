@@ -1,5 +1,6 @@
 package rbekyarov.project.models.entity;
 
+import rbekyarov.project.models.entity.enums.CellSize;
 import rbekyarov.project.models.entity.enums.Status;
 
 import javax.persistence.*;
@@ -9,13 +10,15 @@ import java.time.LocalDate;
 @Table(name = "cells")
 public class Cell extends BaseEntity{
     private String code;
+    private CellSize cellSize;
     private Status status;
 
     private User author;
     private LocalDate dateCreate;
 
-    public Cell(String code, Status status, User author, LocalDate dateCreate) {
+    public Cell(String code, CellSize cellSize, Status status, User author, LocalDate dateCreate) {
         this.code = code;
+        this.cellSize = cellSize;
         this.status = status;
         this.author = author;
         this.dateCreate = dateCreate;
@@ -55,5 +58,13 @@ public class Cell extends BaseEntity{
 
     public void setDateCreate(LocalDate dateCreate) {
         this.dateCreate = dateCreate;
+    }
+    @Enumerated(EnumType.STRING)
+    public CellSize getCellSize() {
+        return cellSize;
+    }
+
+    public void setCellSize(CellSize cellSize) {
+        this.cellSize = cellSize;
     }
 }

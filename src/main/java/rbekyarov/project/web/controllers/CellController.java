@@ -92,7 +92,7 @@ public class CellController extends BaseController {
         var cellDto =
                 cellService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
-        cellService.editCells(cellEditDTO.getCode(), id, cellEditDTO.getStatus(),session);
+        cellService.editCells(cellEditDTO.getCode(), id, cellEditDTO.getStatus(),cellEditDTO.getCellSize(),session);
 
         return "redirect:/view/table/cellTable";
     }

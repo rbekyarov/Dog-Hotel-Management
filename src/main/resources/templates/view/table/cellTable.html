@@ -14,6 +14,7 @@
                 <tr>
                     <th>No</th>
                     <th>Code</th>
+                    <th>Size</th>
                     <th>Status</th>
                     <th>Author</th>
                     <th>Created</th>
@@ -23,6 +24,7 @@
                 <tr th:each="c : ${cells}">
                     <td th:text="${c.id}"></td>
                     <td th:text="${c.code}"></td>
+                    <td th:text="${c.cellSize}"></td>
                     <td th:text="${c.status}"></td>
                     <td th:text="${c.author.username}"></td>
                     <td th:text="${c.dateCreate}"></td>

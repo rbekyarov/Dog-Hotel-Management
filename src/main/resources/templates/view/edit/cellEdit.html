@@ -18,6 +18,15 @@
                         th:field="${cellDto.code}">
             </textarea>
                     <p></p>
+                    <select th:field="${cellDto.cellSize}">
+                        <option value="SMALL">SMALL</option>
+                        <option value="MEDIUM">MEDIUM</option>
+                        <option value="LARGE">LARGE</option>
+                    </select>
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Behavior is required.
+                    </p>
+                    <p></p>
                     <select th:field="${cellDto.status}">
                         <option value="empty">empty</option>
                         <option value="busy">busy</option>

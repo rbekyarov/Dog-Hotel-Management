@@ -1,12 +1,15 @@
 package rbekyarov.project.models.dto;
 
+import rbekyarov.project.models.entity.enums.CellSize;
 import rbekyarov.project.models.entity.enums.Status;
 
 import javax.validation.constraints.NotNull;
 
 public class CellDTO {
     private String code;
+    private CellSize cellSize;
     private Status status;
+
 
     public CellDTO() {
     }
@@ -27,5 +30,13 @@ public class CellDTO {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+    @NotNull
+    public CellSize getCellSize() {
+        return cellSize;
+    }
+
+    public void setCellSize(CellSize cellSize) {
+        this.cellSize = cellSize;
     }
 }

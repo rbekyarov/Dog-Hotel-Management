@@ -10,6 +10,7 @@ import rbekyarov.project.models.dto.CellDTO;
 import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Cell;
 import rbekyarov.project.models.entity.User;
+import rbekyarov.project.models.entity.enums.CellSize;
 import rbekyarov.project.models.entity.enums.Status;
 import rbekyarov.project.repository.CellRepository;
 import rbekyarov.project.service.CellService;
@@ -61,12 +62,12 @@ public class CellServiceImpl implements CellService {
     }
 
     @Override
-    public void editCells(String name, Long id, Status status,HttpSession session) {
+    public void editCells(String name, Long id, Status status,CellSize cellSize,HttpSession session) {
         User editAuthor = userService.getAuthorFromSession(session);
         Long editAuthorId = editAuthor.getId();
         //set dateEdit
         LocalDate dateEdit = LocalDate.now();
-        cellRepository.editCell(name, id, status,editAuthorId,dateEdit);
+        cellRepository.editCell(name, id,cellSize, status,editAuthorId,dateEdit);
     }
 
     @Override

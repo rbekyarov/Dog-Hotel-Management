@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import rbekyarov.project.models.entity.Cell;
+import rbekyarov.project.models.entity.enums.CellSize;
 import rbekyarov.project.models.entity.enums.Status;
 
 
@@ -25,9 +26,10 @@ public interface CellRepository extends JpaRepository<Cell, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Cell as c SET c.code = :code , c.status=:status, c.author.id=:editAuthorId,c.dateCreate=:dateEdit where c.id=:id ")
+    @Query("update Cell as c SET c.code = :code ,c.cellSize=:cellSize, c.status=:status, c.author.id=:editAuthorId,c.dateCreate=:dateEdit where c.id=:id ")
     void editCell(@Param("code") String code,
                   @Param("id") Long id,
+                  @Param("cellSize") CellSize cellSize,
                   @Param("status") Status status,
                   @Param("editAuthorId") Long editAuthorId,
                   @Param("dateEdit") LocalDate dateEdit);
