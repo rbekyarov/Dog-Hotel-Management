@@ -47,8 +47,8 @@ public class InitData implements CommandLineRunner {
 
         //ADD USER
         if (userRepository.findAll().size() == 0) {
-            userRepository.save(new User("admin", "admin", Role.ADMIN));
-            userRepository.save(new User("user", "user", Role.USER));
+            userRepository.save(new User("owner", "owner", Role.ADMIN));
+            userRepository.save(new User("employee", "employee", Role.USER));
         }
         //ADD Dog Behavior
         if (behaviorRepository.findAll().size() == 0) {
