@@ -15,10 +15,10 @@
                 <div class="form-group">
 
                     <label >City Code</label><br>
-                    <input type="text" id="description" th:field="${cityDTO.code}" placeholder="Please enter code"/><br>
+                    <input type="text" id="description" th:field="${cityDTO.code}" placeholder="Please enter code" required /><br>
 
                     <label >City Name</label><br>
-                    <input type="text" id="description1" th:field="${cityDTO.name}" placeholder="Please enter City Name"/>
+                    <input type="text" id="description1" th:field="${cityDTO.name}" placeholder="Please enter City Name" required />
 
                     <p class="invalid-feedback errors alert alert-danger">
                         City is required.
