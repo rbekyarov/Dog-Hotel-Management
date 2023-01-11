@@ -31,26 +31,26 @@
 
                     <label for="date">BirthDate:</label>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                        <input required type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
                                th:field="*{birthDate}" id="date" placeholder="Date"/>
                         <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                         </div>
                     </div>
                 <label>Weight:</label><br>
-                <input type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight"/><br>
+                <input type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight" required/><br>
 
                 <label>Breed:</label><br>
-                <select th:field="*{breed.id}" >
-                    <option value="">Please select</option>
+                <select required th:field="*{breed.id}" >
+                    <option value="">Please select </option>
                     <option
                             th:each="b : ${allBreeds}"
                             th:value="${b.id}"
-                            th:text="${b.breedName}"></option>
+                            th:text="${b.breedName}" ></option>
 
                 </select>
                 <br><label>Client:</label><br>
-                <select th:field="*{client.id}" >
+                <select required th:field="*{client.id}" >
                     <option value="">Please select</option>
                     <option
                             th:each="c : ${allClients}"
@@ -59,7 +59,7 @@
 
                 </select>
                 <br> <label>Behavior:</label><br>
-                <select th:field="*{behavior.id}" >
+                <select required th:field="*{behavior.id}" >
                     <option value="">Please select</option>
                     <option
                             th:each="b : ${allBehaviors}"
