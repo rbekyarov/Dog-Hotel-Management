@@ -32,7 +32,8 @@ LOGIN PAGE:
 
 WELCOM PAGE:
 
-![3 WelcomPage](https://user-images.githubusercontent.com/29566751/211553703-49124dd4-7a45-46b2-95a3-982b4d32e7c3.png)
+
+![3 WelcomPage](https://user-images.githubusercontent.com/29566751/211803187-6873133d-59f4-4fc8-9b2f-965999c9d105.png)
 
 
 RESERVATION PAGE:
