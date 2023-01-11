@@ -22,7 +22,7 @@
                     <input type="text" id="description1" th:field="*{country}" placeholder="Please enter Country"
                            required/><br>
                     <label>City:</label><br>
-                    <select th:field="*{city.id}">
+                    <select required th:field="*{city.id}">
                         <option value="">Please select</option>
                         <option
                                 th:each="b : ${allCity}"
@@ -31,10 +31,10 @@
 
                     </select><br>
                     <label>Address:</label><br>
-                    <input type="text" id="description2" th:field="*{address}" placeholder="Please enter Address"/><br>
+                    <input type="text" id="description2" th:field="*{address}" placeholder="Please enter Address" required/><br>
 
                     <label>Vat Number:</label><br>
-                    <input type="text" id="description3" th:field="*{vatNumber}" placeholder="Please enter Vat Number"/><br>
+                    <input type="text" id="description3" th:field="*{vatNumber}" placeholder="Please enter Vat Number" required/><br>
 
                     <label>Email:</label><br>
                     <input type="text" id="description4" th:field="*{email}" placeholder="Please enter Email"/><br>

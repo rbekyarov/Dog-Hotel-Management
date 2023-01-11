@@ -1,0 +1,43 @@
+<th:block th:if="${session.admin}">
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="button_back">
+        <a class="nav-link h5" th:href="@{/view/table/userTable}">
+            <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                    class="glyphicon glyphicon-ok"></span>Back
+            </button>
+        </a>
+    </div>
+    <div class="container">
+        <h2 class="page_title">Add User</h2>
+        <form class="form_add" th:action="@{/view/add/userAdd}"
+              th:method="post"
+              th:object="${userDTO}"
+        >
+            <div class="form-group">
+                <label>UserName:</label><br>
+                <input type="text" id="description" th:field="${userDTO.username}" placeholder="Please enter Username"/><br>
+                <label>Password:</label><br>
+                <input type="text" id="description1" th:field="${userDTO.password}" placeholder="Please enter Password"/><br>
+                <label>Confirm Password:</label><br>
+                <input type="text" id="description2" th:field="${userDTO.confirmPassword}" placeholder="Confirm Password"/><br>
+                <label>Select Role:</label><br>
+                <div class="form-group">
+                    <select th:field="${userDTO.role}">
+                        <option value="USER">USER</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="button_submit">
+                <div >
+                    <div>
+                        <input type="submit" class="btn btn-danger btn-lg btnTable" value="Register User"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</th:block>
+</th:block>

@@ -1,0 +1,63 @@
+<th:block th:unless="${session.isEmpty()}">
+    <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+        <div class="button_back">
+            <a class="nav-link h5" th:href="@{/view/table/clientTable}">
+                <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                        class="glyphicon glyphicon-ok"></span>Back
+                </button>
+            </a>
+        </div>
+        <div class="container">
+            <h2 class="page_title">Edit Client</h2>
+            <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
+                  th:method="post"
+                  th:object="${clientDTO}"
+
+            >
+                <div class="form-group">
+                    <label>First Name:</label><br>
+                    <input type="text" id="description" th:field="*{firstName}" placeholder="Please enter Name"/><br>
+                    <label>Last Name:</label><br>
+                    <input type="text" id="description1" th:field="*{lastName}" placeholder="Please enter Name"/><br>
+                    <label>Email:</label><br>
+                    <input type="text" id="description2" th:field="*{email}" placeholder="Please enter Email"/><br>
+                    <label>Phone:</label><br>
+                    <input type="text" id="description3" th:field="*{phone}" placeholder="Please enter Phone"/><br>
+
+                    <label>Address:</label><br>
+                    <textarea
+                            th:field="*{address}"
+                            type="textarea"
+                            placeholder="Please enter Address">
+            </textarea><br>
+                    <label>City:</label><br>
+                    <select th:field="*{city.id}" >
+                        <option value="">Please select</option>
+                        <option
+                                th:each="b : ${allCity}"
+                                th:value="${b.id}"
+                                th:text="${b.name}"></option>
+
+                    </select>
+
+                </div>
+                <div class="button_submit">
+                    <div>
+                        <div>
+                            <input type="submit" class="btn btn-danger btn-lg btnTable" value="Edit Client"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <script th:src="@{/assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+        <script>
+            $('.input-group.date').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            });
+        </script>
+    </th:block>
+</th:block>

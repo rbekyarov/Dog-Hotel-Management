@@ -15,11 +15,11 @@
         >
             <div class="form-group">
                 <label>UserName:</label><br>
-                <input type="text" id="description" th:field="${userDTO.username}" placeholder="Please enter Username"/><br>
+                <input type="text" id="description" th:field="${userDTO.username}" placeholder="Please enter Username" required/><br>
                 <label>Password:</label><br>
-                <input type="text" id="description1" th:field="${userDTO.password}" placeholder="Please enter Password"/><br>
+                <input type="text" id="description1" th:field="${userDTO.password}" placeholder="Please enter Password" required/><br>
                 <label>Confirm Password:</label><br>
-                <input type="text" id="description2" th:field="${userDTO.confirmPassword}" placeholder="Confirm Password"/><br>
+                <input type="text" id="description2" th:field="${userDTO.confirmPassword}" placeholder="Confirm Password"required/><br>
                 <label>Select Role:</label><br>
                 <div class="form-group">
                     <select th:field="${userDTO.role}">

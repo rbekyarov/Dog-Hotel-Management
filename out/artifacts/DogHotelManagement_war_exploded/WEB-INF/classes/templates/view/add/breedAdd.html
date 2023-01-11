@@ -1,0 +1,34 @@
+<th:block th:unless="${session.isEmpty()}">
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="button_back">
+        <a class="nav-link h5" th:href="@{/view/table/breedTable}">
+            <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                    class="glyphicon glyphicon-ok"></span>Back
+            </button>
+        </a>
+    </div>
+    <div class="container">
+        <h2 class="page_title">Add Breed</h2>
+        <form class="form_add" th:action="@{/view/add/breedAdd}"
+              th:method="post"
+              th:object="${addBreed}"
+        >
+            <div class="form-group">
+                <label class="text-white font-weight-bold" for="description">Breed</label><br>
+                <input type="text" id="description" th:field="${breedDTO.breedName}" placeholder="Please enter breed" required/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Behavior is required.
+                </p>
+            </div>
+
+            <div class="button_submit">
+                <div >
+                    <div>
+                        <input type="submit" class="btn btn-danger btn-lg btnTable" value="Submit Breed"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</th:block>
+</th:block>

@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: RBekyarov
+Build-Jdk: Amazon Corretto version 17.0.5
+Implementation-Title: DogHotelManagement
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: su
+Main-Class: ${start-class}
+

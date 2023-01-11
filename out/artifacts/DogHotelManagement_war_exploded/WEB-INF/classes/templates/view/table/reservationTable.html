@@ -1,0 +1,115 @@
+<th:block th:unless="${session.isEmpty()}">
+    <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+
+        <div class="table-center">
+            <div class="page-header">
+                <h1>Reservations List</h1>
+            </div>
+            <a class="nav-link h5" th:href="@{/view/add/reservationAdd}">
+                <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                        class="glyphicon glyphicon-ok"></span>Add Reservation
+                </button>
+            </a>
+
+
+
+            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:600px">
+                <thead>
+                <tr>
+                    <th scope="col"><form th:action="@{/view/table/searchReservationNumber}" method="get">
+                        <input type="text" name="reservationNumber" th:value="${reservationNumber}"  placeholder="Find by Reservation Number" size="20" >
+                        <button type="submit" class="btn btn-info" >Search</button>
+                    </form></th>
+                    <th scope="col"><form th:action="@{/view/table/searchReservationByClientEmail}" method="get">
+                        <input type="text" name="clientEmail" th:value="${clientEmail}"  placeholder="Find by Client Mail" size="20" >
+                        <button type="submit" class="btn btn-info" >Search</button>
+                    </form></th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+
+
+
+            <table class=table>
+                <tr>
+                    <th>No</th>
+                    <th>Client:</th>
+                    <th>Dog:</th>
+                    <th>Stay Day:</th>
+                    <th>Day of coming:</th>
+                    <th>Day of departure:</th>
+                    <th>Dog House:</th>
+                    <th>Services:</th>
+                    <th>Price </th>
+                    <th>Discount %</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Author</th>
+                    <th>Created</th>
+                    <th>Invoiced</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+
+
+                </tr>
+                <tr th:each="r : ${reservations}">
+                    <td th:text="${r.id}"></td>
+                    <td th:text="${ r.client.firstName +' '+ r.client.lastName +' '+ r.client.email +' '+r.client.phone}"></td>
+                    <td th:text="${r.dog.name + ' Weight:' +r.dog.weight + ' '+r.dog.breed.breedName}"></td>
+                    <td th:text="${r.countOvernightStay}"></td>
+                    <td th:text="${r.startDate}"></td>
+                    <td th:text="${r.endDate}"></td>
+                    <td th:text="${r.cell.code}"></td>
+                    <td th:text="${'Feeding: '+ r.food+
+                                    ' Training: '+r.training}"></td>
+
+                    <td th:text="${r.price+'$'}"></td>
+                    <td th:text="${r.discount}"></td>
+                    <td th:text="${r.totalPrice +'$'}"></td>
+                    <td class="statusReservation "th:text="${r.statusReservation}"></td>
+                    <td th:text="${r.author.username}"></td>
+                    <td th:text="${r.dateCreate}"></td>
+                    <td th:text="${r.invoiced}"></td>
+
+
+                    <td><a class="nav-link h5" th:href="@{reservation/view/{id}(id=*{r.id})}">
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                class="glyphicon glyphicon-ok"></span>View
+                        </button>
+                    </a></td>
+                    <th:block th:if="${r.invoiced.name()=='NO'}">
+                    <td><a class="nav-link h5" th:href="@{reservation/edit/{id}(id=*{r.id})}">
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                class="glyphicon glyphicon-ok"></span>Edit
+                        </button>
+                    </a></td>
+                    </th:block>
+                    <th:block th:if="${r.invoiced.name()=='NO'}">
+                    <td><a class="nav-link h5" th:href="@{invoice/add/{id}(id=*{r.id})}">
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                class="glyphicon glyphicon-ok"></span>Invoice
+                        </button>
+                    </a></td>
+                    </th:block>
+                    <th:block th:if="${r.invoiced.name()=='NO'}">
+                    <td><a class="nav-link h5" th:href="@{reservation/remove/{id}(id=*{r.id})}">
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                class="glyphicon glyphicon-ok"></span>Remove
+                        </button>
+                    </a></td>
+                    </th:block>
+                </tr>
+            </table>
+            <div th:if="${reservations.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{reservationTable(size=${reservations.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==reservations.number + 1} ? active"></a>
+            </div>
+        </div>
+    </th:block>
+</th:block>
