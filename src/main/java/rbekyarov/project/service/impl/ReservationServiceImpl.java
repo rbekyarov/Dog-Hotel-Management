@@ -79,6 +79,9 @@ public class ReservationServiceImpl implements ReservationService {
 
 
         long countOvernightStay = ChronoUnit.DAYS.between(startDate, endDate);
+        if (countOvernightStay<0){
+            countOvernightStay=0;
+        }
 
 
         Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
@@ -200,6 +203,9 @@ public class ReservationServiceImpl implements ReservationService {
         }
         // Calc Days Stay
         long countOvernightStay = ChronoUnit.DAYS.between(startDate, endDate);
+        if (countOvernightStay<0){
+            countOvernightStay=0;
+        }
         //Get Actual Prices
         Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
         Price currentPrice = allPrices.get();
