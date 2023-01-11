@@ -232,11 +232,11 @@ public class InitData implements CommandLineRunner {
         }
         //ADD VENDORS
         if (vendorRepository.findAll().size() == 0) {
-            vendorRepository.save(new Vendor("BTK Ltd", "Bulgaria", cityRepository.getById(Long.parseLong("1")), "Blv Ivan Shishman 3", "BGUNCR49739749397", "btk@btk.com", userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
-            vendorRepository.save(new Vendor("VIK Ltd", "Bulgaria", cityRepository.getById(Long.parseLong("3")), "Ivan Vazov 8", "BGUNC5356569397", "vik-stz@vik.com", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
-            vendorRepository.save(new Vendor("Kaufland", "Bulgaria", cityRepository.getById(Long.parseLong("3")), "Hristo Botev 1", "BGUNCR4922229397", "kaufland-bg@kaufland.com", userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
-            vendorRepository.save(new Vendor("Bagira OOD", "Bulgaria", cityRepository.getById(Long.parseLong("3")), "Stoletov 31", "BGUNCR9536356397", "bagira@bagira.bg", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
-            vendorRepository.save(new Vendor("METRO", "Bulgaria", cityRepository.getById(Long.parseLong("3")), "General Gurko 9", "BGUNCR64574549397", "metro-stz@metro.com", userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            vendorRepository.save(new Vendor("BTK Ltd", "Bulgaria", cityRepository.getById(Long.parseLong("1")), "Blv Ivan Shishman 3", "BG230234656", "btk@btk.com", userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            vendorRepository.save(new Vendor("VIK Ltd", "Bulgaria", cityRepository.getById(Long.parseLong("3")), "Ivan Vazov 8", "BG230364657", "vik-stz@vik.com", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
+            vendorRepository.save(new Vendor("Kaufland", "Bulgaria", cityRepository.getById(Long.parseLong("3")), "Hristo Botev 1", "BG537268593", "kaufland-bg@kaufland.com", userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            vendorRepository.save(new Vendor("Bagira OOD", "Bulgaria", cityRepository.getById(Long.parseLong("3")), "Stoletov 31", "BG650765652", "bagira@bagira.bg", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
+            vendorRepository.save(new Vendor("METRO", "Bulgaria", cityRepository.getById(Long.parseLong("3")), "General Gurko 9", "BG486464798", "metro-stz@metro.com", userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
 
         }
         //ADD COSTS
