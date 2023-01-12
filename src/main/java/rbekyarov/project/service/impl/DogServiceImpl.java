@@ -51,6 +51,11 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
+    public List<Dog> findAll() {
+        return dogRepository.findAll();
+    }
+
+    @Override
     public void addDog(DogDTO dogDTO, MultipartFile file, String imgName, HttpSession session) throws IOException {
 
         Dog dogNew = modelMapper.map(dogDTO, Dog.class);

@@ -20,7 +20,7 @@ import java.util.Set;
 public interface DogService {
     List<Dog> findAllDogByDesc();
 
-
+    List<Dog> findAll();
 
     void addDog(DogDTO dogDTO, MultipartFile file,String imgName, HttpSession session) throws IOException;
 

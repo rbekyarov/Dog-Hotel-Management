@@ -36,6 +36,7 @@ public abstract class BaseController {
         modelAndView.addObject(clients, clientsList);
         modelAndView.addObject(allEmptyCells, allEmptyCellsList);
         modelAndView.addObject(allPrices, allPricesList);
+        modelAndView.addObject(allDogsOnClient, allDogsOnClientList);
 
 
         return modelAndView;

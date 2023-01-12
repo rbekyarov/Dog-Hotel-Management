@@ -28,7 +28,7 @@
                     </select><br>
 
                     <label>Dogs:</label><br>
-                    <select id="dogsBox" th:field="*{dog.id}">
+                    <select id="dogsBox" th:field="*{dog.id}" onclick="getCells()">
                         <option
                                 th:each="dog : *{dog}"
                                 th:value="${dog.id}"
@@ -56,12 +56,12 @@
                         </div>
                     </div>
                     <label>Dog House:</label><br>
-                    <select required th:field="*{cell}">
+                    <select required id="cellsBox" th:field="*{cell}">
                         <option value="">Please select</option>
                         <option
-                                th:each="c : ${allEmptyCells}"
-                                th:value="${c.id}"
-                                th:text="${c.code}"></option>
+                                th:each="cellsBox : ${allEmptyCells}"
+                                th:value="${cellsBox.id}"
+                                th:text="${cellsBox.code}"></option>
 
                     </select><br><br>
                     <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 700px;">
@@ -190,6 +190,55 @@
                             }));
                         }
                         $("#dogsBox").trigger("chosen:updated");
+                    }
+                }
+            }
+        </script>
+        <script>
+            function getCells() {
+
+                const dogId = Number(document.getElementById('dogsBox').value);
+                const clientId = Number(document.getElementById('showClient').value);
+                let length = dogList.length
+                for (let i = 0; i < length; i++) {
+                    let client = clientList[i];
+                    if(client.id===clientId){
+                        let dogs = clientList[i].dogs
+                        for (let j = 0; j < dogs.length; j++) {
+                            if(dogs[j].id==dogId){
+                                let dog = dogs[j];
+                                dogSize = dog.dogSize;
+                                $('#cellsBox option').remove();
+                                if (dogSize === 'SMALL') {
+                                    for (let j = 0; j < cellList.length; j++) {
+                                        if (cellList[j].cellSize === "SMALL") {
+                                            $('#cellsBox').append($('<option>', {
+                                                value: cellList[j].id,
+                                                text: cellList[j].code+' '+cellList[j].cellSize
+                                            }));
+                                        }
+                                    }
+                                } else if (dogSize === 'MEDIUM') {
+                                    for (let j = 0; j < cellList.length; j++) {
+                                        if (cellList[j].cellSize === "MEDIUM") {
+                                            $('#cellsBox').append($('<option>', {
+                                                value: cellList[j].id,
+                                                text: cellList[j].code+' '+cellList[j].cellSize
+                                            }));
+                                        }
+                                    }
+                                } else if (dogSize === 'LARGE') {
+                                    for (let j = 0; j < cellList.length; j++) {
+                                        if (cellList[j].cellSize === "LARGE") {
+                                            $('#cellsBox').append($('<option>', {
+                                                value: cellList[j].id,
+                                                text: cellList[j].code+' '+cellList[j].cellSize
+                                            }));
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

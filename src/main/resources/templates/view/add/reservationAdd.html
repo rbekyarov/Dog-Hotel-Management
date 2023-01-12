@@ -16,7 +16,8 @@
                 <div class="form-group">
                     <label class="text-white font-weight-bold"></label>
                     <label>Client:</label><br>
-                    <select required id="showClient" name="showClient" th:field="*{client.id}" oninput="getClientDogs()">
+                    <select required id="showClient" name="showClient" th:field="*{client.id}"
+                            oninput="getClientDogs()">
 
                         <option value="">Please select</option>
                         <option
@@ -27,7 +28,7 @@
                     </select><br>
 
                     <label>Dogs:</label><br>
-                    <select id="dogsBox" name="dogsBox" th:field="*{dog.id}" oninput="getCells()">
+                    <select id="dogsBox" name="dogsBox" th:field="*{dog.id}" onclick="getCells()">
                     </select><br>
                     <label>Date of Arrival:</label><br>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
@@ -51,11 +52,7 @@
                     </div>
                     <label>Dog House:</label><br>
                     <select required id="cellsBox" name="cellsBox" th:field="*{cell}">
-                        <option value="">Please select</option>
-                        <option
-                                th:each="c : ${allEmptyCells}"
-                                th:value="${c.id}"
-                                th:text="${c.code}"></option>
+
 
                     </select><br><br>
                     <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 700px;">
@@ -155,7 +152,8 @@
                     today: 'far fa-calendar-check-o',
                     clear: 'far fa-trash',
                     close: 'far fa-times'
-                } });
+                }
+            });
 
             $('#datetimepicker2').datetimepicker({
                 format: 'DD/MM/YYYY'
@@ -164,8 +162,71 @@
         <script th:inline="javascript">
             /*<![CDATA[*/
 
+            var cellList = /*[[${allEmptyCells}]]*/ 'test';
+            /*]]>*/
+        </script>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            var dogList = /*[[${allDogs}]]*/ 'test';
+            /*]]>*/
+        </script>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
             var clientList = /*[[${allClients}]]*/ 'test';
             /*]]>*/
+        </script>
+        <script>
+            function getCells() {
+
+                const dogId = Number(document.getElementById('dogsBox').value);
+                const clientId = Number(document.getElementById('showClient').value);
+                let length = dogList.length
+                for (let i = 0; i < length; i++) {
+                    let client = clientList[i];
+                   if(client.id===clientId){
+                       let dogs = clientList[i].dogs
+                       for (let j = 0; j < dogs.length; j++) {
+                         if(dogs[j].id==dogId){
+                             let dog = dogs[j];
+                             dogSize = dog.dogSize;
+                             $('#cellsBox option').remove();
+                             if (dogSize === 'SMALL') {
+                                 for (let j = 0; j < cellList.length; j++) {
+                                     if (cellList[j].cellSize === "SMALL") {
+                                         $('#cellsBox').append($('<option>', {
+                                             value: cellList[j].id,
+                                             text: cellList[j].code+' '+cellList[j].cellSize
+                                         }));
+                                     }
+                                 }
+                             } else if (dogSize === 'MEDIUM') {
+                                 for (let j = 0; j < cellList.length; j++) {
+                                     if (cellList[j].cellSize === "MEDIUM") {
+                                         $('#cellsBox').append($('<option>', {
+                                             value: cellList[j].id,
+                                             text: cellList[j].code+' '+cellList[j].cellSize
+                                         }));
+                                     }
+                                 }
+                             } else if (dogSize === 'LARGE') {
+                                 for (let j = 0; j < cellList.length; j++) {
+                                     if (cellList[j].cellSize === "LARGE") {
+                                         $('#cellsBox').append($('<option>', {
+                                             value: cellList[j].id,
+                                             text: cellList[j].code+' '+cellList[j].cellSize
+                                         }));
+                                     }
+                                 }
+                             }
+                         }
+                       }
+                   }
+                }
+            }
         </script>
         <script>
 
