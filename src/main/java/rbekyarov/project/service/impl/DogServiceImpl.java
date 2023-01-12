@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import rbekyarov.project.models.dto.DogEditDTO;
 import rbekyarov.project.models.entity.*;
 import rbekyarov.project.models.dto.DogDTO;
+import rbekyarov.project.models.entity.enums.DogSize;
 import rbekyarov.project.service.*;
 import rbekyarov.project.repository.DogRepository;
 
@@ -45,8 +46,8 @@ public class DogServiceImpl implements DogService {
 
 
     @Override
-    public List<Dog> findAllDogById() {
-        return dogRepository.findAllDogById();
+    public List<Dog> findAllDogByDesc() {
+        return dogRepository.findAllDogByDesc();
     }
 
     @Override
@@ -68,6 +69,16 @@ public class DogServiceImpl implements DogService {
 
         // set dateCreated
         dogNew.setDateCreate(LocalDate.now());
+        //set DogSize
+        Integer weight = dogDTO.getWeight();
+        if (weight <= 10) {
+            dogNew.setDogSize(DogSize.SMALL);
+        } else if (weight <= 20) {
+            dogNew.setDogSize(DogSize.MEDIUM);
+        }else {
+            dogNew.setDogSize(DogSize.LARGE);
+        }
+
 
         dogRepository.save(dogNew);
     }
@@ -99,6 +110,17 @@ public class DogServiceImpl implements DogService {
 
         //set dateEdit
         LocalDate dateEdit = LocalDate.now();
+        //set dogSize
+        Integer weight = dogEditDTO.getWeight();
+        DogSize dogSize;
+        if (weight <= 10) {
+            dogSize=DogSize.SMALL;
+        } else if (weight <= 20) {
+            dogSize=DogSize.MEDIUM;
+        }else {
+            dogSize=DogSize.LARGE;
+        }
+
         dogRepository.editDog(dogEditDTO.getName(),
                 birthDate,
                 dogEditDTO.getWeight(),
@@ -111,7 +133,8 @@ public class DogServiceImpl implements DogService {
                 dogEditDTO.getImageName(),
                 id,
                 editAuthorId,
-                dateEdit);
+                dateEdit,
+                dogSize);
     }
 
     @Override

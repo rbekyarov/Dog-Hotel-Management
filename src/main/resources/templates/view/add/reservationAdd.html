@@ -27,7 +27,7 @@
                     </select><br>
 
                     <label>Dogs:</label><br>
-                    <select id="dogsBox" th:field="*{dog.id}">
+                    <select id="dogsBox" name="dogsBox" th:field="*{dog.id}" oninput="getCells()">
                     </select><br>
                     <label>Date of Arrival:</label><br>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <label>Dog House:</label><br>
-                    <select required th:field="*{cell}">
+                    <select required id="cellsBox" name="cellsBox" th:field="*{cell}">
                         <option value="">Please select</option>
                         <option
                                 th:each="c : ${allEmptyCells}"

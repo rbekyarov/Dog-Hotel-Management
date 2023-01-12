@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import rbekyarov.project.models.entity.Dog;
+import rbekyarov.project.models.entity.enums.DogSize;
 import rbekyarov.project.models.entity.enums.Microchip;
 import rbekyarov.project.models.entity.enums.Passport;
 import rbekyarov.project.models.entity.enums.Sex;
@@ -19,8 +20,8 @@ import java.util.Set;
 @Repository
 
 public interface DogRepository extends JpaRepository<Dog, Long> {
-    @Query("select d from Dog as d order by d.id asc ")
-    List<Dog> findAllDogById();
+    @Query("select d from Dog as d order by d.id desc ")
+    List<Dog> findAllDogByDesc();
 
     Optional<Dog> findById(Long id);
     @Query("select d.weight from Dog as d where d.id=:id")
@@ -29,7 +30,7 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Dog as d SET d.name = :name, d.birthDate=:birthDate, d.weight =:weight, d.breed.id = :breedId,d.sex=:sex,d.passport=:passport,d.microchip=:microchip,d.client.id = :clientId, d.behavior.id=:behaviorId,d.imageName=:imageName, d.author.id=:editAuthorId,d.dateCreate=:dateEdit where d.id=:id ")
+    @Query("update Dog as d SET d.name = :name, d.birthDate=:birthDate, d.weight =:weight, d.breed.id = :breedId,d.sex=:sex,d.passport=:passport,d.microchip=:microchip,d.client.id = :clientId, d.behavior.id=:behaviorId,d.imageName=:imageName, d.author.id=:editAuthorId,d.dateCreate=:dateEdit,d.dogSize=:dogSize where d.id=:id ")
     void editDog(@Param("name") String name,
                  @Param("birthDate") LocalDate birthDate,
                  @Param("weight") Integer weight,
@@ -42,7 +43,8 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
                  @Param("imageName")  String imageName,
                  @Param("id") Long id,
                  @Param("editAuthorId") Long editAuthorId,
-                 @Param("dateEdit") LocalDate dateEdit);
+                 @Param("dateEdit") LocalDate dateEdit,
+                 @Param("dogSize")DogSize dogSize);
 
     @Query("select d.id from Dog as d where d.client.email=:clientEmail")
     Set<Long> listDogIds(@Param("clientEmail") String clientEmail);

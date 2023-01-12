@@ -3,7 +3,6 @@ package rbekyarov.project.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import rbekyarov.project.models.dto.DogDTO;
 import rbekyarov.project.models.dto.DogEditDTO;
@@ -11,9 +10,6 @@ import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Breed;
 import rbekyarov.project.models.entity.Client;
 import rbekyarov.project.models.entity.Dog;
-import rbekyarov.project.models.entity.enums.Microchip;
-import rbekyarov.project.models.entity.enums.Passport;
-import rbekyarov.project.models.entity.enums.Sex;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -22,7 +18,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface DogService {
-    List<Dog> findAllDogById();
+    List<Dog> findAllDogByDesc();
 
 
 

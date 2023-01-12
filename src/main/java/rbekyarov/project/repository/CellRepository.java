@@ -36,6 +36,13 @@ public interface CellRepository extends JpaRepository<Cell, Long> {
 
     @Query("select c from Cell as c where c.status='empty'")
     List<Cell> findAllEmptyCells();
+
+    @Query("select c from Cell as c where c.status='empty' and c.cellSize='SMALL'")
+    List<Cell> findAllEmptyCellsSmall();
+    @Query("select c from Cell as c where c.status='empty' and c.cellSize='MEDIUM'")
+    List<Cell> findAllEmptyCellsMedium();
+    @Query("select c from Cell as c where c.status='empty' and c.cellSize='LARGE'")
+    List<Cell> findAllEmptyCellsLarge();
     @Transactional
     @Modifying
     @Query("update Cell as c SET c.status='busy' where c.id=:id")

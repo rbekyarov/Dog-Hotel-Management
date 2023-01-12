@@ -3,7 +3,6 @@ package rbekyarov.project.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.CellDTO;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Cell;
 import rbekyarov.project.models.entity.enums.CellSize;
 import rbekyarov.project.models.entity.enums.Status;
@@ -23,6 +22,7 @@ public interface CellService {
 
     void editCells(String name, Long id, Status status, CellSize cellSize, HttpSession session);
 
+    List<Cell> findAllEmptyCellsForCurrentDog(Integer weight);
     List<Cell> findAllEmptyCells();
 
     void setCellBusy(Long id);

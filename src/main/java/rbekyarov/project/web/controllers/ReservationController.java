@@ -132,8 +132,8 @@ public class ReservationController extends BaseController {
 
         List<Dog> allDogsOnClient = new ArrayList<>();
 
-
-        List<Cell> allEmptyCells = cellService.findAllEmptyCells();
+        Integer weightDog = reservationDTO.getDog().getWeight();
+        List<Cell> allEmptyCells = cellService.findAllEmptyCellsForCurrentDog(weightDog);
         Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
         Price price = allPrices.get();
         modelAndView.addObject("reservationDTO", reservationDTO);

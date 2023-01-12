@@ -4,7 +4,6 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,9 +19,6 @@ import rbekyarov.project.service.FileStorageService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -149,7 +145,7 @@ public class DogController extends BaseController {
             dogs = dogService.listDogByName(dogName);
             modelAndView.addObject("dogs", dogs);
         }else {
-            dogs = dogService.findAllDogById();
+            dogs = dogService.findAllDogByDesc();
             modelAndView.addObject("dogs", dogs);}
         return super.view("/view/table/dogTable", "dogs", dogs);
     }
@@ -160,7 +156,7 @@ public class DogController extends BaseController {
             dogs = dogService.listDogByClientEmail(clientEmail);
             modelAndView.addObject("dogs", dogs);
         }else {
-            dogs = dogService.findAllDogById();
+            dogs = dogService.findAllDogByDesc();
             modelAndView.addObject("dogs", dogs);}
         return super.view("/view/table/dogTable", "dogs", dogs);
     }

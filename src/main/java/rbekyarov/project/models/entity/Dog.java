@@ -3,6 +3,7 @@ package rbekyarov.project.models.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.format.annotation.DateTimeFormat;
+import rbekyarov.project.models.entity.enums.DogSize;
 import rbekyarov.project.models.entity.enums.Microchip;
 import rbekyarov.project.models.entity.enums.Passport;
 import rbekyarov.project.models.entity.enums.Sex;
@@ -26,12 +27,13 @@ public class Dog extends BaseEntity {
     private Behavior behavior;
     private User author;
     private LocalDate dateCreate;
+    private DogSize  dogSize;
 
     public Dog() {
     }
 
 
-    public Dog(String name, LocalDate birthDate, String imageName, Integer weight, Breed breed, Sex sex, Passport passport, Microchip microchip, Client client, Behavior behavior, User author, LocalDate dateCreate) {
+    public Dog(String name, LocalDate birthDate, String imageName, Integer weight, Breed breed, Sex sex, Passport passport, Microchip microchip, Client client, Behavior behavior, User author, LocalDate dateCreate, DogSize dogSize) {
         this.name = name;
         this.birthDate = birthDate;
         this.imageName = imageName;
@@ -44,6 +46,7 @@ public class Dog extends BaseEntity {
         this.behavior = behavior;
         this.author = author;
         this.dateCreate = dateCreate;
+        this.dogSize = dogSize;
     }
 
     @Column(nullable = false)
@@ -154,5 +157,13 @@ public class Dog extends BaseEntity {
 
     public void setDateCreate(LocalDate dateCreate) {
         this.dateCreate = dateCreate;
+    }
+    @Enumerated(EnumType.STRING)
+    public DogSize getDogSize() {
+        return dogSize;
+    }
+
+    public void setDogSize(DogSize dogSize) {
+        this.dogSize = dogSize;
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Breed;
 import rbekyarov.project.models.entity.Client;
+import rbekyarov.project.models.entity.enums.DogSize;
 import rbekyarov.project.models.entity.enums.Microchip;
 import rbekyarov.project.models.entity.enums.Passport;
 import rbekyarov.project.models.entity.enums.Sex;
@@ -24,7 +25,7 @@ public class DogDTO {
     private Behavior behavior;
 
     private String imageName;
-
+    private DogSize dogSize;
     public DogDTO() {
     }
 
@@ -113,5 +114,13 @@ public class DogDTO {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
+    }
+
+    public DogSize getDogSize() {
+        return dogSize;
+    }
+
+    public void setDogSize(DogSize dogSize) {
+        this.dogSize = dogSize;
     }
 }

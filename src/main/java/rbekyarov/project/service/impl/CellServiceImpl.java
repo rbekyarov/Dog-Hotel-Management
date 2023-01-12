@@ -71,8 +71,20 @@ public class CellServiceImpl implements CellService {
     }
 
     @Override
+    public List<Cell> findAllEmptyCellsForCurrentDog(Integer weight) {
+        if (weight <= 10) {
+            return cellRepository.findAllEmptyCellsSmall();
+        } else if (weight <= 20) {
+            return cellRepository.findAllEmptyCellsMedium();
+        }else {
+            return cellRepository.findAllEmptyCellsLarge();
+        }
+
+    }
+    @Override
     public List<Cell> findAllEmptyCells() {
         return cellRepository.findAllEmptyCells();
+
     }
 
     @Override
