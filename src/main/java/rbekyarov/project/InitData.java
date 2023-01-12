@@ -58,7 +58,7 @@ public class InitData implements CommandLineRunner {
             behaviorRepository.save(new Behavior("Bad with dogs", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
             behaviorRepository.save(new Behavior("Bad with dogs and humans", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
             behaviorRepository.save(new Behavior("Bad with humans", userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
-            behaviorRepository.save(new Behavior("Cowardly dog", userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            behaviorRepository.save(new Behavior("Dakel", userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
 
         }
         //ADD Dog Breed
@@ -69,6 +69,9 @@ public class InitData implements CommandLineRunner {
             breedRepository.save(new Breed("Bulgarian Shepherd - BOK", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
             breedRepository.save(new Breed("Miniature Schnauzer", userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
             breedRepository.save(new Breed("Husky", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
+            breedRepository.save(new Breed("Yorkshire Terrier", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
+            breedRepository.save(new Breed("Dakel", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
+            breedRepository.save(new Breed("Pitbull", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
 
         }
         //ADD Dog House
@@ -132,6 +135,8 @@ public class InitData implements CommandLineRunner {
             clientRepository.save(new Client("Stanimir", "Pavlov", "spavlov@abv.bg", "08842276361", "Zdravetzh 4", cityRepository.getById(Long.parseLong("2")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
             clientRepository.save(new Client("Vladimir", "Georgiev", "vgeorgiev@outlook.com", "0887325579", "Zagorka 16", cityRepository.getById(Long.parseLong("3")), userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
             clientRepository.save(new Client("Boyan", "Dimitrov", "bdimitrov@hotmail.com", "0881256377", "Ludogorska 12B", cityRepository.getById(Long.parseLong("4")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            clientRepository.save(new Client("Yordan", "Atanasov", "atanasov@abv.bg", "0867258954", "Vasil Levski 22", cityRepository.getById(Long.parseLong("1")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            clientRepository.save(new Client("Viktor", "Penev", "penev23@abv.bg", "08865578956", "Hristo Botev 24", cityRepository.getById(Long.parseLong("2")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
 
 
         }
@@ -151,6 +156,49 @@ public class InitData implements CommandLineRunner {
                     userRepository.getById(Long.parseLong("1")),
                     LocalDate.of(2023, 1, 1),
                     DogSize.LARGE));
+
+            dogRepository.save(new Dog("Tuti",
+                    LocalDate.of(2022, 3, 15),
+                    "tuti.jpg",
+                    3,
+                    breedRepository.getById(Long.parseLong("6")),
+                    Sex.M,
+                    Passport.YES,
+                    Microchip.YES,
+                    clientRepository.getById(Long.parseLong("5")),
+                    behaviorRepository.getById(Long.parseLong("2")),
+                    userRepository.getById(Long.parseLong("1")),
+                    LocalDate.of(2023, 1, 1),
+                    DogSize.SMALL));
+
+            dogRepository.save(new Dog("Dido",
+                    LocalDate.of(2021, 6, 11),
+                    "dido.jpg",
+                    9,
+                    breedRepository.getById(Long.parseLong("7")),
+                    Sex.M,
+                    Passport.YES,
+                    Microchip.YES,
+                    clientRepository.getById(Long.parseLong("6")),
+                    behaviorRepository.getById(Long.parseLong("4")),
+                    userRepository.getById(Long.parseLong("1")),
+                    LocalDate.of(2023, 1, 1),
+                    DogSize.SMALL));
+
+            dogRepository.save(new Dog("Sara",
+                    LocalDate.of(2022, 2, 22),
+                    "sara.jpg",
+                    18,
+                    breedRepository.getById(Long.parseLong("7")),
+                    Sex.F,
+                    Passport.YES,
+                    Microchip.NO,
+                    clientRepository.getById(Long.parseLong("5")),
+                    behaviorRepository.getById(Long.parseLong("6")),
+                    userRepository.getById(Long.parseLong("2")),
+                    LocalDate.of(2023, 1, 1),
+                    DogSize.MEDIUM));
+
             //New Dog "Berta"
             dogRepository.save(new Dog("Berta",
                     LocalDate.of(2019, 3, 26),
