@@ -27,10 +27,14 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
     @Query("select d.weight from Dog as d where d.id=:id")
     Integer getWeightById(Long id);
 
+    @Transactional
+    @Modifying
+    @Query("update Dog as d SET d.years=:years where d.id=:id")
+    void editDogYearsById(@Param("id")Long id, String years);
 
     @Transactional
     @Modifying
-    @Query("update Dog as d SET d.name = :name, d.birthDate=:birthDate, d.weight =:weight, d.breed.id = :breedId,d.sex=:sex,d.passport=:passport,d.microchip=:microchip,d.client.id = :clientId, d.behavior.id=:behaviorId,d.imageName=:imageName, d.author.id=:editAuthorId,d.dateCreate=:dateEdit,d.dogSize=:dogSize where d.id=:id ")
+    @Query("update Dog as d SET d.name = :name, d.birthDate=:birthDate, d.weight =:weight, d.breed.id = :breedId,d.sex=:sex,d.passport=:passport,d.microchip=:microchip,d.client.id = :clientId, d.behavior.id=:behaviorId,d.imageName=:imageName, d.author.id=:editAuthorId,d.dateCreate=:dateEdit,d.dogSize=:dogSize,d.years=:years where d.id=:id ")
     void editDog(@Param("name") String name,
                  @Param("birthDate") LocalDate birthDate,
                  @Param("weight") Integer weight,
@@ -44,7 +48,8 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
                  @Param("id") Long id,
                  @Param("editAuthorId") Long editAuthorId,
                  @Param("dateEdit") LocalDate dateEdit,
-                 @Param("dogSize")DogSize dogSize);
+                 @Param("dogSize")DogSize dogSize,
+                 @Param("years")String years);
 
     @Query("select d.id from Dog as d where d.client.email=:clientEmail")
     Set<Long> listDogIds(@Param("clientEmail") String clientEmail);

@@ -195,7 +195,7 @@ public class InitData implements CommandLineRunner {
                     DogSize.LARGE));
             //New Dog "Zara"
             dogRepository.save(new Dog("Zara",
-                    LocalDate.of(2020, 4, 16),
+                    LocalDate.of(2022, 9, 16),
                     "Zara.jpg",
                     15,
                     breedRepository.getById(Long.parseLong("1")),

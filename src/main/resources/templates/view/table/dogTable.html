@@ -33,7 +33,7 @@
                     <th>No</th>
                     <th>Name</th>
                     <th>Image</th>
-                    <th>BirthDate</th>
+                    <th>Age</th>
                     <th>Weight</th>
                     <th>Breed</th>
                     <th>Sex</th>
@@ -55,7 +55,7 @@
                              th:src="@{${'/image/' + d.imageName}}" >
 
                     </td>
-                    <td th:text="${d.birthDate}"></td>
+                    <td th:text="${d.years}"></td>
                     <td th:text="${d.weight}"></td>
                     <td th:text="${d.breed.getBreedName()}"></td>
                     <td th:text="${d.sex}"></td>

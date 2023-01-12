@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import static rbekyarov.project.web.controllers.DogController.uploadDir;
@@ -83,6 +84,17 @@ public class DogServiceImpl implements DogService {
         }else {
             dogNew.setDogSize(DogSize.LARGE);
         }
+        //set years
+        long daysLong = ChronoUnit.DAYS.between(birthDate,LocalDate.now());
+        int years = (int)daysLong / 365;
+        int months = ((int)daysLong % 365)/30 ;
+        String result="";
+        if (years<1){
+            result = String.format("mos."+months);
+        }else {
+            result = String.format("yrs."+years+" mos."+months);
+        }
+        dogNew.setYears(result);
 
 
         dogRepository.save(dogNew);
@@ -126,6 +138,17 @@ public class DogServiceImpl implements DogService {
             dogSize=DogSize.LARGE;
         }
 
+        //set years
+        long daysLong = ChronoUnit.DAYS.between(birthDate,LocalDate.now());
+        int years = (int)daysLong / 365;
+        int months = ((int)daysLong % 365)/30 ;
+        String result="";
+        if (years<1){
+            result = String.format("mos."+months);
+        }else {
+            result = String.format("yrs."+years+" mos."+months);
+        }
+
         dogRepository.editDog(dogEditDTO.getName(),
                 birthDate,
                 dogEditDTO.getWeight(),
@@ -139,7 +162,8 @@ public class DogServiceImpl implements DogService {
                 id,
                 editAuthorId,
                 dateEdit,
-                dogSize);
+                dogSize,
+                result);
     }
 
     @Override
@@ -183,7 +207,7 @@ public class DogServiceImpl implements DogService {
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<Dog> list;
-        List<Dog> dogs = dogRepository.findAll();
+        List<Dog> dogs = dogRepository.findAllDogByDesc();
         if (dogs.size() < startItem) {
             list = Collections.emptyList();
         } else {
@@ -199,6 +223,25 @@ public class DogServiceImpl implements DogService {
     @Override
     public Integer getWeightById(Long id) {
         return dogRepository.getWeightById(id);
+    }
+
+    @Override
+    public void updateDogYears() {
+        List<Dog> dogs = findAll();
+        for (Dog dog : dogs) {
+            long daysLong = ChronoUnit.DAYS.between(dog.getBirthDate(),LocalDate.now());
+            int years = (int)daysLong / 365;
+            int months = ((int)daysLong % 365)/30 ;
+            String result="";
+            if (years<1){
+                result = String.format("mos."+months);
+            }else {
+                result = String.format("yrs."+years+" mos."+months);
+            }
+            dogRepository.editDogYearsById(dog.getId(),result);
+        }
+
+
     }
 
     //convert String to LocalDate

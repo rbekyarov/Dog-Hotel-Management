@@ -28,6 +28,7 @@ public class Dog extends BaseEntity {
     private User author;
     private LocalDate dateCreate;
     private DogSize  dogSize;
+    private String years;
 
     public Dog() {
     }
@@ -165,5 +166,13 @@ public class Dog extends BaseEntity {
 
     public void setDogSize(DogSize dogSize) {
         this.dogSize = dogSize;
+    }
+    @Column
+    public String getYears() {
+        return years;
+    }
+
+    public void setYears(String years) {
+        this.years = years;
     }
 }

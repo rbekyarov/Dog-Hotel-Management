@@ -26,6 +26,7 @@ public class DogEditDTO {
     private Behavior behavior;
     private String imageName;
     private DogSize dogSize;
+    private String years;
     public DogEditDTO() {
     }
 
@@ -121,5 +122,13 @@ public class DogEditDTO {
 
     public void setDogSize(DogSize dogSize) {
         this.dogSize = dogSize;
+    }
+
+    public String getYears() {
+        return years;
+    }
+
+    public void setYears(String years) {
+        this.years = years;
     }
 }

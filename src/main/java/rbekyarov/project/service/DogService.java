@@ -44,4 +44,6 @@ public interface DogService {
     Page<Dog> findPaginated(Pageable pageable);
 
     Integer getWeightById(Long id);
+
+    void updateDogYears();
 }

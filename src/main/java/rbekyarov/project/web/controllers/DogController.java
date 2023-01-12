@@ -56,6 +56,7 @@ public class DogController extends BaseController {
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
         modelAndView.addObject("dogs", dogs);
+        dogService.updateDogYears();
         return super.view("/view/table/dogTable", "dogs", dogs,"pageNumbers", pageNumbers);
     }
 
