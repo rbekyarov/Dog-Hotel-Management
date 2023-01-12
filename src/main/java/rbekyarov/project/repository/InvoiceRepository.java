@@ -14,11 +14,11 @@ import java.util.Optional;
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
-    @Query("select i from Invoice as i order by i.id asc ")
+    @Query("select i from Invoice as i order by i.id desc ")
     List<Invoice> findAllInvoice();
-    @Query("select i from Invoice as i where i.cancellationInvoice='NO' order by i.id asc ")
+    @Query("select i from Invoice as i where i.cancellationInvoice='NO' order by i.id desc ")
     List<Invoice> findAllRealInvoice();
-    @Query("select i from Invoice as i where i.cancellationInvoice='YES' order by i.id asc ")
+    @Query("select i from Invoice as i where i.cancellationInvoice='YES' order by i.id desc ")
     List<Invoice> findAllCancelledInvoice();
 
     Optional<Invoice> findById(Long id);

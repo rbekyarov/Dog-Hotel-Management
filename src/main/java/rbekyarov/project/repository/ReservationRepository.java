@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.enums.*;
 
@@ -17,8 +16,8 @@ import java.util.Optional;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
-    @Query("select r from Reservation as r order by r.id asc ")
-    List<Reservation> findAllReservationById();
+    @Query("select r from Reservation as r order by r.id desc ")
+    List<Reservation> findAllReservationByDesc();
 
     Optional<Reservation> findById(Long id);
 

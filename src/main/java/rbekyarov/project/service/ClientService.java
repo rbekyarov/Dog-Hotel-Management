@@ -3,7 +3,6 @@ package rbekyarov.project.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.ClientDTO;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Client;
 
 import javax.servlet.http.HttpSession;
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ClientService {
-    List<Client> findAllClientById();
+    List<Client> findAllClientByDesc();
     List<Client> findAllClientForReservation();
 
     void addClient(ClientDTO clientDTO, HttpSession session);

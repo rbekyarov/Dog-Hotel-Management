@@ -10,7 +10,6 @@ import rbekyarov.project.models.dto.ClientEditDTO;
 import rbekyarov.project.models.entity.City;
 import rbekyarov.project.models.entity.Client;
 import rbekyarov.project.models.dto.ClientDTO;
-import rbekyarov.project.models.entity.*;
 import rbekyarov.project.service.CityService;
 import rbekyarov.project.service.ClientService;
 import rbekyarov.project.service.DogService;
@@ -123,7 +122,7 @@ public class ClientController extends BaseController {
             clients = clientService.listClientByPhone(clientPhone);
             modelAndView.addObject("clients", clients);
         }else {
-            clients = clientService.findAllClientById();
+            clients = clientService.findAllClientByDesc();
             modelAndView.addObject("clients", clients);}
         return super.view("/view/table/clientTable", "clients", clients);
     }
@@ -134,7 +133,7 @@ public class ClientController extends BaseController {
             clients = clientService.listClientByEmail(clientEmail);
             modelAndView.addObject("clients", clients);
         }else {
-            clients = clientService.findAllClientById();
+            clients = clientService.findAllClientByDesc();
             modelAndView.addObject("clients", clients);}
         return super.view("/view/table/clientTable", "clients", clients);
     }

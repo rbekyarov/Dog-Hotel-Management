@@ -15,8 +15,8 @@ import java.util.Optional;
 @Repository
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
-    @Query("select c from Client as c order by c.id asc ")
-    List<Client> findAllClientById();
+    @Query("select c from Client as c order by c.id desc ")
+    List<Client> findAllClientByDesc();
 
     Optional<Client> findById(Long id);
 

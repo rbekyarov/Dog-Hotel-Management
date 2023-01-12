@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.CostDTO;
 import rbekyarov.project.models.dto.CostEditDTO;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Cost;
-import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.Vendor;
 import rbekyarov.project.service.CostService;
 import rbekyarov.project.service.VendorService;
@@ -109,7 +107,7 @@ public class CostController extends BaseController {
             costs = costService.findCostByVendor(vendorName);
             modelAndView.addObject("costs", costs);
         }else {
-            costs = costService.findAllCost();
+            costs = costService.findAllCostByDesc();
             modelAndView.addObject("costs", costs);}
         return super.view("/view/table/costTable", "costs", costs);
     }

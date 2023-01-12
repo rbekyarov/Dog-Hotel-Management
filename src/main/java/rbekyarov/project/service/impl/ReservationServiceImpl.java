@@ -48,8 +48,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Reservation> findAllReservationById() {
-        return reservationRepository.findAllReservationById();
+    public List<Reservation> findAllReservationByDesc() {
+        return reservationRepository.findAllReservationByDesc();
     }
 
     @Override
@@ -319,7 +319,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public void statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall() {
 
-        List<Reservation> allReservation = reservationRepository.findAllReservationById();
+        List<Reservation> allReservation = reservationRepository.findAllReservationByDesc();
         for (Reservation reservation : allReservation) {
             //change reservation status
             Long reservationId = reservation.getId();
@@ -369,7 +369,7 @@ public class ReservationServiceImpl implements ReservationService {
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<Reservation> list;
-        List<Reservation> reservations = reservationRepository.findAllReservationById();
+        List<Reservation> reservations = reservationRepository.findAllReservationByDesc();
         if (reservations.size() < startItem) {
             list = Collections.emptyList();
         } else {

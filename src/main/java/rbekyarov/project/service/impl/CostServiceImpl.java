@@ -6,7 +6,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.service.CompanyService;
 import rbekyarov.project.models.dto.CostDTO;
@@ -38,8 +37,8 @@ public class CostServiceImpl implements CostService {
     }
 
     @Override
-    public List<Cost> findAllCost() {
-        return costRepository.findAllCost();
+    public List<Cost> findAllCostByDesc() {
+        return costRepository.findAllCostByDesc();
     }
 
     @Override
@@ -113,7 +112,7 @@ public class CostServiceImpl implements CostService {
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<Cost> list;
-        List<Cost> costs = costRepository.findAll();
+        List<Cost> costs = costRepository.findAllCostByDesc();
         if (costs.size() < startItem) {
             list = Collections.emptyList();
         } else {

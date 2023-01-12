@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.enums.Invoiced;
 
@@ -14,7 +13,7 @@ import java.util.Optional;
 
 
 public interface ReservationService {
-    List<Reservation> findAllReservationById();
+    List<Reservation> findAllReservationByDesc();
 
 
 

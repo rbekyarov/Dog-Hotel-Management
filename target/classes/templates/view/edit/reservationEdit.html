@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label class="text-white font-weight-bold"></label>
                     <label>Client:</label><br>
-                    <select id="showClient" name="showClient" th:field="*{client.id}" oninput="getClientDogs()">
+                    <select required id="showClient" name="showClient" th:field="*{client.id}" oninput="getClientDogs()">
 
                         <option value="">Please select</option>
                         <option
@@ -37,7 +37,7 @@
                     </select><br>
                     <label>Date of Arrival:</label><br>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input"
+                        <input required type="text" class="form-control datetimepicker-input"
                                data-target="#datetimepicker1"
                                th:field="*{startDate}" id="date" placeholder="Date"/>
                         <div class="input-group-append" data-target="#datetimepicker1"
@@ -47,7 +47,7 @@
                     </div>
                     <label>Date of Departure:</label><br>
                     <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input"
+                        <input required type="text" class="form-control datetimepicker-input"
                                data-target="#datetimepicker2"
                                th:field="*{endDate}" id="date2" placeholder="Date"/>
                         <div class="input-group-append" data-target="#datetimepicker2"
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <label>Dog House:</label><br>
-                    <select th:field="*{cell}">
+                    <select required th:field="*{cell}">
                         <option value="">Please select</option>
                         <option
                                 th:each="c : ${allEmptyCells}"

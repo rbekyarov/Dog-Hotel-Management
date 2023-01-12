@@ -14,7 +14,7 @@
                   th:method="post">
                 <div class="form-group">
                     <label class="text-white font-weight-bold" for="description">Breed</label><br>
-                    <input type="text" id="description" th:field="${breedDTO.breedName}" placeholder="Please enter breed"/>
+                    <input type="text" id="description" th:field="${breedDTO.breedName}" placeholder="Please enter breed" required />
                     <p class="invalid-feedback errors alert alert-danger">
                         Behavior is required.
                     </p>
@@ -30,6 +30,3 @@
         </div>
     </th:block>
 </th:block>
-<!--<a class="btn btn-danger btn-lg btn3d" th:href="@{/behavior/{id}/edit(id=*{id})}">
-    Submit Behavior
-</a>-->

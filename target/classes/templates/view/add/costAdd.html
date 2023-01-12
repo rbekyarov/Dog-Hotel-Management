@@ -17,7 +17,7 @@
                 <div class="form-group">
 
                     <label>Vendor:</label><br>
-                    <select th:field="*{vendor.id}">
+                    <select required th:field="*{vendor.id}">
                         <option value="">Please select</option>
                         <option
                                 th:each="b : ${allVendor}"

@@ -23,13 +23,13 @@
                 <input type="text" id="description3" th:field="*{phone}" placeholder="Please enter Phone" required/><br>
 
                 <label>Address:</label><br>
-                <textarea
+                <textarea required
                         th:field="*{address}"
                         type="textarea"
                         placeholder="Please enter Address">
             </textarea><br>
                 <label>City:</label><br>
-                <select th:field="*{city.id}" >
+                <select required th:field="*{city.id}" >
                     <option value="">Please select</option>
                     <option
                             th:each="b : ${allCity}"

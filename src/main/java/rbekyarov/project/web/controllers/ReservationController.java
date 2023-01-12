@@ -161,7 +161,7 @@ public class ReservationController extends BaseController {
             reservations = reservationService.listReservationById(Long.parseLong(reservationNumber));
             modelAndView.addObject("reservations", reservations);
         }else {
-            reservations = reservationService.findAllReservationById();
+            reservations = reservationService.findAllReservationByDesc();
             modelAndView.addObject("reservations", reservations);}
         return super.view("/view/table/reservationTable", "reservations", reservations);
     }
@@ -172,7 +172,7 @@ public class ReservationController extends BaseController {
             reservations = reservationService.listReservationByClientEmail(clientEmail);
             modelAndView.addObject("reservations", reservations);
         }else {
-            reservations = reservationService.findAllReservationById();
+            reservations = reservationService.findAllReservationByDesc();
             modelAndView.addObject("reservations", reservations);}
         return super.view("/view/table/reservationTable", "reservations", reservations);
     }

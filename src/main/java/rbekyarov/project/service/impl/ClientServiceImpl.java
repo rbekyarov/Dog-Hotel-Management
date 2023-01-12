@@ -7,7 +7,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.ClientDTO;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Client;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.repository.CellRepository;
@@ -37,8 +36,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Client> findAllClientById() {
-        return clientRepository.findAllClientById();
+    public List<Client> findAllClientByDesc() {
+        return clientRepository.findAllClientByDesc();
     }
 
     @Override
@@ -104,7 +103,7 @@ public class ClientServiceImpl implements ClientService {
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<Client> list;
-        List<Client> clients = clientRepository.findAll();
+        List<Client> clients = clientRepository.findAllClientByDesc();
         if (clients.size() < startItem) {
             list = Collections.emptyList();
         } else {

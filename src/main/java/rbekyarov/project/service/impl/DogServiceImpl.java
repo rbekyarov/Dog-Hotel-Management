@@ -9,9 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import rbekyarov.project.models.dto.DogEditDTO;
 import rbekyarov.project.models.entity.*;
-import rbekyarov.project.models.entity.enums.Microchip;
-import rbekyarov.project.models.entity.enums.Passport;
-import rbekyarov.project.models.entity.enums.Sex;
 import rbekyarov.project.models.dto.DogDTO;
 import rbekyarov.project.service.*;
 import rbekyarov.project.repository.DogRepository;
@@ -129,7 +126,7 @@ public class DogServiceImpl implements DogService {
 
     @Override
     public List<Client> getAllClients() {
-        return clientService.findAllClientById();
+        return clientService.findAllClientByDesc();
     }
 
     @Override
