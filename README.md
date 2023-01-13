@@ -60,6 +60,11 @@ INVOICE LIST:
 
 ![7 IvoicesPage](https://user-images.githubusercontent.com/29566751/211554119-a019a784-47b1-452e-879a-ccc74e30d79b.png)
 
+INVOICE:
+
+![2023-01-13 (2)](https://user-images.githubusercontent.com/29566751/212336091-6054ead8-2eda-4e2c-89f5-d3c9c9e58831.png)
+
+
 CANCELLED INVOICE LIST:
 
 ![8 CanceledInvoicesPage](https://user-images.githubusercontent.com/29566751/211554266-c642524a-d990-41de-b8bb-03cdfb79c843.png)
