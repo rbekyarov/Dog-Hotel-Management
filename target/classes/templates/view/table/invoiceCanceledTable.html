@@ -35,7 +35,7 @@
                     <td th:text="${i.price+'$'}"></td>
                     <td th:text="${i.discount}"></td>
                     <td th:text="${i.totalPrice +'$'}"></td>
-                    <td th:text="${i.dateCreate}"></td>
+                    <td th:text="${#temporals.format(i.dateCreate,'dd.MM.yyyy')}"></td>
 
                     <td><a class="nav-link h5" th:href="@{invoice/view/{id}(id=*{i.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span

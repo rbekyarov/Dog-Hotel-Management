@@ -1,3 +1,6 @@
+.navbar-expand-lg .navbar-collapse{
+    display: block;
+}
 .pagination {
     display: inline-block;
 }
@@ -16,16 +19,17 @@
     border-radius: 2px;
 }
 .btnAdmin {
+    font-size: medium;
     transition: all .08s linear;
     position: relative;
     outline: medium none;
     -moz-outline-style: none;
     border: 0px;
-    margin-right: -15px;
+    margin-right: -35px;
     margin-top: 15px;
     color: #ffffff;
     background-color: #c16b29;
-    font-size: 1.25rem;
+
 }
 .dogsOnClient{
     color: #2430ca;
@@ -81,6 +85,7 @@
     color: #353838;
 }
 .table {
+    font-size: small;
     display: block;
     max-width: 70%;
     background-color: transparent;
@@ -100,7 +105,7 @@
 }
 .site-title {
     text-align: -webkit-center;
-    font-size: 30px;
+    font-size: x-large;
     color: #353838;
 }
 .navbar-background {
@@ -109,7 +114,7 @@
 }
 
 header , main, footer {
-    justify-content: center;
+    justify-content: right;
 }
 
 body {
@@ -163,12 +168,13 @@ body > header > nav > a > img{
 }
 
 .btn3d {
+    font-size: medium;
     transition: all .08s linear;
     position: relative;
     outline: medium none;
     -moz-outline-style: none;
     border: 0px;
-    margin-right: -15px;
+    margin-right: -35px;
     margin-top: 15px;
 }
 
