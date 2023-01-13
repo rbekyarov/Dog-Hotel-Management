@@ -296,12 +296,12 @@ public class InitData implements CommandLineRunner {
         }
         //ADD COSTS
         if (costRepository.findAll().size() == 0) {
-            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("4")), "lumber 5 pies", BigDecimal.valueOf(44.26), LocalDate.of(2023, 1, 1), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 6)));
-            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("2")), "Water fee", BigDecimal.valueOf(55.50), LocalDate.of(2023, 1, 2), userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 6)));
-            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("1")), "Gsm fee", BigDecimal.valueOf(21.00), LocalDate.of(2023, 1, 2), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 6)));
-            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("3")), "Dog food", BigDecimal.valueOf(191.99), LocalDate.of(2023, 1, 3), userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 6)));
-            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("5")), "Cosmetics for dogs", BigDecimal.valueOf(94.60), LocalDate.of(2023, 1, 4), userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 6)));
-            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("4")), "Construction materials", BigDecimal.valueOf(200.01), LocalDate.of(2023, 1, 6), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 6)));
+            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("4")), "lumber 5 pies","365323", BigDecimal.valueOf(44.26), LocalDate.of(2023, 1, 1), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 6)));
+            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("2")), "Water fee","546666662", BigDecimal.valueOf(55.50), LocalDate.of(2023, 1, 2), userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 6)));
+            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("1")), "Gsm fee","8787464", BigDecimal.valueOf(21.00), LocalDate.of(2023, 1, 2), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 6)));
+            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("3")), "Dog food","84312", BigDecimal.valueOf(191.99), LocalDate.of(2023, 1, 3), userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 6)));
+            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("5")), "Cosmetics for dogs","116343", BigDecimal.valueOf(94.60), LocalDate.of(2023, 1, 4), userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 6)));
+            costRepository.save(new Cost(vendorRepository.getById(Long.parseLong("4")), "Construction materials","873123", BigDecimal.valueOf(200.01), LocalDate.of(2023, 1, 6), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 6)));
 
 
         }

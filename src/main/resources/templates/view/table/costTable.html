@@ -19,6 +19,7 @@
                     <th>No</th>
                     <th>Vendor</th>
                     <th>Description</th>
+                    <th>Invoice No</th>
                     <th>Amount</th>
                     <th>Date Cost</th>
                     <th>Author</th>
@@ -30,10 +31,12 @@
                     <td th:text="${d.id}"></td>
                     <td th:text="${d.vendor.getName()}"></td>
                     <td th:text="${d.description}"></td>
+                    <td th:text="${d.invoiceNo}"></td>
                     <td th:text="${d.amount}"></td>
-                    <td th:text="${d.dateCost}"></td>
+                    <td th:text="${#temporals.format(d.dateCost,'dd.MM.yyyy')}"></td>
                     <td th:text="${d.author.username}"></td>
-                    <td th:text="${d.dateCreate}"></td>
+                    <td th:text="${#temporals.format(d.dateCreate,'dd.MM.yyyy')}"></td>
+
 
                     <td><a class="nav-link h5" th:href="@{cost/edit/{id}(id=*{d.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span

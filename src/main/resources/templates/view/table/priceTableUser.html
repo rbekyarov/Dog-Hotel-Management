@@ -35,7 +35,7 @@
                     <td th:text="${p.pricePaws}"></td>
                     <td th:text="${p.priceEars}"></td>
                     <td th:text="${p.priceNails}"></td>
-                    <td th:text="${p.dateCreate}"></td>
+                    <td th:text="${#temporals.format(p.dateCreate,'dd.MM.yyyy')}"></td>
 
                 </tr>
             </table>

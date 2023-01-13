@@ -39,7 +39,7 @@
                     <td th:text="${p.pricePaws+'$'}"></td>
                     <td th:text="${p.priceEars+'$'}"></td>
                     <td th:text="${p.priceNails+'$'}"></td>
-                    <td th:text="${p.dateCreate}"></td>
+                    <td th:text="${#temporals.format(p.dateCreate,'dd.MM.yyyy')}"></td>
                     <td><a class="nav-link h5" th:href="@{price/edit/{id}(id=*{p.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Edit

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 public class CostDTO {
     private Vendor vendor;
     private String description;
+    private String invoiceNo;
     private BigDecimal amount;
     private String dateCost;
 
@@ -50,5 +51,13 @@ public class CostDTO {
 
     public void setDateCost(String dateCost) {
         this.dateCost = dateCost;
+    }
+
+    public String getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
     }
 }

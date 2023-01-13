@@ -9,6 +9,7 @@ import java.time.LocalDate;
 public class Cost extends BaseEntity {
     private Vendor vendor;
     private String description;
+    private String invoiceNo;
     private BigDecimal amount;
     private LocalDate dateCost;
     private User author;
@@ -18,9 +19,10 @@ public class Cost extends BaseEntity {
     public Cost() {
     }
 
-    public Cost(Vendor vendor, String description, BigDecimal amount, LocalDate dateCost, User author, LocalDate dateCreate) {
+    public Cost(Vendor vendor, String description, String invoiceNo, BigDecimal amount, LocalDate dateCost, User author, LocalDate dateCreate) {
         this.vendor = vendor;
         this.description = description;
+        this.invoiceNo = invoiceNo;
         this.amount = amount;
         this.dateCost = dateCost;
         this.author = author;
@@ -82,4 +84,11 @@ public class Cost extends BaseEntity {
         this.dateCost = dateCost;
     }
 
+    public String getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
+    }
 }

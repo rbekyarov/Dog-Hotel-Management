@@ -25,7 +25,7 @@
                     <td th:text="${c.code}"></td>
                     <td th:text="${c.name}"></td>
                     <td th:text="${c.author.username}"></td>
-                    <td th:text="${c.dateCreate}"></td>
+                    <td th:text="${#temporals.format(c.dateCreate,'dd.MM.yyyy')}"></td>
                     <td><a class="nav-link h5" th:href="@{city/edit/{id}(id=*{c.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Edit

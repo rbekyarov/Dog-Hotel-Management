@@ -64,7 +64,7 @@
                     <td th:text="${d.client.getEmail()}"></td>
                     <td th:text="${d.behavior.getName()}"></td>
                     <td th:text="${d.author.username}"></td>
-                    <td th:text="${d.dateCreate}"></td>
+                    <td th:text="${#temporals.format(d.dateCreate,'dd.MM.yyyy')}"></td>
 
                     <td><a class="nav-link h5" th:href="@{dog/edit/{id}(id=*{d.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span

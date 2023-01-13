@@ -93,6 +93,7 @@ public class CostController extends BaseController {
         costService.editCost(
                 costEditDTO.getVendor().getId(),
                 costEditDTO.getDescription(),
+                costEditDTO.getInvoiceNo(),
                 costEditDTO.getAmount(),
                 costEditDTO.getDateCost(),
                 session,

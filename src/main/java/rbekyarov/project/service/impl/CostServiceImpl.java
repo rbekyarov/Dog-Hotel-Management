@@ -76,7 +76,7 @@ public class CostServiceImpl implements CostService {
     }
 
     @Override
-    public void editCost(Long vendorId, String description, BigDecimal amount, String dateCost, HttpSession session, Long id) {
+    public void editCost(Long vendorId, String description, String invoiceNo, BigDecimal amount, String dateCost, HttpSession session, Long id) {
         User editAuthor = userService.getAuthorFromSession(session);
         Long editAuthorId = editAuthor.getId();
         //set dateEdit
@@ -97,6 +97,7 @@ public class CostServiceImpl implements CostService {
         costRepository.editCost(
                 vendorId,
                 description,
+                invoiceNo,
                 amount,
                 convertStringToLocalDate(dateCost),
                 editAuthorId,

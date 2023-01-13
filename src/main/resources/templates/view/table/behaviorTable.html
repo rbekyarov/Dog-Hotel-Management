@@ -23,7 +23,7 @@
                     <td th:text="${b.id}"></td>
                     <td th:text="${b.name}"></td>
                     <td th:text="${b.author.username}"></td>
-                    <td th:text="${b.dateCreate}"></td>
+                    <td th:text="${#temporals.format(b.dateCreate,'dd.MM.yyyy')}"></td>
                     <td><a class="nav-link h5" th:href="@{behavior/edit/{id}(id=*{b.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Edit
