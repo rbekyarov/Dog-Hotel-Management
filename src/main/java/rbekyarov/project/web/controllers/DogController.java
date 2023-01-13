@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.DogEditDTO;
-import rbekyarov.project.models.entity.Behavior;
-import rbekyarov.project.models.entity.Breed;
-import rbekyarov.project.models.entity.Client;
-import rbekyarov.project.models.entity.Dog;
+import rbekyarov.project.models.entity.*;
 import rbekyarov.project.models.dto.DogDTO;
+import rbekyarov.project.repository.DogRepository;
 import rbekyarov.project.service.DogService;
 import rbekyarov.project.service.FileStorageService;
 
@@ -31,11 +29,14 @@ public class DogController extends BaseController {
     public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/image";
 
     private final DogService dogService;
+    private final DogRepository dogRepository;
 
 
-    public DogController(DogService dogService, FileStorageService fileStorageService) {
+    public DogController(DogService dogService, FileStorageService fileStorageService,
+                         DogRepository dogRepository) {
 
         this.dogService = dogService;
+        this.dogRepository = dogRepository;
     }
 
     @GetMapping("/view/table/dogTable")
@@ -160,5 +161,16 @@ public class DogController extends BaseController {
             dogs = dogService.findAllDogByDesc();
             modelAndView.addObject("dogs", dogs);}
         return super.view("/view/table/dogTable", "dogs", dogs);
+    }
+
+    @GetMapping("view/table/dog/view/{id}")
+    public ModelAndView getDogView(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
+
+        Dog dog = dogRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
+        modelAndView.addObject("dog", dog);
+
+
+        return super.view("/view/table/dogView", "dog", dog);
+
     }
 }
