@@ -30,7 +30,7 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
     @Transactional
     @Modifying
     @Query("update Dog as d SET d.years=:years where d.id=:id")
-    void editDogYearsById(@Param("id")Long id, String years);
+    void editDogYearsById(@Param("id")Long id,@Param("years") String years);
 
     @Transactional
     @Modifying
