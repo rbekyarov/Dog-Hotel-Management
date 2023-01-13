@@ -91,7 +91,9 @@ DOG PAGE:
 EDIT DOG:
 
 ![14 EditDog](https://user-images.githubusercontent.com/29566751/211554972-2d0d18fa-15fb-426f-979c-e2d8ac90eca5.png)
+DOG DETAILS:
 
+![2023-01-13](https://user-images.githubusercontent.com/29566751/212320215-cea36e0e-6484-4610-9bce-68e612f98729.png)
 
 DOG HOUSE PAGE:
 
