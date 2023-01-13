@@ -45,6 +45,7 @@
                     <th>Created</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
                 <tr th:each="d : ${dogs}">
                     <td th:text="${d.id}"></td>
@@ -65,6 +66,12 @@
                     <td th:text="${d.behavior.getName()}"></td>
                     <td th:text="${d.author.username}"></td>
                     <td th:text="${#temporals.format(d.dateCreate,'dd.MM.yyyy')}"></td>
+
+                    <td><a class="nav-link h5" th:href="@{dog/view/{id}(id=*{d.id})}">
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                class="glyphicon glyphicon-ok"></span>View
+                        </button>
+                    </a></td>
 
                     <td><a class="nav-link h5" th:href="@{dog/edit/{id}(id=*{d.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
