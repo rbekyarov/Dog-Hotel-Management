@@ -53,8 +53,10 @@ public class ReservationController extends BaseController {
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
         modelAndView.addObject("reservations", reservations);
+        List<Invoice> allRealInvoice = invoiceService.findAllRealInvoice();
+        modelAndView.addObject("allRealInvoice", allRealInvoice);
         reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
-        return super.view("/view/table/reservationTable", "reservations", reservations,"pageNumbers", pageNumbers);
+        return super.view("/view/table/reservationTable", "reservations", reservations,"pageNumbers", pageNumbers,"allRealInvoice", allRealInvoice);
     }
 
     @GetMapping("/view/add/reservationAdd")

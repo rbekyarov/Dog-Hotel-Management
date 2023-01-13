@@ -100,8 +100,14 @@
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Remove
                         </button>
-                    </a></td>
-                    </th:block>
+                    </a></td> </th:block>
+                        <th:block th:if="${r.invoiced.name()=='YES'}" th:each="i : ${allRealInvoice}" >
+                            <td th:if="${r.id == i.reservationId}"><a class="nav-link h5" th:href="@{/view/table/invoice/view/{id}(id=${i.id})}">
+                                <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                        class="glyphicon glyphicon-ok"></span>View Invoice
+                                </button>
+                            </a></td></th:block>
+
                 </tr>
             </table>
             <div th:if="${reservations.totalPages > 0}" class="pagination"
