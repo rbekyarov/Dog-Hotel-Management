@@ -1,3 +1,15 @@
+.navbar {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0.5rem 3rem;
+}
 .navbar-expand-lg .navbar-collapse{
     display: block;
 }
@@ -99,7 +111,7 @@
 
 .footerStyle{
     text-align: -webkit-center;
-    font-size: 30px;
+    font-size: 20px;
     color: #353838;
     background: lightcoral;
 }
@@ -176,6 +188,7 @@ body > header > nav > a > img{
     border: 0px;
     margin-right: -35px;
     margin-top: 15px;
+    font-size: 14px;
 }
 
 .btn3d:focus {
