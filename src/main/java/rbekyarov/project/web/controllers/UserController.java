@@ -157,17 +157,13 @@ public class UserController extends BaseController {
             session.setAttribute("username", user.getUsername());
             if (user.getRole().name().equals("ADMIN")) {
                 session.setAttribute("admin", user.getRole());
-                modelAndView.setViewName("/view/home");
 
             } else {
                 session.setAttribute("user", user.getRole());
-                modelAndView.setViewName("/view/home");
+
             }
-
+            return super.redirect("/view/home");
         }
-
-
-        return super.view(modelAndView.getViewName(), "session", session);
 
     }
 

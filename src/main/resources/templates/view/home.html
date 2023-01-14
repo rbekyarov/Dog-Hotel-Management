@@ -3,7 +3,8 @@
     <div class="welcome" th:object="${session}">
 
         <h4>Welcome</h4>
-        <h5 th:text="*{'USER: '+username}"></h5>
+        <h5 th:if="*{user}"th:text="*{'User: '+username}"></h5>
+        <h5 th:if="*{admin}"th:text="*{'Admin: '+username}"></h5>
 <!--        <h5 th:text="*{'TYPE: '+typeUser}"></h5>-->
 
     </div>
