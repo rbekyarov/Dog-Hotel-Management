@@ -18,7 +18,9 @@
                 <label>Password:</label><br>
                 <input type="text" id="description1" th:field="${user.password}" placeholder="Please enter Password"/><br>
                 <label class="text-white font-weight-bold" for="description"></label>
-
+                <p th:if="${notFound}" class="errors alert alert-danger">
+                    Invalid username or password.
+                </p>
             </div>
 
 

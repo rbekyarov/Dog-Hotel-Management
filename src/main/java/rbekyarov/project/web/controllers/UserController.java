@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rbekyarov.project.models.dto.UserDTO;
 import rbekyarov.project.models.dto.UserEditDTO;
 import rbekyarov.project.models.dto.UserLoginDTO;
@@ -71,10 +72,19 @@ public class UserController extends BaseController {
 
     @PostMapping("/view/register")
     public ModelAndView registerConfirm(@ModelAttribute UserRegisterDTO userRegisterDTO,
-                                        ModelAndView modelAndView) {
-        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
-            throw new IllegalArgumentException("Passwords don't match!");
+                                        ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
+
+        if (userRegisterDTO.getUsername().isEmpty()||userRegisterDTO.getPassword().isEmpty()||userRegisterDTO.getConfirmPassword().isEmpty()){
+            redirectAttributes.addFlashAttribute("empty", true);
+            return super.redirect("/view/register");
         }
+
+            if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
+                redirectAttributes.addFlashAttribute("wrongRepeatPasswords", true);
+                return super.redirect("/view/register");
+            }
+
+
         String username = userRegisterDTO.getUsername();
         Optional<User> byUsername = userService.findByUsername(username);
 
@@ -82,8 +92,9 @@ public class UserController extends BaseController {
             userService.registerUser(userRegisterDTO);
             modelAndView.setViewName("redirect:/view/login");
         } else {
+            redirectAttributes.addFlashAttribute("existUser", true);
+            return super.redirect("/view/register");
 
-            modelAndView.setViewName("redirect:/view/register");
         }
 
 
@@ -105,12 +116,13 @@ public class UserController extends BaseController {
 
     @PostMapping("/view/login")
     public ModelAndView loginConfirm(@ModelAttribute UserLoginDTO userLoginDTO, ModelAndView modelAndView,
-                                     HttpSession session) {
+                                     HttpSession session, RedirectAttributes redirectAttributes) {
         UserDTO userDTO = this.modelMapper.map(userLoginDTO, UserDTO.class);
         UserDTO userLogin = this.userService.loginUser(userDTO);
 
         if (userLogin == null) {
-            modelAndView.setViewName("/index");
+            redirectAttributes.addFlashAttribute("notFound", true);
+            return super.redirect("/view/login");
 
         } else {
             User user = new User();
@@ -183,7 +195,7 @@ public class UserController extends BaseController {
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
         modelAndView.addObject("users", users);
-        return super.view("/view/table/userTable", "users", users,"pageNumbers", pageNumbers);
+        return super.view("/view/table/userTable", "users", users, "pageNumbers", pageNumbers);
     }
 
     @GetMapping("view/table/user/edit/{id}")
