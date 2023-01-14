@@ -31,7 +31,7 @@
     border-radius: 2px;
 }
 .btnAdmin {
-    font-size: medium;
+    font-size: 14px;
     transition: all .08s linear;
     position: relative;
     outline: medium none;
@@ -97,7 +97,7 @@
     color: #353838;
 }
 .table {
-    font-size: small;
+    font-size: 12px;
     display: block;
     max-width: 70%;
     background-color: transparent;

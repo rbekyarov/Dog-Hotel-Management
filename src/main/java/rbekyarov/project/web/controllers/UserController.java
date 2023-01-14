@@ -77,10 +77,12 @@ public class UserController extends BaseController {
         }
         String username = userRegisterDTO.getUsername();
         Optional<User> byUsername = userService.findByUsername(username);
-        if (byUsername==null) {
+
+        if (byUsername.isEmpty()) {
             userService.registerUser(userRegisterDTO);
             modelAndView.setViewName("redirect:/view/login");
         } else {
+
             modelAndView.setViewName("redirect:/view/register");
         }
 
