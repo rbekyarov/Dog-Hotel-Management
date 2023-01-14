@@ -46,13 +46,33 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/view/add/userAdd")
-    public String addUser(@Valid UserDTO userDTO) {
-        if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
-            throw new IllegalArgumentException("Passwords don't match!");
-        }
-        userService.addUser(userDTO);
+    public ModelAndView addUser(@Valid UserDTO userDTO,ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
 
-        return "redirect:/view/table/userTable";
+
+        if (userDTO.getUsername().isEmpty()||userDTO.getPassword().isEmpty()||userDTO.getConfirmPassword().isEmpty()){
+            redirectAttributes.addFlashAttribute("empty", true);
+            return super.redirect("/view/add/userAdd");
+        }
+
+        if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
+            redirectAttributes.addFlashAttribute("wrongRepeatPasswords", true);
+            return super.redirect("/view/add/userAdd");
+        }
+
+
+        String username = userDTO.getUsername();
+        Optional<User> byUsername = userService.findByUsername(username);
+
+        if (byUsername.isEmpty()) {
+            userService.addUser(userDTO);
+            modelAndView.setViewName("redirect:/view/table/userTable");
+        } else {
+            redirectAttributes.addFlashAttribute("existUser", true);
+            return super.redirect("/view/add/userAdd");
+
+        }
+
+        return modelAndView;
     }
 
     @GetMapping("/view/register")

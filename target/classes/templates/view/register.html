@@ -15,10 +15,25 @@
             <div class="form-group">
                 <label>UserName:</label><br>
                 <input type="text" id="description" th:field="${userDTO.username}" placeholder="Please enter Username"/><br>
+                <p th:if="${empty}" class="errors alert alert-danger">
+                    Invalid data!
+                </p>
+                <p th:if="${existUser}" class="errors alert alert-danger">
+                    User exist!
+                </p>
                 <label>Password:</label><br>
                 <input type="text" id="description1" th:field="${userDTO.password}" placeholder="Please enter Password"/><br>
+                <p th:if="${empty}" class="errors alert alert-danger">
+                    Invalid data!
+                </p>
                 <label>Confirm Password:</label><br>
                 <input type="text" id="description2" th:field="${userDTO.confirmPassword}" placeholder="Confirm Password"/><br>
+                <p th:if="${empty}" class="errors alert alert-danger">
+                    Invalid data!
+                </p>
+                <p th:if="${wrongRepeatPasswords}" class="errors alert alert-danger">
+                    Passwords don't match!.
+                </p>
                 <label>Default Role:</label><br>
                 <div class="form-group">
                     <select th:field="${userDTO.role}">
@@ -33,6 +48,7 @@
                     <div>
                         <input type="submit" class="btn btn-danger btn-lg btn3d" value="Register"/>
                     </div>
+
                 </div>
             </div>
         </form>

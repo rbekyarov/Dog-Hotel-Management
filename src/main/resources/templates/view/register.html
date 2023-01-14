@@ -18,6 +18,9 @@
                 <p th:if="${empty}" class="errors alert alert-danger">
                     Invalid data!
                 </p>
+                <p th:if="${existUser}" class="errors alert alert-danger">
+                    User exist!
+                </p>
                 <label>Password:</label><br>
                 <input type="text" id="description1" th:field="${userDTO.password}" placeholder="Please enter Password"/><br>
                 <p th:if="${empty}" class="errors alert alert-danger">
@@ -45,9 +48,7 @@
                     <div>
                         <input type="submit" class="btn btn-danger btn-lg btn3d" value="Register"/>
                     </div>
-                    <p th:if="${existUser}" class="errors alert alert-danger">
-                        User exist!
-                    </p>
+
                 </div>
             </div>
         </form>
