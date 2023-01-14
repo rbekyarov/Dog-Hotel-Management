@@ -10,6 +10,9 @@
                         class="glyphicon glyphicon-ok"></span>Add Dog
                 </button>
             </a>
+            <p th:if="${isUsed}" class="errors alert alert-danger">
+                Dog is Used!
+            </p>
             <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:600px">
                 <thead>
                 <tr>

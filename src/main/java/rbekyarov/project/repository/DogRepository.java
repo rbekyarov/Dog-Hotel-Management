@@ -5,7 +5,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import rbekyarov.project.models.entity.Behavior;
+import rbekyarov.project.models.entity.Breed;
 import rbekyarov.project.models.entity.Dog;
+import rbekyarov.project.models.entity.User;
 import rbekyarov.project.models.entity.enums.DogSize;
 import rbekyarov.project.models.entity.enums.Microchip;
 import rbekyarov.project.models.entity.enums.Passport;
@@ -61,5 +64,13 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
     List<Dog> findAllDogByClient(@Param("id") Long id);
     @Query("select d from Dog as d where d.client.email=:clientEmail")
     List<Dog> listDogByClientEmail(String clientEmail);
+
+    @Query("select d.behavior from Dog as d")
+    List<Behavior> listBehaviorUsed();
+    @Query("select d.breed from Dog as d")
+    List<Breed> listBreedUsed();
+
+    @Query("select d.author from Dog as d")
+    List<User> listUserUsed();
 }
 

@@ -9,14 +9,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rbekyarov.project.models.dto.BreedDTO;
 import rbekyarov.project.models.dto.BreedEditDTO;
 import rbekyarov.project.models.entity.Breed;
+import rbekyarov.project.repository.DogRepository;
 import rbekyarov.project.service.BreedService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -24,9 +27,11 @@ import java.util.stream.IntStream;
 @Controller
 public class BreedController extends BaseController {
     private final BreedService breedService;
+    private final DogRepository dogRepository;
 
-    public BreedController(BreedService breedService) {
+    public BreedController(BreedService breedService, DogRepository dogRepository) {
         this.breedService = breedService;
+        this.dogRepository = dogRepository;
     }
 
 
@@ -69,10 +74,19 @@ public class BreedController extends BaseController {
     }
 
     @GetMapping("view/table/breed/remove/{id}")
-    public String removeBreed(@PathVariable Long id) {
-        breedService.removeBreedById(id);
-
-        return "redirect:/view/table/breedTable";
+    public ModelAndView removeBehavior(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        boolean isUsed = false;
+        List<Breed> breeds = dogRepository.listBreedUsed();
+        for (Breed b : breeds) {
+            if(Objects.equals(b.getId(), id)){
+                redirectAttributes.addFlashAttribute("isUsed", true);
+                isUsed =true;
+            }
+        }
+        if(!isUsed){
+            breedService.removeBreedById(id);
+        }
+        return super.redirect("/view/table/breedTable");
     }
 
 

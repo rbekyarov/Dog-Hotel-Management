@@ -6,10 +6,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rbekyarov.project.models.dto.ClientEditDTO;
 import rbekyarov.project.models.entity.City;
 import rbekyarov.project.models.entity.Client;
 import rbekyarov.project.models.dto.ClientDTO;
+import rbekyarov.project.repository.ClientRepository;
+import rbekyarov.project.repository.ReservationRepository;
 import rbekyarov.project.service.CityService;
 import rbekyarov.project.service.ClientService;
 import rbekyarov.project.service.DogService;
@@ -25,11 +28,17 @@ public class ClientController extends BaseController {
     private final ClientService clientService;
     private final DogService dogService;
     private final CityService cityService;
+    private final ClientRepository clientRepository;
+    private final ReservationRepository reservationRepository;
 
-    public ClientController(ClientService clientService, DogService dogService, CityService cityService) {
+    public ClientController(ClientService clientService, DogService dogService, CityService cityService,
+                            ClientRepository clientRepository,
+                            ReservationRepository reservationRepository) {
         this.clientService = clientService;
         this.dogService = dogService;
         this.cityService = cityService;
+        this.clientRepository = clientRepository;
+        this.reservationRepository = reservationRepository;
     }
 
 
@@ -75,10 +84,19 @@ public class ClientController extends BaseController {
     }
 
     @GetMapping("view/table/client/remove/{id}")
-    public String removeClient(@PathVariable Long id) {
-        clientService.removeClientById(id);
-
-        return "redirect:/view/table/clientTable";
+    public ModelAndView removeCity(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        boolean isUsed = false;
+        List<Client> clients = reservationRepository.listUsedClient();
+        for (Client b : clients) {
+            if(Objects.equals(b.getId(), id)){
+                redirectAttributes.addFlashAttribute("isUsed", true);
+                isUsed =true;
+            }
+        }
+        if(!isUsed){
+            clientRepository.deleteById(id);
+        }
+        return super.redirect("/view/table/clientTable");
     }
 
     @GetMapping("view/table/client/edit/{id}")

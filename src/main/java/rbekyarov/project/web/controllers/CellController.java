@@ -9,14 +9,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rbekyarov.project.models.dto.CellDTO;
 import rbekyarov.project.models.dto.CellEditDTO;
 import rbekyarov.project.models.entity.Cell;
+import rbekyarov.project.repository.ReservationRepository;
 import rbekyarov.project.service.CellService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -24,9 +27,11 @@ import java.util.stream.IntStream;
 @Controller
 public class CellController extends BaseController {
     private final CellService cellService;
+    private final ReservationRepository reservationRepository;
 
-    public CellController(CellService cellService) {
+    public CellController(CellService cellService, ReservationRepository reservationRepository) {
         this.cellService = cellService;
+        this.reservationRepository = reservationRepository;
     }
 
     @GetMapping("/view/table/cellTable")
@@ -66,10 +71,19 @@ public class CellController extends BaseController {
     }
 
     @GetMapping("view/table/cell/remove/{id}")
-    public String removeCell(@PathVariable Long id) {
-        cellService.removeCellById(id);
-
-        return "redirect:/view/table/cellTable";
+    public ModelAndView removeBehavior(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        boolean isUsed = false;
+        List<Cell> cells = reservationRepository.listUsedCell();
+        for (Cell c : cells) {
+            if(Objects.equals(c.getId(), id)){
+                redirectAttributes.addFlashAttribute("isUsed", true);
+                isUsed =true;
+            }
+        }
+        if(!isUsed){
+            cellService.removeCellById(id);
+        }
+        return super.redirect("/view/table/cellTable");
     }
 
 

@@ -7,10 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rbekyarov.project.models.dto.DogEditDTO;
 import rbekyarov.project.models.entity.*;
 import rbekyarov.project.models.dto.DogDTO;
+import rbekyarov.project.repository.ClientRepository;
 import rbekyarov.project.repository.DogRepository;
+import rbekyarov.project.repository.ReservationRepository;
 import rbekyarov.project.service.DogService;
 import rbekyarov.project.service.FileStorageService;
 
@@ -19,6 +22,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,13 +34,16 @@ public class DogController extends BaseController {
 
     private final DogService dogService;
     private final DogRepository dogRepository;
+    private final ClientRepository clientRepository;
 
 
     public DogController(DogService dogService, FileStorageService fileStorageService,
-                         DogRepository dogRepository) {
+                         DogRepository dogRepository, ReservationRepository reservationRepository, ClientRepository clientRepository) {
 
         this.dogService = dogService;
         this.dogRepository = dogRepository;
+
+        this.clientRepository = clientRepository;
     }
 
     @GetMapping("/view/table/dogTable")
@@ -97,10 +104,19 @@ public class DogController extends BaseController {
     }
 
     @GetMapping("view/table/dog/remove/{id}")
-    public String removeDog(@PathVariable Long id) {
-        dogService.removeDogById(id);
-
-        return "redirect:/view/table/dogTable";
+    public ModelAndView removeDog(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        boolean isUsed = false;
+        List<Dog> dogs = clientRepository.listUsedDog();
+        for (Dog b : dogs) {
+            if(Objects.equals(b.getId(), id)){
+                redirectAttributes.addFlashAttribute("isUsed", true);
+                isUsed =true;
+            }
+        }
+        if(!isUsed){
+            dogService.removeDogById(id);
+        }
+        return super.redirect("/view/table/dogTable");
     }
 
     @GetMapping("view/table/dog/edit/{id}")

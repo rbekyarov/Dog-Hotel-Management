@@ -12,14 +12,15 @@ import rbekyarov.project.models.dto.UserDTO;
 import rbekyarov.project.models.dto.UserEditDTO;
 import rbekyarov.project.models.dto.UserLoginDTO;
 import rbekyarov.project.models.dto.UserRegisterDTO;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.models.entity.enums.Role;
+import rbekyarov.project.repository.DogRepository;
 import rbekyarov.project.service.UserService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -27,10 +28,12 @@ import java.util.stream.IntStream;
 @Controller
 public class UserController extends BaseController {
     private final UserService userService;
+    private final DogRepository dogRepository;
     private final ModelMapper modelMapper;
 
-    public UserController(UserService userService, ModelMapper modelMapper) {
+    public UserController(UserService userService, DogRepository dogRepository, ModelMapper modelMapper) {
         this.userService = userService;
+        this.dogRepository = dogRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -237,9 +240,18 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("view/table/user/remove/{id}")
-    public String removeUser(@PathVariable Long id) {
-        userService.removeUserById(id);
-
-        return "redirect:/view/table/userTable";
+    public ModelAndView removeUser(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        boolean isUsed = false;
+        List<User> users = dogRepository.listUserUsed();
+        for (User b : users) {
+            if(Objects.equals(b.getId(), id)){
+                redirectAttributes.addFlashAttribute("isUsed", true);
+                isUsed =true;
+            }
+        }
+        if(!isUsed){
+            userService.removeUserById(id);
+        }
+        return super.redirect("/view/table/userTable");
     }
 }

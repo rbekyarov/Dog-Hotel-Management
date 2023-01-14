@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import rbekyarov.project.models.entity.Cost;
+import rbekyarov.project.models.entity.Vendor;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
@@ -37,4 +38,7 @@ public interface CostRepository extends JpaRepository<Cost, Long> {
 
     @Query("select c from Cost as c where c.vendor.name=:name order by c.id asc ")
     List<Cost> findCostByVendor(@Param("name")String name);
+
+    @Query("select c.vendor from Cost as c")
+    List<Vendor> listUsedVendor();
 }

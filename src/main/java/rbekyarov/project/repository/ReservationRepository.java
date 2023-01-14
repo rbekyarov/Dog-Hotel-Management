@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import rbekyarov.project.models.entity.Cell;
+import rbekyarov.project.models.entity.Client;
+import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.enums.*;
 
@@ -64,4 +67,11 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Query("select r from Reservation as r where r.id=:reservationNumber")
     List<Reservation> listReservationById(@Param("reservationNumber") Long reservationNumber);
+
+    @Query("select r.cell from Reservation as r")
+    List<Cell> listUsedCell();
+
+    @Query("select r.client from Reservation as r")
+    List<Client> listUsedClient();
+
 }

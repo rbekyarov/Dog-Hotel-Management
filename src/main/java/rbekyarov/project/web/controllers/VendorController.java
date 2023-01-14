@@ -6,11 +6,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rbekyarov.project.models.dto.VendorDTO;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.City;
-import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.Vendor;
+import rbekyarov.project.repository.CostRepository;
+import rbekyarov.project.repository.VendorRepository;
 import rbekyarov.project.service.VendorService;
 import rbekyarov.project.models.dto.VendorEditDTO;
 import rbekyarov.project.service.CityService;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -27,10 +29,15 @@ import java.util.stream.IntStream;
 public class VendorController extends BaseController {
     private final VendorService vendorService;
     private final CityService cityService;
+    private final VendorRepository vendorRepository;
+    private final CostRepository costRepository;
 
-    public VendorController(VendorService vendorService, CityService cityService) {
+    public VendorController(VendorService vendorService, CityService cityService,
+                            VendorRepository vendorRepository, CostRepository costRepository) {
         this.vendorService = vendorService;
         this.cityService = cityService;
+        this.vendorRepository = vendorRepository;
+        this.costRepository = costRepository;
     }
 
     @GetMapping("/view/table/vendorTable")
@@ -71,10 +78,19 @@ public class VendorController extends BaseController {
     }
 
     @GetMapping("view/table/vendor/remove/{id}")
-    public String removeVendor(@PathVariable Long id) {
-        vendorService.removeVendorById(id);
-
-        return "redirect:/view/table/vendorTable";
+    public ModelAndView removeCity(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        boolean isUsed = false;
+        List<Vendor> vendors = costRepository.listUsedVendor();
+        for (Vendor b : vendors) {
+            if(Objects.equals(b.getId(), id)){
+                redirectAttributes.addFlashAttribute("isUsed", true);
+                isUsed =true;
+            }
+        }
+        if(!isUsed){
+            vendorRepository.deleteById(id);
+        }
+        return super.redirect("/view/table/vendorTable");
     }
 
     @GetMapping("view/table/vendor/edit/{id}")

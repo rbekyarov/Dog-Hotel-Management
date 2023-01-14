@@ -10,6 +10,10 @@
                         class="glyphicon glyphicon-ok"></span>Add Client
                 </button>
             </a>
+            <p th:if="${isUsed}" class="errors alert alert-danger">
+                Client is used!
+            </p>
+
             <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:600px">
                 <thead>
                 <tr>

@@ -5,7 +5,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import rbekyarov.project.models.entity.City;
 import rbekyarov.project.models.entity.Client;
+import rbekyarov.project.models.entity.Dog;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -40,4 +42,9 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     List<Client> listClientByPhone(@Param("clientPhone") String clientPhone);
     @Query("select c from Client as c where c.email=:clientEmail order by c.id asc ")
     List<Client> listClientByEmail(@Param("clientEmail")String clientEmail);
+
+    @Query("select c.dogs from Client as c")
+    List<Dog> listUsedDog();
+    @Query("select c.city from Client as c")
+    List<City> listUsedCity();
 }

@@ -9,14 +9,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rbekyarov.project.models.dto.CityDTO;
 import rbekyarov.project.models.dto.CityEditDTO;
 import rbekyarov.project.models.entity.City;
+import rbekyarov.project.repository.CityRepository;
+import rbekyarov.project.repository.ClientRepository;
 import rbekyarov.project.service.CityService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -24,9 +28,14 @@ import java.util.stream.IntStream;
 @Controller
 public class CityController extends BaseController {
     private final CityService cityService;
+    private final ClientRepository clientRepository;
+    private final CityRepository cityRepository;
 
-    public CityController(CityService cityService) {
+    public CityController(CityService cityService, ClientRepository clientRepository,
+                          CityRepository cityRepository) {
         this.cityService = cityService;
+        this.clientRepository = clientRepository;
+        this.cityRepository = cityRepository;
     }
 
     @GetMapping("/view/table/cityTable")
@@ -66,12 +75,20 @@ public class CityController extends BaseController {
     }
 
     @GetMapping("view/table/city/remove/{id}")
-    public String removeCity(@PathVariable Long id) {
-        cityService.removeCityById(id);
-
-        return "redirect:/view/table/cityTable";
+    public ModelAndView removeCity(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        boolean isUsed = false;
+        List<City> cities = clientRepository.listUsedCity();
+        for (City b : cities) {
+            if(Objects.equals(b.getId(), id)){
+                redirectAttributes.addFlashAttribute("isUsed", true);
+                isUsed =true;
+            }
+        }
+        if(!isUsed){
+            cityRepository.deleteById(id);
+        }
+        return super.redirect("/view/table/cityTable");
     }
-
 
     @GetMapping("view/table/city/edit/{id}")
     public ModelAndView getCityDetail(@PathVariable("id") Long id,
