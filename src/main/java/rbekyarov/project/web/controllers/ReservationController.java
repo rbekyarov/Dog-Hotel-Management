@@ -113,7 +113,7 @@ public class ReservationController extends BaseController {
         Reservation reservation = optionalReservation.get();
         invoiceService.addInvoice(reservation, session);
 
-        return "redirect:/view/table/invoiceTable";
+        return "redirect:/view/table/reservationTable";
     }
 
     @GetMapping("view/table/reservation/view/{id}")
