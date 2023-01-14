@@ -49,7 +49,7 @@
 
                 </tr>
                 <tr th:each="i : ${invoices}">
-                    <td ><a th:href="@{/view/table/invoice/view/{id}(id=${i.id})}" th:text="${i.id}"></td>
+                    <td class="h6"><a th:href="@{/view/table/invoice/view/{id}(id=${i.id})}" th:text="${i.id}"></td>
                     <td th:text="${i.clientName +' '+ i.clientEmail +' '+i.clientPhone}"></td>
                     <td th:text="${'Dog '+ i.dogName + ' '+'House:' +i.cellCode + ' '+'Day: '+i.countStay}"></td>
 

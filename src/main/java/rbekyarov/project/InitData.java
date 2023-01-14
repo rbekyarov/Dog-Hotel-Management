@@ -58,7 +58,6 @@ public class InitData implements CommandLineRunner {
             behaviorRepository.save(new Behavior("Bad with dogs", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
             behaviorRepository.save(new Behavior("Bad with dogs and humans", userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
             behaviorRepository.save(new Behavior("Bad with humans", userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
-            behaviorRepository.save(new Behavior("Dakel", userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
 
         }
         //ADD Dog Breed
@@ -251,7 +250,7 @@ public class InitData implements CommandLineRunner {
                     Passport.YES,
                     Microchip.NO,
                     clientRepository.getById(Long.parseLong("2")),
-                    behaviorRepository.getById(Long.parseLong("7")),
+                    behaviorRepository.getById(Long.parseLong("1")),
                     userRepository.getById(Long.parseLong("2")),
                     LocalDate.of(2023, 1, 1),
                     DogSize.MEDIUM));

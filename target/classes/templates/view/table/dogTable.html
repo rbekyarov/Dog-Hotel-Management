@@ -48,7 +48,7 @@
                     <th></th>
                 </tr>
                 <tr th:each="d : ${dogs}">
-                    <td th:text="${d.id}"></td>
+                    <td class="h6">  <a th:href="@{/view/table/dog/view/{id}(id=${d.id})}"th:text="${d.id}"</td>
                     <td th:text="${d.name}"></td>
 
                     <td>
@@ -62,7 +62,8 @@
                     <td th:text="${d.sex}"></td>
                     <td th:text="${d.passport}"></td>
                     <td th:text="${d.microchip}"></td>
-                    <td th:text="${d.client.getEmail()}"></td>
+                    <td th:text="${ d.client.firstName +' '+ d.client.lastName +' '+ d.client.email +' '+d.client.phone}"> </td>
+<!--                    <td th:text="${d.client.getEmail()}"></td>-->
                     <td th:text="${d.behavior.getName()}"></td>
                     <td th:text="${d.author.username}"></td>
                     <td th:text="${#temporals.format(d.dateCreate,'dd.MM.yyyy')}"></td>
