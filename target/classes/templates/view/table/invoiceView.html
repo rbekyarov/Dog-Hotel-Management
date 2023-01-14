@@ -121,7 +121,14 @@
                                     <img src="/image/logo.png" style="width: 100%; max-width: 100px" />
                                 </td>
                                 <td></td>
-                                <td>
+                                <td th:if="${invoice.cancellationInvoice.name() == 'YES'}">
+                                    <p th:text="CANCELLED"></p><br />
+                                    <p th:text="${'Invoice #: '+invoice.id}"></p><br />
+                                    <p th:text="${'Created: '+invoice.dateCreate}"></p><br />
+<!--                                    <p th:text="${'Cancellated Date: '+invoice.cancelledDateInvoice}"></p><br />-->
+                                </td>
+
+                                <td th:unless="${invoice.cancellationInvoice.name() == 'YES'}">
                                     <p th:text="${'Invoice #: '+invoice.id}"></p><br />
                                     <p th:text="${'Created: '+invoice.dateCreate}"></p><br />
                                 </td>
