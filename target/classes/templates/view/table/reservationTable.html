@@ -38,7 +38,7 @@
                     <th>No</th>
                     <th>Client:</th>
                     <th>Dog:</th>
-                    <th>Stay Day:</th>
+                    <th>Stay Days:</th>
                     <th>Day of coming:</th>
                     <th>Day of departure:</th>
                     <th>Dog House:</th>
@@ -78,8 +78,14 @@
                              th:src="@{${'/pics/completed.png'}}"th:text="completed" >
                     </td>
                     <td th:text="${r.author.username}"></td>
+
                     <td th:text="${#temporals.format(r.dateCreate,'dd.MM.yyyy')}"></td>
-                    <td th:text="${r.invoiced}"></td>
+                    <td >
+                    <img th:if="${r.invoiced.name()=='YES'}" src="#" height="30px" width="30px"
+                         th:src="@{${'/pics/invoiced.png'}}" th:text="'  '+  YES">
+                    <img th:if="${r.invoiced.name()=='NO'}" src="#" height="30px" width="30px"
+                         th:src="@{${'/pics/NO.png'}}">
+                    </td>
 
 
                     <th:block th:if="${r.invoiced.name()=='NO'}">
