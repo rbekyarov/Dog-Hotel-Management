@@ -52,14 +52,13 @@
                     <th>Invoiced</th>
                     <th></th>
                     <th></th>
-                    <th></th>
 
 
                 </tr>
                 <tr th:each="r : ${reservations}">
-                    <td th:text="${r.id}"></td>
-                    <td th:text="${ r.client.firstName +' '+ r.client.lastName +' '+ r.client.email +' '+r.client.phone}"></td>
-                    <td th:text="${r.dog.name + ' Weight:' +r.dog.weight + ' '+r.dog.breed.breedName}"></td>
+                    <td ><a th:text="${r.id}" th:href="@{reservation/view/{id}(id=*{r.id})}"></td>
+                    <td th:text="${ r.client.firstName +' '+ r.client.lastName +' '+ r.client.email +' '+r.client.phone}"> </td>
+                    <td ><a th:target="_blank"  th:href="@{/view/table/dog/view/{id}(id=${r.dog.id})}" th:text="${r.dog.name + ' Weight:' +r.dog.weight + ' '+r.dog.breed.breedName}"></td>
                     <td th:text="${r.countOvernightStay}"></td>
                     <td th:text="${#temporals.format(r.startDate,'dd.MM.yyyy')}"></td>
                     <td th:text="${#temporals.format(r.endDate,'dd.MM.yyyy')}"></td>
@@ -76,11 +75,6 @@
                     <td th:text="${r.invoiced}"></td>
 
 
-                    <td><a class="nav-link h5" th:href="@{reservation/view/{id}(id=*{r.id})}">
-                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                                class="glyphicon glyphicon-ok"></span>View
-                        </button>
-                    </a></td>
                     <th:block th:if="${r.invoiced.name()=='NO'}">
                     <td><a class="nav-link h5" th:href="@{reservation/edit/{id}(id=*{r.id})}">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
@@ -102,7 +96,7 @@
                         </button>
                     </a></td> </th:block>
                         <th:block th:if="${r.invoiced.name()=='YES'}" th:each="i : ${allRealInvoice}" >
-                            <td th:if="${r.id == i.reservationId}"><a class="nav-link h5" th:href="@{/view/table/invoice/view/{id}(id=${i.id})}">
+                            <td th:if="${r.id == i.reservationId}"><a class="nav-link h5" th:target="_blank" th:href="@{/view/table/invoice/view/{id}(id=${i.id})}">
                                 <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                         class="glyphicon glyphicon-ok"></span>View Invoice
                                 </button>
