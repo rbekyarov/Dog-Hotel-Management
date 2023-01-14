@@ -20,10 +20,10 @@
                     User exist!
                 </p>
                 <label>Password:</label><br>
-                <input type="text" id="description1" th:field="${userDTO.password}" placeholder="Please enter Password"/><br>
+                <input type="password" id="description1" th:field="${userDTO.password}" placeholder="Please enter Password"/><br>
 
                 <label>Confirm Password:</label><br>
-                <input type="text" id="description2" th:field="${userDTO.confirmPassword}" placeholder="Confirm Password"/><br>
+                <input type="password" id="description2" th:field="${userDTO.confirmPassword}" placeholder="Confirm Password"/><br>
 
                 <p th:if="${wrongRepeatPasswords}" class="errors alert alert-danger">
                     Passwords don't match!.
