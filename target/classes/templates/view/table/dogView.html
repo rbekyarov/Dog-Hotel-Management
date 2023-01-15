@@ -16,11 +16,11 @@
                 </tr>
                 </tbody>
             </table>
-            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:620px">
+            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:700px">
                 <tbody>
                 <tr>
                     <td>
-                        <img src="#" id="thumbnail" height="208px" width="312px"
+                        <img src="#" id="thumbnail" height="270px" width="405px"
                              th:src="@{${'/image/' + dog.imageName}}" alt="image" />
                         <input type="hidden" name="imgName"  th:value="${dog.imageName}"><br></td>
                     <td>
@@ -28,6 +28,8 @@
                         th:text="${'BirthDate: '+ #temporals.format(dog.birthDate,'dd.MM.yyyy') }"></label><br>
                         <label
                                 th:text="${'Current Age: '+ dog.years}"></label><br>
+                        <label
+                                th:text="${'Last Deworming Date: ' +#temporals.format(dog.lastDewormingDate,'dd.MM.yyyy')}"></label><br>
                         <label
                                 th:text="${'Weight: '+ dog.weight}"></label><br>
                         <label
@@ -37,7 +39,7 @@
                         <label
                                 th:text="${'Passport: '+ dog.passport}"></label><br>
                         <label
-                                th:text="${'Microchip: '+ dog.microchip}"></label><br>
+                                th:text="${'Microchip: '+ dog.microchip + ' - '+ dog.microchipNumber}"></label><br>
                         <label
                                 th:text="${'Behavior: '+ dog.behavior.name}"></label><br>
                     </td>
@@ -46,7 +48,7 @@
 
                 </tbody>
             </table>
-            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 620px;">
+            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 700px;">
                 <tbody>
                 <tr>
                 <td>

@@ -194,7 +194,7 @@ public class InitData implements CommandLineRunner {
                     LocalDate.of(2022, 2, 22),
                     "sara.jpg",
                     18,
-                    breedRepository.getById(Long.parseLong("7")),
+                    breedRepository.getById(Long.parseLong("9")),
                     Sex.F,
                     Passport.YES,
                     Microchip.NO,
