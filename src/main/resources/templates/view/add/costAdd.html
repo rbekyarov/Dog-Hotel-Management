@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <th:block th:unless="${session.isEmpty()}">
+    <link href="/css/dp-light.css" rel="stylesheet">
+    <script defer src="/js/datepicker.js"></script>
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
         <div class="button_back">
             <a class="nav-link h5" th:href="@{/view/table/costTable}">
@@ -35,15 +37,11 @@
                     <label>Amount:</label><br>
                     <input type="text" id="description1" th:field="*{amount}" placeholder="Please enter Amount"
                            required/><br>
-
-                    <label for="date">Date Cost:</label>
-                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
-                               th:field="*{dateCost}" id="date" placeholder="Date"/>
-                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                        </div>
+                    <td><td><label>Date Cost:</label><br>
+                    <div>
+                        <input required type="text" id="input1" th:field="*{dateCost}" placeholder="Please enter Date"  />
                     </div>
+
 
 
                 </div>
@@ -58,24 +56,9 @@
                 </div>
             </form>
         </div>
-        <script th:src="@{/assets/moment/moment.min.js}"></script>
-        <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
         <script>
-            $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
-                icons: {
-                    time: 'far fa-clock',
-                    date: 'far fa-calendar',
-                    up: 'fas fa-arrow-up',
-                    down: 'fas fa-arrow-down',
-                    previous: 'fas fa-chevron-left',
-                    next: 'fas fa-chevron-right',
-                    today: 'far fa-calendar-check-o',
-                    clear: 'far fa-trash',
-                    close: 'far fa-times'
-                } });
-
-            $('#datetimepicker1').datetimepicker({
-                format: 'DD/MM/YYYY'
+            window.addEventListener("load", () => {
+                picker.attach({ target: "input1" });
             });
         </script>
     </th:block>

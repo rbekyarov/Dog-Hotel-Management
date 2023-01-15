@@ -46,7 +46,12 @@ public class CostServiceImpl implements CostService {
         Cost cost = modelMapper.map(costDTO, Cost.class);
         //set DateCost
         String date = costDTO.getDateCost();
-        cost.setDateCost(convertStringToLocalDate(date));
+        if(date.isEmpty()){
+            cost.setDateCost(null);
+        }else {
+            cost.setDateCost(formatterLocalDate(date));
+        }
+
         //get and set Author
         cost.setAuthor(userService.getAuthorFromSession(session));
         // set dateCreated
@@ -91,6 +96,12 @@ public class CostServiceImpl implements CostService {
         companyService.editBalance(currentBalance.add(oldAmount));
         //change Company Balance -charge new amount
         BigDecimal currentNewBalance = companyService.getCurrentBalance();
+        LocalDate localDate =null;
+        if(dateCost.isEmpty()){
+            localDate = null;
+        }else {
+            localDate = formatterLocalDate(dateCost);
+        }
 
 
         companyService.editBalance(currentNewBalance.subtract(amount));
@@ -99,7 +110,7 @@ public class CostServiceImpl implements CostService {
                 description,
                 invoiceNo,
                 amount,
-                convertStringToLocalDate(dateCost),
+                localDate,
                 editAuthorId,
                 dateEdit,
                 id);
@@ -132,10 +143,43 @@ public class CostServiceImpl implements CostService {
     }
 
     //convert String to LocalDate
-    LocalDate convertStringToLocalDate(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(date, formatter);
+    LocalDate formatterLocalDate(String dateDto) {
+        //1.01.23 г.  ->23-01-01
+        //11.01.23 г. ->23-01-11
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        StringBuilder sb = new StringBuilder();
+        if(dateDto.contains(".")){
+            if(dateDto.length()==10){
+                sb.append("2");
+                sb.append("0");
+                sb.append(dateDto.charAt(5));
+                sb.append(dateDto.charAt(6));
+                sb.append("-");
+                sb.append(dateDto.charAt(2));
+                sb.append(dateDto.charAt(3));
+                sb.append("-");
+                sb.append("0");
+                sb.append(dateDto.charAt(0));
 
-        return localDate;
+            }else if(dateDto.length()==11){
+                sb.append("2");
+                sb.append("0");
+                sb.append(dateDto.charAt(6));
+                sb.append(dateDto.charAt(7));
+                sb.append("-");
+                sb.append(dateDto.charAt(3));
+                sb.append(dateDto.charAt(4));
+                sb.append("-");
+                sb.append(dateDto.charAt(0));
+                sb.append(dateDto.charAt(1));
+            }
+            String s = sb.toString();
+
+            LocalDate localDate = LocalDate.parse(s, formatter);
+            return localDate;
+        }else {
+            LocalDate localDate = LocalDate.parse(dateDto, formatter);
+            return localDate;
+        }
     }
 }
