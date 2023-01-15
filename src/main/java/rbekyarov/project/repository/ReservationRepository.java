@@ -74,4 +74,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Query("select r.client from Reservation as r")
     List<Client> listUsedClient();
 
+    @Query("select r.dog from Reservation as r")
+    List<Dog> listUsedDog();
 }

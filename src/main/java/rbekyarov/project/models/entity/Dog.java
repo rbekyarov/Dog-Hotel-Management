@@ -21,20 +21,26 @@ public class Dog extends BaseEntity {
     private Integer weight;
     private Breed breed;
     private Sex sex;
+
     private Passport passport;
     private Microchip microchip;
+
     private Client client;
     private Behavior behavior;
     private User author;
     private LocalDate dateCreate;
     private DogSize  dogSize;
     private String years;
+    private LocalDate lastDewormingDate;
+    private String microchipNumber;
+
+
 
     public Dog() {
     }
 
 
-    public Dog(String name, LocalDate birthDate, String imageName, Integer weight, Breed breed, Sex sex, Passport passport, Microchip microchip, Client client, Behavior behavior, User author, LocalDate dateCreate, DogSize dogSize) {
+    public Dog(String name, LocalDate birthDate, String imageName, Integer weight, Breed breed, Sex sex, Passport passport, Microchip microchip, Client client, Behavior behavior, User author, LocalDate dateCreate, DogSize dogSize, LocalDate lastDewormingDate, String microchipNumber) {
         this.name = name;
         this.birthDate = birthDate;
         this.imageName = imageName;
@@ -48,6 +54,8 @@ public class Dog extends BaseEntity {
         this.author = author;
         this.dateCreate = dateCreate;
         this.dogSize = dogSize;
+        this.lastDewormingDate = lastDewormingDate;
+        this.microchipNumber = microchipNumber;
     }
 
     @Column(nullable = false)
@@ -174,5 +182,21 @@ public class Dog extends BaseEntity {
 
     public void setYears(String years) {
         this.years = years;
+    }
+    @Column
+    public LocalDate getLastDewormingDate() {
+        return lastDewormingDate;
+    }
+
+    public void setLastDewormingDate(LocalDate lastDewormingDate) {
+        this.lastDewormingDate = lastDewormingDate;
+    }
+    @Column
+    public String getMicrochipNumber() {
+        return microchipNumber;
+    }
+
+    public void setMicrochipNumber(String microchipNumber) {
+        this.microchipNumber = microchipNumber;
     }
 }

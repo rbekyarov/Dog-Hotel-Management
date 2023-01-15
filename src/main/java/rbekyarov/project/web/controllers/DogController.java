@@ -34,16 +34,15 @@ public class DogController extends BaseController {
 
     private final DogService dogService;
     private final DogRepository dogRepository;
-    private final ClientRepository clientRepository;
+    private final ReservationRepository reservationRepository;
 
 
     public DogController(DogService dogService, FileStorageService fileStorageService,
-                         DogRepository dogRepository, ReservationRepository reservationRepository, ClientRepository clientRepository) {
+                         DogRepository dogRepository, ReservationRepository reservationRepository, ClientRepository clientRepository, ReservationRepository reservationRepository1) {
 
         this.dogService = dogService;
         this.dogRepository = dogRepository;
-
-        this.clientRepository = clientRepository;
+        this.reservationRepository = reservationRepository1;
     }
 
     @GetMapping("/view/table/dogTable")
@@ -106,7 +105,7 @@ public class DogController extends BaseController {
     @GetMapping("view/table/dog/remove/{id}")
     public ModelAndView removeDog(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         boolean isUsed = false;
-        List<Dog> dogs = clientRepository.listUsedDog();
+        List<Dog> dogs = reservationRepository.listUsedDog();
         for (Dog b : dogs) {
             if(Objects.equals(b.getId(), id)){
                 redirectAttributes.addFlashAttribute("isUsed", true);

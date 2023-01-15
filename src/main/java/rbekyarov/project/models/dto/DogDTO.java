@@ -11,6 +11,8 @@ import rbekyarov.project.models.entity.enums.Passport;
 import rbekyarov.project.models.entity.enums.Sex;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+
 @Data
 public class DogDTO {
 
@@ -27,6 +29,8 @@ public class DogDTO {
     private String imageName;
     private DogSize dogSize;
     private String years;
+    private String lastDewormingDate;
+    private String microchipNumber;
     public DogDTO() {
     }
 
@@ -38,7 +42,7 @@ public class DogDTO {
     public void setName(String name) {
         this.name = name;
     }
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public String getBirthDate() {
         return birthDate;
     }
@@ -92,7 +96,7 @@ public class DogDTO {
         this.microchip = microchip;
     }
 
-    @NotNull(message = "Client cannot be empty")
+
     public Client getClient() {
         return client;
     }
@@ -131,5 +135,21 @@ public class DogDTO {
 
     public void setYears(String years) {
         this.years = years;
+    }
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public String getLastDewormingDate() {
+        return lastDewormingDate;
+    }
+
+    public void setLastDewormingDate(String lastDewormingDate) {
+        this.lastDewormingDate = lastDewormingDate;
+    }
+
+    public String getMicrochipNumber() {
+        return microchipNumber;
+    }
+
+    public void setMicrochipNumber(String microchipNumber) {
+        this.microchipNumber = microchipNumber;
     }
 }

@@ -154,7 +154,9 @@ public class InitData implements CommandLineRunner {
                     behaviorRepository.getById(Long.parseLong("1")),
                     userRepository.getById(Long.parseLong("1")),
                     LocalDate.of(2023, 1, 1),
-                    DogSize.LARGE));
+                    DogSize.LARGE,
+                    LocalDate.of(2022, 12, 1),
+                    ""));
 
             dogRepository.save(new Dog("Tuti",
                     LocalDate.of(2022, 3, 15),
@@ -168,7 +170,9 @@ public class InitData implements CommandLineRunner {
                     behaviorRepository.getById(Long.parseLong("2")),
                     userRepository.getById(Long.parseLong("1")),
                     LocalDate.of(2023, 1, 1),
-                    DogSize.SMALL));
+                    DogSize.SMALL,
+                    LocalDate.of(2022, 12, 13),
+                    "85858585864"));
 
             dogRepository.save(new Dog("Dido",
                     LocalDate.of(2021, 6, 11),
@@ -182,7 +186,9 @@ public class InitData implements CommandLineRunner {
                     behaviorRepository.getById(Long.parseLong("4")),
                     userRepository.getById(Long.parseLong("1")),
                     LocalDate.of(2023, 1, 1),
-                    DogSize.SMALL));
+                    DogSize.SMALL,
+                    LocalDate.of(2022, 12, 6),
+                    "4155261523"));
 
             dogRepository.save(new Dog("Sara",
                     LocalDate.of(2022, 2, 22),
@@ -196,7 +202,9 @@ public class InitData implements CommandLineRunner {
                     behaviorRepository.getById(Long.parseLong("6")),
                     userRepository.getById(Long.parseLong("2")),
                     LocalDate.of(2023, 1, 1),
-                    DogSize.MEDIUM));
+                    DogSize.MEDIUM,
+                    LocalDate.of(2022, 12, 30),
+                    ""));
 
             //New Dog "Berta"
             dogRepository.save(new Dog("Berta",
@@ -211,7 +219,9 @@ public class InitData implements CommandLineRunner {
                     behaviorRepository.getById(Long.parseLong("5")),
                     userRepository.getById(Long.parseLong("1")),
                     LocalDate.of(2023, 1, 1),
-                    DogSize.LARGE));
+                    DogSize.LARGE,
+                    LocalDate.of(2022, 11, 1),
+                    "85866864858"));
             //New Dog "Boby"
             dogRepository.save(new Dog("Boby",
                     LocalDate.of(2017, 6, 10),
@@ -225,7 +235,9 @@ public class InitData implements CommandLineRunner {
                     behaviorRepository.getById(Long.parseLong("2")),
                     userRepository.getById(Long.parseLong("2")),
                     LocalDate.of(2023, 1, 1),
-                    DogSize.LARGE));
+                    DogSize.LARGE,
+                    LocalDate.of(2023, 1, 1),
+                    ""));
             //New Dog Cezar
             dogRepository.save(new Dog("Cezar",
                     LocalDate.of(2020, 4, 16),
@@ -239,7 +251,9 @@ public class InitData implements CommandLineRunner {
                     behaviorRepository.getById(Long.parseLong("4")),
                     userRepository.getById(Long.parseLong("2")),
                     LocalDate.of(2023, 1, 1),
-                    DogSize.LARGE));
+                    DogSize.LARGE,
+                    LocalDate.of(2023, 1, 8),
+                    "17475567666772"));
             //New Dog "Zara"
             dogRepository.save(new Dog("Zara",
                     LocalDate.of(2022, 9, 16),
@@ -253,7 +267,9 @@ public class InitData implements CommandLineRunner {
                     behaviorRepository.getById(Long.parseLong("1")),
                     userRepository.getById(Long.parseLong("2")),
                     LocalDate.of(2023, 1, 1),
-                    DogSize.MEDIUM));
+                    DogSize.MEDIUM,
+                    LocalDate.of(2022, 12, 25),
+                    ""));
             //New Dog "Benji"
             dogRepository.save(new Dog("Benji",
                     LocalDate.of(2020, 5, 28),
@@ -267,7 +283,9 @@ public class InitData implements CommandLineRunner {
                     behaviorRepository.getById(Long.parseLong("1")),
                     userRepository.getById(Long.parseLong("2")),
                     LocalDate.of(2023, 1, 1),
-                    DogSize.SMALL));
+                    DogSize.SMALL,
+                    LocalDate.of(2023, 1, 1),
+                    "7447364142"));
             //New Dog "Lora"
             dogRepository.save(new Dog("Lora",
                     LocalDate.of(2016, 2, 7),
@@ -281,7 +299,9 @@ public class InitData implements CommandLineRunner {
                     behaviorRepository.getById(Long.parseLong("5")),
                     userRepository.getById(Long.parseLong("1")),
                     LocalDate.of(2023, 1, 1),
-                    DogSize.LARGE));
+                    DogSize.LARGE,
+                    LocalDate.of(2022, 11, 25),
+                    ""));
 
         }
         //ADD VENDORS

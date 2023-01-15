@@ -10,6 +10,9 @@
                         class="glyphicon glyphicon-ok"></span>Add Behavior
                 </button>
             </a>
+            <p th:if="${isUsed}" class="errors alert alert-danger">
+                Behavior is used!
+            </p>
             <table class=table>
                 <tr>
                     <th>No</th>

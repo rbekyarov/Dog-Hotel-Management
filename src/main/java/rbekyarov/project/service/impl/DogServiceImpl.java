@@ -63,12 +63,33 @@ public class DogServiceImpl implements DogService {
 
         // upload image
        String imageUUID = imageUpload(file,imgName);
+       if(imageUUID.isEmpty()){
+           imageUUID="emptyDog.png";
+       }
         dogNew.setImageName(imageUUID);
 
         //add birthDate
-        String date = dogDTO.getBirthDate();
-        LocalDate birthDate = formatterLocalForAdd(date);
-        dogNew.setBirthDate(birthDate);
+        String birthDateDto = dogDTO.getBirthDate();
+        LocalDate birthDate = null;
+        if(birthDateDto.isEmpty()){
+            dogNew.setBirthDate(null);
+        }else {
+             birthDate = formatterLocalDate(birthDateDto);
+            dogNew.setBirthDate(birthDate);
+        }
+
+
+        //add lastDewormingDate
+
+        String lastDewormingDateDro = dogDTO.getLastDewormingDate();
+        if (lastDewormingDateDro.isEmpty()){
+            dogNew.setLastDewormingDate(null);
+        }else {
+            LocalDate lastDewormingDate = formatterLocalDate(lastDewormingDateDro);
+            dogNew.setLastDewormingDate(lastDewormingDate);
+        }
+
+
 
         //get and set Author
         dogNew.setAuthor(userService.getAuthorFromSession(session));
@@ -85,16 +106,21 @@ public class DogServiceImpl implements DogService {
             dogNew.setDogSize(DogSize.LARGE);
         }
         //set years
-        long daysLong = ChronoUnit.DAYS.between(birthDate,LocalDate.now());
-        int years = (int)daysLong / 365;
-        int months = ((int)daysLong % 365)/30 ;
-        String result="";
-        if (years<1){
-            result = String.format("mos."+months);
+        if(birthDate==null){
+            dogNew.setYears(null);
         }else {
-            result = String.format("yrs."+years+" mos."+months);
+            long daysLong = ChronoUnit.DAYS.between(birthDate,LocalDate.now());
+            int years = (int)daysLong / 365;
+            int months = ((int)daysLong % 365)/30 ;
+            String result="";
+            if (years<1){
+                result = String.format("mos."+months);
+            }else {
+                result = String.format("yrs."+years+" mos."+months);
+            }
+            dogNew.setYears(result);
         }
-        dogNew.setYears(result);
+
 
 
         dogRepository.save(dogNew);
@@ -113,9 +139,14 @@ public class DogServiceImpl implements DogService {
     @Override
     public void editDog(Long id, DogEditDTO dogEditDTO, String imgName, MultipartFile file, HttpSession session) throws IOException {
 
-        //Get new birth Date
+        //add birthDate
         String birthDateDto = dogEditDTO.getBirthDate();
-        LocalDate birthDate = formatterLocalForEdit(birthDateDto);
+        LocalDate birthDate = formatterLocalDate(birthDateDto);
+
+        //add lastDewormingDate
+        String lastDewormingDateDro = dogEditDTO.getLastDewormingDate();
+        LocalDate lastDewormingDate = formatterLocalDate(lastDewormingDateDro);
+
 
         //image upload
         String imageUUID = imageUpload(file,imgName);
@@ -148,6 +179,7 @@ public class DogServiceImpl implements DogService {
         }else {
             result = String.format("yrs."+years+" mos."+months);
         }
+        //
 
         dogRepository.editDog(dogEditDTO.getName(),
                 birthDate,
@@ -163,7 +195,9 @@ public class DogServiceImpl implements DogService {
                 editAuthorId,
                 dateEdit,
                 dogSize,
-                result);
+                result,
+                lastDewormingDate,
+                dogEditDTO.getMicrochipNumber());
     }
 
     @Override
@@ -229,73 +263,68 @@ public class DogServiceImpl implements DogService {
     public void updateDogYears() {
         List<Dog> dogs = findAll();
         for (Dog dog : dogs) {
-            long daysLong = ChronoUnit.DAYS.between(dog.getBirthDate(),LocalDate.now());
-            int years = (int)daysLong / 365;
-            int months = ((int)daysLong % 365)/30 ;
             String result="";
-            if (years<1){
-                result = String.format("mos."+months);
+            if(dog.getBirthDate()==null){
+                result="";
             }else {
-                result = String.format("yrs."+years+" mos."+months);
+                long daysLong = ChronoUnit.DAYS.between(dog.getBirthDate(),LocalDate.now());
+                int years = (int)daysLong / 365;
+                int months = ((int)daysLong % 365)/30 ;
+
+                if (years<1){
+                    result = String.format("mos."+months);
+                }else {
+                    result = String.format("yrs."+years+" mos."+months);
+                }
             }
+
             dogRepository.editDogYearsById(dog.getId(),result);
         }
 
 
     }
-
     //convert String to LocalDate
-    LocalDate formatterLocalForEdit(String birthDateDto) {
-        LocalDate birthDate = null;
-        if (birthDateDto.contains("/")) {
-            String substring1 = birthDateDto.substring(0, 10);
-            String replace = substring1.replace('/', '-');
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < 1; i++) {
-                sb.append(replace.charAt(6));
-                sb.append(replace.charAt(7));
-                sb.append(replace.charAt(8));
-                sb.append(replace.charAt(9));
-                sb.append(replace.charAt(5));
-                sb.append(replace.charAt(0));
-                sb.append(replace.charAt(1));
-                sb.append(replace.charAt(5));
-                sb.append(replace.charAt(3));
-                sb.append(replace.charAt(4));
+
+    LocalDate formatterLocalDate(String dateDto) {
+        //1.01.23 г.  ->23-01-01
+        //11.01.23 г. ->23-01-11
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        StringBuilder sb = new StringBuilder();
+        if(dateDto.contains(".")){
+          if(dateDto.length()==10){
+              sb.append("2");
+              sb.append("0");
+              sb.append(dateDto.charAt(5));
+              sb.append(dateDto.charAt(6));
+              sb.append("-");
+              sb.append(dateDto.charAt(2));
+              sb.append(dateDto.charAt(3));
+              sb.append("-");
+              sb.append("0");
+              sb.append(dateDto.charAt(0));
+
+          }else if(dateDto.length()==11){
+              sb.append("2");
+              sb.append("0");
+              sb.append(dateDto.charAt(6));
+              sb.append(dateDto.charAt(7));
+              sb.append("-");
+              sb.append(dateDto.charAt(3));
+              sb.append(dateDto.charAt(4));
+              sb.append("-");
+              sb.append(dateDto.charAt(0));
+              sb.append(dateDto.charAt(1));
             }
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate localDate = LocalDate.parse(sb.toString(), formatter);
-            birthDate = localDate;
-        } else {
-            birthDate = LocalDate.parse(birthDateDto);
+            String s = sb.toString();
+
+            LocalDate localDate = LocalDate.parse(s, formatter);
+            return localDate;
+        }else {
+            LocalDate localDate = LocalDate.parse(dateDto, formatter);
+            return localDate;
         }
-
-        return birthDate;
     }
 
-    LocalDate formatterLocalForAdd(String birthDateDto) {
-        LocalDate birthDate = null;
-            String substring1 = birthDateDto.substring(0, 10);
-            String replace = substring1.replace('/', '-');
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < 1; i++) {
-                sb.append(replace.charAt(6));
-                sb.append(replace.charAt(7));
-                sb.append(replace.charAt(8));
-                sb.append(replace.charAt(9));
-                sb.append(replace.charAt(5));
-                sb.append(replace.charAt(3));
-                sb.append(replace.charAt(4));
-                sb.append(replace.charAt(5));
-                sb.append(replace.charAt(0));
-                sb.append(replace.charAt(1));
-            }
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate localDate = LocalDate.parse(sb.toString(), formatter);
-            birthDate = localDate;
-
-        return birthDate;
-    }
     String imageUpload(MultipartFile file, String imgName) throws IOException {
         String imageUUID;
         if (!file.isEmpty()) {
