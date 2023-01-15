@@ -357,7 +357,7 @@ public class InitData implements CommandLineRunner {
                     LocalDate.of(2023, 1, 15),
                     LocalDate.of(2023, 1, 21),
                     6,
-                    cellRepository.getById(Long.parseLong("2")),
+                    cellRepository.getById(Long.parseLong("7")),
                     Food.YES,
                     Training.YES,
                     Bathing.YES,

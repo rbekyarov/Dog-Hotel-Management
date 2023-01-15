@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.CellDTO;
 import rbekyarov.project.models.entity.Cell;
+import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.enums.CellSize;
 import rbekyarov.project.models.entity.enums.Status;
 
@@ -28,4 +29,6 @@ public interface CellService {
     void setCellBusy(Long id);
     void setCellEmpty(Long id);
     Page<Cell> findPaginated(Pageable pageable);
+
+    void updateStatus(List<Reservation> reservationList);
 }

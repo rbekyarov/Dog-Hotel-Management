@@ -47,6 +47,7 @@ public class CellController extends BaseController {
                     .collect(Collectors.toList());
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
+        cellService.updateStatus(reservationRepository.findAllActiveReservation());
         modelAndView.addObject("cells", cells);
         return super.view("/view/table/cellTable", "cells", cells,"pageNumbers", pageNumbers);
     }

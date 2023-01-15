@@ -34,4 +34,6 @@ public interface ReservationService {
     Page<Reservation> findPaginated(Pageable pageable);
 
     List<Reservation> listReservationById(long parseLong);
+
+    List<Reservation> findAllActiveReservation();
 }

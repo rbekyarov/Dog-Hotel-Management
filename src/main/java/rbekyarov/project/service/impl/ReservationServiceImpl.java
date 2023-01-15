@@ -387,6 +387,11 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.listReservationById(reservationNumber);
     }
 
+    @Override
+    public List<Reservation> findAllActiveReservation() {
+        return reservationRepository.findAllActiveReservation();
+    }
+
     LocalDate formatterLocal(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);

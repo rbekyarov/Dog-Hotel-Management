@@ -7,13 +7,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.CellDTO;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Cell;
+import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.models.entity.enums.CellSize;
 import rbekyarov.project.models.entity.enums.Status;
 import rbekyarov.project.repository.CellRepository;
 import rbekyarov.project.service.CellService;
+import rbekyarov.project.service.ReservationService;
 import rbekyarov.project.service.UserService;
 
 import javax.servlet.http.HttpSession;
@@ -28,10 +29,12 @@ public class CellServiceImpl implements CellService {
     private final ModelMapper modelMapper;
     private final UserService userService;
 
+
     public CellServiceImpl(CellRepository cellRepository, ModelMapper modelMapper, UserService userService) {
         this.cellRepository = cellRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
+
     }
 
     @Override
@@ -114,5 +117,15 @@ public class CellServiceImpl implements CellService {
         Page<Cell> cellsPage = new PageImpl<Cell>(list, PageRequest.of(currentPage, pageSize), cells.size());
 
         return cellsPage;
+    }
+
+    @Override
+    public void updateStatus(List<Reservation> allActiveReservation) {
+
+        for (Reservation reservation : allActiveReservation) {
+            Cell cell = reservation.getCell();
+            cellRepository.setCellBusy(cell.getId());
+        }
+
     }
 }
