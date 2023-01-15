@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.entity.Cell;
+import rbekyarov.project.models.entity.Cost;
 import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.enums.CancellationInvoice;
@@ -182,6 +183,16 @@ public class InvoicesServiceImpl implements InvoiceService {
         Page<Invoice> invoicesPage = new PageImpl<Invoice>(list, PageRequest.of(currentPage, pageSize), invoices.size());
 
         return invoicesPage;
+    }
+
+    @Override
+    public BigDecimal getTotalInvoicedPrice() {
+        List<Invoice> allRealInvoice = invoiceRepository.findAllRealInvoice();
+        BigDecimal totalAmount = new BigDecimal("0");
+        for (Invoice invoice : allRealInvoice) {
+            totalAmount = totalAmount.add(invoice.getTotalPrice());
+        }
+        return totalAmount;
     }
 
 }

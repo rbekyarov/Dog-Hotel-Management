@@ -10,10 +10,20 @@
                         class="glyphicon glyphicon-ok"></span>Add Cost
                 </button>
             </a>
-            <form th:action="@{/view/table/searchCostByVendorName}" method="get">
-                <input type="text" name="vendorName" th:value="${vendorName}"  placeholder="Find by Vendor" size="20" >
-                <button type="submit" class="btn btn-info" >Search</button>
-            </form>
+            <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                <tbody>
+                <tr>
+                    <td><form th:action="@{/view/table/searchCostByVendorName}" method="get">
+                        <input type="text" name="vendorName" th:value="${vendorName}"  placeholder="Find by Vendor" size="20" >
+                        <button type="submit" class="btn btn-info" >Search</button>
+                    </form></td>
+
+                    <th th:text="${'Total cost: ' +totalAmountCost+'$'}"></th>
+                </tr>
+                </tbody>
+            </table>
+
+
             <table class=table>
                 <tr>
                     <th>No</th>
@@ -51,6 +61,8 @@
                     </a></td>
                 </tr>
             </table>
+
+
             <div th:if="${costs.totalPages > 0}" class="pagination"
                  th:each="pageNumber : ${pageNumbers}">
                 <a th:href="@{costTable(size=${costs.size}, page=${pageNumber})}"

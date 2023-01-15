@@ -14,6 +14,7 @@ import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.service.InvoiceService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,8 +46,10 @@ public class InvoiceController extends BaseController {
                     .collect(Collectors.toList());
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
+        BigDecimal totalInvoicedPrice = invoiceService.getTotalInvoicedPrice();
         modelAndView.addObject("invoices", invoices);
-        return super.view("/view/table/invoiceTable", "invoices", invoices,"pageNumbers", pageNumbers);
+        modelAndView.addObject("totalInvoicedPrice", totalInvoicedPrice);
+        return super.view("/view/table/invoiceTable", "invoices", invoices,"pageNumbers", pageNumbers,"totalInvoicedPrice", totalInvoicedPrice);
     }
     @GetMapping("/view/table/invoiceCanceledTable")
     public ModelAndView invoiceCancelledTable(ModelAndView modelAndView) {

@@ -4,6 +4,7 @@ import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.entity.*;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public abstract class BaseController {
@@ -73,6 +74,17 @@ public abstract class BaseController {
         modelAndView.addObject(objectName, object);
         modelAndView.addObject(string1, list1);
         modelAndView.addObject(string2, list2);
+
+
+        return modelAndView;
+    }
+    public ModelAndView view(String view, String objectName, Object object, String string1, List list1, String string2, BigDecimal bigDecimal ) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("fragments/base-layout");
+        modelAndView.addObject("view", view);
+        modelAndView.addObject(objectName, object);
+        modelAndView.addObject(string1, list1);
+        modelAndView.addObject(string2, bigDecimal);
 
 
         return modelAndView;

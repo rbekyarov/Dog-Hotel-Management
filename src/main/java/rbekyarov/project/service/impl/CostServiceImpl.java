@@ -142,6 +142,16 @@ public class CostServiceImpl implements CostService {
         return costRepository.findCostByVendor(name);
     }
 
+    @Override
+    public BigDecimal getTotalAmountCost() {
+        List<Cost> allCost = costRepository.findAllCostByDesc();
+        BigDecimal totalAmount = new BigDecimal("0");
+        for (Cost cost : allCost) {
+            totalAmount = totalAmount.add(cost.getAmount());
+        }
+        return totalAmount;
+    }
+
     //convert String to LocalDate
     LocalDate formatterLocalDate(String dateDto) {
         //1.01.23 г.  ->23-01-01

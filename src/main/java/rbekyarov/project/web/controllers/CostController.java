@@ -10,12 +10,14 @@ import rbekyarov.project.models.dto.CostDTO;
 import rbekyarov.project.models.dto.CostEditDTO;
 import rbekyarov.project.models.entity.Cost;
 import rbekyarov.project.models.entity.Vendor;
+import rbekyarov.project.repository.CostRepository;
 import rbekyarov.project.service.CostService;
 import rbekyarov.project.service.VendorService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,10 +28,13 @@ import java.util.stream.IntStream;
 public class CostController extends BaseController {
     private final CostService costService;
     private final VendorService vendorService;
+    private final CostRepository costRepository;
 
-    public CostController(CostService costService, VendorService vendorService) {
+    public CostController(CostService costService, VendorService vendorService,
+                          CostRepository costRepository) {
         this.costService = costService;
         this.vendorService = vendorService;
+        this.costRepository = costRepository;
     }
 
 
@@ -48,8 +53,10 @@ public class CostController extends BaseController {
                     .collect(Collectors.toList());
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
+        BigDecimal totalAmountCost = costService.getTotalAmountCost();
         modelAndView.addObject("costs", costs);
-        return super.view("/view/table/costTable", "costs", costs,"pageNumbers", pageNumbers);
+        modelAndView.addObject("totalAmountCost", totalAmountCost);
+        return super.view("/view/table/costTable", "costs", costs,"pageNumbers", pageNumbers,"totalAmountCost", totalAmountCost);
     }
 
     @GetMapping("/view/add/costAdd")

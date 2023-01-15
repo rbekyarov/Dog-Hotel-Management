@@ -16,7 +16,7 @@
                         class="glyphicon glyphicon-ok"></span>List Cancelled Invoice
                 </button>
             </a>
-            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:600px">
+            <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:780px">
                 <thead>
                 <tr>
                     <th scope="col"><form th:action="@{/view/table/searchInvoiceNumber}" method="get">
@@ -27,6 +27,7 @@
                         <input type="text" name="clientEmail" th:value="${clientEmail}"  placeholder="Find by Client Email" size="20" >
                         <button type="submit" class="btn btn-info" >Search</button>
                     </form></th>
+                    <th th:text="${'Total Invoiced: ' +totalInvoicedPrice+'$'}"</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -56,7 +57,7 @@
                     <td ><a th:target="_blank"  th:href="@{/view/table/reservation/view/{id}(id=${i.reservationId})}" th:text="${i.reservationId}"></td>
                     <td th:text="${i.price+'$'}"></td>
                     <td th:text="${i.discount}"></td>
-                    <td th:text="${i.totalPrice +'$'}"></td>
+                    <td class="boldPrice" th:text="${i.totalPrice +'$'}"></td>
                     <td th:text="${i.authorName}"></td>
                     <td th:text="${#temporals.format(i.dateCreate,'dd.MM.yyyy')}"></td>
 
