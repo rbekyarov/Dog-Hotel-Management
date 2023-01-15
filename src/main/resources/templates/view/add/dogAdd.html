@@ -123,20 +123,19 @@
                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
                     <tbody>
                     <tr>
-                        <td><label>Microchip:</label><br>
-                            <select th:field="*{microchip}" >
+                        <td ><label >Microchip:</label><br>
+                            <select th:field="*{microchip}" id="Microchip" onclick="show()">
                                 <option value="NO">NO</option>
                                 <option value="YES">YES</option>
                             </select>
                         </td>
-                        <td><label>Microchip Number:</label><br>
-                            <input type="text" id="description23" th:field="*{microchipNumber}" placeholder="Please enter Number" />
+                        <td id="description23" style="visibility:hidden" ><label>Microchip Number:</label><br>
+                            <input  type="text"  th:field="*{microchipNumber}"  placeholder="Please enter Number" />
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-
 
             <div class="button_submit">
                 <div >
@@ -179,6 +178,16 @@
             window.addEventListener("load", () => {
                 picker.attach({ target: "input2" });
             });
+        </script>
+        <script type = "text/javascript">
+            function show() {
+                let value = document.getElementById('Microchip').value;
+                if(value=='YES'){
+                    document.getElementById('description23').style.visibility = 'visible';
+                }else {
+                    document.getElementById('description23').style.visibility = 'hidden';
+                }
+            }
         </script>
 </th:block>
 </th:block>
