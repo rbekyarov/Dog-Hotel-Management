@@ -19,7 +19,8 @@ DEMO VIDEO - https://youtu.be/wDdqS93h2EI
 
 ENTITIES:
 
-![2023-01-10 (23)](https://user-images.githubusercontent.com/29566751/211556423-e6f05a74-96e5-49e8-b9dc-e4205b76f051.png)
+
+![2023-01-15 (1)](https://user-images.githubusercontent.com/29566751/212567330-44576c42-be8c-42c3-8a70-08ee0a75dde8.png)
 
 
 INDEX PAGE:
