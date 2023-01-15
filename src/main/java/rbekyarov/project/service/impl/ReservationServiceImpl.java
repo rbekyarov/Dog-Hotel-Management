@@ -108,6 +108,9 @@ public class ReservationServiceImpl implements ReservationService {
             price += (int) countOvernightStay * currentPrice.getPriceFood().doubleValue();
         }
         if (reservationDTO.getDeworming().name().equals("YES")) {
+            //change date Dog Deworming
+            dogRepository.editDogDateDewormingById(reservationDTO.getDog().getId(),LocalDate.now());
+            //setPrice
             price += currentPrice.getPriceDeworming().doubleValue();
         }
         if (reservationDTO.getTraining().name().equals("YES")) {
@@ -233,6 +236,9 @@ public class ReservationServiceImpl implements ReservationService {
             price += (int) countOvernightStay * currentPrice.getPriceFood().doubleValue();
         }
         if (reservationEditDTO.getDeworming().name().equals("YES")) {
+            //change date Dog Deworming
+            dogRepository.editDogDateDewormingById(reservationEditDTO.getDog().getId(),LocalDate.now());
+            //setPrice
             price += currentPrice.getPriceDeworming().doubleValue();
         }
         if (reservationEditDTO.getTraining().name().equals("YES")) {
