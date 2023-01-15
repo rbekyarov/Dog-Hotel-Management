@@ -1,3 +1,6 @@
+.boldPrice {
+    font-weight: bold;
+}
 .navbar {
     position: relative;
     display: -ms-flexbox;

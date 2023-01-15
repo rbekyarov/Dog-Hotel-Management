@@ -15,6 +15,7 @@ public class ReservationEditDTO {
     private String endDate;
     private Cell cell;
     private Food food;
+    private Deworming deworming;
     private Training training;
     private Bathing bathing;
     private Combing combing;
@@ -132,5 +133,11 @@ public class ReservationEditDTO {
         this.discount = discount;
     }
 
+    public Deworming getDeworming() {
+        return deworming;
+    }
 
+    public void setDeworming(Deworming deworming) {
+        this.deworming = deworming;
+    }
 }

@@ -24,6 +24,7 @@ public interface PriceService {
             BigDecimal priceStayM,
             BigDecimal priceStayL,
                    BigDecimal priceFood,
+            BigDecimal deworming,
                    BigDecimal priceTraining,
                    BigDecimal priceBathing,
                    BigDecimal priceCombing,
@@ -33,6 +34,7 @@ public interface PriceService {
                    Long id);
 
     BigDecimal getFoodCurrentPrice();
+    BigDecimal getDewormingCurrentPrice();
 
     BigDecimal getBathingCurrentPrice();
 

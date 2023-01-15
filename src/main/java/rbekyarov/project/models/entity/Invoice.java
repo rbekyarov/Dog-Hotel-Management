@@ -21,6 +21,7 @@ public class Invoice extends BaseEntity {
     private Integer countStay;
     private String cellCode;
     private Food food;
+    private Deworming deworming;
     private Training training;
     private Bathing bathing;
     private Combing combing;
@@ -39,6 +40,7 @@ public class Invoice extends BaseEntity {
 
     private BigDecimal countStayPrice;
     private BigDecimal foodPrice;
+    private BigDecimal dewormingPrice;
     private BigDecimal trainingPrice;
     private BigDecimal bathingPrice;
     private BigDecimal combingPrice;
@@ -57,7 +59,7 @@ public class Invoice extends BaseEntity {
     public Invoice() {
     }
 
-    public Invoice(String companyName, String companyCityName, String companyAddress, String companyVatNumber, String companyEmail, String companyBankName, String companyBankAccount, String companyManagerName, String dogName, Integer countStay, String cellCode, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, String authorName, LocalDate dateCreate, Long reservationId, BigDecimal countStayPrice, BigDecimal foodPrice, BigDecimal trainingPrice, BigDecimal bathingPrice, BigDecimal combingPrice, BigDecimal earsPrice, BigDecimal pawsPrice, BigDecimal nailsPrice, String clientName, String clientEmail, String clientAddress, String clientCityName, String clientPhone, CancellationInvoice cancellationInvoice,LocalDate cancelledDateInvoice) {
+    public Invoice(String companyName, String companyCityName, String companyAddress, String companyVatNumber, String companyEmail, String companyBankName, String companyBankAccount, String companyManagerName, String dogName, Integer countStay, String cellCode, Food food, Deworming deworming ,Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, String authorName, LocalDate dateCreate, Long reservationId, BigDecimal countStayPrice, BigDecimal foodPrice,BigDecimal dewormingPrice, BigDecimal trainingPrice, BigDecimal bathingPrice, BigDecimal combingPrice, BigDecimal earsPrice, BigDecimal pawsPrice, BigDecimal nailsPrice, String clientName, String clientEmail, String clientAddress, String clientCityName, String clientPhone, CancellationInvoice cancellationInvoice,LocalDate cancelledDateInvoice) {
         this.companyName = companyName;
         this.companyCityName = companyCityName;
         this.companyAddress = companyAddress;
@@ -70,6 +72,7 @@ public class Invoice extends BaseEntity {
         this.countStay = countStay;
         this.cellCode = cellCode;
         this.food = food;
+        this.deworming = deworming;
         this.training = training;
         this.bathing = bathing;
         this.combing = combing;
@@ -84,6 +87,7 @@ public class Invoice extends BaseEntity {
         this.reservationId = reservationId;
         this.countStayPrice = countStayPrice;
         this.foodPrice = foodPrice;
+        this.dewormingPrice = dewormingPrice;
         this.trainingPrice = trainingPrice;
         this.bathingPrice = bathingPrice;
         this.combingPrice = combingPrice;
@@ -410,5 +414,21 @@ public class Invoice extends BaseEntity {
 
     public void setCancelledDateInvoice(LocalDate cancelledDateInvoice) {
         this.cancelledDateInvoice = cancelledDateInvoice;
+    }
+    @Enumerated(EnumType.STRING)
+    public Deworming getDeworming() {
+        return deworming;
+    }
+
+    public void setDeworming(Deworming deworming) {
+        this.deworming = deworming;
+    }
+
+    public BigDecimal getDewormingPrice() {
+        return dewormingPrice;
+    }
+
+    public void setDewormingPrice(BigDecimal dewormingPrice) {
+        this.dewormingPrice = dewormingPrice;
     }
 }

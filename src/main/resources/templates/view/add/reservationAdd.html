@@ -63,23 +63,25 @@
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
+                            <td><label th:text="${'Deworming: '+ price.getPriceDeworming()+'$'}"></label><br>
+                                <select th:field="*{deworming}">
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select><br></td>
+
+                        </tr>
+                        <tr>
                             <td><label th:text="${'Training: price '+ price.getPriceTraining()+'$'}"></label><br>
                                 <select th:field="*{training}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
-                        </tr>
-                        <tr>
                             <td><label th:text="${'Bathing: price '+ price.getPriceBathing()+'$'}"></label><br>
                                 <select th:field="*{bathing}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
-                            <td><label th:text="${'Combing: price '+ price.getPriceCombing()+'$'}"></label><br>
-                                <select th:field="*{combing}">
-                                    <option value="NO">NO</option>
-                                    <option value="YES">YES</option>
-                                </select><br></td>
+
                         </tr>
                         <tr>
                             <td><label th:text="${'Еar cleaning: price '+ price.getPriceEars()+'$'}"></label><br>
@@ -99,12 +101,17 @@
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
-                            <td><label>Discount %</label><br>
-                                <input type="text" id="description22" th:field="*{discount}"
-                                       placeholder="Max Discount 20%"/><br></td>
+                            <td><label th:text="${'Combing: price '+ price.getPriceCombing()+'$'}"></label><br>
+                                <select th:field="*{combing}">
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select><br></td>
                         </tr>
                         </tbody>
                     </table>
+                    <label>Discount %</label><br>
+                    <input type="text" id="description22" th:field="*{discount}"
+                           placeholder="Max Discount 20%"/><br>
 
                 </div>
                 <div class="button_calculate">
@@ -187,44 +194,44 @@
                 let length = dogList.length
                 for (let i = 0; i < length; i++) {
                     let client = clientList[i];
-                   if(client.id===clientId){
-                       let dogs = clientList[i].dogs
-                       for (let j = 0; j < dogs.length; j++) {
-                         if(dogs[j].id==dogId){
-                             let dog = dogs[j];
-                             dogSize = dog.dogSize;
-                             $('#cellsBox option').remove();
-                             if (dogSize === 'SMALL') {
-                                 for (let j = 0; j < cellList.length; j++) {
-                                     if (cellList[j].cellSize === "SMALL") {
-                                         $('#cellsBox').append($('<option>', {
-                                             value: cellList[j].id,
-                                             text: cellList[j].code+' '+cellList[j].cellSize
-                                         }));
-                                     }
-                                 }
-                             } else if (dogSize === 'MEDIUM') {
-                                 for (let j = 0; j < cellList.length; j++) {
-                                     if (cellList[j].cellSize === "MEDIUM") {
-                                         $('#cellsBox').append($('<option>', {
-                                             value: cellList[j].id,
-                                             text: cellList[j].code+' '+cellList[j].cellSize
-                                         }));
-                                     }
-                                 }
-                             } else if (dogSize === 'LARGE') {
-                                 for (let j = 0; j < cellList.length; j++) {
-                                     if (cellList[j].cellSize === "LARGE") {
-                                         $('#cellsBox').append($('<option>', {
-                                             value: cellList[j].id,
-                                             text: cellList[j].code+' '+cellList[j].cellSize
-                                         }));
-                                     }
-                                 }
-                             }
-                         }
-                       }
-                   }
+                    if (client.id === clientId) {
+                        let dogs = clientList[i].dogs
+                        for (let j = 0; j < dogs.length; j++) {
+                            if (dogs[j].id == dogId) {
+                                let dog = dogs[j];
+                                dogSize = dog.dogSize;
+                                $('#cellsBox option').remove();
+                                if (dogSize === 'SMALL') {
+                                    for (let j = 0; j < cellList.length; j++) {
+                                        if (cellList[j].cellSize === "SMALL") {
+                                            $('#cellsBox').append($('<option>', {
+                                                value: cellList[j].id,
+                                                text: cellList[j].code + ' ' + cellList[j].cellSize
+                                            }));
+                                        }
+                                    }
+                                } else if (dogSize === 'MEDIUM') {
+                                    for (let j = 0; j < cellList.length; j++) {
+                                        if (cellList[j].cellSize === "MEDIUM") {
+                                            $('#cellsBox').append($('<option>', {
+                                                value: cellList[j].id,
+                                                text: cellList[j].code + ' ' + cellList[j].cellSize
+                                            }));
+                                        }
+                                    }
+                                } else if (dogSize === 'LARGE') {
+                                    for (let j = 0; j < cellList.length; j++) {
+                                        if (cellList[j].cellSize === "LARGE") {
+                                            $('#cellsBox').append($('<option>', {
+                                                value: cellList[j].id,
+                                                text: cellList[j].code + ' ' + cellList[j].cellSize
+                                            }));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         </script>

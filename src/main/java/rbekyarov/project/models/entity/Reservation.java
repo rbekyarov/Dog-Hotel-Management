@@ -17,6 +17,7 @@ public class Reservation extends BaseEntity{
     private Integer countOvernightStay;
     private Cell cell;
     private Food food;
+    private Deworming deworming;
     private Training training;
     private Bathing bathing;
     private Combing combing;
@@ -36,7 +37,7 @@ public class Reservation extends BaseEntity{
     public Reservation() {
     }
 
-    public Reservation(Client client, Dog dog, LocalDate startDate, LocalDate endDate, Integer countOvernightStay, Cell cell, Food food, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, StatusReservation statusReservation, User author, LocalDate dateCreate, Company company, Invoiced invoiced) {
+    public Reservation(Client client, Dog dog, LocalDate startDate, LocalDate endDate, Integer countOvernightStay, Cell cell, Food food,Deworming deworming, Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, StatusReservation statusReservation, User author, LocalDate dateCreate, Company company, Invoiced invoiced) {
         this.client = client;
         this.dog = dog;
         this.startDate = startDate;
@@ -44,6 +45,7 @@ public class Reservation extends BaseEntity{
         this.countOvernightStay = countOvernightStay;
         this.cell = cell;
         this.food = food;
+        this.deworming = deworming;
         this.training = training;
         this.bathing = bathing;
         this.combing = combing;
@@ -236,5 +238,13 @@ public class Reservation extends BaseEntity{
 
     public void setInvoiced(Invoiced invoiced) {
         this.invoiced = invoiced;
+    }
+    @Enumerated(EnumType.STRING)
+    public Deworming getDeworming() {
+        return deworming;
+    }
+
+    public void setDeworming(Deworming deworming) {
+        this.deworming = deworming;
     }
 }

@@ -183,6 +183,12 @@
                     <td></td>
                     <td> <p th:text="${'$'+invoice.foodPrice}"><br></p></td>
                 </tr>
+                <tr class="item" th:if="${invoice.deworming.name() == 'YES'}">
+                    <td>Deworming</td>
+                    <td> <p th:text="${'1'}"><br></p></td>
+                    <td></td>
+                    <td> <p th:text="${'$'+invoice.dewormingPrice}"><br></p></td>
+                </tr>
                 <tr class="item" th:if="${invoice.training.name() == 'YES'}">
                     <td>Training</td>
                     <td> <p th:text="${'1'}"><br></p></td>

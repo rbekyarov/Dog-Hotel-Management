@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import rbekyarov.project.models.entity.Cell;
 import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.enums.CancellationInvoice;
@@ -76,6 +77,7 @@ public class InvoicesServiceImpl implements InvoiceService {
 
            //Enum
         invoice.setFood(reservation.getFood());
+        invoice.setDeworming(reservation.getDeworming());
         invoice.setTraining(reservation.getTraining());
         invoice.setBathing(reservation.getBathing());
         invoice.setCombing(reservation.getCombing());
@@ -88,8 +90,16 @@ public class InvoicesServiceImpl implements InvoiceService {
         invoice.setTotalPrice(reservation.getTotalPrice());
 
            //CURRENT PRICES
-        invoice.setCountStayPrice(priceService.getCurrentPriceStayForCellS());
+        Cell cell = reservation.getCell();
+        if(cell.getCode().contains("S")){
+            invoice.setCountStayPrice(priceService.getCurrentPriceStayForCellS());
+        }else if(cell.getCode().contains("M")){
+            invoice.setCountStayPrice(priceService.getCurrentPriceStayForCellM());
+        }else if(cell.getCode().contains("L")){
+            invoice.setCountStayPrice(priceService.getCurrentPriceStayForCellL());
+        }
         invoice.setFoodPrice(priceService.getFoodCurrentPrice());
+        invoice.setDewormingPrice(priceService.getDewormingCurrentPrice());
         invoice.setTrainingPrice(priceService.getTrainingCurrentPrice());
         invoice.setBathingPrice(priceService.getBathingCurrentPrice());
         invoice.setCombingPrice(priceService.getCombingCurrentPrice());

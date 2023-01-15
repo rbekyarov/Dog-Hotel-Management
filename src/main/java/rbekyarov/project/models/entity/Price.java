@@ -13,6 +13,7 @@ public class Price extends BaseEntity{
   private BigDecimal priceStayM;
   private BigDecimal priceStayL;
   private BigDecimal priceFood;
+  private BigDecimal priceDeworming;
   private BigDecimal priceTraining;
   private BigDecimal priceBathing;
   private BigDecimal priceCombing;
@@ -25,11 +26,12 @@ public class Price extends BaseEntity{
     public Price() {
     }
 
-    public Price(BigDecimal priceStayS, BigDecimal priceStayM, BigDecimal priceStayL, BigDecimal priceFood, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, LocalDate dateCreate) {
+    public Price(BigDecimal priceStayS, BigDecimal priceStayM, BigDecimal priceStayL, BigDecimal priceFood, BigDecimal priceDeworming, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, LocalDate dateCreate) {
         this.priceStayS = priceStayS;
         this.priceStayM = priceStayM;
         this.priceStayL = priceStayL;
         this.priceFood = priceFood;
+        this.priceDeworming = priceDeworming;
         this.priceTraining = priceTraining;
         this.priceBathing = priceBathing;
         this.priceCombing = priceCombing;
@@ -126,5 +128,13 @@ public class Price extends BaseEntity{
 
     public void setPriceStayL(BigDecimal priceStayL) {
         this.priceStayL = priceStayL;
+    }
+
+    public BigDecimal getPriceDeworming() {
+        return priceDeworming;
+    }
+
+    public void setPriceDeworming(BigDecimal priceDeworming) {
+        this.priceDeworming = priceDeworming;
     }
 }

@@ -32,7 +32,7 @@
                     <td th:text="${d.vendor.getName()}"></td>
                     <td th:text="${d.description}"></td>
                     <td th:text="${d.invoiceNo}"></td>
-                    <td th:text="${d.amount}"></td>
+                    <td class="boldPrice" th:text="${d.amount}"></td>
                     <td th:text="${#temporals.format(d.dateCost,'dd.MM.yyyy')}"></td>
                     <td th:text="${d.author.username}"></td>
                     <td th:text="${#temporals.format(d.dateCreate,'dd.MM.yyyy')}"></td>

@@ -10,6 +10,7 @@ public class PriceEditDTO {
     private BigDecimal priceStayM;
     private BigDecimal priceStayL;
     private BigDecimal priceFood;
+    private BigDecimal priceDeworming;
     private BigDecimal priceTraining;
     private BigDecimal priceBathing;
     private BigDecimal priceCombing;
@@ -114,5 +115,13 @@ public class PriceEditDTO {
 
     public void setPriceStayL(BigDecimal priceStayL) {
         this.priceStayL = priceStayL;
+    }
+
+    public BigDecimal getPriceDeworming() {
+        return priceDeworming;
+    }
+
+    public void setPriceDeworming(BigDecimal priceDeworming) {
+        this.priceDeworming = priceDeworming;
     }
 }

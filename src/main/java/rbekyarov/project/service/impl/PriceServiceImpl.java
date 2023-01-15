@@ -51,7 +51,7 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public void editPrice(BigDecimal priceStayS,BigDecimal priceStayM,BigDecimal priceStayL, BigDecimal priceFood, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, Long id) {
+    public void editPrice(BigDecimal priceStayS,BigDecimal priceStayM,BigDecimal priceStayL, BigDecimal priceFood,BigDecimal priceDeworming, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, Long id) {
         //set dateEdit
         LocalDate dateEdit = LocalDate.now();
         priceRepository.editPrice(
@@ -59,6 +59,7 @@ public class PriceServiceImpl implements PriceService {
                 priceStayM,
                 priceStayL,
                 priceFood,
+                priceDeworming,
                 priceTraining,
                 priceBathing,
                 priceCombing,
@@ -73,7 +74,10 @@ public class PriceServiceImpl implements PriceService {
     public BigDecimal getFoodCurrentPrice() {
         return priceRepository.getFoodCurrentPrice(getLastPricesId());
     }
-
+    @Override
+    public BigDecimal getDewormingCurrentPrice() {
+        return priceRepository.getDewormingCurrentPrice(getLastPricesId());
+    }
     @Override
     public BigDecimal getBathingCurrentPrice() {
         return priceRepository.getBathingCurrentPrice(getLastPricesId());

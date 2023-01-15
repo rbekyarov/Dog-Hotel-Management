@@ -66,9 +66,9 @@
                     <td th:text="${'Feeding: '+ r.food+
                                     ' Training: '+r.training}"></td>
 
-                    <td th:text="${r.price+'$'}"></td>
+                    <td  th:text="${r.price+'$'}"></td>
                     <td th:text="${r.discount}"></td>
-                    <td th:text="${r.totalPrice +'$'}"></td>
+                    <td class="boldPrice" th:text="${r.totalPrice +'$'}"></td>
                     <td >
                         <img th:if="${r.statusReservation.name()=='active'}" src="#" height="25px" width="25px"
                              th:src="@{${'/pics/active.png'}}" th:text="'  '+  active">

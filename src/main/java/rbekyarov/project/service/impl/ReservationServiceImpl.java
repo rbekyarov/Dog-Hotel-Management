@@ -107,6 +107,9 @@ public class ReservationServiceImpl implements ReservationService {
         if (reservationDTO.getFood().name().equals("YES")) {
             price += (int) countOvernightStay * currentPrice.getPriceFood().doubleValue();
         }
+        if (reservationDTO.getDeworming().name().equals("YES")) {
+            price += currentPrice.getPriceDeworming().doubleValue();
+        }
         if (reservationDTO.getTraining().name().equals("YES")) {
             price += currentPrice.getPriceTraining().doubleValue();
         }
@@ -229,6 +232,9 @@ public class ReservationServiceImpl implements ReservationService {
         if (reservationEditDTO.getFood().name().equals("YES")) {
             price += (int) countOvernightStay * currentPrice.getPriceFood().doubleValue();
         }
+        if (reservationEditDTO.getDeworming().name().equals("YES")) {
+            price += currentPrice.getPriceDeworming().doubleValue();
+        }
         if (reservationEditDTO.getTraining().name().equals("YES")) {
             price += currentPrice.getPriceTraining().doubleValue();
         }
@@ -264,6 +270,7 @@ public class ReservationServiceImpl implements ReservationService {
         Long cellId = reservationEditDTO.getCell().getId();
         int countOvernightStay1 = (int) countOvernightStay;
         Food food = reservationEditDTO.getFood();
+        Deworming deworming = reservationEditDTO.getDeworming();
         Training training = reservationEditDTO.getTraining();
         Bathing bathing = reservationEditDTO.getBathing();
         Combing combing = reservationEditDTO.getCombing();
@@ -286,6 +293,7 @@ public class ReservationServiceImpl implements ReservationService {
                 countOvernightStay1,
                 cellId,
                 food,
+                deworming,
                 training,
                 bathing,
                 combing,

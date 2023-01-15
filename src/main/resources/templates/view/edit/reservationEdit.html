@@ -72,23 +72,25 @@
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
+                            <td><label th:text="${'Deworming: '+ price.getPriceDeworming()+'$'}"></label><br>
+                                <select th:field="*{deworming}">
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select><br></td>
+
+                        </tr>
+                        <tr>
                             <td><label th:text="${'Training: price '+ price.getPriceTraining()+'$'}"></label><br>
                                 <select th:field="*{training}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
-                        </tr>
-                        <tr>
                             <td><label th:text="${'Bathing: price '+ price.getPriceBathing()+'$'}"></label><br>
                                 <select th:field="*{bathing}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
-                            <td><label th:text="${'Combing: price '+ price.getPriceCombing()+'$'}"></label><br>
-                                <select th:field="*{combing}">
-                                    <option value="NO">NO</option>
-                                    <option value="YES">YES</option>
-                                </select><br></td>
+
                         </tr>
                         <tr>
                             <td><label th:text="${'Еar cleaning: price '+ price.getPriceEars()+'$'}"></label><br>
@@ -108,13 +110,17 @@
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
-                            <td><label>Discount %</label><br>
-                                <input type="text" id="description22" th:field="*{discount}"
-                                       placeholder="Please enter Discount percent"/><br></td>
+                            <td><label th:text="${'Combing: price '+ price.getPriceCombing()+'$'}"></label><br>
+                                <select th:field="*{combing}">
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select><br></td>
                         </tr>
                         </tbody>
                     </table>
-
+                    <label>Discount %</label><br>
+                    <input type="text" id="description22" th:field="*{discount}"
+                           placeholder="Max Discount 20%"/><br>
                 </div>
                 <div class="button_submit">
                     <div>

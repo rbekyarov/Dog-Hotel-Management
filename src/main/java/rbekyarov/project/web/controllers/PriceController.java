@@ -106,6 +106,7 @@ public class PriceController extends BaseController {
                 priceEditDTO.getPriceStayM(),
                 priceEditDTO.getPriceStayL(),
                 priceEditDTO.getPriceFood(),
+                priceEditDTO.getPriceDeworming(),
                 priceEditDTO.getPriceTraining(),
                 priceEditDTO.getPriceBathing(),
                 priceEditDTO.getPriceCombing(),
