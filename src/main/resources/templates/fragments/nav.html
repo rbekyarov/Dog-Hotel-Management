@@ -12,6 +12,16 @@
         <div class="collapse navbar-collapse justify-content-end row" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <th:block th:unless="${session.isEmpty()}">
+                    <li class="nav-item active col-md-6 " style="white-space: nowrap;">
+                        <a class="nav-link h5" th:href="@{/view/home}">
+                            <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                                    class="glyphicon glyphicon-ok"></span>HOME
+                            </button>
+                        </a>
+                    </li>
+                </th:block>
+
+                <th:block th:unless="${session.isEmpty()}">
                 <li class="nav-item active col-md-6 " style="white-space: nowrap;">
                     <a class="nav-link h5" th:href="@{/view/table/reservationTable}">
                         <button type="button" class="btn btn-danger btn-lg btn3d"><span

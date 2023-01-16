@@ -41,12 +41,30 @@ public class HomeController extends BaseController {
             modelAndView.setViewName("/index");
         }
         String viewName = modelAndView.getViewName();
-        List<Reservation>reservations = reservationService.findAllReservationByDesc();
+
+        return super.view(viewName);
+    }
+
+    @GetMapping("/view/home")
+    public ModelAndView home(ModelAndView modelAndView) {
+
+        List<Reservation>activeReservations = reservationService.findAllActiveReservationLimit3();
+        List<Reservation>upcomingReservations = reservationService.findAllUpcomingReservations();
+
+
         List<Cell>cells = cellService.findAllCellById();
-        List<Cost>  costs = costService.findAllCostByDesc();
-        List<Invoice>  invoices = invoiceService.findAllInvoice();
+        List<Cell>cellsEmpty = cellService.findAllEmptyCells();
+        List<Cost>  costs = costService.findLast2Cost();
+        List<Invoice>  invoices = invoiceService.findLastInvoices();
         Optional<Company> companyOptional = companyService.findById(1L);
         Company company = companyOptional.get();
-        return super.view(viewName);
+        modelAndView.addObject("activeReservations",activeReservations);
+        modelAndView.addObject("upcomingReservations",upcomingReservations);
+        modelAndView.addObject("cellsEmpty",cellsEmpty);
+        modelAndView.addObject("costs",costs);
+        modelAndView.addObject("invoices",invoices);
+        modelAndView.addObject("company",company);
+
+        return super.view("/view/home","company",company,"invoices",invoices,"costs",costs,"cellsEmpty",cellsEmpty,"activeReservations",activeReservations,"upcomingReservations",upcomingReservations);
     }
 }

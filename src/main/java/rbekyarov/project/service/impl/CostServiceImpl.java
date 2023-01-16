@@ -152,6 +152,11 @@ public class CostServiceImpl implements CostService {
         return totalAmount;
     }
 
+    @Override
+    public List<Cost> findLast2Cost() {
+        return costRepository.findLast2Cost();
+    }
+
     //convert String to LocalDate
     LocalDate formatterLocalDate(String dateDto) {
         //1.01.23 г.  ->23-01-01

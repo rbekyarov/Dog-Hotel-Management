@@ -31,4 +31,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     List<Invoice> listInvoiceById(@Param("invoiceNumber") Long invoiceNumber);
     @Query("select i from Invoice as i where i.clientEmail=:clientEmail")
     List<Invoice> listInvoiceByEmail(@Param("clientEmail")String clientEmail);
+    @Query(nativeQuery = true,
+            value = "select * from invoces as r where cancellation_invoice ='NO' order by date_create  limit 2")
+    List<Invoice> findLastInvoices();
 }

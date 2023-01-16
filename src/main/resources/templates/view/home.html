@@ -1,11 +1,125 @@
 <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
 
     <div class="welcome" th:object="${session}">
+        <h5 th:if="*{user}"th:text="*{'Welcome User: '+username}"></h5>
+        <h5 th:if="*{admin}"th:text="*{'Welcome Admin: '+username}"></h5>
+        <br>
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:200px">
+            <tbody >Empty Dog House
+            <br>
+            <tr>
+            <td th:each="c : ${cellsEmpty}">
 
-        <h4>Welcome</h4>
-        <h5 th:if="*{user}"th:text="*{'User: '+username}"></h5>
-        <h5 th:if="*{admin}"th:text="*{'Admin: '+username}"></h5>
-<!--        <h5 th:text="*{'TYPE: '+typeUser}"></h5>-->
+                <label  th:text="${c.code}"></label ></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table border="0" cellpadding="1" cellspacing="1" style="width:1350px">
+            <tbody>
+            <tr>
+                <td> <table style="width:400px" class=table>
+                    <tr><h5>Current Part Reservations</h5>
+                        <th>No</th>
+                        <th>Client:</th>
+                        <th>Dog:</th>
+                        <th>Stay Days:</th>
+                        <th>Day of coming:</th>
+                        <th>Day of departure:</th>
+                        <th>Dog House:</th>
+                        <th>Total Price</th>
+                    </tr>
+                    <tr th:each="r : ${activeReservations}">
+                        <td class="h6"><a th:text="${r.id}"></td>
+                        <td th:text="${ r.client.firstName +' '+ r.client.lastName +' '+ r.client.email +' '+r.client.phone}"> </td>
+                        <td ><a th:target="_blank"  th:text="${r.dog.name + ' Weight:' +r.dog.weight + ' '+r.dog.breed.breedName}"></td>
+                        <td th:text="${r.countOvernightStay}"></td>
+                        <td th:text="${#temporals.format(r.startDate,'dd.MM.yyyy')}"></td>
+                        <td th:text="${#temporals.format(r.endDate,'dd.MM.yyyy')}"></td>
+                        <td th:text="${r.cell.code}"></td>
+                        <td class="boldPrice" th:text="${r.totalPrice +'$'}"></td>
+                    </tr>
+                </table></td>
+                <td><table style="width:400px" class=table>
+                    <tr><h5>Upcoming Reservations</h5>
+                        <th>No</th>
+                        <th>Client:</th>
+                        <th>Dog:</th>
+                        <th>Stay Days:</th>
+                        <th>Day of coming:</th>
+                        <th>Day of departure:</th>
+                        <th>Dog House:</th>
+                        <th>Total Price</th>
+                    </tr>
+                    <tr th:each="r : ${upcomingReservations}">
+                        <td class="h6"><a th:text="${r.id}"></td>
+                        <td th:text="${ r.client.firstName +' '+ r.client.lastName +' '+ r.client.email +' '+r.client.phone}"> </td>
+                        <td ><a th:target="_blank"  th:text="${r.dog.name + ' Weight:' +r.dog.weight + ' '+r.dog.breed.breedName}"></td>
+                        <td th:text="${r.countOvernightStay}"></td>
+                        <td th:text="${#temporals.format(r.startDate,'dd.MM.yyyy')}"></td>
+                        <td th:text="${#temporals.format(r.endDate,'dd.MM.yyyy')}"></td>
+                        <td th:text="${r.cell.code}"></td>
+                        <td class="boldPrice" th:text="${r.totalPrice +'$'}"></td>
+                    </tr>
+                </table></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+        <table border="0" cellpadding="1" cellspacing="1" style="width:1350px">
+            <tbody>
+            <tr>
+                <td><table style="width:400px" class=table>
+                    <tr><h5>Last two Invoices</h5>
+                        <th>No</th>
+                        <th>Client:</th>
+                        <th>Dog:</th>
+                        <th>Reservation No:</th>
+                        <th>Total Price:</th>
+                        <th>Author:</th>
+                    </tr>
+                    <tr th:each="i : ${invoices}">
+                        <td class="h6" th:text="${i.id}"></td>
+                        <td th:text="${i.clientName +' '+ i.clientEmail +' '+i.clientPhone}"></td>
+                        <td th:text="${'Dog '+ i.dogName + ' '+'House:' +i.cellCode + ' '+'Day: '+i.countStay}"></td>
+                        <td th:text="${i.reservationId}"></td>
+                        <td class="boldPrice" th:text="${i.totalPrice +'$'}"></td>
+                        <td th:text="${i.authorName}"></td>
+                    </tr>
+                </table></td>
+                <td><table style="width:400px"class=table>
+                    <tr><h5>Last two Costs</h5>
+                        <th>No</th>
+                        <th>Vendor</th>
+                        <th>Description</th>
+                        <th>Invoice No</th>
+                        <th>Amount</th>
+                        <th>Date Cost</th>
+                        <th>Author</th>
+                        <th>Created</th>
+                    </tr>
+                    <tr th:each="d : ${costs}">
+                        <td th:text="${d.id}"></td>
+                        <td th:text="${d.vendor.getName()}"></td>
+                        <td th:text="${d.description}"></td>
+                        <td th:text="${d.invoiceNo}"></td>
+                        <td class="boldPrice" th:text="${d.amount}"></td>
+                        <td th:text="${#temporals.format(d.dateCost,'dd.MM.yyyy')}"></td>
+                        <td th:text="${d.author.username}"></td>
+                        <td th:text="${#temporals.format(d.dateCreate,'dd.MM.yyyy')}"></td>
+
+                    </tr>
+                </table></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+
 
     </div>
 </th:block>

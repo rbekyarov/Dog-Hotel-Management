@@ -41,4 +41,7 @@ public interface CostRepository extends JpaRepository<Cost, Long> {
 
     @Query("select c.vendor from Cost as c")
     List<Vendor> listUsedVendor();
+    @Query(nativeQuery = true,
+            value = "select * from costs as r order by date_create  limit 2")
+    List<Cost> findLast2Cost();
 }

@@ -25,4 +25,6 @@ public interface CostService {
     List<Cost> findCostByVendor(String name);
 
     BigDecimal getTotalAmountCost();
+
+    List<Cost> findLast2Cost();
 }

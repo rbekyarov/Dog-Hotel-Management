@@ -195,6 +195,11 @@ public class InvoicesServiceImpl implements InvoiceService {
         return totalAmount;
     }
 
+    @Override
+    public List<Invoice> findLastInvoices() {
+        return invoiceRepository.findLastInvoices();
+    }
+
 }
 
 

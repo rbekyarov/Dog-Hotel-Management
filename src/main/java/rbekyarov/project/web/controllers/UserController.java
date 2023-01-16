@@ -170,19 +170,7 @@ public class UserController extends BaseController {
 
     }
 
-    @GetMapping("/view/home")
-    public ModelAndView home(ModelAndView modelAndView, HttpSession session) {
-        Object user = session.getAttribute("username");
 
-        if (user != null) {
-            modelAndView.setViewName("/view/home");
-        } else {
-            modelAndView.setViewName("/view/login");
-        }
-
-
-        return super.view(modelAndView.getViewName(), "user", user);
-    }
 
 
     @GetMapping("/logout")

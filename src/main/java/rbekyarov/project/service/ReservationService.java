@@ -37,6 +37,9 @@ public interface ReservationService {
     List<Reservation> listReservationById(long parseLong);
 
     List<Reservation> findAllActiveReservation();
+    List<Reservation> findAllActiveReservationLimit3();
 
     List<Dog> findActiveReservedDogs();
+
+    List<Reservation> findAllUpcomingReservations();
 }

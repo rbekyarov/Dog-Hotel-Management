@@ -407,8 +407,18 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public List<Reservation> findAllActiveReservationLimit3() {
+        return reservationRepository.findAllActiveReservationLimit3();
+    }
+
+    @Override
     public List<Dog> findActiveReservedDogs() {
         return reservationRepository.findActiveReservedDogs();
+    }
+
+    @Override
+    public List<Reservation> findAllUpcomingReservations() {
+        return reservationRepository.findAllUpcomingReservations();
     }
 
     LocalDate formatterLocal(String date) {

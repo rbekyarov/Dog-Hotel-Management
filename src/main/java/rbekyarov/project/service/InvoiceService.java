@@ -31,4 +31,6 @@ public interface InvoiceService {
     Page<Invoice> findPaginated(Pageable pageable);
 
     BigDecimal getTotalInvoicedPrice();
+
+    List<Invoice> findLastInvoices();
 }
