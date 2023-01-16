@@ -7,26 +7,24 @@
             <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:1000px">
                 <tbody>
                 <tr>
-                    <td><table align="center" border="0" cellpadding="1" cellspacing="1" style="width:300px">
-                        <tbody><h5>Empty Dog House</h5>
+                    <td>
+                        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:300px">
+                            <tbody><h5>Empty Dog House</h5>
 
-                        <tr>
-                            <td th:each="c : ${cellsEmpty}">
+                            <tr>
+                                <td th:each="c : ${cellsEmpty}">
 
-                                <label th:text="${c.code}"></label></td>
+                                    <label th:text="${c.code}"></label></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td><h5>Total invoiced: </h5>
 
-
-
-
-                        </tr>
-                        </tbody>
-                    </table></td>
-                    <td> <h5>Total invoiced: </h5>
-
-                    <label th:text="${totalInvoicedPrice}"></label></td>
+                        <label th:text="${totalInvoicedPrice}"></label></td>
                     <td><h5>Total spend: </h5>
 
-                    <label th:text="${totalAmountCost}"></label></td>
+                        <label th:text="${totalAmountCost}"></label></td>
                     <td><h5>Balance: </h5>
 
                         <label th:text="${company.balance}"></label></td>
