@@ -1,3 +1,4 @@
+<th:block th:unless="${session.isEmpty()}">
 <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
 
     <div class="welcome" th:object="${session}">
@@ -122,4 +123,5 @@
 
 
     </div>
+</th:block>
 </th:block>

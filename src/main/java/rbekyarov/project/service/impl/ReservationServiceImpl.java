@@ -290,6 +290,13 @@ public class ReservationServiceImpl implements ReservationService {
 
         //set dateEdit
         LocalDate dateEdit = LocalDate.now();
+
+        //set Cell Busy
+        Cell cellCurrent = reservationEditDTO.getCell();
+        Long id = cellCurrent.getId();
+        if (statusReservation.name().equals("active")) {
+            cellService.setCellBusy(id);
+        }
         // edit reservation
         reservationRepository.editReservation(
                 clientId,
@@ -314,12 +321,7 @@ public class ReservationServiceImpl implements ReservationService {
                 editAuthorId,
                 dateEdit);
 
-        //set Cell Busy
-        Cell cellCurrent = reservationEditDTO.getCell();
-        Long id = cellCurrent.getId();
-        if (statusReservation.name().equals("active")) {
-            cellService.setCellBusy(id);
-        }
+
     }
 
     @Override
