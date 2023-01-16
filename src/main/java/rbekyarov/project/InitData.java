@@ -447,7 +447,7 @@ public class InitData implements CommandLineRunner {
                     BigDecimal.valueOf(398.00),
                     20.00,
                     BigDecimal.valueOf(318.40),
-                    StatusReservation.upcoming,
+                    StatusReservation.active,
                     userRepository.getById(Long.parseLong("2")),
                     LocalDate.of(2023, 1, 6),
                     companyRepository.getById(Long.parseLong("1")),

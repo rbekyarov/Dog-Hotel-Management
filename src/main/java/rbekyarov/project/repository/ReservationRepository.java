@@ -80,14 +80,14 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Query("select r from Reservation as r where r.statusReservation='active'")
     List<Reservation> findAllActiveReservation();
     @Query(nativeQuery = true,
-            value = "select * from reservations as r where status_reservation ='active'  limit 3")
+            value = "select * from reservations as r where status_reservation ='active' order by id desc limit 3")
 //    @Query("select r from Reservation as r where r.statusReservation='active' limit 3")
     List<Reservation> findAllActiveReservationLimit3();
 
     @Query("select r.dog from Reservation as r where r.statusReservation='active'")
     List<Dog> findActiveReservedDogs();
     @Query(nativeQuery = true,
-            value = "select * from reservations as r where status_reservation ='upcoming' order by start_date  limit 3")
+            value = "select * from reservations as r where status_reservation ='upcoming' order by start_date asc limit 3")
 //    @Query("select r from Reservation as r where r.statusReservation='upcoming' order by r.endDate limit 3")
     List<Reservation> findAllUpcomingReservations();
 }
