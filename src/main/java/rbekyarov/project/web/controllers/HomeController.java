@@ -8,6 +8,7 @@ import rbekyarov.project.service.UserService;
 import rbekyarov.project.service.*;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +57,8 @@ public class HomeController extends BaseController {
         List<Cell>cellsEmpty = cellService.findAllEmptyCells();
         List<Cost>  costs = costService.findLast2Cost();
         List<Invoice>  invoices = invoiceService.findLastInvoices();
+        BigDecimal totalInvoicedPrice = invoiceService.getTotalInvoicedPrice();
+        BigDecimal totalAmountCost = costService.getTotalAmountCost();
         Optional<Company> companyOptional = companyService.findById(1L);
         Company company = companyOptional.get();
         modelAndView.addObject("activeReservations",activeReservations);
@@ -64,7 +67,9 @@ public class HomeController extends BaseController {
         modelAndView.addObject("costs",costs);
         modelAndView.addObject("invoices",invoices);
         modelAndView.addObject("company",company);
+        modelAndView.addObject("totalInvoicedPrice",totalInvoicedPrice);
+        modelAndView.addObject("totalAmountCost",totalAmountCost);
 
-        return super.view("/view/home","company",company,"invoices",invoices,"costs",costs,"cellsEmpty",cellsEmpty,"activeReservations",activeReservations,"upcomingReservations",upcomingReservations);
+        return super.view("/view/home","company",company,"invoices",invoices,"costs",costs,"cellsEmpty",cellsEmpty,"activeReservations",activeReservations,"upcomingReservations",upcomingReservations,"totalInvoicedPrice",totalInvoicedPrice,"totalAmountCost",totalAmountCost);
     }
 }
