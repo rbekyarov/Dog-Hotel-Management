@@ -357,12 +357,10 @@ public class ReservationServiceImpl implements ReservationService {
             //change Cell status
 
             Long cellId = reservation.getCell().getId();
-            if (!statusReservation.name().equals("active")) {
+            if (statusReservation.name().equals("active")) {
 
-                cellService.setCellEmpty(cellId);
-
-            } else {
                 cellService.setCellBusy(cellId);
+
             }
         }
 
