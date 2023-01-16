@@ -17,6 +17,29 @@ DEMO - http://rrb.stz.ddns.bulsat.com:8011
 
 DEMO VIDEO - https://youtu.be/wDdqS93h2EI
 
+Resources:
+1.Register Form
+Form for registration on user.
+Оnly user type registration is possible.
+Handler for incorrect data, incomplete data and not allowing existing user to register.
+
+2.Login Form:
+Login after correct data.
+
+3.Home menu - data is dynamic after refresh
+Includes details:
+- of available houses dog
+- amount of current invoices
+- amount of expenses
+- bank account balance
+- The last 3 current reservations
+- Тhe nearest 3 incoming reservations
+- The last two invoices
+- The last two expenses
+
+4.
+
+
 ENTITIES:
 
 
