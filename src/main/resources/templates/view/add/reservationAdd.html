@@ -244,10 +244,20 @@
                     if (clientList[i].id === clientId) {
                         $('#dogsBox option').remove();
                         const dogs = clientList[i].dogs;
-                        for (let n = 0; n < dogs.length; n++) {
+                        const dogFreelist = dogList;
+                        function getDifference(dogs, dogFreelist) {
+                            return dogs.filter(object1 => {
+                                return dogFreelist.some(object2 => {
+                                    return object1.id === object2.id;
+                                });
+                            });
+                        }
+                        const dogs1 =getDifference(dogs, dogFreelist)
+
+                        for (let n = 0; n < dogs1.length; n++) {
                             $('#dogsBox').append($('<option>', {
-                                value: dogs[n].id,
-                                text: dogs[n].name
+                                value: dogs1[n].id,
+                                text: dogs1[n].name
                             }));
                         }
                         $("#dogsBox").trigger("chosen:updated");

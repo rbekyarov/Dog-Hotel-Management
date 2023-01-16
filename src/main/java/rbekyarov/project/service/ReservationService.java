@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
+import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.enums.Invoiced;
 
@@ -36,4 +37,6 @@ public interface ReservationService {
     List<Reservation> listReservationById(long parseLong);
 
     List<Reservation> findAllActiveReservation();
+
+    List<Dog> findActiveReservedDogs();
 }

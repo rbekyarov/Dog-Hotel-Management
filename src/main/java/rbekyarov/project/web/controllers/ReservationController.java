@@ -11,11 +11,10 @@ import rbekyarov.project.models.dto.ReservationEditDTO;
 import rbekyarov.project.models.entity.*;
 import rbekyarov.project.service.*;
 import rbekyarov.project.repository.CellRepository;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -56,7 +55,7 @@ public class ReservationController extends BaseController {
         List<Invoice> allRealInvoice = invoiceService.findAllRealInvoice();
         modelAndView.addObject("allRealInvoice", allRealInvoice);
         reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
-        return super.view("/view/table/reservationTable", "reservations", reservations,"pageNumbers", pageNumbers,"allRealInvoice", allRealInvoice);
+        return super.view("/view/table/reservationTable", "reservations", reservations, "pageNumbers", pageNumbers, "allRealInvoice", allRealInvoice);
     }
 
     @GetMapping("/view/add/reservationAdd")
@@ -65,7 +64,20 @@ public class ReservationController extends BaseController {
 
         List<Client> allClients = clientService.findAll();
 
-        List<Dog> allDogs = dogService.findAll();
+        List<Dog> allDogsInCatalog = dogService.findAll();
+        List<Dog> allActiveReservedDogs = reservationService.findActiveReservedDogs();
+        List<Dog> allDogs = new ArrayList<>(allDogsInCatalog);
+        for (Dog dog : allDogsInCatalog) {
+            Long idDog = dog.getId();
+            for (Dog allActiveReservedDog : allActiveReservedDogs) {
+                Long idActivDog = allActiveReservedDog.getId();
+                if(idDog.intValue()==idActivDog.intValue()){
+                    allDogs.remove(dog);
+                    break;
+                }
+            }
+        }
+
 
         List<Cell> allEmptyCells = cellService.findAllEmptyCells();
 
@@ -91,7 +103,7 @@ public class ReservationController extends BaseController {
     @PostMapping("/view/add/reservationAdd")
     public String addReservation(@Valid ReservationDTO reservationDTO, HttpSession session) {
 
-        reservationService.addReservation(reservationDTO,session);
+        reservationService.addReservation(reservationDTO, session);
 
         return "redirect:/view/table/reservationTable";
     }
@@ -157,31 +169,35 @@ public class ReservationController extends BaseController {
     public String editReservation(@PathVariable("id") Long id, ReservationEditDTO reservationEditDTO, HttpSession session) throws ObjectNotFoundException {
 
 
-        reservationService.editReservation(id, reservationEditDTO,session);
+        reservationService.editReservation(id, reservationEditDTO, session);
 
 
         return "redirect:/view/table/reservationTable";
     }
-    @RequestMapping(path = {"/","/view/table/searchReservationNumber"})
-    public ModelAndView searchReservationNumber(ModelAndView modelAndView,@RequestParam("reservationNumber") String reservationNumber) {
+
+    @RequestMapping(path = {"/", "/view/table/searchReservationNumber"})
+    public ModelAndView searchReservationNumber(ModelAndView modelAndView, @RequestParam("reservationNumber") String reservationNumber) {
         List<Reservation> reservations = new ArrayList<>();
-        if(!reservationNumber.equals("")) {
+        if (!reservationNumber.equals("")) {
             reservations = reservationService.listReservationById(Long.parseLong(reservationNumber));
             modelAndView.addObject("reservations", reservations);
-        }else {
+        } else {
             reservations = reservationService.findAllReservationByDesc();
-            modelAndView.addObject("reservations", reservations);}
+            modelAndView.addObject("reservations", reservations);
+        }
         return super.view("/view/table/reservationTable", "reservations", reservations);
     }
-    @RequestMapping(path = {"/","/view/table/searchReservationByClientEmail"})
-    public ModelAndView searchClientEmail(ModelAndView modelAndView,@RequestParam("clientEmail") String clientEmail) {
+
+    @RequestMapping(path = {"/", "/view/table/searchReservationByClientEmail"})
+    public ModelAndView searchClientEmail(ModelAndView modelAndView, @RequestParam("clientEmail") String clientEmail) {
         List<Reservation> reservations = new ArrayList<>();
-        if(!clientEmail.equals("")) {
+        if (!clientEmail.equals("")) {
             reservations = reservationService.listReservationByClientEmail(clientEmail);
             modelAndView.addObject("reservations", reservations);
-        }else {
+        } else {
             reservations = reservationService.findAllReservationByDesc();
-            modelAndView.addObject("reservations", reservations);}
+            modelAndView.addObject("reservations", reservations);
+        }
         return super.view("/view/table/reservationTable", "reservations", reservations);
     }
 }

@@ -406,6 +406,11 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.findAllActiveReservation();
     }
 
+    @Override
+    public List<Dog> findActiveReservedDogs() {
+        return reservationRepository.findActiveReservedDogs();
+    }
+
     LocalDate formatterLocal(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);

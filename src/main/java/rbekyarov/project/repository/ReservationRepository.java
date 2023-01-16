@@ -79,4 +79,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Dog> listUsedDog();
     @Query("select r from Reservation as r where r.statusReservation='active'")
     List<Reservation> findAllActiveReservation();
+    @Query("select r.dog from Reservation as r where r.statusReservation='active'")
+    List<Dog> findActiveReservedDogs();
 }
