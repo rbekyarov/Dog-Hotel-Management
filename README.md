@@ -18,6 +18,7 @@ DEMO - http://rrb.stz.ddns.bulsat.com:8011
 DEMO VIDEO - https://youtu.be/wDdqS93h2EI
 
 Resources:
+
 1.Register Form
 Form for registration on user.
 Оnly user type registration is possible.
