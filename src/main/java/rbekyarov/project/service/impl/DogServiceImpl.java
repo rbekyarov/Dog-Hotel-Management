@@ -145,7 +145,11 @@ public class DogServiceImpl implements DogService {
 
         //add lastDewormingDate
         String lastDewormingDateDro = dogEditDTO.getLastDewormingDate();
-        LocalDate lastDewormingDate = formatterLocalDate(lastDewormingDateDro);
+        LocalDate lastDewormingDate = null;
+        if(!lastDewormingDateDro.isEmpty()){
+            lastDewormingDate = formatterLocalDate(lastDewormingDateDro);
+        }
+
 
 
         //image upload
