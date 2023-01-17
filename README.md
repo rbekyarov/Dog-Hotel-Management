@@ -40,21 +40,22 @@ Includes details:
 
 4.Reservations
 Includes :
-Customer
-Customer's dog
-Suitable house according to the weight of the dog. Only a vacant house can be selected.
-Check-in date
-Release date
-Total stay - dynamically generated based on the entered dates.
+-Customer
+-Customer's dog
+-Suitable house according to the weight of the dog. Only a vacant house can be selected.
+-Check-in date
+-Release date
+-Total stay - dynamically generated based on the entered dates.
+
 Services:
-Feeding -
-Deworming
-Training
-Bathing
-Air cleaning
-Paws cleaning
-Nails trimming
-Combing
+-Feeding -
+-Deworming
+-Training
+-Bathing
+-Air cleaning
+-Paws cleaning
+-Nails trimming
+-Combing
 
 Pricing -
 The price of the reservation is formed as follows.
