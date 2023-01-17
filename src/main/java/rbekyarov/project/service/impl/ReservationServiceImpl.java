@@ -109,7 +109,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
         if (reservationDTO.getDeworming().name().equals("YES")) {
             //change date Dog Deworming
-            dogRepository.editDogDateDewormingById(reservationDTO.getDog().getId(),LocalDate.now());
+            dogRepository.editDogDateDewormingById(reservationDTO.getDog().getId(),startDate);
             //setPrice
             price += currentPrice.getPriceDeworming().doubleValue();
         }
