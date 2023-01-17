@@ -38,7 +38,44 @@ Includes details:
 - The last two invoices
 - The last two expenses
 
-4.
+4.Reservations
+Includes :
+Customer
+Customer's dog
+Suitable house according to the weight of the dog. Only a vacant house can be selected.
+Check-in date
+Release date
+Total stay - dynamically generated based on the entered dates.
+Services:
+Feeding -
+Deworming
+Training
+Bathing
+Air cleaning
+Paws cleaning
+Nails trimming
+Combing
+
+Pricing -
+The price of the reservation is formed as follows.
+Price per stay is multiplied by the total stay
+Meals - the price of the stay is multiplied by the total stay
+Deworming - unit price
+Training - unit price
+Bathing - unit price
+Air cleaning - unit price
+Paws cleaning - unit price
+Nails trimming - unit price
+Combing - unit price
+Discount - maximum discount is 20%
+The final price is formed after calculating and subtracting the discount.
+
+The status of the reservation is dynamic according to the current date. Statuses are updated after reloading.
+There are 3 statuses - upcoming, active, completed
+Each reservation can be changed, reviewed, removed.
+Every reservation can be invoiced - once invoiced, the reservation cannot be changed or deleted. In order to be able to change, the invoice for it must first be cancelled.
+
+From the reservation table - you can also see detailed information about the dog and detailed information about the invoice.
 
 
 ENTITIES:
