@@ -2,35 +2,29 @@
 </html>
 <th:block th:if="${session.isEmpty()}">
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
-        <div class="container justify-content-center mt-3">
-            <div class="jumbotron index-jumbo d-flex justify-content-center bg-blur">
-                <div class="container">
-                    <div class="col-md-12 d-flex border-left border-bottom w-50 ">
-                        <div class="myBackgroundColor rounded p-2">
-                            <p>Default:</p>
-                            <p>Admin Role:</p>
-                            <p>username : owner</p>
-                            <p>password : owner</p>
-                            <p>User Role:</p>
-                            <p>username : employee </p>
-                            <p>password : employee</p>
-                        </div>
-                        <h1 class="myBackgroundColor ">
-                            <div>
-                                <a href="/view/login">
-                                    <span>LOGIN</span></a>
-                                <p></p>
-                            </div>
-                            <div>
-                                <a href="/view/register">
-                                    <span>REGISTER</span></a>
-                            </div>
-                        </h1>
+
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+            <tbody>
+            <tr>
+                <td><p1>Default:</p1><br><p></p>
+                    <p1>Admin Role:</p1><br>
+                    <p1>username : owner</p1><br>
+                    <p1>password : owner</p1><br><p></p>
+                    <p1>User Role:</p1><br>
+                    <p1>username : employee </p1><br>
+                    <p1>password : employee</p1><br></td>
+                <td><div>
+                    <a href="/view/login">
+                        <span>LOGIN</span></a>
+                    <p></p>
                     </div>
+                    <div>
+                        <a href="/view/register">
+                            <span>REGISTER</span></a>
+                    </div></td>
+            </tr>
+            </tbody>
+        </table>
 
-                </div>
-
-            </div>
-        </div>
     </th:block>
 </th:block>
