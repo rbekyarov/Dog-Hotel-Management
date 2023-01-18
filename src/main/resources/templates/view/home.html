@@ -25,9 +25,9 @@
                     <td><h5>Total spend: </h5>
 
                         <label th:text="${totalAmountCost}"></label></td>
-                    <td><h5>Balance: </h5>
+                    <td th:object="${company}" th:if="*{balance}"><h5>Balance: </h5>
 
-                        <label th:text="${company.balance}"></label></td>
+                        <label  th:text="*{balance}"></label></td>
                 </tr>
                 </tbody>
             </table>

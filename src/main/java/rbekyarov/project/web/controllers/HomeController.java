@@ -15,15 +15,14 @@ import java.util.Optional;
 @Controller
 public class HomeController extends BaseController {
 
-    private final UserService userService;
     private final ReservationService reservationService;
     private final CellService cellService;
     private final CompanyService companyService;
     private final CostService costService;
     private final InvoiceService invoiceService;
 
-    public HomeController(UserService userService, ReservationService reservationService, CellService cellService, CompanyService companyService, CostService costService, InvoiceService invoiceService) {
-        this.userService = userService;
+    public HomeController(ReservationService reservationService, CellService cellService, CompanyService companyService, CostService costService, InvoiceService invoiceService) {
+
         this.reservationService = reservationService;
         this.cellService = cellService;
         this.companyService = companyService;
@@ -32,22 +31,28 @@ public class HomeController extends BaseController {
     }
 
     @GetMapping("/")
-    public ModelAndView index(ModelAndView modelAndView, HttpSession session) {
+    public ModelAndView naklonka(ModelAndView modelAndView, HttpSession session) {
         Object user = session.getAttribute("user");
         Object admin = session.getAttribute("admin");
 
         if((admin !=null) ||(user!=null)){
-            modelAndView.setViewName("/view/home");
-        }else {
-            modelAndView.setViewName("/index");
-        }
-        String viewName = modelAndView.getViewName();
+            return super.redirect("/view/home");
 
-        return super.view(viewName);
+        }else {
+
+            return super.redirect("/index");
+        }
+
+    }
+    @GetMapping("/index")
+    public ModelAndView index(ModelAndView modelAndView, HttpSession session) {
+        return super.view("/index");
+
     }
 
     @GetMapping("/view/home")
-    public ModelAndView home(ModelAndView modelAndView) {
+    public ModelAndView home(ModelAndView modelAndView, HttpSession session) {
+
 
         List<Reservation>activeReservations = reservationService.findAllActiveReservationLimit3();
         List<Reservation>upcomingReservations = reservationService.findAllUpcomingReservations();
