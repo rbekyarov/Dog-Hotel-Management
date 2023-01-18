@@ -1,186 +1,134 @@
 <th:block th:fragment>
-
-    <nav class="navbar bg-transparent navbar-expand-lg navbar-background">
-        <a class="brand pull-left" th:href="@{/view/home}">
-            <span class="site-title" title="Dog Hotel Management">Dog Hotel Management</span></a>
-
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end row" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <th:block th:unless="${session.isEmpty()}">
-                    <li class="nav-item active col-md-6 " style="white-space: nowrap;">
-                        <a class="nav-link h5" th:href="@{/view/home}">
-                            <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                    class="glyphicon glyphicon-ok"></span>HOME
-                            </button>
-                        </a>
-                    </li>
-                </th:block>
-
-                <th:block th:unless="${session.isEmpty()}">
-                <li class="nav-item active col-md-6 " style="white-space: nowrap;">
-                    <a class="nav-link h5" th:href="@{/view/table/reservationTable}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                class="glyphicon glyphicon-ok"></span>RESERVATION
-                        </button>
-                    </a>
-                </li>
-                </th:block>
-                <th:block th:unless="${session.isEmpty()}">
-                    <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                        <a class="nav-link h5" th:href="@{/view/table/invoiceTable}">
-                            <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                    class="glyphicon glyphicon-ok"></span>INVOICES
-                            </button>
-                        </a>
-                    </li>
-                </th:block>
-                <th:block th:unless="${session.isEmpty()}">
-                    <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                        <a class="nav-link h5" th:href="@{/view/table/costTable}">
-                            <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                    class="glyphicon glyphicon-ok"></span>COSTS
-                            </button>
-                        </a>
-                    </li>
-                </th:block>
-                <th:block th:unless="${session.isEmpty()}">
-                    <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                        <a class="nav-link h5" th:href="@{/view/table/vendorTable}">
-                            <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                    class="glyphicon glyphicon-ok"></span>VENDORS
-                            </button>
-                        </a>
-                    </li>
-                </th:block>
-
-
-                <th:block th:unless="${session.isEmpty()}">
-                <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                    <a class="nav-link h5" th:href="@{/view/table/clientTable}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                class="glyphicon glyphicon-ok"></span>CLIENTS
-                        </button>
-                    </a>
-                </li>
-                </th:block>
-
-
-                <th:block th:unless="${session.isEmpty()}">
-                <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                    <a class="nav-link h5" th:href="@{/view/table/cityTable}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                class="glyphicon glyphicon-ok"></span>CITIES
-                        </button>
-                    </a>
-                </li>
-                </th:block>
-                <th:block th:unless="${session.isEmpty()}">
-                    <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                        <a class="nav-link h5" th:href="@{/view/table/dogTable}">
-                            <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                    class="glyphicon glyphicon-ok"></span>DOGS
-                            </button>
-                        </a>
-                    </li>
-                </th:block>
-                <th:block th:unless="${session.isEmpty()}">
-                <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                    <a class="nav-link h5" th:href="@{/view/table/cellTable}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                class="glyphicon glyphicon-ok"></span>Dog House
-                        </button>
-                    </a>
-                </li>
-                </th:block>
-                <th:block th:unless="${session.isEmpty()}">
-                <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                    <a class="nav-link h5" th:href="@{/view/table/breedTable}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                class="glyphicon glyphicon-ok"></span>BREEDS
-                        </button>
-                    </a>
-                </li>
-                </th:block>
-                <th:block th:unless="${session.isEmpty()}">
-                <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                    <a class="nav-link h5" th:href="@{/view/table/behaviorTable}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                class="glyphicon glyphicon-ok"></span>BEHAVIORS
-                        </button>
-                    </a>
-                </li>
-                </th:block>
-
-                <div  th:if="${session.admin}">
-                    <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                        <a class="nav-link h5" th:href="@{/view/table/priceTable}">
-                            <button type="button" class="btn btn-danger btn-lg btnAdmin"><span
-                                    class="glyphicon glyphicon-ok"></span>PRICES
-                            </button>
-                        </a>
-                    </li>
-                </div>
-                <div  th:if="${session.user}">
-                    <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                        <a class="nav-link h5" th:href="@{/view/table/priceTableUser}">
-                            <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                    class="glyphicon glyphicon-ok"></span>PRICES
-                            </button>
-                        </a>
-                    </li>
-                </div>
-                <div  th:if="${session.admin}">
-                <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                    <a class="nav-link h5" th:href="@{/view/table/userTable}">
-                        <button type="button" class="btn btn-danger btn-lg btnAdmin"><span
-                                class="glyphicon glyphicon-ok"></span>USERS
-                        </button>
-                    </a>
-                </li>
-                </div>
-                <div  th:if="${session.admin}">
-                    <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                        <a class="nav-link h5" th:href="@{/view/MyCompany}">
-                            <button type="button" class="btn btn-danger btn-lg btnAdmin"><span
-                                    class="glyphicon glyphicon-ok"></span>My Company
-                            </button>
-                        </a>
-                    </li>
-                </div>
-                <div  th:if="${session.user}">
-                    <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                        <a class="nav-link h5" th:href="@{/view/MyCompanyUser}">
-                            <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                    class="glyphicon glyphicon-ok"></span>My Company
-                            </button>
-                        </a>
-                    </li>
-                </div>
-                <th:block th:if="${session.isEmpty()}">
-                <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                    <a class="nav-link h5" th:href="@{/view/login}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                class="glyphicon glyphicon-ok"></span>Login
-                        </button>
-                    </a>
-                </li>
-                </th:block>
-                <th:block th:unless = "${session.isEmpty()}">
-                <li class="nav-item active col-md-6" style="white-space: nowrap;">
-                    <a class="nav-link h5" th:href="@{/logout}">
-                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
-                                class="glyphicon glyphicon-ok"></span>Logout
-                        </button>
-                    </a>
-                </li>
-                </th:block>
-            </ul>
+    <body>
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
         </div>
-    </nav>
+        <div class="site-mobile-menu-body"></div>
     </div>
+
+
+
+
+    <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
+        <div class="container">
+
+            <div class="row align-items-center position-relative">
+                <div class="site-logo">
+                    <a th:href="@{/view/home}" class="text-black"><span class="site-title">Dog Hotel Management </a>
+                </div>
+
+                <div class="col-12">
+                    <nav class="site-navigation text-right ml-auto " role="navigation">
+                        <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
+                            <th:block th:unless="${session.isEmpty()}">
+                                <li><a th:href="@{/view/home}" class="nav-link">HOME</a></li>
+                            </th:block>
+
+                            <th:block th:unless="${session.isEmpty()}">
+                            <li class="has-children">
+                                <a href="#" class="nav-link">RESERVATION</a>
+                                <ul class="dropdown arrow-top">
+                                    <li><a th:href="@{/view/table/reservationTable}" class="nav-link">RESERVATION LIST</a></li>
+                                    <li><a th:href="@{/view/add/reservationAdd}" class="nav-link">ADD RESERVATION</a></li>
+
+                                </ul>
+                            </li>
+                            </th:block>
+
+                            <th:block th:unless="${session.isEmpty()}">
+                                <li class="has-children">
+                                    <a href="#" class="nav-link">INVOICES</a>
+                                    <ul class="dropdown arrow-top">
+                                        <li><a th:href="@{/view/table/invoiceTable}" class="nav-link">INVOICES LIST</a></li>
+                                        <li><a th:href="@{/view/table/invoiceCanceledTable}" class="nav-link">CANCELED INVOICES</a></li>
+
+                                    </ul>
+                                </li>
+                            </th:block>
+
+
+                            <th:block th:unless="${session.isEmpty()}">
+                                <li class="has-children">
+                                    <a href="#" class="nav-link">DOGS</a>
+                                    <ul class="dropdown arrow-top">
+                                        <li><a th:href="@{/view/table/dogTable}" class="nav-link">DOG LIST</a></li>
+                                        <li><a th:href="@{/view/table/cellTable}" class="nav-link">DOG HOUSES</a></li>
+                                        <li><a th:href="@{/view/table/breedTable}" class="nav-link">DOG BREEDS LIST</a></li>
+                                        <li><a th:href="@{/view/table/behaviorTable}" class="nav-link">DOG BEHAVIORS</a></li>
+
+                                    </ul>
+                                </li>
+                            </th:block>
+
+                            <th:block th:unless="${session.isEmpty()}">
+                                <li class="has-children">
+                                    <a href="#" class="nav-link">CLIENTS</a>
+                                    <ul class="dropdown arrow-top">
+                                        <li><a th:href="@{/view/table/clientTable}" class="nav-link">CLIENTS LIST</a></li>
+                                        <li><a th:href="@{/view/table/cityTable}" class="nav-link">CITIES LIST</a></li>
+
+                                    </ul>
+                                </li>
+                            </th:block>
+
+                            <th:block th:unless="${session.isEmpty()}">
+                                <li class="has-children">
+                                    <a href="#" class="nav-link">EXPENSES</a>
+                                    <ul class="dropdown arrow-top">
+                                        <li><a th:href="@{/view/table/costTable}" class="nav-link">COSTS LIST</a></li>
+                                        <li><a th:href="@{/view/table/vendorTable}" class="nav-link">VENDORS LIST</a></li>
+<!--                                        <li class="has-children">-->
+<!--                                            <a href="#">More Links</a>-->
+<!--                                            <ul class="dropdown">-->
+<!--                                                <li><a href="#">Menu One</a></li>-->
+<!--                                                <li><a href="#">Menu Two</a></li>-->
+<!--                                                <li><a href="#">Menu Three</a></li>-->
+<!--                                            </ul>-->
+<!--                                        </li>-->
+                                    </ul>
+                                </li>
+                            </th:block>
+
+                            <th:block th:if="${session.admin}">
+                                <li class="has-children">
+                                    <a href="#" class="nav-link">ADMIN MENU</a>
+                                    <ul class="dropdown arrow-top">
+                                        <li><a th:href="@{/view/table/priceTable}" class="nav-link">PRICES LIST</a></li>
+                                        <li><a  th:href="@{/view/MyCompany}" class="nav-link">MY COMPANY</a></li>
+                                        <li><a  th:href="@{/view/table/userTable}" class="nav-link">USER LIST</a></li>
+                                        <li><a  th:href="@{/logout}" class="nav-link">LOGOUT</a></li>
+
+                                    </ul>
+                                </li>
+                            </th:block>
+
+                            <th:block th:if="${session.user}">
+                                <li class="has-children">
+                                    <a href="#" class="nav-link">USER MENU</a>
+                                    <ul class="dropdown arrow-top">
+                                        <li><a th:href="@{/view/table/priceTableUser}" class="nav-link">PRICES LIST</a></li>
+                                        <li><a  th:href="@{/view/MyCompanyUser}" class="nav-link">MY COMPANY</a></li>
+                                        <li><a  th:href="@{/logout}" class="nav-link">LOGOUT</a></li>
+
+                                    </ul>
+                                </li>
+                            </th:block>
+
+                            <th:block th:if="${session.isEmpty()}">
+                                <li><a th:href="@{/view/login}" class="nav-link">LOGIN</a></li>
+                            </th:block>
+
+                        </ul>
+                    </nav>
+                </div>
+                <div class="toggle-button d-inline-block d-lg-none"><a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
+            </div>
+        </div>
+
+    </header>
+    </body>
 </th:block>
