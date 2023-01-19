@@ -21,13 +21,13 @@
                     </td>
                     <td><h5>Total invoiced: </h5>
 
-                        <label th:text="${totalInvoicedPrice}"></label></td>
+                        <label th:text="${totalInvoicedPrice+'$'}"></label></td>
                     <td><h5>Total spend: </h5>
 
-                        <label th:text="${totalAmountCost}"></label></td>
-                    <td th:object="${company}" th:if="*{balance}"><h5>Balance: </h5>
+                        <label th:text="${totalAmountCost+'$'}"></label></td>
+                    <td><h5>Balance: </h5>
 
-                        <label  th:text="*{balance}"></label></td>
+                        <label  th:text="${company.balance +'$'}"></label></td>
                 </tr>
                 </tbody>
             </table>
