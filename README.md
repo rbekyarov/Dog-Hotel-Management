@@ -87,7 +87,8 @@ ENTITIES:
 
 INDEX PAGE:
 
-![2023-01-16 (1)](https://user-images.githubusercontent.com/29566751/212759426-43d9f9e1-c4d8-49c7-8b22-b58da9bfca78.png)
+![2023-01-19 (24)](https://user-images.githubusercontent.com/29566751/213428162-4d80cd1b-26f0-4359-8fae-47a52cd7b5d4.png)
+
 
 
 LOGIN PAGE:
@@ -95,15 +96,17 @@ LOGIN PAGE:
 
 ![2023-01-16 (2)](https://user-images.githubusercontent.com/29566751/212759459-ae0bd6d1-c7a0-4e15-af8d-193f46f9f0bb.png)
 
-WELCOM PAGE:
+HOME PAGE:
 
 
-![2023-01-16 (4)](https://user-images.githubusercontent.com/29566751/212759493-80229fce-6d8c-4eb8-ae52-1a1b9404a73f.png)
+
+![2023-01-19 (1)](https://user-images.githubusercontent.com/29566751/213428297-98fcf7a4-beb2-42bb-9f96-888fa7302024.png)
 
 
 RESERVATION PAGE:
 
-![2023-01-16 (5)](https://user-images.githubusercontent.com/29566751/212759530-b37ddba9-d309-4ea4-82d8-104c319a71ba.png)
+![2023-01-19 (2)](https://user-images.githubusercontent.com/29566751/213428392-e6b4825d-ee53-409c-8a14-3d1f1529ed96.png)
+
 
 ADD RESERVATION:
 
@@ -111,21 +114,25 @@ ADD RESERVATION:
 
 EDIT RESERVATION:
 
-![6 EditReservation](https://user-images.githubusercontent.com/29566751/211553934-8b39867d-7df3-4d0c-b298-530089bed402.png)
+![2023-01-19 (4)](https://user-images.githubusercontent.com/29566751/213428583-c1650816-b2a1-43c3-a8c7-1fc03cf7d13d.png)
+
 
 
 RESERVATION DETAILS:
 
-![5A ReservationDetails](https://user-images.githubusercontent.com/29566751/211554038-4cb3ca31-afcb-4f1c-b138-6f8d2f762777.png)
+
+![2023-01-19 (3)](https://user-images.githubusercontent.com/29566751/213428669-5e2dc261-52f8-4fef-b754-7a2ac60cae11.png)
 
 
 INVOICE LIST:
 
-![2023-01-16 (7)](https://user-images.githubusercontent.com/29566751/212759612-fc2c03a4-d381-4083-a114-1794fd2ec5be.png)
+![2023-01-19 (5)](https://user-images.githubusercontent.com/29566751/213428785-ff851aa2-3220-408f-99a7-fd5d670df5f7.png)
+
 
 INVOICE:
 
-![2023-01-16 (8)](https://user-images.githubusercontent.com/29566751/212759662-ff356783-e749-4e30-bedd-674ecee28617.png)
+
+![2023-01-19 (6)](https://user-images.githubusercontent.com/29566751/213428876-ca7d91c8-18ea-4862-881d-021cdbf65033.png)
 
 
 
@@ -139,7 +146,7 @@ COST PAGE:
 ![2023-01-16 (11)](https://user-images.githubusercontent.com/29566751/212759784-aad30a00-bcad-460c-9018-d838e6088268.png)
 
 
-VENDOR PAGE:
+VENDOR LIST:
 
 
 ![2023-01-11](https://user-images.githubusercontent.com/29566751/211800794-46d55763-f8d0-4f4f-b89c-3b950bcaee61.png)
@@ -154,9 +161,10 @@ CITY PAGE:
 
 ![2023-01-16 (14)](https://user-images.githubusercontent.com/29566751/212759898-99536124-094c-449b-9b46-2dd66b2801f3.png)
 
-DOG PAGE:
+DOG LIST:
 
-![2023-01-16 (15)](https://user-images.githubusercontent.com/29566751/212759917-f7d7d327-9e82-4900-853c-42e8c064fed6.png)
+![2023-01-19 (7)](https://user-images.githubusercontent.com/29566751/213429055-596e16b0-18cd-4467-8d53-f161459988dd.png)
+
 
 EDIT DOG:
 
