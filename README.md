@@ -15,7 +15,7 @@ Local link - localhost:8011
 
 DEMO - http://rrb.stz.ddns.bulsat.com:8011
 
-DEMO VIDEO - https://youtu.be/wDdqS93h2EI
+DEMO VIDEO - https://youtu.be/nv8VCsqkdjo
 
 Resources:
 
