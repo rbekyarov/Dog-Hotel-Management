@@ -49,10 +49,10 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/view/add/userAdd")
-    public ModelAndView addUser(@Valid UserDTO userDTO,ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
+    public ModelAndView addUser(@Valid UserDTO userDTO, ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
 
 
-        if (userDTO.getUsername().isEmpty()||userDTO.getPassword().isEmpty()||userDTO.getConfirmPassword().isEmpty()){
+        if (userDTO.getUsername().isEmpty() || userDTO.getPassword().isEmpty() || userDTO.getConfirmPassword().isEmpty()) {
             redirectAttributes.addFlashAttribute("empty", true);
             return super.redirect("/view/add/userAdd");
         }
@@ -97,15 +97,15 @@ public class UserController extends BaseController {
     public ModelAndView registerConfirm(@ModelAttribute UserRegisterDTO userRegisterDTO,
                                         ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
 
-        if (userRegisterDTO.getUsername().isEmpty()||userRegisterDTO.getPassword().isEmpty()||userRegisterDTO.getConfirmPassword().isEmpty()){
+        if (userRegisterDTO.getUsername().isEmpty() || userRegisterDTO.getPassword().isEmpty() || userRegisterDTO.getConfirmPassword().isEmpty()) {
             redirectAttributes.addFlashAttribute("empty", true);
             return super.redirect("/view/register");
         }
 
-            if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
-                redirectAttributes.addFlashAttribute("wrongRepeatPasswords", true);
-                return super.redirect("/view/register");
-            }
+        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
+            redirectAttributes.addFlashAttribute("wrongRepeatPasswords", true);
+            return super.redirect("/view/register");
+        }
 
 
         String username = userRegisterDTO.getUsername();
@@ -141,20 +141,14 @@ public class UserController extends BaseController {
     public ModelAndView loginConfirm(@ModelAttribute UserLoginDTO userLoginDTO, ModelAndView modelAndView,
                                      HttpSession session, RedirectAttributes redirectAttributes) {
         UserDTO userDTO = this.modelMapper.map(userLoginDTO, UserDTO.class);
-        UserDTO userLogin = this.userService.loginUser(userDTO);
 
-        if (userLogin == null) {
-            redirectAttributes.addFlashAttribute("notFound", true);
-            return super.redirect("/view/login");
 
-        } else {
-            User user = new User();
-            Long id = userLogin.getId();
-            String username = userLogin.getUsername();
-            Role role = userLogin.getRole();
-            user.setId(id);
-            user.setUsername(username);
-            user.setRole(role);
+        if (userService.authenticate(userLoginDTO.getUsername(),
+                userLoginDTO.getPassword())) {
+
+            User user = this.userService.loginUser(userDTO);
+
+
 
             session.setAttribute("userId", user.getId());
             session.setAttribute("username", user.getUsername());
@@ -166,11 +160,13 @@ public class UserController extends BaseController {
 
             }
             return super.redirect("/view/home");
+        } else {
+            redirectAttributes.addFlashAttribute("notFound", true);
+            return super.redirect("/view/login");
         }
 
+
     }
-
-
 
 
     @GetMapping("/logout")
@@ -232,12 +228,12 @@ public class UserController extends BaseController {
         boolean isUsed = false;
         List<User> users = dogRepository.listUserUsed();
         for (User b : users) {
-            if(Objects.equals(b.getId(), id)){
+            if (Objects.equals(b.getId(), id)) {
                 redirectAttributes.addFlashAttribute("isUsed", true);
-                isUsed =true;
+                isUsed = true;
             }
         }
-        if(!isUsed){
+        if (!isUsed) {
             userService.removeUserById(id);
         }
         return super.redirect("/view/table/userTable");

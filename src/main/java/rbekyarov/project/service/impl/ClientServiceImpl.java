@@ -15,6 +15,7 @@ import rbekyarov.project.service.ClientService;
 import rbekyarov.project.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +47,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void addClient(ClientDTO clientDTO, HttpSession session) {
+    public void addClient( ClientDTO clientDTO, HttpSession session) {
         Client client = modelMapper.map(clientDTO, Client.class);
         //get and set Author
         client.setAuthor(userService.getAuthorFromSession(session));

@@ -5,10 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.UserDTO;
 import rbekyarov.project.models.dto.UserRegisterDTO;
-import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.models.entity.enums.Role;
 import rbekyarov.project.repository.UserRepository;
@@ -23,25 +23,38 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void registerUser(UserRegisterDTO userRegisterDTO) {
         User user = this.modelMapper.map(userRegisterDTO, User.class);
+        user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
         userRepository.saveAndFlush(user);
 
     }
 
     @Override
-    public UserDTO loginUser(UserDTO userDTO) {
-        return this.userRepository.findByUsername(userDTO.getUsername())
-                .filter(u -> u.getPassword().equals(userDTO.getPassword()))
-                .map(u -> this.modelMapper.map(u, UserDTO.class))
-                .orElse(null);
+    public User loginUser(UserDTO userDTO) {
+
+        Optional<User> byUsername = userRepository.findByUsername(userDTO.getUsername());
+        User user = byUsername.get();
+        return user;
+
+    }
+    @Override
+    public boolean authenticate(String username, String password) {
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        if (userOptional.isEmpty()) {
+            return false;
+        } else {
+            return passwordEncoder.matches(password, userOptional.get().getPassword());
+        }
     }
 
     @Override

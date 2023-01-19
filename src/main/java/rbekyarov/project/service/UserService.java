@@ -15,8 +15,9 @@ import java.util.Optional;
 public interface UserService {
 
     void registerUser(UserRegisterDTO userRegisterDTO);
+     boolean authenticate(String username, String password);
 
-    UserDTO loginUser(UserDTO userDTO);
+    User loginUser(UserDTO userDTO);
 
 
     List<User> findAllUserById();
