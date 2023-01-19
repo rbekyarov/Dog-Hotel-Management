@@ -25,6 +25,7 @@ public interface UserService {
     Optional<User> findById(Long id);
 
     void editUser(Role role, Long id);
+     void editUserPassword(UserDTO userDTO, Long id);
 
     void addUser(UserDTO userDTO);
     Page<User> findPaginated(Pageable pageable);

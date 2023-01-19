@@ -72,14 +72,22 @@ public class UserServiceImpl implements UserService {
         userRepository.editUser(role, id);
     }
 
+    @Override
+    public void editUserPassword(UserDTO userDTO, Long id) {
+        String username = userDTO.getUsername();
+        String encode = passwordEncoder.encode(userDTO.getPassword());
+        userRepository.editUserPassword(encode, id , username);
+    }
+
+
+
 
     public void addUser(UserDTO userDTO) {
-        User user = new User();
-        user.setUsername(userDTO.getUsername());
-        user.setPassword(userDTO.getPassword());
-        user.setRole(userDTO.getRole());
 
-        userRepository.save(user);
+        User user = this.modelMapper.map(userDTO, User.class);
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        userRepository.saveAndFlush(user);
+
     }
 
     @Override

@@ -148,8 +148,6 @@ public class UserController extends BaseController {
 
             User user = this.userService.loginUser(userDTO);
 
-
-
             session.setAttribute("userId", user.getId());
             session.setAttribute("username", user.getUsername());
             if (user.getRole().name().equals("ADMIN")) {
@@ -180,6 +178,33 @@ public class UserController extends BaseController {
 
         return modelAndView;
     }
+
+    @GetMapping("/view/edit/editUserData")
+    public ModelAndView userEditData(ModelAndView modelAndView, HttpSession session) {
+        Object userName = session.getAttribute("username");
+        Optional<User> byUsername = userService.findByUsername(userName.toString());
+        User user = byUsername.get();
+        modelAndView.setViewName("/view/edit/editUserData");
+
+
+        return super.view(modelAndView.getViewName(), "user", user);
+    }
+
+    @PostMapping("/view/edit/editUserData")
+    public String postUserEditData(UserDTO userDTO, HttpSession session, RedirectAttributes redirectAttributes) {
+        if (userDTO.getUsername().isEmpty() || userDTO.getPassword().isEmpty()) {
+            redirectAttributes.addFlashAttribute("empty", true);
+            return "redirect:/view/edit/editUserData";
+        }
+        Object userName = session.getAttribute("username");
+        Optional<User> byUsername = userService.findByUsername(userName.toString());
+        User user = byUsername.get();
+
+        userService.editUserPassword(userDTO,user.getId());
+
+        return "redirect:/logout";
+    }
+
 
     @GetMapping("/view/table/userTable")
     public ModelAndView userTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
