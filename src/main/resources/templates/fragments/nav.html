@@ -9,15 +9,15 @@
         <div class="site-mobile-menu-body"></div>
     </div>
 
-
-
-
     <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
         <div class="container">
-
+            <th:block th:unless="${session.isEmpty()}" class="welcome" th:object="${session}">
+                <div class="userName"  th:if="*{user}" th:text="*{'user: '+ username}"></div>
+                <div class="userName"  th:if="*{admin}" th:text="*{'user: '+ username}"></div>
+            </th:block>
             <div class="row align-items-center position-relative">
                 <div class="site-logo">
-                    <a th:href="@{/view/home}" class="text-black"><span class="site-title">Dog Hotel Management </a>
+                    <a th:href="@{/view/home}" class="text-black"><span class="site-title">Dog Hotel Management</span></a>
                 </div>
 
                 <div class="col-12">
@@ -121,8 +121,11 @@
                                 <li><a th:href="@{/view/login}" class="nav-link">LOGIN</a></li>
                             </th:block>
 
+
+
                         </ul>
                     </nav>
+
                 </div>
                 <div class="toggle-button d-inline-block d-lg-none"><a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
 
@@ -131,4 +134,5 @@
 
     </header>
     </body>
+
 </th:block>
