@@ -405,6 +405,8 @@ a {
     background-color: #c16b29;
 
 }
+
+
 .dogsOnClient{
     color: #2430ca;
     line-height: 0.5;
@@ -443,7 +445,7 @@ a {
 }
 .table-center{
     margin: auto;
-    width: 70%;
+    /*width: 70%;*/
     border: 0px solid #353838;
     padding: 10px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

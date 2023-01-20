@@ -16,7 +16,7 @@
                         <p th:if="${isUsed}" class="errors alert alert-danger">
                             Dog is Used!
                         </p>
-                        <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+                        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:600px">
                             <thead>
                             <tr>
                                 <th scope="col"><form th:action="@{/view/table/searchDogName}" method="get">
@@ -33,7 +33,7 @@
                             </tbody>
                         </table>
 
-
+<div  style="overflow:auto">
                         <table class=table>
                             <tr>
                                 <th>No</th>
@@ -95,6 +95,7 @@
                                 </a></td>
                             </tr>
                         </table>
+</div>
                         <div th:if="${dogs.totalPages > 0}" class="pagination"
                              th:each="pageNumber : ${pageNumbers}">
                             <a th:href="@{dogTable(size=${dogs.size}, page=${pageNumber})}"
