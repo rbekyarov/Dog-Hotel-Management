@@ -87,11 +87,6 @@ ENTITIES:
 
 INDEX PAGE:
 
-![2023-01-19 (24)](https://user-images.githubusercontent.com/29566751/213428162-4d80cd1b-26f0-4359-8fae-47a52cd7b5d4.png)
-
-
-
-LOGIN PAGE:
 
 ![2023-01-20 (2)](https://user-images.githubusercontent.com/29566751/213696340-ec46097f-cf8d-4ad0-933b-e075c7d254b1.png)
 
