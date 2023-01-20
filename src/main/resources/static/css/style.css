@@ -539,6 +539,7 @@ a {
     color: #cbc2c2;
     position: relative;
     background: #202124;
+    padding-inline-start: 10px;
 }
 .navbar-background {
     background-color: #e243ff;
