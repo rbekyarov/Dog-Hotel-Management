@@ -1,34 +1,35 @@
 <th:block th:unless="${session.isEmpty()}">
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+
         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
             <tbody>
             <tr>
                 <td>
                     <div class="welcome" >
                         <br>
-                        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+                        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
                             <tbody>
                             <tr>
                                 <td>
-                                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:200px">
+                                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:150px">
                                         <tbody><h5>Empty House</h5>
 
                                         <tr>
                                             <td th:each="c : ${cellsEmpty}">
 
-                                                <label style="width:30px"><p th:text="${c.code}"></p></label></td>
+                                                <label><p th:text="${c.code}"></p></label></td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </td>
 
-                                <td style="width:200px"><h5>Total invoiced: </h5>
+                                <td style="width:120px"><h5>Total invoiced: </h5>
 
                                     <label ><p th:text="${totalInvoicedPrice+'$'}"></label></td>
-                                <td style="width:200px"><h5>Total spend: </h5>
+                                <td style="width:120px"><h5>Total spend: </h5>
 
                                     <label ><p th:text="${totalAmountCost+'$'}"></label></td>
-                                <td style="width:200px"><h5>Balance: </h5>
+                                <td style="width:150px"><h5>Balance: </h5>
 
                                     <label ><p  th:text="${company.balance +'$'}"></label></td>
                             </tr>
@@ -46,6 +47,9 @@
 
 
                         <br>
+
+
+
                         <table style="width:auto" class=table >
                             <tr><h5>Current Active Reservations</h5>
                                 <th>No</th>
@@ -70,6 +74,7 @@
                                 <td class="boldPrice" th:text="${r.totalPrice +'$'}"></td>
                             </tr>
                         </table>
+
                         <br>
                         <table style="width:auto" class=table>
                             <tr><h5>Upcoming Reservations</h5>
