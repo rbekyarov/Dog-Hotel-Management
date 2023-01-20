@@ -60,7 +60,7 @@ a {
   padding: 0rem; }
   @media (max-width: 991.98px) {
     .site-navbar {
-      padding-top: 3rem;
+      padding-top: 1rem;
       padding-bottom: 3rem; } }
   .site-navbar .toggle-button {
     position: absolute;
@@ -462,7 +462,8 @@ a {
 
     font-size: 12px;
     display: block;
-    max-width: 70%;
+    width:auto;
+    max-width: 73%;
     background-color: transparent;
     border-collapse: collapse;
     border-spacing: 0;
@@ -471,6 +472,7 @@ a {
     padding: 0.5rem;
 
 }
+
 
 .footerStyle{
     text-align: -webkit-center;
