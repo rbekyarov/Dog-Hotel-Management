@@ -418,7 +418,7 @@ a {
     outline: medium none;
     -moz-outline-style: none;
     border: 11px;
-    margin-right: -47px;
+    margin-right: -33px;
     margin-top: -6px;
     color: #ffffff;
     background-color: #f14e5e;
@@ -473,7 +473,7 @@ a {
 
 }
 .table th, .table td {
-    padding: 0.5rem;
+    padding: 3px;
     vertical-align: unset;
     border-top: 1px solid #dee2e6;
 }
