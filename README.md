@@ -93,19 +93,22 @@ INDEX PAGE:
 
 LOGIN PAGE:
 
+![2023-01-20 (2)](https://user-images.githubusercontent.com/29566751/213696340-ec46097f-cf8d-4ad0-933b-e075c7d254b1.png)
 
-![2023-01-16 (2)](https://user-images.githubusercontent.com/29566751/212759459-ae0bd6d1-c7a0-4e15-af8d-193f46f9f0bb.png)
+
 
 HOME PAGE:
 
 
+![2023-01-20 (3)](https://user-images.githubusercontent.com/29566751/213696379-e5168efd-1373-4df6-a54f-1f8a0ff3f859.png)
 
-![2023-01-19 (1)](https://user-images.githubusercontent.com/29566751/213428297-98fcf7a4-beb2-42bb-9f96-888fa7302024.png)
+
 
 
 RESERVATION PAGE:
 
-![2023-01-19 (2)](https://user-images.githubusercontent.com/29566751/213428392-e6b4825d-ee53-409c-8a14-3d1f1529ed96.png)
+
+![2023-01-20](https://user-images.githubusercontent.com/29566751/213696429-65810609-e432-4671-bc2b-a6fefcd02c2f.png)
 
 
 ADD RESERVATION:
@@ -163,7 +166,8 @@ CITY PAGE:
 
 DOG LIST:
 
-![2023-01-19 (7)](https://user-images.githubusercontent.com/29566751/213429055-596e16b0-18cd-4467-8d53-f161459988dd.png)
+
+![2023-01-20 (1)](https://user-images.githubusercontent.com/29566751/213696500-bb502abd-56f4-4f8f-9740-d517d61ce7dd.png)
 
 
 EDIT DOG:
