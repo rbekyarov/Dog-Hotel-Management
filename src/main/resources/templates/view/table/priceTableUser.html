@@ -1,46 +1,55 @@
 <th:block th:if="${session.user}">
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="table-center">
+                        <div class="page-header">
+                            <h1>Price List</h1>
+                        </div>
 
-        <div class="table-center">
-            <div class="page-header">
-                <h1>Price List</h1>
-            </div>
+                        <table class=table>
+                            <tr>
+                                <th>No</th>
+                                <th>Stay House S</th>
+                                <th>Stay House M</th>
+                                <th>Stay House L</th>
+                                <th>Feeding</th>
+                                <th>Deworming</th>
+                                <th>Training</th>
+                                <th>Bathing</th>
+                                <th>Combing</th>
+                                <th>Paws cleaning</th>
+                                <th>Еar cleaning</th>
+                                <th>Nails trimming</th>
+                                <th>Created</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr th:each="p : ${prices}">
+                                <td th:text="${p.id}"></td>
+                                <td th:text="${p.priceStayS+'$'}"></td>
+                                <td th:text="${p.priceStayM+'$'}"></td>
+                                <td th:text="${p.priceStayL+'$'}"></td>
+                                <td th:text="${p.priceFood}"></td>
+                                <td th:text="${p.priceDeworming}"></td>
+                                <td th:text="${p.priceTraining}"></td>
+                                <td th:text="${p.priceBathing}"></td>
+                                <td th:text="${p.priceCombing}"></td>
+                                <td th:text="${p.pricePaws}"></td>
+                                <td th:text="${p.priceEars}"></td>
+                                <td th:text="${p.priceNails}"></td>
+                                <td th:text="${#temporals.format(p.dateCreate,'dd.MM.yyyy')}"></td>
 
-            <table class=table>
-                <tr>
-                    <th>No</th>
-                    <th>Stay House S</th>
-                    <th>Stay House M</th>
-                    <th>Stay House L</th>
-                    <th>Feeding</th>
-                    <th>Deworming</th>
-                    <th>Training</th>
-                    <th>Bathing</th>
-                    <th>Combing</th>
-                    <th>Paws cleaning</th>
-                    <th>Еar cleaning</th>
-                    <th>Nails trimming</th>
-                    <th>Created</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr th:each="p : ${prices}">
-                    <td th:text="${p.id}"></td>
-                    <td th:text="${p.priceStayS+'$'}"></td>
-                    <td th:text="${p.priceStayM+'$'}"></td>
-                    <td th:text="${p.priceStayL+'$'}"></td>
-                    <td th:text="${p.priceFood}"></td>
-                    <td th:text="${p.priceDeworming}"></td>
-                    <td th:text="${p.priceTraining}"></td>
-                    <td th:text="${p.priceBathing}"></td>
-                    <td th:text="${p.priceCombing}"></td>
-                    <td th:text="${p.pricePaws}"></td>
-                    <td th:text="${p.priceEars}"></td>
-                    <td th:text="${p.priceNails}"></td>
-                    <td th:text="${#temporals.format(p.dateCreate,'dd.MM.yyyy')}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
 
-                </tr>
-            </table>
-        </div>
+
+        </table>
+
     </th:block>
 </th:block>

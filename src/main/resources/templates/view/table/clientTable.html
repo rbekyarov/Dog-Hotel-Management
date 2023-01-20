@@ -1,84 +1,93 @@
 <th:block th:unless="${session.isEmpty()}">
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="table-center">
+                        <div class="page-header">
+                            <h1>Client List</h1>
+                        </div>
+                        <a class="nav-link h5" th:href="@{/view/add/clientAdd}">
+                            <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                    class="glyphicon glyphicon-ok"></span>Add Client
+                            </button>
+                        </a>
+                        <p th:if="${isUsed}" class="errors alert alert-danger">
+                            Client is used!
+                        </p>
 
-        <div class="table-center">
-            <div class="page-header">
-                <h1>Client List</h1>
-            </div>
-            <a class="nav-link h5" th:href="@{/view/add/clientAdd}">
-                <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                        class="glyphicon glyphicon-ok"></span>Add Client
-                </button>
-            </a>
-            <p th:if="${isUsed}" class="errors alert alert-danger">
-                Client is used!
-            </p>
-
-            <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:auto">
-                <thead>
-                <tr>
-                    <th scope="col"><form th:action="@{/view/table/searchClientByPhone}" method="get">
-                        <input type="text" name="clientPhone" th:value="${clientPhone}"  placeholder="Find by Client Phone" size="20" >
-                        <button type="submit" class="btn btn-info" >Search</button>
-                    </form></th>
-                    <th scope="col"><form th:action="@{/view/table/searchClientByEmail}" method="get">
-                        <input type="text" name="clientEmail" th:value="${clientEmail}"  placeholder="Find by Client Email" size="20" >
-                        <button type="submit" class="btn btn-info" >Search</button>
-                    </form></th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <table class=table>
-                <tr>
-                    <th>No</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>Dogs</th>
-                    <th>Author</th>
-                    <th>Created</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr th:each="c : ${clients}">
-                    <td th:text="${c.id}"></td>
-                    <td th:text="${c.firstName}"></td>
-                    <td th:text="${c.lastName}"></td>
-                    <td th:text="${c.email}"></td>
-                    <td th:text="${c.phone}"></td>
-                    <td th:text="${c.address}"></td>
-                    <td th:text="${c.city.getName()}"></td>
-                    <td>  <a  <p    th:each="d: ${c.getDogs()}"  th:target="_blank"  th:href="@{/view/table/dog/view/{id}(id=${d.id})}" th:text="${d.getName()+' '}"></td>
-<!--                    <td><p class="dogsOnClient" th:each="d: ${c.getDogs()}" th:text="${d.getName()}"></td>-->
-                    <td th:text="${c.author.username}"></td>
-                    <td th:text="${#temporals.format(c.dateCreate,'dd.MM.yyyy')}"></td>
+                        <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+                            <thead>
+                            <tr>
+                                <th scope="col"><form th:action="@{/view/table/searchClientByPhone}" method="get">
+                                    <input type="text" name="clientPhone" th:value="${clientPhone}"  placeholder="Find by Client Phone" size="20" >
+                                    <button type="submit" class="btn btn-info" >Search</button>
+                                </form></th>
+                                <th scope="col"><form th:action="@{/view/table/searchClientByEmail}" method="get">
+                                    <input type="text" name="clientEmail" th:value="${clientEmail}"  placeholder="Find by Client Email" size="20" >
+                                    <button type="submit" class="btn btn-info" >Search</button>
+                                </form></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <table class=table>
+                            <tr>
+                                <th>No</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>Dogs</th>
+                                <th>Author</th>
+                                <th>Created</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr th:each="c : ${clients}">
+                                <td th:text="${c.id}"></td>
+                                <td th:text="${c.firstName}"></td>
+                                <td th:text="${c.lastName}"></td>
+                                <td th:text="${c.email}"></td>
+                                <td th:text="${c.phone}"></td>
+                                <td th:text="${c.address}"></td>
+                                <td th:text="${c.city.getName()}"></td>
+                                <td>  <a  <p    th:each="d: ${c.getDogs()}"  th:target="_blank"  th:href="@{/view/table/dog/view/{id}(id=${d.id})}" th:text="${d.getName()+' '}"></td>
+                                <!--                    <td><p class="dogsOnClient" th:each="d: ${c.getDogs()}" th:text="${d.getName()}"></td>-->
+                                <td th:text="${c.author.username}"></td>
+                                <td th:text="${#temporals.format(c.dateCreate,'dd.MM.yyyy')}"></td>
 
 
 
-                    <td><a class="nav-link h5" th:href="@{client/edit/{id}(id=*{c.id})}">
-                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                                class="glyphicon glyphicon-ok"></span>Edit
-                        </button>
-                    </a></td>
+                                <td><a class="nav-link h5" th:href="@{client/edit/{id}(id=*{c.id})}">
+                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                            class="glyphicon glyphicon-ok"></span>Edit
+                                    </button>
+                                </a></td>
 
-                    <td><a class="nav-link h5" th:href="@{client/remove/{id}(id=*{c.id})}">
-                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                                class="glyphicon glyphicon-ok"></span>Remove
-                        </button>
-                    </a></td>
-                </tr>
-            </table>
-            <div th:if="${clients.totalPages > 0}" class="pagination"
-                 th:each="pageNumber : ${pageNumbers}">
-                <a th:href="@{clientTable(size=${clients.size}, page=${pageNumber})}"
-                   th:text=${pageNumber}
-                   th:class="${pageNumber==clients.number + 1} ? active"></a>
-            </div>
-        </div>
+                                <td><a class="nav-link h5" th:href="@{client/remove/{id}(id=*{c.id})}">
+                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                            class="glyphicon glyphicon-ok"></span>Remove
+                                    </button>
+                                </a></td>
+                            </tr>
+                        </table>
+                        <div th:if="${clients.totalPages > 0}" class="pagination"
+                             th:each="pageNumber : ${pageNumbers}">
+                            <a th:href="@{clientTable(size=${clients.size}, page=${pageNumber})}"
+                               th:text=${pageNumber}
+                               th:class="${pageNumber==clients.number + 1} ? active"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+        </table>
+
     </th:block>
 </th:block>
