@@ -445,7 +445,7 @@ a {
 }
 .table-center{
     margin: auto;
-    /*width: 70%;*/
+    width: 90%;
     border: 0px solid #353838;
     padding: 10px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
