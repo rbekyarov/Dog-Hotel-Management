@@ -54,7 +54,7 @@ public class HomeController extends BaseController {
     public ModelAndView home(ModelAndView modelAndView, HttpSession session) {
 
 
-        List<Reservation>activeReservations = reservationService.findAllActiveReservationLimit3();
+        List<Reservation>activeReservations = reservationService.findAllActiveReservation();
         List<Reservation>upcomingReservations = reservationService.findAllUpcomingReservations();
 
 
