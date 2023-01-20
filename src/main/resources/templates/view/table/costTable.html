@@ -10,21 +10,28 @@
                         class="glyphicon glyphicon-ok"></span>Add Cost
                 </button>
             </a>
-            <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:500px">
-                <tbody>
+
+
+            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:580px">
+                <thead>
                 <tr>
-                    <td><form th:action="@{/view/table/searchCostByVendorName}" method="get">
+                    <th scope="col"><form th:action="@{/view/table/searchCostByVendorName}" method="get">
                         <input type="text" name="vendorName" th:value="${vendorName}"  placeholder="Find by Vendor" size="20" >
                         <button type="submit" class="btn btn-info" >Search</button>
-                    </form></td>
+                    <span th:text="${'Total cost: ' +totalAmountCost+'$'}"></span>
+                    </form></th>
 
-                    <th th:text="${'Total cost: ' +totalAmountCost+'$'}"></th>
                 </tr>
+                </thead>
+                <tbody>
                 </tbody>
             </table>
+<br>
 
 
-            <table class=table>
+
+
+            <table class="table">
                 <tr>
                     <th>No</th>
                     <th>Vendor</th>

@@ -461,9 +461,9 @@ a {
 .table {
 
     font-size: 12px;
-    display: block;
+    /*display: block;*/
     width:auto;
-    max-width: 73%;
+    max-width: 75%;
     background-color: transparent;
     border-collapse: collapse;
     border-spacing: 0;
@@ -472,7 +472,11 @@ a {
     padding: 0.5rem;
 
 }
-
+.table th, .table td {
+    padding: 0.5rem;
+    vertical-align: unset;
+    border-top: 1px solid #dee2e6;
+}
 
 .footerStyle{
     text-align: -webkit-center;
