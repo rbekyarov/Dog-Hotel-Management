@@ -53,7 +53,7 @@
                     <td th:text="${c.phone}"></td>
                     <td th:text="${c.address}"></td>
                     <td th:text="${c.city.getName()}"></td>
-                    <td>  <a  <p    th:each="d: ${c.getDogs()}"  th:target="_blank"  th:href="@{/view/table/dog/view/{id}(id=${d.id})}" th:text="${d.getName()}"></td>
+                    <td>  <a  <p    th:each="d: ${c.getDogs()}"  th:target="_blank"  th:href="@{/view/table/dog/view/{id}(id=${d.id})}" th:text="${d.getName()+' '}"></td>
 <!--                    <td><p class="dogsOnClient" th:each="d: ${c.getDogs()}" th:text="${d.getName()}"></td>-->
                     <td th:text="${c.author.username}"></td>
                     <td th:text="${#temporals.format(c.dateCreate,'dd.MM.yyyy')}"></td>

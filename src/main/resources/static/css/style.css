@@ -478,7 +478,13 @@ a {
     border-top: 1px solid #dee2e6;
 }
 
-
+/*input,  select, optgroup, textarea {*/
+/*    margin: 5px;*/
+/*    font-family: inherit;*/
+/*    font-size: inherit;*/
+/*    line-height: inherit;*/
+/*    width: 80%*/
+/*}*/
 .container {
     width: auto;
     padding-right: 5px;

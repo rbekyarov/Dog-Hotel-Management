@@ -14,51 +14,68 @@
                   th:object="${reservationDTO}">
 
                 <div class="form-group">
+
                     <label class="text-white font-weight-bold"></label>
-                    <label>Client:</label><br>
-                    <select required id="showClient" name="showClient" th:field="*{client.id}"
-                            oninput="getClientDogs()">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+                        <tbody>
+                        <tr>
+                            <td> <label>Client:</label><br>
+                                <select required id="showClient" name="showClient" th:field="*{client.id}"
+                                        oninput="getClientDogs()">
 
-                        <option value="">Please select</option>
-                        <option
-                                th:each="showClient : ${allClients}"
-                                th:value="${showClient.id}"
-                                th:text="${showClient.email}"
-                        ></option>
-                    </select><br>
+                                    <option value="">Please select</option>
+                                    <option
+                                            th:each="showClient : ${allClients}"
+                                            th:value="${showClient.id}"
+                                            th:text="${showClient.email}"
+                                    ></option>
+                                </select></td>
+                        </tr>
+                        <tr>
+                            <td><label>Dogs:</label><br>
+                                <select id="dogsBox" name="dogsBox" th:field="*{dog.id}" onclick="getCells()">
+                                </select><br>
+                                <label>Date of Arrival:</label><br>
+                                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                    <input required type="text" class="form-control datetimepicker-input"
+                                           data-target="#datetimepicker1"
+                                           th:field="*{startDate}" id="date" placeholder="Date"/>
+                                    <div class="input-group-append" data-target="#datetimepicker1"
+                                         data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                                    </div>
+                                </div></td>
+                        </tr>
+                        <tr>
+                            <td><label>Date of Departure:</label><br>
+                                <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                                    <input required type="text" class="form-control datetimepicker-input"
+                                           data-target="#datetimepicker2"
+                                           th:field="*{endDate}" id="date2" placeholder="Date"/>
+                                    <div class="input-group-append" data-target="#datetimepicker2"
+                                         data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                                    </div>
+                                </div></td>
+                        </tr>
+                        <tr>
+                            <td><label>Dog House:</label><br>
+                                <select required id="cellsBox" name="cellsBox" th:field="*{cell}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-                    <label>Dogs:</label><br>
-                    <select id="dogsBox" name="dogsBox" th:field="*{dog.id}" onclick="getCells()">
-                    </select><br>
-                    <label>Date of Arrival:</label><br>
-                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                        <input required type="text" class="form-control datetimepicker-input"
-                               data-target="#datetimepicker1"
-                               th:field="*{startDate}" id="date" placeholder="Date"/>
-                        <div class="input-group-append" data-target="#datetimepicker1"
-                             data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                        </div>
-                    </div>
-                    <label>Date of Departure:</label><br>
-                    <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                        <input required type="text" class="form-control datetimepicker-input"
-                               data-target="#datetimepicker2"
-                               th:field="*{endDate}" id="date2" placeholder="Date"/>
-                        <div class="input-group-append" data-target="#datetimepicker2"
-                             data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                        </div>
-                    </div>
-                    <label>Dog House:</label><br>
-                    <select required id="cellsBox" name="cellsBox" th:field="*{cell}">
+
+
+
+
 
 
                     </select><br><br>
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 700px;">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: auto">
                         <tbody>
                         <tr>
-                            <td><label th:text="${'Feeding: price for One Day '+ price.getPriceFood()+'$'}"></label><br>
+                            <td><label th:text="${'Feeding:'+ price.getPriceFood()+'$'}"></label><br>
                                 <select th:field="*{food}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
@@ -123,6 +140,7 @@
                 </div>
 
             </form>
+            <br>
         </div>
 
         <script th:src="@{/assets/moment/moment.min.js}"></script>

@@ -44,7 +44,7 @@
 }
 .picker-d table td {
   width: 14.28%; /* 7 EQUAL COLUMNS */
-  padding: 5px;
+  /*padding: 5px;*/
   text-align: center;
 }
 /* HEADER */
