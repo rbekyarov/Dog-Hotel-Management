@@ -14,7 +14,7 @@
                     </a>
 
 
-
+                    <div class="table-responsive">
                     <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <thead>
                         <tr>
@@ -33,8 +33,9 @@
                     </table>
                     <br>
                     <br>
+                        </div>
 
-
+                    <div class="table-responsive">
 
                     <table class="table" >
                         <tr>
@@ -120,6 +121,7 @@
 
                         </tr>
                     </table>
+                    </div>
                     <div th:if="${reservations.totalPages > 0}" class="pagination"
                          th:each="pageNumber : ${pageNumbers}">
                         <a th:href="@{reservationTable(size=${reservations.size}, page=${pageNumber})}"
