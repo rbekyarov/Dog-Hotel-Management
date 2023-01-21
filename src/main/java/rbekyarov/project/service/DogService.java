@@ -46,4 +46,6 @@ public interface DogService {
     Integer getWeightById(Long id);
 
     void updateDogYears();
+
+
 }

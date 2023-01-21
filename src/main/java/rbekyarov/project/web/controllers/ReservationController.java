@@ -76,7 +76,6 @@ public class ReservationController extends BaseController {
         ReservationDTO reservationDTO = new ReservationDTO();
 
         List<Client> allClients = clientService.findAll();
-
         List<Dog> allDogsInCatalog = dogService.findAll();
         List<Dog> allActiveReservedDogs = reservationService.findActiveReservedDogs();
         List<Dog> allDogs = new ArrayList<>(allDogsInCatalog);
@@ -90,7 +89,6 @@ public class ReservationController extends BaseController {
                 }
             }
         }
-
 
         List<Cell> allEmptyCells = cellService.findAllEmptyCells();
 
@@ -169,14 +167,38 @@ public class ReservationController extends BaseController {
         List<Cell> allEmptyCells = cellService.findAllEmptyCellsForCurrentDog(weightDog);
         Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
         Price price = allPrices.get();
+        List<Dog> allDogsInCatalog = dogService.findAll();
+        List<Dog> allActiveReservedDogs = reservationService.findActiveReservedDogs();
+
+        List<Dog> allDogs = new ArrayList<>(allDogsInCatalog);
+        for (Dog dog : allDogsInCatalog) {
+            Long idDog = dog.getId();
+            for (Dog allActiveReservedDog : allActiveReservedDogs) {
+                Long idActivDog = allActiveReservedDog.getId();
+                if(idDog.intValue()==idActivDog.intValue()){
+                    allDogs.remove(dog);
+                    break;
+                }
+            }
+        }
         modelAndView.addObject("reservationDTO", reservationDTO);
         modelAndView.addObject("allClients", allClients);
         modelAndView.addObject("allEmptyCells", allEmptyCells);
         modelAndView.addObject("price", price);
+        modelAndView.addObject("allDogs", allDogs);
+        return super.view("/view/edit/reservationEdit",
+                "reservationDTO", reservationDTO,
+                "allClients", allClients,
+                "allEmptyCells", allEmptyCells,
+                "price", price,
+                "allDogs", allDogs);
 
-
-        return super.view("/view/edit/reservationEdit", "reservationDTO", reservationDTO, "allClients", allClients, "allEmptyCells", allEmptyCells, "price", price, "allDogsOnClient", allDogsOnClient);
     }
+
+
+
+
+
 
     @PostMapping("view/table/reservation/edit/{id}/edit")
     public String editReservation(@PathVariable("id") Long id, ReservationEditDTO reservationEditDTO, HttpSession session) throws ObjectNotFoundException {

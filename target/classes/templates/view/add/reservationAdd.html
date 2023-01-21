@@ -253,6 +253,36 @@
                 }
             }
         </script>
+<!--        <script>-->
+
+<!--            function getClientDogs() {-->
+<!--                const clientId = Number(document.getElementById('showClient').value);-->
+<!--                let length = clientList.length-->
+<!--                for (let i = 0; i < length; i++) {-->
+<!--                    if (clientList[i].id === clientId) {-->
+<!--                        $('#dogsBox option').remove();-->
+<!--                        const dogs = clientList[i].dogs;-->
+<!--                        const dogFreelist = dogList;-->
+<!--                        function getDifference(dogs, dogFreelist) {-->
+<!--                            return dogs.filter(object1 => {-->
+<!--                                return dogFreelist.some(object2 => {-->
+<!--                                    return object1.id === object2.id;-->
+<!--                                });-->
+<!--                            });-->
+<!--                        }-->
+<!--                        const dogs1 =getDifference(dogs, dogFreelist)-->
+
+<!--                        for (let n = 0; n < dogs1.length; n++) {-->
+<!--                            $('#dogsBox').append($('<option>', {-->
+<!--                                value: dogs1[n].id,-->
+<!--                                text: dogs1[n].name-->
+<!--                            }));-->
+<!--                        }-->
+<!--                        $("#dogsBox").trigger("chosen:updated");-->
+<!--                    }-->
+<!--                }-->
+<!--            }-->
+<!--        </script>-->
         <script>
 
             function getClientDogs() {
@@ -262,20 +292,10 @@
                     if (clientList[i].id === clientId) {
                         $('#dogsBox option').remove();
                         const dogs = clientList[i].dogs;
-                        const dogFreelist = dogList;
-                        function getDifference(dogs, dogFreelist) {
-                            return dogs.filter(object1 => {
-                                return dogFreelist.some(object2 => {
-                                    return object1.id === object2.id;
-                                });
-                            });
-                        }
-                        const dogs1 =getDifference(dogs, dogFreelist)
-
-                        for (let n = 0; n < dogs1.length; n++) {
+                        for (let n = 0; n < dogs.length; n++) {
                             $('#dogsBox').append($('<option>', {
-                                value: dogs1[n].id,
-                                text: dogs1[n].name
+                                value: dogs[n].id,
+                                text: dogs[n].name
                             }));
                         }
                         $("#dogsBox").trigger("chosen:updated");
@@ -283,6 +303,5 @@
                 }
             }
         </script>
-
     </th:block>
 </th:block>
