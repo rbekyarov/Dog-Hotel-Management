@@ -1,17 +1,19 @@
 <th:block th:unless="${session.isEmpty()}">
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
         <div class="button_back">
+
             <a class="nav-link h5" th:href="@{/view/table/invoiceTable}">
                 <button type="button" class="btn btn-danger btn-lg btnTable"><span
                         class="glyphicon glyphicon-ok"></span>Back
                 </button>
             </a>
+            <a href="javascript:void(0);" onclick="printPageArea('invoice')">Print</a>
         </div>
-        <div class="container"><a href="javascript:void(0);" onclick="printPageArea('invoice')">Print</a>
+        <div >
             <h1 class="page_title" th:object="${invoice}">Invoice Details</h1>
 
 
-            <div id="invoice" class="page">
+            <div id="invoice" >
 
             <div class="invoice-box"  >
                 <table cellpadding="0" cellspacing="0">
