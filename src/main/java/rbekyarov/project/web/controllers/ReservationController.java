@@ -54,9 +54,21 @@ public class ReservationController extends BaseController {
         modelAndView.addObject("reservations", reservations);
         List<Invoice> allRealInvoice = invoiceService.findAllRealInvoice();
         modelAndView.addObject("allRealInvoice", allRealInvoice);
+        int countActiveReservation = reservationService.getCountActiveReservation();
+        modelAndView.addObject("countActiveReservation", countActiveReservation);
+        int countUpcomingReservation = reservationService.getCountUpcomingReservation();
+        modelAndView.addObject("countUpcomingReservation", countUpcomingReservation);
+        int countCompletedReservation = reservationService.getCountCompletedReservation();
+        modelAndView.addObject("countCompletedReservation", countCompletedReservation);
         reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
         reservationService.statusCellsUpdateEmpty();
-        return super.view("/view/table/reservationTable", "reservations", reservations, "pageNumbers", pageNumbers, "allRealInvoice", allRealInvoice);
+        return super.view("/view/table/reservationTable",
+                "reservations", reservations,
+                "pageNumbers", pageNumbers,
+                "allRealInvoice", allRealInvoice,
+                "countActiveReservation", countActiveReservation,
+                "countUpcomingReservation", countUpcomingReservation,
+                "countCompletedReservation", countCompletedReservation);
     }
 
     @GetMapping("/view/add/reservationAdd")

@@ -13,7 +13,6 @@
                         </button>
                     </a>
 
-
                     <div class="table-responsive">
                     <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <thead>
@@ -26,6 +25,25 @@
                                 <input type="text" name="clientEmail" th:value="${clientEmail}"  placeholder="Find by Client Mail" size="20" >
                                 <button type="submit" class="btn btn-info" >Search</button>
                             </form></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>  <img height="15px" width="15px" th:src="@{${'/pics/upcoming.png'}}" th:text="${'Upcoming: '+countUpcomingReservation}"></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>  <img height="15px" width="15px" th:src="@{${'/pics/active.png'}}" th:text="${'Active: '+countActiveReservation}"></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>  <img height="15px" width="15px" th:src="@{${'/pics/completed.png'}}" th:text="${'Completed: '+countCompletedReservation}"></th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -57,9 +75,9 @@
                             <th></th>
                             <th></th>
 
-
                         </tr>
                         <tr th:each="r : ${reservations}">
+
                             <td class="h6"><a th:text="${r.id}" th:href="@{reservation/view/{id}(id=*{r.id})}"></td>
                             <td th:text="${ r.client.firstName +' '+ r.client.lastName +' '+ r.client.email +' '+r.client.phone}"> </td>
                             <td ><a th:target="_blank"  th:href="@{/view/table/dog/view/{id}(id=${r.dog.id})}" th:text="${r.dog.name + ' Weight:' +r.dog.weight + ' '+r.dog.breed.breedName}"></td>
@@ -120,7 +138,9 @@
                                 </a></td></th:block>
 
                         </tr>
+
                     </table>
+
                     </div>
                     <div th:if="${reservations.totalPages > 0}" class="pagination"
                          th:each="pageNumber : ${pageNumbers}">

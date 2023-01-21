@@ -1,5 +1,6 @@
 package rbekyarov.project.web.controllers;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.entity.*;
 
@@ -106,6 +107,27 @@ public abstract class BaseController {
 
 
         return modelAndView;
+
+
+    }
+    //Reservation Table
+    public ModelAndView view(String view, String string1, Page list1, String string2, List list2, String string3, List list3, String string4, int int1 , String string5, int int2, String string6, int int3) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("fragments/base-layout");
+        modelAndView.addObject("view", view);
+        modelAndView.addObject(string1, list1);
+        modelAndView.addObject(string2, list2);
+        modelAndView.addObject(string3, list3);
+        modelAndView.addObject(string4, int1);
+        modelAndView.addObject(string5, int2);
+        modelAndView.addObject(string6, int3);
+
+
+
+
+        return modelAndView;
+
+
     }
 
 

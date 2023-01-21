@@ -90,4 +90,13 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             value = "select * from reservations as r where status_reservation ='upcoming' order by start_date asc limit 3")
 //    @Query("select r from Reservation as r where r.statusReservation='upcoming' order by r.endDate limit 3")
     List<Reservation> findAllUpcomingReservations();
+    @Query(nativeQuery = true,
+            value = "select COUNT(*) from reservations as r where status_reservation ='active' ")
+    int getCountActiveReservation();
+    @Query(nativeQuery = true,
+            value = "select COUNT(*) from reservations as r where status_reservation ='upcoming' ")
+    int getCountUpcomingReservation();
+    @Query(nativeQuery = true,
+            value = "select COUNT(*) from reservations as r where status_reservation ='completed' ")
+    int getCountCompletedReservation();
 }

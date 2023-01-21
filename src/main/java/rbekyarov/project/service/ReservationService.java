@@ -44,4 +44,10 @@ public interface ReservationService {
     List<Reservation> findAllUpcomingReservations();
 
     void statusCellsUpdateEmpty();
+
+    int getCountActiveReservation();
+
+    int getCountUpcomingReservation();
+
+    int getCountCompletedReservation();
 }

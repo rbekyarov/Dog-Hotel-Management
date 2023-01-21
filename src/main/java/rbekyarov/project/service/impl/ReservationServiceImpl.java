@@ -455,6 +455,21 @@ public class ReservationServiceImpl implements ReservationService {
         }
     }
 
+    @Override
+    public int getCountActiveReservation() {
+        return reservationRepository.getCountActiveReservation();
+    }
+
+    @Override
+    public int getCountUpcomingReservation() {
+         return reservationRepository.getCountUpcomingReservation();
+    }
+
+    @Override
+    public int getCountCompletedReservation() {
+        return reservationRepository.getCountCompletedReservation();
+    }
+
 
     LocalDate formatterLocal(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
