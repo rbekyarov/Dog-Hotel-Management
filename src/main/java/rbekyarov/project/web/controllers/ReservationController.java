@@ -55,6 +55,7 @@ public class ReservationController extends BaseController {
         List<Invoice> allRealInvoice = invoiceService.findAllRealInvoice();
         modelAndView.addObject("allRealInvoice", allRealInvoice);
         reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
+        reservationService.statusCellsUpdateEmpty();
         return super.view("/view/table/reservationTable", "reservations", reservations, "pageNumbers", pageNumbers, "allRealInvoice", allRealInvoice);
     }
 

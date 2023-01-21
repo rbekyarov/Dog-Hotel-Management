@@ -19,9 +19,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -420,6 +419,42 @@ public class ReservationServiceImpl implements ReservationService {
     public List<Reservation> findAllUpcomingReservations() {
         return reservationRepository.findAllUpcomingReservations();
     }
+
+    @Override
+    public void statusCellsUpdateEmpty() {
+
+        List<Cell> allCell = cellService.findAllCellById();
+        List<Cell> activeReservationCell = new ArrayList<>();
+
+        List<Reservation> allActiveReservation = reservationRepository.findAllActiveReservation();
+        for (Reservation reservation : allActiveReservation) {
+            if(reservation.getStatusReservation().name().equals("active")){
+                activeReservationCell.add(reservation.getCell());
+            }
+        }
+        List<Cell> newCellList = new ArrayList<>();
+        boolean isSame = false;
+        for (Cell cell : allCell) {
+            String code = cell.getCode();
+            for (Cell cell1 : activeReservationCell) {
+                String code1 = cell1.getCode();
+                if(code.equals(code1)){
+                    isSame = true;
+                    break;
+
+                }else {
+                    isSame = false;
+                }
+            }
+            if(!isSame){
+                newCellList.add(cell);
+            }
+        }
+        for (Cell cell : newCellList) {
+            cellService.setCellEmpty(cell.getId());
+        }
+    }
+
 
     LocalDate formatterLocal(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

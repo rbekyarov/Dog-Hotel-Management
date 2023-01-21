@@ -42,4 +42,6 @@ public interface ReservationService {
     List<Dog> findActiveReservedDogs();
 
     List<Reservation> findAllUpcomingReservations();
+
+    void statusCellsUpdateEmpty();
 }
