@@ -16,6 +16,7 @@
                         <p th:if="${isUsed}" class="errors alert alert-danger">
                             Vendor is Used!
                         </p>
+                        <div class="table-responsive-invoice">
                         <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                             <thead>
                             <tr>
@@ -34,6 +35,7 @@
                         </table>
                         <br>
                         <br>
+                        <div class="table-responsive-vendor">
                         <table class=table>
                             <tr>
                                 <th>No</th>
@@ -72,6 +74,7 @@
                                 </a></td>
                             </tr>
                         </table>
+                        </div>
                         <div th:if="${vendors.totalPages > 0}" class="pagination"
                              th:each="pageNumber : ${pageNumbers}">
                             <a th:href="@{vendorTable(size=${vendors.size}, page=${pageNumber})}"

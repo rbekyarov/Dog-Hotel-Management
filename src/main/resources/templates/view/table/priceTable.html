@@ -13,6 +13,7 @@
                                     class="glyphicon glyphicon-ok"></span>New Price
                             </button>
                         </a>
+                        <div class="table-responsive-price">
                         <table class=table>
                             <tr>
                                 <th>No</th>
@@ -58,6 +59,7 @@
                                 </a></td>
                             </tr>
                         </table>
+                        </div>
                         <div th:if="${prices.totalPages > 0}" class="pagination"
                              th:each="pageNumber : ${pageNumbers}">
                             <a th:href="@{priceTable(size=${prices.size}, page=${pageNumber})}"

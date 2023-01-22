@@ -661,6 +661,223 @@ a, a:hover {
     }
 }
 
+.table-responsive-dog {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+@media screen and (max-width: 560px) {
+    .table-responsive-dog {
+        font-size: 12px;
+        /*display: block;*/
+        /*width:100%;*/
+        max-width: 28%;
+        background-color: transparent;
+        border-collapse: collapse;
+        border-spacing: 0;
+        color: #353838;
+        text-align: center;
+        padding: 0.5rem;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        overflow-y: inherit;
+    }
+
+    .table-responsive-dog > .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive-dog > .table > thead > tr > th,
+    .table-responsive-dog > .table > tbody > tr > th,
+    .table-responsive-dog > .table > tfoot > tr > th,
+    .table-responsive-dog > .table > thead > tr > td,
+    .table-responsive-dog > .table > tbody > tr > td,
+    .table-responsive-dog > .table > tfoot > tr > td {
+        white-space: nowrap;
+    }
+}
+
+.table-responsive-price {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+@media screen and (max-width: 560px) {
+    .table-responsive-price {
+        font-size: 12px;
+        /*display: block;*/
+        /*width:100%;*/
+        max-width: 55%;
+        background-color: transparent;
+        border-collapse: collapse;
+        border-spacing: 0;
+        color: #353838;
+        text-align: center;
+        padding: 0.5rem;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        overflow-y: inherit;
+    }
+
+    .table-responsive-price> .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive-price > .table > thead > tr > th,
+    .table-responsive-price > .table > tbody > tr > th,
+    .table-responsive-price > .table > tfoot > tr > th,
+    .table-responsive-price > .table > thead > tr > td,
+    .table-responsive-price > .table > tbody > tr > td,
+    .table-responsive-price > .table > tfoot > tr > td {
+        white-space: pre-line;
+    }
+}
+
+.table-responsive-invoice {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+@media screen and (max-width: 560px) {
+    .table-responsive-invoice {
+        font-size: 12px;
+        /*display: block;*/
+        /*width:100%;*/
+        max-width: 38%;
+        background-color: transparent;
+        border-collapse: collapse;
+        border-spacing: 0;
+        color: #353838;
+        text-align: center;
+        padding: 0.5rem;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        overflow-y: inherit;
+    }
+
+    .table-responsive-invoice > .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive-invoice > .table > thead > tr > th,
+    .table-responsive-invoice > .table > tbody > tr > th,
+    .table-responsive-invoice > .table > tfoot > tr > th,
+    .table-responsive-invoice > .table > thead > tr > td,
+    .table-responsive-invoice > .table > tbody > tr > td,
+    .table-responsive-invoice > .table > tfoot > tr > td {
+        white-space: nowrap;
+    }
+}
+
+.table-responsive-cost {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+@media screen and (max-width: 560px) {
+    .table-responsive-cost {
+        font-size: 12px;
+        /*display: block;*/
+        /*width:100%;*/
+        max-width: 60%;
+        background-color: transparent;
+        border-collapse: collapse;
+        border-spacing: 0;
+        color: #353838;
+        text-align: center;
+        padding: 0.5rem;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        overflow-y: inherit;
+    }
+
+    .table-responsive-cost > .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive-cost> .table > thead > tr > th,
+    .table-responsive-cost > .table > tbody > tr > th,
+    .table-responsive-cost > .table > tfoot > tr > th,
+    .table-responsive-cost > .table > thead > tr > td,
+    .table-responsive-cost > .table > tbody > tr > td,
+    .table-responsive-cost > .table > tfoot > tr > td {
+        white-space: nowrap;
+    }
+}
+
+
+.table-responsive-vendor {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+@media screen and (max-width: 560px) {
+    .table-responsive-vendor {
+        font-size: 12px;
+        /*display: block;*/
+        /*width:100%;*/
+        max-width: 100%;
+        background-color: transparent;
+        border-collapse: collapse;
+        border-spacing: 0;
+        color: #353838;
+        text-align: center;
+        padding: 0.1rem;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        overflow-y: inherit;
+    }
+
+    .table-responsive-vendor > .table {
+        margin-bottom: 0px;
+    }
+
+    .table-responsive-vendor > .table > thead > tr > th,
+    .table-responsive-vendor > .table > tbody > tr > th,
+    .table-responsive-vendor > .table > tfoot > tr > th,
+    .table-responsive-vendor > .table > thead > tr > td,
+    .table-responsive-vendor > .table > tbody > tr > td,
+    .table-responsive-vendor > .table > tfoot > tr > td {
+        white-space:nowrap;
+    }
+}
+
+
+
+.table-responsive-client {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+@media screen and (max-width: 600px) {
+    .table-responsive-client {
+        font-size: 12px;
+        /*display: block;*/
+        width:100%;
+        max-width: 120%;
+        background-color: transparent;
+        border-collapse: collapse;
+        border-spacing: 0;
+        color: #353838;
+        text-align: center;
+        padding: 0.5rem;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        overflow-y: inherit;
+    }
+
+    .table-responsive-client > .table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive-client > .table > thead > tr > th,
+    .table-responsive-client > .table > tbody > tr > th,
+    .table-responsive-client > .table > tfoot > tr > th,
+    .table-responsive-client > .table > thead > tr > td,
+    .table-responsive-client > .table > tbody > tr > td,
+    .table-responsive-client > .table > tfoot > tr > td {
+        white-space: nowrap;
+    }
+}
+
+
+
+
+
 .button_submit {
     text-align: -webkit-center;
 }
