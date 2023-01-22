@@ -848,7 +848,7 @@ a, a:hover {
     .table-responsive-client {
         font-size: 12px;
         /*display: block;*/
-        width:100%;
+        width:50%;
         max-width: 120%;
         background-color: transparent;
         border-collapse: collapse;
