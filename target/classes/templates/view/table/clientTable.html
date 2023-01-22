@@ -18,23 +18,28 @@
                             Client is used!
                         </p>
 
-                        <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+                        <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:600px">
                             <thead>
                             <tr>
-                                <th scope="col"><form th:action="@{/view/table/searchClientByPhone}" method="get">
+                                <td scope="col"><form th:action="@{/view/table/searchClientByPhone}" method="get">
                                     <input type="text" name="clientPhone" th:value="${clientPhone}"  placeholder="Find by Client Phone" size="20" >
                                     <button type="submit" class="btn btn-info" >Search</button>
-                                </form></th>
-                                <th scope="col"><form th:action="@{/view/table/searchClientByEmail}" method="get">
+                                </form></td>
+                                <td scope="col"><form th:action="@{/view/table/searchClientByEmail}" method="get">
                                     <input type="text" name="clientEmail" th:value="${clientEmail}"  placeholder="Find by Client Email" size="20" >
                                     <button type="submit" class="btn btn-info" >Search</button>
-                                </form></th>
+                                </form></td>
+                                <td ><p6><img  height="25px" width="25px" style="font-size: 10px"
+                                     th:src="@{${'/pics/top.png'}}" th:text="${topClient+'$'}" ></p6></td>
+
+
                             </tr>
                             </thead>
                             <tbody>
                             </tbody>
                         </table>
                     </div>
+                        <br>
                         <br>
                         <br>
                         <div class="table-responsive-client">
