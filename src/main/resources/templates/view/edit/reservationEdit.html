@@ -1,5 +1,7 @@
 <th:block th:unless="${session.isEmpty()}">
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+        <link href="/css/dp-light.css" rel="stylesheet">
+        <script defer src="/js/datepicker.js"></script>
         <div class="button_back">
             <a class="nav-link h5" th:href="@{/view/table/reservationTable}">
                 <button type="button" class="btn btn-danger btn-lg btnTable"><span
@@ -42,29 +44,21 @@
                                 </select><br></td>
                         </tr>
                         <tr>
-                            <td> <label>Date of Arrival:</label><br>
-                                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                    <input required type="text" class="form-control datetimepicker-input"
-                                           data-target="#datetimepicker1"
-                                           th:field="*{startDate}" id="date" placeholder="Date"/>
-                                    <div class="input-group-append" data-target="#datetimepicker1"
-                                         data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                                    </div>
-                                </div></td>
+                            <td>
+                                <label>Date of Arrival:</label><br>
+                                <div>
+                                    <input required type="text" id="input1" th:field="*{startDate}" placeholder="Date of Arrival"  />
+                                </div>
+                            </td>
                         </tr>
                         <tr>
-                            <td> <label>Date of Departure:</label><br>
-                                <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                                    <input required type="text" class="form-control datetimepicker-input"
-                                           data-target="#datetimepicker2"
-                                           th:field="*{endDate}" id="date2" placeholder="Date"/>
-                                    <div class="input-group-append" data-target="#datetimepicker2"
-                                         data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                                    </div>
-                                </div></td>
+                            <td><label>Date of Departure:</label><br>
+                                <div>
+                                    <input required type="text" id="input2" th:field="*{endDate}" placeholder="Date of Departure"  />
+                                </div>
+                            </td></td>
                         </tr>
+
                         <tr>
                             <td><label>Dog House:</label><br>
                                 <select required id="cellsBox" th:field="*{cell}">
@@ -150,44 +144,14 @@
         </div>
 
 
-        <script th:src="@{/assets/moment/moment.min.js}"></script>
-        <script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
         <script>
-            $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
-                icons: {
-                    time: 'far fa-clock',
-                    date: 'far fa-calendar',
-                    up: 'fas fa-arrow-up',
-                    down: 'fas fa-arrow-down',
-                    previous: 'fas fa-chevron-left',
-                    next: 'fas fa-chevron-right',
-                    today: 'far fa-calendar-check-o',
-                    clear: 'far fa-trash',
-                    close: 'far fa-times'
-                }
+            window.addEventListener("load", () => {
+                picker.attach({ target: "input1" });
             });
-
-            $('#datetimepicker1').datetimepicker({
-                format: 'DD/MM/YYYY'
-            });
-
         </script>
         <script>
-            $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
-                icons: {
-                    time: 'far fa-clock',
-                    date: 'far fa-calendar',
-                    up: 'fas fa-arrow-up',
-                    down: 'fas fa-arrow-down',
-                    previous: 'fas fa-chevron-left',
-                    next: 'fas fa-chevron-right',
-                    today: 'far fa-calendar-check-o',
-                    clear: 'far fa-trash',
-                    close: 'far fa-times'
-                } });
-
-            $('#datetimepicker2').datetimepicker({
-                format: 'DD/MM/YYYY'
+            window.addEventListener("load", () => {
+                picker.attach({ target: "input2" });
             });
         </script>
         <script th:inline="javascript">

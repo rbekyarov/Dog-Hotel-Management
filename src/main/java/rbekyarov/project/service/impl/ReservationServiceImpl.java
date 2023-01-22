@@ -471,10 +471,43 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
 
-    LocalDate formatterLocal(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(date, formatter);
+    LocalDate formatterLocal(String dateDto) {
+        //1.01.23 г.  ->23-01-01
+        //11.01.23 г. ->23-01-11
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        StringBuilder sb = new StringBuilder();
+        if(dateDto.contains(".")){
+            if(dateDto.length()==10){
+                sb.append("2");
+                sb.append("0");
+                sb.append(dateDto.charAt(6));
+                sb.append(dateDto.charAt(7));
+                sb.append("-");
+                sb.append(dateDto.charAt(3));
+                sb.append(dateDto.charAt(4));
+                sb.append("-");
+                sb.append(dateDto.charAt(0));
+                sb.append(dateDto.charAt(1));
 
-        return localDate;
+            }else if(dateDto.length()==11){
+                sb.append("2");
+                sb.append("0");
+                sb.append(dateDto.charAt(6));
+                sb.append(dateDto.charAt(7));
+                sb.append("-");
+                sb.append(dateDto.charAt(3));
+                sb.append(dateDto.charAt(4));
+                sb.append("-");
+                sb.append(dateDto.charAt(0));
+                sb.append(dateDto.charAt(1));
+            }
+            String s = sb.toString();
+
+            LocalDate localDate = LocalDate.parse(s, formatter);
+            return localDate;
+        }else {
+            LocalDate localDate = LocalDate.parse(dateDto, formatter);
+            return localDate;
+        }
     }
 }
