@@ -1,11 +1,19 @@
 <th:block th:unless="${session.isEmpty()}">
+    <script>
+        $(document).ready(function() {
+            $('#nav-link').click(function(e){
+                e.preventDefault();
+                window.history.back();
+            });
+        });
+    </script>
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
 
         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
             <tbody>
             <tr>
                 <td><div class="button_back">
-                    <a class="nav-link h5" th:href="@{/view/table/cellTable}">
+                    <a class="nav-link h5" id="nav-link">
                         <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                 class="glyphicon glyphicon-ok"></span>Back
                         </button>

@@ -7,34 +7,34 @@
                 <td>
                     <div class="welcome" >
                         <br>
-                        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:300px">
                             <tbody>
                             <tr>
-                                <td>
-                                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:150px">
-                                        <tbody><h5>Empty House</h5>
 
-                                        <tr>
-                                            <td th:each="c : ${cellsEmpty}">
-
-                                                <label><p th:text="${c.code}"></p></label></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-
-                                <td style="width:120px"><h5>Total invoiced: </h5>
+                                <td><h5>Total Invoiced: </h5>
 
                                     <label ><p th:text="${totalInvoicedPrice+'$'}"></label></td>
-                                <td style="width:120px"><h5>Total spend: </h5>
+                                <td><h5>Total Spend: </h5>
 
                                     <label ><p th:text="${totalAmountCost+'$'}"></label></td>
-                                <td style="width:150px"><h5>Balance: </h5>
+                                <td><h5>Balance: </h5>
 
                                     <label ><p  th:text="${company.balance +'$'}"></label></td>
                             </tr>
                             </tbody>
                         </table>
+
+                <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:300px">
+                    <tbody><h5>Empty House</h5>
+                    <tr>
+                        <td th:each="c : ${cellsEmpty}">
+
+                            <label><p th:text="${c.code}"></p></label></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
                         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:300px">
                             <tbody><h5>Active Dog and House</h5>
                             <tr>

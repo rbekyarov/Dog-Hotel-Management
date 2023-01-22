@@ -1,9 +1,17 @@
 <th:block th:unless="${session.isEmpty()}">
+    <script>
+        $(document).ready(function() {
+            $('#nav-link').click(function(e){
+                e.preventDefault();
+                window.history.back();
+            });
+        });
+    </script>
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
         <link href="/css/dp-light.css" rel="stylesheet">
         <script defer src="/js/datepicker.js"></script>
         <div class="button_back">
-            <a class="nav-link h5" th:href="@{/view/table/reservationTable}">
+            <a class="nav-link h5" id="nav-link">
                 <button type="button" class="btn btn-danger btn-lg btnTable"><span
                         class="glyphicon glyphicon-ok"></span>Back
                 </button>
