@@ -40,7 +40,7 @@
                             <tr>
                                 <td th:each="r : ${activeReservations}" >
 
-                                    <label style="width:50px"><p th:text="${r.dog.name +' '+ r.cell.code }"></p></label></td>
+                                    <label style="width:50px"><p><a th:href="@{/view/table/dog/view/{id}(id=${r.dog.id})}" th:text="${r.dog.name +' '+ r.cell.code }"></p></label></td>
                             </tr>
                             </tbody>
                         </table>
@@ -62,9 +62,9 @@
                                 <th>Total Price</th>
                             </tr>
                             <tr th:each="r : ${activeReservations}">
-                                <td class="h6"><a th:text="${r.id}"></td>
+                                <td class="h6"><a th:text="${r.id}" th:href="@{/view/table/reservation/view/{id}(id=*{r.id})}"></td>
                                 <td th:text="${ r.client.firstName +' '+ r.client.lastName +' '+ r.client.email +' '+r.client.phone}"></td>
-                                <td><a th:target="_blank"
+                                <td><a  th:href="@{/view/table/dog/view/{id}(id=${r.dog.id})}"
                                        th:text="${r.dog.name + ' Weight:' +r.dog.weight + ' '+r.dog.breed.breedName}">
                                 </td>
                                 <td th:text="${r.countOvernightStay}"></td>
@@ -88,9 +88,9 @@
                                 <th>Total Price</th>
                             </tr>
                             <tr th:each="r : ${upcomingReservations}">
-                                <td class="h6"><a th:text="${r.id}"></td>
+                                <td class="h6"><a th:text="${r.id}" th:href="@{/view/table/reservation/view/{id}(id=*{r.id})}"></td>
                                 <td th:text="${ r.client.firstName +' '+ r.client.lastName +' '+ r.client.email +' '+r.client.phone}"></td>
-                                <td><a th:target="_blank"
+                                <td><a  th:href="@{/view/table/dog/view/{id}(id=${r.dog.id})}"
                                        th:text="${r.dog.name + ' Weight:' +r.dog.weight + ' '+r.dog.breed.breedName}">
                                 </td>
                                 <td th:text="${r.countOvernightStay}"></td>
@@ -111,7 +111,7 @@
                                 <th>Author:</th>
                             </tr>
                             <tr th:each="i : ${invoices}">
-                                <td class="h6" th:text="${i.id}"></td>
+                                <td class="h6"><a th:text="${i.id}" th:href="@{/view/table/invoice/view/{id}(id=${i.id})}" ></td>
                                 <td th:text="${i.clientName +' '+ i.clientEmail +' '+i.clientPhone}"></td>
                                 <td th:text="${'Dog '+ i.dogName + ' '+'House:' +i.cellCode + ' '+'Day: '+i.countStay}"></td>
                                 <td th:text="${i.reservationId}"></td>

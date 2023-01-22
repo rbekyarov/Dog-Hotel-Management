@@ -34,4 +34,8 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     @Query(nativeQuery = true,
             value = "select * from invoces as r where cancellation_invoice ='NO' order by id desc limit 2")
     List<Invoice> findLastInvoices();
+
+    @Query(nativeQuery = true,
+            value = "SELECT client_name , SUM(total_price) as s FROM dog_hotel.invoces group by client_email order by s desc limit 3")
+    List<String> getTop3Client();
 }

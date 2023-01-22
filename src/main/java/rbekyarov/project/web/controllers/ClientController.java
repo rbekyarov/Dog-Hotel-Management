@@ -11,7 +11,9 @@ import rbekyarov.project.models.dto.ClientEditDTO;
 import rbekyarov.project.models.entity.City;
 import rbekyarov.project.models.entity.Client;
 import rbekyarov.project.models.dto.ClientDTO;
+import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.repository.ClientRepository;
+import rbekyarov.project.repository.InvoiceRepository;
 import rbekyarov.project.repository.ReservationRepository;
 import rbekyarov.project.service.CityService;
 import rbekyarov.project.service.ClientService;
@@ -30,15 +32,17 @@ public class ClientController extends BaseController {
     private final CityService cityService;
     private final ClientRepository clientRepository;
     private final ReservationRepository reservationRepository;
+    private final InvoiceRepository invoiceRepository;
 
     public ClientController(ClientService clientService, DogService dogService, CityService cityService,
                             ClientRepository clientRepository,
-                            ReservationRepository reservationRepository) {
+                            ReservationRepository reservationRepository, InvoiceRepository invoiceRepository) {
         this.clientService = clientService;
         this.dogService = dogService;
         this.cityService = cityService;
         this.clientRepository = clientRepository;
         this.reservationRepository = reservationRepository;
+        this.invoiceRepository = invoiceRepository;
     }
 
 
@@ -47,7 +51,8 @@ public class ClientController extends BaseController {
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
         Page<Client> clients = clientService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
-
+        String topClientSting = invoiceRepository.getTop3Client().get(0);
+        String topClient = topClientSting.replace(",", " - ");
         int totalPages = clients.getTotalPages();
         List<Integer> pageNumbers = null;
         if (totalPages > 0) {
@@ -55,9 +60,10 @@ public class ClientController extends BaseController {
                     .boxed()
                     .collect(Collectors.toList());
             modelAndView.addObject("pageNumbers", pageNumbers);
+            modelAndView.addObject("topClient", topClient);
         }
         modelAndView.addObject("clients", clients);
-        return super.view("/view/table/clientTable", "clients", clients,"pageNumbers", pageNumbers);
+        return super.view("/view/table/clientTable", "clients", clients,"pageNumbers", pageNumbers,"topClient", topClient);
     }
 
     @GetMapping("/view/add/clientAdd")

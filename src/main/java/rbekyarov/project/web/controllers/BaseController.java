@@ -69,6 +69,17 @@ public abstract class BaseController {
 
         return modelAndView;
     }
+    public ModelAndView view(String view, String objectName, Object object, String allCity, List allCityList,String objectName1, String object1) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("fragments/base-layout");
+        modelAndView.addObject("view", view);
+        modelAndView.addObject(objectName, object);
+        modelAndView.addObject(allCity, allCityList);
+        modelAndView.addObject(objectName1, object1);
+
+
+        return modelAndView;
+    }
     public ModelAndView view(String view, String objectName, Object object, String string1, List list1, String string2, List list2 ) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fragments/base-layout");
