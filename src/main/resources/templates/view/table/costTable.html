@@ -4,37 +4,35 @@
             <tbody>
             <tr>
                 <td>
-
-                        <div class="page-header">
-                            <h1>Costs List</h1>
-                        </div>
-                        <a class="nav-link h5" th:href="@{/view/add/costAdd}">
-                            <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                                    class="glyphicon glyphicon-ok"></span>Add Cost
-                            </button>
-                        </a>
-
-                        <div class="table-responsive-invoice">
+                    <div class="page-header">
+                        <h1>Costs List</h1>
+                    </div>
+                    <a class="nav-link h5" th:href="@{/view/add/costAdd}">
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                class="glyphicon glyphicon-ok"></span>Add Cost
+                        </button>
+                    </a>
+                    <div class="table-responsive-invoice">
                         <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                             <thead>
                             <tr>
-                                <th scope="col"><form th:action="@{/view/table/searchCostByVendorName}" method="get">
-                                    <input type="text" name="vendorName" th:value="${vendorName}"  placeholder="Find by Vendor" size="20" >
-                                    <button type="submit" class="btn btn-info" >Search</button>
-                                    <span th:text="${'Total cost: ' +totalAmountCost+'$'}"></span>
-                                </form></th>
-
+                                <th scope="col">
+                                    <form th:action="@{/view/table/searchCostByVendorName}" method="get">
+                                        <input type="text" name="vendorName" th:value="${vendorName}"
+                                               placeholder="Find by Vendor" size="20">
+                                        <button type="submit" class="btn btn-info">Search</button>
+                                        <span th:text="${'Total cost: ' +totalAmountCost+'$'}"></span>
+                                    </form>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
                             </tbody>
                         </table>
                         <br><br>
-                        </div>
-
-                        <br>
-                        <br>
-                        <div class="table-responsive-cost">
+                    </div>
+                    <br>
+                    <div class="table-responsive-cost">
                         <table class="table">
                             <tr>
                                 <th>No</th>
@@ -72,20 +70,16 @@
                                 </a></td>
                             </tr>
                         </table>
-                        </div>
-
-                        <div th:if="${costs.totalPages > 0}" class="pagination"
-                             th:each="pageNumber : ${pageNumbers}">
-                            <a th:href="@{costTable(size=${costs.size}, page=${pageNumber})}"
-                               th:text=${pageNumber}
-                               th:class="${pageNumber==costs.number + 1} ? active"></a>
-                        </div>
+                    </div>
+                    <div th:if="${costs.totalPages > 0}" class="pagination"
+                         th:each="pageNumber : ${pageNumbers}">
+                        <a th:href="@{costTable(size=${costs.size}, page=${pageNumber})}"
+                           th:text=${pageNumber}
+                           th:class="${pageNumber==costs.number + 1} ? active"></a>
+                    </div>
                     </div>
                 </td>
             </tr>
-
-
         </table>
-
     </th:block>
 </th:block>
