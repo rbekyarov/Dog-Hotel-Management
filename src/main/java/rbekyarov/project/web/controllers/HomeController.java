@@ -51,18 +51,11 @@ public class HomeController extends BaseController {
     }
 
     @GetMapping("/view/home")
-    public ModelAndView home(ModelAndView modelAndView, HttpSession session) {
-
-//        if(){
-//            return super.redirect("/index");
-//
-//        }
+    public ModelAndView home(ModelAndView modelAndView) {
 
         List<Reservation>activeReservations = reservationService.findAllActiveReservation();
         List<Reservation>upcomingReservations = reservationService.findAllUpcomingReservations();
 
-
-        List<Cell>cells = cellService.findAllCellById();
         List<Cell>cellsEmpty = cellService.findAllEmptyCells();
         List<Cost>  costs = costService.findLast2Cost();
         List<Invoice>  invoices = invoiceService.findLastInvoices();
