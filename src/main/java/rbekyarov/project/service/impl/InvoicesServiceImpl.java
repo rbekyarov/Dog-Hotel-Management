@@ -17,6 +17,7 @@ import rbekyarov.project.repository.InvoiceRepository;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -202,7 +203,14 @@ public class InvoicesServiceImpl implements InvoiceService {
 
     @Override
     public List<String> getTop3Clients() {
-        return invoiceRepository.getTop3Client();
+        List<String> result = new ArrayList<>();
+        for (String s : invoiceRepository.getTop3Client()) {
+            String replace = s.replace(",", " - ");
+            result.add(replace);
+        }
+
+
+        return result;
     }
 
 }

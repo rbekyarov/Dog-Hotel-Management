@@ -43,6 +43,17 @@
                             </tr>
                             </tbody>
                         </table>
+                        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                            <tbody><h5>TOP 3 Clients</h5>
+                            <tr>
+                                <td th:each="r : ${top3Clients}">
+
+                                    <label style="width:150px"><p
+                                            th:text="${r+'$'}"></p></label></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
                         <br>
                         <table style="width:auto" class=table>
                             <tr><h5>Current Active Reservations</h5>
