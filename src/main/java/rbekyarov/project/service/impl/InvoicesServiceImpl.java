@@ -200,6 +200,11 @@ public class InvoicesServiceImpl implements InvoiceService {
         return invoiceRepository.findLastInvoices();
     }
 
+    @Override
+    public List<String> getTop3Clients() {
+        return invoiceRepository.getTop3Client();
+    }
+
 }
 
 

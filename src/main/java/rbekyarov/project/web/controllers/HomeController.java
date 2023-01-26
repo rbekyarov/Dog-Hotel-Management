@@ -4,7 +4,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import rbekyarov.project.models.entity.*;
-import rbekyarov.project.service.UserService;
+import rbekyarov.project.repository.ClientRepository;
 import rbekyarov.project.service.*;
 
 import javax.servlet.http.HttpSession;
@@ -20,14 +20,19 @@ public class HomeController extends BaseController {
     private final CompanyService companyService;
     private final CostService costService;
     private final InvoiceService invoiceService;
+    private final ClientService clientService;
+    private final ClientRepository clientRepository;
 
-    public HomeController(ReservationService reservationService, CellService cellService, CompanyService companyService, CostService costService, InvoiceService invoiceService) {
+    public HomeController(ReservationService reservationService, CellService cellService, CompanyService companyService, CostService costService, InvoiceService invoiceService,
+                          ClientService clientService, ClientRepository clientRepository) {
 
         this.reservationService = reservationService;
         this.cellService = cellService;
         this.companyService = companyService;
         this.costService = costService;
         this.invoiceService = invoiceService;
+        this.clientService = clientService;
+        this.clientRepository = clientRepository;
     }
 
     @GetMapping("/")
@@ -63,6 +68,7 @@ public class HomeController extends BaseController {
         BigDecimal totalAmountCost = costService.getTotalAmountCost();
         Optional<Company> companyOptional = companyService.findById(1L);
         Company company = companyOptional.get();
+        List<String> top3Clients = invoiceService.getTop3Clients();
         modelAndView.addObject("activeReservations",activeReservations);
         modelAndView.addObject("upcomingReservations",upcomingReservations);
         modelAndView.addObject("cellsEmpty",cellsEmpty);
@@ -71,7 +77,8 @@ public class HomeController extends BaseController {
         modelAndView.addObject("company",company);
         modelAndView.addObject("totalInvoicedPrice",totalInvoicedPrice);
         modelAndView.addObject("totalAmountCost",totalAmountCost);
+        modelAndView.addObject("top3Clients",top3Clients);
 
-        return super.view("/view/home","company",company,"invoices",invoices,"costs",costs,"cellsEmpty",cellsEmpty,"activeReservations",activeReservations,"upcomingReservations",upcomingReservations,"totalInvoicedPrice",totalInvoicedPrice,"totalAmountCost",totalAmountCost);
+        return super.view("/view/home","company",company,"invoices",invoices,"costs",costs,"cellsEmpty",cellsEmpty,"activeReservations",activeReservations,"upcomingReservations",upcomingReservations,"totalInvoicedPrice",totalInvoicedPrice,"totalAmountCost",totalAmountCost,"top3Clients",top3Clients);
     }
 }

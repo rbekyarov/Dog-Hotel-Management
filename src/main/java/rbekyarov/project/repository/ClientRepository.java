@@ -47,4 +47,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     List<Dog> listUsedDog();
     @Query("select c.city from Client as c")
     List<City> listUsedCity();
+
+
 }

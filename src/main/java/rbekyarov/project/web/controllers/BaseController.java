@@ -102,7 +102,7 @@ public abstract class BaseController {
 
         return modelAndView;
     }
-    public ModelAndView view(String view, String objectName, Object object, String string1, List list1, String string2, List list2, String string3, List list3, String string4, List list4,String string5, List list5, String string6,BigDecimal bigdecimal1, String string7, BigDecimal bigdecimal2) {
+    public ModelAndView view(String view, String objectName, Object object, String string1, List list1, String string2, List list2, String string3, List list3, String string4, List list4,String string5, List list5, String string6,BigDecimal bigdecimal1, String string7, BigDecimal bigdecimal2,String string8, List list6) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fragments/base-layout");
         modelAndView.addObject("view", view);
@@ -114,6 +114,7 @@ public abstract class BaseController {
         modelAndView.addObject(string5, list5);
         modelAndView.addObject(string6, bigdecimal1);
         modelAndView.addObject(string7, bigdecimal2);
+        modelAndView.addObject(string8, list6);
 
 
 

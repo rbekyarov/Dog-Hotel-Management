@@ -147,7 +147,7 @@ public class UserController extends BaseController {
                 userLoginDTO.getPassword())) {
 
             User user = this.userService.loginUser(userDTO);
-
+            session.setAttribute("username", user.getUsername());
             session.setAttribute("userId", user.getId());
             session.setAttribute("username", user.getUsername());
             if (user.getRole().name().equals("ADMIN")) {

@@ -34,4 +34,5 @@ public interface ClientService {
 
     List<Client> listClientByEmail(String clientEmail);
     Page<Client> findPaginated(Pageable pageable);
+
 }
