@@ -79,7 +79,7 @@
                         <tr th:each="r : ${reservations}">
 
                             <td class="h6"><a th:text="${r.id}" th:href="@{reservation/view/{id}(id=*{r.id})}"></td>
-                            <td th:text="${ r.client.firstName +' '+ r.client.lastName +' '+ r.client.email +' '+r.client.phone}"> </td>
+                            <td ><a   th:href="@{/view/table/client/view/{id}(id=${r.client.id})}"th:text="${ r.client.firstName +' '+ r.client.lastName +' '+ r.client.email +' '+r.client.phone}"> </td>
                             <td ><a   th:href="@{/view/table/dog/view/{id}(id=${r.dog.id})}" th:text="${r.dog.name + ' Weight:' +r.dog.weight + ' '+r.dog.breed.breedName}"></td>
                             <td th:text="${r.countOvernightStay}"></td>
                             <td th:text="${#temporals.format(r.startDate,'dd.MM.yyyy')}"></td>

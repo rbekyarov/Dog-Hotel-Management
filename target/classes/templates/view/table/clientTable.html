@@ -64,7 +64,8 @@
                                     <th></th>
                                 </tr>
                                 <tr th:each="c : ${clients}">
-                                    <td th:text="${c.id}"></td>
+                                    <td class="h6">  <a th:href="@{/view/table/client/view/{id}(id=${c.id})}"th:text="${c.id}"</td>
+<!--                                    <td th:text="${c.id}"></td>-->
                                     <td th:text="${c.firstName}"></td>
                                     <td th:text="${c.lastName}"></td>
                                     <td th:text="${c.email}"></td>

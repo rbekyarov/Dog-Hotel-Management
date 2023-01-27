@@ -11,6 +11,7 @@ import rbekyarov.project.models.dto.ClientEditDTO;
 import rbekyarov.project.models.entity.City;
 import rbekyarov.project.models.entity.Client;
 import rbekyarov.project.models.dto.ClientDTO;
+import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.repository.ClientRepository;
 import rbekyarov.project.repository.InvoiceRepository;
@@ -139,6 +140,18 @@ public class ClientController extends BaseController {
 
         return "redirect:/view/table/clientTable";
     }
+    @GetMapping("view/table/client/view/{id}")
+    public ModelAndView getClientView(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
+
+        Client client = clientRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
+        modelAndView.addObject("client", client);
+
+
+        return super.view("/view/table/clientView", "client", client);
+
+    }
+
+
     @RequestMapping(path = {"/","/view/table/searchClientByPhone"})
     public ModelAndView search(ModelAndView modelAndView,@RequestParam("clientPhone") String clientPhone) {
         List<Client> clients = new ArrayList<>();
