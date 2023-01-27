@@ -19,9 +19,15 @@
 
         <h1 class="page_title" th:object="${client}">Client Details</h1>
 
+
         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
             <tbody>
             <td><h3 th:text="${client.firstName +' '+client.lastName}"></h3></td>
+            <tr>
+                <td>
+
+                </td>
+            </tr>
             <tr>
                 <td>
 
@@ -41,7 +47,7 @@
             </tr>
             <tr th:each="d : ${client.dogs}">
                 <td>
-                    <label ><a th:href="@{/view/table/dog/view/{id}(id=${d.id})}" th:text="${d.name}" ></label><br>
+                    <label><a th:href="@{/view/table/dog/view/{id}(id=${d.id})}" th:text="${d.name}"></label><br>
 
                     <img src="#" height="135px" width="200px"
                          th:src="@{${'/image/' + d.imageName}}"><br>
@@ -51,30 +57,64 @@
             </tbody>
         </table>
         <br>
+
         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
             <tbody>
-            <td><table style="width:auto" class=table>
-            <tr><h5>Invoices</h5>
-                <th>No</th>
-                <th>Dog:</th>
-                <th>Reservation No:</th>
-                <th>Total Price:</th>
-                <th>Created:</th>
-            </tr>
-            <tr th:each="i : ${clientInvoice}">
-                <td class="h6"><a th:text="${i.id}"
-                                  th:href="@{/view/table/invoice/view/{id}(id=${i.id})}"></td>
-                <td th:text="${'Dog '+ i.dogName + ' '+'House:' +i.cellCode + ' '+'Day: '+i.countStay}"></td>
-                <td th:text="${i.reservationId}"></td>
-                <td class="boldPrice" th:text="${i.totalPrice +'$'}"></td>
-                <td th:text="${#temporals.format(i.dateCreate,'dd.MM.yyyy')}"></td>
-            </tr>
-        </table></td></tbody>
+
+            <td>
+                <table style="width:auto" class=table>
+                    <tbody>
+                    <tr><h5>Invoices</h5>
+                        <th>No</th>
+                        <th>Dog:</th>
+                        <th>Reservation No:</th>
+                        <th>Total Price:</th>
+                        <th>Created:</th>
+                        <th>Canceled:</th>
+                    </tr>
+                    <tr th:each="i : ${clientInvoice}">
+                        <td class="h6"><a th:text="${i.id}"
+                                          th:href="@{/view/table/invoice/view/{id}(id=${i.id})}"></td>
+                        <td th:text="${'Dog '+ i.dogName + ' '+'House:' +i.cellCode + ' '+'Day: '+i.countStay}"></td>
+                        <td th:text="${i.reservationId}"></td>
+                        <td class="boldPrice" th:text="${i.totalPrice +'$'}"></td>
+                        <td th:text="${#temporals.format(i.dateCreate,'dd.MM.yyyy')}"></td>
+                        <td th:text="${i.cancellationInvoice}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </td>
+
+            </tbody>
         </table>
 
-        <p>&nbsp;</p>
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+            <tbody>
+
+            <td>
+                <table style="width:auto" class=table>
+                    <tbody>
+                    <tr>
+                        <th>Total Reservation:</th>
+                        <th>Total Invoices:</th>
+                        <th>Total SUM:</th>
+                    </tr>
+                    <tr >
+                        <td th:text="${totalCountReservation}"></td>
+                        <td th:text="${totalCountClientInvoice}"></td>
+                        <td th:text="${totalInvoicedMoney +'$'}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </td>
+
+            </tbody>
+        </table>
 
         </div>
+
 
     </th:block>
 </th:block>

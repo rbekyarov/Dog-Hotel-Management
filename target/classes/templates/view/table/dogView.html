@@ -62,8 +62,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <label style="font-weight: bold;"
-                                th:text="${'Client: '+ dog.client.firstName+' '+dog.client.lastName}"></label><br>
+                        <label style="font-weight: bold;"><a
+                               th:href="@{/view/table/client/view/{id}(id=${dog.client.id})}" th:text="${'Client: '+ dog.client.firstName+' '+dog.client.lastName}"></a></label><br>
                         <label
                                 th:text="${' * '+'City: '+dog.client.city.name}"></label><br>
                         <label
@@ -72,7 +72,30 @@
                                 th:text="${' * '+'Phone: '+dog.client.phone}"></label><br>
                     </td>
                 </tr>
+                <tr>
+                    <table  align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto" class=table>
+                        <tr><h5 align="center">Reservations History</h5>
+                            <th>No</th>
+                            <th>Stay Days:</th>
+                            <th>Day of coming:</th>
+                            <th>Day of departure:</th>
+                            <th>Dog House:</th>
+                            <th>Status:</th>
+                            <th>Total Price</th>
+                        </tr>
+                        <tr th:each="r : ${reservations}">
+                            <td class="h6"><a th:text="${r.id}"
+                                              th:href="@{/view/table/reservation/view/{id}(id=*{r.id})}"></td>
 
+                            <td th:text="${r.countOvernightStay}"></td>
+                            <td th:text="${#temporals.format(r.startDate,'dd.MM.yyyy')}"></td>
+                            <td th:text="${#temporals.format(r.endDate,'dd.MM.yyyy')}"></td>
+                            <td th:text="${r.cell.code}"></td>
+                            <td th:text="${r.statusReservation}"></td>
+                            <td class="boldPrice" th:text="${r.totalPrice +'$'}"></td>
+                        </tr>
+                    </table>
+                </tr>
                 </tbody>
             </table>
 
