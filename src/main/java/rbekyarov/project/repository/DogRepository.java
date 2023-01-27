@@ -28,7 +28,7 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
 
     Optional<Dog> findById(Long id);
     @Query("select d.weight from Dog as d where d.id=:id")
-    Integer getWeightById(Long id);
+    Integer getWeightById(@Param("id") Long id);
 
     @Transactional
     @Modifying
