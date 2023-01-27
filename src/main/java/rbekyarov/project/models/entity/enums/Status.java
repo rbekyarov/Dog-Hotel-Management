@@ -1,5 +1,5 @@
 package rbekyarov.project.models.entity.enums;
 
 public enum Status {
-    empty, busy
+    empty, busy, under_repair
 }

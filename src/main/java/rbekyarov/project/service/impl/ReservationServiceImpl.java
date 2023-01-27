@@ -423,7 +423,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public void statusCellsUpdateEmpty() {
 
-        List<Cell> allCell = cellService.findAllCellById();
+        List<Cell> allCell = cellService.findAllCellWithoutCellInService();
         List<Cell> activeReservationCell = new ArrayList<>();
 
         List<Reservation> allActiveReservation = reservationRepository.findAllActiveReservation();

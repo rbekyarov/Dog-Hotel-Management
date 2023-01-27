@@ -31,4 +31,7 @@ public interface CellService {
     Page<Cell> findPaginated(Pageable pageable);
 
     void updateStatus(List<Reservation> reservationList);
+
+    List<Cell> findAllCellWithoutCellInService();
 }
+
