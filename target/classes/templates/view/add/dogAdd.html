@@ -8,6 +8,16 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('select').selectize({
+                sortField: 'text'
+            });
+        });
+    </script>
+    <script src="/js/selectize.min.js" ></script>
+    <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css" />
+
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
         <link href="/css/dp-light.css" rel="stylesheet">
         <script defer src="/js/datepicker.js"></script>
@@ -55,7 +65,7 @@
                     <tbody>
                     <tr>
                         <td><label>Breed:</label><br>
-                            <select required th:field="*{breed.id}" >
+                            <select required th:field="*{breed.id}" style="width: 196px">
                                 <option value="">Please select </option>
                                 <option
                                         th:each="b : ${allBreeds}"
@@ -65,7 +75,7 @@
                             </select>
                         </td>
                         <td><label>Behavior:</label><br>
-                            <select required th:field="*{behavior.id}" >
+                            <select required th:field="*{behavior.id}" style="width: 196px">
                                 <option value="">Please select</option>
                                 <option
                                         th:each="b : ${allBehaviors}"
@@ -97,7 +107,7 @@
                     <tbody>
                     <tr>
                         <td><label>Client:</label><br>
-                            <select required th:field="*{client.id}" >
+                            <select id="select-state" required th:field="*{client.id}" style="width: 400px">
                                 <option value="">Please select</option>
                                 <option
                                         th:each="c : ${allClients}"
@@ -114,7 +124,7 @@
                     <tbody>
                     <tr>
                         <td><label>Sex:</label><br>
-                            <select th:field="*{sex}" >
+                            <select th:field="*{sex}"style="width: 77px" >
                                 <option value="M">M</option>
                                 <option value="F">F</option>
                             </select>
@@ -137,7 +147,7 @@
                                 <option value="YES">YES</option>
                             </select>
                         </td>
-                        <td id="description23" style="visibility:hidden" ><label>Microchip Number:</label><br>
+                        <td id="description23"  ><label>Microchip Number:</label><br>
                             <input  type="text"  th:field="*{microchipNumber}"  placeholder="Please enter Number" />
                         </td>
                     </tr>

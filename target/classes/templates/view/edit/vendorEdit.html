@@ -7,6 +7,16 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('select').selectize({
+                sortField: 'text'
+            });
+        });
+    </script>
+    <script src="/js/selectize.min.js" ></script>
+    <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css" />
+
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
             <tbody>
@@ -37,7 +47,7 @@
                                 <input type="text" id="description1" th:field="*{country}" placeholder="Please enter Country"
                                        required/><br>
                                 <label>City:</label><br>
-                                <select th:field="*{city.id}">
+                                <select th:field="*{city.id}" style="width: 196px">
                                     <option value="">Please select</option>
                                     <option
                                             th:each="b : ${allCity}"
