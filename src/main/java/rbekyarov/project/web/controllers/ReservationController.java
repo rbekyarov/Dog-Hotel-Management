@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
 import rbekyarov.project.models.entity.*;
+import rbekyarov.project.repository.ClientRepository;
 import rbekyarov.project.service.*;
 import rbekyarov.project.repository.CellRepository;
 
@@ -27,8 +28,10 @@ public class ReservationController extends BaseController {
     private final PriceService priceService;
     private final InvoiceService invoiceService;
     private final CellRepository cellRepository;
+    private final ClientRepository clientRepository;
 
-    public ReservationController(ReservationService reservationService, ClientService clientService, CellService cellService, DogService dogService, PriceService priceService, InvoiceService invoiceService, CellRepository cellRepository) {
+    public ReservationController(ReservationService reservationService, ClientService clientService, CellService cellService, DogService dogService, PriceService priceService, InvoiceService invoiceService, CellRepository cellRepository,
+                                 ClientRepository clientRepository) {
         this.reservationService = reservationService;
         this.clientService = clientService;
         this.cellService = cellService;
@@ -36,6 +39,7 @@ public class ReservationController extends BaseController {
         this.priceService = priceService;
         this.invoiceService = invoiceService;
         this.cellRepository = cellRepository;
+        this.clientRepository = clientRepository;
     }
 
     @GetMapping("/view/table/reservationTable")
@@ -75,6 +79,45 @@ public class ReservationController extends BaseController {
     public ModelAndView reservationAdd(ModelAndView modelAndView) {
         ReservationDTO reservationDTO = new ReservationDTO();
 
+        List<Client> allClients = clientService.findAll();
+        List<Dog> allDogsInCatalog = dogService.findAll();
+        List<Dog> allActiveReservedDogs = reservationService.findActiveReservedDogs();
+        List<Dog> allDogs = new ArrayList<>(allDogsInCatalog);
+        for (Dog dog : allDogsInCatalog) {
+            Long idDog = dog.getId();
+            for (Dog allActiveReservedDog : allActiveReservedDogs) {
+                Long idActivDog = allActiveReservedDog.getId();
+                if(idDog.intValue()==idActivDog.intValue()){
+                    allDogs.remove(dog);
+                    break;
+                }
+            }
+        }
+
+        List<Cell> allEmptyCells = cellService.findAllEmptyCells();
+
+        Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
+
+        Price price = allPrices.get();
+        modelAndView.addObject("allDogs", allDogs);
+        modelAndView.addObject("reservationDTO", reservationDTO);
+        modelAndView.addObject("allClients", allClients);
+        modelAndView.addObject("allEmptyCells", allEmptyCells);
+        modelAndView.addObject("price", price);
+
+
+        return super.view("/view/add/reservationAdd",
+                "reservationDTO", reservationDTO,
+                "allClients", allClients,
+                "allEmptyCells", allEmptyCells,
+                "price", price,
+                "allDogs", allDogs);
+
+    }
+    @GetMapping("/view/add/reservationAdd/{id}")
+    public ModelAndView reservationAddOnClientTable(@PathVariable("id") Long id,ModelAndView modelAndView) {
+        ReservationDTO reservationDTO = new ReservationDTO();
+        reservationDTO.setClient(clientRepository.getOne(id));
         List<Client> allClients = clientService.findAll();
         List<Dog> allDogsInCatalog = dogService.findAll();
         List<Dog> allActiveReservedDogs = reservationService.findActiveReservedDogs();

@@ -62,6 +62,7 @@
                                     <th>Created</th>
                                     <th></th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                                 <tr th:each="c : ${clients}">
                                     <td class="h6">  <a th:href="@{/view/table/client/view/{id}(id=${c.id})}"th:text="${c.id}"</td>
@@ -79,7 +80,16 @@
                                     <!--                    <td><p class="dogsOnClient" th:each="d: ${c.getDogs()}" th:text="${d.getName()}"></td>-->
                                     <td th:text="${c.author.username}"></td>
                                     <td th:text="${#temporals.format(c.dateCreate,'dd.MM.yyyy')}"></td>
-
+                                    <td><a class="nav-link h5" th:href="@{/view/add/dogAdd/{id}(id=*{c.id})}">
+                                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                                class="glyphicon glyphicon-ok"></span>Add Dog
+                                        </button>
+                                    </a></td>
+<!--                                    <td><a class="nav-link h5" th:href="@{/view/add/reservationAdd/{id}(id=*{c.id})}">-->
+<!--                                        <button type="button" class="btn btn-danger btn-lg btnTable"><span-->
+<!--                                                class="glyphicon glyphicon-ok"></span>Add Reservation-->
+<!--                                        </button>-->
+<!--                                    </a></td>-->
 
                                     <td><a class="nav-link h5" th:href="@{client/edit/{id}(id=*{c.id})}">
                                         <button type="button" class="btn btn-danger btn-lg btnTable"><span

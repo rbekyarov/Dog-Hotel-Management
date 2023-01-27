@@ -35,14 +35,16 @@ public class DogController extends BaseController {
     private final DogService dogService;
     private final DogRepository dogRepository;
     private final ReservationRepository reservationRepository;
+    private final ClientRepository clientRepository;
 
 
     public DogController(DogService dogService, FileStorageService fileStorageService,
-                         DogRepository dogRepository, ReservationRepository reservationRepository, ClientRepository clientRepository, ReservationRepository reservationRepository1) {
+                         DogRepository dogRepository, ReservationRepository reservationRepository, ClientRepository clientRepository, ReservationRepository reservationRepository1, ClientRepository clientRepository1) {
 
         this.dogService = dogService;
         this.dogRepository = dogRepository;
         this.reservationRepository = reservationRepository1;
+        this.clientRepository = clientRepository1;
     }
 
     @GetMapping("/view/table/dogTable")
@@ -72,6 +74,28 @@ public class DogController extends BaseController {
         DogDTO dogDTO = new DogDTO();
 
 
+        List<Behavior> allBehaviors = dogService.getAllBehaviors();
+        List<Breed> allBreeds = dogService.getAllBreeds();
+        List<Client> allClients = dogService.getAllClients();
+        modelAndView.addObject("dogDTO", dogDTO);
+
+        modelAndView.addObject("allBehaviors", allBehaviors);
+        modelAndView.addObject("allBreeds", allBreeds);
+        modelAndView.addObject("allClients", allClients);
+
+        return super.view("/view/add/dogAdd",
+                "dogDTO", dogDTO,
+                "allBehaviors",
+                allBehaviors,
+                "allBreeds",
+                allBreeds,
+                "allClients",
+                allClients);
+    }
+    @GetMapping("/view/add/dogAdd/{id}")
+    public ModelAndView dogAddOnClientTable(@PathVariable("id") Long id, ModelAndView modelAndView) {
+        DogDTO dogDTO = new DogDTO();
+        dogDTO.setClient(clientRepository.getOne(id));
         List<Behavior> allBehaviors = dogService.getAllBehaviors();
         List<Breed> allBreeds = dogService.getAllBreeds();
         List<Client> allClients = dogService.getAllClients();
