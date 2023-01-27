@@ -102,5 +102,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Query("select COUNT(r) from Reservation as r where r.client.id =:id")
     int getTotalCountReservationOnClient(@Param("id") Long id);
     @Query("select r from Reservation as r where r.dog.id = :id order by r.id desc ")
-    List<Reservation> getReservationByDogId(@Param("id")Long id);
+    List<Reservation> getReservationByDogId(@Param("id") Long id);
 }

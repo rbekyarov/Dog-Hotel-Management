@@ -71,7 +71,7 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
     @Query("select d from Dog as d where d.client.id=:id ")
     List<Dog> findAllDogByClient(@Param("id") Long id);
     @Query("select d from Dog as d where d.client.email=:clientEmail")
-    List<Dog> listDogByClientEmail(String clientEmail);
+    List<Dog> listDogByClientEmail(@Param("clientEmail")String clientEmail);
 
     @Query("select d.behavior from Dog as d")
     List<Behavior> listBehaviorUsed();
