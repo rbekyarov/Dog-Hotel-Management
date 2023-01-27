@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import rbekyarov.project.models.entity.Invoice;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,4 +41,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     List<String> getTop3Client();
     @Query("select i from Invoice as i where i.clientName=:name order by i.id desc ")
     List<Invoice> getInvoicesOnClient(@Param("name") String name);
+    @Query(nativeQuery = true,
+            value = "SELECT SUM(total_price) as s FROM dog_hotel.invoces where client_name = :clientName and cancellation_invoice='NO'")
+    BigDecimal getTotalInvoicedMoneyOnClient(@Param("clientName") String clientName);
 }

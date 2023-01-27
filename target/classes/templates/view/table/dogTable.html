@@ -73,7 +73,7 @@
                                 <td th:text="${d.passport}"></td>
                                 <td th:text="${d.microchip}"></td>
                                 <td th:text="${#temporals.format(d.lastDewormingDate,'dd.MM.yyyy')}"></td>
-                                <td th:text="${ d.client.firstName +' '+ d.client.lastName +' '+ d.client.email +' '+d.client.phone}"> </td>
+                                <td ><a   th:href="@{/view/table/client/view/{id}(id=${d.client.id})}" th:text="${ d.client.firstName +' '+ d.client.lastName +' '+ d.client.email +' '+d.client.phone}"> </td>
                                 <!--                    <td th:text="${d.client.getEmail()}"></td>-->
                                 <td th:text="${d.behavior.getName()}"></td>
                                 <td th:text="${d.author.username}"></td>

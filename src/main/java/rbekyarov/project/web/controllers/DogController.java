@@ -183,9 +183,9 @@ public class DogController extends BaseController {
 
         Dog dog = dogRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
         modelAndView.addObject("dog", dog);
-
-
-        return super.view("/view/table/dogView", "dog", dog);
+        List<Reservation> reservations = reservationRepository.getReservationByDogId(id);
+        modelAndView.addObject("reservations", reservations);
+        return super.view("/view/table/dogView", "dog", dog,"reservations", reservations);
 
     }
 }

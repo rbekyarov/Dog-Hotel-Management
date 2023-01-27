@@ -11,7 +11,6 @@ import rbekyarov.project.models.dto.ClientEditDTO;
 import rbekyarov.project.models.entity.City;
 import rbekyarov.project.models.entity.Client;
 import rbekyarov.project.models.dto.ClientDTO;
-import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.repository.ClientRepository;
 import rbekyarov.project.repository.InvoiceRepository;
@@ -22,6 +21,7 @@ import rbekyarov.project.service.DogService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -146,11 +146,24 @@ public class ClientController extends BaseController {
         Client client = clientRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
        String clientName = String.format(client.getFirstName() +" "+ client.getLastName());
        List <Invoice> clientInvoice = invoiceRepository.getInvoicesOnClient(clientName);
+
+       BigDecimal totalInvoicedMoney = invoiceRepository.getTotalInvoicedMoneyOnClient(clientName);
+       int totalCountReservation = reservationRepository.getTotalCountReservationOnClient(id);
+       int totalCountClientInvoice = clientInvoice.size();
         modelAndView.addObject("client", client);
         modelAndView.addObject("clientInvoice", clientInvoice);
 
+        modelAndView.addObject("totalInvoicedMoney", totalInvoicedMoney);
+        modelAndView.addObject("totalCountReservation", totalCountReservation);
+        modelAndView.addObject("totalCountClientInvoice", totalCountClientInvoice);
 
-        return super.view("/view/table/clientView", "client", client,"clientInvoice", clientInvoice);
+
+        return super.view("/view/table/clientView",
+                "client", client,
+                "clientInvoice", clientInvoice,
+                "totalInvoicedMoney", totalInvoicedMoney,
+                "totalCountReservation", totalCountReservation,
+                "totalCountClientInvoice", totalCountClientInvoice);
 
     }
 

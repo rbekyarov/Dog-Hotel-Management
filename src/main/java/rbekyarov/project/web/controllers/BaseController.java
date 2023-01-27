@@ -91,6 +91,22 @@ public abstract class BaseController {
 
         return modelAndView;
     }
+     //ClientView
+    public ModelAndView view(String view, String objectName, Object object, String string1, List list1, String stingBigDecimal, BigDecimal bigdecimal,String string2, int int1,String string3, int int2 ) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("fragments/base-layout");
+        modelAndView.addObject("view", view);
+        modelAndView.addObject(objectName, object);
+        modelAndView.addObject(string1, list1);
+        modelAndView.addObject(stingBigDecimal, bigdecimal);
+        modelAndView.addObject(string2, int1);
+        modelAndView.addObject(string3, int2);
+
+        modelAndView.addObject(stingBigDecimal, bigdecimal);
+
+
+        return modelAndView;
+    }
     public ModelAndView view(String view, String objectName, Object object, String string1, List list1, String string2, BigDecimal bigDecimal ) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fragments/base-layout");
