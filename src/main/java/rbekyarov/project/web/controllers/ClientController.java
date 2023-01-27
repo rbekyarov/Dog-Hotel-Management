@@ -144,10 +144,13 @@ public class ClientController extends BaseController {
     public ModelAndView getClientView(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
 
         Client client = clientRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
+       String clientName = String.format(client.getFirstName() +" "+ client.getLastName());
+       List <Invoice> clientInvoice = invoiceRepository.getInvoicesOnClient(clientName);
         modelAndView.addObject("client", client);
+        modelAndView.addObject("clientInvoice", clientInvoice);
 
 
-        return super.view("/view/table/clientView", "client", client);
+        return super.view("/view/table/clientView", "client", client,"clientInvoice", clientInvoice);
 
     }
 

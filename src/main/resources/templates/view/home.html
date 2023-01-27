@@ -116,6 +116,7 @@
                                 <th>Reservation No:</th>
                                 <th>Total Price:</th>
                                 <th>Author:</th>
+                                <th>Created:</th>
                             </tr>
                             <tr th:each="i : ${invoices}">
                                 <td class="h6"><a th:text="${i.id}"
@@ -125,6 +126,7 @@
                                 <td th:text="${i.reservationId}"></td>
                                 <td class="boldPrice" th:text="${i.totalPrice +'$'}"></td>
                                 <td th:text="${i.authorName}"></td>
+                                <td th:text="${#temporals.format(i.dateCreate,'dd.MM.yyyy')}"></td>
                             </tr>
                         </table>
                         <br>

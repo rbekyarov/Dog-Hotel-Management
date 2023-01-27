@@ -45,13 +45,32 @@
 
                     <img src="#" height="135px" width="200px"
                          th:src="@{${'/image/' + d.imageName}}"><br>
-
                 </td>
-            </tr>
 
+            </tr>
             </tbody>
         </table>
-
+        <br>
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+            <tbody>
+            <td><table style="width:auto" class=table>
+            <tr><h5>Invoices</h5>
+                <th>No</th>
+                <th>Dog:</th>
+                <th>Reservation No:</th>
+                <th>Total Price:</th>
+                <th>Created:</th>
+            </tr>
+            <tr th:each="i : ${clientInvoice}">
+                <td class="h6"><a th:text="${i.id}"
+                                  th:href="@{/view/table/invoice/view/{id}(id=${i.id})}"></td>
+                <td th:text="${'Dog '+ i.dogName + ' '+'House:' +i.cellCode + ' '+'Day: '+i.countStay}"></td>
+                <td th:text="${i.reservationId}"></td>
+                <td class="boldPrice" th:text="${i.totalPrice +'$'}"></td>
+                <td th:text="${#temporals.format(i.dateCreate,'dd.MM.yyyy')}"></td>
+            </tr>
+        </table></td></tbody>
+        </table>
 
         <p>&nbsp;</p>
 
