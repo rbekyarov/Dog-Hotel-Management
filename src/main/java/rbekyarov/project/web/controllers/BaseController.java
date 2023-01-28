@@ -139,7 +139,7 @@ public abstract class BaseController {
 
     }
     //Reservation Table
-    public ModelAndView view(String view, String string1, Page list1, String string2, List list2, String string3, List list3, String string4, int int1 , String string5, int int2, String string6, int int3) {
+    public ModelAndView view(String view, String string1, Page list1, String string2, List list2, String string3, List list3, String string4, int int1 , String string5, int int2, String string6, int int3,String string7, String str1) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fragments/base-layout");
         modelAndView.addObject("view", view);
@@ -149,6 +149,7 @@ public abstract class BaseController {
         modelAndView.addObject(string4, int1);
         modelAndView.addObject(string5, int2);
         modelAndView.addObject(string6, int3);
+        modelAndView.addObject(string7, str1);
 
 
 

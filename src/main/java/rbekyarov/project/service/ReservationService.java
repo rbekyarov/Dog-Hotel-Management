@@ -1,6 +1,7 @@
 package rbekyarov.project.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
@@ -50,4 +51,10 @@ public interface ReservationService {
     int getCountUpcomingReservation();
 
     int getCountCompletedReservation();
+
+    Page<Reservation> findPaginatedActive(Pageable pageable);
+
+    Page<Reservation> findPaginatedUpcoming(Pageable pageable);
+
+    Page<Reservation> findPaginatedCompleted(Pageable pageable);
 }

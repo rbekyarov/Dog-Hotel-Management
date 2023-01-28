@@ -103,4 +103,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     int getTotalCountReservationOnClient(@Param("id") Long id);
     @Query("select r from Reservation as r where r.dog.id = :id order by r.id desc ")
     List<Reservation> getReservationByDogId(@Param("id") Long id);
+    @Query("select r from Reservation as r where r.statusReservation='active' order by r.endDate asc ")
+    List<Reservation> findAllReservationActive();
+    @Query("select r from Reservation as r where r.statusReservation='upcoming' order by r.startDate asc ")
+    List<Reservation> findAllReservationUpcoming();
+    @Query("select r from Reservation as r where r.statusReservation='completed' order by r.id desc ")
+    List<Reservation> findAllReservationCompleted();
 }

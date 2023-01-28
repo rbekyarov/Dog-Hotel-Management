@@ -394,6 +394,60 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationPage;
     }
+    @Override
+    public Page<Reservation> findPaginatedActive(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Reservation> list;
+        List<Reservation> reservations = reservationRepository.findAllReservationActive();
+        if (reservations.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, reservations.size());
+            list = reservations.subList(startItem, toIndex);
+        }
+
+        Page<Reservation> reservationPage = new PageImpl<Reservation>(list, PageRequest.of(currentPage, pageSize), reservations.size());
+
+        return reservationPage;
+    }
+    @Override
+    public Page<Reservation> findPaginatedUpcoming(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Reservation> list;
+        List<Reservation> reservations = reservationRepository.findAllReservationUpcoming();
+        if (reservations.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, reservations.size());
+            list = reservations.subList(startItem, toIndex);
+        }
+
+        Page<Reservation> reservationPage = new PageImpl<Reservation>(list, PageRequest.of(currentPage, pageSize), reservations.size());
+
+        return reservationPage;
+    }
+    @Override
+    public Page<Reservation> findPaginatedCompleted(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Reservation> list;
+        List<Reservation> reservations = reservationRepository.findAllReservationCompleted();
+        if (reservations.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, reservations.size());
+            list = reservations.subList(startItem, toIndex);
+        }
+
+        Page<Reservation> reservationPage = new PageImpl<Reservation>(list, PageRequest.of(currentPage, pageSize), reservations.size());
+
+        return reservationPage;
+    }
 
     @Override
     public List<Reservation> listReservationById(long reservationNumber) {

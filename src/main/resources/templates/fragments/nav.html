@@ -29,7 +29,7 @@
 
                             <th:block th:unless="${session.isEmpty()}">
                             <li class="has-children">
-                                <a href="#" class="nav-link">RESERVATION</a>
+                                <a  class="nav-link">RESERVATION</a>
                                 <ul class="dropdown arrow-top">
                                     <li><a th:href="@{/view/table/reservationTable}" class="nav-link">RESERVATION LIST</a></li>
                                     <li><a th:href="@{/view/add/reservationAdd}" class="nav-link">ADD RESERVATION</a></li>
@@ -40,7 +40,7 @@
 
                             <th:block th:unless="${session.isEmpty()}">
                                 <li class="has-children">
-                                    <a href="#" class="nav-link">INVOICES</a>
+                                    <a  class="nav-link">INVOICES</a>
                                     <ul class="dropdown arrow-top">
                                         <li><a th:href="@{/view/table/invoiceTable}" class="nav-link">INVOICES LIST</a></li>
                                         <li><a th:href="@{/view/table/invoiceCanceledTable}" class="nav-link">CANCELED INVOICES</a></li>
@@ -52,7 +52,7 @@
 
                             <th:block th:unless="${session.isEmpty()}">
                                 <li class="has-children">
-                                    <a href="#" class="nav-link">DOGS</a>
+                                    <a  class="nav-link">DOGS</a>
                                     <ul class="dropdown arrow-top">
                                         <li><a th:href="@{/view/table/dogTable}" class="nav-link">DOG LIST</a></li>
                                         <li><a th:href="@{/view/table/cellTable}" class="nav-link">DOG HOUSES</a></li>
@@ -65,7 +65,7 @@
 
                             <th:block th:unless="${session.isEmpty()}">
                                 <li class="has-children">
-                                    <a href="#" class="nav-link">CLIENTS</a>
+                                    <a  class="nav-link">CLIENTS</a>
                                     <ul class="dropdown arrow-top">
                                         <li><a th:href="@{/view/table/clientTable}" class="nav-link">CLIENTS LIST</a></li>
                                         <li><a th:href="@{/view/table/cityTable}" class="nav-link">CITIES LIST</a></li>
@@ -76,7 +76,7 @@
 
                             <th:block th:unless="${session.isEmpty()}">
                                 <li class="has-children">
-                                    <a href="#" class="nav-link">EXPENSES</a>
+                                    <a  class="nav-link">EXPENSES</a>
                                     <ul class="dropdown arrow-top">
                                         <li><a th:href="@{/view/table/costTable}" class="nav-link">COSTS LIST</a></li>
                                         <li><a th:href="@{/view/table/vendorTable}" class="nav-link">VENDORS LIST</a></li>
@@ -94,7 +94,7 @@
 
                             <th:block th:if="${session.admin}">
                                 <li class="has-children">
-                                    <a href="#" class="nav-link">ADMIN MENU</a>
+                                    <a  class="nav-link">ADMIN MENU</a>
                                     <ul class="dropdown arrow-top">
                                         <li><a th:href="@{/view/table/priceTable}" class="nav-link">PRICES LIST</a></li>
                                         <li><a  th:href="@{/view/MyCompany}" class="nav-link">MY COMPANY</a></li>
@@ -108,7 +108,7 @@
 
                             <th:block th:if="${session.user}">
                                 <li class="has-children">
-                                    <a href="#" class="nav-link">USER MENU</a>
+                                    <a  class="nav-link">USER MENU</a>
                                     <ul class="dropdown arrow-top">
                                         <li><a th:href="@{/view/table/priceTableUser}" class="nav-link">PRICES LIST</a></li>
                                         <li><a  th:href="@{/view/MyCompanyUser}" class="nav-link">MY COMPANY</a></li>

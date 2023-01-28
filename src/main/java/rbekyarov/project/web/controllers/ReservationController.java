@@ -55,6 +55,7 @@ public class ReservationController extends BaseController {
                     .collect(Collectors.toList());
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
+        String url = "reservationTable";
         modelAndView.addObject("reservations", reservations);
         List<Invoice> allRealInvoice = invoiceService.findAllRealInvoice();
         modelAndView.addObject("allRealInvoice", allRealInvoice);
@@ -64,6 +65,7 @@ public class ReservationController extends BaseController {
         modelAndView.addObject("countUpcomingReservation", countUpcomingReservation);
         int countCompletedReservation = reservationService.getCountCompletedReservation();
         modelAndView.addObject("countCompletedReservation", countCompletedReservation);
+        modelAndView.addObject("url", url);
         reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
         reservationService.statusCellsUpdateEmpty();
         return super.view("/view/table/reservationTable",
@@ -72,7 +74,113 @@ public class ReservationController extends BaseController {
                 "allRealInvoice", allRealInvoice,
                 "countActiveReservation", countActiveReservation,
                 "countUpcomingReservation", countUpcomingReservation,
-                "countCompletedReservation", countCompletedReservation);
+                "countCompletedReservation", countCompletedReservation,
+                "url", url);
+    }
+    @GetMapping("/view/table/reservationTableUpcoming")
+    public ModelAndView reservationTableUpcoming(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+        final int currentPage = page.orElse(1);
+        final int pageSize = size.orElse(5);
+        Page<Reservation> reservations = reservationService.findPaginatedUpcoming(PageRequest.of(currentPage - 1, pageSize));
+        int totalPages = reservations.getTotalPages();
+        List<Integer> pageNumbers = null;
+        if (totalPages > 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
+        String url = "reservationTableUpcoming";
+        modelAndView.addObject("reservations", reservations);
+        List<Invoice> allRealInvoice = invoiceService.findAllRealInvoice();
+        modelAndView.addObject("allRealInvoice", allRealInvoice);
+        int countActiveReservation = reservationService.getCountActiveReservation();
+        modelAndView.addObject("countActiveReservation", countActiveReservation);
+        int countUpcomingReservation = reservationService.getCountUpcomingReservation();
+        modelAndView.addObject("countUpcomingReservation", countUpcomingReservation);
+        int countCompletedReservation = reservationService.getCountCompletedReservation();
+        modelAndView.addObject("countCompletedReservation", countCompletedReservation);
+        modelAndView.addObject("url", url);
+        reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
+        reservationService.statusCellsUpdateEmpty();
+        return super.view("/view/table/reservationTable",
+                "reservations", reservations,
+                "pageNumbers", pageNumbers,
+                "allRealInvoice", allRealInvoice,
+                "countActiveReservation", countActiveReservation,
+                "countUpcomingReservation", countUpcomingReservation,
+                "countCompletedReservation", countCompletedReservation,
+                "url", url);
+    }
+    @GetMapping("/view/table/reservationTableActive")
+    public ModelAndView reservationTableActive(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+        final int currentPage = page.orElse(1);
+        final int pageSize = size.orElse(5);
+        Page<Reservation> reservations = reservationService.findPaginatedActive(PageRequest.of(currentPage - 1, pageSize));
+        int totalPages = reservations.getTotalPages();
+        List<Integer> pageNumbers = null;
+        if (totalPages > 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
+        String url = "reservationTableActive";
+        modelAndView.addObject("reservations", reservations);
+        List<Invoice> allRealInvoice = invoiceService.findAllRealInvoice();
+        modelAndView.addObject("allRealInvoice", allRealInvoice);
+        int countActiveReservation = reservationService.getCountActiveReservation();
+        modelAndView.addObject("countActiveReservation", countActiveReservation);
+        int countUpcomingReservation = reservationService.getCountUpcomingReservation();
+        modelAndView.addObject("countUpcomingReservation", countUpcomingReservation);
+        int countCompletedReservation = reservationService.getCountCompletedReservation();
+        modelAndView.addObject("countCompletedReservation", countCompletedReservation);
+        modelAndView.addObject("url", url);
+        reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
+        reservationService.statusCellsUpdateEmpty();
+        return super.view("/view/table/reservationTable",
+                "reservations", reservations,
+                "pageNumbers", pageNumbers,
+                "allRealInvoice", allRealInvoice,
+                "countActiveReservation", countActiveReservation,
+                "countUpcomingReservation", countUpcomingReservation,
+                "countCompletedReservation", countCompletedReservation,
+                "url", url);
+    }
+    @GetMapping("/view/table/reservationTableCompleted")
+    public ModelAndView reservationTableCompleted(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+        final int currentPage = page.orElse(1);
+        final int pageSize = size.orElse(5);
+        Page<Reservation> reservations = reservationService.findPaginatedCompleted(PageRequest.of(currentPage - 1, pageSize));
+        int totalPages = reservations.getTotalPages();
+        List<Integer> pageNumbers = null;
+        if (totalPages > 0) {
+            pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
+        String url = "reservationTableCompleted";
+        modelAndView.addObject("reservations", reservations);
+        List<Invoice> allRealInvoice = invoiceService.findAllRealInvoice();
+        modelAndView.addObject("allRealInvoice", allRealInvoice);
+        int countActiveReservation = reservationService.getCountActiveReservation();
+        modelAndView.addObject("countActiveReservation", countActiveReservation);
+        int countUpcomingReservation = reservationService.getCountUpcomingReservation();
+        modelAndView.addObject("countUpcomingReservation", countUpcomingReservation);
+        int countCompletedReservation = reservationService.getCountCompletedReservation();
+        modelAndView.addObject("countCompletedReservation", countCompletedReservation);
+        modelAndView.addObject("url", url);
+        reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
+        reservationService.statusCellsUpdateEmpty();
+        return super.view("/view/table/reservationTable",
+                "reservations", reservations,
+                "pageNumbers", pageNumbers,
+                "allRealInvoice", allRealInvoice,
+                "countActiveReservation", countActiveReservation,
+                "countUpcomingReservation", countUpcomingReservation,
+                "countCompletedReservation", countCompletedReservation,
+                "url", url);
     }
 
     @GetMapping("/view/add/reservationAdd")
