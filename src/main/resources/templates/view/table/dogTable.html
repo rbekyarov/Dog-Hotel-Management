@@ -61,9 +61,9 @@
                                 <td class="h6">  <a th:href="@{/view/table/dog/view/{id}(id=${d.id})}"th:text="${d.id}"</td>
                                 <td th:text="${d.name}"></td>
 
-                                <td>
-                                    <img src="#" height="80px" width="100px"
-                                         th:src="@{${'/image/' + d.imageName}}" >
+                                <td><a th:href="@{/view/table/dog/view/{id}(id=${d.id})}">
+                                     <img src="#" height="80px" width="100px"
+                                     th:src="@{${'/image/' + d.imageName}}" ></a>
 
                                 </td>
                                 <td th:text="${d.years}"></td>

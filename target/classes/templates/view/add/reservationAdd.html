@@ -8,6 +8,15 @@
         });
     </script>
 
+<!--    <script>-->
+<!--        $(document).ready(function () {-->
+<!--            $('select').selectize({-->
+<!--                sortField: 'text'-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
+<!--    <script src="/js/selectize.min.js" ></script>-->
+<!--    <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css" />-->
 
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
         <link href="/css/dp-light.css" rel="stylesheet">
@@ -32,20 +41,20 @@
                         <tbody>
                         <tr>
                             <td> <label>Client:</label><br>
-                                <select required id="showClient" name="showClient" th:field="*{client.id}"
-                                        oninput="getClientDogs()">
+                                <select style="width:330px" required id="showClient" name="showClient" th:field="*{client.id}"
+                                        onclick="getClientDogs()">
 
                                     <option value="">Please select</option>
                                     <option
                                             th:each="showClient : ${allClients}"
                                             th:value="${showClient.id}"
-                                            th:text="${showClient.email}"
+                                            th:text="${showClient.firstName+' '+showClient.lastName+' - '+showClient.phone}"
                                     ></option>
                                 </select></td>
                         </tr>
                         <tr>
-                            <td><label>Dogs:</label><br>
-                                <select id="dogsBox" name="dogsBox" th:field="*{dog.id}" onclick="getCells()">
+                            <td><label>Dog:</label><br>
+                                <select style="width:330px" id="dogsBox" name="dogsBox" th:field="*{dog.id}"   onclick="getCells()">
                                 </select><br>
                                 <label>Date of Arrival:</label><br>
                                 <div>
@@ -267,7 +276,7 @@
                         for (let n = 0; n < dogs.length; n++) {
                             $('#dogsBox').append($('<option>', {
                                 value: dogs[n].id,
-                                text: dogs[n].name
+                                text: dogs[n].name +' - weight: '+ dogs[n].weight +','+'  dewormer: '+ dogs[n].lastDewormingDate
                             }));
                         }
                         $("#dogsBox").trigger("chosen:updated");
