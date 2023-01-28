@@ -39,23 +39,23 @@
                     <td>
 
                         <label
-                        th:text="${'BirthDate: '+ #temporals.format(dog.birthDate,'dd.MM.yyyy') }"></label><br>
+                        th:text="${' * '+'BirthDate: '+ #temporals.format(dog.birthDate,'dd.MM.yyyy') }"></label><br>
                         <label
-                                th:text="${'Current Age: '+ dog.years}"></label><br>
+                                th:text="${' * '+'Current Age: '+ dog.years}"></label><br>
                         <label
-                                th:text="${'Last Deworming Date: ' +#temporals.format(dog.lastDewormingDate,'dd.MM.yyyy')}"></label><br>
+                                th:text="${' * '+'Last Deworming Date: ' +#temporals.format(dog.lastDewormingDate,'dd.MM.yyyy')}"></label><br>
                         <label
-                                th:text="${'Weight: '+ dog.weight}"></label><br>
+                                th:text="${' * '+'Weight: '+ dog.weight}"></label><br>
                         <label
-                                th:text="${'Breed: '+ dog.breed.breedName}"></label><br>
+                                th:text="${' * '+'Breed: '+ dog.breed.breedName}"></label><br>
                         <label
-                                th:text="${'Sex: '+ dog.sex}"></label><br>
+                                th:text="${' * '+'Sex: '+ dog.sex}"></label><br>
                         <label
-                                th:text="${'Passport: '+ dog.passport}"></label><br>
+                                th:text="${' * '+'Passport: '+ dog.passport}"></label><br>
                         <label
-                                th:text="${'Microchip: '+ dog.microchip + ' - '+ dog.microchipNumber}"></label><br>
+                                th:text="${' * '+'Microchip: '+ dog.microchip + ' - '+ dog.microchipNumber}"></label><br>
                         <label
-                                th:text="${'Behavior: '+ dog.behavior.name}"></label><br>
+                                th:text="${' * '+'Behavior: '+ dog.behavior.name}"></label><br>
                         </div>
                     </td>
 
