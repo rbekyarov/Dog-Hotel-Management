@@ -33,7 +33,7 @@
                     </table>
 
 
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 500px;">
+                    <table  align="center" border="0" cellpadding="1" cellspacing="1" style="width: 500px; font-size: 14px;">
                         <tr>
                             <td><label th:text="${'Status: ' + reservation.statusReservation}"></label></label><br>
                             </td>
@@ -63,7 +63,7 @@
 
 
 
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: auto;">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: auto; ">
                         <tbody>
                         <tr>
                             <td><h5>Hotel Accommodation:</h5></td>
@@ -72,7 +72,7 @@
                         </tbody>
                     </table>
 
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 500px;">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 500px;font-size: 14px;">
                         <tbody>
                         <tr>
                             <td><label th:text="${'Day of coming: '+ reservation.startDate }"></label><br></td>
@@ -93,7 +93,7 @@
                         </tbody>
                     </table>
 
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 500px;">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 500px;font-size: 14px;">
 
                         <tbody>
                         <tr>
@@ -101,7 +101,7 @@
                             <td><label th:text="${'Training: '+ reservation.training }"></label><br></td>
                         </tr>
                         <tr>
-                            <td><label th:text="${'Bathing: '+ reservation.bathing }"></label><br></td>
+                            <td><label th:text="${'Deworming: '+ reservation.deworming }"></label><br></td>
                             <td><label th:text="${'Combing: '+ reservation.combing }"></label><br></td>
                         </tr>
                         <tr>
@@ -110,8 +110,9 @@
                         </tr>
                         <tr>
                             <td><label th:text="${'Nails trimming: '+ reservation.nails }"></label><br></td>
-                            <td>&nbsp;</td>
+                            <td><label th:text="${'Bathing: '+ reservation.bathing }"></label><br></td>
                         </tr>
+
                         </tbody>
                     </table>
 
@@ -125,7 +126,7 @@
                         </tbody>
                     </table>
 
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 500px;">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="font-size: 14px;width: 500px;">
                         <tbody>
                         <tr>
                             <td><label th:text="${'Price: '+ reservation.price+'$' }"></label><br></td>
