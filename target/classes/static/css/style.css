@@ -55,6 +55,7 @@ a {
 
 a, a:hover {
     text-decoration: none !important;
+    color: #0ea5e9;
 }
 
 
@@ -78,7 +79,7 @@ a, a:hover {
 @media (max-width: 991.98px) {
     .site-navbar {
         padding-top: 1rem;
-        padding-bottom: 3rem;
+        padding-bottom: 2rem;
     }
 }
 

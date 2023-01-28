@@ -55,6 +55,7 @@ a {
 
 a, a:hover {
     text-decoration: none !important;
+    color: #0ea5e9;
 }
 
 
@@ -78,7 +79,7 @@ a, a:hover {
 @media (max-width: 991.98px) {
     .site-navbar {
         padding-top: 1rem;
-        padding-bottom: 3rem;
+        padding-bottom: 2rem;
     }
 }
 
@@ -904,25 +905,6 @@ a, a:hover {
     text-align: center;
     padding: 0.5rem;
 
-}
-.tableHome {
-
-    font-size: 14px;
-    /*display: block;*/
-    width: auto;
-    max-width: 75%;
-    background-color: transparent;
-    border-collapse: collapse;
-    border-spacing: 0;
-    color: #353838;
-    text-align: center;
-    padding: 0.5rem;
-
-}
-.tableHome th, .tableHome td {
-    padding: 3px;
-    vertical-align: unset;
-    border-top: 1px solid #dee2e6;
 }
 
 .table th, .table td {
