@@ -594,6 +594,20 @@ a, a:hover {
     line-height: 1;
     border-radius: 1.3000000000000007rem;
 }
+.btnList {
+    transition: all .08s linear;
+    position: relative;
+    outline: medium none;
+    -moz-outline-style: none;
+    border: 11px;
+    margin-right: 0px;
+    margin-top: 0px;
+    color: #ffffff;
+    background-color: #f14e5e;
+    font-size: 12px;
+    line-height: 1;
+    border-radius: 1.3000000000000007rem;
+}
 
 .welcome {
     text-align: -webkit-center;
