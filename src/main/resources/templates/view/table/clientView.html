@@ -8,13 +8,28 @@
         });
     </script>
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
-        <div class="button_back">
-            <a class="nav-link h5" id="nav-link">
+        <br>
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: auto;">
+            <tbody>
+
+            <td><div class="button_back">
+                <a class="nav-link h5" id="nav-link">
+                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                            class="glyphicon glyphicon-ok"></span>Back
+                    </button>
+                </a>
+            </div></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td> <div><a class="nav-link h5" th:href="@{/view/table/client/edit/{id}(id=*{client.id})}">
                 <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                        class="glyphicon glyphicon-ok"></span>Back
+                        class="glyphicon glyphicon-ok"></span>Edit Client
                 </button>
-            </a>
-        </div>
+            </a></div></td>
+
+            </tbody>
+        </table>
 
 
         <h1 class="page_title" th:object="${client}">Client Details</h1>

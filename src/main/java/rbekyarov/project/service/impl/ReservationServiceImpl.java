@@ -526,24 +526,25 @@ public class ReservationServiceImpl implements ReservationService {
 
 
     LocalDate formatterLocal(String dateDto) {
-        //1.01.23 г.  ->23-01-01
-        //11.01.23 г. ->23-01-11
+        //1.01.23 г.  ->2023-01-01
+        //11.01.23 г. ->2023-01-11
+        //15.02.23 г
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         StringBuilder sb = new StringBuilder();
         if(dateDto.contains(".")){
-            if(dateDto.length()==10){
+            if(dateDto.charAt(1) == '.'){
                 sb.append("2");
                 sb.append("0");
+                sb.append(dateDto.charAt(5));
                 sb.append(dateDto.charAt(6));
-                sb.append(dateDto.charAt(7));
                 sb.append("-");
+                sb.append(dateDto.charAt(2));
                 sb.append(dateDto.charAt(3));
-                sb.append(dateDto.charAt(4));
                 sb.append("-");
+                sb.append("0");
                 sb.append(dateDto.charAt(0));
-                sb.append(dateDto.charAt(1));
 
-            }else if(dateDto.length()==11){
+            }else if(dateDto.charAt(1) != '.'){
                 sb.append("2");
                 sb.append("0");
                 sb.append(dateDto.charAt(6));
