@@ -1,3 +1,27 @@
+/*.form-group {*/
+/*    height: 48px;*/
+/*    background: rgba(0, 0, 0, 0.05);*/
+/*    color: rgba(255, 255, 255, 0.8) !important;*/
+/*    font-size: 14px;*/
+/*    -webkit-box-shadow: none;*/
+/*    box-shadow: none;*/
+/*    border-radius: 0;*/
+/*    border: none;*/
+/*    border-bottom: 1px solid #b689b0;*/
+/*    padding-left: 30px;*/
+/*    padding-right: 0;*/
+/*    letter-spacing: 1px;*/
+/*    -webkit-transition: all 0.2s ease-in-out;*/
+/*    -o-transition: all 0.2s ease-in-out;*/
+/*    transition: all 0.2s ease-in-out;}*/
+.searchArea {
+    width: 150px;
+    font-size: 14px;
+    padding: 3px 1px;
+    border: 1px solid #acacb1;
+
+}
+
 .selectize-input {
     width: 196px;
 }
@@ -1059,7 +1083,7 @@ body > header > nav > a > img {
     color: #fff;
     background-color: #c16b29;
     border-color: #cbc5c5;
-    font-size: revert;
+    font-size: x-small;
 }
 
 .btn-warning {
@@ -1093,6 +1117,18 @@ body > header > nav > a > img {
     line-height: 10px;
     font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
     color: #555;
+}
+.login-box {
+    max-width: 670px;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    font-size: 16px;
+    /*line-height: 10px;*/
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: #555;
+
 }
 
 .invoice-box table {

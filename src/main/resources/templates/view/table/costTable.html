@@ -20,7 +20,7 @@
                                 <th scope="col">
                                     <form th:action="@{/view/table/searchCostByVendorName}" method="get">
                                         <input type="text" name="vendorName" th:value="${vendorName}"
-                                               placeholder="Find by Vendor" size="20">
+                                               placeholder="Find by Vendor" size="20" class="searchArea">
                                         <button type="submit" class="btn btn-info">Search</button>
                                         <span th:text="${'Total cost: ' +totalAmountCost+'$'}"></span>
                                     </form>
@@ -30,7 +30,7 @@
                             <tbody>
                             </tbody>
                         </table>
-                        <br><br>
+                        <br>
                     </div>
                     <br>
                     <div class="table-responsive-cost">

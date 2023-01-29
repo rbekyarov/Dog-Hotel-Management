@@ -18,11 +18,11 @@
                             <thead>
                             <tr>
                                 <th scope="col"><form th:action="@{/view/table/searchInvoiceNumber}" method="get">
-                                    <input type="text" name="invoiceNumber" th:value="${invoiceNumber}"  placeholder="Find by Invoice Number" size="20" >
+                                    <input type="text" name="invoiceNumber" th:value="${invoiceNumber}" class="searchArea" placeholder="Find by Invoice Number" size="20" >
                                     <button type="submit" class="btn btn-info" >Search</button>
                                 </form></th>
                                 <th scope="col"><form th:action="@{/view/table/searchInvoiceByClientEmail}" method="get">
-                                    <input type="text" name="clientEmail" th:value="${clientEmail}"  placeholder="Find by Client Email" size="20" >
+                                    <input type="text" name="clientEmail" th:value="${clientEmail}" class="searchArea" placeholder="Find by Client Email" size="20" >
                                     <button type="submit" class="btn btn-info" >Search</button>
                                 </form></th>
                                 <th th:text="${'Total Invoiced: ' +totalInvoicedPrice+'$'}"</th>
@@ -32,7 +32,6 @@
                             </tbody>
                         </table>
                     </div>
-                        <br>
                         <br>
                         <div class="table-responsive-invoice">
                         <table class=table>

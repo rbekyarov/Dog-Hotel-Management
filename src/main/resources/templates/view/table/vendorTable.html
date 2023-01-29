@@ -21,11 +21,11 @@
                             <thead>
                             <tr>
                                 <th scope="col"><form th:action="@{/view/table/searchVendorName}" method="get">
-                                    <input type="text" name="vendorName" th:value="${vendorName}"  placeholder="Find by Vendor Name" size="20" >
+                                    <input type="text" name="vendorName" th:value="${vendorName}" class="searchArea" placeholder="Find by Vendor Name" size="20" >
                                     <button type="submit" class="btn btn-info" >Search</button>
                                 </form></th>
                                 <th scope="col"><form th:action="@{/view/table/searchVatNumber}" method="get">
-                                    <input type="text" name="vendorVatNumber" th:value="${vendorVatNumber}"  placeholder="Find by Vat Number" size="20" >
+                                    <input type="text" name="vendorVatNumber" th:value="${vendorVatNumber}" class="searchArea" placeholder="Find by Vat Number" size="20" >
                                     <button type="submit" class="btn btn-info" >Search</button>
                                 </form></th>
                             </tr>
