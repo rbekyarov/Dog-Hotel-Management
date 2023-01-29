@@ -1,0 +1,72 @@
+<th:block th:if="${session.admin}">
+    <script>
+        $(document).ready(function() {
+            $('#nav-link').click(function(e){
+                e.preventDefault();
+                window.history.back();
+            });
+        });
+    </script>
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+        <tbody>
+        <tr>
+            <td> <div class="button_back">
+                <a class="nav-link h5" id="nav-link">
+                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                            class="glyphicon glyphicon-ok"></span>Back
+                    </button>
+                </a>
+            </div></td>
+        </tr>
+        <tr>
+            <td><div class="container">
+                <h2 class="page_title">Add Prices</h2>
+                <form class="form_add" th:action="@{/view/add/priceAdd}"
+                      th:method="post"
+                      th:object="${addPrice}"
+                >
+                    <div class="form-group">
+                        <label>Price Stay Hous S for 1 day:</label><br>
+                        <input type="text" id="description" th:field="${priceDTO.priceStayS}" placeholder="Please enter price Overnight Stay" required/><br>
+                        <label>Price Stay Hous M for 1 day:</label><br>
+                        <input type="text" id="description8" th:field="${priceDTO.priceStayM}" placeholder="Please enter price Overnight Stay" required/><br>
+                        <label>Price Stay Hous L for 1 day:</label><br>
+                        <input type="text" id="description9" th:field="${priceDTO.priceStayL}" placeholder="Please enter price Overnight Stay" required/><br>
+                        <label>Price Feeding:</label><br>
+                        <input type="text" id="description1" th:field="${priceDTO.priceFood}" placeholder="Please enter price Food" required/><br>
+                        <label>Price Deworming:</label><br>
+                        <input type="text" id="description0" th:field="${priceDTO.priceDeworming}" placeholder="Please enter price Deworming" required/><br>
+                        <label>Price Training:</label><br>
+                        <input type="text" id="description2" th:field="${priceDTO.priceTraining}" placeholder="Please enter price Training" required/><br>
+                        <label>Price Bathing:</label><br>
+                        <input type="text" id="description3" th:field="${priceDTO.priceBathing}" placeholder="Please enter price Bathing" required/><br>
+                        <label>Price Combing:</label><br>
+                        <input type="text" id="description4" th:field="${priceDTO.priceCombing}" placeholder="Please enter price Combing" required/><br>
+                        <label>Price Paws cleaning:</label><br>
+                        <input type="text" id="description5" th:field="${priceDTO.pricePaws}" placeholder="Please enter price Paws" required/><br>
+                        <label>Price Еar cleaning:</label><br>
+                        <input type="text" id="description6" th:field="${priceDTO.priceEars}" placeholder="Please enter price Ears" required/><br>
+                        <label>Price Nails trimming:</label><br>
+                        <input type="text" id="description7" th:field="${priceDTO.priceNails}" placeholder="Please enter price Nails" required/><br>
+
+                    </div>
+
+
+                    <div class="button_submit">
+                        <div >
+                            <div>
+                                <input type="submit" class="btn btn-danger btn-lg btnTable" value="Submit Price"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</th:block>
+</th:block>

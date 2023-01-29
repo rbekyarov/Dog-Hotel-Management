@@ -1,0 +1,50 @@
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+        <tbody>
+        <tr>
+            <td>
+                <div class="button_back">
+                    <a class="nav-link h5" th:href="@{/}">
+                        <button type="button" class="btn btn-danger btn-lg btn3d"><span
+                                class="glyphicon glyphicon-ok"></span>Back
+                        </button>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="container">
+                    <h2 class="page_title">Login</h2>
+                    <form class="form_add" th:action="@{/view/login}"
+                          th:method="post"
+                          th:object="${user}"
+                    >
+                        <div class="form-group">
+                            <label>UserName:</label><br>
+                            <input type="text" id="description" th:field="${user.username}" placeholder="Please enter Username"/><br>
+                            <label>Password:</label><br>
+                            <input type="password" id="description1" th:field="${user.password}" placeholder="Please enter Password"/><br>
+                            <label class="text-white font-weight-bold" for="description"></label>
+                            <p th:if="${notFound}" class="errors alert alert-danger">
+                                Invalid username or password.
+                            </p>
+                        </div>
+
+
+                        <div class="button_submit">
+                            <div>
+                                <div>
+                                    <input type="submit" class="btn btn-danger btn-lg btn3d" value="Login"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </td>
+        </tr>
+
+    </table>
+
+
+</th:block>

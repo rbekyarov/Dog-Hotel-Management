@@ -1,0 +1,91 @@
+<th:block th:unless="${session.isEmpty()}">
+    <script>
+        $(document).ready(function() {
+            $('#nav-link').click(function(e){
+                e.preventDefault();
+                window.history.back();
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('select').selectize({
+                sortField: 'text'
+            });
+        });
+    </script>
+    <script src="/js/selectize.min.js" ></script>
+    <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css" />
+    <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+            <tbody>
+            <tr>
+                <td><div class="button_back">
+                    <a class="nav-link h5" id="nav-link">
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                class="glyphicon glyphicon-ok"></span>Back
+                        </button>
+                    </a>
+                </div></td>
+            </tr>
+            <tr>
+                <td><div class="container">
+                    <h2 class="page_title">Edit Client</h2>
+                    <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
+                          th:method="post"
+                          th:object="${clientDTO}"
+
+                    >
+                        <div class="form-group">
+                            <label>First Name:</label><br>
+                            <input type="text" id="description" th:field="*{firstName}" placeholder="Please enter Name" required/><br>
+                            <label>Last Name:</label><br>
+                            <input type="text" id="description1" th:field="*{lastName}" placeholder="Please enter Name" required/><br>
+                            <label>Email:</label><br>
+                            <input type="email" id="description2" th:field="*{email}" placeholder="Please enter Email" required/><br>
+                            <label>Phone:</label><br>
+                            <input type="text" id="description3" th:field="*{phone}" placeholder="Please enter Phone" required/><br>
+
+                            <label>Address:</label><br>
+                            <textarea
+                                    th:field="*{address}"
+                                    type="textarea"
+                                    placeholder="Please enter Address" required>
+            </textarea><br>
+                            <label>City:</label><br>
+                            <select id="select-state" required th:field="*{city.id}" style="width: 200px" >
+                                <option value="">Please select</option>
+                                <option
+                                        th:each="b : ${allCity}"
+                                        th:value="${b.id}"
+                                        th:text="${b.name}"></option>
+
+                            </select>
+
+                        </div>
+                        <div class="button_submit">
+                            <div>
+                                <div>
+                                    <input type="submit" class="btn btn-danger btn-lg btnTable" value="Edit Client"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div></td>
+            </tr>
+
+        </table>
+
+
+
+        <script th:src="@{/assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+        <script>
+            $('.input-group.date').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            });
+        </script>
+    </th:block>
+</th:block>

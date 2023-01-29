@@ -1,0 +1,55 @@
+<th:block th:unless="${session.isEmpty()}">
+    <script>
+        $(document).ready(function() {
+            $('#nav-link').click(function(e){
+                e.preventDefault();
+                window.history.back();
+            });
+        });
+    </script>
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+        <tbody>
+        <tr>
+            <td><div class="button_back">
+                <a class="nav-link h5" id="nav-link">
+                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                            class="glyphicon glyphicon-ok"></span>Back
+                    </button>
+                </a>
+            </div></td>
+        </tr>
+        <tr>
+            <td><div class="container">
+                <h2 class="page_title">Add Behavior</h2>
+                <form class="form_add" th:action="@{/view/add/behaviorAdd}"
+                      th:method="post"
+                      th:object="${addBehavior}"
+                >
+                    <div class="form-group">
+                        <label class="text-white font-weight-bold" for="description">Behavior</label><br>
+                        <input type="text" id="description" th:field="${behaviorDTO.name}" placeholder="Please enter behavior" required/>
+                        <p class="invalid-feedback errors alert alert-danger">
+                            Behavior is required.
+                        </p>
+                    </div>
+
+
+                    <div class="button_submit">
+                        <div >
+                            <div>
+                                <input type="submit" class="btn btn-danger btn-lg btnTable" value="Submit Behavior"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</th:block>
+</th:block>

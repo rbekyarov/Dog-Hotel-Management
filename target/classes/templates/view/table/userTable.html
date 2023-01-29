@@ -1,0 +1,56 @@
+<th:block th:if="${session.admin}">
+    <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="table-center">
+                        <div class="page-header">
+                            <h1>User List</h1>
+                        </div>
+                        <a class="nav-link h5" th:href="@{/view/add/userAdd}">
+                            <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                    class="glyphicon glyphicon-ok"></span>New User
+                            </button>
+                        </a>
+                        <p th:if="${isUsed}" class="errors alert alert-danger">
+                            User is Used!
+                        </p>
+                        <table class=table>
+                            <tr>
+                                <th>No</th>
+                                <th>UserName</th>
+                                <th>Roles</th>
+                            </tr>
+                            <tr th:each="u : ${users}">
+                                <td th:text="${u.id}"></td>
+                                <td th:text="${u.username}"></td>
+                                <td th:text="${u.role}"></td>
+                                <td><a class="nav-link h5" th:href="@{user/edit/{id}(id=*{u.id})}">
+                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                            class="glyphicon glyphicon-ok"></span>Edit
+                                    </button>
+                                </a></td>
+
+                                <td><a class="nav-link h5" th:href="@{user/remove/{id}(id=*{u.id})}">
+                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                            class="glyphicon glyphicon-ok"></span>Remove
+                                    </button>
+                                </a></td>
+                            </tr>
+                        </table>
+                        <div th:if="${users.totalPages > 0}" class="pagination"
+                             th:each="pageNumber : ${pageNumbers}">
+                            <a th:href="@{userTable(size=${users.size}, page=${pageNumber})}"
+                               th:text=${pageNumber}
+                               th:class="${pageNumber==users.number + 1} ? active"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+        </table>
+
+    </th:block>
+</th:block>

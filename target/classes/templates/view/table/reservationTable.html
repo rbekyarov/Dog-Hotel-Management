@@ -1,0 +1,173 @@
+<th:block th:unless="${session.isEmpty()}">
+    <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+        <script>
+            function filterUpcoming(checked) {
+                var elm = document.getElementById('upcoming');
+                if (checked != elm.checked) {
+                    elm.click();
+                    window.location.href = '/view/table/reservationTable/upcoming';
+                }
+            }
+        </script>
+
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:1400px">
+            <tbody>
+            <tr>
+                <td><div class="table-center">
+                    <div class="page-header">
+                        <h1>Reservations List</h1>
+                    </div>
+                    <a class="nav-link h5" th:href="@{/view/add/reservationAdd}">
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                class="glyphicon glyphicon-ok"></span>Add Reservation
+                        </button>
+                    </a>
+
+                    <div class="table-responsive">
+                    <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+                        <thead>
+                        <tr>
+                            <th scope="col"><form th:action="@{/view/table/searchReservationNumber}" method="get">
+                                <input type="text" name="reservationNumber" th:value="${reservationNumber}"  placeholder="Find by Reservation Number" size="20" >
+                                <button type="submit" class="btn btn-info" >Search</button>
+                            </form></th>
+                            <th scope="col"><form th:action="@{/view/table/searchReservationByClientEmail}" method="get">
+                                <input type="text" name="clientEmail" th:value="${clientEmail}"  placeholder="Find by Client Mail" size="20" >
+                                <button type="submit" class="btn btn-info" >Search</button>
+                            </form></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th >  <a th:href="@{/view/table/reservationTableUpcoming}"> <img  height="15px" width="15px" th:src="@{${'/pics/upcoming.png'}}" th:text="${'Upcoming: '+countUpcomingReservation}" > </th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th> <a th:href="@{/view/table/reservationTableActive}"> <img height="15px" width="15px" th:src="@{${'/pics/active.png'}}" th:text="${'Active: '+countActiveReservation}"></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th> <a th:href="@{/view/table/reservationTableCompleted}"> <img height="15px" width="15px" th:src="@{${'/pics/completed.png'}}" th:text="${'Completed: '+countCompletedReservation}"></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th> <a th:href="@{/view/table/reservationTable}" ><img height="15px" width="15px" th:src="@{${'/pics/reset.png'}}" th:text="${'reset'}"></th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <br>
+                    <br>
+                        </div>
+
+                    <div class="table-responsive">
+
+                    <table class="table" >
+                        <tr>
+                            <th>No</th>
+                            <th>Client:</th>
+                            <th>Dog:</th>
+                            <th>Stay Days:</th>
+                            <th>Day of coming:</th>
+                            <th>Day of departure:</th>
+                            <th>Dog House:</th>
+                            <th>Services:</th>
+                            <th>Price </th>
+                            <th>Discount %</th>
+                            <th>Total Price</th>
+                            <th>Status</th>
+                            <th>Author</th>
+                            <th>Created</th>
+                            <th>Invoiced</th>
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                        <tr th:each="r : ${reservations}">
+
+                            <td class="h6"><a th:text="${r.id}" th:href="@{reservation/view/{id}(id=*{r.id})}"></td>
+                            <td ><a   th:href="@{/view/table/client/view/{id}(id=${r.client.id})}"th:text="${ r.client.firstName +' '+ r.client.lastName +' '+ r.client.email +' '+r.client.phone}"> </td>
+                            <td ><a   th:href="@{/view/table/dog/view/{id}(id=${r.dog.id})}" th:text="${r.dog.name + ' Weight:' +r.dog.weight + ' '+r.dog.breed.breedName}"></td>
+                            <td th:text="${r.countOvernightStay}"></td>
+                            <td th:text="${#temporals.format(r.startDate,'dd.MM.yyyy')}"></td>
+                            <td th:text="${#temporals.format(r.endDate,'dd.MM.yyyy')}"></td>
+                            <td th:text="${r.cell.code}"></td>
+                            <td th:text="${'Feeding: '+ r.food+
+                                    ' Training: '+r.training}"></td>
+
+                            <td  th:text="${r.price+'$'}"></td>
+                            <td th:text="${r.discount}"></td>
+                            <td class="boldPrice" th:text="${r.totalPrice +'$'}"></td>
+                            <td >
+                                <img th:if="${r.statusReservation.name()=='active'}" src="#" height="25px" width="25px"
+                                     th:src="@{${'/pics/active.png'}}" th:text="'  '+  active">
+                                <img th:if="${r.statusReservation.name()=='upcoming'}" src="#" height="25px" width="25px"
+                                     th:src="@{${'/pics/upcoming.png'}}"th:text="upcoming" >
+                                <img th:if="${r.statusReservation.name()=='completed'}" src="#" height="25px" width="25px"
+                                     th:src="@{${'/pics/completed.png'}}"th:text="completed" >
+                            </td>
+                            <td th:text="${r.author.username}"></td>
+
+                            <td th:text="${#temporals.format(r.dateCreate,'dd.MM.yyyy')}"></td>
+                            <td >
+                                <img th:if="${r.invoiced.name()=='YES'}" src="#" height="30px" width="30px"
+                                     th:src="@{${'/pics/invoiced.png'}}" th:text="'  '+  YES">
+                                <img th:if="${r.invoiced.name()=='NO'}" src="#" height="30px" width="30px"
+                                     th:src="@{${'/pics/NO.png'}}">
+                            </td>
+
+
+                            <th:block th:if="${r.invoiced.name()=='NO'}">
+                                <td><a class="nav-link h5" th:href="@{reservation/edit/{id}(id=*{r.id})}">
+                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                            class="glyphicon glyphicon-ok"></span>Edit
+                                    </button>
+                                </a></td>
+                            </th:block>
+                            <th:block th:if="${r.invoiced.name()=='NO'}">
+                                <td><a class="nav-link h5" th:href="@{invoice/add/{id}(id=*{r.id})}">
+                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                            class="glyphicon glyphicon-ok"></span>Invoice
+                                    </button>
+                                </a></td>
+                            </th:block>
+                            <th:block th:if="${r.invoiced.name()=='NO'}">
+                                <td><a class="nav-link h5" th:href="@{reservation/remove/{id}(id=*{r.id})}">
+                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                            class="glyphicon glyphicon-ok"></span>Remove
+                                    </button>
+                                </a></td> </th:block>
+                            <th:block th:if="${r.invoiced.name()=='YES'}" th:each="i : ${allRealInvoice}" >
+                                <td th:if="${r.id == i.reservationId}"><a class="nav-link h5"  th:href="@{/view/table/invoice/view/{id}(id=${i.id})}">
+                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                            class="glyphicon glyphicon-ok"></span>View Invoice
+                                    </button>
+                                </a></td></th:block>
+
+                        </tr>
+
+                    </table>
+
+                    </div>
+                    <div th:if="${reservations.totalPages > 0}" class="pagination"
+                         th:each="pageNumber : ${pageNumbers}">
+                        <a th:href="@{${url}(size=${reservations.size}, page=${pageNumber})}"
+                           th:text=${pageNumber}
+                           th:class="${pageNumber==reservations.number + 1} ? active"></a>
+                    </div>
+                </div></td>
+            </tr>
+
+        </table>
+
+    </th:block>
+</th:block>

@@ -1,0 +1,210 @@
+<th:block th:unless="${session.isEmpty()}">
+    <script>
+        $(document).ready(function() {
+            $('#nav-link').click(function(e){
+                e.preventDefault();
+                window.history.back();
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('select').selectize({
+                sortField: 'text'
+            });
+        });
+    </script>
+    <script src="/js/selectize.min.js" ></script>
+    <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css" />
+
+    <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+        <link href="/css/dp-light.css" rel="stylesheet">
+        <script defer src="/js/datepicker.js"></script>
+        <div class="button_back">
+            <a class="nav-link h5" id="nav-link">
+                <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                        class="glyphicon glyphicon-ok"></span>Back
+                </button>
+            </a>
+        </div>
+        <div class="container">
+            <h2 class="page_title">Edit Dog</h2>
+
+            <form class="form_add" enctype="multipart/form-data" th:action="@{{id}/edit(id=*{id})}"
+                  th:method="post"
+                  th:object="${dogDTO}">
+
+                <div class="form-group">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                        <tbody>
+                        <tr>
+                            <td><label class="file-label" for="fileImage">Image</label>
+                                <div class="mb-4">
+                                    <input class="file-input" type="file" id="fileImage" name="fileImage">
+                                </div>
+
+
+                                <img src="#" id="thumbnail" height="80px" width="100px"
+                                     th:src="@{${'/image/' + dogDTO.imageName}}" alt="image" />
+                                <input type="hidden" name="imgName"  th:value="${dogDTO.imageName}"><br>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                        <tbody>
+                        <tr>
+                            <td><label>Dog Name:</label><br>
+                                <input type="text" id="description" th:field="*{name}" placeholder="Please enter Name" required/><br>
+                            </td>
+                            <td><label>Weight:</label><br>
+                                <input type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight" required/><br>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                        <tbody>
+                        <tr>
+                            <td><label>Breed:</label><br>
+                                <select required th:field="*{breed.id}" style="width: 196px">
+                                    <option value="">Please select </option>
+                                    <option
+                                            th:each="b : ${allBreeds}"
+                                            th:value="${b.id}"
+                                            th:text="${b.breedName}" ></option>
+
+                                </select>
+                            </td>
+                            <td><label>Behavior:</label><br>
+                                <select required th:field="*{behavior.id}" style="width: 196px" >
+                                    <option value="">Please select</option>
+                                    <option
+                                            th:each="b : ${allBehaviors}"
+                                            th:value="${b.id}"
+                                            th:text="${b.name}"></option>
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                        <tbody>
+                        <tr>
+                            <td><label>BirthDate:</label><br>
+                                <div>
+                                    <input type="text" id="input1" th:field="*{birthDate}" placeholder="BirthDate" required/>
+                                </div>
+                            </td>
+                            <td><label>Last Deworming Date:</label><br>
+                                <div>
+                                    <input type="text" id="input2" th:field="*{lastDewormingDate}" placeholder="Deworming" required/>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                        <tbody>
+                        <tr>
+                            <td><label>Client:</label><br>
+                                <select required th:field="*{client.id}" style="width: 400px">
+                                    <option value="">Please select</option>
+                                    <option
+                                            th:each="c : ${allClients}"
+                                            th:value="${c.id}"
+                                            th:text="${c.firstName+' '+c.lastName+' - '+c.phone}"></option>
+
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                        <tbody>
+                        <tr>
+                            <td><label>Sex:</label><br>
+                                <select th:field="*{sex}" style="width: 77px" >
+                                    <option value="M">M</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </td>
+                            <td><label>Passport:</label><br>
+                                <select th:field="*{passport}" style="width: 77px" >
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                        <tbody>
+                        <tr>
+                            <td><label>Microchip:</label><br>
+                                <select th:field="*{microchip}" style="width: 77px" >
+                                    <option value="NO">NO</option>
+                                    <option value="YES">YES</option>
+                                </select>
+                            </td>
+                            <td><label>Microchip Number:</label><br>
+                                <input type="text" id="description23" th:field="*{microchipNumber}" placeholder="Please enter Number" />
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="button_submit">
+                    <div>
+                        <div>
+                            <input type="submit" class="btn btn-danger btn-lg btnTable" value="Edit Dog"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <script>
+            /* $(document).ready(function(){
+
+            }); */
+            function showImageThumbnail(fileInput){
+                if(fileInput.files && fileInput.files[0]){
+                    var reader = new FileReader();
+
+                    reader.onload = function(e){
+                        $('thumbnail').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            }
+            $('#fileImage').change(function(){
+                showImageThumbnail(this);
+            });
+
+            $('.file-input').on("change", function(){
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".file-label").addClass("selected").html(fileName);
+            });
+        </script>
+
+        <script>
+            window.addEventListener("load", () => {
+                picker.attach({ target: "input1" });
+            });
+        </script>
+        <script>
+            window.addEventListener("load", () => {
+                picker.attach({ target: "input2" });
+            });
+        </script>
+
+
+
+    </th:block>
+</th:block>

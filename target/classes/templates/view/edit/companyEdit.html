@@ -1,0 +1,123 @@
+<th:block th:if="${session.admin}">
+
+    <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+        <script>
+            $(document).ready(function() {
+                $('#nav-link').click(function(e){
+                    e.preventDefault();
+                    window.history.back();
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('select').selectize({
+                    sortField: 'text'
+                });
+            });
+        </script>
+        <script src="/js/selectize.min.js" ></script>
+        <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css" />
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+            <tbody>
+            <tr>
+                <td><div class="button_back">
+                    <a class="nav-link h5" id="nav-link">
+                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                class="glyphicon glyphicon-ok"></span>Back
+                        </button>
+                    </a>
+                </div></td>
+            </tr>
+            <tr>
+                <td><div class="container">
+                    <h2 class="page_title">Edit MyCompany</h2>
+
+                    <form class="form_add" enctype="multipart/form-data" th:action="@{/view/edit/companyEdit}"
+                          th:method="post"
+                          th:object="${companyDTO}">
+                        <div class="form-group">
+
+                            <label class="file-label" for="fileImage">Edit Logo</label>
+                            <div class="mb-4">
+                                <input class="file-input" type="file" id="fileImage" name="fileImage">
+                            </div>
+
+
+                            <img src="#" id="thumbnail" height="100px" width="100px"
+                                 th:src="@{${'/image/' + companyDTO.logoName}}" alt="image" />
+                            <input type="hidden" name="imgName"  th:value="${companyDTO.logoName}"><br>
+
+                            <label>Company Name:</label><br>
+                            <input type="text" id="description" th:field="${companyDTO.name}" placeholder="Please enter Company Name" required/><br>
+                            <label>Country:</label><br>
+                            <input type="text" id="description1" th:field="${companyDTO.country}" placeholder="Please enter Country" required/><br>
+                            <label>City:</label><br>
+                            <select required th:field="*{city.id}" style="width: 196px" >
+                                <option value="">Please select</option>
+                                <option
+                                        th:each="b : ${allCity}"
+                                        th:value="${b.id}"
+                                        th:text="${b.name}"></option>
+
+                            </select><br>
+
+                            <label>Address:</label><br>
+                            <input type="text" id="description2" th:field="${companyDTO.address}" placeholder="Please enter Address" required/><br>
+                            <label>Vat Number:</label><br>
+                            <input type="text" id="description3" th:field="${companyDTO.vatNumber}" placeholder="Please enter Vat Number" required/><br>
+                            <label>Email:</label><br>
+                            <input type="text" id="description4" th:field="${companyDTO.email}" placeholder="Please enter Email" required/><br>
+                            <label>Bank Name:</label><br>
+                            <input type="text" id="description44" th:field="${companyDTO.bankName}" placeholder="Please enter Bank Name" required/><br>
+                            <label>Bank Account:</label><br>
+                            <input type="text" id="description55" th:field="${companyDTO.bankAccount}" placeholder="Please enter Bank Account" required/><br>
+                            <label>Balance:</label><br>
+                            <input type="text" id="description5" th:field="${companyDTO.balance}" placeholder="Please enter Balance" required/><br>
+                            <label>Manager Name:</label><br>
+                            <input type="text" id="description6" th:field="${companyDTO.managerName}" placeholder="Please enter Manager Name" required/><br>
+
+
+                        </div>
+                        <div class="button_submit">
+                            <div>
+                                <div>
+                                    <input type="submit" class="btn btn-danger btn-lg btnTable" value="Save"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div></td>
+            </tr>
+
+        </table>
+
+
+
+        <script>
+            /* $(document).ready(function(){
+
+            }); */
+            function showImageThumbnail(fileInput){
+                if(fileInput.files && fileInput.files[0]){
+                    var reader = new FileReader();
+
+                    reader.onload = function(e){
+                        $('thumbnail').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            }
+            $('#fileImage').change(function(){
+                showImageThumbnail(this);
+            });
+
+            $('.file-input').on("change", function(){
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".file-label").addClass("selected").html(fileName);
+            });
+
+
+        </script>
+    </th:block>
+</th:block>
