@@ -26,12 +26,25 @@
 
                         <tbody>
                         <tr>
+
+                            <td><a th:href="@{/view/table/dog/view/{id}(id=${reservation.dog.id})}">
+                                <img src="#" height="120px" width="150px"
+                                     th:src="@{${'/image/' + reservation.dog.imageName}}" ></a>
+
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: auto;">
+
+                        <tbody>
+                        <tr>
                             <td><h5 th:text="${'Reservation No.'+ reservation.id }"></h5></td>
 
                         </tr>
                         </tbody>
                     </table>
-
 
                     <table  align="center" border="0" cellpadding="1" cellspacing="1" style="width: 450px; font-size: 14px;">
                         <tr>
@@ -41,10 +54,16 @@
                         </tr>
                         <tbody>
                         <tr>
-                            <td><label
-                                    th:text="${'Client: '+ reservation.client.firstName + ' ' + reservation.client.lastName}"></label><br>
+
+                            <td><label style="font-weight: bold;">
+                                <a
+                                        th:href="@{/view/table/client/view/{id}(id=${reservation.client.id})}" th:text="${'Client: '+ reservation.client.firstName + ' ' + reservation.client.lastName}"></a></label><br>
                             </td>
-                            <td><label th:text="${'Dog: '+ reservation.dog.name }"></label><br></td>
+                            <td><label style="font-weight: bold;">
+                                <a
+                                        th:href="@{/view/table/dog/view/{id}(id=${reservation.dog.id})}" th:text="${'Dog: '+ reservation.dog.name }"></a></label><br>
+                            </td>
+
                         </tr>
                         <tr>
                             <td><label th:text="${'      '+'City: '+ reservation.client.city.name}"></label><br></td>
@@ -131,7 +150,7 @@
                         <tr>
                             <td><label th:text="${'Price: '+ reservation.price+'$' }"></label><br></td>
                             <td><label th:text="${'Discount: '+ reservation.discount +'%' }"></label><br></td>
-                            <td><label th:text="${'Total Price: '+ reservation.totalPrice+'$' }"></label></td>
+                            <td style="font-weight: bold;"><label th:text="${'Total Price: '+ reservation.totalPrice+'$' }"></label></td>
                         </tr>
                         </tbody>
                     </table>
