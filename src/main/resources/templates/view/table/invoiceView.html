@@ -17,6 +17,11 @@
                 </button>
             </a>
             <a href="javascript:void(0);" onclick="printPageArea('invoice')">Print</a>
+<!--            <a class="nav-link h5" th:href="@{/view/table/invoice/generatePdfFile/{id}(id=*{invoice.id})}">-->
+<!--                <button type="button" class="btn btn-danger btn-lg btnList"><span-->
+<!--                        class="glyphicon glyphicon-ok"></span>PDF-->
+<!--                </button>-->
+<!--            </a>-->
         </div>
         <div >
             <h1 class="page_title" th:object="${invoice}">Invoice Details</h1>

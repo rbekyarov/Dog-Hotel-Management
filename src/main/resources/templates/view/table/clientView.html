@@ -37,7 +37,13 @@
 
         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
             <tbody>
-            <td><h3 th:text="${client.firstName +' '+client.lastName}"></h3></td>
+            <tr>
+                <td align="center"><img align="center" src="#" height="50px" width="50px"
+                 th:src="@{${'/pics/client.png'}}"></td>
+            </tr>
+            <tr>
+            <td><h3 th:text="${' '+client.firstName +' '+client.lastName}"></h3></td>
+            </tr>
             <tr>
                 <td>
 

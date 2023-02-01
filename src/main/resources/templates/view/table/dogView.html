@@ -76,8 +76,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <label style="font-weight: bold;"><a
-                               th:href="@{/view/table/client/view/{id}(id=${dog.client.id})}" th:text="${'Client: '+ dog.client.firstName+' '+dog.client.lastName}"></a></label><br>
+                        <label style="font-weight: bold;"><img align="center" src="#" height="25px" width="25px"
+                                                               th:src="@{${'/pics/client.png'}}"><a
+                               th:href="@{/view/table/client/view/{id}(id=${dog.client.id})}" th:text="${' '+ dog.client.firstName+' '+dog.client.lastName}"></a></label><br>
                         <label
                                 th:text="${' * '+'City: '+dog.client.city.name}"></label><br>
                         <label
