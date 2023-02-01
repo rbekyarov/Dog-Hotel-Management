@@ -56,8 +56,14 @@ public class HomeController extends BaseController {
     }
 
     @GetMapping("/view/home")
-    public ModelAndView home(ModelAndView modelAndView) {
+    public ModelAndView home(ModelAndView modelAndView,HttpSession session) {
+        Object user = session.getAttribute("user");
+        Object admin = session.getAttribute("admin");
 
+        if(admin ==null && user==null){
+            return super.redirect("/view/login");
+
+        }
         List<Reservation>activeReservations = reservationService.findAllActiveReservation();
         List<Reservation>upcomingReservations = reservationService.findAllUpcomingReservations();
 

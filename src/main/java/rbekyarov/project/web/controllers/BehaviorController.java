@@ -29,15 +29,18 @@ public class BehaviorController extends BaseController {
     private final BehaviorService behaviorService;
     private final DogRepository dogRepository;
 
+
     public BehaviorController(BehaviorService behaviorService,
                               DogRepository dogRepository) {
         this.behaviorService = behaviorService;
         this.dogRepository = dogRepository;
+
     }
 
 
     @GetMapping("/view/table/behaviorTable")
-    public ModelAndView behaviorTable(ModelAndView modelAndView , @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+    public ModelAndView behaviorTable(ModelAndView modelAndView , @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size, HttpSession session) {
+
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
 

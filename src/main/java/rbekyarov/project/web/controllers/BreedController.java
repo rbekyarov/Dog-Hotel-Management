@@ -37,6 +37,7 @@ public class BreedController extends BaseController {
 
     @GetMapping("/view/table/breedTable")
     public ModelAndView breedTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
 

@@ -150,6 +150,7 @@ public class UserController extends BaseController {
             session.setAttribute("username", user.getUsername());
             session.setAttribute("userId", user.getId());
             session.setAttribute("username", user.getUsername());
+            session.setMaxInactiveInterval(0);
             if (user.getRole().name().equals("ADMIN")) {
                 session.setAttribute("admin", user.getRole());
 
