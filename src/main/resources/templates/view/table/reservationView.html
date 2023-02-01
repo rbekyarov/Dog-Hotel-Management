@@ -70,12 +70,14 @@
                         <tr>
 
                             <td><label style="font-weight: bold;">
-                                <a
-                                        th:href="@{/view/table/client/view/{id}(id=${reservation.client.id})}" th:text="${'Client: '+ reservation.client.firstName + ' ' + reservation.client.lastName}"></a></label><br>
+                                <img align="center" src="#" height="25px" width="25px"
+                                     th:src="@{${'/pics/client.png'}}">  <a
+                                        th:href="@{/view/table/client/view/{id}(id=${reservation.client.id})}" th:text="${' '+ reservation.client.firstName + ' ' + reservation.client.lastName}"></a></label><br>
                             </td>
                             <td><label style="font-weight: bold;">
-                                <a
-                                        th:href="@{/view/table/dog/view/{id}(id=${reservation.dog.id})}" th:text="${'Dog: '+ reservation.dog.name }"></a></label><br>
+                                <img align="center" src="#" height="25px" width="25px"
+                                     th:src="@{${'/pics/dog.png'}}"><a
+                                        th:href="@{/view/table/dog/view/{id}(id=${reservation.dog.id})}" th:text="${' '+ reservation.dog.name }"></a></label><br>
                             </td>
 
                         </tr>
@@ -113,7 +115,7 @@
                         </tr>
                         <tr>
                             <td><label th:text="${'Stay Day: '+ reservation.countOvernightStay }"></label><br></td>
-                            <td><label th:text="${'Dog House: '+ reservation.cell.code }"></label><br></td>
+                            <td><label th:text="${'Dog House: '+ reservation.cell.code +' '+ reservation.cell.cellSize }"></label><br></td>
                         </tr>
                         </tbody>
                     </table>
