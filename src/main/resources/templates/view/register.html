@@ -29,21 +29,26 @@
                           th:object="${userDTO}"
                     >
                         <div class="login-box">
-                            <label>UserName:</label><br>
+                            <label><img align="center" src="#" height="25px" width="25px"
+                                        th:src="@{${'/pics/user.png'}}">UserName:</label><br>
                             <input type="text" id="description" th:field="${userDTO.username}" placeholder="Please enter Username"/><br>
 
                             <p th:if="${existUser}" class="errors alert alert-danger">
                                 User exist!
                             </p>
-                            <label>Password:</label><br>
+                            <br>
+                            <label><img align="center" src="#" height="20px" width="20px"
+                                        th:src="@{${'/pics/pass.png'}}"> Password:</label><br>
                             <input type="password" id="description1" th:field="${userDTO.password}" placeholder="Please enter Password"/><br>
-
-                            <label>Confirm Password:</label><br>
+                            <br>
+                            <label><img align="center" src="#" height="20px" width="20px"
+                                        th:src="@{${'/pics/pass.png'}}"> Confirm Password:</label><br>
                             <input type="password" id="description2" th:field="${userDTO.confirmPassword}" placeholder="Confirm Password"/><br>
 
                             <p th:if="${wrongRepeatPasswords}" class="errors alert alert-danger">
                                 Passwords don't match!.
                             </p>
+                            <br>
                             <label>Default Role:</label><br>
                             <div class="form-group">
                                 <select th:field="${userDTO.role}" >
