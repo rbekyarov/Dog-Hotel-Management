@@ -29,6 +29,14 @@
                                     <input type="text" name="clientEmail" th:value="${clientEmail}" class="searchArea" placeholder="Find by Client Email" size="20" >
                                     <button type="submit" class="btn btn-info" >Search</button>
                                 </form></th>
+                            <th >
+                                <label></label>
+                                <td th:each="r : ${allActiveReservation}">
+
+                                    <label style="width:60px"><img height="7px" width="7px" th:src="@{${'/pics/green-dot.png'}}"><a
+                                            th:href="@{/view/table/dog/view/{id}(id=${r.dog.id})}"
+                                            th:text="${' '+r.dog.name+' ' }"></p></label></td>
+                            </th>
                             </tr>
                             </thead>
                             <tbody>

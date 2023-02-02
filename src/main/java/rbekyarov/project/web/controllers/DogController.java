@@ -55,6 +55,7 @@ public class DogController extends BaseController {
         final int pageSize = size.orElse(5);
 
         Page<Dog> dogs = dogService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+        List<Reservation> allActiveReservation = reservationRepository.findAllActiveReservation();
 
         int totalPages = dogs.getTotalPages();
         List<Integer> pageNumbers = null;
@@ -65,8 +66,9 @@ public class DogController extends BaseController {
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
         modelAndView.addObject("dogs", dogs);
+        modelAndView.addObject("allActiveReservation", allActiveReservation);
         dogService.updateDogYears();
-        return super.view("/view/table/dogTable", "dogs", dogs,"pageNumbers", pageNumbers);
+        return super.view("/view/table/dogTable", "dogs", dogs,"pageNumbers", pageNumbers,"allActiveReservation", allActiveReservation);
     }
 
     @GetMapping("/view/add/dogAdd")
