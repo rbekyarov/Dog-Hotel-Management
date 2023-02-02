@@ -12,79 +12,83 @@
         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: auto;">
             <tbody>
 
-            <td><div class="button_back">
-                <a class="nav-link h5" id="nav-link">
+            <td>
+                <div class="button_back">
+                    <a class="nav-link h5" id="nav-link">
+                        <button type="button" class="btn btn-danger btn-lg btnList"><span
+                                class="glyphicon glyphicon-ok"></span>Back
+                        </button>
+                    </a>
+                </div>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <div><a class="nav-link h5" th:href="@{/view/table/client/edit/{id}(id=*{client.id})}">
                     <button type="button" class="btn btn-danger btn-lg btnList"><span
-                            class="glyphicon glyphicon-ok"></span>Back
+                            class="glyphicon glyphicon-ok"></span>Edit Client
                     </button>
-                </a>
-            </div></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td> <div><a class="nav-link h5" th:href="@{/view/table/client/edit/{id}(id=*{client.id})}">
-                <button type="button" class="btn btn-danger btn-lg btnList"><span
-                        class="glyphicon glyphicon-ok"></span>Edit Client
-                </button>
-            </a></div></td>
+                </a></div>
+            </td>
 
             </tbody>
         </table>
 
+        <div class="login-box">
+            <h1 class="page_title" th:object="${client}">Client Details</h1>
 
-        <h1 class="page_title" th:object="${client}">Client Details</h1>
 
+            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+                <tbody>
+                <tr>
+                    <td align="center"><img align="center" src="#" height="50px" width="50px"
+                                            th:src="@{${'/pics/client.png'}}"></td>
+                </tr>
+                <tr>
+                    <td><h3 th:text="${' '+client.firstName +' '+client.lastName}"></h3></td>
+                </tr>
+                <tr>
+                    <td>
 
-        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
-            <tbody>
-            <tr>
-                <td align="center"><img align="center" src="#" height="50px" width="50px"
-                 th:src="@{${'/pics/client.png'}}"></td>
-            </tr>
-            <tr>
-            <td><h3 th:text="${' '+client.firstName +' '+client.lastName}"></h3></td>
-            </tr>
-            <tr>
-                <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
 
-                </td>
-            </tr>
-            <tr>
-                <td>
+                        <label
+                                th:text="${' * '+'Email: '+ client.email}"></label><br>
 
-                    <label
-                            th:text="${' * '+'Email: '+ client.email}"></label><br>
+                        <label
+                                th:text="${' * '+'Phone: '+ client.phone}"></label><br>
+                        <label
+                                th:text="${' * '+'Address: '+ client.address}"></label><br>
+                        <label
+                                th:text="${' * '+'City: '+ client.city.name}"></label><br>
 
-                    <label
-                            th:text="${' * '+'Phone: '+ client.phone}"></label><br>
-                    <label
-                            th:text="${' * '+'Address: '+ client.address}"></label><br>
-                    <label
-                            th:text="${' * '+'City: '+ client.city.name}"></label><br>
+        </div>
+        </td>
 
-                    </div>
-                </td>
+        </tr>
+        <tr th:each="d : ${client.dogs}">
+            <td>
+                <label><a th:href="@{/view/table/dog/view/{id}(id=${d.id})}" th:text="${d.name}"></label><br>
 
-            </tr>
-            <tr th:each="d : ${client.dogs}">
-                <td>
-                    <label><a th:href="@{/view/table/dog/view/{id}(id=${d.id})}" th:text="${d.name}"></label><br>
+                <img src="#" height="135px" width="200px"
+                     th:src="@{${'/image/' + d.imageName}}"><br>
+            </td>
 
-                    <img src="#" height="135px" width="200px"
-                         th:src="@{${'/image/' + d.imageName}}"><br>
-                </td>
-
-            </tr>
-            <br>
-            <tr>
+        </tr>
+        <br>
+        <tr>
 
             <td><a class="nav-link h5" th:href="@{/view/add/dogAdd/{id}(id=*{client.id})}">
                 <button type="button" class="btn btn-danger btn-lg btnList"><span
                         class="glyphicon glyphicon-ok"></span>Add Dog
                 </button>
             </a></td>
-            </tr>
-            </tbody>
+        </tr>
+        </tbody>
         </table>
 
         <br>
@@ -131,7 +135,7 @@
                         <th>Total Invoices:</th>
                         <th>Total SUM:</th>
                     </tr>
-                    <tr >
+                    <tr>
                         <td th:text="${totalCountReservation}"></td>
                         <td th:text="${totalCountClientInvoice}"></td>
                         <td th:text="${totalInvoicedMoney +'$'}"></td>
@@ -143,7 +147,7 @@
 
             </tbody>
         </table>
-
+        </div>
         </div>
 
 
