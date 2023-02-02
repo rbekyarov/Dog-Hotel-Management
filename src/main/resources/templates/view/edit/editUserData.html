@@ -28,18 +28,18 @@
                       th:method="post"
                       th:object="${user}"
                 >
-                    <div class="form-group">
+                    <div class="login-box">
                         <label  th:text="${ 'Current username :'+ user.username}" > </label> <br>
-                        <label>new username:</label><br>
+                        <label>New username:</label><br>
                         <input type="text"  th:field="${user.username}" placeholder="Enter new password"/><br>
-                        <label>new password:</label><br>
+                        <label>New password:</label><br>
                         <input type="password"  th:field="${user.password}" placeholder="Enter new password"/><br>
                         <p th:if="${empty}" class="errors alert alert-danger">
                             Invalid data!
                         </p>
                     </div>
 
-
+                    <br>
                     <div class="button_submit">
                         <div>
                             <div>

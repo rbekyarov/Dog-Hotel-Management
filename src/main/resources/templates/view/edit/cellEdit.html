@@ -26,13 +26,14 @@
 
                     <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
                           th:method="post">
-                        <div class="form-group">
+                        <div class="login-box">
 
-                <textarea rows="1"
-                          th:field="${cellDto.code}">
-            </textarea>
-                            <p></p>
-                            <select th:field="${cellDto.cellSize}">
+                            <label>House name</label><br>
+                            <input style="width: 120px;" type="text" id="description" th:field="${cellDto.code}"  required/>
+                            <br>
+                            <label>Size</label><br>
+
+                            <select style="width: 120px;" th:field="${cellDto.cellSize}">
                                 <option value="SMALL">SMALL</option>
                                 <option value="MEDIUM">MEDIUM</option>
                                 <option value="LARGE">LARGE</option>
@@ -41,7 +42,8 @@
                                 Behavior is required.
                             </p>
                             <p></p>
-                            <select required th:field="${cellDto.status}">
+                            <label>Status</label><br>
+                            <select style="width: 120px;" required th:field="${cellDto.status}">
                                 <option value="empty">empty</option>
                                 <option value="busy">busy</option>
                                 <option value="under_repair">under repair</option>
@@ -50,6 +52,7 @@
                                 Behavior is required.
                             </p>
                         </div>
+                        <br>
                         <div class="button_submit">
                             <div>
                                 <div>

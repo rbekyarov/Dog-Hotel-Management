@@ -9,7 +9,7 @@
     </script>
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
         <br>
-        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: auto;">
+        <table  align="center" border="0" cellpadding="1" cellspacing="1" style="width: auto;">
             <tbody>
 
             <td><div class="button_back">
@@ -29,9 +29,10 @@
             </tbody>
         </table>
 
-
+        <div class="login-box">
 
             <h1 class="page_title" th:object="${dog}">Dog Details</h1>
+
             <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: auto;">
                 <tbody>
 
@@ -110,13 +111,9 @@
                             <td class="boldPrice" th:text="${r.totalPrice +'$'}"></td>
                         </tr>
                     </table>
-                </tr>
+                    </div>
                 </tbody>
             </table>
-
-
-            <p>&nbsp;</p>
-
         </div>
 
     </th:block>

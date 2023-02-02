@@ -25,13 +25,14 @@
 
                     <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
                           th:method="post">
-                        <div class="form-group">
-                            <label class="text-white font-weight-bold" for="description">Breed</label><br>
+                        <div class="login-box">
+                            <label>Breed name</label><br>
                             <input type="text" id="description" th:field="${breedDTO.breedName}" placeholder="Please enter breed" required />
                             <p class="invalid-feedback errors alert alert-danger">
                                 Behavior is required.
                             </p>
                         </div>
+                        <br>
                         <div class="button_submit">
                             <div>
                                 <div>

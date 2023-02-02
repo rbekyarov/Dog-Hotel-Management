@@ -35,7 +35,7 @@
                 <form class="form_add" th:action="@{/view/add/clientAdd}"
                       th:method="post"
                       th:object="${clientDTO}">
-                    <div class="form-group">
+                    <div class="login-box">
                         <label>First Name:</label><br>
                         <input type="text" id="description" th:field="*{firstName}" placeholder="Please enter Name" required/><br>
                         <label>Last Name:</label><br>
@@ -71,6 +71,7 @@
                         </table>
 
                     </div>
+                    <br>
                     <div class="button_submit">
                         <div >
                             <div>
