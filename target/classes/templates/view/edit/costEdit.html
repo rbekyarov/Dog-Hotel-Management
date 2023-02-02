@@ -1,7 +1,7 @@
 <th:block th:unless="${session.isEmpty()}">
     <script>
-        $(document).ready(function() {
-            $('#nav-link').click(function(e){
+        $(document).ready(function () {
+            $('#nav-link').click(function (e) {
                 e.preventDefault();
                 window.history.back();
             });
@@ -14,63 +14,83 @@
             });
         });
     </script>
-    <script src="/js/selectize.min.js" ></script>
-    <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css" />
+    <script src="/js/selectize.min.js"></script>
+    <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css"/>
     <link href="/css/dp-light.css" rel="stylesheet">
     <script defer src="/js/datepicker.js"></script>
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
-        <div class="button_back">
-            <a class="nav-link h5" id="nav-link">
-                <button type="button" class="btn btn-danger btn-lg btnList"><span
-                        class="glyphicon glyphicon-ok"></span>Back
-                </button>
-            </a>
-        </div>
-        <div class="container">
-            <h2 class="page_title">Edit Cost</h2>
-            <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
-                  th:method="post"
-                  th:object="${costDTO}">
-
-                <div class="form-group">
-                    <label>Vendor:</label><br>
-                    <select th:field="*{vendor.id}">
-                        <option required value="">Please select</option>
-                        <option
-                                th:each="b : ${allVendor}"
-                                th:value="${b.id}"
-                                th:text="${b.name}"></option>
-
-                    </select><br>
-
-                    <label>Description:</label><br>
-                    <input type="text" id="description" th:field="*{description}" placeholder="Please enter Description"
-                           required/><br>
-                    <label>Invoice No:</label><br>
-                    <input type="text" id="description4" th:field="*{invoiceNo}" placeholder="Please enter Invoice No"
-                           required/><br>
-                    <label>Amount:</label><br>
-                    <input type="text" id="description1" th:field="*{amount}" placeholder="Please enter Amount"
-                           required/><br>
-
-                    <td><td><label>Date Cost:</label><br>
-                    <div>
-                        <input required type="text" id="input1" th:field="*{dateCost}" placeholder="Please enter BirthDate"  />
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="button_back">
+                        <a class="nav-link h5" id="nav-link">
+                            <button type="button" class="btn btn-danger btn-lg btnList"><span
+                                    class="glyphicon glyphicon-ok"></span>Back
+                            </button>
+                        </a>
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="container">
+                    <h2 class="page_title">Edit Cost</h2>
+                    <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
+                          th:method="post"
+                          th:object="${costDTO}">
 
-                </div>
-                <div class="button_submit">
-                    <div>
+                        <div class="login-box">
+                            <label>Vendor:</label><br>
+                            <select th:field="*{vendor.id}">
+                                <option required value="">Please select</option>
+                                <option
+                                        th:each="b : ${allVendor}"
+                                        th:value="${b.id}"
+                                        th:text="${b.name}"></option>
+
+                            </select><br>
+
+                            <label>Description:</label><br>
+                            <input type="text" id="description" th:field="*{description}"
+                                   placeholder="Please enter Description"
+                                   required/><br>
+                            <label>Invoice No:</label><br>
+                            <input type="text" id="description4" th:field="*{invoiceNo}"
+                                   placeholder="Please enter Invoice No"
+                                   required/><br>
+                            <label>Amount:</label><br>
+                            <input type="text" id="description1" th:field="*{amount}" placeholder="Please enter Amount"
+                                   required/><br>
+
+                            <label>Date Cost:</label><br>
+                            <div>
+                                <input required type="text" id="input1" th:field="*{dateCost}"
+                                       placeholder="Please enter BirthDate"/>
+
+                            </div>
+                        </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                    <div class="button_submit">
                         <div>
-                            <input type="submit" class="btn btn-danger btn-lg btnList" value="Edit Cost"/>
+                            <div>
+                                <input type="submit" class="btn btn-danger btn-lg btnList" value="Edit Cost"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                    </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
         <script>
             window.addEventListener("load", () => {
-                picker.attach({ target: "input1" });
+                picker.attach({target: "input1"});
             });
         </script>
     </th:block>

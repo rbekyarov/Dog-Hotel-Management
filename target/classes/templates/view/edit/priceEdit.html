@@ -27,7 +27,7 @@
 
                         <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
                               th:method="post">
-                            <div class="form-group">
+                            <div class="login-box">
                                 <label>Price Stay Hous S for 1 day:</label><br>
                                 <input type="text" id="description" th:field="${priceDTO.priceStayS}" placeholder="Please enter price Overnight Stay" required/><br>
                                 <label>Price Stay Hous M for 1 day:</label><br>
@@ -52,6 +52,7 @@
                                 <input type="text" id="description7" th:field="${priceDTO.priceNails}" placeholder="Please enter price Nails" required/><br>
 
                             </div>
+                            <br>
                             <div class="button_submit">
                                 <div>
                                     <div>

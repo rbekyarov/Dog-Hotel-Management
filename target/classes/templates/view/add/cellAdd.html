@@ -27,15 +27,18 @@
                       th:method="post"
                       th:object="${cellDto}"
                 >
-                    <div class="form-group">
-                        <label class="text-white font-weight-bold" for="description">Dog House</label><br>
-                        <input type="text" id="description" th:field="${cellDTO.code}" placeholder="Please enter Dog House" required/>
+
+
+                    <div class="login-box">
+
+                        <label>House name</label><br>
+                        <input style="width: 120px;" type="text" id="description" th:field="${cellDTO.code}"  required/>
                         <p class="invalid-feedback errors alert alert-danger">
                             Behavior is required.
                         </p><br>
                         <label>Size</label><br>
 
-                        <select th:field="${cellDTO.cellSize}" >
+                        <select style="width: 120px;" th:field="${cellDTO.cellSize}" >
                             <option value="SMALL">SMALL</option>
                             <option value="MEDIUM">MEDIUM</option>
                             <option value="LARGE">LARGE</option>
@@ -53,7 +56,7 @@
                         </p>
                     </div>
 
-
+                    <br>
                     <div class="button_submit">
                         <div >
                             <div>

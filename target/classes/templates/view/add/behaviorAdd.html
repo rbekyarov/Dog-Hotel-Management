@@ -27,15 +27,13 @@
                       th:method="post"
                       th:object="${addBehavior}"
                 >
-                    <div class="form-group">
-                        <label class="text-white font-weight-bold" for="description">Behavior</label><br>
-                        <input type="text" id="description" th:field="${behaviorDTO.name}" placeholder="Please enter behavior" required/>
-                        <p class="invalid-feedback errors alert alert-danger">
-                            Behavior is required.
-                        </p>
+                    <div class="login-box">
+                        <label>Behavior</label><br>
+                        <input style="width: 250px" type="text" id="description" th:field="${behaviorDTO.name}" placeholder="Please enter behavior" required/>
+
                     </div>
 
-
+                    <br>
                     <div class="button_submit">
                         <div >
                             <div>

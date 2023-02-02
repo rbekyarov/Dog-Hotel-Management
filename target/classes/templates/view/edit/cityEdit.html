@@ -25,7 +25,7 @@
 
                     <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
                           th:method="post">
-                        <div class="form-group">
+                        <div class="login-box">
 
                             <label >City Code</label><br>
                             <input type="text" id="description" th:field="${cityDTO.code}" placeholder="Please enter code" required /><br>
@@ -37,6 +37,7 @@
                                 City is required.
                             </p>
                         </div>
+                        <br>
                         <div class="button_submit">
                             <div>
                                 <div>
