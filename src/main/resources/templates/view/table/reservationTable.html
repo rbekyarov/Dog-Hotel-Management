@@ -22,15 +22,7 @@
                 }
             }
         </script>
-        <script>
-            function filterUpcoming(checked) {
-                var elm = document.getElementById('upcoming');
-                if (checked != elm.checked) {
-                    elm.click();
-                    window.location.href = '/view/table/reservationTable/upcoming';
-                }
-            }
-        </script>
+
 
         <table  align="center" border="0" cellpadding="1" cellspacing="1" style="width:1400px">
             <tbody>
@@ -63,25 +55,25 @@
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th id="upcoming">  <a th:href="@{/view/table/reservationTableUpcoming}"> <img  height="15px" width="15px" th:src="@{${'/pics/upcoming.png'}}" th:text="${'Upcoming: '+countUpcomingReservation}" > </th>
+                            <th id="upcoming">  <a th:href="@{/view/table/reservationTableUpcoming}"> <img  height="15px" width="15px" th:src="@{${'/pics/upcoming.png'}}" th:text="${' Upcoming: '+countUpcomingReservation}" > </th>
                             <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th id="active"> <a th:href="@{/view/table/reservationTableActive}"> <img height="15px" width="15px" th:src="@{${'/pics/active.png'}}" th:text="${'Active: '+countActiveReservation}"></th>
+                            <th id="active"> <a th:href="@{/view/table/reservationTableActive}"> <img height="15px" width="15px" th:src="@{${'/pics/active.png'}}" th:text="${' Active: '+countActiveReservation}"></th>
                             <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th id="completed"> <a th:href="@{/view/table/reservationTableCompleted}"> <img height="15px" width="15px" th:src="@{${'/pics/completed.png'}}" th:text="${'Completed: '+countCompletedReservation}"></th>
+                            <th id="completed"> <a th:href="@{/view/table/reservationTableCompleted}"> <img height="15px" width="15px" th:src="@{${'/pics/completed.png'}}" th:text="${' Completed: '+countCompletedReservation}"></th>
                             <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th> <a th:href="@{/view/table/reservationTable}" ><img height="15px" width="15px" th:src="@{${'/pics/reset.png'}}" th:text="${'reset'}"></th>
+                            <th> <a th:href="@{/view/table/reservationTable}" ><img height="15px" width="15px" th:src="@{${'/pics/reset.png'}}" th:text="${' reset'}"></th>
 
                         </tr>
                         </thead>
