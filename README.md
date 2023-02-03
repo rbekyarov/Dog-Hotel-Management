@@ -181,7 +181,8 @@ EDIT DOG:
 
 DOG DETAILS:
 
-![2023-01-16 (19)](https://user-images.githubusercontent.com/29566751/212759969-457bc212-7c4f-4707-aa23-a1a216b60350.png)
+
+![2023-02-03 (19)](https://user-images.githubusercontent.com/29566751/216559278-e07fc383-98e0-4163-9c73-b5de37227d25.png)
 
 DOG HOUSE PAGE:
 
