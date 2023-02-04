@@ -10,10 +10,24 @@
                                      th:src="@{${'/pics/house.png'}}">Dog Houses List</h1>
                         </div>
                         <a class="nav-link h5" th:href="@{/view/add/cellAdd}">
-                            <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                                    class="glyphicon glyphicon-ok"></span>Add House
-                            </button>
-                        </a>
+                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                            class="glyphicon glyphicon-ok"></span>Add House
+                                    </button>
+                                </a>
+
+                        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:300px"
+                               class=tableHome>
+                            <tbody>
+
+                            <tr>
+                                <label th:each="c : ${cellsRepair}">
+
+                                    <label ><img height="30px" width="30px" th:src="@{${'/pics/repair.png'}}" th:text="${' '+c.code}"></label></label>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
                         <p th:if="${isUsed}" class="errors alert alert-danger">
                             Cell is used!
                         </p>

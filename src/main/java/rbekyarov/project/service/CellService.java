@@ -33,5 +33,7 @@ public interface CellService {
     void updateStatus(List<Reservation> reservationList);
 
     List<Cell> findAllCellWithoutCellInService();
+
+    List<Cell> findAllRepairsCells();
 }
 

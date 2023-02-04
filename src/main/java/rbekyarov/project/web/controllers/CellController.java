@@ -47,9 +47,11 @@ public class CellController extends BaseController {
                     .collect(Collectors.toList());
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
+        List<Cell> cellsRepair = cellService.findAllRepairsCells();
         cellService.updateStatus(reservationRepository.findAllActiveReservation());
         modelAndView.addObject("cells", cells);
-        return super.view("/view/table/cellTable", "cells", cells,"pageNumbers", pageNumbers);
+        modelAndView.addObject("cellsRepair", cellsRepair);
+        return super.view("/view/table/cellTable", "cells", cells,"pageNumbers", pageNumbers,"cellsRepair", cellsRepair);
     }
 
     @GetMapping("/view/add/cellAdd")

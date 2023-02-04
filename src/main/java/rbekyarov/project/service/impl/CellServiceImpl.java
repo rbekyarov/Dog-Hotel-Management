@@ -133,4 +133,9 @@ public class CellServiceImpl implements CellService {
     public List<Cell> findAllCellWithoutCellInService() {
         return cellRepository.findAllCellWithoutCellInService();
     }
+
+    @Override
+    public List<Cell> findAllRepairsCells() {
+        return cellRepository.findAllRepairsCells();
+    }
 }
