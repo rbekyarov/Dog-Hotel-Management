@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public interface PriceRepository extends JpaRepository<Price, Long> {
 
-    @Query("select p from Price as p order by p.id asc ")
+    @Query("select p from Price as p order by p.id desc ")
     List<Price> findAllPrices();
 
     Optional<Price> findById(Long id);
