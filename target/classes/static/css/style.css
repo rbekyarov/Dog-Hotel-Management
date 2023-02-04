@@ -851,9 +851,9 @@ a, a:hover {
 
 @media screen and (max-width: 560px) {
     .table-responsive-vendor {
-        font-size: 12px;
-        /*display: block;*/
-        /*width:100%;*/
+        font-size: 16px;
+        display: block;
+        width:100%;
         max-width: 100%;
         background-color: transparent;
         border-collapse: collapse;

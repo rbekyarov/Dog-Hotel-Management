@@ -56,7 +56,7 @@
                                 <td th:text="${i.clientName +' '+ i.clientEmail +' '+i.clientPhone}"></td>
                                 <td th:text="${'Dog '+ i.dogName + ' '+'House:' +i.cellCode + ' '+'Day: '+i.countStay}"></td>
 
-                                <td ><a th:target="_blank"  th:href="@{/view/table/reservation/view/{id}(id=${i.reservationId})}" th:text="${i.reservationId}"></td>
+                                <td class="h6" ><a  th:href="@{/view/table/reservation/view/{id}(id=${i.reservationId})}" th:text="${i.reservationId}"></td>
                                 <td th:text="${i.price+'$'}"></td>
                                 <td th:text="${i.discount}"></td>
                                 <td class="boldPrice" th:text="${i.totalPrice +'$'}"></td>
