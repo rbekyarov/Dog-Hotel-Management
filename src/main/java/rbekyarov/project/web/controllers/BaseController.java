@@ -1,6 +1,7 @@
 package rbekyarov.project.web.controllers;
 
 import org.springframework.data.domain.Page;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.entity.*;
 
@@ -151,14 +152,10 @@ public abstract class BaseController {
         modelAndView.addObject(string6, int3);
         modelAndView.addObject(string7, str1);
 
-
-
-
         return modelAndView;
 
 
     }
-
 
 
     public ModelAndView redirect(String url) {
@@ -167,4 +164,29 @@ public abstract class BaseController {
 
         return modelAndView;
     }
+
+
+
+
+
+
+
+
+
+
+//    public ModelAndView redirect(String url,String bind ,BindingResult bindingResult) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.addObject(bind, bindingResult);
+//        modelAndView.setViewName("redirect:" + url);
+//
+//        return modelAndView;
+//    }
+//
+//    protected ModelAndView view(String view,String bind ,BindingResult bindingResult) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("fragments/base-layout");
+//        modelAndView.addObject("view", view);
+//        modelAndView.addObject(bind, bindingResult);
+//        return modelAndView;
+//    }
 }

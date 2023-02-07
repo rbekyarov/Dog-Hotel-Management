@@ -25,13 +25,22 @@
                 <h2 class="page_title">Add Behavior</h2>
                 <form class="form_add" th:action="@{/view/add/behaviorAdd}"
                       th:method="post"
-                      th:object="${addBehavior}"
-                >
+                      th:object="${behaviorDTO}" >
+
                     <div class="login-box">
                         <label>Behavior</label><br>
-                        <input style="width: 250px" type="text" id="description" th:field="${behaviorDTO.name}" placeholder="Please enter behavior" required/>
+                        <input style="width: 250px" type="text"
+                               th:field="${behaviorDTO.name}"
+                               name="name"
+                               id="name" />
+
+                        <small th:if="${#fields.hasErrors('name')}"
+                               th:errors="*{name}"
+                               class="text-light form-text bg-danger "></small>
 
                     </div>
+
+
 
                     <br>
                     <div class="button_submit">

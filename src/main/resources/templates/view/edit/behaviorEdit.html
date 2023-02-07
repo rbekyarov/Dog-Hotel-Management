@@ -1,7 +1,7 @@
 <th:block th:unless="${session.isEmpty()}">
     <script>
-        $(document).ready(function() {
-            $('#nav-link').click(function(e){
+        $(document).ready(function () {
+            $('#nav-link').click(function (e) {
                 e.preventDefault();
                 window.history.back();
             });
@@ -12,31 +12,41 @@
         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
             <tbody>
             <tr>
-                <td> <div class="button_back">
-                    <a class="nav-link h5" id="nav-link">
-                        <button type="button" class="btn btn-danger btn-lg btnList"><span
-                                class="glyphicon glyphicon-ok"></span>Back
-                        </button>
-                    </a>
-                </div></td>
+                <td>
+                    <div class="button_back">
+                        <a class="nav-link h5" id="nav-link">
+                            <button type="button" class="btn btn-danger btn-lg btnList"><span
+                                    class="glyphicon glyphicon-ok"></span>Back
+                            </button>
+                        </a>
+                    </div>
+                </td>
             </tr>
             <tr>
-                <td><div class="container">
-                    <h2 class="page_title">Edit Behavior</h2>
+                <td>
+                    <div class="container">
+                        <h2 class="page_title">Edit Behavior</h2>
 
-                    <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
-                          th:method="post">
-                        <div class="login-box">
-                            <label>Behavior</label><br>
-                            <input style="width: 250px" type="text" id="description" th:field="${behaviorDTO.name}" placeholder="Please enter behavior" required/>
-                            <p class="invalid-feedback errors alert alert-danger">
-                                Behavior is required.
-                            </p>
-                        </div>
-                        <p class="invalid-feedback errors alert alert-danger">
-                            Behavior is required.
-                        </p>
-                </div>
+                        <form class="form_add"
+
+                              th:action="@{/view/table/behavior/edit/{id}(id=*{id})}"
+                              th:object="${behaviorEditDTO}"
+                              th:method="post">
+                            <div class="login-box">
+
+                                <label>Behavior</label><br>
+                                <input style="width: 250px" type="text"
+                                       th:field="${behaviorEditDTO.name}"
+                                       name="name"
+                                       id="name" />
+                                <small th:if="${#fields.hasErrors('name')}"
+                                       th:errors="*{name}"
+                                       class="text-light form-text bg-danger "></small>
+
+
+                            </div>
+
+
                     <br>
                     <div class="button_submit">
                         <div>
@@ -48,14 +58,6 @@
                     </form>
                     </div></td>
             </tr>
-
         </table>
-
-
-
     </th:block>
 </th:block>
-
-<!--<a class="btn btn-danger btn-lg btn3d" th:href="@{/behavior/{id}/edit(id=*{id})}">
-    Submit Behavior
-</a>-->

@@ -4,10 +4,8 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rbekyarov.project.models.dto.BehaviorDTO;
@@ -59,8 +57,8 @@ public class BehaviorController extends BaseController {
     }
 
     @GetMapping("/view/add/behaviorAdd")
-    public ModelAndView behaviorAdd(ModelAndView modelAndView) {
-        BehaviorDTO behaviorDTO = new BehaviorDTO();
+    public ModelAndView behaviorAdd(ModelAndView modelAndView, BehaviorDTO behaviorDTO) {
+
 
         modelAndView.addObject("behaviorDTO", behaviorDTO);
 
@@ -70,11 +68,16 @@ public class BehaviorController extends BaseController {
     }
 
     @PostMapping("/view/add/behaviorAdd")
-    public String addBehavior(@Valid BehaviorDTO behaviorDTO , HttpSession session) {
+    public ModelAndView addBehavior(@Valid BehaviorDTO behaviorDTO ,BindingResult bindingResult,RedirectAttributes redirectAttributes, HttpSession session ) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("behaviorDTO", behaviorDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.behaviorDTO", bindingResult);
 
+            return super.view("/view/add/behaviorAdd");
+        }
         behaviorService.addBehaviors(behaviorDTO,session);
+        return super.redirect("/view/table/behaviorTable");
 
-        return "redirect:/view/table/behaviorTable";
     }
 
     @GetMapping("view/table/behavior/remove/{id}")
@@ -94,25 +97,34 @@ public class BehaviorController extends BaseController {
     }
 
 
-    @GetMapping("view/table/behavior/edit/{id}")
+    @GetMapping("/view/table/behavior/edit/{id}")
     public ModelAndView getBehaviorDetail(@PathVariable("id") Long id,
                                           ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        Behavior behaviorDto =
+        Behavior behaviorEditDTO =
                 behaviorService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
-        modelAndView.addObject("behaviorDTO", behaviorDto);
+        modelAndView.addObject("behaviorEditDTO",behaviorEditDTO );
 
-        return super.view("/view/edit/behaviorEdit", "behaviorDTO", behaviorDto);
+        return super.view("/view/edit/behaviorEdit","behaviorEditDTO",behaviorEditDTO);
 
     }
 
-    @PostMapping("view/table/behavior/edit/{id}/edit")
-    public String editBehavior(@PathVariable("id") Long id, BehaviorEditDTO behaviorEditDTO, HttpSession session) throws ObjectNotFoundException {
+    @PostMapping("/view/table/behavior/edit/{id}")
+    public ModelAndView editBehavior( @PathVariable("id") Long id ,
+                                      @Valid BehaviorEditDTO behaviorEditDTO,
+                                      BindingResult bindingResult,
+                                      RedirectAttributes redirectAttributes,
+                                      HttpSession session ) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("behaviorEditDTO", behaviorEditDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.behaviorEditDTO", bindingResult);
 
+
+            return super.redirect("/view/table/behavior/edit/"+id);
+        }
         behaviorService.editBehaviors(behaviorEditDTO.getName(), id, session);
-
-        return "redirect:/view/table/behaviorTable";
+        return super.redirect("/view/table/behaviorTable");
     }
 }
