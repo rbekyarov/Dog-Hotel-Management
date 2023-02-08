@@ -34,7 +34,10 @@
                     <div class="login-box">
 
                         <label>House name</label><br>
-                        <input style="width: 120px;" type="text" id="description" th:field="${cellDTO.code}"/>
+                        <input style="width: 120px;"
+                               type="text" id="description"
+                               th:field="${cellDTO.code}"/>
+
                         <small th:if="${#fields.hasErrors('code')}"
                                th:errors="*{code}"
                                class="text-light form-text bg-danger "></small>

@@ -4,6 +4,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,11 +68,16 @@ public class CityController extends BaseController {
     }
 
     @PostMapping("/view/add/cityAdd")
-    public String addCity(@Valid CityDTO cityDTO, HttpSession session) {
+    public ModelAndView addCity(@Valid CityDTO cityDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("cityDTO", cityDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.cityDTO", bindingResult);
 
+            return super.view("/view/add/cityAdd");
+        }
         cityService.addCity(cityDTO,session);
+        return super.redirect("/view/table/cityTable");
 
-        return "redirect:/view/table/cityTable";
     }
 
     @GetMapping("view/table/city/remove/{id}")
@@ -90,25 +96,34 @@ public class CityController extends BaseController {
         return super.redirect("/view/table/cityTable");
     }
 
-    @GetMapping("view/table/city/edit/{id}")
+    @GetMapping("/view/table/city/edit/{id}")
     public ModelAndView getCityDetail(@PathVariable("id") Long id,
                                       ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        City cityDTO =
+        City cityEditDTO =
                 cityService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
-        modelAndView.addObject("cityDTO", cityDTO);
+        modelAndView.addObject("cityEditDTO", cityEditDTO);
 
-        return super.view("/view/edit/cityEdit", "cityDTO", cityDTO);
+        return super.view("/view/edit/cityEdit", "cityEditDTO", cityEditDTO);
 
     }
 
-    @PostMapping("view/table/city/edit/{id}/edit")
-    public String editCity(@PathVariable("id") Long id, CityEditDTO cityEditDTO, HttpSession session) throws ObjectNotFoundException {
+    @PostMapping("/view/table/city/edit/{id}")
+    public ModelAndView editCity(@PathVariable("id") Long id,
+                                 @Valid CityEditDTO cityEditDTO,
+                                 BindingResult bindingResult,
+                                 HttpSession session,ModelAndView modelAndView) throws ObjectNotFoundException {
+        if (bindingResult.hasErrors()) {
+
+            modelAndView.addObject("cityEditDTO", cityEditDTO);
+            return super.view("view/edit/cityEdit","cityEditDTO", cityEditDTO);
+
+        }
 
         cityService.editCity(cityEditDTO.getCode(), id, cityEditDTO.getName(),session);
+        return super.redirect("/view/table/cityTable");
 
-        return "redirect:/view/table/cityTable";
     }
 }
