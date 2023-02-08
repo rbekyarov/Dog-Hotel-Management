@@ -24,33 +24,42 @@
                 <td><div class="container">
                     <h2 class="page_title">Edit Dog House</h2>
 
-                    <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
+                    <form class="form_add"
+                          th:object="${cellEditDTO}"
+                          th:action="@{/view/table/cell/edit/{id}(id=*{id})}"
                           th:method="post">
                         <div class="login-box">
 
                             <label>House name</label><br>
-                            <input style="width: 120px;" type="text" id="description" th:field="${cellDto.code}"  required/>
+                            <input style="width: 120px;" type="text"
+                                   th:field="${cellEditDTO.code}"  name="code"
+                                   id="code" />
                             <br>
+                            <small th:if="${#fields.hasErrors('code')}"
+                                   th:errors="*{code}"
+                                   class="text-light form-text bg-danger "></small>
                             <label>Size</label><br>
 
-                            <select style="width: 120px;" th:field="${cellDto.cellSize}">
+                            <select style="width: 120px;" th:field="${cellEditDTO.cellSize}">
+                                <option value="SMALL">please select</option>
                                 <option value="SMALL">SMALL</option>
                                 <option value="MEDIUM">MEDIUM</option>
                                 <option value="LARGE">LARGE</option>
                             </select>
-                            <p class="invalid-feedback errors alert alert-danger">
-                                Behavior is required.
-                            </p>
-                            <p></p>
+                            <small th:if="${#fields.hasErrors('cellSize')}"
+                                   th:errors="*{cellSize}"
+                                   class="text-light form-text bg-danger "></small><br>
+
                             <label>Status</label><br>
-                            <select style="width: 120px;" required th:field="${cellDto.status}">
+                            <select style="width: 120px;" required th:field="${cellEditDTO.status}">
+                                <option value="SMALL">please select</option>
                                 <option value="empty">empty</option>
                                 <option value="busy">busy</option>
                                 <option value="under_repair">under repair</option>
                             </select>
-                            <p class="invalid-feedback errors alert alert-danger">
-                                Behavior is required.
-                            </p>
+                            <small th:if="${#fields.hasErrors('status')}"
+                                   th:errors="*{status}"
+                                   class="text-light form-text bg-danger "></small><br>
                         </div>
                         <br>
                         <div class="button_submit">

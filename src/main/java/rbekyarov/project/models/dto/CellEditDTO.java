@@ -6,6 +6,8 @@ import rbekyarov.project.models.entity.enums.Status;
 import javax.validation.constraints.NotNull;
 
 public class CellEditDTO {
+    private Long id;
+
     private String code;
     private Status status;
     private CellSize cellSize;
@@ -37,5 +39,13 @@ public class CellEditDTO {
 
     public void setCellSize(CellSize cellSize) {
         this.cellSize = cellSize;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

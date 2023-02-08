@@ -10,6 +10,7 @@ import rbekyarov.project.models.entity.enums.Microchip;
 import rbekyarov.project.models.entity.enums.Passport;
 import rbekyarov.project.models.entity.enums.Sex;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -34,7 +35,7 @@ public class DogDTO {
     public DogDTO() {
     }
 
-    @NotNull(message = "Name cannot be empty")
+    @NotBlank(message = "cannot be empty")
     public String getName() {
         return name;
     }
@@ -43,6 +44,7 @@ public class DogDTO {
         this.name = name;
     }
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotBlank(message = "cannot be empty")
     public String getBirthDate() {
         return birthDate;
     }
@@ -51,7 +53,7 @@ public class DogDTO {
         this.birthDate = birthDate;
     }
 
-
+    @NotBlank(message = "cannot be empty")
     public Integer getWeight() {
         return weight;
     }
