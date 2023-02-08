@@ -3,6 +3,7 @@ package rbekyarov.project.models.dto;
 import rbekyarov.project.models.entity.enums.CellSize;
 import rbekyarov.project.models.entity.enums.Status;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class CellDTO {
@@ -14,7 +15,7 @@ public class CellDTO {
     public CellDTO() {
     }
 
-    @NotNull(message = "Field cannot be empty")
+    @NotBlank(message = "Field cannot be empty")
     public String getCode() {
         return code;
     }
@@ -23,7 +24,7 @@ public class CellDTO {
         this.code = code;
     }
 
-    @NotNull
+    @NotNull(message = "Cannot be empty, please select")
     public Status getStatus() {
         return status;
     }
@@ -31,7 +32,7 @@ public class CellDTO {
     public void setStatus(Status status) {
         this.status = status;
     }
-    @NotNull
+    @NotNull(message = "Cannot be empty, please select")
     public CellSize getCellSize() {
         return cellSize;
     }

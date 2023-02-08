@@ -4,6 +4,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,11 +67,16 @@ public class CellController extends BaseController {
     }
 
     @PostMapping("/view/add/cellAdd")
-    public String addCell(@Valid CellDTO cellDTO,HttpSession session) {
+    public ModelAndView addCell(@Valid CellDTO cellDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("cellDTO", cellDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.cellDTO", bindingResult);
 
-        cellService.addCells(cellDTO,session);
+            return super.view("/view/add/cellAdd");
+        }
+        cellService.addCell(cellDTO,session);
+        return super.redirect("/view/table/cellTable");
 
-        return "redirect:/view/table/cellTable";
     }
 
     @GetMapping("view/table/cell/remove/{id}")

@@ -43,7 +43,7 @@ public class CellServiceImpl implements CellService {
     }
 
     @Override
-    public void addCells(CellDTO cellDTO, HttpSession session) {
+    public void addCell(CellDTO cellDTO, HttpSession session) {
         Cell cell = modelMapper.map(cellDTO, Cell.class);
         cell.setStatus(cellDTO.getStatus());
         //get and set Author

@@ -10,7 +10,6 @@ public class BehaviorDTO {
     }
 
     @Size(min = 5, max = 50, message = "Content length must be between 5 and 50 characters!")
-    @NotNull(message = "Field cannot be empty")
     public String getName() {
         return name;
     }

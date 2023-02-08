@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface CellService {
     List<Cell> findAllCellById();
 
-    void addCells(CellDTO cellDTO, HttpSession session);
+    void addCell(CellDTO cellDTO, HttpSession session);
 
     void removeCellById(Long id);
 
