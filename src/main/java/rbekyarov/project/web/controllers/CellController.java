@@ -113,14 +113,24 @@ public class CellController extends BaseController {
     @PostMapping("/view/table/cell/edit/{id}")
     public ModelAndView editCell(@PathVariable("id") Long id,
                            @Valid CellEditDTO cellEditDTO,
-                           BindingResult bindingResult,
-                           HttpSession session,ModelAndView modelAndView) throws ObjectNotFoundException {
+                           BindingResult bindingResult,RedirectAttributes redirectAttributes,
+                           HttpSession session) throws ObjectNotFoundException {
+
         if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("cellEditDTO", cellEditDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.cellEditDTO", bindingResult);
 
-            modelAndView.addObject("cellEditDTO", cellEditDTO);
-            return super.view("view/edit/cellEdit","cellEditDTO", cellEditDTO);
 
+           return super.view("view/edit/cellEdit","cellEditDTO", cellEditDTO);
         }
+
+
+//        if (bindingResult.hasErrors()) {
+//
+//            modelAndView.addObject("cellEditDTO", cellEditDTO);
+//            return super.view("view/edit/cellEdit","cellEditDTO", cellEditDTO);
+//
+//        }
 
         cellService.editCells(cellEditDTO.getCode(), id, cellEditDTO.getStatus(),cellEditDTO.getCellSize(),session);
         return super.redirect("/view/table/cellTable");

@@ -3,6 +3,7 @@ package rbekyarov.project.models.dto;
 import rbekyarov.project.models.entity.enums.CellSize;
 import rbekyarov.project.models.entity.enums.Status;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class CellEditDTO {
@@ -14,7 +15,7 @@ public class CellEditDTO {
     public CellEditDTO() {
     }
 
-    @NotNull(message = "Field cannot be empty")
+    @NotBlank(message = "Field cannot be empty")
     public String getCode() {
         return code;
     }

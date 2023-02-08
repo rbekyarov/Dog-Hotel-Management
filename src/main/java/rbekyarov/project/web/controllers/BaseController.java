@@ -12,6 +12,10 @@ import java.util.List;
 
 public abstract class BaseController {
 
+
+    protected BaseController() {
+    }
+
     public ModelAndView view(String view) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fragments/base-layout");
@@ -159,12 +163,16 @@ public abstract class BaseController {
 
 
     public ModelAndView redirect(String url) {
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:" + url);
 
         return modelAndView;
     }
+    public ModelAndView rdc(String url) {
 
+        return view("redirect:" + url);
+    }
 
 
 
