@@ -24,15 +24,17 @@
                 <h2 class="page_title">Add Breed</h2>
                 <form class="form_add" th:action="@{/view/add/breedAdd}"
                       th:method="post"
-                      th:object="${addBreed}"
+                      th:object="${breedDTO}"
                 >
                     <div class="login-box">
                         <label>Breed name</label><br>
 
-                        <input type="text" id="description" th:field="${breedDTO.breedName}"  required/>
-                        <p class="invalid-feedback errors alert alert-danger">
-                            Behavior is required.
-                        </p>
+                        <input type="text" id="breedName"
+                               th:field="${breedDTO.breedName}"
+                               name="breedName"/>
+                        <small th:if="${#fields.hasErrors('breedName')}"
+                               th:errors="*{breedName}"
+                               class="text-light form-text bg-danger "></small>
                     </div>
                     <br>
                     <div class="button_submit">

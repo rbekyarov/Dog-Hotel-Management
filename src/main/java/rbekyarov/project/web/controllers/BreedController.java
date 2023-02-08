@@ -4,6 +4,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,11 +68,16 @@ public class BreedController extends BaseController {
     }
 
     @PostMapping("/view/add/breedAdd")
-    public String addBreed(@Valid BreedDTO breedDTO, HttpSession session) {
+    public ModelAndView addBreed(@Valid BreedDTO breedDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("breedDTO", breedDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.breedDTO", bindingResult);
 
+            return super.view("/view/add/breedAdd");
+        }
         breedService.addBreeds(breedDTO,session);
 
-        return "redirect:/view/table/breedTable";
+        return super.redirect("/view/table/breedTable");
     }
 
     @GetMapping("view/table/breed/remove/{id}")
@@ -91,24 +97,36 @@ public class BreedController extends BaseController {
     }
 
 
-    @GetMapping("view/table/breed/edit/{id}")
+    @GetMapping("/view/table/breed/edit/{id}")
     public ModelAndView getBreedDetail(@PathVariable("id") Long id,
                                        ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        Breed breedDto =
+        Breed breedEditDTO =
                 breedService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
-        modelAndView.addObject("breedDTO", breedDto);
+        modelAndView.addObject("breedEditDTO", breedEditDTO);
 
-        return super.view("/view/edit/breedEdit", "breedDTO", breedDto);
+        return super.view("/view/edit/breedEdit", "breedEditDTO", breedEditDTO);
 
     }
 
-    @PostMapping("view/table/breed/edit/{id}/edit")
-    public String editBreed(@PathVariable("id") Long id, BreedEditDTO breedEditDTO, HttpSession session) throws ObjectNotFoundException {
+    @PostMapping("/view/table/breed/edit/{id}")
+    public ModelAndView editBreed(@PathVariable("id") Long id,
+                                  @Valid BreedEditDTO breedEditDTO,
+                                  BindingResult bindingResult,
+                                  HttpSession session,ModelAndView modelAndView) throws ObjectNotFoundException {
+        if (bindingResult.hasErrors()) {
+
+            modelAndView.addObject("breedEditDTO", breedEditDTO);
+            return super.view("view/edit/breedEdit","breedEditDTO", breedEditDTO);
+
+        }
+
+
         breedService.editBreeds(breedEditDTO.getBreedName(), id,session);
 
-        return "redirect:/view/table/breedTable";
+
+        return super.redirect("/view/table/breedTable");
     }
 }

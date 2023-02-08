@@ -115,16 +115,29 @@ public class BehaviorController extends BaseController {
     public ModelAndView editBehavior( @PathVariable("id") Long id ,
                                       @Valid BehaviorEditDTO behaviorEditDTO,
                                       BindingResult bindingResult,
-                                      RedirectAttributes redirectAttributes,
-                                      HttpSession session ) {
+                                      HttpSession session, ModelAndView modelAndView ) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("behaviorEditDTO", behaviorEditDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.behaviorEditDTO", bindingResult);
 
+            modelAndView.addObject("behaviorEditDTO", behaviorEditDTO);
+            return super.view("/view/edit/behaviorEdit","behaviorEditDTO", behaviorEditDTO);
 
-            return super.redirect("/view/table/behavior/edit/"+id);
         }
         behaviorService.editBehaviors(behaviorEditDTO.getName(), id, session);
         return super.redirect("/view/table/behaviorTable");
     }
+
+//    @PostMapping("/view/table/behavior/edit/{id}")
+//    public ModelAndView editBehavior(@PathVariable("id") Long id,
+//                                     @Valid BehaviorEditDTO behaviorEditDTO,
+//                                     BindingResult bindingResult,
+//                                     ModelAndView modelAndView,
+//                                     HttpSession session) {
+//        if (bindingResult.hasErrors()) {
+//            modelAndView.setViewName("fragments/base-layout");
+//            modelAndView.addObject("view", "view/edit/behaviorEdit");
+//            return modelAndView.addObject("behaviorEditDTO", behaviorEditDTO);
+//        }
+//        behaviorService.editBehaviors(behaviorEditDTO.getName(), id, session);
+//        return super.redirect("/view/table/behaviorTable");
+//    }
 }

@@ -10,7 +10,7 @@ public class BreedDTO {
     }
 
    @NotNull(message = "Field cannot be empty")
-   @Size(min = 2, max = 50, message = "Content length must be between 2 and 20 characters!")
+   @Size(min = 3, max = 50, message = "Content length must be between 3 and 50 characters!")
     public String getBreedName() {
         return breedName;
     }

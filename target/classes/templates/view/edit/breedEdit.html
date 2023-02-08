@@ -23,14 +23,18 @@
                 <td><div class="container">
                     <h2 class="page_title">Edit Breed</h2>
 
-                    <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
+                    <form class="form_add"  th:action="@{/view/table/breed/edit/{id}(id=*{id})}"
+                          th:object="${breedEditDTO}"
                           th:method="post">
                         <div class="login-box">
                             <label>Breed name</label><br>
-                            <input type="text" id="description" th:field="${breedDTO.breedName}" placeholder="Please enter breed" required />
-                            <p class="invalid-feedback errors alert alert-danger">
-                                Behavior is required.
-                            </p>
+                            <input style="width: 250px" type="text"
+                                   th:field="${breedEditDTO.breedName}"
+                                   name="breedName"
+                                   id="breedName" />
+                            <small th:if="${#fields.hasErrors('breedName')}"
+                                   th:errors="*{breedName}"
+                                   class="text-light form-text bg-danger "></small>
                         </div>
                         <br>
                         <div class="button_submit">
