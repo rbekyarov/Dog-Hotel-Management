@@ -23,19 +23,28 @@
                 <td><div class="container">
                     <h2 class="page_title">Edit City</h2>
 
-                    <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
+                    <form class="form_add" th:action="@{/view/table/city/edit/{id}(id=*{id})}"
+                          th:object="${cityEditDTO}"
                           th:method="post">
                         <div class="login-box">
 
                             <label >City Code</label><br>
-                            <input type="text" id="description" th:field="${cityDTO.code}" placeholder="Please enter code" required /><br>
-
+                            <input  type="text"
+                                    id="code" th:field="${cityEditDTO.code}"
+                                    placeholder="Please enter code" /><br>
+                            <small th:if="${#fields.hasErrors('code')}"
+                                   th:errors="*{code}"
+                                   class="text-light form-text bg-danger "></small>
+                            <br>
                             <label >City Name</label><br>
-                            <input type="text" id="description1" th:field="${cityDTO.name}" placeholder="Please enter City Name" required />
+                            <input type="text" id="name"
+                                   th:field="${cityEditDTO.name}"
+                                   placeholder="Please enter City Name" />
 
-                            <p class="invalid-feedback errors alert alert-danger">
-                                City is required.
-                            </p>
+                            <small th:if="${#fields.hasErrors('name')}"
+                                   th:errors="*{name}"
+                                   class="text-light form-text bg-danger "></small>
+                            <br>
                         </div>
                         <br>
                         <div class="button_submit">

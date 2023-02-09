@@ -6,22 +6,25 @@ import rbekyarov.project.models.entity.City;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 public class ClientEditDTO {
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
     private String phone;
     private String address;
     private City city;
-    private Set<Dog> dogs;
+
 
 
     public ClientEditDTO() {
     }
 
-    @NotNull(message = "Name cannot be empty")
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 20, message = "Content length must be between 3 and 20 characters!")
     public String getFirstName() {
         return firstName;
     }
@@ -30,7 +33,8 @@ public class ClientEditDTO {
         this.firstName = firstName;
     }
 
-    @NotNull(message = "LastName cannot be empty")
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 20, message = "Content length must be between 3 and 20 characters!")
     public String getLastName() {
         return lastName;
     }
@@ -48,7 +52,8 @@ public class ClientEditDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 20, message = "Content length must be between 3 and 20 characters!")
     public String getPhone() {
         return phone;
     }
@@ -56,7 +61,8 @@ public class ClientEditDTO {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 30, message = "Content length must be between 3 and 30 characters!")
     public String getAddress() {
         return address;
     }
@@ -65,7 +71,6 @@ public class ClientEditDTO {
         this.address = address;
     }
 
-    @NotNull(message = "City cannot be empty")
     public City getCity() {
         return city;
     }
@@ -74,11 +79,14 @@ public class ClientEditDTO {
         this.city = city;
     }
 
-    public Set<Dog> getDogs() {
-        return dogs;
+    @NotNull(message = "Field cannot be empty")
+
+
+    public Long getId() {
+        return id;
     }
 
-    public void setDogs(Set<Dog> dogs) {
-        this.dogs = dogs;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -4,6 +4,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -83,11 +84,21 @@ public class ClientController extends BaseController {
     }
 
     @PostMapping("/view/add/clientAdd")
-    public String addClient(@Valid ClientDTO clientDTO, HttpSession session) {
+    public ModelAndView addClient(@Valid ClientDTO clientDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            List<City> allCity = cityService.findAllCityById();
 
+            redirectAttributes.addFlashAttribute("clientDTO", clientDTO);
+            redirectAttributes.addFlashAttribute("allCity", allCity);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.clientDTO", bindingResult);
+
+            return super.view("/view/add/clientAdd",
+                    "clientDTO", clientDTO,
+                    "allCity", allCity);
+        }
         clientService.addClient(clientDTO,session);
+        return super.redirect("/view/table/clientTable");
 
-        return "redirect:/view/table/clientTable";
     }
 
     @GetMapping("view/table/client/remove/{id}")
@@ -106,28 +117,39 @@ public class ClientController extends BaseController {
         return super.redirect("/view/table/clientTable");
     }
 
-    @GetMapping("view/table/client/edit/{id}")
+    @GetMapping("/view/table/client/edit/{id}")
     public ModelAndView getClientDetail(@PathVariable("id") Long id,
                                         ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        Client clientDTO =
+        Client clientEditDTO =
                 clientService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
-        modelAndView.addObject("clientDTO", clientDTO);
+        modelAndView.addObject("clientEditDTO", clientEditDTO);
         List<City> allCity = cityService.findAllCityById();
 
         modelAndView.addObject("allCity", allCity);
 
 
         return super.view("/view/edit/clientEdit",
-                "clientDTO", clientDTO,
+                "clientEditDTO", clientEditDTO,
                 "allCity", allCity);
 
     }
 
-    @PostMapping("view/table/client/edit/{id}/edit")
-    public String clientEdit(@PathVariable("id") Long id, ClientEditDTO clientEditDTO, HttpSession session) throws ObjectNotFoundException {
+    @PostMapping("/view/table/client/edit/{id}")
+    public ModelAndView clientEdit(@PathVariable("id") Long id,
+                             @Valid ClientEditDTO clientEditDTO,
+                             BindingResult bindingResult,
+                             HttpSession session,ModelAndView modelAndView) throws ObjectNotFoundException {
+
+        if (bindingResult.hasErrors()) {
+            List<City> allCity = cityService.findAllCityById();
+            modelAndView.addObject("clientEditDTO", clientEditDTO);
+            return super.view("view/edit/clientEdit","clientEditDTO", clientEditDTO, "allCity", allCity);
+
+        }
+
         //Set<Dog> dogs = dogService.findAllDogByClient(id);
         clientService.editClient(clientEditDTO.getFirstName(),
                 clientEditDTO.getLastName(),
@@ -137,10 +159,9 @@ public class ClientController extends BaseController {
                 clientEditDTO.getCity().getId(),
                 id,
                 session);
-
-        return "redirect:/view/table/clientTable";
+        return super.redirect("/view/table/clientTable");
     }
-    @GetMapping("view/table/client/view/{id}")
+    @GetMapping("/view/table/client/view/{id}")
     public ModelAndView getClientView(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
 
         Client client = clientRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
