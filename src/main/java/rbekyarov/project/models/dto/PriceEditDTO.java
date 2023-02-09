@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class PriceEditDTO {
-
+private Long id;
     private BigDecimal priceStayS;
     private BigDecimal priceStayM;
     private BigDecimal priceStayL;
@@ -100,7 +100,8 @@ public class PriceEditDTO {
     public void setPriceNails(BigDecimal priceNails) {
         this.priceNails = priceNails;
     }
-
+    @NotNull(message = "Field cannot be empty")
+    @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceStayM() {
         return priceStayM;
     }
@@ -108,7 +109,8 @@ public class PriceEditDTO {
     public void setPriceStayM(BigDecimal priceStayM) {
         this.priceStayM = priceStayM;
     }
-
+    @NotNull(message = "Field cannot be empty")
+    @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceStayL() {
         return priceStayL;
     }
@@ -116,12 +118,21 @@ public class PriceEditDTO {
     public void setPriceStayL(BigDecimal priceStayL) {
         this.priceStayL = priceStayL;
     }
-
+    @NotNull(message = "Field cannot be empty")
+    @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceDeworming() {
         return priceDeworming;
     }
 
     public void setPriceDeworming(BigDecimal priceDeworming) {
         this.priceDeworming = priceDeworming;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

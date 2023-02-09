@@ -28,31 +28,63 @@
                         <h2 class="page_title">Add Prices</h2>
                         <form class="form_add" th:action="@{/view/add/priceAdd}"
                               th:method="post"
-                              th:object="${addPrice}">
+                              th:object="${priceDTO}">
                             <div class="login-box">
                                 <label>Price Stay Hous S for 1 day:</label><br>
-                                <input type="text" id="description" th:field="${priceDTO.priceStayS}" required/><br>
+                                <input type="text" id="description" th:field="${priceDTO.priceStayS}" />
+                                <small th:if="${#fields.hasErrors('priceStayS')}"
+                                       th:errors="*{priceStayS}"
+                                       class="text-light form-text bg-danger "></small><br>
                                 <label>Price Stay Hous M for 1 day:</label><br>
-                                <input type="text" id="description8" th:field="${priceDTO.priceStayM}" required/><br>
+                                <input type="text" id="description8" th:field="${priceDTO.priceStayM}" />
+                                <small th:if="${#fields.hasErrors('priceStayM')}"
+                                       th:errors="*{priceStayM}"
+                                       class="text-light form-text bg-danger "></small><br>
                                 <label>Price Stay Hous L for 1 day:</label><br>
-                                <input type="text" id="description9" th:field="${priceDTO.priceStayL}" required/><br>
+                                <input type="text" id="description9" th:field="${priceDTO.priceStayL}" />
+                                <small th:if="${#fields.hasErrors('priceStayL')}"
+                                       th:errors="*{priceStayL}"
+                                       class="text-light form-text bg-danger "></small><br>
                                 <label>Price Feeding:</label><br>
-                                <input type="text" id="description1" th:field="${priceDTO.priceFood}" required/><br>
+                                <input type="text" id="description1" th:field="${priceDTO.priceFood}" />
+                                <small th:if="${#fields.hasErrors('priceFood')}"
+                                       th:errors="*{priceFood}"
+                                       class="text-light form-text bg-danger "></small><br>
                                 <label>Price Deworming:</label><br>
-                                <input type="text" id="description0" th:field="${priceDTO.priceDeworming}"
-                                       required/><br>
+                                <input type="text" id="description0" th:field="${priceDTO.priceDeworming}" />
+                                <small th:if="${#fields.hasErrors('priceDeworming')}"
+                                       th:errors="*{priceDeworming}"
+                                       class="text-light form-text bg-danger "></small><br>
                                 <label>Price Training:</label><br>
-                                <input type="text" id="description2" th:field="${priceDTO.priceTraining}" required/><br>
+                                <input type="text" id="description2" th:field="${priceDTO.priceTraining}" />
+                                <small th:if="${#fields.hasErrors('priceTraining')}"
+                                       th:errors="*{priceTraining}"
+                                       class="text-light form-text bg-danger "></small><br>
                                 <label>Price Bathing:</label><br>
-                                <input type="text" id="description3" th:field="${priceDTO.priceBathing}" required/><br>
+                                <input type="text" id="description3" th:field="${priceDTO.priceBathing}" />
+                                <small th:if="${#fields.hasErrors('priceBathing')}"
+                                       th:errors="*{priceBathing}"
+                                       class="text-light form-text bg-danger "></small><br>
                                 <label>Price Combing:</label><br>
-                                <input type="text" id="description4" th:field="${priceDTO.priceCombing}" required/><br>
+                                <input type="text" id="description4" th:field="${priceDTO.priceCombing}" />
+                                <small th:if="${#fields.hasErrors('priceCombing')}"
+                                       th:errors="*{priceCombing}"
+                                       class="text-light form-text bg-danger "></small><br>
                                 <label>Price Paws cleaning:</label><br>
-                                <input type="text" id="description5" th:field="${priceDTO.pricePaws}" required/><br>
+                                <input type="text" id="description5" th:field="${priceDTO.pricePaws}" />
+                                <small th:if="${#fields.hasErrors('pricePaws')}"
+                                       th:errors="*{pricePaws}"
+                                       class="text-light form-text bg-danger "></small><br>
                                 <label>Price Еar cleaning:</label><br>
-                                <input type="text" id="description6" th:field="${priceDTO.priceEars}" required/><br>
+                                <input type="text" id="description6" th:field="${priceDTO.priceEars}" />
+                                <small th:if="${#fields.hasErrors('priceEars')}"
+                                       th:errors="*{priceEars}"
+                                       class="text-light form-text bg-danger "></small><br>
                                 <label>Price Nails trimming:</label><br>
-                                <input type="text" id="description7" th:field="${priceDTO.priceNails}" required/><br>
+                                <input type="text" id="description7" th:field="${priceDTO.priceNails}" />
+                                <small th:if="${#fields.hasErrors('priceNails')}"
+                                       th:errors="*{priceNails}"
+                                       class="text-light form-text bg-danger "></small><br>
 
                             </div>
                             <br>

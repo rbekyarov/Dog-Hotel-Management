@@ -100,7 +100,8 @@ public class PriceDTO {
     public void setPriceNails(BigDecimal priceNails) {
         this.priceNails = priceNails;
     }
-
+    @NotNull(message = "Field cannot be empty")
+    @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceStayM() {
         return priceStayM;
     }
@@ -108,7 +109,8 @@ public class PriceDTO {
     public void setPriceStayM(BigDecimal priceStayM) {
         this.priceStayM = priceStayM;
     }
-
+    @NotNull(message = "Field cannot be empty")
+    @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceStayL() {
         return priceStayL;
     }
@@ -116,7 +118,8 @@ public class PriceDTO {
     public void setPriceStayL(BigDecimal priceStayL) {
         this.priceStayL = priceStayL;
     }
-
+    @NotNull(message = "Field cannot be empty")
+    @DecimalMin(value = "0", message = "Accepts only positive numbers")
     public BigDecimal getPriceDeworming() {
         return priceDeworming;
     }

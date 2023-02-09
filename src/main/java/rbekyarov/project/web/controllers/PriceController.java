@@ -4,11 +4,13 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rbekyarov.project.models.dto.PriceDTO;
 import rbekyarov.project.models.dto.PriceEditDTO;
 import rbekyarov.project.models.entity.Price;
@@ -67,11 +69,16 @@ public class PriceController extends BaseController {
     }
 
     @PostMapping("/view/add/priceAdd")
-    public String addPrice(@Valid PriceDTO priceDTO) {
+    public ModelAndView addPrice(@Valid PriceDTO priceDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("priceDTO", priceDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.priceDTO", bindingResult);
 
+            return super.view("/view/add/priceAdd");
+        }
         priceService.addPrice(priceDTO);
+        return super.redirect("/view/table/priceTable");
 
-        return "redirect:/view/table/priceTable";
     }
 
     @GetMapping("view/table/price/remove/{id}")
@@ -82,25 +89,30 @@ public class PriceController extends BaseController {
     }
 
 
-    @GetMapping("view/table/price/edit/{id}")
+    @GetMapping("/view/table/price/edit/{id}")
     public ModelAndView getPriceDetail(@PathVariable("id") Long id,
                                        ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        Price priceDTO =
+        Price priceEditDTO =
                 priceService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
 
-        modelAndView.addObject("priceDTO", priceDTO);
+        modelAndView.addObject("priceEditDTO", priceEditDTO);
 
-        return super.view("/view/edit/priceEdit", "priceDTO", priceDTO);
+        return super.view("/view/edit/priceEdit", "priceEditDTO", priceEditDTO);
 
     }
 
-    @PostMapping("view/table/price/edit/{id}/edit")
-    public String editPrice(@PathVariable("id") Long id, PriceEditDTO priceEditDTO) throws ObjectNotFoundException {
-        Price priceDTO =
-                priceService.findById(id).
-                        orElseThrow(() -> new ObjectNotFoundException("not found!"));
+    @PostMapping("/view/table/price/edit/{id}")
+    public ModelAndView editPrice(@PathVariable("id") Long id, @Valid PriceEditDTO priceEditDTO,
+                            BindingResult bindingResult,
+                            ModelAndView modelAndView) throws ObjectNotFoundException {
+        if (bindingResult.hasErrors()) {
+
+            modelAndView.addObject("priceEditDTO", priceEditDTO);
+            return super.view("view/edit/priceEdit","priceEditDTO", priceEditDTO);
+
+        }
         priceService.editPrice(
                 priceEditDTO.getPriceStayS(),
                 priceEditDTO.getPriceStayM(),
@@ -114,7 +126,7 @@ public class PriceController extends BaseController {
                 priceEditDTO.getPriceEars(),
                 priceEditDTO.getPriceNails(),
                 id);
+        return super.redirect("/view/table/priceTable");
 
-        return "redirect:/view/table/priceTable";
     }
 }
