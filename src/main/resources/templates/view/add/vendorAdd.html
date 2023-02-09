@@ -38,13 +38,19 @@
                           th:method="post"
                           th:object="${vendorDTO}">
 
-                        <div class="form-group">
+                        <div class="login-box">
                             <label>Vendor Name:</label><br>
-                            <input type="text" id="description" th:field="*{name}" placeholder="Please enter Name"
-                                   required/><br>
+                            <input type="text" id="name" th:field="*{name}" placeholder="Please enter Name"
+                                   />
+                            <small th:if="${#fields.hasErrors('name')}"
+                                   th:errors="*{name}"
+                                   class="text-light form-text bg-danger "></small><br>
                             <label>Country:</label><br>
-                            <input type="text" id="description1" th:field="*{country}" placeholder="Please enter Country"
-                                   required/><br>
+                            <input type="text" id="country" th:field="*{country}" placeholder="Please enter Country"
+                                   />
+                            <small th:if="${#fields.hasErrors('country')}"
+                                   th:errors="*{country}"
+                                   class="text-light form-text bg-danger "></small><br>
                             <label>City:</label><br>
                             <select required th:field="*{city.id}" style="width: 196px">
                                 <option value="">Please select</option>
@@ -55,17 +61,26 @@
 
                             </select><br>
                             <label>Address:</label><br>
-                            <input type="text" id="description2" th:field="*{address}" placeholder="Please enter Address" required/><br>
+                            <input type="text" id="description2" th:field="*{address}" placeholder="Please enter Address" />
+                            <small th:if="${#fields.hasErrors('address')}"
+                                   th:errors="*{address}"
+                                   class="text-light form-text bg-danger "></small><br>
 
                             <label>Vat Number:</label><br>
-                            <input type="text" id="description3" th:field="*{vatNumber}" placeholder="Please enter Vat Number" required/><br>
+                            <input type="text" id="vatNumber" th:field="*{vatNumber}" placeholder="Please enter Vat Number" />
+                            <small th:if="${#fields.hasErrors('vatNumber')}"
+                                   th:errors="*{vatNumber}"
+                                   class="text-light form-text bg-danger "></small><br>
 
                             <label>Email:</label><br>
-                            <input type="email" id="description4" th:field="*{email}" placeholder="Please enter Email"/><br>
+                            <input type="email" id="email" th:field="*{email}" placeholder="Please enter Email"/>
+                            <small th:if="${#fields.hasErrors('email')}"
+                                   th:errors="*{email}"
+                                   class="text-light form-text bg-danger "></small><br>
 
                         </div>
 
-
+                        <br>
                         <div class="button_submit">
                             <div>
                                 <div>

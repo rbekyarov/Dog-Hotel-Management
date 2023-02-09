@@ -2,8 +2,11 @@ package rbekyarov.project.models.dto;
 
 
 import rbekyarov.project.models.entity.City;
-import javax.validation.constraints.NotNull;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 public class VendorDTO {
@@ -17,7 +20,8 @@ public class VendorDTO {
 
     public VendorDTO() {
     }
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 30, message = "Content length must be between 3 and 30 characters!")
     public String getName() {
         return name;
     }
@@ -25,7 +29,8 @@ public class VendorDTO {
     public void setName(String name) {
         this.name = name;
     }
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 30, message = "Content length must be between 3 and 30 characters!")
     public String getCountry() {
         return country;
     }
@@ -41,7 +46,8 @@ public class VendorDTO {
     public void setCity(City city) {
         this.city = city;
     }
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 30, message = "Content length must be between 3 and 30 characters!")
     public String getAddress() {
         return address;
     }
@@ -49,7 +55,8 @@ public class VendorDTO {
     public void setAddress(String address) {
         this.address = address;
     }
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 30, message = "Content length must be between 3 and 30 characters!")
     public String getVatNumber() {
         return vatNumber;
     }
@@ -57,7 +64,8 @@ public class VendorDTO {
     public void setVatNumber(String vatNumber) {
         this.vatNumber = vatNumber;
     }
-    @NotNull
+    @Email(message = "Enter valid email!")
+    @NotBlank(message = "Email cannot be empty!")
     public String getEmail() {
         return email;
     }

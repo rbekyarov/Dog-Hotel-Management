@@ -4,6 +4,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -70,11 +71,16 @@ public class VendorController extends BaseController {
     }
 
     @PostMapping("/view/add/vendorAdd")
-    public String addVendor(@Valid VendorDTO vendorDTO, HttpSession session) throws IOException {
-
+    public ModelAndView addVendor(@Valid VendorDTO vendorDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) throws IOException {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("vendorDTO", vendorDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.vendorDTO", bindingResult);
+            List<City> allCity = cityService.findAllCityById();
+            return super.view("/view/add/vendorAdd", "vendorDTO", vendorDTO, "allCity", allCity);
+        }
         vendorService.addVendor(vendorDTO, session);
+        return super.redirect("/view/table/vendorTable");
 
-        return "redirect:/view/table/vendorTable";
     }
 
     @GetMapping("view/table/vendor/remove/{id}")
@@ -93,19 +99,26 @@ public class VendorController extends BaseController {
         return super.redirect("/view/table/vendorTable");
     }
 
-    @GetMapping("view/table/vendor/edit/{id}")
+    @GetMapping("/view/table/vendor/edit/{id}")
     public ModelAndView getVendorDetail(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        Vendor vendorDTO = vendorService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
+        Vendor vendorEditDTO = vendorService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
         List<City> allCity = cityService.findAllCityById();
-        modelAndView.addObject("vendorDTO", vendorDTO);
+        modelAndView.addObject("vendorEditDTO", vendorEditDTO);
         modelAndView.addObject("allCity", allCity);
-        return super.view("/view/edit/vendorEdit", "vendorDTO", vendorDTO, "allCity",allCity);
+        return super.view("/view/edit/vendorEdit", "vendorEditDTO", vendorEditDTO, "allCity",allCity);
     }
 
-    @PostMapping("view/table/vendor/edit/{id}/edit")
-    public String editVendor(@PathVariable("id") Long id, VendorEditDTO vendorEditDTO, HttpSession session) throws ObjectNotFoundException, IOException {
+    @PostMapping("/view/table/vendor/edit/{id}")
+    public ModelAndView editVendor(@PathVariable("id") Long id,
+                             @Valid  VendorEditDTO vendorEditDTO, BindingResult bindingResult,
+                             HttpSession session, ModelAndView modelAndView) throws ObjectNotFoundException, IOException {
+        if (bindingResult.hasErrors()) {
+            List<City> allCity = cityService.findAllCityById();
+            modelAndView.addObject("vendorEditDTO", vendorEditDTO);
+            return super.view("/view/edit/vendorEdit", "vendorEditDTO", vendorEditDTO, "allCity",allCity);
 
+        }
         vendorService.editVendor(vendorEditDTO.getName(),
                 vendorEditDTO.getCountry(),
                 vendorEditDTO.getCity().getId(),
@@ -114,8 +127,7 @@ public class VendorController extends BaseController {
                 vendorEditDTO.getEmail(),
                 session,
                 id);
-
-        return "redirect:/view/table/vendorTable";
+        return super.redirect("/view/table/vendorTable");
     }
 
     @RequestMapping(path = {"/","/view/table/searchVendorName"})
