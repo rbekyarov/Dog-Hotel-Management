@@ -35,14 +35,15 @@
             <tr>
                 <td class="container">
                     <h2 class="page_title">Edit Cost</h2>
-                    <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
+                    <form class="form_add" th:action="@{/view/table/cost/edit/{id}(id=*{id})}"
                           th:method="post"
-                          th:object="${costDTO}">
+                          th:object="${costEditDTO}">
 
                         <div class="login-box">
+
                             <label>Vendor:</label><br>
-                            <select th:field="*{vendor.id}">
-                                <option required value="">Please select</option>
+                            <select required th:field="*{vendor.id}">
+                                <option value="">Please select</option>
                                 <option
                                         th:each="b : ${allVendor}"
                                         th:value="${b.id}"
@@ -53,20 +54,33 @@
                             <label>Description:</label><br>
                             <input type="text" id="description" th:field="*{description}"
                                    placeholder="Please enter Description"
-                                   required/><br>
+                            />
+                            <small th:if="${#fields.hasErrors('description')}"
+                                   th:errors="*{description}"
+                                   class="text-light form-text bg-danger "></small><br>
                             <label>Invoice No:</label><br>
-                            <input type="text" id="description4" th:field="*{invoiceNo}"
+                            <input type="text" id="invoiceNo" th:field="*{invoiceNo}"
                                    placeholder="Please enter Invoice No"
-                                   required/><br>
+                            />
+                            <small th:if="${#fields.hasErrors('invoiceNo')}"
+                                   th:errors="*{invoiceNo}"
+                                   class="text-light form-text bg-danger "></small><br>
                             <label>Amount:</label><br>
-                            <input type="text" id="description1" th:field="*{amount}" placeholder="Please enter Amount"
-                                   required/><br>
+                            <input type="text" id="amount" th:field="*{amount}"
+                                   placeholder="Please enter Amount"
+                            />
+                            <small th:if="${#fields.hasErrors('amount')}"
+                                   th:errors="*{amount}"
+                                   class="text-light form-text bg-danger "></small><br>
+
 
                             <label>Date Cost:</label><br>
                             <div>
-                                <input required type="text" id="input1" th:field="*{dateCost}"
-                                       placeholder="Please enter BirthDate"/>
-
+                                <input  type="text" id="dateCost" th:field="*{dateCost}"
+                                        placeholder="Please enter Date"/>
+                                <small th:if="${#fields.hasErrors('dateCost')}"
+                                       th:errors="*{dateCost}"
+                                       class="text-light form-text bg-danger "></small>
                             </div>
                         </div>
                 </td>
@@ -90,7 +104,7 @@
         <br>
         <script>
             window.addEventListener("load", () => {
-                picker.attach({target: "input1"});
+                picker.attach({target: "dateCost"});
             });
         </script>
     </th:block>

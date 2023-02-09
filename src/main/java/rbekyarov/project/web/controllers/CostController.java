@@ -91,19 +91,26 @@ public class CostController extends BaseController {
         return "redirect:/view/table/costTable";
     }
 
-    @GetMapping("view/table/cost/edit/{id}")
+    @GetMapping("/view/table/cost/edit/{id}")
     public ModelAndView getCostDetail(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        Cost costDTO = costService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
+        Cost costEditDTO = costService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
         List<Vendor> allVendor = vendorService.findAllVendor();
-        modelAndView.addObject("costDTO", costDTO);
+        modelAndView.addObject("costEditDTO", costEditDTO);
         modelAndView.addObject("allVendor", allVendor);
-        return super.view("/view/edit/costEdit", "costDTO", costDTO, "allVendor",allVendor);
+        return super.view("/view/edit/costEdit", "costEditDTO", costEditDTO, "allVendor",allVendor);
     }
 
-    @PostMapping("view/table/cost/edit/{id}/edit")
-    public String editCost(@PathVariable("id") Long id, CostEditDTO costEditDTO, HttpSession session) throws ObjectNotFoundException, IOException {
+    @PostMapping("/view/table/cost/edit/{id}")
+    public ModelAndView editCost(@PathVariable("id") Long id, @Valid CostEditDTO costEditDTO,
+                           BindingResult bindingResult,
+                           HttpSession session, ModelAndView modelAndView) throws ObjectNotFoundException, IOException {
+        if (bindingResult.hasErrors()) {
+            List<Vendor> allVendor = vendorService.findAllVendor();
+            modelAndView.addObject("costEditDTO", costEditDTO);
+            return super.view("/view/edit/costEdit", "costEditDTO", costEditDTO, "allVendor",allVendor);
 
+        }
         costService.editCost(
                 costEditDTO.getVendor().getId(),
                 costEditDTO.getDescription(),
@@ -112,8 +119,7 @@ public class CostController extends BaseController {
                 costEditDTO.getDateCost(),
                 session,
                 id);
-
-        return "redirect:/view/table/costTable";
+        return super.redirect("/view/table/costTable");
     }
     @RequestMapping(path = {"/","/view/table/searchCostByVendorName"})
     public ModelAndView search(ModelAndView modelAndView,@RequestParam("vendorName") String vendorName) {
