@@ -1,7 +1,7 @@
 <th:block th:unless="${session.isEmpty()}">
     <script>
-        $(document).ready(function() {
-            $('#nav-link').click(function(e){
+        $(document).ready(function () {
+            $('#nav-link').click(function (e) {
                 e.preventDefault();
                 window.history.back();
             });
@@ -15,8 +15,8 @@
             });
         });
     </script>
-    <script src="/js/selectize.min.js" ></script>
-    <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css" />
+    <script src="/js/selectize.min.js"></script>
+    <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css"/>
 
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
         <link href="/css/dp-light.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                                 <div class="mb-4">
                                     <input class="file-input" type="file" id="fileImage" name="fileImage">
                                 </div>
-                                <input type="hidden" name="imgName"  th:value="${dogEditDTO.imageName}">
+                                <input type="hidden" name="imgName" th:value="${dogEditDTO.imageName}">
                             </td>
                         </tr>
                         </tbody>
@@ -54,14 +54,15 @@
                         <tbody>
                         <tr>
                             <td><label>Dog Name:</label><br>
-                                <input type="text" id="name" th:field="*{name}" placeholder="Please enter Name" />
+                                <input type="text" id="name" th:field="*{name}" placeholder="Please enter Name"/>
                                 <small th:if="${#fields.hasErrors('name')}"
                                        th:errors="*{name}"
                                        class="text-light form-text bg-danger "></small>
                                 <br>
                             </td>
                             <td><label>Weight:</label><br>
-                                <input type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight" />
+                                <input type="text" id="description22" th:field="*{weight}"
+                                       placeholder="Please enter Weight"/>
                                 <small th:if="${#fields.hasErrors('weight')}"
                                        th:errors="*{weight}"
                                        class="text-light form-text bg-danger "></small>
@@ -75,11 +76,11 @@
                         <tr>
                             <td><label>Breed:</label><br>
                                 <select required th:field="*{breed.id}" style="width: 196px">
-                                    <option value="">Please select </option>
+                                    <option value="">Please select</option>
                                     <option
                                             th:each="b : ${allBreeds}"
                                             th:value="${b.id}"
-                                            th:text="${b.breedName}" ></option>
+                                            th:text="${b.breedName}"></option>
 
                                 </select>
                             </td>
@@ -98,17 +99,20 @@
                     <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <tbody>
                         <tr>
-                            <td><td><label>BirthDate:</label><br>
-                            <div>
-                                <input  type="text" id="input1" th:field="*{birthDate}" placeholder="Please enter BirthDate"  />
-                                <small th:if="${#fields.hasErrors('birthDate')}"
-                                       th:errors="*{birthDate}"
-                                       class="text-light form-text bg-danger "></small>
-                            </div>
-                        </td>
+                            <td>
+                            <td><label>BirthDate:</label><br>
+                                <div>
+                                    <input type="text" id="input1" th:field="*{birthDate}"
+                                           placeholder="Please enter BirthDate"/>
+                                    <small th:if="${#fields.hasErrors('birthDate')}"
+                                           th:errors="*{birthDate}"
+                                           class="text-light form-text bg-danger "></small>
+                                </div>
+                            </td>
                             <td><label>Last Deworming Date:</label><br>
                                 <div>
-                                    <input  type="text" id="input2" th:field="*{lastDewormingDate}" placeholder="Please enter Deworming" />
+                                    <input type="text" id="input2" th:field="*{lastDewormingDate}"
+                                           placeholder="Please enter Deworming"/>
                                     <small th:if="${#fields.hasErrors('lastDewormingDate')}"
                                            th:errors="*{lastDewormingDate}"
                                            class="text-light form-text bg-danger "></small>
@@ -139,13 +143,13 @@
                         <tbody>
                         <tr>
                             <td><label>Sex:</label><br>
-                                <select th:field="*{sex}"style="width: 77px" >
+                                <select th:field="*{sex}" style="width: 77px">
                                     <option value="M">M</option>
                                     <option value="F">F</option>
                                 </select>
                             </td>
                             <td><label>Passport:</label><br>
-                                <select th:field="*{passport}" >
+                                <select th:field="*{passport}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select>
@@ -156,14 +160,14 @@
                     <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <tbody>
                         <tr>
-                            <td ><label >Microchip:</label><br>
+                            <td><label>Microchip:</label><br>
                                 <select th:field="*{microchip}" id="Microchip" onclick="show()">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select>
                             </td>
-                            <td id="description23"  ><label>Microchip Number:</label><br>
-                                <input  type="text"  th:field="*{microchipNumber}"  placeholder="Please enter Number" />
+                            <td id="description23"><label>Microchip Number:</label><br>
+                                <input type="text" th:field="*{microchipNumber}" placeholder="Please enter Number"/>
                             </td>
                         </tr>
                         </tbody>
@@ -185,21 +189,22 @@
             /* $(document).ready(function(){
 
             }); */
-            function showImageThumbnail(fileInput){
-                if(fileInput.files && fileInput.files[0]){
+            function showImageThumbnail(fileInput) {
+                if (fileInput.files && fileInput.files[0]) {
                     var reader = new FileReader();
 
-                    reader.onload = function(e){
+                    reader.onload = function (e) {
                         $('thumbnail').attr('src', e.target.result);
                     }
                     reader.readAsDataURL(fileInput.files[0]);
                 }
             }
-            $('#fileImage').change(function(){
+
+            $('#fileImage').change(function () {
                 showImageThumbnail(this);
             });
 
-            $('.file-input').on("change", function(){
+            $('.file-input').on("change", function () {
                 var fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".file-label").addClass("selected").html(fileName);
             });
@@ -207,15 +212,14 @@
 
         <script>
             window.addEventListener("load", () => {
-                picker.attach({ target: "input1" });
+                picker.attach({target: "input1"});
             });
         </script>
         <script>
             window.addEventListener("load", () => {
-                picker.attach({ target: "input2" });
+                picker.attach({target: "input2"});
             });
         </script>
-
 
 
     </th:block>
