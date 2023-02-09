@@ -32,40 +32,45 @@
         <div class="container">
             <h2 class="page_title">Edit Dog</h2>
 
-            <form class="form_add" enctype="multipart/form-data" th:action="@{{id}/edit(id=*{id})}"
+            <form class="form_add" enctype="multipart/form-data" th:action="@{/view/table/dog/edit/{id}(id=*{id})}"
                   th:method="post"
-                  th:object="${dogDTO}">
+                  th:object="${dogEditDTO}">
 
                 <div class="login-box">
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <tbody>
                         <tr>
-                            <td><label class="file-label" for="fileImage">Image</label>
+                            <td><label class="file-label" for="fileImage">Add Image</label>
                                 <div class="mb-4">
                                     <input class="file-input" type="file" id="fileImage" name="fileImage">
                                 </div>
-
-
-                                <img src="#" id="thumbnail" height="80px" width="100px"
-                                     th:src="@{${'/image/' + dogDTO.imageName}}" alt="image" />
-                                <input type="hidden" name="imgName"  th:value="${dogDTO.imageName}"><br>
+                                <input type="hidden" name="imgName"  th:value="${dogEditDTO.imageName}">
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <tbody>
                         <tr>
                             <td><label>Dog Name:</label><br>
-                                <input type="text" id="description" th:field="*{name}" placeholder="Please enter Name" required/><br>
+                                <input type="text" id="name" th:field="*{name}" placeholder="Please enter Name" />
+                                <small th:if="${#fields.hasErrors('name')}"
+                                       th:errors="*{name}"
+                                       class="text-light form-text bg-danger "></small>
+                                <br>
                             </td>
                             <td><label>Weight:</label><br>
-                                <input type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight" required/><br>
+                                <input type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight" />
+                                <small th:if="${#fields.hasErrors('weight')}"
+                                       th:errors="*{weight}"
+                                       class="text-light form-text bg-danger "></small>
+                                <br>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <tbody>
                         <tr>
                             <td><label>Breed:</label><br>
@@ -79,7 +84,7 @@
                                 </select>
                             </td>
                             <td><label>Behavior:</label><br>
-                                <select required th:field="*{behavior.id}" style="width: 196px" >
+                                <select required th:field="*{behavior.id}" style="width: 196px">
                                     <option value="">Please select</option>
                                     <option
                                             th:each="b : ${allBehaviors}"
@@ -90,29 +95,34 @@
                         </tr>
                         </tbody>
                     </table>
-
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <tbody>
                         <tr>
-                            <td><label>BirthDate:</label><br>
-                                <div>
-                                    <input type="text" id="input1" th:field="*{birthDate}" placeholder="BirthDate" required/>
-                                </div>
-                            </td>
+                            <td><td><label>BirthDate:</label><br>
+                            <div>
+                                <input  type="text" id="input1" th:field="*{birthDate}" placeholder="Please enter BirthDate"  />
+                                <small th:if="${#fields.hasErrors('birthDate')}"
+                                       th:errors="*{birthDate}"
+                                       class="text-light form-text bg-danger "></small>
+                            </div>
+                        </td>
                             <td><label>Last Deworming Date:</label><br>
                                 <div>
-                                    <input type="text" id="input2" th:field="*{lastDewormingDate}" placeholder="Deworming" required/>
+                                    <input  type="text" id="input2" th:field="*{lastDewormingDate}" placeholder="Please enter Deworming" />
+                                    <small th:if="${#fields.hasErrors('lastDewormingDate')}"
+                                           th:errors="*{lastDewormingDate}"
+                                           class="text-light form-text bg-danger "></small>
                                 </div>
                             </td>
                         </tr>
                         </tbody>
                     </table>
 
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <tbody>
                         <tr>
                             <td><label>Client:</label><br>
-                                <select required th:field="*{client.id}" style="width: 400px">
+                                <select id="select-state" required th:field="*{client.id}" style="width: 400px">
                                     <option value="">Please select</option>
                                     <option
                                             th:each="c : ${allClients}"
@@ -125,17 +135,17 @@
                         </tbody>
                     </table>
 
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <tbody>
                         <tr>
                             <td><label>Sex:</label><br>
-                                <select th:field="*{sex}" style="width: 77px" >
+                                <select th:field="*{sex}"style="width: 77px" >
                                     <option value="M">M</option>
                                     <option value="F">F</option>
                                 </select>
                             </td>
                             <td><label>Passport:</label><br>
-                                <select th:field="*{passport}" style="width: 77px" >
+                                <select th:field="*{passport}" >
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select>
@@ -143,17 +153,17 @@
                         </tr>
                         </tbody>
                     </table>
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <tbody>
                         <tr>
-                            <td><label>Microchip:</label><br>
-                                <select th:field="*{microchip}" style="width: 77px" >
+                            <td ><label >Microchip:</label><br>
+                                <select th:field="*{microchip}" id="Microchip" onclick="show()">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select>
                             </td>
-                            <td><label>Microchip Number:</label><br>
-                                <input type="text" id="description23" th:field="*{microchipNumber}" placeholder="Please enter Number" />
+                            <td id="description23"  ><label>Microchip Number:</label><br>
+                                <input  type="text"  th:field="*{microchipNumber}"  placeholder="Please enter Number" />
                             </td>
                         </tr>
                         </tbody>

@@ -4,6 +4,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -118,14 +119,34 @@ public class DogController extends BaseController {
     }
 
     @PostMapping("/view/add/dogAdd")
-    public String addDog(@Valid DogDTO dogDTO,
+    public ModelAndView addDog(@Valid DogDTO dogDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                          @RequestParam("fileImage") MultipartFile file,
                          @RequestParam("imgName") String imgName, HttpSession session) throws IOException {
 
+        if (bindingResult.hasErrors()) {
+            List<Behavior> allBehaviors = dogService.getAllBehaviors();
+            List<Breed> allBreeds = dogService.getAllBreeds();
+            List<Client> allClients = dogService.getAllClients();
+
+            redirectAttributes.addFlashAttribute("dogDTO", dogDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.clientDTO", bindingResult);
+
+            redirectAttributes.addFlashAttribute("allBehaviors", allBehaviors);
+            redirectAttributes.addFlashAttribute("allBreeds", allBreeds);
+            redirectAttributes.addFlashAttribute("allClients", allClients);
+            return super.view("/view/add/dogAdd",
+                    "dogDTO", dogDTO,
+                    "allBehaviors",
+                    allBehaviors,
+                    "allBreeds",
+                    allBreeds,
+                    "allClients",
+                    allClients);
+        }
 
         dogService.addDog(dogDTO, file, imgName, session);
+        return super.redirect("/view/table/dogTable");
 
-        return "redirect:/view/table/dogTable";
     }
 
     @GetMapping("view/table/dog/remove/{id}")
@@ -144,11 +165,11 @@ public class DogController extends BaseController {
         return super.redirect("/view/table/dogTable");
     }
 
-    @GetMapping("view/table/dog/edit/{id}")
+    @GetMapping("/view/table/dog/edit/{id}")
     public ModelAndView getDogDetail(@PathVariable("id") Long id,
                                      ModelAndView modelAndView) throws ObjectNotFoundException {
 
-        Dog dogDTO =
+        Dog dogEditDTO =
                 dogService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
         List<Behavior> allBehaviors = dogService.getAllBehaviors();
@@ -157,11 +178,11 @@ public class DogController extends BaseController {
         modelAndView.addObject("allBehaviors", allBehaviors);
         modelAndView.addObject("allBreeds", allBreeds);
         modelAndView.addObject("allClients", allClients);
-        modelAndView.addObject("dogDTO", dogDTO);
+        modelAndView.addObject("dogEditDTO", dogEditDTO);
 
 
         return super.view("/view/edit/dogEdit",
-                "dogDTO", dogDTO,
+                "dogEditDTO", dogEditDTO,
                 "allBehaviors",
                 allBehaviors,
                 "allBreeds",
@@ -172,13 +193,34 @@ public class DogController extends BaseController {
 
     }
 
-    @PostMapping("view/table/dog/edit/{id}/edit")
-    public String editDog(@PathVariable("id") Long id, DogEditDTO dogEditDTO, @RequestParam("fileImage") MultipartFile file,
-                          @RequestParam("imgName") String imgName, HttpSession session) throws ObjectNotFoundException, IOException {
+    @PostMapping("/view/table/dog/edit/{id}")
+    public ModelAndView editDog(@PathVariable("id") Long id,
+                          @Valid DogEditDTO dogEditDTO,BindingResult bindingResult,
+                          @RequestParam("fileImage") MultipartFile file,
+                          @RequestParam("imgName") String imgName,
+                          HttpSession session, ModelAndView modelAndView) throws ObjectNotFoundException, IOException {
+        if (bindingResult.hasErrors()) {
+
+            List<Behavior> allBehaviors = dogService.getAllBehaviors();
+            List<Breed> allBreeds = dogService.getAllBreeds();
+            List<Client> allClients = dogService.getAllClients();
+            modelAndView.addObject("dogEditDTO", dogEditDTO);
+
+            return super.view("/view/edit/dogEdit",
+                    "dogEditDTO", dogEditDTO,
+                    "allBehaviors",
+                    allBehaviors,
+                    "allBreeds",
+                    allBreeds,
+                    "allClients",
+                    allClients
+            );
+
+        }
 
         dogService.editDog(id, dogEditDTO, imgName, file, session);
+        return super.redirect("/view/table/dogTable");
 
-        return "redirect:/view/table/dogTable";
     }
 
     @RequestMapping(path = {"/","/view/table/searchDogName"})

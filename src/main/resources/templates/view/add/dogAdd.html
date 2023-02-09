@@ -53,10 +53,18 @@
                     <tbody>
                     <tr>
                         <td><label>Dog Name:</label><br>
-                            <input type="text" id="description" th:field="*{name}" placeholder="Please enter Name" required/><br>
+                            <input type="text" id="name" th:field="*{name}" placeholder="Please enter Name" />
+                            <small th:if="${#fields.hasErrors('name')}"
+                                   th:errors="*{name}"
+                                   class="text-light form-text bg-danger "></small>
+                            <br>
                         </td>
                         <td><label>Weight:</label><br>
-                            <input type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight" required/><br>
+                            <input type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight" />
+                            <small th:if="${#fields.hasErrors('weight')}"
+                                   th:errors="*{weight}"
+                                   class="text-light form-text bg-danger "></small>
+                            <br>
                         </td>
                     </tr>
                     </tbody>
@@ -91,12 +99,18 @@
                     <tr>
                         <td><td><label>BirthDate:</label><br>
                         <div>
-                            <input required type="text" id="input1" th:field="*{birthDate}" placeholder="Please enter BirthDate"  />
+                            <input  type="text" id="input1" th:field="*{birthDate}" placeholder="Please enter BirthDate"  />
+                            <small th:if="${#fields.hasErrors('birthDate')}"
+                                   th:errors="*{birthDate}"
+                                   class="text-light form-text bg-danger "></small>
                         </div>
                     </td>
                         <td><label>Last Deworming Date:</label><br>
                             <div>
-                                <input required type="text" id="input2" th:field="*{lastDewormingDate}" placeholder="Please enter Deworming" />
+                                <input  type="text" id="input2" th:field="*{lastDewormingDate}" placeholder="Please enter Deworming" />
+                                <small th:if="${#fields.hasErrors('lastDewormingDate')}"
+                                       th:errors="*{lastDewormingDate}"
+                                       class="text-light form-text bg-danger "></small>
                             </div>
                         </td>
                     </tr>

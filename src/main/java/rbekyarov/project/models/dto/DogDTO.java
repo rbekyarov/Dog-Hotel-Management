@@ -43,7 +43,7 @@ public class DogDTO {
     public void setName(String name) {
         this.name = name;
     }
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+
     @NotBlank(message = "cannot be empty")
     public String getBirthDate() {
         return birthDate;
@@ -53,7 +53,7 @@ public class DogDTO {
         this.birthDate = birthDate;
     }
 
-    @NotBlank(message = "cannot be empty")
+    @NotNull(message = "cannot be empty")
     public Integer getWeight() {
         return weight;
     }
@@ -138,7 +138,7 @@ public class DogDTO {
     public void setYears(String years) {
         this.years = years;
     }
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotBlank(message = "cannot be empty")
     public String getLastDewormingDate() {
         return lastDewormingDate;
     }

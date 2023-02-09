@@ -10,12 +10,13 @@ import rbekyarov.project.models.entity.enums.Microchip;
 import rbekyarov.project.models.entity.enums.Passport;
 import rbekyarov.project.models.entity.enums.Sex;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
 public class DogEditDTO {
-
+private Long id;
     private String name;
     private String birthDate;
     private Integer weight;
@@ -33,7 +34,7 @@ public class DogEditDTO {
     public DogEditDTO() {
     }
 
-    @NotNull(message = "Name cannot be empty")
+    @NotBlank(message = "cannot be empty")
     public String getName() {
         return name;
     }
@@ -41,7 +42,8 @@ public class DogEditDTO {
     public void setName(String name) {
         this.name = name;
     }
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+
+    @NotBlank(message = "cannot be empty")
     public String getBirthDate() {
         return birthDate;
     }
@@ -50,6 +52,7 @@ public class DogEditDTO {
         this.birthDate = birthDate;
     }
 
+    @NotNull(message = "cannot be empty")
     public Integer getWeight() {
         return weight;
     }
@@ -134,7 +137,7 @@ public class DogEditDTO {
     public void setYears(String years) {
         this.years = years;
     }
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotBlank(message = "cannot be empty")
     public String getLastDewormingDate() {
         return lastDewormingDate;
     }
@@ -149,5 +152,13 @@ public class DogEditDTO {
 
     public void setMicrochipNumber(String microchipNumber) {
         this.microchipNumber = microchipNumber;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
