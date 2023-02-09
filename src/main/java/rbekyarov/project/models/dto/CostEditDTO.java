@@ -2,11 +2,14 @@ package rbekyarov.project.models.dto;
 
 import rbekyarov.project.models.entity.Vendor;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 
 public class CostEditDTO {
+    private Long id;
     private Vendor vendor;
     private String description;
     private String invoiceNo;
@@ -26,7 +29,8 @@ public class CostEditDTO {
         this.vendor = vendor;
     }
 
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, message = "Content length must be over 3 characters!")
     public String getDescription() {
         return description;
     }
@@ -35,7 +39,8 @@ public class CostEditDTO {
         this.description = description;
     }
 
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Digits(integer = 10, fraction = 2)
     public BigDecimal getAmount() {
         return amount;
     }
@@ -44,7 +49,7 @@ public class CostEditDTO {
         this.amount = amount;
     }
 
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
     public String getDateCost() {
         return dateCost;
     }
@@ -52,12 +57,21 @@ public class CostEditDTO {
     public void setDateCost(String dateCost) {
         this.dateCost = dateCost;
     }
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, message = "Content length must be over 3 characters!")
     public String getInvoiceNo() {
         return invoiceNo;
     }
 
     public void setInvoiceNo(String invoiceNo) {
         this.invoiceNo = invoiceNo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

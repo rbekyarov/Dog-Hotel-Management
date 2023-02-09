@@ -2,7 +2,10 @@ package rbekyarov.project.models.dto;
 
 import rbekyarov.project.models.entity.Vendor;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 
@@ -26,7 +29,8 @@ public class CostDTO {
         this.vendor = vendor;
     }
 
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, message = "Content length must be over 3 characters!")
     public String getDescription() {
         return description;
     }
@@ -35,7 +39,8 @@ public class CostDTO {
         this.description = description;
     }
 
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Digits(integer = 10, fraction = 2)
     public BigDecimal getAmount() {
         return amount;
     }
@@ -44,7 +49,7 @@ public class CostDTO {
         this.amount = amount;
     }
 
-    @NotNull
+    @NotBlank(message = "Field cannot be empty")
     public String getDateCost() {
         return dateCost;
     }
@@ -52,7 +57,8 @@ public class CostDTO {
     public void setDateCost(String dateCost) {
         this.dateCost = dateCost;
     }
-
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, message = "Content length must be over 3 characters!")
     public String getInvoiceNo() {
         return invoiceNo;
     }

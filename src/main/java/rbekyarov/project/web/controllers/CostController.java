@@ -4,8 +4,10 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rbekyarov.project.models.dto.CostDTO;
 import rbekyarov.project.models.dto.CostEditDTO;
 import rbekyarov.project.models.entity.Cost;
@@ -70,11 +72,16 @@ public class CostController extends BaseController {
     }
 
     @PostMapping("/view/add/costAdd")
-    public String addCost(@Valid CostDTO costDTO, HttpSession session) throws IOException {
-
+    public ModelAndView addCost(@Valid CostDTO costDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) throws IOException {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("costDTO", costDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.costDTO", bindingResult);
+            List<Vendor> allVendor = vendorService.findAllVendor();
+            return super.view("/view/add/costAdd", "costDTO", costDTO, "allVendor", allVendor);
+        }
         costService.addCost(costDTO, session);
+        return super.redirect("/view/table/costTable");
 
-        return "redirect:/view/table/costTable";
     }
 
     @GetMapping("view/table/cost/remove/{id}")
