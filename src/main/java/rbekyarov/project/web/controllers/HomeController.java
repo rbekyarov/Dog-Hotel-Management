@@ -4,7 +4,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import rbekyarov.project.models.entity.*;
-import rbekyarov.project.repository.ClientRepository;
 import rbekyarov.project.service.*;
 
 import javax.servlet.http.HttpSession;
@@ -20,23 +19,22 @@ public class HomeController extends BaseController {
     private final CompanyService companyService;
     private final CostService costService;
     private final InvoiceService invoiceService;
-    private final ClientService clientService;
-    private final ClientRepository clientRepository;
 
-    public HomeController(ReservationService reservationService, CellService cellService, CompanyService companyService, CostService costService, InvoiceService invoiceService,
-                          ClientService clientService, ClientRepository clientRepository) {
-
+    public HomeController(ReservationService reservationService,
+                          CellService cellService,
+                          CompanyService companyService,
+                          CostService costService,
+                          InvoiceService invoiceService) {
         this.reservationService = reservationService;
         this.cellService = cellService;
         this.companyService = companyService;
         this.costService = costService;
         this.invoiceService = invoiceService;
-        this.clientService = clientService;
-        this.clientRepository = clientRepository;
     }
 
+
     @GetMapping("/")
-    public ModelAndView naklonka(ModelAndView modelAndView, HttpSession session) {
+    public ModelAndView naklonka(HttpSession session) {
         Object user = session.getAttribute("user");
         Object admin = session.getAttribute("admin");
 
@@ -50,7 +48,7 @@ public class HomeController extends BaseController {
 
     }
     @GetMapping("/index")
-    public ModelAndView index(ModelAndView modelAndView, HttpSession session) {
+    public ModelAndView index() {
         return super.view("/index");
 
     }
@@ -85,6 +83,14 @@ public class HomeController extends BaseController {
         modelAndView.addObject("totalAmountCost",totalAmountCost);
         modelAndView.addObject("top3Clients",top3Clients);
 
-        return super.view("/view/home","company",company,"invoices",invoices,"costs",costs,"cellsEmpty",cellsEmpty,"activeReservations",activeReservations,"upcomingReservations",upcomingReservations,"totalInvoicedPrice",totalInvoicedPrice,"totalAmountCost",totalAmountCost,"top3Clients",top3Clients);
+        return super.view("/view/home","company",company,
+                "invoices",invoices,
+                "costs",costs,
+                "cellsEmpty",cellsEmpty,
+                "activeReservations",activeReservations,
+                "upcomingReservations",upcomingReservations,
+                "totalInvoicedPrice",totalInvoicedPrice,
+                "totalAmountCost",totalAmountCost,
+                "top3Clients",top3Clients);
     }
 }
