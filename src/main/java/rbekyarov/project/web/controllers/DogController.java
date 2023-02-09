@@ -200,7 +200,7 @@ public class DogController extends BaseController {
                           @RequestParam("imgName") String imgName,
                           HttpSession session, ModelAndView modelAndView) throws ObjectNotFoundException, IOException {
         if (bindingResult.hasErrors()) {
-
+            dogEditDTO.setImageName(imgName);
             List<Behavior> allBehaviors = dogService.getAllBehaviors();
             List<Breed> allBreeds = dogService.getAllBreeds();
             List<Client> allClients = dogService.getAllClients();
