@@ -2,6 +2,7 @@ package rbekyarov.project.web.controllers;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,8 @@ import rbekyarov.project.models.entity.City;
 import rbekyarov.project.service.CityService;
 import rbekyarov.project.service.CompanyService;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -70,9 +73,9 @@ public class CompanyController extends BaseController {
     }
 
     @PostMapping("/view/edit/companyEdit")
-    public String editCompany(CompanyDTO companyDTO, @RequestParam("fileImage") MultipartFile file,
+    public ModelAndView editCompany(@Valid CompanyDTO companyDTO, BindingResult bindingResult,
+                              ModelAndView modelAndView ,@RequestParam("fileImage") MultipartFile file,
                               @RequestParam("imgName")String imgName) throws IOException {
-
         Long id = 1L;
         //image upload
         String imageUUID;
@@ -84,6 +87,16 @@ public class CompanyController extends BaseController {
             imageUUID = imgName;
         }
         companyDTO.setLogoName(imageUUID);
+
+        if (bindingResult.hasErrors()) {
+            List<City> allCity = cityService.findAllCityById();
+            modelAndView.addObject("companyDTO", companyDTO);
+            companyDTO.setLogoName(imageUUID);
+            return super.view("view/edit/companyEdit","companyDTO", companyDTO,"allCity", allCity);
+
+        }
+
+
 
         companyService.editCompany(companyDTO.getName(),
                 imageUUID,
@@ -97,7 +110,6 @@ public class CompanyController extends BaseController {
                 companyDTO.getBalance(),
                 companyDTO.getManagerName(),
                 id);
-
-        return "redirect:/view/MyCompany";
+        return super.redirect("/view/MyCompany");
     }
 }

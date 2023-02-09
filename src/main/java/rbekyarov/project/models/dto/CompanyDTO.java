@@ -3,7 +3,10 @@ package rbekyarov.project.models.dto;
 import rbekyarov.project.models.entity.BaseEntity;
 import rbekyarov.project.models.entity.City;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 
@@ -25,7 +28,8 @@ public class CompanyDTO extends BaseEntity {
     public CompanyDTO() {
     }
 
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 20, message = "Content length must be between 3 and 20 characters!")
     public String getName() {
         return name;
     }
@@ -33,7 +37,8 @@ public class CompanyDTO extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 20, message = "Content length must be between 3 and 20 characters!")
     public String getCountry() {
         return country;
     }
@@ -49,7 +54,8 @@ public class CompanyDTO extends BaseEntity {
     public void setCity(City city) {
         this.city = city;
     }
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 20, message = "Content length must be between 3 and 20 characters!")
     public String getAddress() {
         return address;
     }
@@ -57,7 +63,8 @@ public class CompanyDTO extends BaseEntity {
     public void setAddress(String address) {
         this.address = address;
     }
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 8, max = 12, message = "Content length must be between 8 and 12 characters!")
     public String getVatNumber() {
         return vatNumber;
     }
@@ -65,7 +72,8 @@ public class CompanyDTO extends BaseEntity {
     public void setVatNumber(String vatNumber) {
         this.vatNumber = vatNumber;
     }
-    @NotNull
+    @Email(message = "Enter valid email!")
+    @NotBlank(message = "Email cannot be empty!")
     public String getEmail() {
         return email;
     }
@@ -73,7 +81,8 @@ public class CompanyDTO extends BaseEntity {
     public void setEmail(String email) {
         this.email = email;
     }
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 16, max = 24, message = "Content length must be between 16 and 24 characters!")
     public String getBankAccount() {
         return bankAccount;
     }
@@ -81,7 +90,8 @@ public class CompanyDTO extends BaseEntity {
     public void setBankAccount(String bankAccount) {
         this.bankAccount = bankAccount;
     }
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 20, message = "Content length must be between 3 and 20 characters!")
     public String getManagerName() {
         return managerName;
     }
@@ -97,7 +107,8 @@ public class CompanyDTO extends BaseEntity {
     public void setLogoName(String logoName) {
         this.logoName = logoName;
     }
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
+    @Size(min = 3, max = 30, message = "Content length must be between 3 and 30 characters!")
     public String getBankName() {
         return bankName;
     }
@@ -105,7 +116,7 @@ public class CompanyDTO extends BaseEntity {
     public void setBankName(String bankName) {
         this.bankName = bankName;
     }
-    @NotNull
+    @NotNull(message = "Field cannot be empty")
     public BigDecimal getBalance() {
         return balance;
     }
