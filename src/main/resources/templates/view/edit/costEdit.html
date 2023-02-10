@@ -41,7 +41,7 @@
 
                         <div class="login-box">
 
-                            <label>Vendor:</label><br>
+                            <label style="font-weight: bold">Vendor:</label><br>
                             <select required th:field="*{vendor.id}">
                                 <option value="">Please select</option>
                                 <option
@@ -51,21 +51,21 @@
 
                             </select><br>
 
-                            <label>Description:</label><br>
+                            <label style="font-weight: bold">Description:</label><br>
                             <input type="text" id="description" th:field="*{description}"
                                    placeholder="Please enter Description"
                             />
                             <small th:if="${#fields.hasErrors('description')}"
                                    th:errors="*{description}"
                                    class="text-light form-text bg-danger "></small><br>
-                            <label>Invoice No:</label><br>
+                            <label style="font-weight: bold">Invoice No:</label><br>
                             <input type="text" id="invoiceNo" th:field="*{invoiceNo}"
                                    placeholder="Please enter Invoice No"
                             />
                             <small th:if="${#fields.hasErrors('invoiceNo')}"
                                    th:errors="*{invoiceNo}"
                                    class="text-light form-text bg-danger "></small><br>
-                            <label>Amount:</label><br>
+                            <label style="font-weight: bold">Amount:</label><br>
                             <input type="text" id="amount" th:field="*{amount}"
                                    placeholder="Please enter Amount"
                             />
@@ -74,7 +74,7 @@
                                    class="text-light form-text bg-danger "></small><br>
 
 
-                            <label>Date Cost:</label><br>
+                            <label style="font-weight: bold">Date Cost:</label><br>
                             <div>
                                 <input  type="text" id="dateCost" th:field="*{dateCost}"
                                         placeholder="Please enter Date"/>

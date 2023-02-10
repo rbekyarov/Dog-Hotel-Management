@@ -33,7 +33,7 @@
 
                     <div class="login-box">
 
-                        <label>House name</label><br>
+                        <label style="font-weight: bold">House name</label><br>
                         <input style="width: 120px;"
                                type="text" id="description"
                                th:field="${cellDTO.code}"/>
@@ -42,7 +42,7 @@
                                th:errors="*{code}"
                                class="text-light form-text bg-danger "></small>
                         <br>
-                        <label>Size</label><br>
+                        <label style="font-weight: bold">Size</label><br>
 
                         <select style="width: 120px;" th:field="${cellDTO.cellSize}" >
                             <option value="">please select</option>
@@ -55,7 +55,7 @@
                                class="text-light form-text bg-danger "></small>
                         <br>
 
-                        <label>Status</label><br>
+                        <label style="font-weight: bold">Status</label><br>
 
                         <select th:field="${cellDTO.status}" >
                             <option value="">please select</option>

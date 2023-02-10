@@ -30,7 +30,7 @@
                           th:method="post">
                         <div class="login-box">
 
-                            <label>House name</label><br>
+                            <label style="font-weight: bold">House name</label><br>
                             <input style="width: 120px;" type="text"
                                    th:field="${cellEditDTO.code}"  name="code"
                                    id="code" />
@@ -38,7 +38,7 @@
                             <small th:if="${#fields.hasErrors('code')}"
                                    th:errors="*{code}"
                                    class="text-light form-text bg-danger "></small>
-                            <label>Size</label><br>
+                            <label style="font-weight: bold">Size</label><br>
 
                             <select style="width: 120px;" th:field="${cellEditDTO.cellSize}">
                                 <option value="">please select</option>
@@ -50,7 +50,7 @@
                                    th:errors="*{cellSize}"
                                    class="text-light form-text bg-danger "></small><br>
 
-                            <label>Status</label><br>
+                            <label style="font-weight: bold">Status</label><br>
                             <select style="width: 120px;" required th:field="${cellEditDTO.status}">
                                 <option value="SMALL">please select</option>
                                 <option value="empty">empty</option>

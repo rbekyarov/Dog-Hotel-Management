@@ -29,7 +29,7 @@
                 >
                     <div class="login-box">
 
-                        <label >City Code</label><br>
+                        <label style="font-weight: bold">City Code</label><br>
                         <input  type="text"
                                id="code" th:field="${cityDTO.code}"
                                placeholder="Please enter code" /><br>
@@ -37,7 +37,7 @@
                                th:errors="*{code}"
                                class="text-light form-text bg-danger "></small>
                         <br>
-                        <label >City Name</label><br>
+                        <label style="font-weight: bold">City Name</label><br>
                         <input type="text" id="name"
                                th:field="${cityDTO.name}"
                                placeholder="Please enter City Name" />
