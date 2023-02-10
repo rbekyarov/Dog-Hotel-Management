@@ -4,8 +4,10 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
 import rbekyarov.project.models.entity.*;
@@ -263,11 +265,44 @@ public class ReservationController extends BaseController {
     }
 
     @PostMapping("/view/add/reservationAdd")
-    public String addReservation(@Valid ReservationDTO reservationDTO, HttpSession session) {
+    public ModelAndView addReservation(@Valid ReservationDTO reservationDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            List<Dog> allDogsInCatalog = dogService.findAll();
+            List<Dog> allActiveReservedDogs = reservationService.findActiveReservedDogs();
+            List<Dog> allDogs = new ArrayList<>(allDogsInCatalog);
+            for (Dog dog : allDogsInCatalog) {
+                Long idDog = dog.getId();
+                for (Dog allActiveReservedDog : allActiveReservedDogs) {
+                    Long idActivDog = allActiveReservedDog.getId();
+                    if(idDog.intValue()==idActivDog.intValue()){
+                        allDogs.remove(dog);
+                        break;
+                    }
+                }
+            }
+            Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
+
+            Price price = allPrices.get();
+            List<Client> allClients = dogService.getAllClients();
+            List<Cell> allEmptyCells = cellService.findAllEmptyCells();
+            redirectAttributes.addFlashAttribute("reservationDTO", reservationDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.reservationDTO", bindingResult);
+
+            redirectAttributes.addFlashAttribute("allDogs", allDogs);
+            redirectAttributes.addFlashAttribute("price", price);
+            redirectAttributes.addFlashAttribute("allClients", allClients);
+            return super.view("/view/add/reservationAdd",
+                    "reservationDTO", reservationDTO,
+                    "allClients", allClients,
+                    "allEmptyCells", allEmptyCells,
+                    "price", price,
+                    "allDogs", allDogs);
+
+        }
 
         reservationService.addReservation(reservationDTO, session);
+        return super.redirect("/view/table/reservationTable");
 
-        return "redirect:/view/table/reservationTable";
     }
 
     @GetMapping("view/table/reservation/remove/{id}")

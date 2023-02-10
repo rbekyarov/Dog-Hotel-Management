@@ -52,7 +52,10 @@
                                             th:value="${showClient.id}"
                                             th:text="${showClient.firstName+' '+showClient.lastName+' - '+showClient.phone}"
                                     ></option>
-                                </select></td>
+                                </select>
+                                <small th:if="${#fields.hasErrors('client.id')}"
+                                       th:errors="*{client.id}"
+                                       class="text-light form-text bg-danger "></small></td>
                         </tr>
                         <tr>
                             <td><label><img align="center" src="#" height="20px" width="20px"
@@ -62,7 +65,10 @@
                                 <label><img align="center" src="#" height="20px" width="20px"
                                             th:src="@{${'/pics/calendar.png'}}"> Date of Arrival:</label><br>
                                 <div>
-                                    <input required type="text" id="input1" th:field="*{startDate}" placeholder="Date of Arrival"  />
+                                    <input  type="text" id="input1" th:field="*{startDate}" placeholder="Date of Arrival"  />
+                                    <small th:if="${#fields.hasErrors('startDate')}"
+                                           th:errors="*{startDate}"
+                                           class="text-light form-text bg-danger "></small>
                                 </div>
                                 </td>
                         </tr>
@@ -70,14 +76,20 @@
                             <td><label><img align="center" src="#" height="20px" width="20px"
                                            th:src="@{${'/pics/calendar.png'}}"> Date of Departure:</label><br>
                                 <div>
-                                    <input required type="text" id="input2" th:field="*{endDate}" placeholder="Date of Departure"  />
+                                    <input  type="text" id="input2" th:field="*{endDate}" placeholder="Date of Departure"  />
+                                    <small th:if="${#fields.hasErrors('endDate')}"
+                                           th:errors="*{endDate}"
+                                           class="text-light form-text bg-danger "></small>
                                 </div>
                                 </td>
                         </tr>
                         <tr>
                             <td><label><img align="center" src="#" height="20px" width="20px"
                                             th:src="@{${'/pics/house.png'}}"> Dog House:</label><br>
-                                <select required id="cellsBox" name="cellsBox" th:field="*{cell}"></td>
+                                <select required id="cellsBox" name="cellsBox" th:field="*{cell}">
+                                    <small th:if="${#fields.hasErrors('cell')}"
+                                           th:errors="*{cell}"
+                                           class="text-light form-text bg-danger "></small></td>
                         </tr>
                         </tbody>
                     </table>

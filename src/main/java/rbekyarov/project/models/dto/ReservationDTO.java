@@ -5,6 +5,7 @@ import rbekyarov.project.models.entity.Client;
 import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.enums.*;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class ReservationDTO {
@@ -27,7 +28,7 @@ public class ReservationDTO {
     public ReservationDTO() {
     }
 
-    @NotNull
+    @NotNull(message = "cannot be empty")
     public Client getClient() {
         return client;
     }
@@ -35,7 +36,7 @@ public class ReservationDTO {
     public void setClient(Client client) {
         this.client = client;
     }
-
+    @NotNull(message = "cannot be empty")
     public Dog getDog() {
         return dog;
     }
@@ -43,7 +44,7 @@ public class ReservationDTO {
     public void setDog(Dog dog) {
         this.dog = dog;
     }
-
+    @NotNull(message = "cannot be empty")
     public Cell getCell() {
         return cell;
     }
@@ -51,7 +52,7 @@ public class ReservationDTO {
     public void setCell(Cell cell) {
         this.cell = cell;
     }
-
+    @NotBlank(message = "cannot be empty")
     public String getStartDate() {
         return startDate;
     }
@@ -59,7 +60,7 @@ public class ReservationDTO {
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
-
+    @NotBlank(message = "cannot be empty")
     public String getEndDate() {
         return endDate;
     }
