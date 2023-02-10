@@ -40,7 +40,7 @@
                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                     <tbody>
                     <tr>
-                        <td><label class="file-label" for="fileImage">Add Image</label>
+                        <td><label class="file-label" for="fileImage" style="font-weight: bold">Add Image</label>
                             <div class="mb-4">
                                 <input class="file-input" type="file" id="fileImage" name="fileImage">
                             </div>
@@ -52,14 +52,14 @@
                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                     <tbody>
                     <tr>
-                        <td><label>Dog Name:</label><br>
+                        <td><label style="font-weight: bold">Dog Name:</label><br>
                             <input type="text" id="name" th:field="*{name}" placeholder="Please enter Name" />
                             <small th:if="${#fields.hasErrors('name')}"
                                    th:errors="*{name}"
                                    class="text-light form-text bg-danger "></small>
                             <br>
                         </td>
-                        <td><label>Weight:</label><br>
+                        <td><label style="font-weight: bold">Weight:</label><br>
                             <input type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight" />
                             <small th:if="${#fields.hasErrors('weight')}"
                                    th:errors="*{weight}"
@@ -72,7 +72,7 @@
                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                     <tbody>
                     <tr>
-                        <td><label>Breed:</label><br>
+                        <td><label style="font-weight: bold">Breed:</label><br>
                             <select required th:field="*{breed.id}" style="width: 196px">
                                 <option value="">Please select </option>
                                 <option
@@ -82,7 +82,7 @@
 
                             </select>
                         </td>
-                        <td><label>Behavior:</label><br>
+                        <td><label style="font-weight: bold">Behavior:</label><br>
                             <select required th:field="*{behavior.id}" style="width: 196px">
                                 <option value="">Please select</option>
                                 <option
@@ -97,7 +97,7 @@
                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                     <tbody>
                     <tr>
-                        <td><td><label>BirthDate:</label><br>
+                        <td><td><label style="font-weight: bold">BirthDate:</label><br>
                         <div>
                             <input  type="text" id="input1" th:field="*{birthDate}" placeholder="Please enter BirthDate"  />
                             <small th:if="${#fields.hasErrors('birthDate')}"
@@ -105,7 +105,7 @@
                                    class="text-light form-text bg-danger "></small>
                         </div>
                     </td>
-                        <td><label>Last Deworming Date:</label><br>
+                        <td><label style="font-weight: bold">Last Deworming Date:</label><br>
                             <div>
                                 <input  type="text" id="input2" th:field="*{lastDewormingDate}" placeholder="Please enter Deworming" />
                                 <small th:if="${#fields.hasErrors('lastDewormingDate')}"
@@ -120,7 +120,7 @@
                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                     <tbody>
                     <tr>
-                        <td><label>Client:</label><br>
+                        <td><label style="font-weight: bold">Client:</label><br>
                             <select id="select-state" required th:field="*{client.id}" style="width: 400px">
                                 <option value="">Please select</option>
                                 <option
@@ -137,13 +137,13 @@
                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                     <tbody>
                     <tr>
-                        <td><label>Sex:</label><br>
+                        <td><label style="font-weight: bold">Sex:</label><br>
                             <select th:field="*{sex}"style="width: 77px" >
                                 <option value="M">M</option>
                                 <option value="F">F</option>
                             </select>
                         </td>
-                        <td><label>Passport:</label><br>
+                        <td><label style="font-weight: bold">Passport:</label><br>
                             <select th:field="*{passport}" >
                                 <option value="NO">NO</option>
                                 <option value="YES">YES</option>
@@ -155,14 +155,14 @@
                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                     <tbody>
                     <tr>
-                        <td ><label >Microchip:</label><br>
+                        <td ><label style="font-weight: bold">Microchip:</label><br>
                             <select th:field="*{microchip}" id="Microchip" onclick="show()">
                                 <option value="NO">NO</option>
                                 <option value="YES">YES</option>
                             </select>
                         </td>
-                        <td id="description23"  ><label>Microchip Number:</label><br>
-                            <input  type="text"  th:field="*{microchipNumber}"  placeholder="Please enter Number" />
+                        <td id="description23"  ><label style="font-weight: bold"></label><br>
+                            <input  type="text" style="content-visibility: auto;" th:field="*{microchipNumber}"  placeholder="Please enter Number" />
                         </td>
                     </tr>
                     </tbody>

@@ -1,118 +1,123 @@
 <th:block th:unless="${session.isEmpty()}">
-    <script>
-        $(document).ready(function() {
-            $('#nav-link').click(function(e){
-                e.preventDefault();
-                window.history.back();
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('select').selectize({
-                sortField: 'text'
-            });
-        });
-    </script>
-    <script src="/js/selectize.min.js" ></script>
-    <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css" />
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+        <script>
+            $(document).ready(function () {
+                $('#nav-link').click(function (e) {
+                    e.preventDefault();
+                    window.history.back();
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('select').selectize({
+                    sortField: 'text'
+                });
+            });
+        </script>
+        <script src="/js/selectize.min.js"></script>
+        <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css"/>
 
-        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
             <tbody>
             <tr>
-                <td><div class="button_back">
-                    <a class="nav-link h5" id="nav-link">
-                        <button type="button" class="btn btn-danger btn-lg btnList"><span
-                                class="glyphicon glyphicon-ok"></span>Back
-                        </button>
-                    </a>
-                </div></td>
+                <td>
+                    <div class="button_back">
+                        <a class="nav-link h5" id="nav-link">
+                            <button type="button" class="btn btn-danger btn-lg btnList"><span
+                                    class="glyphicon glyphicon-ok"></span>Back
+                            </button>
+                        </a>
+                    </div>
+                </td>
             </tr>
             <tr>
-                <td><div class="container">
-                    <h2 class="page_title">Edit Client</h2>
-                    <form class="form_add" th:action="@{/view/table/client/edit/{id}(id=*{id})}"
-                          th:method="post"
-                          th:object="${clientEditDTO}"
-
-                    >
-                        <div class="login-box">
-                            <label>First Name:</label><br>
-                            <input type="text" id="firstName"
-                                   th:field="*{firstName}"
-                                   placeholder="Please enter Name"/>
-                            <small th:if="${#fields.hasErrors('firstName')}"
-                                   th:errors="*{firstName}"
-                                   class="text-light form-text bg-danger "></small>
-                            <br>
-                            <label>Last Name:</label><br>
-                            <input type="text" id="lastName"
-                                   th:field="*{lastName}"
-                                   placeholder="Please enter Name"/>
-                            <small th:if="${#fields.hasErrors('lastName')}"
-                                   th:errors="*{lastName}"
-                                   class="text-light form-text bg-danger "></small><br>
-                            <label>Email:</label><br>
-                            <input type="email" id="email"
-                                   th:field="*{email}"
-                                   placeholder="Please enter Email"/>
-                            <small th:if="${#fields.hasErrors('email')}"
-                                   th:errors="*{email}"
-                                   class="text-light form-text bg-danger "></small><br>
-                            <label>Phone:</label><br>
-                            <input type="text" id="phone"
-                                   th:field="*{phone}" placeholder="Please enter Phone"/>
-                            <small th:if="${#fields.hasErrors('phone')}"
-                                   th:errors="*{phone}"
-                                   class="text-light form-text bg-danger "></small>
-                            <br>
-
-                            <label>Address:</label><br>
-                            <textarea
-                                    th:field="*{address}"
-                                    type="textarea"
-                                    placeholder="Please enter Address"></textarea>
-                            <small th:if="${#fields.hasErrors('address')}"
-                                   th:errors="*{address}"
-                                   class="text-light form-text bg-danger "></small><br>
-                            <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:200px">
-                                <tbody>
-                                <label>City:</label><br>
-                                <select id="city.id"
-                                        name="city.id"
-                                        th:field="*{city.id}" style="width: 200px">
-
-                                    <option value="">Please select</option>
-                                    <option
-                                            th:each="b : ${allCity}"
-                                            th:value="${b.id}"
-                                            th:text="${b.name}"></option>
-
-                                </select>
-                                <small th:if="${#fields.hasErrors('city.id')}"
-                                       th:errors="*{city.id}"
+                <td>
+                    <div class="container">
+                        <h2 class="page_title">Edit Client</h2>
+                        <form class="form_add" th:action="@{/view/table/client/edit/{id}(id=*{id})}"
+                              th:method="post"
+                              th:object="${clientEditDTO}">
+                            <div class="login-box">
+                                <label style="font-weight: bold">First Name:</label><br>
+                                <input type="text" id="firstName"
+                                       th:field="*{firstName}"
+                                       placeholder="Please enter Name"/>
+                                <small th:if="${#fields.hasErrors('firstName')}"
+                                       th:errors="*{firstName}"
+                                       class="text-light form-text bg-danger "></small>
+                                <br>
+                                <label style="font-weight: bold">Last Name:</label><br>
+                                <input type="text" id="lastName"
+                                       th:field="*{lastName}"
+                                       placeholder="Please enter Name"/>
+                                <small th:if="${#fields.hasErrors('lastName')}"
+                                       th:errors="*{lastName}"
                                        class="text-light form-text bg-danger "></small><br>
-                                <label>
-                                    <a th:href="@{/view/add/cityAdd}">+ add city
+                                <label style="font-weight: bold">Email:</label><br>
+                                <input type="email" id="email"
+                                       th:field="*{email}"
+                                       placeholder="Please enter Email"/>
+                                <small th:if="${#fields.hasErrors('email')}"
+                                       th:errors="*{email}"
+                                       class="text-light form-text bg-danger "></small><br>
+                                <label style="font-weight: bold">Phone:</label><br>
+                                <input type="text" id="phone"
+                                       th:field="*{phone}" placeholder="Please enter Phone"/>
+                                <small th:if="${#fields.hasErrors('phone')}"
+                                       th:errors="*{phone}"
+                                       class="text-light form-text bg-danger "></small>
+                                <br>
 
-                                    </a></label>
+                                <label style="font-weight: bold">Address:</label><br>
+                                <textarea
+                                        th:field="*{address}"
+                                        type="textarea"
+                                        placeholder="Please enter Address"></textarea>
+                                <small th:if="${#fields.hasErrors('address')}"
+                                       th:errors="*{address}"
+                                       class="text-light form-text bg-danger "></small><br>
+                                <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:200px">
+                                    <tbody>
+                                    <label style="font-weight: bold">City:</label><br>
+                                    <select id="city.id"
+                                            name="city.id"
+                                            th:field="*{city.id}" style="width: 200px">
 
-                        </div>
-                        <br>
-                        <div class="button_submit">
-                            <div>
+                                        <option value="">Please select</option>
+                                        <option
+                                                th:each="b : ${allCity}"
+                                                th:value="${b.id}"
+                                                th:text="${b.name}"></option>
+
+                                    </select>
+                                    <small th:if="${#fields.hasErrors('city.id')}"
+                                           th:errors="*{city.id}"
+                                           class="text-light form-text bg-danger "></small><br>
+                                    <label>
+                                        <a th:href="@{/view/add/cityAdd}">+ add city
+
+                                        </a></label>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <br>
+                            <div class="button_submit">
                                 <div>
-                                    <input type="submit" class="btn btn-danger btn-lg btnList" value="Edit Client"/>
+                                    <div>
+                                        <input type="submit" class="btn btn-danger btn-lg btnList"
+                                               value="Submit Client"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div></td>
+                        </form>
+                    </div>
+                </td>
             </tr>
-
+            </tbody>
         </table>
-
 
 
         <script th:src="@{/assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>

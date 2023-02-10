@@ -15,7 +15,7 @@
                 });
             });
         </script>
-        <script src="/js/selectize.js"></script>
+        <script src="/js/selectize.min.js"></script>
         <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css"/>
 
         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
@@ -39,7 +39,7 @@
                               th:method="post"
                               th:object="${clientDTO}">
                             <div class="login-box">
-                                <label>First Name:</label><br>
+                                <label style="font-weight: bold">First Name:</label><br>
                                 <input type="text" id="firstName"
                                        th:field="*{firstName}"
                                        placeholder="Please enter Name"/>
@@ -47,21 +47,21 @@
                                        th:errors="*{firstName}"
                                        class="text-light form-text bg-danger "></small>
                                 <br>
-                                <label>Last Name:</label><br>
+                                <label style="font-weight: bold">Last Name:</label><br>
                                 <input type="text" id="lastName"
                                        th:field="*{lastName}"
                                        placeholder="Please enter Name"/>
                                 <small th:if="${#fields.hasErrors('lastName')}"
                                        th:errors="*{lastName}"
                                        class="text-light form-text bg-danger "></small><br>
-                                <label>Email:</label><br>
+                                <label style="font-weight: bold">Email:</label><br>
                                 <input type="email" id="email"
                                        th:field="*{email}"
                                        placeholder="Please enter Email"/>
                                 <small th:if="${#fields.hasErrors('email')}"
                                        th:errors="*{email}"
                                        class="text-light form-text bg-danger "></small><br>
-                                <label>Phone:</label><br>
+                                <label style="font-weight: bold">Phone:</label><br>
                                 <input type="text" id="phone"
                                        th:field="*{phone}" placeholder="Please enter Phone"/>
                                 <small th:if="${#fields.hasErrors('phone')}"
@@ -69,7 +69,7 @@
                                        class="text-light form-text bg-danger "></small>
                                 <br>
 
-                                <label>Address:</label><br>
+                                <label style="font-weight: bold">Address:</label><br>
                                 <textarea
                                         th:field="*{address}"
                                         type="textarea"
@@ -79,7 +79,7 @@
                                        class="text-light form-text bg-danger "></small><br>
                                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:200px">
                                     <tbody>
-                                    <label>City:</label><br>
+                                    <label style="font-weight: bold">City:</label><br>
                                     <select id="cityId"
                                             name="cityId"
                                             th:field="*{cityId}" style="width: 200px">

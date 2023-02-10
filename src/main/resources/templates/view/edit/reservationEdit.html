@@ -31,7 +31,7 @@
                     <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <tbody>
                         <tr>
-                            <td> <label><img align="center" src="#" height="20px" width="20px"
+                            <td> <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                              th:src="@{${'/pics/client.png'}}"> Client:</label><br>
                                 <select style="width:330px" required id="showClient" name="showClient" th:field="*{client.id}" oninput="getClientDogs()">
 
@@ -44,7 +44,7 @@
                                 </select><br></td>
                         </tr>
                         <tr>
-                            <td><label><img align="center" src="#" height="20px" width="20px"
+                            <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                             th:src="@{${'/pics/dog.png'}}"> Dog:</label><br>
                                 <select style="width:330px" id="dogsBox" th:field="*{dog.id}" onclick="getCells()">
                                     <option
@@ -56,7 +56,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label><img align="center" src="#" height="20px" width="20px"
+                                <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                             th:src="@{${'/pics/calendar.png'}}"> Date of Arrival:</label><br>
                                 <div>
                                     <input required type="text" id="input1" th:field="*{startDate}" placeholder="Date of Arrival"  />
@@ -64,7 +64,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><label><img align="center" src="#" height="20px" width="20px"
+                            <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                             th:src="@{${'/pics/calendar.png'}}"> Date of Departure:</label><br>
                                 <div>
                                     <input required type="text" id="input2" th:field="*{endDate}" placeholder="Date of Departure"  />
@@ -73,7 +73,7 @@
                         </tr>
 
                         <tr>
-                            <td><label><img align="center" src="#" height="20px" width="20px"
+                            <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                             th:src="@{${'/pics/house.png'}}"> Dog House:</label><br>
                                 <select required id="cellsBox" th:field="*{cell}">
                                     <option value="">Please select</option>
@@ -90,12 +90,12 @@
                     <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: auto">
                         <tbody>
                         <tr>
-                            <td><label th:text="${'Feeding: '+ price.getPriceFood()+'$'}"></label><br>
+                            <td><label style="font-weight: bold" th:text="${'Feeding: '+ price.getPriceFood()+'$'}"></label><br>
                                 <select th:field="*{food}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
-                            <td><label th:text="${'Deworming: '+ price.getPriceDeworming()+'$'}"></label><br>
+                            <td><label style="font-weight: bold" th:text="${'Deworming: '+ price.getPriceDeworming()+'$'}"></label><br>
                                 <select th:field="*{deworming}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
@@ -103,12 +103,12 @@
 
                         </tr>
                         <tr>
-                            <td><label th:text="${'Training: '+ price.getPriceTraining()+'$'}"></label><br>
+                            <td><label style="font-weight: bold" th:text="${'Training: '+ price.getPriceTraining()+'$'}"></label><br>
                                 <select th:field="*{training}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
-                            <td><label th:text="${'Bathing: '+ price.getPriceBathing()+'$'}"></label><br>
+                            <td><label style="font-weight: bold" th:text="${'Bathing: '+ price.getPriceBathing()+'$'}"></label><br>
                                 <select th:field="*{bathing}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
@@ -116,24 +116,24 @@
 
                         </tr>
                         <tr>
-                            <td><label th:text="${'Еar cleaning: '+ price.getPriceEars()+'$'}"></label><br>
+                            <td><label style="font-weight: bold" th:text="${'Еar cleaning: '+ price.getPriceEars()+'$'}"></label><br>
                                 <select th:field="*{ears}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
-                            <td><label th:text="${'Paws cleaning: price '+ price.getPricePaws()+'$'}"></label><br>
+                            <td><label style="font-weight: bold" th:text="${'Paws cleaning: price '+ price.getPricePaws()+'$'}"></label><br>
                                 <select th:field="*{paws}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
                         </tr>
                         <tr>
-                            <td><label th:text="${'Nails trimming: '+ price.getPriceNails()+'$'}"></label><br>
+                            <td><label style="font-weight: bold" th:text="${'Nails trimming: '+ price.getPriceNails()+'$'}"></label><br>
                                 <select th:field="*{nails}"><br>
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select><br></td>
-                            <td><label th:text="${'Combing: '+ price.getPriceCombing()+'$'}"></label><br>
+                            <td><label style="font-weight: bold" th:text="${'Combing: '+ price.getPriceCombing()+'$'}"></label><br>
                                 <select th:field="*{combing}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
@@ -143,10 +143,10 @@
                     </table>
 
 
-                    <label><img align="center" src="#" height="20px" width="20px"
+                    <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                 th:src="@{${'/pics/discount.png'}}"> Discount: max - 20%</label><br>
                     <input style="width: 50px; text-align:left;" type="text" id="description22" th:field="*{discount}"
-                           placeholder="Max Discount 20%"/><br>
+                           placeholder="0"/><br>
                 </div>
                 <br>
                 <div class="button_submit">
