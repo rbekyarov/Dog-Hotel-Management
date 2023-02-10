@@ -2,6 +2,7 @@ package rbekyarov.project.models.dto;
 
 import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.City;
+import rbekyarov.project.models.entity.enums.ClientType;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -16,6 +17,7 @@ public class ClientEditDTO {
     private String email;
     private String phone;
     private String address;
+    private ClientType clientType;
     private City city;
 
 
@@ -88,5 +90,13 @@ public class ClientEditDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public ClientType getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(ClientType clientType) {
+        this.clientType = clientType;
     }
 }

@@ -2,6 +2,7 @@ package rbekyarov.project.models.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import rbekyarov.project.models.entity.enums.ClientType;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,6 +17,8 @@ public class Client extends BaseEntity{
     private String email;
     private String phone;
     private String address;
+
+    private ClientType clientType;
     private City city;
     private Set<Dog> dogs;
     private User author;
@@ -24,12 +27,13 @@ public class Client extends BaseEntity{
     public Client() {
     }
 
-    public Client(String firstName, String lastName, String email, String phone, String address, City city, User author, LocalDate dateCreate) {
+    public Client(String firstName, String lastName, String email, String phone, String address,ClientType clientType, City city, User author, LocalDate dateCreate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.clientType = clientType;
         this.city = city;
         this.author = author;
         this.dateCreate = dateCreate;
@@ -109,5 +113,13 @@ public class Client extends BaseEntity{
 
     public void setDateCreate(LocalDate dateCreate) {
         this.dateCreate = dateCreate;
+    }
+    @Enumerated(EnumType.STRING)
+    public ClientType getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(ClientType clientType) {
+        this.clientType = clientType;
     }
 }

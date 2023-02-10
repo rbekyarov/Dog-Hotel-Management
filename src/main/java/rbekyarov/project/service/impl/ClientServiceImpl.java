@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.ClientDTO;
 import rbekyarov.project.models.entity.Client;
 import rbekyarov.project.models.entity.User;
+import rbekyarov.project.models.entity.enums.ClientType;
 import rbekyarov.project.repository.CellRepository;
+import rbekyarov.project.repository.CityRepository;
 import rbekyarov.project.repository.ClientRepository;
 import rbekyarov.project.service.ClientService;
 import rbekyarov.project.service.UserService;
@@ -27,13 +29,16 @@ public class ClientServiceImpl implements ClientService {
     private final ModelMapper modelMapper;
     private final CellRepository cellRepository;
     private final UserService userService;
+    private final CityRepository cityRepository;
 
     public ClientServiceImpl(ClientRepository clientRepository, ModelMapper modelMapper,
-                             CellRepository cellRepository, UserService userService) {
+                             CellRepository cellRepository, UserService userService,
+                             CityRepository cityRepository) {
         this.clientRepository = clientRepository;
         this.modelMapper = modelMapper;
         this.cellRepository = cellRepository;
         this.userService = userService;
+        this.cityRepository = cityRepository;
     }
 
     @Override
@@ -49,10 +54,12 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void addClient( ClientDTO clientDTO, HttpSession session) {
         Client client = modelMapper.map(clientDTO, Client.class);
+        client.setCity(cityRepository.findById(clientDTO.getCityId()).orElseThrow());
         //get and set Author
         client.setAuthor(userService.getAuthorFromSession(session));
         // set dateCreated
         client.setDateCreate(LocalDate.now());
+        client.setId(null);
         clientRepository.save(client);
     }
 
@@ -67,7 +74,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void editClient(String firstName, String lastName, String email, String phone, String address, Long cityId, Long id, HttpSession session) {
+    public void editClient(String firstName, String lastName, String email, String phone, String address, ClientType clientType, Long cityId, Long id, HttpSession session) {
         User editAuthor = userService.getAuthorFromSession(session);
         Long editAuthorId = editAuthor.getId();
         //set dateEdit
@@ -77,6 +84,7 @@ public class ClientServiceImpl implements ClientService {
                 email,
                 phone,
                 address,
+                clientType,
                 cityId,
                 id,
                 editAuthorId,

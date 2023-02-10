@@ -77,8 +77,18 @@
                                 <small th:if="${#fields.hasErrors('address')}"
                                        th:errors="*{address}"
                                        class="text-light form-text bg-danger "></small><br>
+
+
+
+
                                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:200px">
                                     <tbody>
+                                    <label style="font-weight: bold">Client Type:</label><br>
+                                    <select th:field="*{clientType}" style="width: 200px" name="clientType">
+                                        <option value="NEW">NEW</option>
+                                        <option value="REGULAR">REGULAR</option>
+                                        <option value="VIP">VIP</option>
+                                    </select>
                                     <label style="font-weight: bold">City:</label><br>
                                     <select id="cityId"
                                             name="cityId"

@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.ClientDTO;
 import rbekyarov.project.models.entity.Client;
+import rbekyarov.project.models.entity.enums.ClientType;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -24,6 +25,7 @@ public interface ClientService {
                  String email,
                  String phone,
                  String address,
+                 ClientType clientType,
                  Long cityId,
                  Long id,
              HttpSession session);

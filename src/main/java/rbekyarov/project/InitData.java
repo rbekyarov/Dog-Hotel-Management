@@ -132,12 +132,12 @@ public class InitData implements CommandLineRunner {
         }
         //ADD CLIENT
         if (clientRepository.findAll().size() == 0) {
-            clientRepository.save(new Client("Ivan", "Ivanov", "ivanov@gmail.com", "0886335241", "Lulin 15", cityRepository.getById(Long.parseLong("1")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
-            clientRepository.save(new Client("Stanimir", "Pavlov", "spavlov@abv.bg", "08842276361", "Zdravetzh 4", cityRepository.getById(Long.parseLong("2")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
-            clientRepository.save(new Client("Vladimir", "Georgiev", "vgeorgiev@outlook.com", "0887325579", "Zagorka 16", cityRepository.getById(Long.parseLong("3")), userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
-            clientRepository.save(new Client("Boyan", "Dimitrov", "bdimitrov@hotmail.com", "0881256377", "Ludogorska 12B", cityRepository.getById(Long.parseLong("4")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
-            clientRepository.save(new Client("Yordan", "Atanasov", "atanasov@abv.bg", "0867258954", "Vasil Levski 22", cityRepository.getById(Long.parseLong("1")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
-            clientRepository.save(new Client("Viktor", "Penev", "penev23@abv.bg", "08865578956", "Hristo Botev 24", cityRepository.getById(Long.parseLong("2")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            clientRepository.save(new Client("Ivan", "Ivanov", "ivanov@gmail.com", "0886335241", "Lulin 15",ClientType.NEW, cityRepository.getById(Long.parseLong("1")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            clientRepository.save(new Client("Stanimir", "Pavlov", "spavlov@abv.bg", "08842276361", "Zdravetzh 4",ClientType.NEW, cityRepository.getById(Long.parseLong("2")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            clientRepository.save(new Client("Vladimir", "Georgiev", "vgeorgiev@outlook.com", "0887325579", "Zagorka 16",ClientType.NEW, cityRepository.getById(Long.parseLong("3")), userRepository.getById(Long.parseLong("1")), LocalDate.of(2023, 1, 1)));
+            clientRepository.save(new Client("Boyan", "Dimitrov", "bdimitrov@hotmail.com", "0881256377", "Ludogorska 12B",ClientType.NEW, cityRepository.getById(Long.parseLong("4")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            clientRepository.save(new Client("Yordan", "Atanasov", "atanasov@abv.bg", "0867258954", "Vasil Levski 22",ClientType.NEW, cityRepository.getById(Long.parseLong("1")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
+            clientRepository.save(new Client("Viktor", "Penev", "penev23@abv.bg", "08865578956", "Hristo Botev 24",ClientType.NEW, cityRepository.getById(Long.parseLong("2")), userRepository.getById(Long.parseLong("2")), LocalDate.of(2023, 1, 1)));
 
 
         }

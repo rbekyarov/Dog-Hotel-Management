@@ -60,6 +60,7 @@
                                 <th>Address</th>
                                 <th>City</th>
                                 <th>Dogs</th>
+                                <th>Client Type</th>
                                 <th>Author</th>
                                 <th>Created</th>
                                 <th></th>
@@ -81,6 +82,7 @@
                                        th:href="@{/view/table/dog/view/{id}(id=${d.id})}"
                                        th:text="${d.getName()+' '}"></td>
                                 <!--                    <td><p class="dogsOnClient" th:each="d: ${c.getDogs()}" th:text="${d.getName()}"></td>-->
+                                <td th:text="${c.clientType}"></td>
                                 <td th:text="${c.author.username}"></td>
                                 <td th:text="${#temporals.format(c.dateCreate,'dd.MM.yyyy')}"></td>
                                 <td><a class="nav-link h5" th:href="@{/view/add/dogAdd/{id}(id=*{c.id})}">

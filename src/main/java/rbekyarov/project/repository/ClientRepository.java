@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import rbekyarov.project.models.entity.City;
 import rbekyarov.project.models.entity.Client;
 import rbekyarov.project.models.entity.Dog;
+import rbekyarov.project.models.entity.enums.ClientType;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -24,12 +25,13 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Client as c SET c.firstName = :firstName, c.lastName=:lastName,c.email=:email, c.phone =:phone, c.address = :address,c.city.id=:cityId,c.author.id=:editAuthorId,c.dateCreate=:dateEdit where c.id=:id ")
+    @Query("update Client as c SET c.firstName = :firstName, c.lastName=:lastName,c.email=:email, c.phone =:phone, c.address = :address,c.clientType=:clientType, c.city.id=:cityId,c.author.id=:editAuthorId,c.dateCreate=:dateEdit where c.id=:id ")
     void editClient(@Param("firstName") String firstName,
                     @Param("lastName") String lastName,
                     @Param("email") String email,
                     @Param("phone") String phone,
                     @Param("address") String address,
+                    @Param("clientType")ClientType clientType,
                     @Param("cityId") Long cityId,
                     @Param("id") Long id,
                     @Param("editAuthorId") Long editAuthorId,

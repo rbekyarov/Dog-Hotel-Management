@@ -156,6 +156,7 @@ public class ClientController extends BaseController {
                 clientEditDTO.getEmail(),
                 clientEditDTO.getPhone(),
                 clientEditDTO.getAddress(),
+                clientEditDTO.getClientType(),
                 clientEditDTO.getCity().getId(),
                 id,
                 session);
