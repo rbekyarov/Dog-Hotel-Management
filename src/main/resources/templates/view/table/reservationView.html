@@ -63,9 +63,11 @@
 
                     <table  align="center" border="0" cellpadding="1" cellspacing="1" style="width: 450px; font-size: 14px;">
                         <tr>
-                            <td><label th:text="${'Status: ' + reservation.statusReservation}"></label></label><br>
+                            <td><label ><img align="center" src="#" height="20px" width="20px"
+                                             th:src="@{${'/pics/status.png'}}" th:text="${'Status: ' + reservation.statusReservation}"></label></label><br>
                             </td>
-                            <td><label th:text="${'Date Create: '+ reservation.dateCreate}"></label><br></td>
+                            <td><label ><img align="center" src="#" height="20px" width="20px"
+                                             th:src="@{${'/pics/calendar.png'}}" th:text="${'Date Create: '+ reservation.dateCreate}"></label><br></td>
                         </tr>
                         <tbody>
                         <tr>
@@ -83,16 +85,22 @@
 
                         </tr>
                         <tr>
-                            <td><label th:text="${'      '+'City: '+ reservation.client.city.name}"></label><br></td>
-                            <td><label th:text="${'Weight: '+ reservation.dog.weight }"></label><br></td>
+                            <td><label ><img align="center" src="#" height="20px" width="20px"
+                                             th:src="@{${'/pics/city.png'}}" th:text="${'      '+'City: '+ reservation.client.city.name}"></label><br></td>
+                            <td><label ><img align="center" src="#" height="20px" width="20px"
+                                             th:src="@{${'/pics/kg.png'}}" th:text="${'Weight: '+ reservation.dog.weight }"></label><br></td>
                         </tr>
                         <tr>
-                            <td><label th:text="${'      '+'Email: '+ reservation.client.email}"></label><br></td>
-                            <td><label th:text="${'Breed: '+ reservation.dog.breed.breedName }"></label><br></td>
+                            <td><label ><img align="center" src="#" height="20px" width="20px"
+                                             th:src="@{${'/pics/email.png'}}" th:text="${'      '+'Email: '+ reservation.client.email}"></label><br></td>
+                            <td><label ><img align="center" src="#" height="20px" width="20px"
+                                             th:src="@{${'/pics/breed.png'}}" th:text="${'Breed: '+ reservation.dog.breed.breedName }"></label><br></td>
                         </tr>
                         <tr>
-                            <td><label th:text="${'      '+'Phone: '+ reservation.client.phone}"></label><br></td>
-                            <td><label th:text="${'Behavior: '+ reservation.dog.behavior.name }"></label><br></td>
+                            <td><label ><img align="center" src="#" height="20px" width="20px"
+                                             th:src="@{${'/pics/phone.png'}}" th:text="${'      '+'Phone: '+ reservation.client.phone}"></label><br></td>
+                            <td><label ><img align="center" src="#" height="20px" width="20px"
+                                             th:src="@{${'/pics/behavior.png'}}" th:text="${'Behavior: '+ reservation.dog.behavior.name }"></label><br></td>
                         </tr>
                         </tbody>
                     </table><br>
@@ -111,12 +119,16 @@
                     <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 450px;font-size: 14px;">
                         <tbody>
                         <tr>
-                            <td><label th:text="${'Day of coming: '+ reservation.startDate }"></label><br></td>
-                            <td><label th:text="${'Day of departure: '+ reservation.endDate }"></label><br></td>
+                            <td><label ><img align="center" src="#" height="20px" width="20px"
+                                             th:src="@{${'/pics/calendar.png'}}" th:text="${'Day of coming: '+ reservation.startDate }"></label><br></td>
+                            <td><label ><img align="center" src="#" height="20px" width="20px"
+                                             th:src="@{${'/pics/calendar.png'}}" th:text="${'Day of departure: '+ reservation.endDate }"></label><br></td>
                         </tr>
                         <tr>
-                            <td><label th:text="${'Stay Day: '+ reservation.countOvernightStay }"></label><br></td>
-                            <td><label th:text="${'Dog House: '+ reservation.cell.code +' '+ reservation.cell.cellSize }"></label><br></td>
+                            <td><label ><img align="center" src="#" height="20px" width="20px"
+                                             th:src="@{${'/pics/hotel.png'}}" th:text="${'Stay Day: '+ reservation.countOvernightStay }"></label><br></td>
+                            <td><label ><img align="center" src="#" height="20px" width="20px"
+                                             th:src="@{${'/pics/ahouse.png'}}" th:text="${'Dog House: '+ reservation.cell.code +' '+ reservation.cell.cellSize }"></label><br></td>
                         </tr>
                         </tbody>
                     </table>

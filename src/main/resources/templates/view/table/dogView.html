@@ -53,24 +53,33 @@
                 <tr>
                     <td>
 
-                        <label
-                        th:text="${' * '+'BirthDate: '+ #temporals.format(dog.birthDate,'dd.MM.yyyy') }"></label><br>
-                        <label
-                                th:text="${' * '+'Current Age: '+ dog.years}"></label><br>
-                        <label
-                                th:text="${' * '+'Last Deworming Date: ' +#temporals.format(dog.lastDewormingDate,'dd.MM.yyyy')}"></label><br>
-                        <label
-                                th:text="${' * '+'Weight: '+ dog.weight}"></label><br>
-                        <label
-                                th:text="${' * '+'Breed: '+ dog.breed.breedName}"></label><br>
-                        <label
-                                th:text="${' * '+'Sex: '+ dog.sex}"></label><br>
-                        <label
-                                th:text="${' * '+'Passport: '+ dog.passport}"></label><br>
-                        <label
-                                th:text="${' * '+'Microchip: '+ dog.microchip + ' - '+ dog.microchipNumber}"></label><br>
-                        <label
-                                th:text="${' * '+'Behavior: '+ dog.behavior.name}"></label><br>
+                        <label><img align="center" src="#" height="20px" width="20px"
+                                    th:src="@{${'/pics/calendar.png'}}"
+                        th:text="${' BirthDate: '+ #temporals.format(dog.birthDate,'dd.MM.yyyy') }"></label><br>
+                        <label><img align="center" src="#" height="20px" width="20px"
+                                    th:src="@{${'/pics/age.png'}}"
+                                th:text="${' Current Age: '+ dog.years}"></label><br>
+                        <label><img align="center" src="#" height="20px" width="20px"
+                                   th:src="@{${'/pics/calendar.png'}}"
+                                th:text="${' Last Deworming Date: ' +#temporals.format(dog.lastDewormingDate,'dd.MM.yyyy')}"></label><br>
+                        <label><img align="center" src="#" height="20px" width="20px"
+                                    th:src="@{${'/pics/kg.png'}}"
+                                th:text="${' Weight: '+ dog.weight}"></label><br>
+                        <label><img align="center" src="#" height="20px" width="20px"
+                                    th:src="@{${'/pics/breed.png'}}"
+                                th:text="${' Breed: '+ dog.breed.breedName}"></label><br>
+                        <label><img align="center" src="#" height="20px" width="20px"
+                                    th:src="@{${'/pics/sex.png'}}"
+                                th:text="${' Sex: '+ dog.sex}"></label><br>
+                        <label><img align="center" src="#" height="20px" width="20px"
+                                    th:src="@{${'/pics/pasport.png'}}"
+                                th:text="${' Passport: '+ dog.passport}"></label><br>
+                        <label><img align="center" src="#" height="20px" width="20px"
+                                    th:src="@{${'/pics/microchip.png'}}"
+                                th:text="${' Microchip: '+ dog.microchip + ' - '+ dog.microchipNumber}"></label><br>
+                        <label><img align="center" src="#" height="20px" width="20px"
+                                    th:src="@{${'/pics/behavior.png'}}"
+                                th:text="${' Behavior: '+ dog.behavior.name}"></label><br>
                         </div>
                     </td>
 
@@ -80,12 +89,15 @@
                         <label style="font-weight: bold;"><img align="center" src="#" height="25px" width="25px"
                                                                th:src="@{${'/pics/client.png'}}"><a
                                th:href="@{/view/table/client/view/{id}(id=${dog.client.id})}" th:text="${' '+ dog.client.firstName+' '+dog.client.lastName}"></a></label><br>
-                        <label
-                                th:text="${' * '+'City: '+dog.client.city.name}"></label><br>
-                        <label
-                                th:text="${' * '+'Email: '+dog.client.email}"></label><br>
-                        <label
-                                th:text="${' * '+'Phone: '+dog.client.phone}"></label><br>
+                        <label ><img align="center" src="#" height="20px" width="20px"
+                                     th:src="@{${'/pics/city.png'}}"
+                                th:text="${' City: '+dog.client.city.name}"></label><br>
+                        <label ><img align="center" src="#" height="20px" width="20px"
+                                     th:src="@{${'/pics/email.png'}}"
+                                th:text="${' Email: '+dog.client.email}"></label><br>
+                        <label ><img align="center" src="#" height="20px" width="20px"
+                                     th:src="@{${'/pics/phone.png'}}"
+                                th:text="${' Phone: '+dog.client.phone}"></label><br>
                     </td>
                 </tr>
                 <tr>

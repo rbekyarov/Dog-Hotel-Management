@@ -30,9 +30,9 @@
                 >
                     <div class="login-box">
                         <label  th:text="${ 'Current username :'+ user.username}" > </label> <br>
-                        <label>New username:</label><br>
+                        <label style="font-weight: bold">New username:</label><br>
                         <input type="text"  th:field="${user.username}" placeholder="Enter new password"/><br>
-                        <label>New password:</label><br>
+                        <label style="font-weight: bold">New password:</label><br>
                         <input type="password"  th:field="${user.password}" placeholder="Enter new password"/><br>
                         <p th:if="${empty}" class="errors alert alert-danger">
                             Invalid data!
