@@ -50,7 +50,7 @@
                                     <option
                                             th:each="showClient : ${allClients}"
                                             th:value="${showClient.id}"
-                                            th:text="${showClient.firstName+' '+showClient.lastName+' - '+showClient.phone}"
+                                            th:text="${showClient.firstName+' '+showClient.lastName+' - '+showClient.phone+' Type: '+showClient.clientType}"
                                     ></option>
                                 </select>
                                 <small th:if="${#fields.hasErrors('client.id')}"
