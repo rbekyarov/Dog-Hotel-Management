@@ -86,6 +86,18 @@
                                        th:errors="*{priceNails}"
                                        class="text-light form-text bg-danger "></small><br>
 
+                                <label>Discount Regular Client:</label><br>
+                                <input type="text" id="discountClientRegular" th:field="${priceDTO.discountClientRegular}" />
+                                <small th:if="${#fields.hasErrors('discountClientRegular')}"
+                                       th:errors="*{discountClientRegular}"
+                                       class="text-light form-text bg-danger "></small><br>
+
+                                <label>Discount VIP Client:</label><br>
+                                <input type="text" id="discountClientVip" th:field="${priceDTO.discountClientVip}" />
+                                <small th:if="${#fields.hasErrors('discountClientVip')}"
+                                       th:errors="*{discountClientVip}"
+                                       class="text-light form-text bg-danger "></small><br>
+
                             </div>
                             <br>
 
