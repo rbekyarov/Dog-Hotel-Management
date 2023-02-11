@@ -51,7 +51,7 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public void editPrice(BigDecimal priceStayS,BigDecimal priceStayM,BigDecimal priceStayL, BigDecimal priceFood,BigDecimal priceDeworming, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, Long id) {
+    public void editPrice(BigDecimal priceStayS,BigDecimal priceStayM,BigDecimal priceStayL, BigDecimal priceFood,BigDecimal priceDeworming, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails,Double discountClientRegular,Double discountClientVip, Long id) {
         //set dateEdit
         LocalDate dateEdit = LocalDate.now();
         priceRepository.editPrice(
@@ -66,6 +66,8 @@ public class PriceServiceImpl implements PriceService {
                 pricePaws,
                 priceEars,
                 priceNails,
+                discountClientRegular,
+                discountClientVip,
                 id,
                 dateEdit);
     }

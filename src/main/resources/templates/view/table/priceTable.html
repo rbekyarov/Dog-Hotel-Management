@@ -7,7 +7,7 @@
                     <div class="table-center">
                         <div class="page-header">
                             <h1><img align="center" src="#" height="45px" width="45px"
-                                     th:src="@{${'/pics/prices.png'}}">Price List</h1>
+                                     th:src="@{${'/pics/prices.png'}}">Prices List and Discounts</h1>
                         </div>
                         <a class="nav-link h5" th:href="@{/view/add/priceAdd}">
                             <button type="button" class="btn btn-danger btn-lg btnTable"><span
@@ -29,6 +29,8 @@
                                 <th>Paws cleaning</th>
                                 <th>Еar cleaning</th>
                                 <th>Nails trimming</th>
+                                <th>Discount Regular Client</th>
+                                <th>Discount VIP Client</th>
                                 <th>Created</th>
                                 <th></th>
                                 <th></th>
@@ -46,6 +48,8 @@
                                 <td th:text="${p.pricePaws+'$'}"></td>
                                 <td th:text="${p.priceEars+'$'}"></td>
                                 <td th:text="${p.priceNails+'$'}"></td>
+                                <td th:text="${p.discountClientRegular+'%'}"></td>
+                                <td th:text="${p.discountClientVip+'%'}"></td>
                                 <td th:text="${#temporals.format(p.dateCreate,'dd.MM.yyyy')}"></td>
                                 <td><a class="nav-link h5" th:href="@{price/edit/{id}(id=*{p.id})}">
                                     <button type="button" class="btn btn-danger btn-lg btnTable"><span

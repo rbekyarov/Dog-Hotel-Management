@@ -24,7 +24,7 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Price as p SET p.priceStayS = :priceStayS,p.priceStayM = :priceStayM,p.priceStayL = :priceStayL ,p.priceFood =:priceFood,p.priceDeworming=:priceDeworming,p.priceTraining=:priceTraining,p.priceBathing=:priceBathing,p.priceCombing=:priceCombing,p.pricePaws=:pricePaws,p.priceEars=:priceEars,p.priceNails=:priceNails ,p.dateCreate=:dateEdit where p.id=:id ")
+    @Query("update Price as p SET p.priceStayS = :priceStayS,p.priceStayM = :priceStayM,p.priceStayL = :priceStayL ,p.priceFood =:priceFood,p.priceDeworming=:priceDeworming,p.priceTraining=:priceTraining,p.priceBathing=:priceBathing,p.priceCombing=:priceCombing,p.pricePaws=:pricePaws,p.priceEars=:priceEars,p.priceNails=:priceNails ,p.discountClientRegular=:discountClientRegular,p.discountClientVip=:discountClientVip,p.dateCreate=:dateEdit where p.id=:id ")
     void editPrice(
              @Param("priceStayS") BigDecimal priceStayS
              ,@Param("priceStayM") BigDecimal priceStayM
@@ -37,6 +37,8 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
             , @Param("pricePaws") BigDecimal pricePaws
             , @Param("priceEars") BigDecimal priceEars
             , @Param("priceNails") BigDecimal priceNails
+            , @Param("discountClientRegular") Double discountClientRegular
+            , @Param("discountClientVip") Double discountClientVip
             , @Param("id") Long id
             , @Param("dateEdit") LocalDate dateEdit);
 

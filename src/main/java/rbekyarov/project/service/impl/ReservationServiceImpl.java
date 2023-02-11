@@ -10,6 +10,7 @@ import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
 import rbekyarov.project.models.entity.*;
 import rbekyarov.project.models.entity.enums.*;
+import rbekyarov.project.repository.ClientRepository;
 import rbekyarov.project.repository.DogRepository;
 import rbekyarov.project.repository.ReservationRepository;
 import rbekyarov.project.service.*;
@@ -33,9 +34,11 @@ public class ReservationServiceImpl implements ReservationService {
     private final CompanyService companyService;
     private final DogRepository dogRepository;
     private final DogService dogService;
+    private final ClientRepository clientRepository;
 
     public ReservationServiceImpl(ReservationRepository reservationRepository, PriceService priceService, ModelMapper modelMapper, CellService cellService, UserService userService, CompanyService companyService,
-                                  DogRepository dogRepository, DogService dogService) {
+                                  DogRepository dogRepository, DogService dogService,
+                                  ClientRepository clientRepository) {
         this.reservationRepository = reservationRepository;
         this.priceService = priceService;
         this.modelMapper = modelMapper;
@@ -44,6 +47,7 @@ public class ReservationServiceImpl implements ReservationService {
         this.companyService = companyService;
         this.dogRepository = dogRepository;
         this.dogService = dogService;
+        this.clientRepository = clientRepository;
     }
 
     @Override
@@ -142,6 +146,14 @@ public class ReservationServiceImpl implements ReservationService {
         } else {
             totalPrice = price;
             discount = 0.0;
+
+            if (clientRepository.findById(reservationDTO.getClient().getId()).get().getClientType().name().equals("REGULAR")){
+                discount = currentPrice.getDiscountClientRegular();
+                totalPrice = price - (price * discount / 100);
+            }else if (clientRepository.findById(reservationDTO.getClient().getId()).get().getClientType().name().equals("VIP")){
+                discount = currentPrice.getDiscountClientVip();
+                totalPrice = price - (price * discount / 100);
+            }
         }
 
         Cell cellCurrent = reservationDTO.getCell();
@@ -267,6 +279,13 @@ public class ReservationServiceImpl implements ReservationService {
         } else {
             totalPrice = price;
             discount = 0.0;
+            if (clientRepository.findById(reservationEditDTO.getClient().getId()).get().getClientType().name().equals("REGULAR")){
+                discount = currentPrice.getDiscountClientRegular();
+                totalPrice = price - (price * discount / 100);
+            }else if (clientRepository.findById(reservationEditDTO.getClient().getId()).get().getClientType().name().equals("VIP")){
+                discount = currentPrice.getDiscountClientVip();
+                totalPrice = price - (price * discount / 100);
+            }
         }
 
         //Get field

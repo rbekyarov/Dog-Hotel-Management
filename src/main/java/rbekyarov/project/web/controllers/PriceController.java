@@ -125,7 +125,10 @@ public class PriceController extends BaseController {
                 priceEditDTO.getPricePaws(),
                 priceEditDTO.getPriceEars(),
                 priceEditDTO.getPriceNails(),
+                priceEditDTO.getDiscountClientRegular(),
+                priceEditDTO.getDiscountClientVip(),
                 id);
+
         return super.redirect("/view/table/priceTable");
 
     }

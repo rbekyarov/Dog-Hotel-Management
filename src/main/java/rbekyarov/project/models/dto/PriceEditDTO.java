@@ -17,6 +17,8 @@ private Long id;
     private BigDecimal pricePaws;
     private BigDecimal priceEars;
     private BigDecimal priceNails;
+    private Double discountClientRegular;
+    private Double discountClientVip;
 
     public PriceEditDTO() {
     }
@@ -126,6 +128,24 @@ private Long id;
 
     public void setPriceDeworming(BigDecimal priceDeworming) {
         this.priceDeworming = priceDeworming;
+    }
+    @NotNull(message = "Field cannot be empty")
+    @DecimalMin(value = "0", message = "Accepts only positive numbers")
+    public Double getDiscountClientRegular() {
+        return discountClientRegular;
+    }
+
+    public void setDiscountClientRegular(Double discountClientRegular) {
+        this.discountClientRegular = discountClientRegular;
+    }
+    @NotNull(message = "Field cannot be empty")
+    @DecimalMin(value = "0", message = "Accepts only positive numbers")
+    public Double getDiscountClientVip() {
+        return discountClientVip;
+    }
+
+    public void setDiscountClientVip(Double discountClientVip) {
+        this.discountClientVip = discountClientVip;
     }
 
     public Long getId() {

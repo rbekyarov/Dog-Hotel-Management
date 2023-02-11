@@ -31,6 +31,8 @@ public interface PriceService {
                    BigDecimal pricePaws,
                    BigDecimal priceEars,
                    BigDecimal priceNails,
+            Double discountClientRegular,
+            Double discountClientVip,
                    Long id);
 
     BigDecimal getFoodCurrentPrice();

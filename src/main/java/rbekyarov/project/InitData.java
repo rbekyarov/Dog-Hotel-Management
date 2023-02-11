@@ -113,6 +113,8 @@ public class InitData implements CommandLineRunner {
                     BigDecimal.valueOf(5.00),
                     BigDecimal.valueOf(5.00),
                     BigDecimal.valueOf(5.00),
+                    5.00,
+                    15.00,
                     LocalDate.of(2023, 1, 1)));
             priceRepository.save(new Price(
                     BigDecimal.valueOf(12.00),
@@ -126,6 +128,9 @@ public class InitData implements CommandLineRunner {
                     BigDecimal.valueOf(5.00),
                     BigDecimal.valueOf(5.00),
                     BigDecimal.valueOf(5.00),
+                    5.00,
+                    15.00,
+
                     LocalDate.of(2023, 1, 2)));
 
 

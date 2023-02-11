@@ -20,13 +20,16 @@ public class Price extends BaseEntity{
   private BigDecimal pricePaws;
   private BigDecimal priceEars;
   private BigDecimal priceNails;
+
+  private Double discountClientRegular;
+  private Double discountClientVip;
     private LocalDate dateCreate;
 
 
     public Price() {
     }
 
-    public Price(BigDecimal priceStayS, BigDecimal priceStayM, BigDecimal priceStayL, BigDecimal priceFood, BigDecimal priceDeworming, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails, LocalDate dateCreate) {
+    public Price(BigDecimal priceStayS, BigDecimal priceStayM, BigDecimal priceStayL, BigDecimal priceFood, BigDecimal priceDeworming, BigDecimal priceTraining, BigDecimal priceBathing, BigDecimal priceCombing, BigDecimal pricePaws, BigDecimal priceEars, BigDecimal priceNails,Double discountClientRegular, Double discountClientVip, LocalDate dateCreate) {
         this.priceStayS = priceStayS;
         this.priceStayM = priceStayM;
         this.priceStayL = priceStayL;
@@ -38,6 +41,8 @@ public class Price extends BaseEntity{
         this.pricePaws = pricePaws;
         this.priceEars = priceEars;
         this.priceNails = priceNails;
+        this.discountClientRegular = discountClientRegular;
+        this.discountClientVip= discountClientVip;
         this.dateCreate = dateCreate;
     }
 
@@ -129,12 +134,28 @@ public class Price extends BaseEntity{
     public void setPriceStayL(BigDecimal priceStayL) {
         this.priceStayL = priceStayL;
     }
-
+    @Column
     public BigDecimal getPriceDeworming() {
         return priceDeworming;
     }
 
     public void setPriceDeworming(BigDecimal priceDeworming) {
         this.priceDeworming = priceDeworming;
+    }
+    @Column
+    public Double getDiscountClientRegular() {
+        return discountClientRegular;
+    }
+
+    public void setDiscountClientRegular(Double discountClientRegular) {
+        this.discountClientRegular = discountClientRegular;
+    }
+    @Column
+    public Double getDiscountClientVip() {
+        return discountClientVip;
+    }
+
+    public void setDiscountClientVip(Double discountClientVip) {
+        this.discountClientVip = discountClientVip;
     }
 }
