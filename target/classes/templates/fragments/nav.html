@@ -54,7 +54,12 @@
                                 <li class="has-children">
                                     <a  class="nav-link">DOGS</a>
                                     <ul class="dropdown arrow-top">
-                                        <li><a th:href="@{/view/table/dogTable}" class="nav-link">DOG LIST</a></li>
+                                        <li><a th:href="@{/view/table/dogTable}" class="nav-link">DOG LIST</a>
+
+                                           <ul class="dropdown">
+                                             <li><a href="#">ADD DOG</a></li>
+                                           </ul>
+                                        </li>
                                         <li><a th:href="@{/view/table/cellTable}" class="nav-link">DOG HOUSES</a></li>
                                         <li><a th:href="@{/view/table/breedTable}" class="nav-link">DOG BREEDS LIST</a></li>
                                         <li><a th:href="@{/view/table/behaviorTable}" class="nav-link">DOG BEHAVIORS</a></li>
