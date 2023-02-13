@@ -54,14 +54,16 @@
                                 <small th:if="${#fields.hasErrors('lastName')}"
                                        th:errors="*{lastName}"
                                        class="text-light form-text bg-danger "></small><br>
-                                <label style="font-weight: bold">Email:</label><br>
+                                <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
+                                                                      th:src="@{${'/pics/email.png'}}">Email:</label><br>
                                 <input type="email" id="email"
                                        th:field="*{email}"
                                        placeholder="Please enter Email"/>
                                 <small th:if="${#fields.hasErrors('email')}"
                                        th:errors="*{email}"
                                        class="text-light form-text bg-danger "></small><br>
-                                <label style="font-weight: bold">Phone:</label><br>
+                                <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
+                                                                      th:src="@{${'/pics/phone.png'}}">Phone:</label><br>
                                 <input type="text" id="phone"
                                        th:field="*{phone}" placeholder="Please enter Phone"/>
                                 <small th:if="${#fields.hasErrors('phone')}"
@@ -69,7 +71,8 @@
                                        class="text-light form-text bg-danger "></small>
                                 <br>
 
-                                <label style="font-weight: bold">Address:</label><br>
+                                <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
+                                                                      th:src="@{${'/pics/address.png'}}">Address:</label><br>
                                 <textarea
                                         th:field="*{address}"
                                         type="textarea"
@@ -83,13 +86,15 @@
 
                                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:200px">
                                     <tbody>
-                                    <label style="font-weight: bold">Client Type:</label><br>
+                                    <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
+                                                                          th:src="@{${'/pics/type.png'}}">Client Type:</label><br>
                                     <select th:field="*{clientType}" style="width: 200px" name="clientType">
                                         <option value="NEW">NEW</option>
                                         <option value="REGULAR">REGULAR</option>
                                         <option value="VIP">VIP</option>
                                     </select>
-                                    <label style="font-weight: bold">City:</label><br>
+                                    <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
+                                                                          th:src="@{${'/pics/city.png'}}">City:</label><br>
                                     <select id="cityId"
                                             name="cityId"
                                             th:field="*{cityId}" style="width: 200px">
