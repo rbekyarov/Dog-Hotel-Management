@@ -82,7 +82,15 @@
                                        th:href="@{/view/table/dog/view/{id}(id=${d.id})}"
                                        th:text="${d.getName()+' '}"></td>
                                 <!--                    <td><p class="dogsOnClient" th:each="d: ${c.getDogs()}" th:text="${d.getName()}"></td>-->
-                                <td th:text="${c.clientType}"></td>
+                                <td >
+                                    <img th:if="${c.clientType.name()=='NEW'}" src="#" height="45px" width="45px"
+                                         th:src="@{${'/pics/new.png'}}" >
+                                    <img th:if="${c.clientType.name()=='REGULAR'}" src="#" height="50px" width="50px"
+                                         th:src="@{${'/pics/regular.png'}}" >
+                                    <img th:if="${c.clientType.name()=='VIP'}" src="#" height="45px" width="45px"
+                                         th:src="@{${'/pics/vip.png'}}" >
+                                </td>
+
                                 <td th:text="${c.author.username}"></td>
                                 <td th:text="${#temporals.format(c.dateCreate,'dd.MM.yyyy')}"></td>
                                 <td><a class="nav-link h5" th:href="@{/view/add/dogAdd/{id}(id=*{c.id})}">
