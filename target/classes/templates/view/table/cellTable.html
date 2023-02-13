@@ -43,10 +43,25 @@
                                 <th></th>
                             </tr>
                             <tr th:each="c : ${cells}">
-                                <td th:text="${c.id}"></td>
-                                <td th:text="${c.code}"></td>
-                                <td th:text="${c.cellSize}"></td>
-                                <td th:text="${c.status}"></td>
+                                <td class="h6"><a th:text="${c.id}" th:href="@{cell/edit/{id}(id=*{c.id})}"></td>
+
+                                <td class="h6" style="font-weight: bold" th:text="${c.code}"></td>
+                                <td >
+                                    <img th:if="${c.cellSize.name()=='SMALL'}" src="#" height="14px" width="14px"
+                                         th:src="@{${'/pics/house.png'}}" th:text="'  '+  SMALL">
+                                    <img th:if="${c.cellSize.name()=='MEDIUM'}" src="#" height="18px" width="18px"
+                                         th:src="@{${'/pics/house.png'}}"th:text="'  '+ MEDIUM" >
+                                    <img th:if="${c.cellSize.name()=='LARGE'}" src="#" height="22px" width="22px"
+                                         th:src="@{${'/pics/house.png'}}"th:text="'  '+ LARGE" >
+                                </td>
+                                <td >
+                                    <img th:if="${c.status.name()=='busy'}" src="#" height="15px" width="15px"
+                                         th:src="@{${'/pics/busy.png'}}" th:text="'  '+  busy">
+                                    <img th:if="${c.status.name()=='empty'}" src="#" height="15px" width="15px"
+                                         th:src="@{${'/pics/empty.png'}}"th:text="'  '+ empty" >
+                                    <img th:if="${c.status.name()=='under_repair'}" src="#" height="15px" width="15px"
+                                         th:src="@{${'/pics/repair.png'}}"th:text="'  '+ repair" >
+                                </td>
                                 <td th:text="${c.author.username}"></td>
                                 <td th:text="${#temporals.format(c.dateCreate,'dd.MM.yyyy')}"></td>
                                 <td><a class="nav-link h5" th:href="@{cell/edit/{id}(id=*{c.id})}">
