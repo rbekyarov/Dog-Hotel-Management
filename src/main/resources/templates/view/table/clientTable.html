@@ -83,11 +83,11 @@
                                        th:text="${d.getName()+' '}"></td>
                                 <!--                    <td><p class="dogsOnClient" th:each="d: ${c.getDogs()}" th:text="${d.getName()}"></td>-->
                                 <td >
-                                    <img th:if="${c.clientType.name()=='NEW'}" src="#" height="45px" width="45px"
+                                    <img th:if="${c.clientType.name()=='NEW'}" src="#" height="15px" width="50px"
                                          th:src="@{${'/pics/new.png'}}" >
-                                    <img th:if="${c.clientType.name()=='REGULAR'}" src="#" height="50px" width="50px"
+                                    <img th:if="${c.clientType.name()=='REGULAR'}" src="#" height="15px" width="50px"
                                          th:src="@{${'/pics/regular.png'}}" >
-                                    <img th:if="${c.clientType.name()=='VIP'}" src="#" height="45px" width="45px"
+                                    <img th:if="${c.clientType.name()=='VIP'}" src="#" height="15px" width="50px"
                                          th:src="@{${'/pics/vip.png'}}" >
                                 </td>
 
