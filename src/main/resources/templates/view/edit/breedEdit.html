@@ -1,7 +1,7 @@
 <th:block th:unless="${session.isEmpty()}">
     <script>
-        $(document).ready(function() {
-            $('#nav-link').click(function(e){
+        $(document).ready(function () {
+            $('#nav-link').click(function (e) {
                 e.preventDefault();
                 window.history.back();
             });
@@ -11,46 +11,48 @@
         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
             <tbody>
             <tr>
-                <td><div class="button_back">
-                    <a class="nav-link h5" id="nav-link">
-                        <button type="button" class="btn btn-danger btn-lg btnList"><span
-                                class="glyphicon glyphicon-ok"></span>Back
-                        </button>
-                    </a>
-                </div></td>
+                <td>
+                    <div class="button_back">
+                        <a class="nav-link h5" id="nav-link">
+                            <button type="button" class="btn btn-danger btn-lg btnList"><span
+                                    class="glyphicon glyphicon-ok"></span>Back
+                            </button>
+                        </a>
+                    </div>
+                </td>
             </tr>
             <tr>
-                <td><div class="container">
-                    <h2 class="page_title">Edit Breed</h2>
+                <td>
+                    <div class="container">
+                        <h2 class="page_title">Edit Breed</h2>
 
-                    <form class="form_add"  th:action="@{/view/table/breed/edit/{id}(id=*{id})}"
-                          th:object="${breedEditDTO}"
-                          th:method="post">
-                        <div class="login-box">
-                            <label style="font-weight: bold">Breed name</label><br>
-                            <input class="form-control form-control-sm" style="width: 250px" type="text"
-                                   th:field="${breedEditDTO.breedName}"
-                                   name="breedName"
-                                   id="breedName" />
-                            <small th:if="${#fields.hasErrors('breedName')}"
-                                   th:errors="*{breedName}"
-                                   class="text-light form-text bg-danger "></small>
-                        </div>
-                        <br>
-                        <div class="button_submit">
-                            <div>
+                        <form class="form_add" th:action="@{/view/table/breed/edit/{id}(id=*{id})}"
+                              th:object="${breedEditDTO}"
+                              th:method="post">
+                            <div class="login-box">
+                                <label style="font-weight: bold">Breed name</label><br>
+                                <input class="form-control form-control-sm" style="width: 250px" type="text"
+                                       th:field="${breedEditDTO.breedName}"
+                                       name="breedName"
+                                       id="breedName"/>
+                                <small th:if="${#fields.hasErrors('breedName')}"
+                                       th:errors="*{breedName}"
+                                       class="text-light form-text bg-danger "></small>
+                            </div>
+                            <br>
+                            <div class="button_submit">
                                 <div>
-                                    <input type="submit" class="btn btn-danger btn-lg btnList" value="Edit Breed"/>
+                                    <div>
+                                        <input type="submit" class="btn btn-danger btn-lg btnList" value="Edit Breed"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div></td>
+                        </form>
+                    </div>
+                </td>
             </tr>
 
         </table>
-
-
 
 
     </th:block>

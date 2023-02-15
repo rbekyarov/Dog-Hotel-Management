@@ -73,22 +73,26 @@
                                 <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                                                       th:src="@{${'/pics/address.png'}}">Address:</label>
                                 <textarea class="form-control form-control-sm"
-                                        th:field="*{address}"
-                                        type="textarea"
-                                        placeholder="Please enter Address"></textarea>
+                                          th:field="*{address}"
+                                          type="textarea"
+                                          placeholder="Please enter Address"></textarea>
                                 <small th:if="${#fields.hasErrors('address')}"
                                        th:errors="*{address}"
                                        class="text-light form-text bg-danger "></small>
                                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:200px">
                                     <tbody>
-                                    <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
-                                                                          th:src="@{${'/pics/type.png'}}">Client Type:</label>
-                                    <select class="form-control form-control-sm" th:field="*{clientType}" style="width: 200px">
+                                    <label style="font-weight: bold"><img align="center" src="#" height="20px"
+                                                                          width="20px"
+                                                                          th:src="@{${'/pics/type.png'}}">Client
+                                        Type:</label>
+                                    <select class="form-control form-control-sm" th:field="*{clientType}"
+                                            style="width: 200px">
                                         <option value="NEW">NEW</option>
                                         <option value="REGULAR">REGULAR</option>
                                         <option value="VIP">VIP</option>
                                     </select>
-                                    <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
+                                    <label style="font-weight: bold"><img align="center" src="#" height="20px"
+                                                                          width="20px"
                                                                           th:src="@{${'/pics/city.png'}}">City:</label>
                                     <select class="form-control form-control-sm" id="city.id"
                                             name="city.id"

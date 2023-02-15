@@ -27,7 +27,7 @@
                     <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
                           th:method="post">
                         <div class="form-group">
-                            <select th:field="${userDto.role}">
+                            <select class="form-control form-control-sm" th:field="${userDto.role}">
                                 <option value="">Please select</option>
                                 <option value="USER">USER</option>
                                 <option value="ADMIN">ADMIN</option>

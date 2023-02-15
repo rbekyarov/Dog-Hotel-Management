@@ -1,7 +1,7 @@
 <th:block th:unless="${session.isEmpty()}">
     <script>
-        $(document).ready(function() {
-            $('#nav-link').click(function(e){
+        $(document).ready(function () {
+            $('#nav-link').click(function (e) {
                 e.preventDefault();
                 window.history.back();
             });
@@ -21,7 +21,7 @@
         <div class="container">
             <h2 class="page_title">Edit Reservation</h2>
 
-            <form class="form_add"  th:action="@{{id}/edit(id=*{id})}"
+            <form class="form_add" th:action="@{{id}/edit(id=*{id})}"
                   th:method="post"
                   th:object="${reservationDTO}">
 
@@ -31,9 +31,11 @@
                     <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <tbody>
                         <tr>
-                            <td> <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
-                                             th:src="@{${'/pics/client.png'}}"> Client:</label>
-                                <select class="form-control form-control-sm" style="width:330px" required id="showClient" name="showClient" th:field="*{client.id}" oninput="getClientDogs()">
+                            <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
+                                                                      th:src="@{${'/pics/client.png'}}"> Client:</label>
+                                <select class="form-control form-control-sm" style="width:330px" required
+                                        id="showClient" name="showClient" th:field="*{client.id}"
+                                        oninput="getClientDogs()">
 
                                     <option value="">Please select</option>
                                     <option
@@ -45,8 +47,9 @@
                         </tr>
                         <tr>
                             <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
-                                            th:src="@{${'/pics/dog.png'}}"> Dog:</label>
-                                <select class="form-control form-control-sm" style="width:330px" id="dogsBox" th:field="*{dog.id}" onclick="getCells()">
+                                                                      th:src="@{${'/pics/dog.png'}}"> Dog:</label>
+                                <select class="form-control form-control-sm" style="width:330px" id="dogsBox"
+                                        th:field="*{dog.id}" onclick="getCells()">
                                     <option
                                             th:each="d : *{dog}"
                                             th:value="${d.id}"
@@ -57,24 +60,30 @@
                         <tr>
                             <td>
                                 <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
-                                            th:src="@{${'/pics/calendar.png'}}"> Date of Arrival:</label>
+                                                                      th:src="@{${'/pics/calendar.png'}}"> Date of
+                                    Arrival:</label>
                                 <div>
-                                    <input class="form-control form-control-sm" required type="text" id="input1" th:field="*{startDate}" placeholder="Date of Arrival"  />
+                                    <input class="form-control form-control-sm" required type="text" id="input1"
+                                           th:field="*{startDate}" placeholder="Date of Arrival"/>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td><label  style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
-                                            th:src="@{${'/pics/calendar.png'}}"> Date of Departure:</label>
+                            <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
+                                                                      th:src="@{${'/pics/calendar.png'}}"> Date of
+                                Departure:</label>
                                 <div>
-                                    <input class="form-control form-control-sm" required type="text" id="input2" th:field="*{endDate}" placeholder="Date of Departure"  />
+                                    <input class="form-control form-control-sm" required type="text" id="input2"
+                                           th:field="*{endDate}" placeholder="Date of Departure"/>
                                 </div>
-                            </td></td>
+                            </td>
+                            </td>
                         </tr>
 
                         <tr>
                             <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
-                                            th:src="@{${'/pics/house.png'}}"> Dog House:</label>
+                                                                      th:src="@{${'/pics/house.png'}}"> Dog
+                                House:</label>
                                 <select class="form-control form-control-sm" required id="cellsBox" th:field="*{cell}">
                                     <option value="">Please select</option>
                                     <option
@@ -90,12 +99,14 @@
                     <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: auto">
                         <tbody>
                         <tr>
-                            <td><label style="font-weight: bold" th:text="${'Feeding: '+ price.getPriceFood()+'$'}"></label>
+                            <td><label style="font-weight: bold"
+                                       th:text="${'Feeding: '+ price.getPriceFood()+'$'}"></label>
                                 <select class="form-control form-control-sm" th:field="*{food}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select></td>
-                            <td><label style="font-weight: bold" th:text="${'Deworming: '+ price.getPriceDeworming()+'$'}"></label>
+                            <td><label style="font-weight: bold"
+                                       th:text="${'Deworming: '+ price.getPriceDeworming()+'$'}"></label>
                                 <select class="form-control form-control-sm" th:field="*{deworming}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
@@ -103,12 +114,14 @@
 
                         </tr>
                         <tr>
-                            <td><label style="font-weight: bold" th:text="${'Training: '+ price.getPriceTraining()+'$'}"></label>
+                            <td><label style="font-weight: bold"
+                                       th:text="${'Training: '+ price.getPriceTraining()+'$'}"></label>
                                 <select class="form-control form-control-sm" th:field="*{training}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select></td>
-                            <td><label style="font-weight: bold" th:text="${'Bathing: '+ price.getPriceBathing()+'$'}"></label>
+                            <td><label style="font-weight: bold"
+                                       th:text="${'Bathing: '+ price.getPriceBathing()+'$'}"></label>
                                 <select class="form-control form-control-sm" th:field="*{bathing}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
@@ -116,24 +129,28 @@
 
                         </tr>
                         <tr>
-                            <td><label style="font-weight: bold" th:text="${'Еar cleaning: '+ price.getPriceEars()+'$'}"></label>
+                            <td><label style="font-weight: bold"
+                                       th:text="${'Еar cleaning: '+ price.getPriceEars()+'$'}"></label>
                                 <select class="form-control form-control-sm" th:field="*{ears}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select></td>
-                            <td><label style="font-weight: bold" th:text="${'Paws cleaning: price '+ price.getPricePaws()+'$'}"></label>
-                                <select  class="form-control form-control-sm" th:field="*{paws}">
+                            <td><label style="font-weight: bold"
+                                       th:text="${'Paws cleaning: price '+ price.getPricePaws()+'$'}"></label>
+                                <select class="form-control form-control-sm" th:field="*{paws}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select></td>
                         </tr>
                         <tr>
-                            <td><label style="font-weight: bold" th:text="${'Nails trimming: '+ price.getPriceNails()+'$'}"></label>
+                            <td><label style="font-weight: bold"
+                                       th:text="${'Nails trimming: '+ price.getPriceNails()+'$'}"></label>
                                 <select class="form-control form-control-sm" th:field="*{nails}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select></td>
-                            <td><label style="font-weight: bold" th:text="${'Combing: '+ price.getPriceCombing()+'$'}"></label>
+                            <td><label style="font-weight: bold"
+                                       th:text="${'Combing: '+ price.getPriceCombing()+'$'}"></label>
                                 <select class="form-control form-control-sm" th:field="*{combing}">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
@@ -144,7 +161,8 @@
 
 
                     <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
-                                th:src="@{${'/pics/discount.png'}}"> Discount: max - 20%</label><br>
+                                                          th:src="@{${'/pics/discount.png'}}"> Discount: max -
+                        20%</label><br>
                     <input style="width: 50px; text-align:left;" type="text" id="description22" th:field="*{discount}"
                            placeholder="0"/><br>
                 </div>
@@ -162,12 +180,12 @@
 
         <script>
             window.addEventListener("load", () => {
-                picker.attach({ target: "input1" });
+                picker.attach({target: "input1"});
             });
         </script>
         <script>
             window.addEventListener("load", () => {
-                picker.attach({ target: "input2" });
+                picker.attach({target: "input2"});
             });
         </script>
         <script th:inline="javascript">
@@ -203,7 +221,7 @@
                         for (let n = 0; n < dogs.length; n++) {
                             $('#dogsBox').append($('<option>', {
                                 value: dogs[n].id,
-                                text: dogs[n].name +' - weight: '+ dogs[n].weight +','+'  dewormer: '+ dogs[n].lastDewormingDate
+                                text: dogs[n].name + ' - weight: ' + dogs[n].weight + ',' + '  dewormer: ' + dogs[n].lastDewormingDate
                             }));
                         }
                         $("#dogsBox").trigger("chosen:updated");
@@ -219,10 +237,10 @@
                 let length = dogList.length
                 for (let i = 0; i < length; i++) {
                     let client = clientList[i];
-                    if(client.id===clientId){
+                    if (client.id === clientId) {
                         let dogs = clientList[i].dogs
                         for (let j = 0; j < dogs.length; j++) {
-                            if(dogs[j].id==dogId){
+                            if (dogs[j].id == dogId) {
                                 let dog = dogs[j];
                                 dogSize = dog.dogSize;
                                 $('#cellsBox option').remove();

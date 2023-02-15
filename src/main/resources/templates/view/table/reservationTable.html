@@ -14,15 +14,12 @@
                 const active = document.getElementById('active');
                 const completed = document.getElementById('completed');
                 if(urll==='reservationTableUpcoming'){
-                    upcoming.style.border= 'ridge';
-                    upcoming.style.borderColor= '#03a9f4';
-
+                    upcoming.className= 'border border-primary';
                 }else if(urll==='reservationTableActive'){
-                    active.style.border= 'ridge';
-                    active.style.borderColor= '#03a9f4';
+                    active.className= 'border border-primary';
                 }else if(urll==='reservationTableCompleted'){
-                    completed.style.border= 'ridge';
-                    completed.style.borderColor= '#03a9f4';
+                    completed.className= 'border border-primary';
+
                 }
             }
         </script>
@@ -90,7 +87,7 @@
 
                     <div class="table-responsive">
 
-                    <table class="table" >
+                    <table  class="table" >
                         <tr>
                             <th>No</th>
                             <th>Client:</th>
@@ -138,10 +135,9 @@
 
                             <td th:text="${#temporals.format(r.dateCreate,'dd.MM.yyyy')}"></td>
                             <td >
-                                <img th:if="${r.invoiced.name()=='YES'}" src="#" height="15px" width="15px"
-                                     th:src="@{${'/pics/invoiced1.png'}}" th:text="'  '+  YES">
-                                <img th:if="${r.invoiced.name()=='NO'}" src="#" height="15px" width="15px"
-                                     th:src="@{${'/pics/invoiced2.png'}}"th:text="'  '+  NO">
+                                <span th:if="${r.invoiced.name()=='YES'}" class="badge badge-success">YES</span>
+                                <span th:if="${r.invoiced.name()=='NO'}" class="badge badge-danger">NO</span>
+
                             </td>
 
                             <th:block th:if="${r.invoiced.name()=='NO'}">

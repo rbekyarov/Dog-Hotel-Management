@@ -10,10 +10,10 @@
                                      th:src="@{${'/pics/house.png'}}">Dog Houses List</h1>
                         </div>
                         <a class="nav-link h5" th:href="@{/view/add/cellAdd}">
-                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                                            class="glyphicon glyphicon-ok"></span>Add House
-                                    </button>
-                                </a>
+                            <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                    class="glyphicon glyphicon-ok"></span>Add House
+                            </button>
+                        </a>
 
                         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:300px"
                                class=tableHome>
@@ -22,7 +22,8 @@
                             <tr>
                                 <label th:each="c : ${cellsRepair}">
 
-                                    <label ><img height="30px" width="30px" th:src="@{${'/pics/repair.png'}}" th:text="${' '+c.code}"></label></label>
+                                    <label><img height="30px" width="30px" th:src="@{${'/pics/repair.png'}}"
+                                                th:text="${' '+c.code}"></label></label>
                             </tr>
                             </tbody>
                         </table>
@@ -46,21 +47,20 @@
                                 <td class="h6"><a th:text="${c.id}" th:href="@{cell/edit/{id}(id=*{c.id})}"></td>
 
                                 <td class="h6" style="font-weight: bold" th:text="${c.code}"></td>
-                                <td >
+                                <td>
                                     <img th:if="${c.cellSize.name()=='SMALL'}" src="#" height="14px" width="14px"
                                          th:src="@{${'/pics/house.png'}}" th:text="'  '+  SMALL">
                                     <img th:if="${c.cellSize.name()=='MEDIUM'}" src="#" height="18px" width="18px"
-                                         th:src="@{${'/pics/house.png'}}"th:text="'  '+ MEDIUM" >
+                                         th:src="@{${'/pics/house.png'}}" th:text="'  '+ MEDIUM">
                                     <img th:if="${c.cellSize.name()=='LARGE'}" src="#" height="22px" width="22px"
-                                         th:src="@{${'/pics/house.png'}}"th:text="'  '+ LARGE" >
+                                         th:src="@{${'/pics/house.png'}}" th:text="'  '+ LARGE">
                                 </td>
-                                <td >
-                                    <img th:if="${c.status.name()=='busy'}" src="#" height="15px" width="15px"
-                                         th:src="@{${'/pics/busy.png'}}" th:text="'  '+  busy">
-                                    <img th:if="${c.status.name()=='empty'}" src="#" height="15px" width="15px"
-                                         th:src="@{${'/pics/empty.png'}}"th:text="'  '+ empty" >
-                                    <img th:if="${c.status.name()=='under_repair'}" src="#" height="15px" width="15px"
-                                         th:src="@{${'/pics/repair.png'}}"th:text="'  '+ repair" >
+                                <td>
+                                    <span th:if="${c.status.name()=='empty'}" class="badge badge-success">EMPTY</span>
+                                    <span th:if="${c.status.name()=='busy'}" class="badge badge-danger">BUSY</span>
+                                    <span th:if="${c.status.name()=='under_repair'}"
+                                          class="badge badge-warning">REPAIR</span>
+
                                 </td>
                                 <td th:text="${c.author.username}"></td>
                                 <td th:text="${#temporals.format(c.dateCreate,'dd.MM.yyyy')}"></td>

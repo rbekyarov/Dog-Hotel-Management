@@ -8,6 +8,7 @@
         });
     </script>
 
+
 <!--    <script>-->
 <!--        $(document).ready(function () {-->
 <!--            $('select').selectize({-->
@@ -44,8 +45,8 @@
                         <tr>
                             <td> <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                              th:src="@{${'/pics/client.png'}}"> Client:</label>
-                                <select class="form-control form-control-sm" style="width:330px" required id="showClient" name="showClient" th:field="*{client.id}"
-                                        onclick="getClientDogs()">
+                                <select  class="form-control form-control-sm" data-show-subtext="true" data-live-search="true"  required id="showClient" name="showClient" th:field="*{client.id}"
+                                        oninput="getClientDogs()">
 
                                     <option value="">Please select</option>
                                     <option
@@ -61,7 +62,7 @@
                         <tr>
                             <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                             th:src="@{${'/pics/dog.png'}}"> Dog:</label>
-                                <select class="form-control form-control-sm" style="width:330px" id="dogsBox" name="dogsBox" th:field="*{dog.id}"   onclick="getCells()">
+                                <select class="form-control form-control-sm"  id="dogsBox" name="dogsBox" th:field="*{dog.id}"   onclick="getCells()">
                                 </select>
                                 <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                             th:src="@{${'/pics/calendar.png'}}"> Date of Arrival:</label>

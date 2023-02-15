@@ -83,8 +83,9 @@
                                        th:text="${d.getName()+' '}"></td>
                                 <!--                    <td><p class="dogsOnClient" th:each="d: ${c.getDogs()}" th:text="${d.getName()}"></td>-->
                                 <td >
-                                    <span th:if="${c.clientType.name()=='NEW'}"  class="badge badge-success">NEW</span>
-                                    <span th:if="${c.clientType.name()=='REGULAR'}"  class="badge badge-primary">REGULAR</span>
+                                    <span th:if="${c.clientType.name()=='NEW'}" class="badge badge-success">NEW</span>
+                                    <span th:if="${c.clientType.name()=='REGULAR'}"
+                                          class="badge badge-primary">REGULAR</span>
 
                                     <span th:if="${c.clientType.name()=='VIP'}" class="badge badge-warning">VIP</span>
                                 </td>

@@ -15,74 +15,84 @@
                             </button>
                         </a>
                         <div class="table-responsive-invoice">
-                        <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:780px">
-                            <thead>
-                            <tr>
-                                <th scope="col"><form th:action="@{/view/table/searchInvoiceNumber}" method="get">
-                                    <input type="text" name="invoiceNumber" th:value="${invoiceNumber}" class="searchArea" placeholder="Find by Invoice Number" size="20" >
-                                    <button type="submit" class="btn btn-info" >Search</button>
-                                </form></th>
-                                <th scope="col"><form th:action="@{/view/table/searchInvoiceByClientEmail}" method="get">
-                                    <input type="text" name="clientEmail" th:value="${clientEmail}" class="searchArea" placeholder="Find by Client Email" size="20" >
-                                    <button type="submit" class="btn btn-info" >Search</button>
-                                </form></th>
-                                <th th:text="${'Total Invoiced: ' +totalInvoicedPrice+'$'}"</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
+                            <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:780px">
+                                <thead>
+                                <tr>
+                                    <th scope="col">
+                                        <form th:action="@{/view/table/searchInvoiceNumber}" method="get">
+                                            <input type="text" name="invoiceNumber" th:value="${invoiceNumber}"
+                                                   class="searchArea" placeholder="Find by Invoice Number" size="20">
+                                            <button type="submit" class="btn btn-info">Search</button>
+                                        </form>
+                                    </th>
+                                    <th scope="col">
+                                        <form th:action="@{/view/table/searchInvoiceByClientEmail}" method="get">
+                                            <input type="text" name="clientEmail" th:value="${clientEmail}"
+                                                   class="searchArea" placeholder="Find by Client Email" size="20">
+                                            <button type="submit" class="btn btn-info">Search</button>
+                                        </form>
+                                    </th>
+                                    <th th:text="${'Total Invoiced: ' +totalInvoicedPrice+'$'}"
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                         <br>
                         <div class="table-responsive-invoice">
-                        <table class=table>
-                            <tr>
-                                <th>No</th>
-                                <th>Client:</th>
-                                <th>Dog:</th>
-                                <th>Reservation No:</th>
-                                <th>Price:</th>
-                                <th>Discount %</th>
-                                <th>Total Price:</th>
-                                <th>Author:</th>
-                                <th>Created:</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                            <table class=table>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Client:</th>
+                                    <th>Dog:</th>
+                                    <th>Reservation No:</th>
+                                    <th>Price:</th>
+                                    <th>Discount %</th>
+                                    <th>Total Price:</th>
+                                    <th>Author:</th>
+                                    <th>Created:</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
 
 
-                            </tr>
-                            <tr th:each="i : ${invoices}">
-                                <td class="h6"><a th:href="@{/view/table/invoice/view/{id}(id=${i.id})}" th:text="${i.id}"></td>
-                                <td th:text="${i.clientName +' '+ i.clientEmail +' '+i.clientPhone}"></td>
-                                <td th:text="${'Dog '+ i.dogName + ' '+'House:' +i.cellCode + ' '+'Day: '+i.countStay}"></td>
+                                </tr>
+                                <tr th:each="i : ${invoices}">
+                                    <td class="h6"><a th:href="@{/view/table/invoice/view/{id}(id=${i.id})}"
+                                                      th:text="${i.id}"></td>
+                                    <td th:text="${i.clientName +' '+ i.clientEmail +' '+i.clientPhone}"></td>
+                                    <td th:text="${'Dog '+ i.dogName + ' '+'House:' +i.cellCode + ' '+'Day: '+i.countStay}"></td>
 
-                                <td class="h6" ><a  th:href="@{/view/table/reservation/view/{id}(id=${i.reservationId})}" th:text="${i.reservationId}"></td>
-                                <td th:text="${i.price+'$'}"></td>
-                                <td th:text="${i.discount}"></td>
-                                <td class="boldPrice" th:text="${i.totalPrice +'$'}"></td>
-                                <td th:text="${i.authorName}"></td>
-                                <td th:text="${#temporals.format(i.dateCreate,'dd.MM.yyyy')}"></td>
+                                    <td class="h6"><a
+                                            th:href="@{/view/table/reservation/view/{id}(id=${i.reservationId})}"
+                                            th:text="${i.reservationId}"></td>
+                                    <td th:text="${i.price+'$'}"></td>
+                                    <td th:text="${i.discount}"></td>
+                                    <td class="boldPrice" th:text="${i.totalPrice +'$'}"></td>
+                                    <td th:text="${i.authorName}"></td>
+                                    <td th:text="${#temporals.format(i.dateCreate,'dd.MM.yyyy')}"></td>
 
-                                <td><a class="nav-link h5" th:href="@{invoice/view/{id}(id=*{i.id})}">
-                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                                            class="glyphicon glyphicon-ok"></span>View
-                                    </button>
-                                </a></td>
-                                <td><a class="nav-link h5" th:href="@{invoice/remove/{id}(id=*{i.id})}">
-                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
-                                            class="glyphicon glyphicon-ok"></span>Cancellation
-                                    </button>
-                                </a></td>
-                            </tr>
-                        </table>
-                        <div th:if="${invoices.totalPages > 0}" class="pagination"
-                             th:each="pageNumber : ${pageNumbers}">
-                            <a th:href="@{invoiceTable(size=${invoices.size}, page=${pageNumber})}"
-                               th:text=${pageNumber}
-                               th:class="${pageNumber==invoices.number + 1} ? active"></a>
+                                    <td><a class="nav-link h5" th:href="@{invoice/view/{id}(id=*{i.id})}">
+                                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                                class="glyphicon glyphicon-ok"></span>View
+                                        </button>
+                                    </a></td>
+                                    <td><a class="nav-link h5" th:href="@{invoice/remove/{id}(id=*{i.id})}">
+                                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                                class="glyphicon glyphicon-ok"></span>Cancellation
+                                        </button>
+                                    </a></td>
+                                </tr>
+                            </table>
+                            <div th:if="${invoices.totalPages > 0}" class="pagination"
+                                 th:each="pageNumber : ${pageNumbers}">
+                                <a th:href="@{invoiceTable(size=${invoices.size}, page=${pageNumber})}"
+                                   th:text=${pageNumber}
+                                   th:class="${pageNumber==invoices.number + 1} ? active"></a>
+                            </div>
                         </div>
-                    </div>
                 </td>
             </tr>
 
