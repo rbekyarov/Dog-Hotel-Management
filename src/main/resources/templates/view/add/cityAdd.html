@@ -29,26 +29,26 @@
                 >
                     <div class="login-box">
 
-                        <label style="font-weight: bold">City Code</label><br>
-                        <input  type="text"
+                        <label style="font-weight: bold">City Code</label>
+                        <input  class="form-control form-control-sm" type="text"
                                id="code" th:field="${cityDTO.code}"
-                               placeholder="Please enter code" /><br>
+                               placeholder="Please enter code" />
                         <small th:if="${#fields.hasErrors('code')}"
                                th:errors="*{code}"
                                class="text-light form-text bg-danger "></small>
-                        <br>
-                        <label style="font-weight: bold">City Name</label><br>
-                        <input type="text" id="name"
+<br>
+                        <label style="font-weight: bold">City Name</label>
+                        <input class="form-control form-control-sm" type="text" id="name"
                                th:field="${cityDTO.name}"
                                placeholder="Please enter City Name" />
 
                         <small th:if="${#fields.hasErrors('name')}"
                                th:errors="*{name}"
                                class="text-light form-text bg-danger "></small>
-                        <br>
+
                     </div>
 
-                    <br>
+
                     <div class="button_submit">
                         <div >
                             <div>

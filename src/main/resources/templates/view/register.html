@@ -31,25 +31,25 @@
                         <div class="login-box">
                             <label><img align="center" src="#" height="25px" width="25px"
                                         th:src="@{${'/pics/user.png'}}">UserName:</label><br>
-                            <input type="text" id="description" th:field="${userDTO.username}" placeholder="Please enter Username"/><br>
+                            <input class="form-control" type="text" id="description" th:field="${userDTO.username}" placeholder="Please enter Username"/><br>
 
                             <p th:if="${existUser}" class="errors alert alert-danger">
                                 User exist!
                             </p>
-                            <br>
+
                             <label><img align="center" src="#" height="20px" width="20px"
                                         th:src="@{${'/pics/pass.png'}}"> Password:</label><br>
-                            <input type="password" id="description1" th:field="${userDTO.password}" placeholder="Please enter Password"/><br>
-                            <br>
+                            <input class="form-control" type="password" id="description1" th:field="${userDTO.password}" placeholder="Please enter Password"/><br>
+
                             <label><img align="center" src="#" height="20px" width="20px"
                                         th:src="@{${'/pics/pass.png'}}"> Confirm Password:</label><br>
-                            <input type="password" id="description2" th:field="${userDTO.confirmPassword}" placeholder="Confirm Password"/><br>
+                            <input class="form-control" type="password" id="description2" th:field="${userDTO.confirmPassword}" placeholder="Confirm Password"/><br>
 
                             <p th:if="${wrongRepeatPasswords}" class="errors alert alert-danger">
                                 Passwords don't match!.
                             </p>
-                            <br>
-                            <label>Default Role:</label><br>
+
+                            <label>Default Role:</label>
                             <div class="form-group">
                                 <select th:field="${userDTO.role}" >
                                     <option value="USER">USER</option>

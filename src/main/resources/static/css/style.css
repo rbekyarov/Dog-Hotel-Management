@@ -813,12 +813,12 @@ a, a:hover {
     overflow-x: auto;
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 460px) {
     .table-responsive-cost {
         font-size: 12px;
-        /*display: block;*/
-        /*width:100%;*/
-        max-width: 60%;
+        display: block;
+        width:100%;
+        max-width: 70%;
         background-color: transparent;
         border-collapse: collapse;
         border-spacing: 0;

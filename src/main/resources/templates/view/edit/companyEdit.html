@@ -106,7 +106,7 @@
                                        th:errors="*{bankAccount}"
                                        class="text-light form-text bg-danger "></small><br>
                                 <label style="font-weight: bold">Balance:</label><br>
-                                <input type="text" id="balance" th:field="${companyDTO.balance}"
+                                <input disabled type="text" id="balance" th:field="${companyDTO.balance}"
                                        placeholder="Please enter Balance" />
                                 <small th:if="${#fields.hasErrors('balance')}"
                                        th:errors="*{balance}"
