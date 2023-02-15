@@ -41,7 +41,7 @@
 
                         <div class="login-box">
 
-                            <label style="font-weight: bold">Vendor:</label><br>
+                            <label style="font-weight: bold">Vendor:</label>
                             <select required th:field="*{vendor.id}">
                                 <option value="">Please select</option>
                                 <option
@@ -49,34 +49,30 @@
                                         th:value="${b.id}"
                                         th:text="${b.name}"></option>
 
-                            </select><br>
+                            </select>
 
-                            <label style="font-weight: bold">Description:</label><br>
-                            <input type="text" id="description" th:field="*{description}"
-                                   placeholder="Please enter Description"
-                            />
+                            <label style="font-weight: bold">Description:</label>
+                            <input class="form-control form-control-sm" type="text" id="description" th:field="*{description}"/>
                             <small th:if="${#fields.hasErrors('description')}"
                                    th:errors="*{description}"
-                                   class="text-light form-text bg-danger "></small><br>
-                            <label style="font-weight: bold">Invoice No:</label><br>
-                            <input type="text" id="invoiceNo" th:field="*{invoiceNo}"
+                                   class="text-light form-text bg-danger "></small>
+                            <label style="font-weight: bold">Invoice No:</label>
+                            <input class="form-control form-control-sm" type="text" id="invoiceNo" th:field="*{invoiceNo}"
                                    placeholder="Please enter Invoice No"
                             />
                             <small th:if="${#fields.hasErrors('invoiceNo')}"
                                    th:errors="*{invoiceNo}"
-                                   class="text-light form-text bg-danger "></small><br>
-                            <label style="font-weight: bold">Amount:</label><br>
-                            <input type="text" id="amount" th:field="*{amount}"
+                                   class="text-light form-text bg-danger "></small>
+                            <label style="font-weight: bold">Amount:</label>
+                            <input  class="form-control form-control-sm" type="text" id="amount" th:field="*{amount}"
                                    placeholder="Please enter Amount"
                             />
                             <small th:if="${#fields.hasErrors('amount')}"
                                    th:errors="*{amount}"
-                                   class="text-light form-text bg-danger "></small><br>
-
-
-                            <label style="font-weight: bold">Date Cost:</label><br>
+                                   class="text-light form-text bg-danger "></small>
+                            <label style="font-weight: bold">Date Cost:</label>
                             <div>
-                                <input  type="text" id="dateCost" th:field="*{dateCost}"
+                                <input class="form-control form-control-sm" type="text" id="dateCost" th:field="*{dateCost}"
                                         placeholder="Please enter Date"/>
                                 <small th:if="${#fields.hasErrors('dateCost')}"
                                        th:errors="*{dateCost}"

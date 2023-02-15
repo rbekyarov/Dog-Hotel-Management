@@ -47,7 +47,7 @@
                         <thead>
                         <tr>
                             <th scope="col"><form th:action="@{/view/table/searchReservationNumber}" method="get">
-                                <input type="text" name="reservationNumber" th:value="${reservationNumber}"  class="searchArea" placeholder="Find by Reservation Number" size="20" >
+                                <input  type="text" name="reservationNumber" th:value="${reservationNumber}"  class="searchArea" placeholder="Find by Reservation Number" size="20" >
                                 <button type="submit" class="btn btn-info" >Search</button>
                             </form></th>
                             <th scope="col"><form th:action="@{/view/table/searchReservationByClientEmail}" method="get">

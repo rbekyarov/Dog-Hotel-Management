@@ -41,44 +41,44 @@
                               th:object="${vendorEditDTO}">
 
                             <div class="login-box">
-                                <label style="font-weight: bold">Vendor Name:</label><br>
-                                <input type="text" id="name" th:field="*{name}" placeholder="Please enter Name"
+                                <label style="font-weight: bold">Vendor Name:</label>
+                                <input class="form-control form-control-sm" type="text" id="name" th:field="*{name}" placeholder="Please enter Name"
                                 />
                                 <small th:if="${#fields.hasErrors('name')}"
                                        th:errors="*{name}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label style="font-weight: bold">Country:</label><br>
-                                <input type="text" id="country" th:field="*{country}" placeholder="Please enter Country"
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Country:</label>
+                                <input class="form-control form-control-sm" type="text" id="country" th:field="*{country}" placeholder="Please enter Country"
                                 />
                                 <small th:if="${#fields.hasErrors('country')}"
                                        th:errors="*{country}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label style="font-weight: bold">City:</label><br>
-                                <select required th:field="*{city.id}" style="width: 196px">
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">City:</label>
+                                <select class="form-control form-control-sm" required th:field="*{city.id}" style="width: 196px">
                                     <option value="">Please select</option>
                                     <option
                                             th:each="b : ${allCity}"
                                             th:value="${b.id}"
                                             th:text="${b.name}"></option>
 
-                                </select><br>
-                                <label style="font-weight: bold">Address:</label><br>
-                                <input type="text" id="description2" th:field="*{address}" placeholder="Please enter Address" />
+                                </select>
+                                <label style="font-weight: bold">Address:</label>
+                                <input class="form-control form-control-sm" type="text" id="description2" th:field="*{address}" placeholder="Please enter Address" />
                                 <small th:if="${#fields.hasErrors('address')}"
                                        th:errors="*{address}"
-                                       class="text-light form-text bg-danger "></small><br>
+                                       class="text-light form-text bg-danger "></small>
 
-                                <label style="font-weight: bold">Vat Number:</label><br>
-                                <input type="text" id="vatNumber" th:field="*{vatNumber}" placeholder="Please enter Vat Number" />
+                                <label style="font-weight: bold">Vat Number:</label>
+                                <input class="form-control form-control-sm" type="text" id="vatNumber" th:field="*{vatNumber}" placeholder="Please enter Vat Number" />
                                 <small th:if="${#fields.hasErrors('vatNumber')}"
                                        th:errors="*{vatNumber}"
-                                       class="text-light form-text bg-danger "></small><br>
+                                       class="text-light form-text bg-danger "></small>
 
-                                <label style="font-weight: bold">Email:</label><br>
-                                <input type="email" id="email" th:field="*{email}" placeholder="Please enter Email"/>
+                                <label style="font-weight: bold">Email:</label>
+                                <input class="form-control form-control-sm" type="email" id="email" th:field="*{email}" placeholder="Please enter Email"/>
                                 <small th:if="${#fields.hasErrors('email')}"
                                        th:errors="*{email}"
-                                       class="text-light form-text bg-danger "></small><br>
+                                       class="text-light form-text bg-danger "></small>
 
                             </div>
                             <br>

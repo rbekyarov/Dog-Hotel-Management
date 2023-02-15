@@ -30,17 +30,17 @@
                           th:method="post">
                         <div class="login-box">
 
-                            <label style="font-weight: bold">House name</label><br>
-                            <input style="width: 120px;" type="text"
+                            <label style="font-weight: bold">House name</label>
+                            <input class="form-control form-control-sm" style="width: 120px;" type="text"
                                    th:field="${cellEditDTO.code}"  name="code"
                                    id="code" />
-                            <br>
+
                             <small th:if="${#fields.hasErrors('code')}"
                                    th:errors="*{code}"
                                    class="text-light form-text bg-danger "></small>
-                            <label style="font-weight: bold">Size</label><br>
+                            <label style="font-weight: bold">Size</label>
 
-                            <select style="width: 120px;" th:field="${cellEditDTO.cellSize}">
+                            <select class="form-control form-control-sm" style="width: 120px;" th:field="${cellEditDTO.cellSize}">
                                 <option value="">please select</option>
                                 <option value="SMALL">SMALL</option>
                                 <option value="MEDIUM">MEDIUM</option>
@@ -48,10 +48,10 @@
                             </select>
                             <small th:if="${#fields.hasErrors('cellSize')}"
                                    th:errors="*{cellSize}"
-                                   class="text-light form-text bg-danger "></small><br>
+                                   class="text-light form-text bg-danger "></small>
 
                             <label style="font-weight: bold">Status</label><br>
-                            <select style="width: 120px;" required th:field="${cellEditDTO.status}">
+                            <select class="form-control form-control-sm" style="width: 120px;" required th:field="${cellEditDTO.status}">
                                 <option value="SMALL">please select</option>
                                 <option value="empty">empty</option>
                                 <option value="busy">busy</option>
@@ -59,7 +59,7 @@
                             </select>
                             <small th:if="${#fields.hasErrors('status')}"
                                    th:errors="*{status}"
-                                   class="text-light form-text bg-danger "></small><br>
+                                   class="text-light form-text bg-danger "></small>
                         </div>
                         <br>
                         <div class="button_submit">

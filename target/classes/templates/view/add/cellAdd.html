@@ -26,25 +26,22 @@
                 <form class="form_add"
                       th:object="${cellDTO}"
                       th:action="@{/view/add/cellAdd}"
-                      th:method="post"
-
-                >
-
+                      th:method="post">
 
                     <div class="login-box">
 
-                        <label style="font-weight: bold">House name</label><br>
-                        <input style="width: 120px;"
+                        <label style="font-weight: bold">House name</label>
+                        <input class="form-control form-control-sm" style="width: 120px;"
                                type="text" id="description"
                                th:field="${cellDTO.code}"/>
 
                         <small th:if="${#fields.hasErrors('code')}"
                                th:errors="*{code}"
                                class="text-light form-text bg-danger "></small>
-                        <br>
-                        <label style="font-weight: bold">Size</label><br>
 
-                        <select style="width: 120px;" th:field="${cellDTO.cellSize}" >
+                        <label style="font-weight: bold">Size</label>
+
+                        <select class="form-control form-control-sm" style="width: 120px;" th:field="${cellDTO.cellSize}" >
                             <option value="">please select</option>
                             <option value="SMALL">SMALL</option>
                             <option value="MEDIUM">MEDIUM</option>
@@ -53,11 +50,11 @@
                         <small th:if="${#fields.hasErrors('cellSize')}"
                                th:errors="*{cellSize}"
                                class="text-light form-text bg-danger "></small>
-                        <br>
 
-                        <label style="font-weight: bold">Status</label><br>
 
-                        <select th:field="${cellDTO.status}" >
+                        <label style="font-weight: bold">Status</label>
+
+                        <select class="form-control form-control-sm" th:field="${cellDTO.status}" >
                             <option value="">please select</option>
                             <option value="empty">empty</option>
                             <option value="busy">busy</option>
@@ -66,7 +63,7 @@
                         <small th:if="${#fields.hasErrors('status')}"
                                th:errors="*{status}"
                                class="text-light form-text bg-danger "></small>
-                        <br>
+
                     </div>
 
                     <br>

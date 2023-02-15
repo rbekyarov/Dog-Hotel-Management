@@ -44,80 +44,75 @@
 
                                 <label class="file-label" for="fileImage" style="font-weight: bold">Edit Logo</label>
                                 <div class="mb-4">
-                                    <input class="file-input" type="file" id="fileImage" name="fileImage">
+                                    <input  class="file-input" type="file" id="fileImage" name="fileImage">
                                 </div>
-
-
                                 <img src="#" id="thumbnail" height="100px" width="100px"
                                      th:src="@{${'/image/' + companyDTO.logoName}}" alt="image"/>
-                                <input type="hidden" name="imgName" th:value="${companyDTO.logoName}"><br>
+                                <input class="form-control form-control-sm" type="hidden" name="imgName" th:value="${companyDTO.logoName}"><br>
 
-                                <label style="font-weight: bold">Company Name:</label><br>
-                                <input type="text" id="name" th:field="${companyDTO.name}"
+                                <label style="font-weight: bold">Company Name:</label>
+                                <input class="form-control form-control-sm" type="text" id="name" th:field="${companyDTO.name}"
                                        placeholder="Please enter Company Name"/>
                                 <small th:if="${#fields.hasErrors('name')}"
                                        th:errors="*{name}"
                                        class="text-light form-text bg-danger "></small>
-                                <br>
-                                <label style="font-weight: bold">Country:</label><br>
-                                <input type="text" id="description1" th:field="${companyDTO.country}"
+
+                                <label style="font-weight: bold">Country:</label>
+                                <input class="form-control form-control-sm" type="text" id="description1" th:field="${companyDTO.country}"
                                        placeholder="Please enter Country"/>
                                 <small th:if="${#fields.hasErrors('country')}"
                                        th:errors="*{country}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label style="font-weight: bold">City:</label><br>
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">City:</label>
                                 <select required th:field="*{city.id}" style="width: 196px">
                                     <option value="">Please select</option>
                                     <option
                                             th:each="b : ${allCity}"
                                             th:value="${b.id}"
                                             th:text="${b.name}"></option>
-
-                                </select><br>
-
+                                </select>
                                 <label style="font-weight: bold">Address:</label><br>
-                                <input type="text" id="address" th:field="${companyDTO.address}"
+                                <input class="form-control form-control-sm" type="text" id="address" th:field="${companyDTO.address}"
                                        placeholder="Please enter Address"/>
                                 <small th:if="${#fields.hasErrors('address')}"
                                        th:errors="*{address}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label style="font-weight: bold">Vat Number:</label><br>
-                                <input type="text" id="vatNumber" th:field="${companyDTO.vatNumber}"
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Vat Number:</label>
+                                <input class="form-control form-control-sm" type="text" id="vatNumber" th:field="${companyDTO.vatNumber}"
                                        placeholder="Please enter Vat Number"/>
                                 <small th:if="${#fields.hasErrors('vatNumber')}"
                                        th:errors="*{vatNumber}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label style="font-weight: bold">Email:</label><br>
-                                <input type="text" id="email" th:field="${companyDTO.email}"
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Email:</label>
+                                <input class="form-control form-control-sm" type="text" id="email" th:field="${companyDTO.email}"
                                        placeholder="Please enter Email" />
                                 <small th:if="${#fields.hasErrors('email')}"
                                        th:errors="*{email}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label style="font-weight: bold">Bank Name:</label><br>
-                                <input type="text" id="bankName" th:field="${companyDTO.bankName}"
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Bank Name:</label>
+                                <input class="form-control form-control-sm" type="text" id="bankName" th:field="${companyDTO.bankName}"
                                        placeholder="Please enter Bank Name" />
                                 <small th:if="${#fields.hasErrors('bankName')}"
                                        th:errors="*{bankName}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label style="font-weight: bold">Bank Account:</label><br>
-                                <input type="text" id="bankAccount" th:field="${companyDTO.bankAccount}"
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Bank Account:</label>
+                                <input class="form-control form-control-sm" type="text" id="bankAccount" th:field="${companyDTO.bankAccount}"
                                        placeholder="Please enter Bank Account" />
                                 <small th:if="${#fields.hasErrors('bankAccount')}"
                                        th:errors="*{bankAccount}"
-                                       class="text-light form-text bg-danger "></small><br>
+                                       class="text-light form-text bg-danger "></small>
                                 <label style="font-weight: bold">Balance:</label><br>
-                                <input type="text" id="balance" th:field="${companyDTO.balance}"
+                                <input class="form-control form-control-sm" disabled type="text" id="balance" th:field="${companyDTO.balance}"
                                        placeholder="Please enter Balance" />
                                 <small th:if="${#fields.hasErrors('balance')}"
                                        th:errors="*{balance}"
-                                       class="text-light form-text bg-danger "></small><br>
+                                       class="text-light form-text bg-danger "></small>
                                 <label style="font-weight: bold">Manager Name:</label><br>
-                                <input type="text" id="description6" th:field="${companyDTO.managerName}"
-                                       placeholder="Please enter Manager Name" /><br>
+                                <input class="form-control form-control-sm" type="text" id="description6" th:field="${companyDTO.managerName}"
+                                       placeholder="Please enter Manager Name" />
                                 <small th:if="${#fields.hasErrors('managerName')}"
                                        th:errors="*{managerName}"
-                                       class="text-light form-text bg-danger "></small><br>
-
+                                       class="text-light form-text bg-danger "></small>
                             </div>
                             <div class="button_submit">
                                 <div>

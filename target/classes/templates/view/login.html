@@ -23,10 +23,10 @@
                         <div class="login-box">
                             <label ><img align="center" src="#" height="25px" width="25px"
                                         th:src="@{${'/pics/user.png'}}">UserName:</label><br>
-                            <input type="text" id="description" th:field="${user.username}" placeholder="Please enter Username"/><br><br>
+                            <input class="form-control" type="text" id="description" th:field="${user.username}" placeholder="Please enter Username"/><br>
                             <label><img align="center" src="#" height="20px" width="20px"
-                                       th:src="@{${'/pics/pass.png'}}"> Password:</label><br>
-                            <input type="password" id="description1" th:field="${user.password}" placeholder="Please enter Password"/><br>
+                                       th:src="@{${'/pics/pass.png'}}"> Password:</label>
+                            <input class="form-control" type="password" id="description1" th:field="${user.password}" placeholder="Please enter Password"/>
                             <label class="text-white font-weight-bold" for="description"></label>
                             <p th:if="${notFound}" class="errors alert alert-danger">
                                 Invalid username or password.

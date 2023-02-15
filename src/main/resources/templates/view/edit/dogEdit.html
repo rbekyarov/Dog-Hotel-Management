@@ -37,7 +37,7 @@
                   th:object="${dogEditDTO}">
 
                 <div class="login-box">
-                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+                    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                         <tbody>
                         <tr>
                             <td><label class="file-label" for="fileImage" style="font-weight: bold">Image</label>
@@ -58,19 +58,18 @@
                         <tr>
                             <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                                                       th:src="@{${'/pics/dog.png'}}">Dog Name:</label><br>
-                                <input type="text" id="name" th:field="*{name}" placeholder="Please enter Name" />
+                                <input style="width: 196px" class="form-control form-control-sm" type="text" id="name" th:field="*{name}" placeholder="Please enter Name" />
                                 <small th:if="${#fields.hasErrors('name')}"
                                        th:errors="*{name}"
                                        class="text-light form-text bg-danger "></small>
-                                <br>
+
                             </td>
                             <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                                                       th:src="@{${'/pics/kg.png'}}">Weight:</label><br>
-                                <input type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight" />
+                                <input style="width: 196px" class="form-control form-control-sm" type="text" id="description22" th:field="*{weight}" placeholder="Please enter Weight" />
                                 <small th:if="${#fields.hasErrors('weight')}"
                                        th:errors="*{weight}"
                                        class="text-light form-text bg-danger "></small>
-                                <br>
                             </td>
                         </tr>
                         </tbody>
@@ -80,7 +79,7 @@
                         <tr>
                             <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                                                       th:src="@{${'/pics/breed.png'}}">Breed:</label><br>
-                                <select required th:field="*{breed.id}" style="width: 196px">
+                                <select class="form-control form-control-sm" required th:field="*{breed.id}" style="width: 196px">
                                     <option value="">Please select </option>
                                     <option
                                             th:each="b : ${allBreeds}"
@@ -91,7 +90,7 @@
                             </td>
                             <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                                                       th:src="@{${'/pics/behavior.png'}}">Behavior:</label><br>
-                                <select required th:field="*{behavior.id}" style="width: 196px">
+                                <select class="form-control form-control-sm" required th:field="*{behavior.id}" style="width: 196px">
                                     <option value="">Please select</option>
                                     <option
                                             th:each="b : ${allBehaviors}"
@@ -108,7 +107,7 @@
                             <td><td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                                                           th:src="@{${'/pics/calendar.png'}}">BirthDate:</label><br>
                             <div>
-                                <input  type="text" id="input1" th:field="*{birthDate}" placeholder="Please enter BirthDate"  />
+                                <input style="width: 196px" class="form-control form-control-sm" type="text" id="input1" th:field="*{birthDate}" placeholder="Please enter BirthDate"  />
                                 <small th:if="${#fields.hasErrors('birthDate')}"
                                        th:errors="*{birthDate}"
                                        class="text-light form-text bg-danger "></small>
@@ -117,7 +116,7 @@
                             <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                                                       th:src="@{${'/pics/calendar.png'}}">Last Deworming Date:</label><br>
                                 <div>
-                                    <input  type="text" id="input2" th:field="*{lastDewormingDate}" placeholder="Please enter Deworming" />
+                                    <input style="width: 196px" class="form-control form-control-sm" type="text" id="input2" th:field="*{lastDewormingDate}" placeholder="Please enter Deworming" />
                                     <small th:if="${#fields.hasErrors('lastDewormingDate')}"
                                            th:errors="*{lastDewormingDate}"
                                            class="text-light form-text bg-danger "></small>
@@ -132,7 +131,7 @@
                         <tr>
                             <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                                                       th:src="@{${'/pics/client.png'}}">Client:</label><br>
-                                <select id="select-state" required th:field="*{client.id}" style="width: 400px">
+                                <select class="form-control form-control-sm" id="select-state" required th:field="*{client.id}" style="width: 400px">
                                     <option value="">Please select</option>
                                     <option
                                             th:each="c : ${allClients}"
@@ -150,14 +149,14 @@
                         <tr>
                             <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                                                       th:src="@{${'/pics/sex.png'}}">Sex:</label><br>
-                                <select th:field="*{sex}"style="width: 77px" >
+                                <select class="form-control form-control-sm" th:field="*{sex}"style="width: 196px" >
                                     <option value="M">M</option>
                                     <option value="F">F</option>
                                 </select>
                             </td>
                             <td><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                                                       th:src="@{${'/pics/pasport.png'}}">Passport:</label><br>
-                                <select th:field="*{passport}" >
+                                <select class="form-control form-control-sm" style="width: 196px" th:field="*{passport}" >
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select>
@@ -170,13 +169,13 @@
                         <tr>
                             <td ><label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
                                                                        th:src="@{${'/pics/microchip.png'}}">Microchip:</label><br>
-                                <select th:field="*{microchip}" id="Microchip" onclick="show()">
+                                <select class="form-control form-control-sm" th:field="*{microchip}" style="width: 196px" id="Microchip" onclick="show()">
                                     <option value="NO">NO</option>
                                     <option value="YES">YES</option>
                                 </select>
                             </td>
                             <td id="description23"  ><label style="font-weight: bold"></label><br>
-                                <input  type="text" style="content-visibility: auto;"  th:field="*{microchipNumber}"  placeholder="Please enter Number" />
+                                <input  class="form-control form-control-sm" type="text" style="width: 196px"  th:field="*{microchipNumber}"  placeholder="Please enter Number" />
                             </td>
                         </tr>
                         </tbody>

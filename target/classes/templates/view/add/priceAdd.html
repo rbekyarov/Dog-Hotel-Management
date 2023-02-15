@@ -9,7 +9,7 @@
     </script>
     <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
         <br>
-        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
             <tbody>
             <tr>
                 <td>
@@ -30,73 +30,73 @@
                               th:method="post"
                               th:object="${priceDTO}">
                             <div class="login-box">
-                                <label>Price Stay Hous S for 1 day:</label><br>
-                                <input type="text" id="description" th:field="${priceDTO.priceStayS}" />
+                                <label style="font-weight: bold">Price Stay Hous S for 1 day:</label>
+                                <input class="form-control form-control-sm" type="text" id="description" th:field="${priceDTO.priceStayS}" />
                                 <small th:if="${#fields.hasErrors('priceStayS')}"
                                        th:errors="*{priceStayS}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label>Price Stay Hous M for 1 day:</label><br>
-                                <input type="text" id="description8" th:field="${priceDTO.priceStayM}" />
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Price Stay Hous M for 1 day:</label>
+                                <input class="form-control form-control-sm" type="text" id="description8" th:field="${priceDTO.priceStayM}" />
                                 <small th:if="${#fields.hasErrors('priceStayM')}"
                                        th:errors="*{priceStayM}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label>Price Stay Hous L for 1 day:</label><br>
-                                <input type="text" id="description9" th:field="${priceDTO.priceStayL}" />
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Price Stay Hous L for 1 day:</label>
+                                <input class="form-control form-control-sm"type="text" id="description9" th:field="${priceDTO.priceStayL}" />
                                 <small th:if="${#fields.hasErrors('priceStayL')}"
                                        th:errors="*{priceStayL}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label>Price Feeding:</label><br>
-                                <input type="text" id="description1" th:field="${priceDTO.priceFood}" />
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Price Feeding:</label>
+                                <input class="form-control form-control-sm"type="text" id="description1" th:field="${priceDTO.priceFood}" />
                                 <small th:if="${#fields.hasErrors('priceFood')}"
                                        th:errors="*{priceFood}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label>Price Deworming:</label><br>
-                                <input type="text" id="description0" th:field="${priceDTO.priceDeworming}" />
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Price Deworming:</label>
+                                <input class="form-control form-control-sm" type="text" id="description0" th:field="${priceDTO.priceDeworming}" />
                                 <small th:if="${#fields.hasErrors('priceDeworming')}"
                                        th:errors="*{priceDeworming}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label>Price Training:</label><br>
-                                <input type="text" id="description2" th:field="${priceDTO.priceTraining}" />
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Price Training:</label>
+                                <input class="form-control form-control-sm"type="text" id="description2" th:field="${priceDTO.priceTraining}" />
                                 <small th:if="${#fields.hasErrors('priceTraining')}"
                                        th:errors="*{priceTraining}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label>Price Bathing:</label><br>
-                                <input type="text" id="description3" th:field="${priceDTO.priceBathing}" />
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Price Bathing:</label>
+                                <input class="form-control form-control-sm"type="text" id="description3" th:field="${priceDTO.priceBathing}" />
                                 <small th:if="${#fields.hasErrors('priceBathing')}"
                                        th:errors="*{priceBathing}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label>Price Combing:</label><br>
-                                <input type="text" id="description4" th:field="${priceDTO.priceCombing}" />
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Price Combing:</label>
+                                <input class="form-control form-control-sm"type="text" id="description4" th:field="${priceDTO.priceCombing}" />
                                 <small th:if="${#fields.hasErrors('priceCombing')}"
                                        th:errors="*{priceCombing}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label>Price Paws cleaning:</label><br>
-                                <input type="text" id="description5" th:field="${priceDTO.pricePaws}" />
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Price Paws cleaning:</label>
+                                <input class="form-control form-control-sm"type="text" id="description5" th:field="${priceDTO.pricePaws}" />
                                 <small th:if="${#fields.hasErrors('pricePaws')}"
                                        th:errors="*{pricePaws}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label>Price Еar cleaning:</label><br>
-                                <input type="text" id="description6" th:field="${priceDTO.priceEars}" />
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Price Еar cleaning:</label>
+                                <input class="form-control form-control-sm"type="text" id="description6" th:field="${priceDTO.priceEars}" />
                                 <small th:if="${#fields.hasErrors('priceEars')}"
                                        th:errors="*{priceEars}"
-                                       class="text-light form-text bg-danger "></small><br>
-                                <label>Price Nails trimming:</label><br>
-                                <input type="text" id="description7" th:field="${priceDTO.priceNails}" />
+                                       class="text-light form-text bg-danger "></small>
+                                <label style="font-weight: bold">Price Nails trimming:</label>
+                                <input class="form-control form-control-sm"type="text" id="description7" th:field="${priceDTO.priceNails}" />
                                 <small th:if="${#fields.hasErrors('priceNails')}"
                                        th:errors="*{priceNails}"
-                                       class="text-light form-text bg-danger "></small><br>
+                                       class="text-light form-text bg-danger "></small>
 
-                                <label>Discount Regular Client:</label><br>
-                                <input type="text" id="discountClientRegular" th:field="${priceDTO.discountClientRegular}" />
+                                <label style="font-weight: bold">Discount Regular Client:</label>
+                                <input class="form-control form-control-sm"type="text" id="discountClientRegular" th:field="${priceDTO.discountClientRegular}" />
                                 <small th:if="${#fields.hasErrors('discountClientRegular')}"
                                        th:errors="*{discountClientRegular}"
-                                       class="text-light form-text bg-danger "></small><br>
+                                       class="text-light form-text bg-danger "></small>
 
-                                <label>Discount VIP Client:</label><br>
-                                <input type="text" id="discountClientVip" th:field="${priceDTO.discountClientVip}" />
+                                <label style="font-weight: bold">Discount VIP Client:</label>
+                                <input class="form-control form-control-sm"type="text" id="discountClientVip" th:field="${priceDTO.discountClientVip}" />
                                 <small th:if="${#fields.hasErrors('discountClientVip')}"
                                        th:errors="*{discountClientVip}"
-                                       class="text-light form-text bg-danger "></small><br>
+                                       class="text-light form-text bg-danger "></small>
 
                             </div>
                             <br>

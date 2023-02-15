@@ -18,7 +18,7 @@
         <script src="/js/selectize.min.js"></script>
         <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css"/>
 
-        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
             <tbody>
             <tr>
                 <td>
@@ -39,59 +39,58 @@
                               th:method="post"
                               th:object="${clientEditDTO}">
                             <div class="login-box">
-                                <label style="font-weight: bold">First Name:</label><br>
-                                <input type="text" id="firstName"
+                                <label style="font-weight: bold">First Name:</label>
+                                <input class="form-control form-control-sm" type="text" id="firstName"
                                        th:field="*{firstName}"
                                        placeholder="Please enter Name"/>
                                 <small th:if="${#fields.hasErrors('firstName')}"
                                        th:errors="*{firstName}"
                                        class="text-light form-text bg-danger "></small>
-                                <br>
-                                <label style="font-weight: bold">Last Name:</label><br>
-                                <input type="text" id="lastName"
+
+                                <label style="font-weight: bold">Last Name:</label>
+                                <input class="form-control form-control-sm" type="text" id="lastName"
                                        th:field="*{lastName}"
                                        placeholder="Please enter Name"/>
                                 <small th:if="${#fields.hasErrors('lastName')}"
                                        th:errors="*{lastName}"
-                                       class="text-light form-text bg-danger "></small><br>
+                                       class="text-light form-text bg-danger "></small>
                                 <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
-                                                                      th:src="@{${'/pics/email.png'}}">Email:</label><br>
-                                <input type="email" id="email"
+                                                                      th:src="@{${'/pics/email.png'}}">Email:</label>
+                                <input class="form-control form-control-sm" type="email" id="email"
                                        th:field="*{email}"
                                        placeholder="Please enter Email"/>
                                 <small th:if="${#fields.hasErrors('email')}"
                                        th:errors="*{email}"
-                                       class="text-light form-text bg-danger "></small><br>
+                                       class="text-light form-text bg-danger "></small>
                                 <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
-                                                                      th:src="@{${'/pics/phone.png'}}">Phone:</label><br>
-                                <input type="text" id="phone"
+                                                                      th:src="@{${'/pics/phone.png'}}">Phone:</label>
+                                <input class="form-control form-control-sm" type="text" id="phone"
                                        th:field="*{phone}" placeholder="Please enter Phone"/>
                                 <small th:if="${#fields.hasErrors('phone')}"
                                        th:errors="*{phone}"
                                        class="text-light form-text bg-danger "></small>
-                                <br>
 
                                 <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
-                                                                      th:src="@{${'/pics/address.png'}}">Address:</label><br>
-                                <textarea
+                                                                      th:src="@{${'/pics/address.png'}}">Address:</label>
+                                <textarea class="form-control form-control-sm"
                                         th:field="*{address}"
                                         type="textarea"
                                         placeholder="Please enter Address"></textarea>
                                 <small th:if="${#fields.hasErrors('address')}"
                                        th:errors="*{address}"
-                                       class="text-light form-text bg-danger "></small><br>
+                                       class="text-light form-text bg-danger "></small>
                                 <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:200px">
                                     <tbody>
                                     <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
-                                                                          th:src="@{${'/pics/type.png'}}">Client Type:</label><br>
-                                    <select th:field="*{clientType}" style="width: 200px">
+                                                                          th:src="@{${'/pics/type.png'}}">Client Type:</label>
+                                    <select class="form-control form-control-sm" th:field="*{clientType}" style="width: 200px">
                                         <option value="NEW">NEW</option>
                                         <option value="REGULAR">REGULAR</option>
                                         <option value="VIP">VIP</option>
                                     </select>
                                     <label style="font-weight: bold"><img align="center" src="#" height="20px" width="20px"
-                                                                          th:src="@{${'/pics/city.png'}}">City:</label><br>
-                                    <select id="city.id"
+                                                                          th:src="@{${'/pics/city.png'}}">City:</label>
+                                    <select class="form-control form-control-sm" id="city.id"
                                             name="city.id"
                                             th:field="*{city.id}" style="width: 200px">
 
@@ -104,7 +103,7 @@
                                     </select>
                                     <small th:if="${#fields.hasErrors('city.id')}"
                                            th:errors="*{city.id}"
-                                           class="text-light form-text bg-danger "></small><br>
+                                           class="text-light form-text bg-danger "></small>
                                     <label>
                                         <a th:href="@{/view/add/cityAdd}">+ add city
 
