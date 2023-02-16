@@ -1,7 +1,7 @@
 <th:block th:unless="${session.isEmpty()}">
     <script>
-        $(document).ready(function() {
-            $('#nav-link').click(function(e){
+        $(document).ready(function () {
+            $('#nav-link').click(function (e) {
                 e.preventDefault();
                 window.history.back();
             });
@@ -21,8 +21,8 @@
                 <tbody>
                 <tr>
                     <td style="font-weight: bold">Company logo:</td>
-                    <td> <img src="#" height="120px" width="120px"
-                              th:src="@{${'/image/' + myCompany.logoName}}" ></td>
+                    <td><img src="#" height="120px" width="120px"
+                             th:src="@{${'/image/' + myCompany.logoName}}"></td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold">Company name:</td>

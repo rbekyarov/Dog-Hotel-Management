@@ -1,7 +1,7 @@
 <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
     <script>
-        $(document).ready(function() {
-            $('#nav-link').click(function(e){
+        $(document).ready(function () {
+            $('#nav-link').click(function (e) {
                 e.preventDefault();
                 window.history.back();
             });
@@ -10,45 +10,51 @@
     <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
         <tbody>
         <tr>
-            <td><div class="button_back">
+            <td>
+                <div class="button_back">
 
-                <a class="nav-link h5" id="nav-link">
-                    <button type="button" class="btn btn-danger btn-lg btnList"><span
-                            class="glyphicon glyphicon-ok"></span>Back
-                    </button>
-                </a>
-            </div></td>
+                    <a class="nav-link h5" id="nav-link">
+                        <button type="button" class="btn btn-danger btn-lg btnList"><span
+                                class="glyphicon glyphicon-ok"></span>Back
+                        </button>
+                    </a>
+                </div>
+            </td>
         </tr>
         <tr>
-            <td><div class="container">
+            <td>
+                <div class="container">
 
-                <h2 class="page_title">Edit My Data</h2>
+                    <h2 class="page_title">Edit My Data</h2>
 
-                <form class="form_add" th:action="@{/view/edit/editUserData}"
-                      th:method="post"
-                      th:object="${user}"
-                >
-                    <div class="login-box">
-                        <label  th:text="${ 'Current username :'+ user.username}" > </label> <br>
-                        <label style="font-weight: bold">New username:</label><br>
-                        <input class="form-control form-control-sm" type="text"  th:field="${user.username}" placeholder="Enter new password"/><br>
-                        <label style="font-weight: bold">New password:</label><br>
-                        <input class="form-control form-control-sm"type="password"  th:field="${user.password}" placeholder="Enter new password"/><br>
-                        <p th:if="${empty}" class="errors alert alert-danger">
-                            Invalid data!
-                        </p>
-                    </div>
+                    <form class="form_add" th:action="@{/view/edit/editUserData}"
+                          th:method="post"
+                          th:object="${user}"
+                    >
+                        <div class="login-box">
+                            <label th:text="${ 'Current username :'+ user.username}"> </label> <br>
+                            <label style="font-weight: bold">New username:</label><br>
+                            <input class="form-control form-control-sm" type="text" th:field="${user.username}"
+                                   placeholder="Enter new password"/><br>
+                            <label style="font-weight: bold">New password:</label><br>
+                            <input class="form-control form-control-sm" type="password" th:field="${user.password}"
+                                   placeholder="Enter new password"/><br>
+                            <p th:if="${empty}" class="errors alert alert-danger">
+                                Invalid data!
+                            </p>
+                        </div>
 
-                    <br>
-                    <div class="button_submit">
-                        <div>
+                        <br>
+                        <div class="button_submit">
                             <div>
-                                <input type="submit" class="btn btn-danger btn-lg btnList" value="Change Data"/>
+                                <div>
+                                    <input type="submit" class="btn btn-danger btn-lg btnList" value="Change Data"/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div></td>
+                    </form>
+                </div>
+            </td>
         </tr>
 
     </table>

@@ -1,7 +1,7 @@
 <th:block th:unless="${session.isEmpty()}">
     <script>
-        $(document).ready(function() {
-            $('#nav-link').click(function(e){
+        $(document).ready(function () {
+            $('#nav-link').click(function (e) {
                 e.preventDefault();
                 window.history.back();
             });
@@ -17,155 +17,155 @@
                 </button>
             </a>
             <a href="javascript:void(0);" onclick="printPageArea('invoice')">Print</a>
-<!--            <a class="nav-link h5" th:href="@{/view/table/invoice/generatePdfFile/{id}(id=*{invoice.id})}">-->
-<!--                <button type="button" class="btn btn-danger btn-lg btnList"><span-->
-<!--                        class="glyphicon glyphicon-ok"></span>PDF-->
-<!--                </button>-->
-<!--            </a>-->
+            <!--            <a class="nav-link h5" th:href="@{/view/table/invoice/generatePdfFile/{id}(id=*{invoice.id})}">-->
+            <!--                <button type="button" class="btn btn-danger btn-lg btnList"><span-->
+            <!--                        class="glyphicon glyphicon-ok"></span>PDF-->
+            <!--                </button>-->
+            <!--            </a>-->
         </div>
-        <div >
+        <div>
             <h1 class="page_title" th:object="${invoice}">Invoice Details</h1>
 
 
-            <div id="invoice" >
+            <div id="invoice">
 
-            <div class="invoice-box"  >
-                <table cellpadding="0" cellspacing="0">
-                    <tr class="top">
-                        <td colspan="2">
+                <div class="invoice-box">
+                    <table cellpadding="0" cellspacing="0">
+                        <tr class="top">
+                            <td colspan="2">
 
-                            <table class="div2">
-                                <tr>
-                                    <td class="title">
-                                        <img src="/image/logo.png" style="width: 100%; max-width: 100px"/>
-                                    </td>
-                                    <td></td>
-                                    <td th:if="${invoice.cancellationInvoice.name() == 'YES'}">
-                                        <p th:text="CANCELLED"></p><br/>
-                                        <p th:text="${'Invoice #: '+invoice.id}"></p><br/>
-                                        <p th:text="${'Created: '+invoice.dateCreate}"></p><br/>
-                                        <!--                                    <p th:text="${'Cancellated Date: '+invoice.cancelledDateInvoice}"></p><br />-->
-                                    </td>
+                                <table class="div2">
+                                    <tr>
+                                        <td class="title">
+                                            <img src="/image/logo.png" style="width: 100%; max-width: 100px"/>
+                                        </td>
+                                        <td></td>
+                                        <td th:if="${invoice.cancellationInvoice.name() == 'YES'}">
+                                            <p th:text="CANCELLED"></p><br/>
+                                            <p th:text="${'Invoice #: '+invoice.id}"></p><br/>
+                                            <p th:text="${'Created: '+invoice.dateCreate}"></p><br/>
+                                            <!--                                    <p th:text="${'Cancellated Date: '+invoice.cancelledDateInvoice}"></p><br />-->
+                                        </td>
 
-                                    <td th:unless="${invoice.cancellationInvoice.name() == 'YES'}">
-                                        <p th:text="${'Invoice #: '+invoice.id}"></p><br/>
-                                        <p th:text="${'Created: '+invoice.dateCreate}"></p><br/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <td></td>
-                    <tr class="item">
-                        <td colspan="4">
-                            <table>
+                                        <td th:unless="${invoice.cancellationInvoice.name() == 'YES'}">
+                                            <p th:text="${'Invoice #: '+invoice.id}"></p><br/>
+                                            <p th:text="${'Created: '+invoice.dateCreate}"></p><br/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <td></td>
+                        <tr class="item">
+                            <td colspan="4">
+                                <table>
 
-                                <tr>
-                                    <td>
-                                        <p th:text="${invoice.companyName}"></p><br/>
-                                        <p th:text="${invoice.companyCityName}"></p><br/>
-                                        <p th:text="${'Address: '+ invoice.companyAddress}"></p><br/>
-                                        <p th:text="${invoice.companyEmail}"></p><br/>
-                                        <p th:text="${invoice.companyBankName}"></p><br/>
-                                        <p th:text="${invoice.companyBankAccount}"></p><br/>
-                                        <p th:text="${'Author:'+ invoice.authorName}"><br></p>
-                                    </td>
+                                    <tr>
+                                        <td>
+                                            <p th:text="${invoice.companyName}"></p><br/>
+                                            <p th:text="${invoice.companyCityName}"></p><br/>
+                                            <p th:text="${'Address: '+ invoice.companyAddress}"></p><br/>
+                                            <p th:text="${invoice.companyEmail}"></p><br/>
+                                            <p th:text="${invoice.companyBankName}"></p><br/>
+                                            <p th:text="${invoice.companyBankAccount}"></p><br/>
+                                            <p th:text="${'Author:'+ invoice.authorName}"><br></p>
+                                        </td>
 
-                                    <td>
-                                        <p th:text="${invoice.clientName}"></p><br/>
-                                        <p th:text="${invoice.clientCityName}"></p><br/>
-                                        <p th:text="${'Address.'+ invoice.clientAddress}"></p><br/>
-                                        <p th:text="${invoice.clientEmail}"></p><br/>
-                                        <p th:text="${'Phone:'+ invoice.clientPhone}"></p><br/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                                        <td>
+                                            <p th:text="${invoice.clientName}"></p><br/>
+                                            <p th:text="${invoice.clientCityName}"></p><br/>
+                                            <p th:text="${'Address.'+ invoice.clientAddress}"></p><br/>
+                                            <p th:text="${invoice.clientEmail}"></p><br/>
+                                            <p th:text="${'Phone:'+ invoice.clientPhone}"></p><br/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
 
-                    <tr class="heading">
-                        <td>Item</td>
-                        <td>Quantity</td>
-                        <td></td>
-                        <td>Price</td>
-                    </tr>
+                        <tr class="heading">
+                            <td>Item</td>
+                            <td>Quantity</td>
+                            <td></td>
+                            <td>Price</td>
+                        </tr>
 
-                    <tr class="item">
-                        <td><p th:text="${'Day Stay - dog: '+invoice.dogName+', house: '+invoice.cellCode}"><br></p>
-                        </td>
-                        </td>
-                        <td><p th:text="${invoice.countStay}"><br></p></td>
-                        <td></td>
-                        <td><p th:text="${'$'+invoice.countStayPrice}"><br></p></td>
-                    </tr>
-                    <tr th:if="${invoice.food.name() == 'YES'}" class="item">
-                        <td>Feeding</td>
-                        <td><p th:text="${invoice.countStay}"><br></p></td>
-                        <td></td>
-                        <td><p th:text="${'$'+invoice.foodPrice}"><br></p></td>
-                    </tr>
-                    <tr class="item" th:if="${invoice.deworming.name() == 'YES'}">
-                        <td>Deworming</td>
-                        <td><p th:text="${'1'}"><br></p></td>
-                        <td></td>
-                        <td><p th:text="${'$'+invoice.dewormingPrice}"><br></p></td>
-                    </tr>
-                    <tr class="item" th:if="${invoice.training.name() == 'YES'}">
-                        <td>Training</td>
-                        <td><p th:text="${'1'}"><br></p></td>
-                        <td></td>
-                        <td><p th:text="${'$'+invoice.trainingPrice}"><br></p></td>
-                    </tr>
-                    <tr class="item" th:if="${invoice.bathing.name() == 'YES'}">
-                        <td>Bathing</td>
-                        <td><p th:text="${'1'}"><br></p></td>
-                        <td></td>
-                        <td><p th:text="${'$'+invoice.bathingPrice}"><br></p></td>
-                    </tr>
-                    <tr class="item" th:if="${invoice.combing.name() == 'YES'}">
-                        <td>Combing</td>
-                        <td><p th:text="${'1'}"><br></p></td>
-                        <td></td>
-                        <td><p th:text="${'$'+invoice.combingPrice}"><br></p></td>
-                    </tr>
-                    <tr class="item" th:if="${invoice.paws.name() == 'YES'}">
-                        <td>Paws cleaning</td>
-                        <td><p th:text="${'1'}"><br></p></td>
-                        <td></td>
-                        <td><p th:text="${'$'+invoice.pawsPrice}"><br></p></td>
-                    </tr>
-                    <tr class="item" th:if="${invoice.ears.name() == 'YES'}">
-                        <td>Еar cleaning</td>
-                        <td><p th:text="${'1'}"><br></p></td>
-                        <td></td>
-                        <td><p th:text="${'$'+invoice.earsPrice}"><br></p></td>
-                    </tr>
-                    <tr class="item" th:if="${invoice.nails.name() == 'YES'}">
-                        <td>Nails trimming</td>
-                        <td><p th:text="${'1'}"><br></p></td>
-                        <td></td>
-                        <td><p th:text="${'$'+invoice.nailsPrice}"><br></p></td>
-                    </tr>
-                    <tr class="item" th:if="${invoice.discount > 0}">
-                        <td></td>
-                        <td><p th:text="${'Price'}"><br></p></td>
-                        <td></td>
-                        <td><p th:text="${'$'+invoice.price}"><br></p></td>
-                    </tr>
-                    <tr class="item" th:if="${invoice.discount > 0}">
-                        <td></td>
-                        <td><p th:text="${'Discount%'}"><br></p></td>
-                        <td></td>
-                        <td><p th:text="${invoice.discount}"><br></p></td>
-                    </tr>
-                    <tr class="total">
-                        <td></td>
-                        <td><p th:text="${'Total Price'}"><br></p></td>
-                        <td></td>
-                        <td><p th:text="${'$'+invoice.totalPrice}"><br></p></td>
-                    </tr>
-                </table >
-            </div>
+                        <tr class="item">
+                            <td><p th:text="${'Day Stay - dog: '+invoice.dogName+', house: '+invoice.cellCode}"><br></p>
+                            </td>
+                            </td>
+                            <td><p th:text="${invoice.countStay}"><br></p></td>
+                            <td></td>
+                            <td><p th:text="${'$'+invoice.countStayPrice}"><br></p></td>
+                        </tr>
+                        <tr th:if="${invoice.food.name() == 'YES'}" class="item">
+                            <td>Feeding</td>
+                            <td><p th:text="${invoice.countStay}"><br></p></td>
+                            <td></td>
+                            <td><p th:text="${'$'+invoice.foodPrice}"><br></p></td>
+                        </tr>
+                        <tr class="item" th:if="${invoice.deworming.name() == 'YES'}">
+                            <td>Deworming</td>
+                            <td><p th:text="${'1'}"><br></p></td>
+                            <td></td>
+                            <td><p th:text="${'$'+invoice.dewormingPrice}"><br></p></td>
+                        </tr>
+                        <tr class="item" th:if="${invoice.training.name() == 'YES'}">
+                            <td>Training</td>
+                            <td><p th:text="${'1'}"><br></p></td>
+                            <td></td>
+                            <td><p th:text="${'$'+invoice.trainingPrice}"><br></p></td>
+                        </tr>
+                        <tr class="item" th:if="${invoice.bathing.name() == 'YES'}">
+                            <td>Bathing</td>
+                            <td><p th:text="${'1'}"><br></p></td>
+                            <td></td>
+                            <td><p th:text="${'$'+invoice.bathingPrice}"><br></p></td>
+                        </tr>
+                        <tr class="item" th:if="${invoice.combing.name() == 'YES'}">
+                            <td>Combing</td>
+                            <td><p th:text="${'1'}"><br></p></td>
+                            <td></td>
+                            <td><p th:text="${'$'+invoice.combingPrice}"><br></p></td>
+                        </tr>
+                        <tr class="item" th:if="${invoice.paws.name() == 'YES'}">
+                            <td>Paws cleaning</td>
+                            <td><p th:text="${'1'}"><br></p></td>
+                            <td></td>
+                            <td><p th:text="${'$'+invoice.pawsPrice}"><br></p></td>
+                        </tr>
+                        <tr class="item" th:if="${invoice.ears.name() == 'YES'}">
+                            <td>Еar cleaning</td>
+                            <td><p th:text="${'1'}"><br></p></td>
+                            <td></td>
+                            <td><p th:text="${'$'+invoice.earsPrice}"><br></p></td>
+                        </tr>
+                        <tr class="item" th:if="${invoice.nails.name() == 'YES'}">
+                            <td>Nails trimming</td>
+                            <td><p th:text="${'1'}"><br></p></td>
+                            <td></td>
+                            <td><p th:text="${'$'+invoice.nailsPrice}"><br></p></td>
+                        </tr>
+                        <tr class="item" th:if="${invoice.discount > 0}">
+                            <td></td>
+                            <td><p th:text="${'Price'}"><br></p></td>
+                            <td></td>
+                            <td><p th:text="${'$'+invoice.price}"><br></p></td>
+                        </tr>
+                        <tr class="item" th:if="${invoice.discount > 0}">
+                            <td></td>
+                            <td><p th:text="${'Discount%'}"><br></p></td>
+                            <td></td>
+                            <td><p th:text="${invoice.discount}"><br></p></td>
+                        </tr>
+                        <tr class="total">
+                            <td></td>
+                            <td><p th:text="${'Total Price'}"><br></p></td>
+                            <td></td>
+                            <td><p th:text="${'$'+invoice.totalPrice}"><br></p></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
             <br>
@@ -174,7 +174,7 @@
         </div>
 
         <script>
-            function printPageArea(areaID){
+            function printPageArea(areaID) {
                 var printContent = document.getElementById(areaID).innerHTML;
                 var originalContent = document.body.innerHTML;
                 document.body.innerHTML = printContent;

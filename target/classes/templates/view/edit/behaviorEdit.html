@@ -38,7 +38,7 @@
                                 <input class="form-control form-control-sm" style="width: 250px" type="text"
                                        th:field="${behaviorEditDTO.name}"
                                        name="name"
-                                       id="name" />
+                                       id="name"/>
                                 <small th:if="${#fields.hasErrors('name')}"
                                        th:errors="*{name}"
                                        class="text-light form-text bg-danger "></small>
@@ -47,16 +47,18 @@
                             </div>
 
 
-                    <br>
-                    <div class="button_submit">
-                        <div>
-                            <div>
-                                <input type="submit" class="btn btn-danger btn-lg btnList" value="Edit Behavior"/>
+                            <br>
+                            <div class="button_submit">
+                                <div>
+                                    <div>
+                                        <input type="submit" class="btn btn-danger btn-lg btnList"
+                                               value="Edit Behavior"/>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                    </form>
-                    </div></td>
+                </td>
             </tr>
         </table>
     </th:block>

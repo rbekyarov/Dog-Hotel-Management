@@ -20,10 +20,20 @@
                             <tbody>
 
                             <tr>
+
                                 <label th:each="c : ${cellsRepair}">
 
-                                    <label><img height="30px" width="30px" th:src="@{${'/pics/repair.png'}}"
-                                                th:text="${' '+c.code}"></label></label>
+                                    <label class="badge badge-warning" th:text="${' '+c.code}">
+                                                </label></label>
+
+                            </tr>
+                            <tr>
+                                <td th:each="c : ${allActiveReservation}">
+
+                                    <label style="width:60px"><img height="7px" width="7px"
+                                                                   th:src="@{${'/pics/invoiced2.png'}}"><a
+                                            th:href="@{/view/table/dog/view/{id}(id=${c.dog.id})}"
+                                            th:text="${' '+ c.cell.code + ' ' + c.dog.name + ' '}"></p></label></td>
                             </tr>
                             </tbody>
                         </table>

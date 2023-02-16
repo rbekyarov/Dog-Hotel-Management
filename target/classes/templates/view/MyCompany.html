@@ -1,7 +1,7 @@
 <th:block th:unless="${session.isEmpty()}">
     <script>
-        $(document).ready(function() {
-            $('#nav-link').click(function(e){
+        $(document).ready(function () {
+            $('#nav-link').click(function (e) {
                 e.preventDefault();
                 window.history.back();
             });
@@ -28,9 +28,9 @@
                         <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:500px">
                             <tbody>
                             <tr>
-                                <td style="font-weight: bold" >Company logo:</td>
-                                <td> <img src="#" height="120px" width="120px"
-                                          th:src="@{${'/image/' + myCompany.logoName}}" ></td>
+                                <td style="font-weight: bold">Company logo:</td>
+                                <td><img src="#" height="120px" width="120px"
+                                         th:src="@{${'/image/' + myCompany.logoName}}"></td>
                             </tr>
                             <tr>
                                 <td style="font-weight: bold">Company name:</td>
@@ -91,5 +91,4 @@
         </table>
 
 
-
-</th:block>
+    </th:block>

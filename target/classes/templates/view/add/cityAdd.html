@@ -1,68 +1,71 @@
 <th:block th:unless="${session.isEmpty()}">
     <script>
-        $(document).ready(function() {
-            $('#nav-link').click(function(e){
+        $(document).ready(function () {
+            $('#nav-link').click(function (e) {
                 e.preventDefault();
                 window.history.back();
             });
         });
     </script>
-<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
-        <tbody>
-        <tr>
-            <td><div class="button_back">
-                <a class="nav-link h5" id="nav-link">
-                    <button type="button" class="btn btn-danger btn-lg btnList"><span
-                            class="glyphicon glyphicon-ok"></span>Back
-                    </button>
-                </a>
-            </div></td>
-        </tr>
-        <tr>
-            <td><div class="container">
-                <h2 class="page_title">Add City</h2>
-                <form class="form_add" th:action="@{/view/add/cityAdd}"
-                      th:object="${cityDTO}"
-                      th:method="post"
-                >
-                    <div class="login-box">
-
-                        <label style="font-weight: bold">City Code</label>
-                        <input  class="form-control form-control-sm" type="text"
-                               id="code" th:field="${cityDTO.code}"
-                               placeholder="Please enter code" />
-                        <small th:if="${#fields.hasErrors('code')}"
-                               th:errors="*{code}"
-                               class="text-light form-text bg-danger "></small>
-<br>
-                        <label style="font-weight: bold">City Name</label>
-                        <input class="form-control form-control-sm" type="text" id="name"
-                               th:field="${cityDTO.name}"
-                               placeholder="Please enter City Name" />
-
-                        <small th:if="${#fields.hasErrors('name')}"
-                               th:errors="*{name}"
-                               class="text-light form-text bg-danger "></small>
-
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="width:auto">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="button_back">
+                        <a class="nav-link h5" id="nav-link">
+                            <button type="button" class="btn btn-danger btn-lg btnList"><span
+                                    class="glyphicon glyphicon-ok"></span>Back
+                            </button>
+                        </a>
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        <h2 class="page_title">Add City</h2>
+                        <form class="form_add" th:action="@{/view/add/cityAdd}"
+                              th:object="${cityDTO}"
+                              th:method="post"
+                        >
+                            <div class="login-box">
 
+                                <label style="font-weight: bold">City Code</label>
+                                <input class="form-control form-control-sm" type="text"
+                                       id="code" th:field="${cityDTO.code}"
+                                       placeholder="Please enter code"/>
+                                <small th:if="${#fields.hasErrors('code')}"
+                                       th:errors="*{code}"
+                                       class="text-light form-text bg-danger "></small>
+                                <br>
+                                <label style="font-weight: bold">City Name</label>
+                                <input class="form-control form-control-sm" type="text" id="name"
+                                       th:field="${cityDTO.name}"
+                                       placeholder="Please enter City Name"/>
 
-                    <div class="button_submit">
-                        <div >
-                            <div>
-                                <input type="submit" class="btn btn-danger btn-lg btnList" value="Submit City"/>
+                                <small th:if="${#fields.hasErrors('name')}"
+                                       th:errors="*{name}"
+                                       class="text-light form-text bg-danger "></small>
+
                             </div>
-                        </div>
+
+
+                            <div class="button_submit">
+                                <div>
+                                    <div>
+                                        <input type="submit" class="btn btn-danger btn-lg btnList" value="Submit City"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </div></td>
-        </tr>
-        </tbody>
-    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
 
-
-</th:block>
+    </th:block>
 </th:block>

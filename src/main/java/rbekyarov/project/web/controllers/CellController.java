@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rbekyarov.project.models.dto.CellDTO;
 import rbekyarov.project.models.dto.CellEditDTO;
 import rbekyarov.project.models.entity.Cell;
+import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.repository.ReservationRepository;
 import rbekyarov.project.service.CellService;
 
@@ -48,11 +49,13 @@ public class CellController extends BaseController {
                     .collect(Collectors.toList());
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
+        List<Reservation> allActiveReservation = reservationRepository.findAllActiveReservation();
         List<Cell> cellsRepair = cellService.findAllRepairsCells();
         cellService.updateStatus(reservationRepository.findAllActiveReservation());
         modelAndView.addObject("cells", cells);
+        modelAndView.addObject("allActiveReservation", allActiveReservation);
         modelAndView.addObject("cellsRepair", cellsRepair);
-        return super.view("/view/table/cellTable", "cells", cells,"pageNumbers", pageNumbers,"cellsRepair", cellsRepair);
+        return super.view("/view/table/cellTable", "cells",  cells,"pageNumbers", pageNumbers,"cellsRepair", cellsRepair,"allActiveReservation", allActiveReservation);
     }
 
     @GetMapping("/view/add/cellAdd")
