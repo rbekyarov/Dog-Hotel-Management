@@ -15,7 +15,7 @@
                             </button>
                         </a>
                         <div class="table-responsive-invoice">
-                            <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:780px">
+                            <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                                 <thead>
                                 <tr>
                                     <th scope="col">
@@ -32,8 +32,13 @@
                                             <button type="submit" class="btn btn-info">Search</button>
                                         </form>
                                     </th>
-                                    <th th:text="${'Total Invoiced: ' +totalInvoicedPrice+'$'}"
-                                    </th>
+                                    <th> <a th:href="@{/view/table/invoiceTable}" ><img height="10px" width="10px" th:src="@{${'/pics/reset.png'}}" th:text="${'clear'}"></th>
+
+
+                                </tr>
+                                <tr>
+                                    <th th:text="${'Total Invoiced: ' +totalInvoicedPrice+'$'}"></th>
+
                                 </tr>
                                 </thead>
                                 <tbody>

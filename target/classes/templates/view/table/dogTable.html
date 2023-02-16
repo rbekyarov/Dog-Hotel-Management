@@ -18,9 +18,16 @@
                         <p th:if="${isUsed}" class="errors alert alert-danger">
                             Dog is Used!
                         </p>
+                        <label th:each="r : ${allActiveReservation}">
+
+                            <img height="7px" width="7px"  th:src="@{${'/pics/invoiced2.png'}}">
+                            <a
+                                    th:href="@{/view/table/dog/view/{id}(id=${r.dog.id})}"
+                                    th:text="${r.dog.name+' '}"></a></label>
                         <div class="table-responsive-dog">
-                            <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:600px">
+                            <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:auto">
                                 <thead>
+
                                 <tr>
                                     <th scope="col">
                                         <form th:action="@{/view/table/searchDogName}" method="get">
@@ -36,15 +43,14 @@
                                             <button type="submit" class="btn btn-info">Search</button>
                                         </form>
                                     </th>
-                                    <th>
-                                        <label></label>
-                                    <td th:each="r : ${allActiveReservation}">
+                                    <th> <a th:href="@{/view/table/dogTable}" ><img height="10px" width="10px" th:src="@{${'/pics/reset.png'}}" th:text="${'clear  '}"></th>
 
-                                        <label style="width:60px"><img height="7px" width="7px"
-                                                                       th:src="@{${'/pics/green-dot.png'}}"><a
-                                                th:href="@{/view/table/dog/view/{id}(id=${r.dog.id})}"
-                                                th:text="${' '+r.dog.name+' ' }"></p></label></td>
-                                    </th>
+
+                                </tr>
+                                <tr>
+
+
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -78,7 +84,7 @@
                                 <tr th:each="d : ${dogs}">
                                     <td class="h6"><a th:href="@{/view/table/dog/view/{id}(id=${d.id})}"
                                                       th:text="${d.id}"</td>
-                                    <td th:text="${d.name}"></td>
+                                    <td ><a th:href="@{/view/table/dog/view/{id}(id=${d.id})}"style=" font-weight: bold ;color: #0ea5e9" th:text="${d.name}"></td>
 
                                     <td><a th:href="@{/view/table/dog/view/{id}(id=${d.id})}">
                                         <img src="#" height="80px" width="100px"
@@ -88,7 +94,9 @@
                                     <td th:text="${d.years}"></td>
                                     <td th:text="${d.weight}"></td>
                                     <td th:text="${d.breed.getBreedName()}"></td>
-                                    <td th:text="${d.sex}"></td>
+                                    <td th:if="${d.sex.name()=='F'}" class="badge badge-warning" th:text="${d.sex}"></td>
+                                    <td th:if="${d.sex.name()=='M'}" class="badge badge-info" th:text="${d.sex}"></td>
+
                                     <td th:text="${d.passport}"></td>
                                     <td th:text="${d.microchip}"></td>
                                     <td th:text="${#temporals.format(d.lastDewormingDate,'dd.MM.yyyy')}"></td>

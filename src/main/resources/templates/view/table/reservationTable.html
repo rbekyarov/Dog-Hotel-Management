@@ -74,7 +74,7 @@
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th> <a th:href="@{/view/table/reservationTable}" ><img height="15px" width="15px" th:src="@{${'/pics/reset.png'}}" th:text="${' reset'}"></th>
+                            <th> <a th:href="@{/view/table/reservationTable}" ><img height="10px" width="10px" th:src="@{${'/pics/reset.png'}}" th:text="${' clear'}"></th>
 
                         </tr>
                         </thead>
@@ -113,10 +113,10 @@
                             <td class="h6"><a th:text="${r.id}" th:href="@{reservation/view/{id}(id=*{r.id})}"></td>
                             <td ><a   th:href="@{/view/table/client/view/{id}(id=${r.client.id})}"th:text="${ r.client.firstName +' '+ r.client.lastName +' '+r.client.phone}"> </td>
                             <td ><a   th:href="@{/view/table/dog/view/{id}(id=${r.dog.id})}" th:text="${r.dog.name + ' Weight:' +r.dog.weight + ' '+r.dog.breed.breedName}"></td>
-                            <td th:text="${r.countOvernightStay}"></td>
+                            <td style="font-size: 11px" class="badge badge-success" th:text="${r.countOvernightStay}"></td>
                             <td th:text="${#temporals.format(r.startDate,'dd.MM.yyyy')}"></td>
                             <td th:text="${#temporals.format(r.endDate,'dd.MM.yyyy')}"></td>
-                            <td th:text="${r.cell.code}"></td>
+                            <td style="font-size: 11px" class="badge badge-warning" th:text="${r.cell.code}"></td>
                             <td th:text="${'Feeding: '+ r.food+
                                     ' Training: '+r.training}"></td>
 
