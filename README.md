@@ -107,7 +107,8 @@ RESERVATION PAGE:
 
 
 
-![2023-02-03 (1)](https://user-images.githubusercontent.com/29566751/216555904-41d31853-dbb9-45d8-852a-06280ea1473a.png)
+![2023-02-16 (3)](https://user-images.githubusercontent.com/29566751/219396393-d2d7916b-b2bd-46f9-9bd5-db97a405fc43.png)
+
 
 
 
@@ -118,9 +119,8 @@ ADD RESERVATION:
 
 EDIT RESERVATION:
 
-![2023-02-16 (3)](https://user-images.githubusercontent.com/29566751/219395282-3c39e8b6-55d6-4fc1-afb4-04d497991f4d.png)
 
-
+![2023-02-16 (9)](https://user-images.githubusercontent.com/29566751/219396329-a1c32473-46a1-444f-81a1-aff80141c18a.png)
 
 
 RESERVATION DETAILS:
