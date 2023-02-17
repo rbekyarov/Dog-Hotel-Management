@@ -70,10 +70,34 @@
                                     </button>
                                 </a></td>
 
-                                <td><a class="nav-link h5" th:href="@{cost/remove/{id}(id=*{d.id})}">
-                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                <td><a class="nav-link h5" >
+                                    <button type="button" class="btn btn-danger btn-lg btnTable" data-toggle="modal" data-target="#removeCost"><span
                                             class="glyphicon glyphicon-ok"></span>Remove
                                     </button>
+                                    <div class="modal fade" id="removeCost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" >Warning!</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    This Cost will be removed!
+                                                    The cost amount will be refunded to the bank account!
+                                                </div>
+
+                                                <div style="align-content: center"><a th:href="@{cost/remove/{id}(id=*{d.id})}" style="font-size: large">
+                                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                                            class="glyphicon glyphicon-ok"></span>ОК.Remove Cost
+                                                    </button>
+                                                </a></div>
+                                                <br>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </a></td>
                             </tr>
                         </table>

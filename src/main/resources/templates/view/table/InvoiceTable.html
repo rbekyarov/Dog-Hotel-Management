@@ -84,10 +84,35 @@
                                                 class="glyphicon glyphicon-ok"></span>View
                                         </button>
                                     </a></td>
-                                    <td><a class="nav-link h5" th:href="@{invoice/remove/{id}(id=*{i.id})}">
-                                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                    <td><a class="nav-link h5" >
+                                        <button type="button" class="btn btn-danger btn-lg btnTable" data-toggle="modal" data-target="#canceledInvoice"><span
                                                 class="glyphicon glyphicon-ok"></span>Cancellation
                                         </button>
+                                        <div class="modal fade" id="canceledInvoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" >Warning!</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        This invoice will be cancelled!
+                                                        The amount will be removed from the bank account!
+                                                        The reservation will be able to be corrected or removed!
+                                                    </div>
+
+                                                    <div style="align-content: center"><a th:href="@{invoice/remove/{id}(id=*{i.id})}" style="font-size: large">
+                                                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                                                class="glyphicon glyphicon-ok"></span>ОК.Canceled Invoice
+                                                        </button>
+                                                    </a></div>
+                                                    <br>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </a></td>
                                 </tr>
                             </table>
