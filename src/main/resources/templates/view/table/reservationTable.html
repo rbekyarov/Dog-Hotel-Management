@@ -141,10 +141,34 @@
                             </td>
 
                             <th:block th:if="${r.invoiced.name()=='NO'}">
-                                <td><a class="nav-link h5" th:href="@{invoice/add/{id}(id=*{r.id})}">
-                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                <td><a class="nav-link h5" >
+                                    <button type="button" class="btn btn-danger btn-lg btnTable" data-toggle="modal" data-target="#generateInvoice"><span
                                             class="glyphicon glyphicon-ok"></span>Generate Invoice
                                     </button>
+                                    <div class="modal fade" id="generateInvoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" >Warning!</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    You will generate an Invoice, after which you will not be able to correct or remove the reservation.
+                                                    To correct or remove a reservation, you must first cancel the invoice.
+                                                </div>
+
+                                                    <div style="align-content: center"><a th:href="@{invoice/add/{id}(id=*{r.id})}" style="font-size: large">
+                                                        <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                                                class="glyphicon glyphicon-ok"></span>Generate Invoice
+                                                        </button>
+                                                    </a></div>
+                                                       <br>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </a></td>
                             </th:block>
                             <th:block th:if="${r.invoiced.name()=='NO'}">
@@ -152,14 +176,38 @@
                                     <button type="button" class="btn btn-danger btn-lg btnTable"><span
                                             class="glyphicon glyphicon-ok"></span>Edit
                                     </button>
+
                                 </a></td>
                             </th:block>
 
                             <th:block th:if="${r.invoiced.name()=='NO'}">
-                                <td><a class="nav-link h5" th:href="@{reservation/remove/{id}(id=*{r.id})}">
-                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                <td><a class="nav-link h5" >
+                                    <button type="button" class="btn btn-danger btn-lg btnTable" data-toggle="modal" data-target="#deleteReservation"><span
                                             class="glyphicon glyphicon-ok"></span>Remove
                                     </button>
+                                    <div class="modal fade" id="deleteReservation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" >Warning!</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete this reservation?
+                                                </div>
+
+                                                <div style="align-content: center"><a th:href="@{reservation/remove/{id}(id=*{r.id})}" style="font-size: large">
+                                                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                                                            class="glyphicon glyphicon-ok"></span>Yes Remove
+                                                    </button>
+                                                </a></div>
+                                                <br>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </a></td> </th:block>
                             <th:block th:if="${r.invoiced.name()=='YES'}" th:each="i : ${allRealInvoice}" >
                                 <td th:if="${r.id == i.reservationId}"><a class="nav-link h5"  th:href="@{/view/table/invoice/view/{id}(id=${i.id})}">
@@ -183,6 +231,7 @@
             </tr>
 
         </table>
+        <!-- Modal -->
 
     </th:block>
 </th:block>

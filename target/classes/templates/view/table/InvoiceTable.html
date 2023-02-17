@@ -70,7 +70,7 @@
                                     <td th:text="${i.clientName +' '+ i.clientEmail +' '+i.clientPhone}"></td>
                                     <td th:text="${'Dog '+ i.dogName + ' '+'House:' +i.cellCode + ' '+'Day: '+i.countStay}"></td>
 
-                                    <td class="h6"><a
+                                    <td  style="font-size:small ; color: white"><a
                                             th:href="@{/view/table/reservation/view/{id}(id=${i.reservationId})}"
                                             th:text="${i.reservationId}"></td>
                                     <td th:text="${i.price+'$'}"></td>
