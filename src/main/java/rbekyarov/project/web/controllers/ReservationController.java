@@ -329,10 +329,12 @@ public class ReservationController extends BaseController {
     public ModelAndView getReservationView(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
 
         Reservation reservation = reservationService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
+        List<Invoice> allRealInvoice = invoiceService.findAllRealInvoice();
         modelAndView.addObject("reservation", reservation);
+        modelAndView.addObject("allRealInvoice", allRealInvoice);
 
 
-        return super.view("/view/table/reservationView", "reservation", reservation);
+        return super.view("/view/table/reservationView", "reservation", reservation,"allRealInvoice", allRealInvoice);
 
     }
 

@@ -25,12 +25,20 @@
             <td></td>
             <td></td>
             <td>
+                <th:block th:if="${reservation.invoiced.name()=='NO'}">
                 <div><a class="nav-link h5" th:href="@{/view/table/reservation/edit/{id}(id=*{reservation.id})}">
                     <button type="button" class="btn btn-danger btn-lg btnList"><span
                             class="glyphicon glyphicon-ok"></span>Edit Reservation
                     </button>
                 </a></div>
             </td>
+            </th:block>
+            <th:block th:if="${reservation.invoiced.name()=='YES'}" th:each="i : ${allRealInvoice}" >
+                <td th:if="${reservation.id == i.reservationId}"><a class="nav-link h5"  th:href="@{/view/table/invoice/view/{id}(id=${i.id})}">
+                    <button type="button" class="btn btn-danger btn-lg btnTable"><span
+                            class="glyphicon glyphicon-ok"></span>View Invoice
+                    </button>
+                </a></td></th:block>
 
             </tbody>
         </table>
@@ -61,7 +69,12 @@
                                 <tbody>
                                 <tr>
                                     <td><h5 th:text="${'Reservation No.'+ reservation.id }"></h5></td>
-
+                                    <th:block th:if="${reservation.invoiced.name()=='YES'}">
+                                        <td><label><img align="center" src="#" height="50px" width="50px"
+                                                        th:src="@{${'/pics/invoiced_tap.png'}}"
+                                        ></label><br>
+                                        </td>
+                                    </th:block>
                                 </tr>
                                 </tbody>
                             </table>
