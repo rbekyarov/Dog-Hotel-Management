@@ -23,12 +23,16 @@
                                         <input type="text" name="vendorName" th:value="${vendorName}"
                                                placeholder="Find by Vendor" size="20" class="searchArea">
                                         <button type="submit" class="btn btn-info">Search</button>
-                                        <span th:text="${'Total cost: ' +totalAmountCost+'$'}"></span>
                                     </form>
                                 </th>
+                                <th> <a th:href="@{/view/table/costTable}" ><img height="10px" width="10px" th:src="@{${'/pics/reset.png'}}" th:text="${'clear  '}"></th>
+
                             </tr>
+
                             </thead>
-                            <tbody>
+                            <tr>
+                                <td th:text="${'Total cost: ' +totalAmountCost+'$'}"></td>
+                            </tr>
                             </tbody>
                         </table>
                         <br>
