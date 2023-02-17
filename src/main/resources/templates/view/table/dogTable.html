@@ -16,7 +16,7 @@
                             </button>
                         </a>
                         <p th:if="${isUsed}" class="errors alert alert-danger">
-                            Dog is Used!
+                            This dog has reservations made, cannot be removed!
                         </p>
                         <label th:each="r : ${allActiveReservation}">
 
