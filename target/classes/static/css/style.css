@@ -293,18 +293,18 @@ a, a:hover {
 }
 
 .site-mobile-menu {
-    width: 260px;
-    position: absolute;
-    right: 0;
+    width: 300px;
+    position: fixed;
+    left: 0;
     z-index: 2000;
     padding-top: 20px;
     background: #fff;
     height: calc(100vh);
-    -webkit-transform: translateX(110%);
-    -ms-transform: translateX(110%);
-    transform: translateX(110%);
-    -webkit-box-shadow: -10px 0 20px -10px rgba(0, 0, 0, 0.1);
-    box-shadow: -10px 0 20px -10px rgba(0, 0, 0, 0.1);
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+    -webkit-box-shadow: -10px 0 20px -10px rgb(0 0 0 / 10%);
+    box-shadow: -10px 0 20px -10px rgb(0 0 0 / 10%);
     -webkit-transition: .3s all ease-in-out;
     -o-transition: .3s all ease-in-out;
     transition: .3s all ease-in-out;
