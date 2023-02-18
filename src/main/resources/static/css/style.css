@@ -687,6 +687,25 @@ a, a:hover {
         white-space: pre-line;
     }
 }
+.modal-content {
+    min-height: .01%;
+}
+
+@media screen and (max-width: 560px) {
+    .modal-content {
+        font-size: 13px;
+        display: block;
+        width:25%;
+        max-width: 100%;
+        /*background-color: transparent;*/
+        border-collapse: collapse;
+        border-spacing: 0;
+        color: #353838;
+        text-align: center;
+        /*padding: 0.5rem;*/
+        /*white-space: pre-line;*/
+    }
+}
 @media screen and (max-width: 560px) {
     .table-responsive {
         font-size: 12px;

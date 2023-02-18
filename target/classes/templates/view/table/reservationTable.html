@@ -187,6 +187,7 @@
                                     </button>
                                     <div class="modal fade" id="deleteReservation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
+
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" >Warning!</h5>
@@ -204,10 +205,10 @@
                                                     </button>
                                                 </a></div>
                                                 <br>
-
+                                            </div>
                                             </div>
                                         </div>
-                                    </div>
+
                                 </a></td> </th:block>
                             <th:block th:if="${r.invoiced.name()=='YES'}" th:each="i : ${allRealInvoice}" >
                                 <td th:if="${r.id == i.reservationId}"><a class="nav-link h5"  th:href="@{/view/table/invoice/view/{id}(id=${i.id})}">
