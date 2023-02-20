@@ -231,3 +231,22 @@ USER LIST:
 ![2023-02-03 (16)](https://user-images.githubusercontent.com/29566751/216556845-9a9fe667-a203-4a8e-9c27-f11f30810670.png)
 
 ![2023-02-03 (17)](https://user-images.githubusercontent.com/29566751/216556855-01517646-739c-4715-9fc1-10dfc6f8abf3.png)
+
+RESPONSIVE:
+
+![2023-02-20 (28)](https://user-images.githubusercontent.com/29566751/220052687-d8e037fd-09f4-4055-b78e-d22466f77de0.png)
+![2023-02-20 (29)](https://user-images.githubusercontent.com/29566751/220052691-a9f492ee-4a6b-40fc-8909-02263063d2ee.png)
+![2023-02-20 (30)](https://user-images.githubusercontent.com/29566751/220052692-66d547f0-57bf-4300-a7f3-b5e7bedde662.png)
+![2023-02-20 (31)](https://user-images.githubusercontent.com/29566751/220052696-9cb09233-3db1-4f69-857e-ea3b86d89f58.png)
+![2023-02-20 (15)](https://user-images.githubusercontent.com/29566751/220052700-8f2a0f32-717c-4f99-a822-d755a0569836.png)
+![2023-02-20 (16)](https://user-images.githubusercontent.com/29566751/220052702-0061adbf-3601-427e-90f6-853fd88ba041.png)
+![2023-02-20 (18)](https://user-images.githubusercontent.com/29566751/220052703-29c8ce51-149b-45a2-bafe-82a53cc51292.png)
+![2023-02-20 (19)](https://user-images.githubusercontent.com/29566751/220052705-f9880b84-e04d-434e-a0be-98fbff3cbce9.png)
+![2023-02-20 (20)](https://user-images.githubusercontent.com/29566751/220052708-16086c33-cfa3-462c-9f4d-f75debb6cfe8.png)
+![2023-02-20 (21)](https://user-images.githubusercontent.com/29566751/220052713-b4f20441-b03f-4b4f-a1f7-5b9b186fc335.png)
+![2023-02-20 (22)](https://user-images.githubusercontent.com/29566751/220052714-6346369c-19d5-4df9-9106-419883b49271.png)
+![2023-02-20 (23)](https://user-images.githubusercontent.com/29566751/220052715-2d4ea500-0861-4504-ae3f-aa5cfd77f804.png)
+![2023-02-20 (24)](https://user-images.githubusercontent.com/29566751/220052722-a685f3cc-196b-452f-971a-2e3c77984d5d.png)
+![2023-02-20 (25)](https://user-images.githubusercontent.com/29566751/220052724-62494b53-37b7-49cc-a093-a12144deef20.png)
+![2023-02-20 (26)](https://user-images.githubusercontent.com/29566751/220052725-a909f894-3aa7-4c97-9bf4-dff7d2d4618f.png)
+![2023-02-20 (27)](https://user-images.githubusercontent.com/29566751/220052727-4a72b8aa-235d-4436-bcbf-19a5dc400b27.png)
