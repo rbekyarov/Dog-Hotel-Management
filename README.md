@@ -180,13 +180,14 @@ DOG LIST:
 
 EDIT DOG:
 
-![2023-02-03 (12)](https://user-images.githubusercontent.com/29566751/216556459-8eeed79e-0df6-41bf-9f35-5065e2c1eec3.png)
+
+![2023-02-20 (5)](https://user-images.githubusercontent.com/29566751/220045762-cfa2c673-333a-463c-84e5-4d068df8eb21.png)
 
 
 DOG DETAILS:
 
+![2023-02-20 (6)](https://user-images.githubusercontent.com/29566751/220045795-519c3bcb-5fd2-4992-829d-25269808ea95.png)
 
-![2023-02-03 (19)](https://user-images.githubusercontent.com/29566751/216559278-e07fc383-98e0-4163-9c73-b5de37227d25.png)
 
 DOG HOUSE PAGE:
 
