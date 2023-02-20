@@ -121,13 +121,13 @@ ADD RESERVATION:
 EDIT RESERVATION:
 
 
-![2023-02-16 (9)](https://user-images.githubusercontent.com/29566751/219396329-a1c32473-46a1-444f-81a1-aff80141c18a.png)
+![2023-02-20 (9)](https://user-images.githubusercontent.com/29566751/220046626-1436dfcc-ee27-4a81-8730-e2938deb4abb.png)
 
 
 RESERVATION DETAILS:
 
-![2023-02-03 (3)](https://user-images.githubusercontent.com/29566751/216556132-c64d71d0-e2a4-4b38-aa38-f4d48d1a7f87.png)
 
+![2023-02-20 (8)](https://user-images.githubusercontent.com/29566751/220046433-b76708e9-e58b-416c-95be-68547a92f9aa.png)
 
 
 INVOICE LIST:
