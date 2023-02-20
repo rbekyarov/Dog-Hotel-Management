@@ -195,7 +195,8 @@ DOG HOUSE PAGE:
 
 PRICE LIST:
 
-![2023-01-16 (23)](https://user-images.githubusercontent.com/29566751/212760066-26b2024d-3544-4790-969f-07d5fb715ce2.png)
+![2023-02-20 (2)](https://user-images.githubusercontent.com/29566751/220044626-0c09b29b-d29e-4dbe-8e73-2f626bcb1780.png)
+
 
 BREED LIST:
 
@@ -208,8 +209,12 @@ BEHAVIOR LIST:
 
 
 MY COMPANY:
-![2023-02-03 (18)](https://user-images.githubusercontent.com/29566751/216556736-368f0b6b-8653-433d-a2b7-f1f5a74bc266.png)
 
+![2023-02-20 (3)](https://user-images.githubusercontent.com/29566751/220044657-04f4c7fa-fbb2-4cd8-a9eb-65404067e474.png)
+
+
+EDIT MY COMPANY:
+![2023-02-20 (4)](https://user-images.githubusercontent.com/29566751/220044705-0d974567-99dd-4b9c-a011-b81fb5574e9c.png)
 
 
 USER LIST:
