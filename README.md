@@ -129,6 +129,8 @@ RESERVATION DETAILS:
 
 ![2023-02-20 (8)](https://user-images.githubusercontent.com/29566751/220046433-b76708e9-e58b-416c-95be-68547a92f9aa.png)
 
+GENERATE INVOICE:
+![2023-02-20 (10)](https://user-images.githubusercontent.com/29566751/220048153-6fd8d4d2-6e91-4547-b213-10cef48fc585.png)
 
 INVOICE LIST:
 
@@ -145,6 +147,8 @@ INVOICE:
 
 
 CANCELLED INVOICE LIST:
+
+![2023-02-20 (11)](https://user-images.githubusercontent.com/29566751/220048384-5f316b6f-14eb-499c-bcff-d88cb50a234b.png)
 
 ![2023-01-16 (9)](https://user-images.githubusercontent.com/29566751/212759731-230cef0a-bede-433b-8f8a-1bf2f6cc0467.png)
 ![2023-01-16 (10)](https://user-images.githubusercontent.com/29566751/212759755-6e71a731-5e49-4d6f-8d60-c9bdd79473e1.png)
