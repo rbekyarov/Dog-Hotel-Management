@@ -170,7 +170,11 @@ LIST CLIENT:
 
 ![2023-02-16 (6)](https://user-images.githubusercontent.com/29566751/219395556-d066a836-413d-44d8-8696-4470503ae65a.png)
 
+ADD CLIENT:
+![2023-02-20 (12)](https://user-images.githubusercontent.com/29566751/220049310-d9b147a3-f2ee-4c6c-821b-de9f7b9c716d.png)
 
+CLIENT DETAILS:
+![2023-02-20 (14)](https://user-images.githubusercontent.com/29566751/220049386-c4cf119d-df02-4d17-97a4-314f16e6f9af.png)
 
 CITY PAGE:
 
