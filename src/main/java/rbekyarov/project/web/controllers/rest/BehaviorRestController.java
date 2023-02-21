@@ -4,7 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import rbekyarov.project.models.dto.BehaviorDTO;
-import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.service.BehaviorService;
 
 import java.util.List;
@@ -32,12 +31,12 @@ public class BehaviorRestController {
                 build();
     }
     @PostMapping()
-    public ResponseEntity<BehaviorDTO> createBehavior(@RequestBody BehaviorDTO newBehavior,
+    public ResponseEntity<BehaviorDTO> createBehavior(@RequestBody BehaviorDTO behaviorDTO,
                                               UriComponentsBuilder uriComponentsBuilder) {
-        long newBehaviorId = behaviorService.createBehaviorForRest(newBehavior);
+        long newBehaviorId = behaviorService.createBehaviorForRest(behaviorDTO);
 
         return ResponseEntity.created(uriComponentsBuilder.
-                        path("/api/behaviors/{id}").build(newBehavior)).
+                        path("/api/behaviors/{id}").build(behaviorDTO)).
                 build();
     }
 }
