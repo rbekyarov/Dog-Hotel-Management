@@ -33,7 +33,8 @@ public class BehaviorRestController {
     @PostMapping()
     public ResponseEntity<BehaviorDTO> createBehavior(@RequestBody BehaviorDTO behaviorDTO,
                                               UriComponentsBuilder uriComponentsBuilder) {
-        long newBehaviorId = behaviorService.createBehaviorForRest(behaviorDTO);
+
+        behaviorService.createBehaviorForRest(behaviorDTO);
 
         return ResponseEntity.created(uriComponentsBuilder.
                         path("/api/behaviors/{id}").build(behaviorDTO)).
