@@ -26,8 +26,9 @@ public class Behavior extends BaseEntity{
         return name;
     }
 
-    public void setName(String name) {
+    public Behavior setName(String name) {
         this.name = name;
+        return this;
     }
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")

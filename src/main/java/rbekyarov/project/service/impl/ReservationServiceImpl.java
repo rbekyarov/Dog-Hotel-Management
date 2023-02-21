@@ -468,6 +468,8 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationPage;
     }
 
+
+
     @Override
     public List<Reservation> listReservationById(long reservationNumber) {
         return reservationRepository.listReservationById(reservationNumber);
@@ -543,7 +545,10 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.getCountCompletedReservation();
     }
 
-
+    @Override
+    public List<Reservation> findAllReservationForRest() {
+        return reservationRepository.findAll();
+    }
     LocalDate formatterLocal(String dateDto) {
         //1.01.23 г.  ->2023-01-01
         //11.01.23 г. ->2023-01-11

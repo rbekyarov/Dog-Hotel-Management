@@ -57,4 +57,6 @@ public interface ReservationService {
     Page<Reservation> findPaginatedUpcoming(Pageable pageable);
 
     Page<Reservation> findPaginatedCompleted(Pageable pageable);
+
+    List<Reservation> findAllReservationForRest();
 }

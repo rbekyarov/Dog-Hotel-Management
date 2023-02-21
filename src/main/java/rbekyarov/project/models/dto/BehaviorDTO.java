@@ -1,9 +1,9 @@
 package rbekyarov.project.models.dto;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class BehaviorDTO {
+    private Long id;
     private String name;
 
     public BehaviorDTO() {
@@ -14,7 +14,17 @@ public class BehaviorDTO {
         return name;
     }
 
-    public void setName(String name) {
+    public BehaviorDTO setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public BehaviorDTO setId(Long id) {
+        this.id = id;
+        return this;
     }
 }

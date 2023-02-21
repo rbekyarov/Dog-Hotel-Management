@@ -21,4 +21,10 @@ public interface BehaviorService {
     void editBehaviors(String name, Long id,HttpSession session);
 
     Page<Behavior> findPaginated(Pageable pageable);
+
+    List<BehaviorDTO> findAllBehaviorForRest();
+
+    void deleteByIdForRest(Long id);
+
+    long createBehaviorForRest(BehaviorDTO newBehavior);
 }

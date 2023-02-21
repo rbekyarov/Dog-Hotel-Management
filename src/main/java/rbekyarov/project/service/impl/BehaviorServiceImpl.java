@@ -95,4 +95,35 @@ public class BehaviorServiceImpl implements BehaviorService {
         return behaviorsPage;
 
 }
+
+    @Override
+    public List<BehaviorDTO> findAllBehaviorForRest() {
+        return behaviorRepository.findAll().
+                stream().
+                map(this::map).
+                toList();
+    }
+
+    @Override
+    public void deleteByIdForRest(Long id) {
+
+        behaviorRepository.deleteById(id);
+
+    }
+
+    @Override
+    public long createBehaviorForRest(BehaviorDTO behaviorDTO) {
+
+        Behavior behavior = new Behavior().
+                setName(behaviorDTO.getName());
+
+        return behaviorRepository.save(behavior).getId();
+    }
+
+
+    private BehaviorDTO map(Behavior behavior) {
+
+        return  new BehaviorDTO().
+               setName(behavior.getName()).setId(behavior.getId());
+    }
 }
