@@ -163,7 +163,7 @@ public class CellServiceImpl implements CellService {
         cell.setCode(cellRestDTO.getCode());
         cell.setCellSize(cellRestDTO.getCellSize());
         cell.setStatus(cellRestDTO.getStatus());
-        cell.setAuthor(userService.findById(20l).get());
+        cell.setAuthor(userService.findById(3l).get());
         cell.setDateCreate(LocalDate.now());
         return cellRepository.save(cell).getId();
     }
