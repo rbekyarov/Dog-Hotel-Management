@@ -1,11 +1,13 @@
 package rbekyarov.project.models.dto.restDto;
 
+import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.enums.ClientType;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 public class ClientRestDTO {
     private Long id;
@@ -15,7 +17,9 @@ public class ClientRestDTO {
     private String phone;
     private String address;
     private ClientType clientType;
-    private CityRestDTO cityRestDTO;
+    private CityRestThinDTO city;
+
+    private Set<DogRestThinDTO> dogs;
 
     public ClientRestDTO() {
     }
@@ -68,12 +72,12 @@ public class ClientRestDTO {
         this.address = address;
     }
 
-    public CityRestDTO getCityRestDTO() {
-        return cityRestDTO;
+    public CityRestThinDTO getCity() {
+        return city;
     }
 
-    public ClientRestDTO setCityRestDTO(CityRestDTO cityRestDTO) {
-        this.cityRestDTO = cityRestDTO;
+    public ClientRestDTO setCity(CityRestThinDTO city) {
+        this.city = city;
         return this;
     }
 
@@ -91,6 +95,15 @@ public class ClientRestDTO {
 
     public ClientRestDTO setId(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public Set<DogRestThinDTO> getDogs() {
+        return dogs;
+    }
+
+    public ClientRestDTO setDogs(Set<DogRestThinDTO> dogs) {
+        this.dogs = dogs;
         return this;
     }
 }

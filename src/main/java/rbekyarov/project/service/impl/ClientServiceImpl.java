@@ -7,7 +7,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.ClientDTO;
+import rbekyarov.project.models.dto.restDto.*;
+import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Client;
+import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.models.entity.enums.ClientType;
 import rbekyarov.project.repository.CellRepository;
@@ -19,9 +22,8 @@ import rbekyarov.project.service.UserService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -52,7 +54,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void addClient( ClientDTO clientDTO, HttpSession session) {
+    public void addClient(ClientDTO clientDTO, HttpSession session) {
         Client client = modelMapper.map(clientDTO, Client.class);
         client.setCity(cityRepository.findById(clientDTO.getCityId()).orElseThrow());
         //get and set Author
@@ -125,5 +127,52 @@ public class ClientServiceImpl implements ClientService {
         return clientsPage;
     }
 
+    @Override
+    public List<ClientRestDTO> findAllClientForRest() {
+        return clientRepository.findAll().
+                stream().
+                map(this::map).
+                toList();
+    }
+
+    @Override
+    public void deleteByIdForRest(Long id) {
+        clientRepository.deleteById(id);
+    }
+
+    @Override
+    public void createClientForRest(ClientRestDTO clientRestDTO) {
+
+    }
+
+    private ClientRestDTO map(Client client) {
+
+        ClientRestDTO clientRestDTO = new ClientRestDTO();
+        clientRestDTO.setId(client.getId());
+        clientRestDTO.setFirstName(client.getFirstName());
+        clientRestDTO.setLastName(client.getLastName());
+        clientRestDTO.setEmail(client.getEmail());
+        clientRestDTO.setPhone(client.getPhone());
+        clientRestDTO.setAddress(client.getAddress());
+        clientRestDTO.setClientType(client.getClientType());
+
+        CityRestThinDTO cityRestDTO = new CityRestThinDTO();
+        cityRestDTO.setName(client.getCity().getName());
+
+
+        clientRestDTO.setCity(cityRestDTO);
+
+        Set<Dog> dogs = client.getDogs();
+        Set<DogRestThinDTO> dogRestDTOSet = new HashSet<>();
+        for (Dog dog : dogs) {
+            DogRestThinDTO dogRestThinDTO = new DogRestThinDTO();
+
+            dogRestThinDTO.setName(dog.getName());
+            dogRestDTOSet.add(dogRestThinDTO);
+        }
+        clientRestDTO.setDogs(dogRestDTOSet);
+
+        return clientRestDTO;
+    }
 
 }
