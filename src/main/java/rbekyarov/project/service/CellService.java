@@ -3,6 +3,8 @@ package rbekyarov.project.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.CellDTO;
+import rbekyarov.project.models.dto.restDto.BehaviorRestDTO;
+import rbekyarov.project.models.dto.restDto.CellRestDTO;
 import rbekyarov.project.models.entity.Cell;
 import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.enums.CellSize;
@@ -35,5 +37,12 @@ public interface CellService {
     List<Cell> findAllCellWithoutCellInService();
 
     List<Cell> findAllRepairsCells();
+
+    List<CellRestDTO> findAllCellForRest();
+
+    void deleteByIdForRest(Long id);
+
+
+    Long createCellForRest(CellRestDTO cellRestDTO);
 }
 

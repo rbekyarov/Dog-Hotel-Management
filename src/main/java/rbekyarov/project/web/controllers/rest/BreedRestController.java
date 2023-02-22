@@ -41,7 +41,7 @@ public class BreedRestController {
         breedService.createBreedForRest(breedRestDTO);
 
         return ResponseEntity.created(uriComponentsBuilder.
-                        path("/api/behaviors/{id}").build(breedRestDTO)).
+                        path("/api/breeds/{id}").build(breedRestDTO)).
                 build();
     }
 }
