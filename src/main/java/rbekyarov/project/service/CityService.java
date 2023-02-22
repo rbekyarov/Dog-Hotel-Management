@@ -4,6 +4,8 @@ package rbekyarov.project.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.CityDTO;
+import rbekyarov.project.models.dto.restDto.BehaviorRestDTO;
+import rbekyarov.project.models.dto.restDto.CityRestDTO;
 import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.City;
 
@@ -22,4 +24,10 @@ public interface CityService {
 
     void editCity(String code, Long id , String name, HttpSession session);
     Page<City> findPaginated(Pageable pageable);
+
+    List<CityRestDTO> findAllCityForRest();
+
+    void deleteByIdForRest(Long id);
+
+    Long createCityForRest(CityRestDTO cityRestDTO);
 }
