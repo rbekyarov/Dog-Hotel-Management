@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.BreedDTO;
-import rbekyarov.project.models.entity.Behavior;
+import rbekyarov.project.models.dto.restDto.BreedRestDTO;
 import rbekyarov.project.models.entity.Breed;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.repository.BreedRepository;
@@ -85,5 +85,32 @@ public class BreedServiceImpl implements BreedService {
         Page<Breed> breedsPage = new PageImpl<Breed>(list, PageRequest.of(currentPage, pageSize), breeds.size());
 
         return breedsPage;
+    }
+
+    @Override
+    public List<BreedRestDTO> findAllBreedForRest() {
+        return breedRepository.findAll().
+                stream().
+                map(this::map).
+                toList();
+    }
+
+    @Override
+    public void deleteByIdForRest(Long id) {
+        breedRepository.deleteById(id);
+    }
+
+    @Override
+    public Long createBreedForRest(BreedRestDTO breedRestDTO) {
+        Breed breed = new Breed().
+                setBreedName(breedRestDTO.getBreedName());
+
+        return breedRepository.save(breed).getId();
+    }
+    private BreedRestDTO map(Breed breed) {
+
+        return  new BreedRestDTO()
+                .setId(breed.getId())
+                .setBreedName(breed.getBreedName());
     }
 }

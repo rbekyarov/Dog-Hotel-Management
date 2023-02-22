@@ -3,6 +3,7 @@ package rbekyarov.project.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.BehaviorDTO;
+import rbekyarov.project.models.dto.restDto.BehaviorRestDTO;
 import rbekyarov.project.models.entity.Behavior;
 
 import javax.servlet.http.HttpSession;
@@ -22,9 +23,9 @@ public interface BehaviorService {
 
     Page<Behavior> findPaginated(Pageable pageable);
 
-    List<BehaviorDTO> findAllBehaviorForRest();
+    List<BehaviorRestDTO> findAllBehaviorForRest();
 
     void deleteByIdForRest(Long id);
 
-    long createBehaviorForRest(BehaviorDTO newBehavior);
+    long createBehaviorForRest(BehaviorRestDTO behaviorRestDTO);
 }

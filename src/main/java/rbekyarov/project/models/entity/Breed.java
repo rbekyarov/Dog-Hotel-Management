@@ -23,8 +23,9 @@ public class Breed extends BaseEntity{
         return breedName;
     }
 
-    public void setBreedName(String breedName) {
+    public Breed setBreedName(String breedName) {
         this.breedName = breedName;
+        return this;
     }
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")

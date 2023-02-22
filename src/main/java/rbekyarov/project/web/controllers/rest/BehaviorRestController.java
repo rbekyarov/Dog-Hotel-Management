@@ -3,7 +3,7 @@ package rbekyarov.project.web.controllers.rest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import rbekyarov.project.models.dto.BehaviorDTO;
+import rbekyarov.project.models.dto.restDto.BehaviorRestDTO;
 import rbekyarov.project.service.BehaviorService;
 
 import java.util.List;
@@ -17,13 +17,13 @@ public class BehaviorRestController {
         this.behaviorService = behaviorService;
     }
     @GetMapping
-    public ResponseEntity<List<BehaviorDTO>> getAllBehavior() {
+    public ResponseEntity<List<BehaviorRestDTO>> getAllBehavior() {
         return ResponseEntity.
                 ok(behaviorService.findAllBehaviorForRest());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<BehaviorDTO> deleteBehaviorById(@PathVariable("id") Long id) {
+    public ResponseEntity<BehaviorRestDTO> deleteBehaviorById(@PathVariable("id") Long id) {
         behaviorService.deleteByIdForRest(id);
 
         return ResponseEntity.
@@ -31,13 +31,13 @@ public class BehaviorRestController {
                 build();
     }
     @PostMapping()
-    public ResponseEntity<BehaviorDTO> createBehavior(@RequestBody BehaviorDTO behaviorDTO,
+    public ResponseEntity<BehaviorRestDTO> createBehavior(@RequestBody BehaviorRestDTO behaviorRestDTO,
                                               UriComponentsBuilder uriComponentsBuilder) {
 
-        behaviorService.createBehaviorForRest(behaviorDTO);
+        behaviorService.createBehaviorForRest(behaviorRestDTO);
 
         return ResponseEntity.created(uriComponentsBuilder.
-                        path("/api/behaviors/{id}").build(behaviorDTO)).
+                        path("/api/behaviors/{id}").build(behaviorRestDTO)).
                 build();
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.BehaviorDTO;
+import rbekyarov.project.models.dto.restDto.BehaviorRestDTO;
 import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.repository.BehaviorRepository;
@@ -97,7 +98,7 @@ public class BehaviorServiceImpl implements BehaviorService {
 }
 
     @Override
-    public List<BehaviorDTO> findAllBehaviorForRest() {
+    public List<BehaviorRestDTO> findAllBehaviorForRest() {
         return behaviorRepository.findAll().
                 stream().
                 map(this::map).
@@ -112,18 +113,18 @@ public class BehaviorServiceImpl implements BehaviorService {
     }
 
     @Override
-    public long createBehaviorForRest(BehaviorDTO behaviorDTO) {
+    public long createBehaviorForRest(BehaviorRestDTO behaviorRestDTO) {
 
         Behavior behavior = new Behavior().
-                setName(behaviorDTO.getName());
+                setName(behaviorRestDTO.getName());
 
         return behaviorRepository.save(behavior).getId();
     }
 
 
-    private BehaviorDTO map(Behavior behavior) {
+    private BehaviorRestDTO map(Behavior behavior) {
 
-        return  new BehaviorDTO().
+        return  new BehaviorRestDTO().
                setName(behavior.getName()).setId(behavior.getId());
     }
 }

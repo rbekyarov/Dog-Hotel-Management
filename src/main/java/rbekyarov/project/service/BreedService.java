@@ -3,7 +3,8 @@ package rbekyarov.project.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.BreedDTO;
-import rbekyarov.project.models.entity.Behavior;
+import rbekyarov.project.models.dto.restDto.BreedRestDTO;
+
 import rbekyarov.project.models.entity.Breed;
 
 import javax.servlet.http.HttpSession;
@@ -22,4 +23,10 @@ public interface BreedService {
     void editBreeds(String name, Long id, HttpSession session);
     Page<Breed> findPaginated(Pageable pageable);
 
+
+
+    List<BreedRestDTO> findAllBreedForRest();
+    void deleteByIdForRest(Long id);
+
+    Long createBreedForRest(BreedRestDTO breedRestDTO);
 }
