@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
+import rbekyarov.project.models.dto.restDto.ReservationRestDTO;
 import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.enums.Invoiced;
@@ -58,5 +59,5 @@ public interface ReservationService {
 
     Page<Reservation> findPaginatedCompleted(Pageable pageable);
 
-    List<Reservation> findAllReservationForRest();
+    List<ReservationRestDTO> findAllReservationForRest();
 }

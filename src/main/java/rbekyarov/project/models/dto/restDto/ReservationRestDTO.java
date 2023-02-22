@@ -4,14 +4,15 @@ import rbekyarov.project.models.entity.enums.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 public class ReservationRestDTO {
     private Long id;
-    private ClientRestDTO clientRestDTO;
-    private DogRestDTO dogRestDTO;
+    private ClientRestThinDTO client;
+    private DogRestThinDTO dog;
     private String startDate;
     private String endDate;
-    private CellRestDTO cellRestDTO;
+    private CellRestThinDTO dogHouse;
     private Food food;
     private Deworming deworming;
     private Training training;
@@ -20,37 +21,40 @@ public class ReservationRestDTO {
     private Ears ears;
     private Paws paws;
     private Nails nails;
+    private BigDecimal price;
+
     private Double discount;
+    private BigDecimal totalPrice;
+
 
 
     public ReservationRestDTO() {
     }
 
-    @NotNull(message = "cannot be empty")
-    public ClientRestDTO getClientRestDTO() {
-        return clientRestDTO;
+    public Long getId() {
+        return id;
     }
 
-    public void setClientRestDTO(ClientRestDTO clientRestDTO) {
-        this.clientRestDTO = clientRestDTO;
-    }
-    @NotNull(message = "cannot be empty")
-    public DogRestDTO getDogRestDTO() {
-        return dogRestDTO;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setDogRestDTO(DogRestDTO dogRestDTO) {
-        this.dogRestDTO = dogRestDTO;
-    }
-    @NotNull(message = "cannot be empty")
-    public CellRestDTO getCellRestDTO() {
-        return cellRestDTO;
+    public ClientRestThinDTO getClient() {
+        return client;
     }
 
-    public void setCellRestDTO(CellRestDTO cellRestDTO) {
-        this.cellRestDTO = cellRestDTO;
+    public void setClient(ClientRestThinDTO client) {
+        this.client = client;
     }
-    @NotBlank(message = "cannot be empty")
+
+    public DogRestThinDTO getDog() {
+        return dog;
+    }
+
+    public void setDog(DogRestThinDTO dog) {
+        this.dog = dog;
+    }
+
     public String getStartDate() {
         return startDate;
     }
@@ -58,7 +62,7 @@ public class ReservationRestDTO {
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
-    @NotBlank(message = "cannot be empty")
+
     public String getEndDate() {
         return endDate;
     }
@@ -67,7 +71,13 @@ public class ReservationRestDTO {
         this.endDate = endDate;
     }
 
+    public CellRestThinDTO getDogHouse() {
+        return dogHouse;
+    }
 
+    public void setDogHouse(CellRestThinDTO dogHouse) {
+        this.dogHouse = dogHouse;
+    }
 
     public Food getFood() {
         return food;
@@ -75,6 +85,14 @@ public class ReservationRestDTO {
 
     public void setFood(Food food) {
         this.food = food;
+    }
+
+    public Deworming getDeworming() {
+        return deworming;
+    }
+
+    public void setDeworming(Deworming deworming) {
+        this.deworming = deworming;
     }
 
     public Training getTraining() {
@@ -133,20 +151,19 @@ public class ReservationRestDTO {
         this.discount = discount;
     }
 
-    public Deworming getDeworming() {
-        return deworming;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setDeworming(Deworming deworming) {
-        this.deworming = deworming;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
-    public Long getId() {
-        return id;
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
     }
 
-    public ReservationRestDTO setId(Long id) {
-        this.id = id;
-        return this;
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

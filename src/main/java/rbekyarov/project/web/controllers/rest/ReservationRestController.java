@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import rbekyarov.project.models.dto.restDto.ReservationRestDTO;
 import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.service.ReservationService;
 
@@ -19,7 +20,7 @@ public class ReservationRestController {
         this.reservationService = reservationService;
     }
     @GetMapping
-    public ResponseEntity<List<Reservation>> getAllReservation() {
+    public ResponseEntity<List<ReservationRestDTO>> getAllReservation() {
         return ResponseEntity.
                 ok(reservationService.findAllReservationForRest());
     }

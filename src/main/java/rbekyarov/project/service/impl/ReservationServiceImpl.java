@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
+import rbekyarov.project.models.dto.restDto.*;
 import rbekyarov.project.models.entity.*;
 import rbekyarov.project.models.entity.enums.*;
 import rbekyarov.project.repository.ClientRepository;
@@ -546,8 +547,46 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Reservation> findAllReservationForRest() {
-        return reservationRepository.findAll();
+    public List<ReservationRestDTO> findAllReservationForRest() {
+        return reservationRepository.findAll().
+                stream().
+                map(this::map).
+                toList();
+    }
+
+    private ReservationRestDTO map(Reservation reservation) {
+        ReservationRestDTO reservationRestDTO = new ReservationRestDTO();
+
+        reservationRestDTO.setId(reservation.getId());
+        reservationRestDTO.setTraining(reservation.getTraining());
+        reservationRestDTO.setBathing(reservation.getBathing());
+        reservationRestDTO.setDeworming(reservation.getDeworming());
+        reservationRestDTO.setCombing(reservation.getCombing());
+        reservationRestDTO.setDiscount(reservation.getDiscount());
+        reservationRestDTO.setPrice(reservation.getPrice());
+        reservationRestDTO.setTotalPrice(reservation.getTotalPrice());
+        reservationRestDTO.setEars(reservation.getEars());
+        reservationRestDTO.setFood(reservation.getFood());
+        reservationRestDTO.setNails(reservation.getNails());
+        reservationRestDTO.setPaws(reservation.getPaws());
+        reservationRestDTO.setStartDate(reservation.getStartDate().toString());
+        reservationRestDTO.setEndDate(reservation.getEndDate().toString());
+
+        ClientRestThinDTO clientRestThinDTO = new ClientRestThinDTO();
+        clientRestThinDTO.setFirstName(reservation.getClient().getFirstName());
+        clientRestThinDTO.setLastName(reservation.getClient().getLastName());
+        reservationRestDTO.setClient(clientRestThinDTO);
+
+        DogRestThinDTO dogRestThinDTO = new DogRestThinDTO();
+        dogRestThinDTO.setName(reservation.getDog().getName());
+        reservationRestDTO.setDog(dogRestThinDTO);
+
+        CellRestThinDTO cellRestThinDTO = new CellRestThinDTO();
+        cellRestThinDTO.setCode(reservation.getCell().getCode());
+        reservationRestDTO.setDogHouse(cellRestThinDTO);
+
+
+        return reservationRestDTO;
     }
     LocalDate formatterLocal(String dateDto) {
         //1.01.23 г.  ->2023-01-01
