@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import rbekyarov.project.models.dto.DogEditDTO;
+import rbekyarov.project.models.dto.restDto.*;
 import rbekyarov.project.models.entity.*;
 import rbekyarov.project.models.dto.DogDTO;
 import rbekyarov.project.models.entity.enums.DogSize;
@@ -288,6 +289,46 @@ public class DogServiceImpl implements DogService {
 
     }
 
+    @Override
+    public List<DogRestDTO> findAllDogForRest() {
+        return dogRepository.findAll().
+                stream().
+                map(this::map).
+                toList();
+    }
+    private DogRestDTO map(Dog dog) {
+        DogRestDTO dogRestDTO = new DogRestDTO();
+        dogRestDTO.setId(dog.getId());
+        dogRestDTO.setName(dog.getName());
+        dogRestDTO.setYears(dog.getYears());
+        dogRestDTO.setDogSize(dog.getDogSize());
+        dogRestDTO.setImageName(dog.getImageName());
+        dogRestDTO.setLastDewormingDate(dog.getLastDewormingDate().toString());
+        dogRestDTO.setBirthDate(dog.getBirthDate().toString());
+        dogRestDTO.setMicrochip(dog.getMicrochip());
+        dogRestDTO.setMicrochipNumber(dog.getMicrochipNumber());
+        dogRestDTO.setSex(dog.getSex());
+        dogRestDTO.setPassport(dog.getPassport());
+        dogRestDTO.setPassport(dog.getPassport());
+        dogRestDTO.setWeight(dog.getWeight());
+        dogRestDTO.setLastDewormingDate(dog.getLastDewormingDate().toString());
+
+        ClientRestThinDTO clientRestThinDTO = new ClientRestThinDTO();
+        clientRestThinDTO.setFirstName(dog.getClient().getFirstName());
+        clientRestThinDTO.setLastName(dog.getClient().getLastName());
+        dogRestDTO.setClient(clientRestThinDTO);
+
+        BehaviorRestThinDTO behaviorRestThinDTO = new BehaviorRestThinDTO();
+        behaviorRestThinDTO.setName(dog.getBehavior().getName());
+        dogRestDTO.setBehavior(behaviorRestThinDTO);
+
+        BreedRestThinDTO breedRestThinDTO = new BreedRestThinDTO();
+        breedRestThinDTO.setBreedName(dog.getBreed().getBreedName());
+        dogRestDTO.setBreed(breedRestThinDTO);
+
+
+        return dogRestDTO;
+    }
 
     //convert String to LocalDate
 

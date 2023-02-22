@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 import rbekyarov.project.models.dto.DogDTO;
 import rbekyarov.project.models.dto.DogEditDTO;
+import rbekyarov.project.models.dto.restDto.DogRestDTO;
 import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.Breed;
 import rbekyarov.project.models.entity.Client;
@@ -48,4 +49,5 @@ public interface DogService {
     void updateDogYears();
 
 
+    List<DogRestDTO> findAllDogForRest();
 }

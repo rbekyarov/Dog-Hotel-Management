@@ -16,12 +16,12 @@ public class DogRestDTO {
     private String name;
     private String birthDate;
     private Integer weight;
-    private BreedRestDTO breedRestDTO;
+    private BreedRestThinDTO breed;
     private Sex sex;
     private Passport passport;
     private Microchip microchip;
-    private ClientRestDTO clientRestDTO;
-    private BehaviorRestDTO behaviorRestDTO;
+    private ClientRestThinDTO client;
+    private BehaviorRestThinDTO behavior;
 
     private String imageName;
     private DogSize dogSize;
@@ -58,13 +58,12 @@ public class DogRestDTO {
         this.weight = weight;
     }
 
-    @NotNull(message = "Breed cannot be empty")
-    public BreedRestDTO getBreedRestDTO() {
-        return breedRestDTO;
+    public BreedRestThinDTO getBreed() {
+        return breed;
     }
 
-    public void setBreedRestDTO(BreedRestDTO breedRestDTO) {
-        this.breedRestDTO = breedRestDTO;
+    public void setBreed(BreedRestThinDTO breed) {
+        this.breed = breed;
     }
 
     @NotNull(message = "Sex cannot be empty")
@@ -95,20 +94,20 @@ public class DogRestDTO {
     }
 
 
-    public ClientRestDTO getClientRestDTO() {
-        return clientRestDTO;
+    public ClientRestThinDTO getClient() {
+        return client;
     }
 
-    public void setClientRestDTO(ClientRestDTO clientRestDTO) {
-        this.clientRestDTO = clientRestDTO;
+    public void setClient(ClientRestThinDTO client) {
+        this.client = client;
     }
 
-    public BehaviorRestDTO getBehaviorRestDTO() {
-        return behaviorRestDTO;
+    public BehaviorRestThinDTO getBehavior() {
+        return behavior;
     }
 
-    public void setBehaviorRestDTO(BehaviorRestDTO behaviorRestDTO) {
-        this.behaviorRestDTO = behaviorRestDTO;
+    public void setBehavior(BehaviorRestThinDTO behavior) {
+        this.behavior = behavior;
     }
 
     public String getImageName() {

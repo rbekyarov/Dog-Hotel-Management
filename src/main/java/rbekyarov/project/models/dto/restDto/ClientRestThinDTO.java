@@ -21,17 +21,15 @@ public class ClientRestThinDTO {
         return firstName;
     }
 
-    public ClientRestThinDTO setFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
-        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public ClientRestThinDTO setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
-        return this;
     }
 }
