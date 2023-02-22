@@ -13,6 +13,7 @@ public class ReservationRestDTO {
     private String startDate;
     private String endDate;
     private CellRestThinDTO dogHouse;
+    private StatusReservation status;
     private Food food;
     private Deworming deworming;
     private Training training;
@@ -165,5 +166,13 @@ public class ReservationRestDTO {
 
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public StatusReservation getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusReservation status) {
+        this.status = status;
     }
 }

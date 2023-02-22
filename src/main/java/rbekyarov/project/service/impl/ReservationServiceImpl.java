@@ -559,6 +559,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         reservationRestDTO.setId(reservation.getId());
         reservationRestDTO.setTraining(reservation.getTraining());
+        reservationRestDTO.setStatus(reservation.getStatusReservation());
         reservationRestDTO.setBathing(reservation.getBathing());
         reservationRestDTO.setDeworming(reservation.getDeworming());
         reservationRestDTO.setCombing(reservation.getCombing());
