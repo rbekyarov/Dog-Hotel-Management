@@ -36,4 +36,6 @@ public interface InvoiceService {
     List<Invoice> findLastInvoices();
 
     List<String> getTop3Clients();
+
+    List<Invoice> getAllInvoiceForRest();
 }

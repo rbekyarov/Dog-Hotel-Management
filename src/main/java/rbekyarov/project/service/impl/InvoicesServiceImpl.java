@@ -213,6 +213,11 @@ public class InvoicesServiceImpl implements InvoiceService {
         return result;
     }
 
+    @Override
+    public List<Invoice> getAllInvoiceForRest() {
+        return invoiceRepository.findAllInvoice();
+    }
+
 }
 
 

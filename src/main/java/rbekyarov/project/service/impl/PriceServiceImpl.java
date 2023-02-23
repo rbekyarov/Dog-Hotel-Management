@@ -155,7 +155,9 @@ public class PriceServiceImpl implements PriceService {
                 toList();
     }
     private PriceRestDTO map(Price price) {
+
          PriceRestDTO priceRestDTO = new PriceRestDTO();
+
          priceRestDTO.setId(price.getId());
          priceRestDTO.setPriceBathing(price.getPriceBathing());
          priceRestDTO.setPriceCombing(price.getPriceCombing());
