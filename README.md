@@ -88,9 +88,9 @@ ENTITIES:
 INDEX PAGE:
 
 
+![2023-02-23](https://user-images.githubusercontent.com/29566751/220892562-ab5675e0-c4d8-4054-b382-675519b08f6d.png)
 
 
-![2023-02-05](https://user-images.githubusercontent.com/29566751/216809212-7d1d8098-b26b-44a3-bbb1-6304d6a2270e.png)
 
 
 
