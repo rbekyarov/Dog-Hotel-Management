@@ -23,22 +23,22 @@ public class CellRestController {
                 ok(cellService.findAllCellForRest());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<CellRestDTO> deleteCellById(@PathVariable("id") Long id) {
-        cellService.deleteByIdForRest(id);
-
-        return ResponseEntity.
-                noContent().
-                build();
-    }
-    @PostMapping()
-    public ResponseEntity<CellRestDTO> createCell(@RequestBody CellRestDTO cellRestDTO,
-                                              UriComponentsBuilder uriComponentsBuilder) {
-
-        cellService.createCellForRest(cellRestDTO);
-
-        return ResponseEntity.created(uriComponentsBuilder.
-                        path("/api/cells/{id}").build(cellRestDTO)).
-                build();
-    }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<CellRestDTO> deleteCellById(@PathVariable("id") Long id) {
+//        cellService.deleteByIdForRest(id);
+//
+//        return ResponseEntity.
+//                noContent().
+//                build();
+//    }
+//    @PostMapping()
+//    public ResponseEntity<CellRestDTO> createCell(@RequestBody CellRestDTO cellRestDTO,
+//                                              UriComponentsBuilder uriComponentsBuilder) {
+//
+//        cellService.createCellForRest(cellRestDTO);
+//
+//        return ResponseEntity.created(uriComponentsBuilder.
+//                        path("/api/cells/{id}").build(cellRestDTO)).
+//                build();
+//    }
 }

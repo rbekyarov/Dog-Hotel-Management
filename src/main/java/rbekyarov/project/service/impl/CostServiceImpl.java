@@ -6,7 +6,12 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import rbekyarov.project.models.dto.restDto.CityRestThinDTO;
+import rbekyarov.project.models.dto.restDto.CostRestDTO;
+import rbekyarov.project.models.dto.restDto.VendorRestDTO;
+import rbekyarov.project.models.dto.restDto.VendorRestThinDTO;
 import rbekyarov.project.models.entity.User;
+import rbekyarov.project.models.entity.Vendor;
 import rbekyarov.project.service.CompanyService;
 import rbekyarov.project.models.dto.CostDTO;
 import rbekyarov.project.models.entity.Cost;
@@ -155,6 +160,29 @@ public class CostServiceImpl implements CostService {
     @Override
     public List<Cost> findLast2Cost() {
         return costRepository.findLast2Cost();
+    }
+
+    @Override
+    public List<CostRestDTO> getAllCostForRest() {
+        return costRepository.findAll().
+                stream().
+                map(this::map).
+                toList();
+    }
+    private CostRestDTO map(Cost cost) {
+        CostRestDTO costRestDTO = new CostRestDTO();
+        costRestDTO.setId(cost.getId());
+        costRestDTO.setAmount(cost.getAmount());
+        costRestDTO.setDescription(cost.getDescription());
+        costRestDTO.setInvoiceNo(cost.getInvoiceNo());
+
+        costRestDTO.setDateCost(cost.getDateCost().toString());
+
+       VendorRestThinDTO vendorRestDTO = new VendorRestThinDTO();
+        vendorRestDTO.setName(cost.getVendor().getName());
+        costRestDTO.setVendor(vendorRestDTO);
+        return costRestDTO;
+
     }
 
     //convert String to LocalDate

@@ -7,10 +7,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.VendorDTO;
-import rbekyarov.project.models.entity.Behavior;
-import rbekyarov.project.models.entity.Cost;
-import rbekyarov.project.models.entity.User;
-import rbekyarov.project.models.entity.Vendor;
+import rbekyarov.project.models.dto.restDto.CityRestThinDTO;
+import rbekyarov.project.models.dto.restDto.PriceRestDTO;
+import rbekyarov.project.models.dto.restDto.VendorRestDTO;
+import rbekyarov.project.models.entity.*;
 import rbekyarov.project.repository.VendorRepository;
 import rbekyarov.project.service.VendorService;
 import rbekyarov.project.service.UserService;
@@ -106,6 +106,28 @@ public class VendorServiceImpl implements VendorService {
         Page<Vendor> vendorsPage = new PageImpl<Vendor>(list, PageRequest.of(currentPage, pageSize), vendors.size());
 
         return vendorsPage;
+    }
+
+    @Override
+    public List<VendorRestDTO> getAllVendorForRest() {
+        return vendorRepository.findAll().
+                stream().
+                map(this::map).
+                toList();
+    }
+    private VendorRestDTO map(Vendor vendor) {
+        VendorRestDTO vendorRestDTO = new VendorRestDTO();
+
+        vendorRestDTO.setId(vendor.getId());
+        vendorRestDTO.setAddress(vendor.getAddress());
+        vendorRestDTO.setName(vendor.getName());
+        vendorRestDTO.setCountry(vendor.getCountry());
+        vendorRestDTO.setEmail(vendor.getEmail());
+        vendorRestDTO.setVatNumber(vendor.getVatNumber());
+        CityRestThinDTO cityRestThinDTO = new CityRestThinDTO();
+        cityRestThinDTO.setName(vendor.getCity().getName());
+        vendorRestDTO.setCity(cityRestThinDTO);
+        return vendorRestDTO;
     }
 
 

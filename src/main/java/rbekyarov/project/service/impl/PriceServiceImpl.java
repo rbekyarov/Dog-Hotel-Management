@@ -7,6 +7,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.PriceDTO;
+import rbekyarov.project.models.dto.restDto.BreedRestDTO;
+import rbekyarov.project.models.dto.restDto.PriceRestDTO;
+import rbekyarov.project.models.entity.Breed;
 import rbekyarov.project.models.entity.Price;
 import rbekyarov.project.repository.PriceRepository;
 import rbekyarov.project.service.PriceService;
@@ -142,6 +145,32 @@ public class PriceServiceImpl implements PriceService {
         Page<Price> pricesPage = new PageImpl<Price>(list, PageRequest.of(currentPage, pageSize), prices.size());
 
         return pricesPage;
+    }
+
+    @Override
+    public List<PriceRestDTO> getAllPricesForRest() {
+        return priceRepository.findAll().
+                stream().
+                map(this::map).
+                toList();
+    }
+    private PriceRestDTO map(Price price) {
+         PriceRestDTO priceRestDTO = new PriceRestDTO();
+         priceRestDTO.setId(price.getId());
+         priceRestDTO.setPriceBathing(price.getPriceBathing());
+         priceRestDTO.setPriceCombing(price.getPriceCombing());
+         priceRestDTO.setPriceDeworming(price.getPriceDeworming());
+         priceRestDTO.setPriceTraining(price.getPriceTraining());
+         priceRestDTO.setPriceEars(price.getPriceEars());
+         priceRestDTO.setPriceNails(price.getPriceNails());
+         priceRestDTO.setPriceFood(price.getPriceFood());
+         priceRestDTO.setPricePaws(price.getPricePaws());
+         priceRestDTO.setPriceStayL(price.getPriceStayL());
+         priceRestDTO.setPriceStayM(price.getPriceStayM());
+         priceRestDTO.setPriceStayS(price.getPriceStayS());
+         priceRestDTO.setDiscountClientRegular(price.getDiscountClientRegular());
+         priceRestDTO.setDiscountClientVip(price.getDiscountClientVip());
+         return priceRestDTO;
     }
 
     public Long getLastPricesId(){

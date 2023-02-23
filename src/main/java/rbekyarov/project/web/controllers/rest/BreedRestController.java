@@ -26,22 +26,22 @@ public class BreedRestController {
                 ok(breedService.findAllBreedForRest());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<BreedRestDTO> deleteBreedById(@PathVariable("id") Long id) {
-        breedService.deleteByIdForRest(id);
-
-        return ResponseEntity.
-                noContent().
-                build();
-    }
-    @PostMapping()
-    public ResponseEntity<BreedRestDTO> createBreed(@RequestBody BreedRestDTO breedRestDTO,
-                                              UriComponentsBuilder uriComponentsBuilder) {
-
-        breedService.createBreedForRest(breedRestDTO);
-
-        return ResponseEntity.created(uriComponentsBuilder.
-                        path("/api/breeds/{id}").build(breedRestDTO)).
-                build();
-    }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<BreedRestDTO> deleteBreedById(@PathVariable("id") Long id) {
+//        breedService.deleteByIdForRest(id);
+//
+//        return ResponseEntity.
+//                noContent().
+//                build();
+//    }
+//    @PostMapping()
+//    public ResponseEntity<BreedRestDTO> createBreed(@RequestBody BreedRestDTO breedRestDTO,
+//                                              UriComponentsBuilder uriComponentsBuilder) {
+//
+//        breedService.createBreedForRest(breedRestDTO);
+//
+//        return ResponseEntity.created(uriComponentsBuilder.
+//                        path("/api/breeds/{id}").build(breedRestDTO)).
+//                build();
+//    }
 }

@@ -3,6 +3,7 @@ package rbekyarov.project.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import rbekyarov.project.models.dto.restDto.CostRestDTO;
 import rbekyarov.project.models.entity.Cost;
 import rbekyarov.project.models.dto.CostDTO;
 
@@ -27,4 +28,6 @@ public interface CostService {
     BigDecimal getTotalAmountCost();
 
     List<Cost> findLast2Cost();
+
+    List<CostRestDTO> getAllCostForRest();
 }
