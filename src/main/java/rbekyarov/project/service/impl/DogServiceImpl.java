@@ -207,7 +207,7 @@ public class DogServiceImpl implements DogService {
 
     @Override
     public List<Behavior> getAllBehaviors() {
-        return behaviorService.findAllBehaviorById();
+        return behaviorService.findAllBehavior();
     }
 
     @Override

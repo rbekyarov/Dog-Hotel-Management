@@ -1,20 +1,19 @@
 
 package rbekyarov.project.config;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.modelmapper.Converter;
+
 import org.modelmapper.ModelMapper;
-import org.modelmapper.spi.MappingContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
-import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import javax.validation.constraints.NotNull;
+
 
 @Configuration
 public class ApplicationBeanConfiguration {
@@ -23,7 +22,12 @@ public class ApplicationBeanConfiguration {
         return new Pbkdf2PasswordEncoder();
     }
 
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
+
+        return http.build();
+    }
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();

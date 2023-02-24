@@ -34,7 +34,7 @@ public class BehaviorServiceImpl implements BehaviorService {
     }
 
     @Override
-    public List<Behavior> findAllBehaviorById() {
+    public List<Behavior> findAllBehavior() {
         return behaviorRepository.findAllOrderById();
     }
 

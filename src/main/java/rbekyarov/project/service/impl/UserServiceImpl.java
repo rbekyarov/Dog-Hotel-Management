@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+
     @Override
     public void registerUser(UserRegisterDTO userRegisterDTO) {
         User user = this.modelMapper.map(userRegisterDTO, User.class);
