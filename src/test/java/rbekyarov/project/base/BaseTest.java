@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @ExtendWith(MockitoExtension.class)
+
 public class BaseTest {
 
     @BeforeEach

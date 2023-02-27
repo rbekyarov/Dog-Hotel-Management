@@ -39,7 +39,7 @@ public class BehaviorServiceImpl implements BehaviorService {
     }
 
     @Override
-    public void addBehaviors(BehaviorDTO behaviorDTO, HttpSession session) {
+    public void addBehavior(BehaviorDTO behaviorDTO, HttpSession session) {
 
 
         Behavior behavior = modelMapper.map(behaviorDTO, Behavior.class);

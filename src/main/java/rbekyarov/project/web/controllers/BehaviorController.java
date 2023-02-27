@@ -75,7 +75,7 @@ public class BehaviorController extends BaseController {
 
             return super.view("/view/add/behaviorAdd");
         }
-        behaviorService.addBehaviors(behaviorDTO,session);
+        behaviorService.addBehavior(behaviorDTO,session);
         return super.redirect("/view/table/behaviorTable");
 
     }

@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface BehaviorService {
     List<Behavior> findAllBehavior();
 
-    void addBehaviors(BehaviorDTO behaviorDTO, HttpSession session);
+    void addBehavior(BehaviorDTO behaviorDTO, HttpSession session);
 
     void removeBehaviorById(Long id);
 
