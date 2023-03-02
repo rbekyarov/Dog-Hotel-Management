@@ -16,6 +16,7 @@ import rbekyarov.project.models.dto.PriceEditDTO;
 import rbekyarov.project.models.entity.Price;
 import rbekyarov.project.service.PriceService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -25,14 +26,18 @@ import java.util.stream.IntStream;
 @Controller
 public class PriceController extends BaseController {
     private final PriceService priceService;
+    private final HttpSession session;
 
-    public PriceController(PriceService priceService) {
+    public PriceController(PriceService priceService, HttpSession session) {
         this.priceService = priceService;
+        this.session = session;
     }
 
     @GetMapping("/view/table/priceTable")
     public ModelAndView priceTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
 
@@ -51,7 +56,9 @@ public class PriceController extends BaseController {
     }
     @GetMapping("/view/table/priceTableUser")
     public ModelAndView priceTableUser(ModelAndView modelAndView) {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         List<Price> prices = priceService.findAllPriceById();
         modelAndView.addObject("prices", prices);
         return super.view("/view/table/priceTableUser", "prices", prices);
@@ -59,6 +66,9 @@ public class PriceController extends BaseController {
 
     @GetMapping("/view/add/priceAdd")
     public ModelAndView priceAdd(ModelAndView modelAndView) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         PriceDTO priceDTO = new PriceDTO();
 
         modelAndView.addObject("priceDTO", priceDTO);
@@ -70,6 +80,9 @@ public class PriceController extends BaseController {
 
     @PostMapping("/view/add/priceAdd")
     public ModelAndView addPrice(@Valid PriceDTO priceDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("priceDTO", priceDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.priceDTO", bindingResult);
@@ -83,6 +96,9 @@ public class PriceController extends BaseController {
 
     @GetMapping("view/table/price/remove/{id}")
     public String removePrice(@PathVariable Long id) {
+        if(checkValidSession()) {
+            return "redirect:view/login";
+        }
         priceService.removePriceById(id);
 
         return "redirect:/view/table/priceTable";
@@ -92,7 +108,9 @@ public class PriceController extends BaseController {
     @GetMapping("/view/table/price/edit/{id}")
     public ModelAndView getPriceDetail(@PathVariable("id") Long id,
                                        ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Price priceEditDTO =
                 priceService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
@@ -107,6 +125,9 @@ public class PriceController extends BaseController {
     public ModelAndView editPrice(@PathVariable("id") Long id, @Valid PriceEditDTO priceEditDTO,
                             BindingResult bindingResult,
                             ModelAndView modelAndView) throws ObjectNotFoundException {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
 
             modelAndView.addObject("priceEditDTO", priceEditDTO);
@@ -132,4 +153,15 @@ public class PriceController extends BaseController {
         return super.redirect("/view/table/priceTable");
 
     }
+    public boolean checkValidSession(){
+        Object user = session.getAttribute("user");
+        Object admin = session.getAttribute("admin");
+
+        if(admin ==null && user==null){
+            return   true;
+
+        }
+        return false;
+    }
+
 }

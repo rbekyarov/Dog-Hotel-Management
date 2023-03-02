@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.entity.Invoice;
 import rbekyarov.project.service.InvoiceService;
 
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +21,19 @@ import java.util.stream.IntStream;
 @Controller
 public class InvoiceController extends BaseController {
    private final InvoiceService invoiceService;
+   private final HttpSession session;
 
-    public InvoiceController(InvoiceService invoiceService) {
+    public InvoiceController(InvoiceService invoiceService, HttpSession session) {
         this.invoiceService = invoiceService;
+        this.session = session;
     }
 
 
     @GetMapping("/view/table/invoiceTable")
     public ModelAndView invoiceTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
 
@@ -49,14 +54,18 @@ public class InvoiceController extends BaseController {
     }
     @GetMapping("/view/table/invoiceCanceledTable")
     public ModelAndView invoiceCancelledTable(ModelAndView modelAndView) {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         List<Invoice> invoices = invoiceService.findAllCancelledInvoice();
         modelAndView.addObject("invoices", invoices);
         return super.view("/view/table/invoiceCanceledTable", "invoices", invoices);
     }
     @GetMapping("view/table/invoice/view/{id}")
     public ModelAndView getInvoiceView(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Invoice invoice = invoiceService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
         modelAndView.addObject("invoice", invoice);
 
@@ -67,7 +76,9 @@ public class InvoiceController extends BaseController {
 
     @GetMapping("view/table/invoice/remove/{id}")
     public String cancellationInvoice(@PathVariable Long id) {
-
+        if(checkValidSession()) {
+            return "redirect:view/login";
+        }
         //delete invoice
         invoiceService.cancellationInvoiceById(id);
 
@@ -78,6 +89,9 @@ public class InvoiceController extends BaseController {
 
     @RequestMapping(path = {"/","/view/table/searchInvoiceNumber"})
     public ModelAndView searchInvoiceNumber(ModelAndView modelAndView,@RequestParam("invoiceNumber") String invoiceNumber) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         List<Invoice> invoices = new ArrayList<>();
         if(!invoiceNumber.equals("")) {
             invoices = invoiceService.listInvoiceById(Long.parseLong(invoiceNumber));
@@ -89,6 +103,9 @@ public class InvoiceController extends BaseController {
     }
     @RequestMapping(path = {"/","/view/table/searchInvoiceByClientEmail"})
     public ModelAndView searchClientEmail(ModelAndView modelAndView,@RequestParam("clientEmail") String clientEmail) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         List<Invoice> invoices = new ArrayList<>();
         if(!clientEmail.equals("")) {
             invoices = invoiceService.listInvoiceByEmail(clientEmail);
@@ -99,5 +116,14 @@ public class InvoiceController extends BaseController {
         return super.view("/view/table/invoiceTable", "invoices", invoices);
     }
 
+    public boolean checkValidSession(){
+        Object user = session.getAttribute("user");
+        Object admin = session.getAttribute("admin");
 
+        if(admin ==null && user==null){
+            return   true;
+
+        }
+        return false;
+    }
 }

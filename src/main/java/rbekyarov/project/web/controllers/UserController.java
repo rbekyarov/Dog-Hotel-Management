@@ -13,7 +13,6 @@ import rbekyarov.project.models.dto.UserEditDTO;
 import rbekyarov.project.models.dto.UserLoginDTO;
 import rbekyarov.project.models.dto.UserRegisterDTO;
 import rbekyarov.project.models.entity.User;
-import rbekyarov.project.models.entity.enums.Role;
 import rbekyarov.project.repository.DogRepository;
 import rbekyarov.project.service.UserService;
 
@@ -30,15 +29,20 @@ public class UserController extends BaseController {
     private final UserService userService;
     private final DogRepository dogRepository;
     private final ModelMapper modelMapper;
+    private final HttpSession session;
 
-    public UserController(UserService userService, DogRepository dogRepository, ModelMapper modelMapper) {
+    public UserController(UserService userService, DogRepository dogRepository, ModelMapper modelMapper, HttpSession session) {
         this.userService = userService;
         this.dogRepository = dogRepository;
         this.modelMapper = modelMapper;
+        this.session = session;
     }
 
     @GetMapping("/view/add/userAdd")
     public ModelAndView userAdd(ModelAndView modelAndView) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         UserDTO userDTO = new UserDTO();
 
         modelAndView.addObject("userDTO", userDTO);
@@ -50,7 +54,9 @@ public class UserController extends BaseController {
 
     @PostMapping("/view/add/userAdd")
     public ModelAndView addUser(@Valid UserDTO userDTO, ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
 
         if (userDTO.getUsername().isEmpty() || userDTO.getPassword().isEmpty() || userDTO.getConfirmPassword().isEmpty()) {
             redirectAttributes.addFlashAttribute("empty", true);
@@ -80,6 +86,7 @@ public class UserController extends BaseController {
 
     @GetMapping("/view/register")
     public ModelAndView register(ModelAndView modelAndView, HttpSession session) {
+
         UserDTO userDTO = new UserDTO();
 
         modelAndView.addObject("userDTO", userDTO);
@@ -89,7 +96,7 @@ public class UserController extends BaseController {
         } else {
             modelAndView.setViewName("/view/register");
         }
-
+        session.invalidate();
         return super.view(modelAndView.getViewName(), "userDTO", userDTO);
     }
 
@@ -133,7 +140,7 @@ public class UserController extends BaseController {
             user = new User();
             modelAndView.setViewName("/view/login");
         }
-
+        session.invalidate();
         return super.view(modelAndView.getViewName(), "user", user);
     }
 
@@ -182,6 +189,9 @@ public class UserController extends BaseController {
 
     @GetMapping("/view/edit/editUserData")
     public ModelAndView userEditData(ModelAndView modelAndView, HttpSession session) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Object userName = session.getAttribute("username");
         Optional<User> byUsername = userService.findByUsername(userName.toString());
         User user = byUsername.get();
@@ -193,6 +203,9 @@ public class UserController extends BaseController {
 
     @PostMapping("/view/edit/editUserData")
     public String postUserEditData(UserDTO userDTO, HttpSession session, RedirectAttributes redirectAttributes) {
+        if(checkValidSession()) {
+            return "redirect:/view/login";
+        }
         if (userDTO.getUsername().isEmpty() || userDTO.getPassword().isEmpty()) {
             redirectAttributes.addFlashAttribute("empty", true);
             return "redirect:/view/edit/editUserData";
@@ -209,7 +222,9 @@ public class UserController extends BaseController {
 
     @GetMapping("/view/table/userTable")
     public ModelAndView userTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
 
@@ -230,7 +245,9 @@ public class UserController extends BaseController {
     @GetMapping("view/table/user/edit/{id}")
     public ModelAndView getUserDetail(@PathVariable("id") Long id,
                                       ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         User userDto =
                 userService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
@@ -243,7 +260,9 @@ public class UserController extends BaseController {
 
     @PostMapping("view/table/user/edit/{id}/edit")
     public String editBehavior(@PathVariable("id") Long id, UserEditDTO userEditDTO) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return "redirect:/view/login";
+        }
         userService.editUser(userEditDTO.getRole(), id);
 
         return "redirect:/view/table/userTable";
@@ -251,6 +270,9 @@ public class UserController extends BaseController {
 
     @GetMapping("view/table/user/remove/{id}")
     public ModelAndView removeUser(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         boolean isUsed = false;
         List<User> users = dogRepository.listUserUsed();
         for (User b : users) {
@@ -263,5 +285,15 @@ public class UserController extends BaseController {
             userService.removeUserById(id);
         }
         return super.redirect("/view/table/userTable");
+    }
+    public boolean checkValidSession(){
+        Object user = session.getAttribute("user");
+        Object admin = session.getAttribute("admin");
+
+        if(admin ==null && user==null){
+            return   true;
+
+        }
+        return false;
     }
 }

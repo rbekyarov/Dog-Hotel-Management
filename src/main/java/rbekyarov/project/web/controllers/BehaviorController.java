@@ -26,19 +26,22 @@ import java.util.stream.IntStream;
 public class BehaviorController extends BaseController {
     private final BehaviorService behaviorService;
     private final DogRepository dogRepository;
-
+private final HttpSession session;
 
     public BehaviorController(BehaviorService behaviorService,
-                              DogRepository dogRepository) {
+                              DogRepository dogRepository, HttpSession session) {
         this.behaviorService = behaviorService;
         this.dogRepository = dogRepository;
 
+        this.session = session;
     }
 
 
     @GetMapping("/view/table/behaviorTable")
-    public ModelAndView behaviorTable(ModelAndView modelAndView , @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size, HttpSession session) {
-
+    public ModelAndView behaviorTable(ModelAndView modelAndView , @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+       if(checkValidSession()) {
+           return super.redirect("/view/login");
+       }
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
 
@@ -58,8 +61,9 @@ public class BehaviorController extends BaseController {
 
     @GetMapping("/view/add/behaviorAdd")
     public ModelAndView behaviorAdd(ModelAndView modelAndView, BehaviorDTO behaviorDTO) {
-
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         modelAndView.addObject("behaviorDTO", behaviorDTO);
 
 
@@ -68,7 +72,10 @@ public class BehaviorController extends BaseController {
     }
 
     @PostMapping("/view/add/behaviorAdd")
-    public ModelAndView addBehavior(@Valid BehaviorDTO behaviorDTO ,BindingResult bindingResult,RedirectAttributes redirectAttributes, HttpSession session ) {
+    public ModelAndView addBehavior(@Valid BehaviorDTO behaviorDTO ,BindingResult bindingResult,RedirectAttributes redirectAttributes ) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("behaviorDTO", behaviorDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.behaviorDTO", bindingResult);
@@ -82,6 +89,9 @@ public class BehaviorController extends BaseController {
 
     @GetMapping("view/table/behavior/remove/{id}")
     public ModelAndView removeBehavior(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         boolean isUsed = false;
         List<Behavior> behaviors = dogRepository.listBehaviorUsed();
         for (Behavior b : behaviors) {
@@ -100,7 +110,9 @@ public class BehaviorController extends BaseController {
     @GetMapping("/view/table/behavior/edit/{id}")
     public ModelAndView getBehaviorDetail(@PathVariable("id") Long id,
                                           ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Behavior behaviorEditDTO =
                 behaviorService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
@@ -115,7 +127,10 @@ public class BehaviorController extends BaseController {
     public ModelAndView editBehavior( @PathVariable("id") Long id ,
                                       @Valid BehaviorEditDTO behaviorEditDTO,
                                       BindingResult bindingResult,
-                                      HttpSession session, ModelAndView modelAndView ) {
+                                      ModelAndView modelAndView ) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
 
             modelAndView.addObject("behaviorEditDTO", behaviorEditDTO);
@@ -124,6 +139,17 @@ public class BehaviorController extends BaseController {
         }
         behaviorService.editBehaviors(behaviorEditDTO.getName(), id, session);
         return super.redirect("/view/table/behaviorTable");
+    }
+
+    public boolean checkValidSession(){
+        Object user = session.getAttribute("user");
+        Object admin = session.getAttribute("admin");
+
+        if(admin ==null && user==null){
+         return   true;
+
+        }
+        return false;
     }
 
 //    @PostMapping("/view/table/behavior/edit/{id}")

@@ -19,17 +19,19 @@ public class HomeController extends BaseController {
     private final CompanyService companyService;
     private final CostService costService;
     private final InvoiceService invoiceService;
+    private final HttpSession session;
 
     public HomeController(ReservationService reservationService,
                           CellService cellService,
                           CompanyService companyService,
                           CostService costService,
-                          InvoiceService invoiceService) {
+                          InvoiceService invoiceService, HttpSession session) {
         this.reservationService = reservationService;
         this.cellService = cellService;
         this.companyService = companyService;
         this.costService = costService;
         this.invoiceService = invoiceService;
+        this.session = session;
     }
 
 
@@ -42,13 +44,14 @@ public class HomeController extends BaseController {
             return super.redirect("/view/home");
 
         }else {
-
+            session.invalidate();
             return super.redirect("/index");
         }
 
     }
     @GetMapping("/index")
     public ModelAndView index() {
+        session.invalidate();
         return super.view("/index");
 
     }

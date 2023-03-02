@@ -27,7 +27,7 @@ public class BehaviorServiceTest extends BaseTest {
     @InjectMocks
     MockHttpSession session;
     @MockBean
-    BehaviorRepository behaviorRepository;
+    BehaviorRepository mockBehaviorRepository;
 
 
     @Before
@@ -51,7 +51,7 @@ public class BehaviorServiceTest extends BaseTest {
         behaviorDTO.setId(1l);
 
         this.behaviorService.addBehavior(behaviorDTO,this.session);
-        List<Behavior> allBehavior = behaviorRepository.findAll();
+        List<Behavior> allBehavior = behaviorService.findAllBehavior();
         Assert.assertTrue(allBehavior.size()==1);
     }
 

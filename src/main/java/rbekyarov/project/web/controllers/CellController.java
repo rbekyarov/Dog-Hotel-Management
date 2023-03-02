@@ -30,14 +30,18 @@ import java.util.stream.IntStream;
 public class CellController extends BaseController {
     private final CellService cellService;
     private final ReservationRepository reservationRepository;
-
-    public CellController(CellService cellService, ReservationRepository reservationRepository) {
+private final HttpSession session;
+    public CellController(CellService cellService, ReservationRepository reservationRepository, HttpSession session) {
         this.cellService = cellService;
         this.reservationRepository = reservationRepository;
+        this.session = session;
     }
 
     @GetMapping("/view/table/cellTable")
     public ModelAndView cellTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
         Page<Cell> cells = cellService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
@@ -60,6 +64,9 @@ public class CellController extends BaseController {
 
     @GetMapping("/view/add/cellAdd")
     public ModelAndView cellAdd(ModelAndView modelAndView) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         CellDTO cellDTO = new CellDTO();
 
         modelAndView.addObject("cellDTO", cellDTO);
@@ -71,6 +78,9 @@ public class CellController extends BaseController {
 
     @PostMapping("/view/add/cellAdd")
     public ModelAndView addCell(@Valid CellDTO cellDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("cellDTO", cellDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.cellDTO", bindingResult);
@@ -84,6 +94,9 @@ public class CellController extends BaseController {
 
     @GetMapping("view/table/cell/remove/{id}")
     public ModelAndView removeBehavior(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         boolean isUsed = false;
         List<Cell> cells = reservationRepository.listUsedCell();
         for (Cell c : cells) {
@@ -102,7 +115,9 @@ public class CellController extends BaseController {
     @GetMapping("/view/table/cell/edit/{id}")
     public ModelAndView getCellDetail(@PathVariable("id") Long id,
                                       ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Cell cellEditDTO =
                 cellService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
@@ -118,7 +133,9 @@ public class CellController extends BaseController {
                            @Valid CellEditDTO cellEditDTO,
                            BindingResult bindingResult,RedirectAttributes redirectAttributes,
                            HttpSession session) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("cellEditDTO", cellEditDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.cellEditDTO", bindingResult);
@@ -138,6 +155,16 @@ public class CellController extends BaseController {
         cellService.editCells(cellEditDTO.getCode(), id, cellEditDTO.getStatus(),cellEditDTO.getCellSize(),session);
         return super.redirect("/view/table/cellTable");
 
+    }
+    public boolean checkValidSession(){
+        Object user = session.getAttribute("user");
+        Object admin = session.getAttribute("admin");
+
+        if(admin ==null && user==null){
+            return   true;
+
+        }
+        return false;
     }
 
 

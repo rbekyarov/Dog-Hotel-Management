@@ -31,16 +31,22 @@ public class CityController extends BaseController {
     private final CityService cityService;
     private final ClientRepository clientRepository;
     private final CityRepository cityRepository;
+    private final HttpSession session;
+
 
     public CityController(CityService cityService, ClientRepository clientRepository,
-                          CityRepository cityRepository) {
+                          CityRepository cityRepository, HttpSession session) {
         this.cityService = cityService;
         this.clientRepository = clientRepository;
         this.cityRepository = cityRepository;
+        this.session = session;
     }
 
     @GetMapping("/view/table/cityTable")
     public ModelAndView cityTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
         Page<City> cities = cityService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
@@ -58,6 +64,9 @@ public class CityController extends BaseController {
 
     @GetMapping("/view/add/cityAdd")
     public ModelAndView cityAdd(ModelAndView modelAndView) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         CityDTO cityDTO = new CityDTO();
 
         modelAndView.addObject("cityDTO", cityDTO);
@@ -69,6 +78,9 @@ public class CityController extends BaseController {
 
     @PostMapping("/view/add/cityAdd")
     public ModelAndView addCity(@Valid CityDTO cityDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("cityDTO", cityDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.cityDTO", bindingResult);
@@ -82,6 +94,9 @@ public class CityController extends BaseController {
 
     @GetMapping("view/table/city/remove/{id}")
     public ModelAndView removeCity(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         boolean isUsed = false;
         List<City> cities = clientRepository.listUsedCity();
         for (City b : cities) {
@@ -99,7 +114,9 @@ public class CityController extends BaseController {
     @GetMapping("/view/table/city/edit/{id}")
     public ModelAndView getCityDetail(@PathVariable("id") Long id,
                                       ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         City cityEditDTO =
                 cityService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
@@ -115,6 +132,9 @@ public class CityController extends BaseController {
                                  @Valid CityEditDTO cityEditDTO,
                                  BindingResult bindingResult,
                                  HttpSession session,ModelAndView modelAndView) throws ObjectNotFoundException {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
 
             modelAndView.addObject("cityEditDTO", cityEditDTO);
@@ -125,5 +145,15 @@ public class CityController extends BaseController {
         cityService.editCity(cityEditDTO.getCode(), id, cityEditDTO.getName(),session);
         return super.redirect("/view/table/cityTable");
 
+    }
+    public boolean checkValidSession(){
+        Object user = session.getAttribute("user");
+        Object admin = session.getAttribute("admin");
+
+        if(admin ==null && user==null){
+            return   true;
+
+        }
+        return false;
     }
 }

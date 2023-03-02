@@ -26,17 +26,21 @@ import java.util.List;
 public class CompanyController extends BaseController {
     private final CompanyService companyService;
     private final CityService cityService;
+    private final HttpSession session;
     public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/image";
 
-    public CompanyController(CompanyService companyService, CityService cityService) {
+    public CompanyController(CompanyService companyService, CityService cityService, HttpSession session) {
         this.companyService = companyService;
         this.cityService = cityService;
+        this.session = session;
     }
 
 
     @GetMapping("view/MyCompany")
     public ModelAndView getMyCompany( ModelAndView modelAndView) {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         List<Company> allCompany = companyService.findAllCompany();
         Company myCompany = allCompany.get(0);
 
@@ -47,7 +51,9 @@ public class CompanyController extends BaseController {
     }
     @GetMapping("view/MyCompanyUser")
     public ModelAndView getMyCompanyUser( ModelAndView modelAndView) {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         List<Company> allCompany = companyService.findAllCompany();
         Company myCompany = allCompany.get(0);
 
@@ -59,6 +65,9 @@ public class CompanyController extends BaseController {
 
     @GetMapping("/view/edit/companyEdit")
     public ModelAndView getMyCompanyEdit(ModelAndView modelAndView) throws ObjectNotFoundException {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Long id = 1L;
         Company companyDTO =
                 companyService.findById(id).
@@ -76,6 +85,9 @@ public class CompanyController extends BaseController {
     public ModelAndView editCompany(@Valid CompanyDTO companyDTO, BindingResult bindingResult,
                               ModelAndView modelAndView ,@RequestParam("fileImage") MultipartFile file,
                               @RequestParam("imgName")String imgName) throws IOException {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Long id = 1L;
         //image upload
         String imageUUID;
@@ -111,5 +123,15 @@ public class CompanyController extends BaseController {
                 companyDTO.getManagerName(),
                 id);
         return super.redirect("/view/MyCompany");
+    }
+    public boolean checkValidSession(){
+        Object user = session.getAttribute("user");
+        Object admin = session.getAttribute("admin");
+
+        if(admin ==null && user==null){
+            return   true;
+
+        }
+        return false;
     }
 }

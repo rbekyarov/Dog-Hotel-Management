@@ -29,16 +29,20 @@ import java.util.stream.IntStream;
 public class BreedController extends BaseController {
     private final BreedService breedService;
     private final DogRepository dogRepository;
+    private final HttpSession session;
 
-    public BreedController(BreedService breedService, DogRepository dogRepository) {
+    public BreedController(BreedService breedService, DogRepository dogRepository, HttpSession session) {
         this.breedService = breedService;
         this.dogRepository = dogRepository;
+        this.session = session;
     }
 
 
     @GetMapping("/view/table/breedTable")
     public ModelAndView breedTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
 
@@ -58,6 +62,9 @@ public class BreedController extends BaseController {
 
     @GetMapping("/view/add/breedAdd")
     public ModelAndView breedAdd(ModelAndView modelAndView) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         BreedDTO breedDTO = new BreedDTO();
 
         modelAndView.addObject("breedDTO", breedDTO);
@@ -69,6 +76,9 @@ public class BreedController extends BaseController {
 
     @PostMapping("/view/add/breedAdd")
     public ModelAndView addBreed(@Valid BreedDTO breedDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("breedDTO", breedDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.breedDTO", bindingResult);
@@ -82,6 +92,9 @@ public class BreedController extends BaseController {
 
     @GetMapping("view/table/breed/remove/{id}")
     public ModelAndView removeBehavior(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         boolean isUsed = false;
         List<Breed> breeds = dogRepository.listBreedUsed();
         for (Breed b : breeds) {
@@ -100,7 +113,9 @@ public class BreedController extends BaseController {
     @GetMapping("/view/table/breed/edit/{id}")
     public ModelAndView getBreedDetail(@PathVariable("id") Long id,
                                        ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Breed breedEditDTO =
                 breedService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
@@ -116,6 +131,9 @@ public class BreedController extends BaseController {
                                   @Valid BreedEditDTO breedEditDTO,
                                   BindingResult bindingResult,
                                   HttpSession session,ModelAndView modelAndView) throws ObjectNotFoundException {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
 
             modelAndView.addObject("breedEditDTO", breedEditDTO);
@@ -128,5 +146,15 @@ public class BreedController extends BaseController {
 
 
         return super.redirect("/view/table/breedTable");
+    }
+    public boolean checkValidSession(){
+        Object user = session.getAttribute("user");
+        Object admin = session.getAttribute("admin");
+
+        if(admin ==null && user==null){
+            return   true;
+
+        }
+        return false;
     }
 }

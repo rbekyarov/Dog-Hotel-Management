@@ -60,4 +60,6 @@ public interface ReservationService {
     Page<Reservation> findPaginatedCompleted(Pageable pageable);
 
     List<ReservationRestDTO> findAllReservationForRest();
+
+    boolean checkReservationIsInvoised(Long id);
 }

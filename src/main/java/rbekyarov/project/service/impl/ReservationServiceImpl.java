@@ -554,6 +554,15 @@ public class ReservationServiceImpl implements ReservationService {
                 toList();
     }
 
+    @Override
+    public boolean checkReservationIsInvoised(Long id) {
+        if (reservationRepository.findById(id).get().getInvoiced().equals(Invoiced.YES)){
+            return true;
+        }
+
+        return false;
+    }
+
     private ReservationRestDTO map(Reservation reservation) {
         ReservationRestDTO reservationRestDTO = new ReservationRestDTO();
 

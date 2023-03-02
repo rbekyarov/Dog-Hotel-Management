@@ -37,21 +37,25 @@ public class DogController extends BaseController {
     private final DogRepository dogRepository;
     private final ReservationRepository reservationRepository;
     private final ClientRepository clientRepository;
+    private final HttpSession session;
 
 
     public DogController(DogService dogService, FileStorageService fileStorageService,
-                         DogRepository dogRepository, ReservationRepository reservationRepository, ClientRepository clientRepository, ReservationRepository reservationRepository1, ClientRepository clientRepository1) {
+                         DogRepository dogRepository, ReservationRepository reservationRepository, ClientRepository clientRepository, ReservationRepository reservationRepository1, ClientRepository clientRepository1, HttpSession session) {
 
         this.dogService = dogService;
         this.dogRepository = dogRepository;
         this.reservationRepository = reservationRepository1;
         this.clientRepository = clientRepository1;
+        this.session = session;
     }
 
     @GetMapping("/view/table/dogTable")
     public ModelAndView dogTable(ModelAndView  modelAndView , @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
 
@@ -74,6 +78,9 @@ public class DogController extends BaseController {
 
     @GetMapping("/view/add/dogAdd")
     public ModelAndView dogAdd(ModelAndView modelAndView) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         DogDTO dogDTO = new DogDTO();
 
 
@@ -97,6 +104,9 @@ public class DogController extends BaseController {
     }
     @GetMapping("/view/add/dogAdd/{id}")
     public ModelAndView dogAddOnClientTable(@PathVariable("id") Long id, ModelAndView modelAndView) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         DogDTO dogDTO = new DogDTO();
         dogDTO.setClient(clientRepository.getOne(id));
         List<Behavior> allBehaviors = dogService.getAllBehaviors();
@@ -122,7 +132,9 @@ public class DogController extends BaseController {
     public ModelAndView addDog(@Valid DogDTO dogDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                          @RequestParam("fileImage") MultipartFile file,
                          @RequestParam("imgName") String imgName, HttpSession session) throws IOException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
             List<Behavior> allBehaviors = dogService.getAllBehaviors();
             List<Breed> allBreeds = dogService.getAllBreeds();
@@ -151,6 +163,9 @@ public class DogController extends BaseController {
 
     @GetMapping("view/table/dog/remove/{id}")
     public ModelAndView removeDog(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         boolean isUsed = false;
         List<Dog> dogs = reservationRepository.listUsedDog();
         for (Dog b : dogs) {
@@ -168,7 +183,9 @@ public class DogController extends BaseController {
     @GetMapping("/view/table/dog/edit/{id}")
     public ModelAndView getDogDetail(@PathVariable("id") Long id,
                                      ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Dog dogEditDTO =
                 dogService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
@@ -199,6 +216,9 @@ public class DogController extends BaseController {
                           @RequestParam("fileImage") MultipartFile file,
                           @RequestParam("imgName") String imgName,
                           HttpSession session, ModelAndView modelAndView) throws ObjectNotFoundException, IOException {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
             dogEditDTO.setImageName(imgName);
             List<Behavior> allBehaviors = dogService.getAllBehaviors();
@@ -225,6 +245,9 @@ public class DogController extends BaseController {
 
     @RequestMapping(path = {"/","/view/table/searchDogName"})
     public ModelAndView search(ModelAndView modelAndView,@RequestParam("dogName") String dogName) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         List<Dog> dogs = new ArrayList<>();
         if(!dogName.equals("")) {
             dogs = dogService.listDogByName(dogName);
@@ -236,6 +259,9 @@ public class DogController extends BaseController {
     }
     @RequestMapping(path = {"/","/view/table/searchClientEmail"})
     public ModelAndView searchClientEmail(ModelAndView modelAndView,@RequestParam("clientEmail") String clientEmail) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         List<Dog> dogs = new ArrayList<>();
         if(!clientEmail.equals("")) {
             dogs = dogService.listDogByClientEmail(clientEmail);
@@ -248,7 +274,9 @@ public class DogController extends BaseController {
 
     @GetMapping("view/table/dog/view/{id}")
     public ModelAndView getDogView(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Dog dog = dogRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
         modelAndView.addObject("dog", dog);
         List<Reservation> reservations = reservationRepository.getReservationByDogId(id);
@@ -256,4 +284,15 @@ public class DogController extends BaseController {
         return super.view("/view/table/dogView", "dog", dog,"reservations", reservations);
 
     }
+    public boolean checkValidSession(){
+        Object user = session.getAttribute("user");
+        Object admin = session.getAttribute("admin");
+
+        if(admin ==null && user==null){
+            return   true;
+
+        }
+        return false;
+    }
+
 }

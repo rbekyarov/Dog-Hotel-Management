@@ -35,21 +35,26 @@ public class ClientController extends BaseController {
     private final ClientRepository clientRepository;
     private final ReservationRepository reservationRepository;
     private final InvoiceRepository invoiceRepository;
+    private final HttpSession session;
 
     public ClientController(ClientService clientService, DogService dogService, CityService cityService,
                             ClientRepository clientRepository,
-                            ReservationRepository reservationRepository, InvoiceRepository invoiceRepository) {
+                            ReservationRepository reservationRepository, InvoiceRepository invoiceRepository, HttpSession session) {
         this.clientService = clientService;
         this.dogService = dogService;
         this.cityService = cityService;
         this.clientRepository = clientRepository;
         this.reservationRepository = reservationRepository;
         this.invoiceRepository = invoiceRepository;
+        this.session = session;
     }
 
 
     @GetMapping("/view/table/clientTable")
     public ModelAndView clientTable(ModelAndView modelAndView, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
         Page<Client> clients = clientService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
@@ -70,6 +75,9 @@ public class ClientController extends BaseController {
 
     @GetMapping("/view/add/clientAdd")
     public ModelAndView clientAdd(ModelAndView modelAndView) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         ClientDTO clientDTO = new ClientDTO();
 
         List<City> allCity = cityService.findAllCityById();
@@ -85,6 +93,9 @@ public class ClientController extends BaseController {
 
     @PostMapping("/view/add/clientAdd")
     public ModelAndView addClient(@Valid ClientDTO clientDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
             List<City> allCity = cityService.findAllCityById();
 
@@ -103,6 +114,9 @@ public class ClientController extends BaseController {
 
     @GetMapping("view/table/client/remove/{id}")
     public ModelAndView removeCity(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         boolean isUsed = false;
         List<Client> clients = reservationRepository.listUsedClient();
         for (Client b : clients) {
@@ -120,7 +134,9 @@ public class ClientController extends BaseController {
     @GetMapping("/view/table/client/edit/{id}")
     public ModelAndView getClientDetail(@PathVariable("id") Long id,
                                         ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Client clientEditDTO =
                 clientService.findById(id).
                         orElseThrow(() -> new ObjectNotFoundException("not found!"));
@@ -142,7 +158,9 @@ public class ClientController extends BaseController {
                              @Valid ClientEditDTO clientEditDTO,
                              BindingResult bindingResult,
                              HttpSession session,ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
             List<City> allCity = cityService.findAllCityById();
             modelAndView.addObject("clientEditDTO", clientEditDTO);
@@ -164,7 +182,9 @@ public class ClientController extends BaseController {
     }
     @GetMapping("/view/table/client/view/{id}")
     public ModelAndView getClientView(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Client client = clientRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
        String clientName = String.format(client.getFirstName() +" "+ client.getLastName());
        List <Invoice> clientInvoice = invoiceRepository.getInvoicesOnClient(clientName);
@@ -192,6 +212,9 @@ public class ClientController extends BaseController {
 
     @RequestMapping(path = {"/","/view/table/searchClientByPhone"})
     public ModelAndView search(ModelAndView modelAndView,@RequestParam("clientPhone") String clientPhone) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         List<Client> clients = new ArrayList<>();
         if(!clientPhone.equals("")) {
             clients = clientService.listClientByPhone(clientPhone);
@@ -203,6 +226,9 @@ public class ClientController extends BaseController {
     }
     @RequestMapping(path = {"/","/view/table/searchClientByEmail"})
     public ModelAndView searchClientEmail(ModelAndView modelAndView,@RequestParam("clientEmail") String clientEmail) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         List<Client> clients = new ArrayList<>();
         if(!clientEmail.equals("")) {
             clients = clientService.listClientByEmail(clientEmail);
@@ -211,5 +237,15 @@ public class ClientController extends BaseController {
             clients = clientService.findAllClientByDesc();
             modelAndView.addObject("clients", clients);}
         return super.view("/view/table/clientTable", "clients", clients);
+    }
+    public boolean checkValidSession(){
+        Object user = session.getAttribute("user");
+        Object admin = session.getAttribute("admin");
+
+        if(admin ==null && user==null){
+            return   true;
+
+        }
+        return false;
     }
 }

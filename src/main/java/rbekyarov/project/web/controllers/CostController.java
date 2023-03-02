@@ -31,17 +31,22 @@ public class CostController extends BaseController {
     private final CostService costService;
     private final VendorService vendorService;
     private final CostRepository costRepository;
+    private final HttpSession session;
 
     public CostController(CostService costService, VendorService vendorService,
-                          CostRepository costRepository) {
+                          CostRepository costRepository, HttpSession session) {
         this.costService = costService;
         this.vendorService = vendorService;
         this.costRepository = costRepository;
+        this.session = session;
     }
 
 
     @GetMapping("/view/table/costTable")
     public ModelAndView costTable(ModelAndView modelAndView , @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
 
@@ -63,6 +68,9 @@ public class CostController extends BaseController {
 
     @GetMapping("/view/add/costAdd")
     public ModelAndView costAdd(ModelAndView modelAndView) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         CostDTO costDTO = new CostDTO();
         List<Vendor> allVendor = vendorService.findAllVendor();
         modelAndView.addObject("costDTO", costDTO);
@@ -73,6 +81,9 @@ public class CostController extends BaseController {
 
     @PostMapping("/view/add/costAdd")
     public ModelAndView addCost(@Valid CostDTO costDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) throws IOException {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("costDTO", costDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.costDTO", bindingResult);
@@ -86,6 +97,9 @@ public class CostController extends BaseController {
 
     @GetMapping("view/table/cost/remove/{id}")
     public String removeCost(@PathVariable Long id) {
+        if(checkValidSession()) {
+            return "redirect:/view/login";
+        }
         costService.removeCostById(id);
 
         return "redirect:/view/table/costTable";
@@ -93,7 +107,9 @@ public class CostController extends BaseController {
 
     @GetMapping("/view/table/cost/edit/{id}")
     public ModelAndView getCostDetail(@PathVariable("id") Long id, ModelAndView modelAndView) throws ObjectNotFoundException {
-
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         Cost costEditDTO = costService.findById(id).orElseThrow(() -> new ObjectNotFoundException("not found!"));
         List<Vendor> allVendor = vendorService.findAllVendor();
         modelAndView.addObject("costEditDTO", costEditDTO);
@@ -105,6 +121,9 @@ public class CostController extends BaseController {
     public ModelAndView editCost(@PathVariable("id") Long id, @Valid CostEditDTO costEditDTO,
                            BindingResult bindingResult,
                            HttpSession session, ModelAndView modelAndView) throws ObjectNotFoundException, IOException {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         if (bindingResult.hasErrors()) {
             List<Vendor> allVendor = vendorService.findAllVendor();
             modelAndView.addObject("costEditDTO", costEditDTO);
@@ -123,6 +142,9 @@ public class CostController extends BaseController {
     }
     @RequestMapping(path = {"/","/view/table/searchCostByVendorName"})
     public ModelAndView search(ModelAndView modelAndView,@RequestParam("vendorName") String vendorName) {
+        if(checkValidSession()) {
+            return super.redirect("/view/login");
+        }
         List<Cost> costs = new ArrayList<>();
         if(!vendorName.equals("")) {
             costs = costService.findCostByVendor(vendorName);
@@ -131,5 +153,15 @@ public class CostController extends BaseController {
             costs = costService.findAllCostByDesc();
             modelAndView.addObject("costs", costs);}
         return super.view("/view/table/costTable", "costs", costs);
+    }
+    public boolean checkValidSession(){
+        Object user = session.getAttribute("user");
+        Object admin = session.getAttribute("admin");
+
+        if(admin ==null && user==null){
+            return   true;
+
+        }
+        return false;
     }
 }
