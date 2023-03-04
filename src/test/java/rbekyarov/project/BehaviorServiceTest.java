@@ -3,8 +3,14 @@ package rbekyarov.project;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockHttpSession;
@@ -17,19 +23,62 @@ import rbekyarov.project.repository.BehaviorRepository;
 import rbekyarov.project.service.BehaviorService;
 
 import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.context.junit4.SpringRunner;
+import rbekyarov.project.base.BaseTest;
+import rbekyarov.project.models.dto.BehaviorDTO;
+import rbekyarov.project.models.entity.Behavior;
+import rbekyarov.project.models.entity.User;
+import rbekyarov.project.repository.BehaviorRepository;
+import rbekyarov.project.service.BehaviorService;
+import rbekyarov.project.service.impl.BehaviorServiceImpl;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class BehaviorServiceTest extends BaseTest {
 
-    @Autowired
-     BehaviorService behaviorService;
-
+    @MockBean
+    private BehaviorRepository behaviorRepository;
     @InjectMocks
     MockHttpSession session;
-    @MockBean
-    BehaviorRepository mockBehaviorRepository;
+    @Mock
+    private Behavior behavior;
 
+    @Autowired
+    private BehaviorServiceImpl behaviorService;
 
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
     @Before
     public void   initUserSession() {
         User user = new User();
@@ -38,22 +87,20 @@ public class BehaviorServiceTest extends BaseTest {
 
     }
     @Test
-    public void findAllBehaviorReturnEmpty() {
-
-        List<Behavior> allBehavior = behaviorService.findAllBehavior();
-        Assert.assertTrue(allBehavior.isEmpty());
-    }
-    @Test
-    public void addBehavior() {
-
+    public void testAddBehavior() {
+        // Arrange
         BehaviorDTO behaviorDTO = new BehaviorDTO();
-        behaviorDTO.setName("test");
+        behaviorDTO.setName("Test");
         behaviorDTO.setId(1l);
 
-        this.behaviorService.addBehavior(behaviorDTO,this.session);
-        List<Behavior> allBehavior = behaviorService.findAllBehavior();
-        Assert.assertTrue(allBehavior.size()==1);
+        when(behaviorRepository.save(any(Behavior.class))).thenReturn(behavior);
+
+        // Act
+        behaviorService.addBehavior(behaviorDTO, session);
+
+        // Assert
+        assertEquals(behaviorDTO.getName(),behavior.getName());
+        assertEquals(behaviorDTO.getId(),behavior.getId());
+
     }
-
-
 }

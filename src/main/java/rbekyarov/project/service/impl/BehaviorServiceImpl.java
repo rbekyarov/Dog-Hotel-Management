@@ -52,7 +52,6 @@ public class BehaviorServiceImpl implements BehaviorService {
         behavior.setDateCreate(LocalDate.now());
 
         behaviorRepository.save(behavior);
-        List<Behavior> all = behaviorRepository.findAll();
     }
 
     @Override
