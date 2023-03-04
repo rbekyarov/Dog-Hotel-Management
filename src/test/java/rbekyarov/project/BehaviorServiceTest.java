@@ -1,6 +1,5 @@
 package rbekyarov.project;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockHttpSession;
@@ -20,46 +18,11 @@ import rbekyarov.project.models.dto.BehaviorDTO;
 import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.repository.BehaviorRepository;
-import rbekyarov.project.service.BehaviorService;
-
-import java.util.List;
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.context.junit4.SpringRunner;
-import rbekyarov.project.base.BaseTest;
-import rbekyarov.project.models.dto.BehaviorDTO;
-import rbekyarov.project.models.entity.Behavior;
-import rbekyarov.project.models.entity.User;
-import rbekyarov.project.repository.BehaviorRepository;
 import rbekyarov.project.service.BehaviorService;
-import rbekyarov.project.service.impl.BehaviorServiceImpl;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @ExtendWith(MockitoExtension.class)
@@ -73,7 +36,7 @@ public class BehaviorServiceTest extends BaseTest {
     private Behavior behavior;
 
     @Autowired
-    private BehaviorServiceImpl behaviorService;
+    private BehaviorService behaviorService;
 
     @BeforeEach
     public void setUp() {
