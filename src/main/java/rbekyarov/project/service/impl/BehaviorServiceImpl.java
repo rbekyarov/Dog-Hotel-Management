@@ -33,6 +33,8 @@ public class BehaviorServiceImpl implements BehaviorService {
         this.userService = userService;
     }
 
+
+
     @Override
     public List<Behavior> findAllBehavior() {
         return behaviorRepository.findAllOrderById();
@@ -65,7 +67,7 @@ public class BehaviorServiceImpl implements BehaviorService {
     }
 
     @Override
-    public void editBehaviors(String name, Long id, HttpSession session) {
+    public void editBehavior(String name, Long id, HttpSession session) {
         //Edit Author
         User editAuthor = userService.getAuthorFromSession(session);
         Long editAuthorId = editAuthor.getId();
@@ -105,21 +107,6 @@ public class BehaviorServiceImpl implements BehaviorService {
                 toList();
     }
 
-    @Override
-    public void deleteByIdForRest(Long id) {
-
-        behaviorRepository.deleteById(id);
-
-    }
-
-    @Override
-    public long createBehaviorForRest(BehaviorRestDTO behaviorRestDTO) {
-
-        Behavior behavior = new Behavior().
-                setName(behaviorRestDTO.getName());
-
-        return behaviorRepository.save(behavior).getId();
-    }
 
 
     private BehaviorRestDTO map(Behavior behavior) {

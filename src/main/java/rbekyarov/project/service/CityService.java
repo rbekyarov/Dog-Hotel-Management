@@ -27,7 +27,4 @@ public interface CityService {
 
     List<CityRestDTO> findAllCityForRest();
 
-    void deleteByIdForRest(Long id);
-
-    Long createCityForRest(CityRestDTO cityRestDTO);
 }

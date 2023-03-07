@@ -42,7 +42,4 @@ public interface ClientService {
 
     List<ClientRestDTO> findAllClientForRest();
 
-    void deleteByIdForRest(Long id);
-
-    void createClientForRest(ClientRestDTO clientRestDTO);
 }

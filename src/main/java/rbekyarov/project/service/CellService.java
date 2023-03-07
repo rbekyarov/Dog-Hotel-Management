@@ -40,9 +40,5 @@ public interface CellService {
 
     List<CellRestDTO> findAllCellForRest();
 
-    void deleteByIdForRest(Long id);
-
-
-    Long createCellForRest(CellRestDTO cellRestDTO);
 }
 

@@ -137,7 +137,7 @@ private final HttpSession session;
             return super.view("/view/edit/behaviorEdit","behaviorEditDTO", behaviorEditDTO);
 
         }
-        behaviorService.editBehaviors(behaviorEditDTO.getName(), id, session);
+        behaviorService.editBehavior(behaviorEditDTO.getName(), id, session);
         return super.redirect("/view/table/behaviorTable");
     }
 

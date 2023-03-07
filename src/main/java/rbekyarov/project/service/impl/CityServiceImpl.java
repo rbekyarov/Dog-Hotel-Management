@@ -95,23 +95,6 @@ public class CityServiceImpl implements CityService {
                 toList();
     }
 
-    @Override
-    public void deleteByIdForRest(Long id) {
-        cityRepository.deleteById(id);
-
-    }
-
-    @Override
-    public Long createCityForRest(CityRestDTO cityRestDTO) {
-
-        City city = new City();
-        city.setName(cityRestDTO.getName());
-        city.setCode(cityRestDTO.getCode());
-        city.setAuthor(userService.findById(3l).get());
-        city.setDateCreate(LocalDate.now());
-
-        return cityRepository.save(city).getId();
-    }
     private CityRestDTO map(City city) {
         CityRestDTO cityRestDTO = new CityRestDTO();
         cityRestDTO.setId(city.getId());

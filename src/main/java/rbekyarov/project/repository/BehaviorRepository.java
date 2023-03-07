@@ -28,4 +28,5 @@ public interface BehaviorRepository extends JpaRepository<Behavior, Long> {
                       @Param("editAuthorId") Long editAuthorId,
                       @Param("dateEdit") LocalDate dateEdit);
 
+
 }

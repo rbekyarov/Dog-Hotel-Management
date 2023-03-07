@@ -21,6 +21,9 @@ public class Behavior extends BaseEntity{
         this.dateCreate = dateCreate;
     }
 
+    public Behavior(String s) {
+    }
+
     @Column(nullable = false, unique = true)
     public String getName() {
         return name;

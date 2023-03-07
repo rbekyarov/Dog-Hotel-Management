@@ -134,17 +134,6 @@ public class ClientServiceImpl implements ClientService {
                 map(this::map).
                 toList();
     }
-
-    @Override
-    public void deleteByIdForRest(Long id) {
-        clientRepository.deleteById(id);
-    }
-
-    @Override
-    public void createClientForRest(ClientRestDTO clientRestDTO) {
-
-    }
-
     private ClientRestDTO map(Client client) {
 
         ClientRestDTO clientRestDTO = new ClientRestDTO();

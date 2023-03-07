@@ -152,21 +152,6 @@ public class CellServiceImpl implements CellService {
                 toList();
     }
 
-    @Override
-    public void deleteByIdForRest(Long id) {
-        cellRepository.deleteById(id);
-    }
-
-    @Override
-    public Long createCellForRest(CellRestDTO cellRestDTO) {
-        Cell cell = new Cell();
-        cell.setCode(cellRestDTO.getCode());
-        cell.setCellSize(cellRestDTO.getCellSize());
-        cell.setStatus(cellRestDTO.getStatus());
-        cell.setAuthor(userService.findById(3l).get());
-        cell.setDateCreate(LocalDate.now());
-        return cellRepository.save(cell).getId();
-    }
     private CellRestDTO map(Cell cell) {
              CellRestDTO cellRestDTO = new CellRestDTO();
              cellRestDTO.setId(cell.getId());

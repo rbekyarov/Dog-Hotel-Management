@@ -19,13 +19,13 @@ public interface BehaviorService {
 
     Optional<Behavior> findById(Long id);
 
-    void editBehaviors(String name, Long id,HttpSession session);
+    void editBehavior(String name, Long id, HttpSession session);
 
     Page<Behavior> findPaginated(Pageable pageable);
 
     List<BehaviorRestDTO> findAllBehaviorForRest();
 
-    void deleteByIdForRest(Long id);
 
-    long createBehaviorForRest(BehaviorRestDTO behaviorRestDTO);
+
+
 }

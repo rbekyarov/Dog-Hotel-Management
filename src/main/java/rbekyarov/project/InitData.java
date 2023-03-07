@@ -9,7 +9,7 @@ import rbekyarov.project.repository.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Component
+//@Component
 public class InitData implements CommandLineRunner {
     private final UserRepository userRepository;
     private final BehaviorRepository behaviorRepository;

@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @ExtendWith(MockitoExtension.class)
 
-public class BaseTest {
+public abstract class BaseTest {
 
     @BeforeEach
     private void setupTest() {

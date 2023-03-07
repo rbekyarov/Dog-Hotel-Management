@@ -22,6 +22,16 @@ public class VendorRestDTO {
     public VendorRestDTO() {
     }
 
+    public VendorRestDTO(Long id, String name, String country, CityRestThinDTO city, String address, String vatNumber, String email) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+        this.city = city;
+        this.address = address;
+        this.vatNumber = vatNumber;
+        this.email = email;
+    }
+
     public Long getId() {
         return id;
     }
