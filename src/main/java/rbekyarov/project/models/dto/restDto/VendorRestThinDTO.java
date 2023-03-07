@@ -13,6 +13,10 @@ public class VendorRestThinDTO {
     public VendorRestThinDTO() {
     }
 
+    public VendorRestThinDTO(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

@@ -21,6 +21,15 @@ public class CostRestDTO {
     public CostRestDTO() {
     }
 
+    public CostRestDTO(Long id, VendorRestThinDTO vendor, String description, String invoiceNo, BigDecimal amount, String dateCost) {
+        this.id = id;
+        this.vendor = vendor;
+        this.description = description;
+        this.invoiceNo = invoiceNo;
+        this.amount = amount;
+        this.dateCost = dateCost;
+    }
+
     public Long getId() {
         return id;
     }
