@@ -372,7 +372,7 @@ public class DogServiceImpl implements DogService {
         }
     }
 
-    String imageUpload(MultipartFile file, String imgName) throws IOException {
+    public String imageUpload(MultipartFile file, String imgName) throws IOException {
         String imageUUID;
         if (!file.isEmpty()) {
             imageUUID = file.getOriginalFilename();

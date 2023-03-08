@@ -8,20 +8,22 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import rbekyarov.project.models.dto.CellDTO;
+import rbekyarov.project.models.dto.restDto.CellRestDTO;
 import rbekyarov.project.models.entity.Cell;
+import rbekyarov.project.models.entity.Reservation;
 import rbekyarov.project.models.entity.User;
+import rbekyarov.project.models.entity.enums.CellSize;
 import rbekyarov.project.models.entity.enums.Status;
 import rbekyarov.project.repository.CellRepository;
 import rbekyarov.project.service.impl.CellServiceImpl;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -34,12 +36,31 @@ public class CellServiceImplTest {
     private HttpSession httpSession;
     @InjectMocks
     private CellServiceImpl cellService;
+    private List<Cell> mockCells;
+
+    private Cell mockCell;
+
+    private CellRestDTO mockCellRestDTO;
+
+
     @BeforeEach
     public void setUp() {
         cellRepository = mock(CellRepository.class);
         userService = mock(UserService.class);
         modelMapper = mock(ModelMapper.class);
         cellService = new CellServiceImpl(cellRepository, modelMapper, userService);
+        mockCells = Arrays.asList(
+                new Cell( CellSize.SMALL, "1", Status.empty),
+                new Cell( CellSize.MEDIUM, "2", Status.under_repair)
+        );
+
+        mockCell = new Cell( CellSize.SMALL, "1", Status.empty);
+
+        mockCellRestDTO = new CellRestDTO();
+        mockCellRestDTO.setId(1L);
+        mockCellRestDTO.setCellSize(CellSize.SMALL);
+        mockCellRestDTO.setCode("1");
+        mockCellRestDTO.setStatus(Status.empty);
     }
 
     @Test
@@ -127,21 +148,6 @@ public class CellServiceImplTest {
 
         assertEquals(page, actual);
     }
-//    @Test
-//    public void testAddCell() {
-//        CellDTO cellDTO = new CellDTO();
-//        cellDTO.setCode("Test Cell");
-//        cellDTO.setStatus(Status.empty);
-//
-//        User user = new User();
-//        user.setId(1L);
-//
-//        when(userService.getAuthorFromSession(httpSession)).thenReturn(user);
-//
-//        cellService.addCell(cellDTO, httpSession);
-//
-//        verify(cellRepository, times(1)).save(any(Cell.class));
-//    }
 
     @Test
     public void testRemoveCellById() {
@@ -176,4 +182,79 @@ public class CellServiceImplTest {
 
         verify(cellRepository, times(1)).editCell(cellName, cellId, null, cellStatus, user.getId(), LocalDate.now());
     }
+    @Test
+    public void testAddCell() {
+        // Arrange
+        HttpSession session = mock(HttpSession.class);
+        User author = new User();
+        when(userService.getAuthorFromSession(session)).thenReturn(author);
+        CellDTO cellDTO = new CellDTO();
+        cellDTO.setStatus(Status.empty);
+        Cell cell = new Cell();
+        when(modelMapper.map(cellDTO, Cell.class)).thenReturn(cell);
+
+        // Act
+        cellService.addCell(cellDTO, session);
+
+        // Assert
+        verify(cellRepository).save(cell);
+        assertEquals(author, cell.getAuthor());
+        assertNotNull(cell.getDateCreate());
+    }
+    @Test
+    public void testSetCellBusy() {
+        // Arrange
+        Long id = 1L;
+
+        // Act
+        cellService.setCellBusy(id);
+
+        // Assert
+        verify(cellRepository).setCellBusy(id);
+    }
+    @Test
+    public void testSetCellEmpty() {
+        // Arrange
+        Long id = 1L;
+
+        // Act
+        cellService.setCellEmpty(id);
+
+        // Assert
+        verify(cellRepository).setCellEmpty(id);
+    }
+    @Test
+    public void testUpdateStatus() {
+        // Arrange
+        Cell cell = new Cell();
+        Reservation reservation = new Reservation();
+        reservation.setCell(cell);
+        List<Reservation> allActiveReservation = Collections.singletonList(reservation);
+
+        // Act
+        cellService.updateStatus(allActiveReservation);
+
+        // Assert
+        verify(cellRepository).setCellBusy(cell.getId());
+    }
+
+    @Test
+    void findAllCellWithoutCellInService() {
+        when(cellRepository.findAllCellWithoutCellInService()).thenReturn(mockCells);
+
+        List<Cell> result = cellService.findAllCellWithoutCellInService();
+
+        assertThat(result).isEqualTo(mockCells);
+        verify(cellRepository).findAllCellWithoutCellInService();
+    }
+    @Test
+    void findAllRepairsCells() {
+        when(cellRepository.findAllRepairsCells()).thenReturn(Collections.singletonList(mockCell));
+
+        List<Cell> result = cellService.findAllRepairsCells();
+
+        assertThat(result).containsOnly(mockCell);
+        verify(cellRepository).findAllRepairsCells();
+    }
+
 }

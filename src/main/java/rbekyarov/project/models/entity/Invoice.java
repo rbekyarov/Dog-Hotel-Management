@@ -59,7 +59,11 @@ public class Invoice extends BaseEntity {
     public Invoice() {
     }
 
-    public Invoice(String companyName, String companyCityName, String companyAddress, String companyVatNumber, String companyEmail, String companyBankName, String companyBankAccount, String companyManagerName, String dogName, Integer countStay, String cellCode, Food food, Deworming deworming ,Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, String authorName, LocalDate dateCreate, Long reservationId, BigDecimal countStayPrice, BigDecimal foodPrice,BigDecimal dewormingPrice, BigDecimal trainingPrice, BigDecimal bathingPrice, BigDecimal combingPrice, BigDecimal earsPrice, BigDecimal pawsPrice, BigDecimal nailsPrice, String clientName, String clientEmail, String clientAddress, String clientCityName, String clientPhone, CancellationInvoice cancellationInvoice,LocalDate cancelledDateInvoice) {
+    public Invoice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Invoice(String companyName, String companyCityName, String companyAddress, String companyVatNumber, String companyEmail, String companyBankName, String companyBankAccount, String companyManagerName, String dogName, Integer countStay, String cellCode, Food food, Deworming deworming , Training training, Bathing bathing, Combing combing, Ears ears, Paws paws, Nails nails, BigDecimal price, Double discount, BigDecimal totalPrice, String authorName, LocalDate dateCreate, Long reservationId, BigDecimal countStayPrice, BigDecimal foodPrice, BigDecimal dewormingPrice, BigDecimal trainingPrice, BigDecimal bathingPrice, BigDecimal combingPrice, BigDecimal earsPrice, BigDecimal pawsPrice, BigDecimal nailsPrice, String clientName, String clientEmail, String clientAddress, String clientCityName, String clientPhone, CancellationInvoice cancellationInvoice, LocalDate cancelledDateInvoice) {
         this.companyName = companyName;
         this.companyCityName = companyCityName;
         this.companyAddress = companyAddress;

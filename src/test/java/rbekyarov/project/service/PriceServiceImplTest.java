@@ -46,6 +46,7 @@ public class PriceServiceImplTest {
         price = new Price();
         price.setId(1L);
         price.setPriceFood(new BigDecimal("20.00"));
+        price.setPriceDeworming(new BigDecimal("50.00"));
         price.setDateCreate(LocalDate.now());
 
         priceRestDTO = new PriceRestDTO();
@@ -140,7 +141,138 @@ public class PriceServiceImplTest {
         assertEquals(expectedPrice, result);
     }
 
+    @Test
+    public void testGetDewormingCurrentPrice() {
 
+        // Arrange
+        BigDecimal expectedPrice = BigDecimal.valueOf(10);
+        when(priceRepository.getDewormingCurrentPrice(anyLong())).thenReturn(expectedPrice);
+
+        // Act
+        BigDecimal result = priceService.getDewormingCurrentPrice();
+
+        // Assert
+        verify(priceRepository).getDewormingCurrentPrice(anyLong());
+        assertEquals(expectedPrice, result);
+
+    }
+    @Test
+    public void testGetBathingCurrentPrice() {
+        // Arrange
+        BigDecimal expectedPrice = BigDecimal.valueOf(10);
+        when(priceRepository.getBathingCurrentPrice(anyLong())).thenReturn(expectedPrice);
+
+        // Act
+        BigDecimal result = priceService.getBathingCurrentPrice();
+
+        // Assert
+        verify(priceRepository).getBathingCurrentPrice(anyLong());
+        assertEquals(expectedPrice, result);
+    }
+    @Test
+    public void testGetTrainingCurrentPrice() {
+        // Arrange
+        BigDecimal expectedPrice = BigDecimal.valueOf(10);
+        when(priceRepository.getTrainingCurrentPrice(anyLong())).thenReturn(expectedPrice);
+
+        // Act
+        BigDecimal result = priceService.getTrainingCurrentPrice();
+
+        // Assert
+        verify(priceRepository).getTrainingCurrentPrice(anyLong());
+        assertEquals(expectedPrice, result);
+    }
+    @Test
+    public void testGetCombingCurrentPrice() {
+        // Arrange
+        BigDecimal expectedPrice = BigDecimal.valueOf(10);
+        when(priceRepository.getCombingCurrentPrice(anyLong())).thenReturn(expectedPrice);
+
+        // Act
+        BigDecimal result = priceService.getCombingCurrentPrice();
+
+        // Assert
+        verify(priceRepository).getCombingCurrentPrice(anyLong());
+        assertEquals(expectedPrice, result);
+    }
+    @Test
+    public void testGetEarsCurrentPrice() {
+        // Arrange
+        BigDecimal expectedPrice = BigDecimal.valueOf(10);
+        when(priceRepository.getEarsCurrentPrice(anyLong())).thenReturn(expectedPrice);
+
+        // Act
+        BigDecimal result = priceService.getEarsCurrentPrice();
+
+        // Assert
+        verify(priceRepository).getEarsCurrentPrice(anyLong());
+        assertEquals(expectedPrice, result);
+    }
+    @Test
+    public void testGetPawsCurrentPrice() {
+        // Arrange
+        BigDecimal expectedPrice = BigDecimal.valueOf(10);
+        when(priceRepository.getPawsCurrentPrice(anyLong())).thenReturn(expectedPrice);
+
+        // Act
+        BigDecimal result = priceService.getPawsCurrentPrice();
+
+        // Assert
+        verify(priceRepository).getPawsCurrentPrice(anyLong());
+        assertEquals(expectedPrice, result);
+    }
+    @Test
+    public void testGetNailsCurrentPrice() {
+        // Arrange
+        BigDecimal expectedPrice = BigDecimal.valueOf(10);
+        when(priceRepository.getNailsCurrentPrice(anyLong())).thenReturn(expectedPrice);
+
+        // Act
+        BigDecimal result = priceService.getNailsCurrentPrice();
+
+        // Assert
+        verify(priceRepository).getNailsCurrentPrice(anyLong());
+        assertEquals(expectedPrice, result);
+    }
+    @Test
+    public void testGetCurrentPriceStayForCellS() {
+        // Arrange
+        BigDecimal expectedPrice = BigDecimal.valueOf(10);
+        when(priceRepository.getCurrentPriceStayForCellS(anyLong())).thenReturn(expectedPrice);
+
+        // Act
+        BigDecimal result = priceService.getCurrentPriceStayForCellS();
+
+        // Assert
+        verify(priceRepository).getCurrentPriceStayForCellS(anyLong());
+        assertEquals(expectedPrice, result);
+    }
+    @Test
+    public void testGetCurrentPriceStayForCellM() {
+        // Arrange
+        BigDecimal expectedPrice = BigDecimal.valueOf(10);
+        when(priceRepository.getCurrentPriceStayForCellM(anyLong())).thenReturn(expectedPrice);
+
+        // Act
+        BigDecimal result = priceService.getCurrentPriceStayForCellM();
+
+        // Assert
+        verify(priceRepository).getCurrentPriceStayForCellM(anyLong());
+        assertEquals(expectedPrice, result);
+    }
+    @Test
+    public void testGetCurrentPriceStayForCellL() {
+        // Arrange
+        BigDecimal expectedPrice = BigDecimal.valueOf(10);
+        when(priceRepository.getCurrentPriceStayForCellL(anyLong())).thenReturn(expectedPrice);
+
+        // Act
+        BigDecimal result = priceService.getCurrentPriceStayForCellL();
+
+        // Assert
+        verify(priceRepository).getCurrentPriceStayForCellL(anyLong());
+        assertEquals(expectedPrice, result);
+    }
 
 }
 

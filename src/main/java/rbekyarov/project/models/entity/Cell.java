@@ -24,6 +24,12 @@ public class Cell extends BaseEntity{
         this.dateCreate = dateCreate;
     }
 
+    public Cell( CellSize cellSize,String code, Status status) {
+        this.code = code;
+        this.cellSize = cellSize;
+        this.status = status;
+    }
+
     public Cell() {
     }
     @Column(nullable = false, unique = true)
