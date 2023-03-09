@@ -8,12 +8,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.VendorDTO;
 import rbekyarov.project.models.dto.restDto.CityRestThinDTO;
-import rbekyarov.project.models.dto.restDto.PriceRestDTO;
 import rbekyarov.project.models.dto.restDto.VendorRestDTO;
-import rbekyarov.project.models.entity.*;
+import rbekyarov.project.models.entity.User;
+import rbekyarov.project.models.entity.Vendor;
 import rbekyarov.project.repository.VendorRepository;
-import rbekyarov.project.service.VendorService;
 import rbekyarov.project.service.UserService;
+import rbekyarov.project.service.VendorService;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;

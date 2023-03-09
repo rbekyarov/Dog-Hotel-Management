@@ -8,7 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
-import rbekyarov.project.models.dto.restDto.*;
+import rbekyarov.project.models.dto.restDto.CellRestThinDTO;
+import rbekyarov.project.models.dto.restDto.ClientRestThinDTO;
+import rbekyarov.project.models.dto.restDto.DogRestThinDTO;
+import rbekyarov.project.models.dto.restDto.ReservationRestDTO;
 import rbekyarov.project.models.entity.*;
 import rbekyarov.project.models.entity.enums.*;
 import rbekyarov.project.repository.ClientRepository;
@@ -21,8 +24,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service

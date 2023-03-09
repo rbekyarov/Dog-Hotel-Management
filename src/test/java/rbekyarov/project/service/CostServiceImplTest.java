@@ -64,7 +64,7 @@ public class CostServiceImplTest {
             cost.setInvoiceNo("INV-0001");
             cost.setAmount(BigDecimal.valueOf(100.00));
             cost.setDateCost(LocalDate.parse("2022-01-01"));
-
+            cost.setVendor(new Vendor());
             costDTO = new CostDTO();
             costDTO.setDescription("Test Description");
             costDTO.setInvoiceNo("INV-0001");
@@ -240,5 +240,22 @@ public class CostServiceImplTest {
        // assertEquals("vendor1", allCostForRest.get(0).getVendor().getName());
         assertEquals("desc2", allCostForRest.get(1).getDescription());
         //assertEquals("vendor2", allCostForRest.get(1).getVendor().getName());
+    }
+    @Test
+    public void testFormatterLocalDate() {
+        String dateDTO = "1.01.23 г.";
+        LocalDate date = costService.formatterLocalDate(dateDTO);
+        assertEquals("2023-01-01",date.toString());
+
+    }
+    @Test
+    public void testMap() {
+
+        CostRestDTO target  = costService.map(cost);
+        assertEquals(target.getId(),cost.getId());
+        assertEquals(target.getDateCost().toString(),cost.getDateCost().toString());
+        assertEquals(target.getAmount(),cost.getAmount());
+
+
     }
 }

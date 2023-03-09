@@ -96,19 +96,7 @@ public abstract class BaseController {
 
         return modelAndView;
     }
-    //CELL TABLE
-//    public ModelAndView view(String view, String string0, Object list0, String string1, List list1, String string2, List list2,String string3, List list3 ) {
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("fragments/base-layout");
-//        modelAndView.addObject("view", view);
-//        modelAndView.addObject(string0, list0);
-//        modelAndView.addObject(string1, list1);
-//        modelAndView.addObject(string2, list2);
-//        modelAndView.addObject(string3, list3);
-//
-//
-//        return modelAndView;
-//    }
+
      //ClientView
     public ModelAndView view(String view, String objectName, Object object, String string1, List list1, String stingBigDecimal, BigDecimal bigdecimal,String string2, int int1,String string3, int int2 ) {
         ModelAndView modelAndView = new ModelAndView();
@@ -187,27 +175,4 @@ public abstract class BaseController {
         return view("redirect:" + url);
     }
 
-
-
-
-
-
-
-
-
-//    public ModelAndView redirect(String url,String bind ,BindingResult bindingResult) {
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject(bind, bindingResult);
-//        modelAndView.setViewName("redirect:" + url);
-//
-//        return modelAndView;
-//    }
-//
-//    protected ModelAndView view(String view,String bind ,BindingResult bindingResult) {
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("fragments/base-layout");
-//        modelAndView.addObject("view", view);
-//        modelAndView.addObject(bind, bindingResult);
-//        return modelAndView;
-//    }
 }

@@ -7,8 +7,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.ClientDTO;
-import rbekyarov.project.models.dto.restDto.*;
-import rbekyarov.project.models.entity.Behavior;
+import rbekyarov.project.models.dto.restDto.CityRestThinDTO;
+import rbekyarov.project.models.dto.restDto.ClientRestDTO;
+import rbekyarov.project.models.dto.restDto.DogRestThinDTO;
 import rbekyarov.project.models.entity.Client;
 import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.models.entity.User;
@@ -20,10 +21,8 @@ import rbekyarov.project.service.ClientService;
 import rbekyarov.project.service.UserService;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class ClientServiceImpl implements ClientService {

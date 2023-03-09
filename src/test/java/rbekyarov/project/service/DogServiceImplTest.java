@@ -2,30 +2,27 @@ package rbekyarov.project.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 import rbekyarov.project.models.dto.DogDTO;
-import rbekyarov.project.models.entity.*;
-import rbekyarov.project.models.entity.enums.DogSize;
+import rbekyarov.project.models.dto.restDto.DogRestDTO;
+import rbekyarov.project.models.entity.Behavior;
+import rbekyarov.project.models.entity.Breed;
+import rbekyarov.project.models.entity.Client;
+import rbekyarov.project.models.entity.Dog;
 import rbekyarov.project.repository.DogRepository;
-import rbekyarov.project.service.BehaviorService;
-import rbekyarov.project.service.ClientService;
-import rbekyarov.project.service.UserService;
-import rbekyarov.project.service.BreedService;
-import org.modelmapper.ModelMapper;
 import rbekyarov.project.service.impl.DogServiceImpl;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class DogServiceImplTest {
 
@@ -56,7 +53,8 @@ public class DogServiceImplTest {
     private List<Dog> dogs;
     private Dog dog1;
     private DogDTO dogDTO;
-
+    @Captor
+    private ArgumentCaptor<Dog> dogCaptor;
 
     @BeforeEach
     public void initMocks() {
@@ -69,9 +67,20 @@ public class DogServiceImplTest {
         Dog dog2 = new Dog();
         dog2.setName("Charlie");
         dogs.add(dog2);
+        //file = mock(MultipartFile.class);
 
     }
+    @Test
+    public void testGetWeightById() {
+        Long id = 1L;
+        Integer weight = 10;
+        when(dogRepository.getWeightById(id)).thenReturn(weight);
 
+        Integer result = dogService.getWeightById(id);
+
+        assertThat(result).isEqualTo(weight);
+        verify(dogRepository).getWeightById(id);
+    }
     @Test
     public void testFindAllDogByDesc() {
 
@@ -83,18 +92,7 @@ public class DogServiceImplTest {
         assertEquals("Buddy", result.get(0).getName());
         assertEquals("Charlie", result.get(1).getName());
     }
-    @Test
-    public void testGetWeightById() {
-        Long id = 1L;
-        Integer weight = 10;
 
-        when(dogRepository.getWeightById(id)).thenReturn(weight);
-
-        Integer result = dogService.getWeightById(id);
-
-        assertEquals(weight, result);
-        verify(dogRepository).getWeightById(id);
-    }
 
 
     @Test
@@ -103,7 +101,21 @@ public class DogServiceImplTest {
         dogService.removeDogById(id);
         verify(dogRepository, times(1)).deleteById(id);
     }
+    @Test
+    public void testFindPaginated() {
+        List<Dog> dogList = new ArrayList<>();
+        Dog dog1 = new Dog();
+        Dog dog2 = new Dog();
+        dogList.add(dog1);
+        dogList.add(dog2);
+        when(dogRepository.findAllDogByDesc()).thenReturn(dogList);
 
+        Page<Dog> dogsPage = dogService.findPaginated(PageRequest.of(0, 10));
+
+        assertThat(dogsPage).isNotNull();
+
+        verify(dogRepository).findAllDogByDesc();
+    }
     @Test
     public void testFindById() {
         Long id = 1L;
@@ -216,5 +228,71 @@ public class DogServiceImplTest {
         verify(dogRepository).listDogByClientEmail("test@test.com");
         assertSame(dogs, result);
     }
+    @Test
+    public void testFormatterLocalDate() {
+        String dateDTO = "1.01.23 г.";
+        LocalDate date = dogService.formatterLocalDate(dateDTO);
+        assertEquals("2023-01-01",date.toString());
 
+    }
+    @Test
+    void testFindAllDogForRest() {
+        Dog dog = new Dog();
+        dog.setId(1L);
+        dog.setName("Dog1");
+        dog.setYears("yrs.2 mos.2");
+        dog.setLastDewormingDate(LocalDate.now());
+        dog.setBirthDate(LocalDate.now());
+        dog.setClient(new Client());
+        dog.setBehavior(new Behavior());
+        dog.setBreed(new Breed());
+
+
+        when(dogRepository.findAll()).thenReturn(Arrays.asList(dog));
+        when(modelMapper.map(dog, DogRestDTO.class)).thenReturn(new DogRestDTO());
+
+        List<DogRestDTO> dogs = dogService.findAllDogForRest();
+
+        assertEquals(1, dogs.size());
+    }
+//    @Test
+//    void testImageUpload() throws IOException {
+//        MultipartFile file = mock(MultipartFile.class);
+//
+//        when(file.isEmpty()).thenReturn(false);
+//        when(file.getOriginalFilename()).thenReturn("image.png");
+//
+//        String imageName = dogService.imageUpload(file, "old_image.png");
+//
+//        assertEquals("image.png", imageName);
+//    }
+//
+//    @Test
+//    public void testEditDog() throws IOException {
+//        // Arrange
+//        Long id = 1L;
+//        String imgName = "testImage.jpg";
+//        MultipartFile file = mock(MultipartFile.class);
+//        HttpSession session = mock(HttpSession.class);
+//
+//        DogEditDTO dogEditDTO = new DogEditDTO();
+//        dogEditDTO.setName("Test Dog");
+//        dogEditDTO.setBirthDate("2010-01-01");
+//        dogEditDTO.setWeight(20);
+//        dogEditDTO.setBreed(new Breed());
+//        dogEditDTO.setLastDewormingDate("2020-10-10");
+//        dogEditDTO.setSex(Sex.M);
+//        dogEditDTO.setPassport(Passport.NO);
+//        dogEditDTO.setMicrochip(Microchip.NO);
+//        dogEditDTO.setClient(new Client());
+//        dogEditDTO.setBehavior(new Behavior());
+//        dogEditDTO.setMicrochipNumber("123456");
+//
+//
+//        // Act
+//        dogService.editDog(id, dogEditDTO, imgName, file, session);
+//
+//        // Assert
+//        verify(dogRepository, times(1)).editDog(eq(dogEditDTO.getName()), any(LocalDate.class), eq(dogEditDTO.getWeight()), anyLong(), eq(dogEditDTO.getSex()), eq(dogEditDTO.getPassport()), eq(dogEditDTO.getMicrochip()), anyLong(), anyLong(), eq(imgName), eq(id), anyLong(), any(LocalDate.class), any(DogSize.class), anyString(), any(LocalDate.class), eq(dogEditDTO.getMicrochipNumber()));
+//    }
 }

@@ -332,7 +332,7 @@ public class DogServiceImpl implements DogService {
 
     //convert String to LocalDate
 
-    LocalDate formatterLocalDate(String dateDto) {
+    public LocalDate formatterLocalDate(String dateDto) {
         //1.01.23 г.  ->23-01-01
         //11.01.23 г. ->23-01-11
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

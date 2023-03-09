@@ -6,10 +6,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.ModelAndView;
 import rbekyarov.project.models.dto.BehaviorDTO;
@@ -20,13 +23,19 @@ import rbekyarov.project.service.BehaviorService;
 import rbekyarov.project.web.controllers.BehaviorController;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@SpringBootTest
+@AutoConfigureMockMvc
 
 @RunWith(MockitoJUnitRunner.class)
 public class BehaviorControllerTest {
@@ -35,6 +44,8 @@ public class BehaviorControllerTest {
 
     @Mock
     private BehaviorService behaviorService;
+    @Mock
+    private ModelAndView modelAndView;
     @Mock
     private DogRepository dogRepository;
     @Mock
@@ -48,21 +59,24 @@ public class BehaviorControllerTest {
 
     @Test
     public void testBehaviorTable() throws Exception {
-        Behavior behavior1 = new Behavior();
-        behavior1.setName("testBehavior");
-        when(session.getAttribute("user")).thenReturn(new User());
 
         Behavior behavior = new Behavior();
         behavior.setName("testBehavior");
         when(session.getAttribute("user")).thenReturn(new User());
 
-        Page<Behavior> page = new PageImpl<>(Arrays.asList(behavior1, behavior));
+        Behavior behavior1 = new Behavior();
+        behavior1.setName("testBehavior1");
+        when(session.getAttribute("user")).thenReturn(new User());
+
+
+        Page<Behavior> page = new PageImpl<>(Arrays.asList(behavior, behavior1));
         when(behaviorService.findPaginated(PageRequest.of(0, 5))).thenReturn(page);
 
         mockMvc.perform(get("/view/table/behaviorTable"))
                 .andExpect(status().isOk())
-                //.andExpect(view().name("/view/table/behaviorTable"))
-                .andExpect(model().attribute("behaviors", page.getContent()));
+                .andExpect(model().attribute("behaviors", page))
+                .andExpect(view().name("/view/table/behaviorTable"));
+
     }
 
     @Test
@@ -70,10 +84,15 @@ public class BehaviorControllerTest {
         BehaviorDTO behaviorDTO = new BehaviorDTO();
         behaviorDTO.setName("testBehavior");
         when(session.getAttribute("user")).thenReturn(new User());
-        mockMvc.perform(get("/view/add/behaviorAdd").flashAttr("behaviorDTO", behaviorDTO))
+
+        mockMvc.perform(get("/view/add/behaviorAdd")
+
+                        .sessionAttr("user", new User())
+                .flashAttr("behaviorDTO", behaviorDTO))
+
                 .andExpect(status().isOk())
-           //    .andExpect(view().name("/view/add/behaviorAdd"))
-               .andExpect(model().attribute("behaviorDTO", behaviorDTO));
+                .andExpect(model().attribute("behaviorDTO", behaviorDTO))
+                .andExpect(view().name("/view/add/behaviorAdd"));
     }
 
     @Test
@@ -84,6 +103,7 @@ public class BehaviorControllerTest {
         doNothing().when(behaviorService).addBehavior(behaviorDTO, session);
 
         mockMvc.perform(post("/view/add/behaviorAdd")
+
                         .flashAttr("behaviorDTO", behaviorDTO)
                         .sessionAttr("user", new User()))
                 .andExpect(status().is3xxRedirection())
@@ -123,4 +143,5 @@ public class BehaviorControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("/view/edit/behaviorEdit"))
                 .andExpect(model().attribute("behaviorEditDTO", behavior));
-    }}
+    }
+}

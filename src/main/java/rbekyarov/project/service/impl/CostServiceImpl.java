@@ -6,16 +6,13 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import rbekyarov.project.models.dto.restDto.CityRestThinDTO;
-import rbekyarov.project.models.dto.restDto.CostRestDTO;
-import rbekyarov.project.models.dto.restDto.VendorRestDTO;
-import rbekyarov.project.models.dto.restDto.VendorRestThinDTO;
-import rbekyarov.project.models.entity.User;
-import rbekyarov.project.models.entity.Vendor;
-import rbekyarov.project.service.CompanyService;
 import rbekyarov.project.models.dto.CostDTO;
+import rbekyarov.project.models.dto.restDto.CostRestDTO;
+import rbekyarov.project.models.dto.restDto.VendorRestThinDTO;
 import rbekyarov.project.models.entity.Cost;
+import rbekyarov.project.models.entity.User;
 import rbekyarov.project.repository.CostRepository;
+import rbekyarov.project.service.CompanyService;
 import rbekyarov.project.service.CostService;
 import rbekyarov.project.service.UserService;
 
@@ -169,7 +166,7 @@ public class CostServiceImpl implements CostService {
                 map(this::map).
                 toList();
     }
-    private CostRestDTO map(Cost cost) {
+    public CostRestDTO map(Cost cost) {
         CostRestDTO costRestDTO = new CostRestDTO();
         costRestDTO.setId(cost.getId());
         costRestDTO.setAmount(cost.getAmount());
@@ -186,7 +183,7 @@ public class CostServiceImpl implements CostService {
     }
 
     //convert String to LocalDate
-    LocalDate formatterLocalDate(String dateDto) {
+    public LocalDate formatterLocalDate(String dateDto) {
         //1.01.23 г.  ->23-01-01
         //11.01.23 г. ->23-01-11
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
