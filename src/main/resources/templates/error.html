@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body id="error-body">
+<div id="container-wrapper">
+    <header>
+        <th:block th:include="~{fragments/nav}"></th:block>
+    </header>
+    <div id="root" class="justify-content-center p-lg-5">
+        <section id="error-type">
+            <p class="text-danger h4 col-md text-center">We are apologizing for the disturbance.</p>
+            <p class="text-danger h4 col-md text-center"> Problem has occurred and it will be fixed as soon as possible</p></p>
+        </section>
+        <div class="text-center p-lg-3">
+            <a th:href="@{/}" class="btn btn-info">Go Back To Home</a>
+        </div>
+    </div>
+</div>
+<footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+</body>
+
+</html>

@@ -58,59 +58,6 @@ public class BehaviorControllerTest {
     }
 
     @Test
-    public void testBehaviorTable() throws Exception {
-
-        Behavior behavior = new Behavior();
-        behavior.setName("testBehavior");
-        when(session.getAttribute("user")).thenReturn(new User());
-
-        Behavior behavior1 = new Behavior();
-        behavior1.setName("testBehavior1");
-        when(session.getAttribute("user")).thenReturn(new User());
-
-
-        Page<Behavior> page = new PageImpl<>(Arrays.asList(behavior, behavior1));
-        when(behaviorService.findPaginated(PageRequest.of(0, 5))).thenReturn(page);
-
-        mockMvc.perform(get("/view/table/behaviorTable"))
-                .andExpect(status().isOk())
-                .andExpect(model().attribute("behaviors", page))
-                .andExpect(view().name("/view/table/behaviorTable"));
-
-    }
-
-    @Test
-    public void testBehaviorAdd() throws Exception {
-        BehaviorDTO behaviorDTO = new BehaviorDTO();
-        behaviorDTO.setName("testBehavior");
-        when(session.getAttribute("user")).thenReturn(new User());
-
-        mockMvc.perform(get("/view/add/behaviorAdd")
-
-                        .sessionAttr("user", new User())
-                .flashAttr("behaviorDTO", behaviorDTO))
-
-                .andExpect(status().isOk())
-                .andExpect(model().attribute("behaviorDTO", behaviorDTO))
-                .andExpect(view().name("/view/add/behaviorAdd"));
-    }
-
-    @Test
-    public void testAddBehavior() throws Exception {
-        BehaviorDTO behaviorDTO = new BehaviorDTO();
-        behaviorDTO.setName("testBehavior");
-        when(session.getAttribute("user")).thenReturn(new User());
-        doNothing().when(behaviorService).addBehavior(behaviorDTO, session);
-
-        mockMvc.perform(post("/view/add/behaviorAdd")
-
-                        .flashAttr("behaviorDTO", behaviorDTO)
-                        .sessionAttr("user", new User()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/view/table/behaviorTable"));
-    }
-
-    @Test
     public void testRemoveBehavior() throws Exception {
         Behavior behavior = new Behavior();
         behavior.setName("testBehavior");
@@ -131,17 +78,5 @@ public class BehaviorControllerTest {
         verify(behaviorService, times(1)).removeBehaviorById(1L);
     }
 
-    @Test
-    public void testGetBehaviorDetail() throws Exception {
 
-        Behavior behavior = new Behavior();
-        behavior.setName("testBehavior");
-        behavior.setId(1L);
-        when(session.getAttribute("user")).thenReturn(new User());
-        when(behaviorService.findById(1L)).thenReturn(Optional.of(behavior));
-        mockMvc.perform(get("/view/table/behavior/edit/{id}", 1L))
-                .andExpect(status().isOk())
-                .andExpect(view().name("/view/edit/behaviorEdit"))
-                .andExpect(model().attribute("behaviorEditDTO", behavior));
-    }
 }

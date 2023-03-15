@@ -1,7 +1,6 @@
 package rbekyarov.project.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
@@ -30,7 +29,8 @@ public interface ReservationService {
 
     void setCellEmptyByReservationID(Long id);
 
-    void statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
+    void statusReservationsUpdate();
+
     void changeInvoicedStatus(Long id, Invoiced invoiced);
 
     List<Reservation> listReservationByClientEmail(String clientEmail);

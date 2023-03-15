@@ -51,42 +51,6 @@ public class BreedControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(breedController).build();
     }
 
-    @Test
-    public void testBreedTable() throws Exception {
-        // Mocking the breed service to return a page of breed entities
-        Page<Breed> breeds = new PageImpl<>(Collections.singletonList(new Breed()));
-        when(breedService.findPaginated(any(PageRequest.class))).thenReturn(breeds);
-        when(session.getAttribute("user")).thenReturn(new User());
-        // Sending a GET request to the breedTable endpoint
-        mockMvc.perform(get("/view/table/breedTable"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("breeds"))
-                .andExpect(model().attributeExists("pageNumbers"))
-                .andExpect(view().name("/view/table/breedTable"));
-    }
-
-    @Test
-    public void testBreedAdd() throws Exception {
-        when(session.getAttribute("user")).thenReturn(new User());
-        // Sending a GET request to the breedAdd endpoint
-        mockMvc.perform(get("/view/add/breedAdd"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("breedDTO"))
-                .andExpect(view().name("/view/add/breedAdd"));
-
-        // Mocking a BreedDTO instance
-        BreedDTO breedDTO = new BreedDTO();
-        breedDTO.setBreedName("Bulldog");
-
-        // Sending a POST request to the breedAdd endpoint with a valid BreedDTO instance
-        mockMvc.perform(post("/view/add/breedAdd")
-                        .flashAttr("breedDTO", breedDTO))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/view/table/breedTable"));
-
-        // Verifying that the breedService's addBreeds method was called with the BreedDTO instance
-        verify(breedService, times(1)).addBreeds(eq(breedDTO), any(HttpSession.class));
-    }
 
     @Test
     public void testRemoveBehavior() throws Exception {

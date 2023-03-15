@@ -4,14 +4,16 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import rbekyarov.project.service.FileStorageService;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 @Service
-public class FileStorageService implements rbekyarov.project.service.FileStorageService {
-    private final Path root = Paths.get("uploads");
+public class FileStorageServiceImpl implements FileStorageService {
+    public Path root = Paths.get("uploads");
     @Override
     public void save(MultipartFile file, String filename) {
         try {
@@ -46,3 +48,4 @@ public class FileStorageService implements rbekyarov.project.service.FileStorage
         }
     }
 }
+

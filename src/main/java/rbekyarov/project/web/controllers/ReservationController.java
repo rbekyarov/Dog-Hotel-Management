@@ -74,8 +74,9 @@ public class ReservationController extends BaseController {
         int countCompletedReservation = reservationService.getCountCompletedReservation();
         modelAndView.addObject("countCompletedReservation", countCompletedReservation);
         modelAndView.addObject("url", url);
-        reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
+        reservationService.statusReservationsUpdate();
         reservationService.statusCellsUpdateEmpty();
+
         return super.view("/view/table/reservationTable",
                 "reservations", reservations,
                 "pageNumbers", pageNumbers,
@@ -112,7 +113,7 @@ public class ReservationController extends BaseController {
         int countCompletedReservation = reservationService.getCountCompletedReservation();
         modelAndView.addObject("countCompletedReservation", countCompletedReservation);
         modelAndView.addObject("url", url);
-        reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
+        reservationService.statusReservationsUpdate();
         reservationService.statusCellsUpdateEmpty();
         return super.view("/view/table/reservationTable",
                 "reservations", reservations,
@@ -150,7 +151,7 @@ public class ReservationController extends BaseController {
         int countCompletedReservation = reservationService.getCountCompletedReservation();
         modelAndView.addObject("countCompletedReservation", countCompletedReservation);
         modelAndView.addObject("url", url);
-        reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
+        reservationService.statusReservationsUpdate();
         reservationService.statusCellsUpdateEmpty();
         return super.view("/view/table/reservationTable",
                 "reservations", reservations,
@@ -188,7 +189,7 @@ public class ReservationController extends BaseController {
         int countCompletedReservation = reservationService.getCountCompletedReservation();
         modelAndView.addObject("countCompletedReservation", countCompletedReservation);
         modelAndView.addObject("url", url);
-        reservationService.statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall();
+        reservationService.statusReservationsUpdate();
         reservationService.statusCellsUpdateEmpty();
         return super.view("/view/table/reservationTable",
                 "reservations", reservations,

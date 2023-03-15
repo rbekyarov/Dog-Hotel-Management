@@ -51,7 +51,7 @@ public interface CellRepository extends JpaRepository<Cell, Long> {
     @Modifying
     @Query("update Cell as c SET c.status='empty' where c.id=:id")
     void setCellEmpty(@Param("id") Long id);
-    @Query("select c from Cell as c where c.status = 'empty' and c.status = 'busy' order by c.id asc ")
+    @Query("select c from Cell as c where c.status = 'empty' or c.status = 'busy' order by c.id asc ")
     List<Cell> findAllCellWithoutCellInService();
     @Query("select c from Cell as c where c.status = 'under_repair' order by c.id asc ")
     List<Cell> findAllRepairsCells();

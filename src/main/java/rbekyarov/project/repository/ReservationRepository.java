@@ -109,4 +109,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findAllReservationUpcoming();
     @Query("select r from Reservation as r where r.statusReservation='completed' order by r.id desc ")
     List<Reservation> findAllReservationCompleted();
+
 }

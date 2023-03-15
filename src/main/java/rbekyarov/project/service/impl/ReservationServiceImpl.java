@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import rbekyarov.project.models.dto.ReservationDTO;
 import rbekyarov.project.models.dto.ReservationEditDTO;
@@ -88,8 +89,8 @@ public class ReservationServiceImpl implements ReservationService {
 
 
         long countOvernightStay = ChronoUnit.DAYS.between(startDate, endDate);
-        if (countOvernightStay<0){
-            countOvernightStay=0;
+        if (countOvernightStay < 0) {
+            countOvernightStay = 0;
         }
 
 
@@ -106,7 +107,7 @@ public class ReservationServiceImpl implements ReservationService {
             currentPriceStay = currentPrice.getPriceStayS().doubleValue();
         } else if (weight <= 20) {
             currentPriceStay = currentPrice.getPriceStayM().doubleValue();
-        }else {
+        } else {
             currentPriceStay = currentPrice.getPriceStayL().doubleValue();
         }
 
@@ -118,7 +119,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
         if (reservationDTO.getDeworming().name().equals("YES")) {
             //change date Dog Deworming
-            dogRepository.editDogDateDewormingById(reservationDTO.getDog().getId(),startDate);
+            dogRepository.editDogDateDewormingById(reservationDTO.getDog().getId(), startDate);
             //setPrice
             price += currentPrice.getPriceDeworming().doubleValue();
         }
@@ -153,10 +154,10 @@ public class ReservationServiceImpl implements ReservationService {
             totalPrice = price;
             discount = 0.0;
 
-            if (clientRepository.findById(reservationDTO.getClient().getId()).get().getClientType().name().equals("REGULAR")){
+            if (clientRepository.findById(reservationDTO.getClient().getId()).get().getClientType().name().equals("REGULAR")) {
                 discount = currentPrice.getDiscountClientRegular();
                 totalPrice = price - (price * discount / 100);
-            }else if (clientRepository.findById(reservationDTO.getClient().getId()).get().getClientType().name().equals("VIP")){
+            } else if (clientRepository.findById(reservationDTO.getClient().getId()).get().getClientType().name().equals("VIP")) {
                 discount = currentPrice.getDiscountClientVip();
                 totalPrice = price - (price * discount / 100);
             }
@@ -226,8 +227,8 @@ public class ReservationServiceImpl implements ReservationService {
         }
         // Calc Days Stay
         long countOvernightStay = ChronoUnit.DAYS.between(startDate, endDate);
-        if (countOvernightStay<0){
-            countOvernightStay=0;
+        if (countOvernightStay < 0) {
+            countOvernightStay = 0;
         }
         //Get Actual Prices
         Optional<Price> allPrices = priceService.findById(Long.parseLong(Integer.toString(priceService.findAllPriceById().size())));
@@ -243,7 +244,7 @@ public class ReservationServiceImpl implements ReservationService {
             currentPriceStay = currentPrice.getPriceStayS().doubleValue();
         } else if (weight <= 20) {
             currentPriceStay = currentPrice.getPriceStayM().doubleValue();
-        }else {
+        } else {
             currentPriceStay = currentPrice.getPriceStayL().doubleValue();
         }
         //Calculate price and totalPrice
@@ -254,7 +255,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
         if (reservationEditDTO.getDeworming().name().equals("YES")) {
             //change date Dog Deworming
-            dogRepository.editDogDateDewormingById(reservationEditDTO.getDog().getId(),LocalDate.now());
+            dogRepository.editDogDateDewormingById(reservationEditDTO.getDog().getId(), LocalDate.now());
             //setPrice
             price += currentPrice.getPriceDeworming().doubleValue();
         }
@@ -285,10 +286,10 @@ public class ReservationServiceImpl implements ReservationService {
         } else {
             totalPrice = price;
             discount = 0.0;
-            if (clientRepository.findById(reservationEditDTO.getClient().getId()).get().getClientType().name().equals("REGULAR")){
+            if (clientRepository.findById(reservationEditDTO.getClient().getId()).get().getClientType().name().equals("REGULAR")) {
                 discount = currentPrice.getDiscountClientRegular();
                 totalPrice = price - (price * discount / 100);
-            }else if (clientRepository.findById(reservationEditDTO.getClient().getId()).get().getClientType().name().equals("VIP")){
+            } else if (clientRepository.findById(reservationEditDTO.getClient().getId()).get().getClientType().name().equals("VIP")) {
                 discount = currentPrice.getDiscountClientVip();
                 totalPrice = price - (price * discount / 100);
             }
@@ -357,7 +358,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public void statusReservationsUpdateAndStatusCellsUpdateEverytimeTableReservationUpdateOrCall() {
+    public void statusReservationsUpdate() {
 
         List<Reservation> allReservation = reservationRepository.findAllReservationByDesc();
         for (Reservation reservation : allReservation) {
@@ -378,17 +379,8 @@ public class ReservationServiceImpl implements ReservationService {
 
             }
             reservationRepository.updateStatusReservation(reservationId, statusReservation);
-            //change Cell status
 
-            Long cellId = reservation.getCell().getId();
-            if (statusReservation.name().equals("active")) {
-
-                cellService.setCellBusy(cellId);
-
-            }
         }
-
-
     }
 
     @Override
@@ -419,6 +411,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationPage;
     }
+
     @Override
     public Page<Reservation> findPaginatedActive(Pageable pageable) {
         int pageSize = pageable.getPageSize();
@@ -437,6 +430,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationPage;
     }
+
     @Override
     public Page<Reservation> findPaginatedUpcoming(Pageable pageable) {
         int pageSize = pageable.getPageSize();
@@ -455,6 +449,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationPage;
     }
+
     @Override
     public Page<Reservation> findPaginatedCompleted(Pageable pageable) {
         int pageSize = pageable.getPageSize();
@@ -473,7 +468,6 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationPage;
     }
-
 
 
     @Override
@@ -500,7 +494,7 @@ public class ReservationServiceImpl implements ReservationService {
     public List<Reservation> findAllUpcomingReservations() {
         return reservationRepository.findAllUpcomingReservations();
     }
-
+    @Scheduled(cron = "0 * * * * *")
     @Override
     public void statusCellsUpdateEmpty() {
 
@@ -509,7 +503,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         List<Reservation> allActiveReservation = reservationRepository.findAllActiveReservation();
         for (Reservation reservation : allActiveReservation) {
-            if(reservation.getStatusReservation().name().equals("active")){
+            if (reservation.getStatusReservation().name().equals("active")) {
                 activeReservationCell.add(reservation.getCell());
             }
         }
@@ -519,15 +513,15 @@ public class ReservationServiceImpl implements ReservationService {
             String code = cell.getCode();
             for (Cell cell1 : activeReservationCell) {
                 String code1 = cell1.getCode();
-                if(code.equals(code1)){
+                if (code.equals(code1)) {
                     isSame = true;
                     break;
 
-                }else {
+                } else {
                     isSame = false;
                 }
             }
-            if(!isSame){
+            if (!isSame) {
                 newCellList.add(cell);
             }
         }
@@ -543,7 +537,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public int getCountUpcomingReservation() {
-         return reservationRepository.getCountUpcomingReservation();
+        return reservationRepository.getCountUpcomingReservation();
     }
 
     @Override
@@ -561,7 +555,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public boolean checkReservationIsInvoised(Long id) {
-        if (reservationRepository.findById(id).get().getInvoiced().equals(Invoiced.YES)){
+        if (reservationRepository.findById(id).get().getInvoiced().equals(Invoiced.YES)) {
             return true;
         }
 
@@ -603,14 +597,15 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationRestDTO;
     }
+
     LocalDate formatterLocal(String dateDto) {
         //1.01.23 г.  ->2023-01-01
         //11.01.23 г. ->2023-01-11
         //15.02.23 г
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         StringBuilder sb = new StringBuilder();
-        if(dateDto.contains(".")){
-            if(dateDto.charAt(1) == '.'){
+        if (dateDto.contains(".")) {
+            if (dateDto.charAt(1) == '.') {
                 sb.append("2");
                 sb.append("0");
                 sb.append(dateDto.charAt(5));
@@ -622,7 +617,7 @@ public class ReservationServiceImpl implements ReservationService {
                 sb.append("0");
                 sb.append(dateDto.charAt(0));
 
-            }else if(dateDto.charAt(1) != '.'){
+            } else if (dateDto.charAt(1) != '.') {
                 sb.append("2");
                 sb.append("0");
                 sb.append(dateDto.charAt(6));
@@ -638,7 +633,7 @@ public class ReservationServiceImpl implements ReservationService {
 
             LocalDate localDate = LocalDate.parse(s, formatter);
             return localDate;
-        }else {
+        } else {
             LocalDate localDate = LocalDate.parse(dateDto, formatter);
             return localDate;
         }
