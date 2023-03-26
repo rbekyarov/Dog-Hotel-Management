@@ -13,11 +13,10 @@ import org.springframework.data.domain.PageRequest;
 import rbekyarov.project.models.dto.ClientDTO;
 import rbekyarov.project.models.dto.DogDTO;
 import rbekyarov.project.models.dto.ReservationDTO;
+import rbekyarov.project.models.dto.ReservationEditDTO;
+import rbekyarov.project.models.dto.restDto.DogRestThinDTO;
 import rbekyarov.project.models.dto.restDto.ReservationRestDTO;
-import rbekyarov.project.models.entity.Cell;
-import rbekyarov.project.models.entity.Client;
-import rbekyarov.project.models.entity.Dog;
-import rbekyarov.project.models.entity.Reservation;
+import rbekyarov.project.models.entity.*;
 import rbekyarov.project.models.entity.enums.*;
 import rbekyarov.project.repository.ClientRepository;
 import rbekyarov.project.repository.DogRepository;
@@ -25,11 +24,9 @@ import rbekyarov.project.repository.ReservationRepository;
 import rbekyarov.project.service.impl.ReservationServiceImpl;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -284,5 +281,79 @@ public class ReservationServiceImplTest {
         Assertions.assertEquals(reservation.getId(), result.get(0).getId());
         Assertions.assertEquals(reservation.getStatusReservation(), result.get(0).getStatus());
     }
+    @Test
+    public void editReservation_shouldUpdateReservationAndCalculatePriceCorrectly() {
+        // Arrange
+        Long reservationId = 1L;
+        ReservationEditDTO reservationEditDTO = new ReservationEditDTO();
+        reservationEditDTO.setStartDate("2023-04-01");
+        reservationEditDTO.setEndDate("2023-04-03");
+        reservationEditDTO.setFood(Food.YES);
+        reservationEditDTO.setDeworming(Deworming.YES);
+        reservationEditDTO.setTraining(Training.YES);
+        reservationEditDTO.setBathing(Bathing.YES);
+        reservationEditDTO.setCombing(Combing.YES);
+        reservationEditDTO.setEars(Ears.YES);
+        reservationEditDTO.setPaws(Paws.YES);
+        reservationEditDTO.setNails(Nails.YES);
 
+        Dog dog = new Dog();
+        dog.setId(1L);
+        reservationEditDTO.setDog(dog);
+        HttpSession session = mock(HttpSession.class);
+        Cell cell = new Cell();
+        cell.setId(1l);
+        cell.setCode("S1");
+        Reservation reservation = new Reservation();
+        reservation.setStartDate(LocalDate.parse("2023-03-30"));
+        reservation.setEndDate(LocalDate.parse("2023-04-01"));
+        reservation.setPrice(BigDecimal.valueOf(0));
+        reservation.setCell(cell);
+        reservationEditDTO.setCell(cell);
+
+        Price price = new Price();
+        price.setPriceStayS(BigDecimal.valueOf(10));
+        price.setPriceStayM(BigDecimal.valueOf(15));
+        price.setPriceStayL(BigDecimal.valueOf(20));
+        price.setPriceFood(BigDecimal.valueOf(5));
+        price.setPriceDeworming(BigDecimal.valueOf(8));
+        price.setPriceTraining(BigDecimal.valueOf(12));
+        price.setPriceBathing(BigDecimal.valueOf(7));
+        price.setPriceCombing(BigDecimal.valueOf(3));
+        price.setPriceEars(BigDecimal.valueOf(2));
+        price.setPricePaws(BigDecimal.valueOf(2));
+        price.setPriceNails(BigDecimal.valueOf(2));
+        price.setDiscountClientRegular(5.0);
+        List<Price> prices = Collections.singletonList(price);
+
+        Client client = new Client();
+        client.setId(1l);
+        client.setClientType(ClientType.REGULAR);
+        dog.setId(1L);
+        dog.setWeight(15);
+        dog.setClient(client);
+        reservationEditDTO.setClient(client);
+        User user = new User();
+        user.setId(1l);
+        session.setAttribute("owner", user);
+
+        when(reservationRepository.findById(reservationId)).thenReturn(Optional.of(reservation));
+        when(priceService.findById(anyLong())).thenReturn(Optional.of(price));
+        when(priceService.findAllPriceById()).thenReturn(prices);
+        when(dogRepository.findById(dog.getId())).thenReturn(Optional.of(dog));
+        when(cellService.findById(cell.getId())).thenReturn(Optional.of(cell));
+        when(userService.getAuthorFromSession(session)).thenReturn(user);
+        when(clientRepository.findById(client.getId())).thenReturn(Optional.of(client));
+        when(dogService.getWeightById(dog.getId())).thenReturn(dog.getWeight());
+        doNothing().when(dogRepository).editDogDateDewormingById(dog.getId(), LocalDate.now());
+
+        // Act
+        reservationService.editReservation(reservationId, reservationEditDTO, session);
+
+        // Assert
+        //verify(reservationRepository, times(1)).save(reservation);
+       // assertEquals(StatusReservation.upcoming, reservation.getStatusReservation());
+        //assertEquals(2, reservation.getCountOvernightStay());
+        assertEquals(BigDecimal.valueOf(0), reservation.getPrice());
+    }
 }

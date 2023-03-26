@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class DogRestThinDTO {
+  private   Long id;
     private String name;
 
     public DogRestThinDTO() {
@@ -24,5 +25,11 @@ public class DogRestThinDTO {
         this.name = name;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
