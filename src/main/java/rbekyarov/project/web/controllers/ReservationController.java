@@ -419,10 +419,6 @@ public class ReservationController extends BaseController {
     }
 
 
-
-
-
-
     @PostMapping("view/table/reservation/edit/{id}/edit")
     public String editReservation(@PathVariable("id") Long id, ReservationEditDTO reservationEditDTO, HttpSession session) throws ObjectNotFoundException {
         if(checkValidSession()) {
@@ -443,11 +439,12 @@ public class ReservationController extends BaseController {
         List<Reservation> reservations = new ArrayList<>();
         if (!reservationNumber.equals("")) {
             reservations = reservationService.listReservationById(Long.parseLong(reservationNumber));
-            modelAndView.addObject("reservations", reservations);
+
         } else {
             reservations = reservationService.findAllReservationByDesc();
-            modelAndView.addObject("reservations", reservations);
+
         }
+        modelAndView.addObject("reservations", reservations);
         return super.view("/view/table/reservationTable", "reservations", reservations);
     }
 

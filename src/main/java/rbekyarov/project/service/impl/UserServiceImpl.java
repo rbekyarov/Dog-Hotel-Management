@@ -50,6 +50,9 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public boolean authenticate(String username, String password) {
+        if(username.isEmpty() ||password.isEmpty()){
+            return false;
+        }
         Optional<User> userOptional = userRepository.findByUsername(username);
         if (userOptional.isEmpty()) {
             return false;
