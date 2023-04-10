@@ -67,7 +67,6 @@ public class DogServiceImplTest {
         Dog dog2 = new Dog();
         dog2.setName("Charlie");
         dogs.add(dog2);
-        //file = mock(MultipartFile.class);
 
     }
     @Test
@@ -255,44 +254,4 @@ public class DogServiceImplTest {
 
         assertEquals(1, dogs.size());
     }
-//    @Test
-//    void testImageUpload() throws IOException {
-//        MultipartFile file = mock(MultipartFile.class);
-//
-//        when(file.isEmpty()).thenReturn(false);
-//        when(file.getOriginalFilename()).thenReturn("image.png");
-//
-//        String imageName = dogService.imageUpload(file, "old_image.png");
-//
-//        assertEquals("image.png", imageName);
-//    }
-//
-//    @Test
-//    public void testEditDog() throws IOException {
-//        // Arrange
-//        Long id = 1L;
-//        String imgName = "testImage.jpg";
-//        MultipartFile file = mock(MultipartFile.class);
-//        HttpSession session = mock(HttpSession.class);
-//
-//        DogEditDTO dogEditDTO = new DogEditDTO();
-//        dogEditDTO.setName("Test Dog");
-//        dogEditDTO.setBirthDate("2010-01-01");
-//        dogEditDTO.setWeight(20);
-//        dogEditDTO.setBreed(new Breed());
-//        dogEditDTO.setLastDewormingDate("2020-10-10");
-//        dogEditDTO.setSex(Sex.M);
-//        dogEditDTO.setPassport(Passport.NO);
-//        dogEditDTO.setMicrochip(Microchip.NO);
-//        dogEditDTO.setClient(new Client());
-//        dogEditDTO.setBehavior(new Behavior());
-//        dogEditDTO.setMicrochipNumber("123456");
-//
-//
-//        // Act
-//        dogService.editDog(id, dogEditDTO, imgName, file, session);
-//
-//        // Assert
-//        verify(dogRepository, times(1)).editDog(eq(dogEditDTO.getName()), any(LocalDate.class), eq(dogEditDTO.getWeight()), anyLong(), eq(dogEditDTO.getSex()), eq(dogEditDTO.getPassport()), eq(dogEditDTO.getMicrochip()), anyLong(), anyLong(), eq(imgName), eq(id), anyLong(), any(LocalDate.class), any(DogSize.class), anyString(), any(LocalDate.class), eq(dogEditDTO.getMicrochipNumber()));
-//    }
 }

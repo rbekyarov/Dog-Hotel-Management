@@ -77,20 +77,13 @@ public class CostServiceImplTest {
     }
     @Test
    public void addCost() {
-        // given
-//        CostDTO costDTO = new CostDTO();
-//        costDTO.setDateCost("1.01.23 г.");
-//        costDTO.setAmount(BigDecimal.valueOf(50.00));
-//        Cost cost = new Cost();
-//        cost.setDateCost(LocalDate.now());
+
         when(modelMapper.map(costDTO, Cost.class)).thenReturn(cost);
         when(costRepository.save(cost)).thenReturn(cost);
         when(userService.getAuthorFromSession(session)).thenReturn(new User());
         when(companyService.getCurrentBalance()).thenReturn(BigDecimal.valueOf(100));
-        // when
         costService.addCost(costDTO, session);
-        // then
-        //verify(costRepository, times(1)).save(cost);
+
         verify(companyService, times(1)).editBalance(any());
     }
     @Test
@@ -149,7 +142,6 @@ public class CostServiceImplTest {
 
         // assert
         verify(userService).getAuthorFromSession(session);
-       // verify(companyService).getCurrentBalance();
         verify(companyService).editBalance(currentBalance.add(BigDecimal.valueOf(50.00)));
         verify(companyService).editBalance(currentBalance.subtract(amount));
         verify(costRepository).editCost(vendorId, description, invoiceNo, amount, LocalDate.parse(dateCost), 1L, LocalDate.now(), id);
@@ -237,9 +229,8 @@ public class CostServiceImplTest {
         List<CostRestDTO> allCostForRest = costService.getAllCostForRest();
         assertEquals(2, allCostForRest.size());
         assertEquals("desc1", allCostForRest.get(0).getDescription());
-       // assertEquals("vendor1", allCostForRest.get(0).getVendor().getName());
         assertEquals("desc2", allCostForRest.get(1).getDescription());
-        //assertEquals("vendor2", allCostForRest.get(1).getVendor().getName());
+
     }
     @Test
     public void testFormatterLocalDate() {

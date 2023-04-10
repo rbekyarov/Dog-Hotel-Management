@@ -350,10 +350,6 @@ public class ReservationServiceImplTest {
         // Act
         reservationService.editReservation(reservationId, reservationEditDTO, session);
 
-        // Assert
-        //verify(reservationRepository, times(1)).save(reservation);
-       // assertEquals(StatusReservation.upcoming, reservation.getStatusReservation());
-        //assertEquals(2, reservation.getCountOvernightStay());
         assertEquals(BigDecimal.valueOf(0), reservation.getPrice());
     }
 }

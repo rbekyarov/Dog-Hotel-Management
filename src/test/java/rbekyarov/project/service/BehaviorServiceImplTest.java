@@ -11,19 +11,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import rbekyarov.project.models.dto.BehaviorDTO;
-import rbekyarov.project.models.dto.restDto.BehaviorRestDTO;
 import rbekyarov.project.models.entity.Behavior;
 import rbekyarov.project.models.entity.User;
 import rbekyarov.project.repository.BehaviorRepository;
-import rbekyarov.project.service.UserService;
 import rbekyarov.project.service.impl.BehaviorServiceImpl;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BehaviorServiceImplTest {
