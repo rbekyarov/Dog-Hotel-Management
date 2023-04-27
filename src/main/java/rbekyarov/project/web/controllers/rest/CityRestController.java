@@ -24,22 +24,4 @@ public class CityRestController {
                 ok(cityService.findAllCityForRest());
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<CityRestDTO> deleteCityById(@PathVariable("id") Long id) {
-//        cityService.deleteByIdForRest(id);
-//
-//        return ResponseEntity.
-//                noContent().
-//                build();
-//    }
-//    @PostMapping()
-//    public ResponseEntity<CityRestDTO> createCity(@RequestBody CityRestDTO cityRestDTO,
-//                                              UriComponentsBuilder uriComponentsBuilder) {
-//
-//        cityService.createCityForRest(cityRestDTO);
-//
-//        return ResponseEntity.created(uriComponentsBuilder.
-//                        path("/api/cities/{id}").build(cityRestDTO)).
-//                build();
-//    }
 }

@@ -151,19 +151,4 @@ private final HttpSession session;
         }
         return false;
     }
-
-//    @PostMapping("/view/table/behavior/edit/{id}")
-//    public ModelAndView editBehavior(@PathVariable("id") Long id,
-//                                     @Valid BehaviorEditDTO behaviorEditDTO,
-//                                     BindingResult bindingResult,
-//                                     ModelAndView modelAndView,
-//                                     HttpSession session) {
-//        if (bindingResult.hasErrors()) {
-//            modelAndView.setViewName("fragments/base-layout");
-//            modelAndView.addObject("view", "view/edit/behaviorEdit");
-//            return modelAndView.addObject("behaviorEditDTO", behaviorEditDTO);
-//        }
-//        behaviorService.editBehaviors(behaviorEditDTO.getName(), id, session);
-//        return super.redirect("/view/table/behaviorTable");
-//    }
 }

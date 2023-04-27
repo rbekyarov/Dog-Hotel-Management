@@ -22,22 +22,4 @@ public class BehaviorRestController {
                 ok(behaviorService.findAllBehaviorForRest());
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<BehaviorRestDTO> deleteBehaviorById(@PathVariable("id") Long id) {
-//        behaviorService.deleteByIdForRest(id);
-//
-//        return ResponseEntity.
-//                noContent().
-//                build();
-//    }
-//    @PostMapping()
-//    public ResponseEntity<BehaviorRestDTO> createBehavior(@RequestBody BehaviorRestDTO behaviorRestDTO,
-//                                              UriComponentsBuilder uriComponentsBuilder) {
-//
-//        behaviorService.createBehaviorForRest(behaviorRestDTO);
-//
-//        return ResponseEntity.created(uriComponentsBuilder.
-//                        path("/api/behaviors/{id}").build(behaviorRestDTO)).
-//                build();
-//    }
 }

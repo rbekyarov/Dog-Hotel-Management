@@ -25,22 +25,4 @@ public class ClientRestController {
                 ok(clientService.findAllClientForRest());
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<ClientRestDTO> deleteClientById(@PathVariable("id") Long id) {
-//        clientService.deleteByIdForRest(id);
-//
-//        return ResponseEntity.
-//                noContent().
-//                build();
-//    }
-//    @PostMapping()
-//    public ResponseEntity<ClientRestDTO> createClient(@RequestBody ClientRestDTO clientRestDTO,
-//                                              UriComponentsBuilder uriComponentsBuilder) {
-//
-//        clientService.createClientForRest(clientRestDTO);
-//
-//        return ResponseEntity.created(uriComponentsBuilder.
-//                        path("/api/cities/{id}").build(clientRestDTO)).
-//                build();
-//    }
 }

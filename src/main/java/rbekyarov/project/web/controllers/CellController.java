@@ -143,15 +143,6 @@ private final HttpSession session;
 
            return super.view("view/edit/cellEdit","cellEditDTO", cellEditDTO);
         }
-
-
-//        if (bindingResult.hasErrors()) {
-//
-//            modelAndView.addObject("cellEditDTO", cellEditDTO);
-//            return super.view("view/edit/cellEdit","cellEditDTO", cellEditDTO);
-//
-//        }
-
         cellService.editCells(cellEditDTO.getCode(), id, cellEditDTO.getStatus(),cellEditDTO.getCellSize(),session);
         return super.redirect("/view/table/cellTable");
 
@@ -167,30 +158,4 @@ private final HttpSession session;
         return false;
     }
 
-
-
-
-
-
-
-//    @GetMapping("view/table/cell/edit/{id}")
-//    public ModelAndView getCellDetail(@PathVariable("id") Long id,
-//                                      ModelAndView modelAndView) throws ObjectNotFoundException {
-//
-//        Cell cellDto =
-//                cellService.findById(id).
-//                        orElseThrow(() -> new ObjectNotFoundException("not found!"));
-//
-//        modelAndView.addObject("cellDto", cellDto);
-//
-//        return super.view("/view/edit/cellEdit", "cellDto", cellDto);
-//
-//    }
-//
-//    @PostMapping("view/table/cell/edit/{id}/edit")
-//    public String editCell(@PathVariable("id") Long id, CellEditDTO cellEditDTO, HttpSession session) throws ObjectNotFoundException {
-//        cellService.editCells(cellEditDTO.getCode(), id, cellEditDTO.getStatus(),cellEditDTO.getCellSize(),session);
-//
-//        return "redirect:/view/table/cellTable";
-//    }
 }
